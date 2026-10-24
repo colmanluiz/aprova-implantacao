@@ -33,6 +33,7 @@ const estado = {
   enviando: false,
   mostrarNotas: false,
   gateUI: null,          // null | "ajustar" | "rejeitar"
+  ajuste: null,          // { linhas: [id], valores: {id: campos}, marcados: Set, erro } enquanto gateUI === "ajustar"
   gateSaida: null,       // { ok, texto, em, rota }
   confirmaModo: null,    // null | "humano" | "agente"
   jaPintouAlgo: false,
@@ -315,6 +316,108 @@ function pintarCabecalhoDetalhe(d) {
 }
 
 // ---------- detalhe: gate como cartão de decisão ----------
+
+// ---------- ajuste do gate: perguntas pré-preenchidas em vez de "id=valor" ----------
+const SIM_NAO = (v) => `<option value="true" ${v === "true" ? "selected" : ""}>sim</option><option value="false" ${v === "false" ? "selected" : ""}>não</option>`;
+function camposDe(q) {
+  const r = q.resposta;
+  const obj = r && typeof r === "object" && !Array.isArray(r) ? r : null;
+  switch (q.tipo) {
+    case "opcoes": case "etapas": return { lista: Array.isArray(r) ? r.join(", ") : "" };
+    case "documento": return { exigido: obj ? String(!!obj.exigido) : "true", sempre: obj && "sempre" in obj ? String(!!obj.sempre) : "" };
+    case "taxa": case "card": return { existe: obj ? String(!!obj.existe) : "false", nome: obj?.nome ?? "" };
+    case "setor": return { slug: obj?.slug ?? "", setor: obj?.setor ?? "" };
+    case "texto": case "residuo": return { texto: typeof r === "string" ? r : "" };
+    default: return { json: r === null || r === undefined ? "" : JSON.stringify(r) };
+  }
+}
+/** Valor no formato que o `ajustar` aceita (JSON numa linha, ou texto puro para texto/residuo); "" = nada a mandar. */
+function serializarAjuste(q, c) {
+  const lista = (t) => t.split(",").map((x) => x.trim()).filter(Boolean);
+  switch (q.tipo) {
+    case "opcoes": case "etapas": { const l = lista(c.lista ?? ""); return l.length ? JSON.stringify(l) : ""; }
+    case "documento": return JSON.stringify({ exigido: c.exigido === "true", ...(c.sempre ? { sempre: c.sempre === "true" } : {}) });
+    case "taxa": case "card": return JSON.stringify({ existe: c.existe === "true", ...(c.nome?.trim() ? { nome: c.nome.trim() } : {}) });
+    case "setor": return c.slug?.trim() && c.setor?.trim() ? JSON.stringify({ slug: c.slug.trim(), setor: c.setor.trim() }) : "";
+    case "texto": case "residuo": return (c.texto ?? "").replace(/\s*\n\s*/g, " ").trim();
+    default: { const t = (c.json ?? "").trim(); if (!t) return ""; try { return JSON.stringify(JSON.parse(t)); } catch { return t; } }
+  }
+}
+function editorAjuste(q, c) {
+  const campo = (nome, valor, extra = "") => `<input type="text" class="campo" data-id="${esc(q.id)}" data-campo="${nome}" value="${esc(valor ?? "")}" ${extra}>`;
+  const sel = (nome, valor, opcoes) => `<select class="campo" data-id="${esc(q.id)}" data-campo="${nome}">${opcoes(valor)}</select>`;
+  switch (q.tipo) {
+    case "opcoes": case "etapas": return `${campo("lista", c.lista, 'placeholder="uma opção, outra opção"')}<span class="ajuste-dica">separe por vírgula</span>`;
+    case "documento": return `<label>exigido ${sel("exigido", c.exigido, SIM_NAO)}</label><label>sempre ${sel("sempre", c.sempre, (v) => `<option value="" ${v === "" ? "selected" : ""}>como no modelo</option>${SIM_NAO(v)}`)}</label>`;
+    case "taxa": case "card": return `<label>existe ${sel("existe", c.existe, SIM_NAO)}</label>${campo("nome", c.nome, 'placeholder="nome (opcional)"')}`;
+    case "setor": return `${campo("setor", c.setor, 'placeholder="nome do setor"')}${campo("slug", c.slug, 'placeholder="slug" class="campo curto"')}`;
+    case "texto": case "residuo": return campo("texto", c.texto);
+    default: return `${campo("json", c.json, 'placeholder="JSON"')}<span class="ajuste-dica">${q.tipo === "dataset" ? "tabela por zona, em JSON" : "JSON"}</span>`;
+  }
+}
+function iniciarAjuste(d, g) {
+  const perguntas = mapaPerguntas(d);
+  const pend = Array.isArray(g?.contexto?.pendencias) ? g.contexto.pendencias.map((x) => x.id) : [];
+  const daFicha = [...perguntas.values()].filter((q) => q.pendencia && (q.resposta === null || q.resposta === undefined)).map((q) => q.id);
+  const linhas = [...new Set([...pend, ...daFicha])].filter((id) => perguntas.has(id)).slice(0, 10);
+  const valores = {};
+  for (const id of linhas) valores[id] = camposDe(perguntas.get(id));
+  estado.ajuste = { linhas, valores, marcados: new Set(), livre: "", erro: "" };
+}
+/** Guarda o que está digitado antes de repintar. */
+function lerFormAjuste() {
+  const a = estado.ajuste;
+  if (!a) return;
+  document.querySelectorAll("#d-gate .campo[data-id]").forEach((el) => { (a.valores[el.dataset.id] ??= {})[el.dataset.campo] = el.value; });
+  document.querySelectorAll("#d-gate input[data-marcar]").forEach((el) => { if (el.checked) a.marcados.add(el.dataset.marcar); else a.marcados.delete(el.dataset.marcar); });
+  const livre = $("gate-texto");
+  if (livre) a.livre = livre.value;
+}
+function htmlAjuste(d) {
+  const a = estado.ajuste;
+  const perguntas = mapaPerguntas(d);
+  const linhas = a.linhas.map((id) => {
+    const q = perguntas.get(id);
+    const c = a.valores[id] ?? camposDe(q);
+    const marcado = a.marcados.has(id);
+    const semResposta = q.resposta === null || q.resposta === undefined;
+    return `<li class="ajuste-linha ${marcado ? "marcada" : ""}">
+      <label class="ajuste-marca"><input type="checkbox" data-marcar="${esc(id)}" ${marcado ? "checked" : ""} title="Mandar esta resposta"></label>
+      <div class="ajuste-corpo">
+        <div class="ajuste-rotulo"><b>${esc(perguntaCurta(q.texto, 90) || id)}</b><span class="muted">${esc(q.grupo ?? "")}${semResposta ? ", sem resposta" : ""}</span></div>
+        <div class="ajuste-editor">${editorAjuste(q, c)}</div>
+        ${q.pendencia && semResposta ? `<div class="ajuste-pend">${esc(q.pendencia)}</div>` : ""}
+      </div>
+      <button type="button" class="btn btn-fantasma btn-p" data-remover="${esc(id)}" title="Tirar da lista">×</button>
+    </li>`;
+  }).join("");
+  const grupos = new Map();
+  for (const q of perguntas.values()) { if (a.linhas.includes(q.id)) continue; (grupos.get(q.grupo ?? "Outras") ?? grupos.set(q.grupo ?? "Outras", []).get(q.grupo ?? "Outras")).push(q); }
+  const opts = [...grupos].map(([g, qs]) => `<optgroup label="${esc(g)}">${qs.map((q) => `<option value="${esc(q.id)}">${esc(perguntaCurta(q.texto, 70) || q.id)}</option>`).join("")}</optgroup>`).join("");
+  return `<div class="ajuste">
+    <p class="ajuste-intro">${a.linhas.length ? "Corrija o que precisa e marque o que vai. O formulário e os cenários são refeitos com as respostas novas." : "Escolha uma pergunta da ficha para corrigir."}</p>
+    ${linhas ? `<ul class="ajuste-lista">${linhas}</ul>` : ""}
+    <select class="campo ajuste-adicionar" id="ajuste-adicionar"><option value="">Adicionar outra pergunta…</option>${opts}</select>
+    <details ${a.livre ? "open" : ""}><summary>Ou peça algo ao validador em texto livre</summary><textarea id="gate-texto" rows="2" placeholder="Ex.: cubra também pedidos de reforma em ZC1">${esc(a.livre)}</textarea></details>
+    ${a.erro ? `<p class="gate-saida erro">${esc(a.erro)}</p>` : ""}
+    <div class="gate-botoes"><button type="button" class="btn btn-primario" data-acao="ajustar" data-confirmado="1">Enviar ajuste</button><button type="button" class="btn btn-fantasma" data-cancelar="1">Cancelar</button></div>
+  </div>`;
+}
+/** Linhas "id=valor" das perguntas marcadas, mais o texto livre. */
+function montarTextoAjuste(d) {
+  lerFormAjuste();
+  const a = estado.ajuste;
+  const perguntas = mapaPerguntas(d);
+  const linhas = [];
+  for (const id of a.linhas) {
+    if (!a.marcados.has(id)) continue;
+    const v = serializarAjuste(perguntas.get(id), a.valores[id] ?? {});
+    if (v) linhas.push(`${id}=${v}`);
+  }
+  const livre = a.livre.trim();
+  return [...linhas, ...(livre ? [livre] : [])].join("\n");
+}
+
 function tituloGate(g, d) {
   const nomeEtapa = d.processo?.etapas?.find((e) => e.slug === g.etapa)?.nome ?? g.etapa ?? "";
   if (g.tipo === "homologacao") return "Sua decisão: liberar o formulário para homologação";
@@ -332,6 +435,8 @@ function pintarGate(d) {
     } else setHtml(el, "", "d-gate");
     return;
   }
+  // Com o editor de ajuste aberto, só repinta por pedido explícito (repintarGate): o polling não pode trocar os campos debaixo dos dedos.
+  if (estado.gateUI === "ajustar" && estado.assinaturas["d-gate"] && !estado.gateForcar) return;
   const paraImplantador = g.para !== "analista";
   const ctx = g.contexto ?? {};
   const desab = somenteLeitura() || !d.gate_disponivel;
@@ -372,11 +477,8 @@ function pintarGate(d) {
   };
   let sub = "";
   if (estado.gateUI === "ajustar") {
-    sub = `<div class="gate-ajuste">
-      <textarea id="gate-texto" rows="3" placeholder="opcoes-20=Construção nova, Reforma&#10;ou um pedido em texto livre"></textarea>
-      <div class="dica">Uma linha <code>pergunta_id=valor</code> corrige a ficha e refaz formulário e cenários. Texto livre pede mais cenários ao validador.</div>
-      <div class="gate-botoes"><button type="button" class="btn btn-primario" data-acao="ajustar" data-confirmado="1">Enviar ajuste</button><button type="button" class="btn btn-fantasma" data-cancelar="1">Cancelar</button></div>
-    </div>`;
+    if (!estado.ajuste) iniciarAjuste(d, g);
+    sub = htmlAjuste(d);
   } else if (estado.gateUI === "rejeitar") {
     sub = `<div class="confirma perigo">Rejeitar para o processo; ninguém mais recebe mensagem. Confirmar?
       <button type="button" class="btn btn-perigo-solido" data-acao="rejeitar" data-confirmado="1">Sim, rejeitar</button><button type="button" class="btn" data-cancelar="1">Cancelar</button></div>`;
@@ -397,16 +499,39 @@ function pintarGate(d) {
   </section>`;
   setHtml(el, html, "d-gate");
 }
+function repintarGate() { lerFormAjuste(); estado.gateForcar = true; delete estado.assinaturas["d-gate"]; try { pintarGate(estado.detalhe); } finally { estado.gateForcar = false; } }
+
+$("d-gate").addEventListener("change", (e) => {
+  const sel = e.target.closest("#ajuste-adicionar");
+  if (sel && sel.value && estado.ajuste) { lerFormAjuste(); estado.ajuste.linhas.push(sel.value); estado.ajuste.marcados.add(sel.value); repintarGate(); return; }
+  const marca = e.target.closest("input[data-marcar]");
+  if (marca) { lerFormAjuste(); marca.closest(".ajuste-linha")?.classList.toggle("marcada", marca.checked); }
+});
+$("d-gate").addEventListener("input", (e) => {
+  // editar um campo marca a linha automaticamente
+  const campo = e.target.closest(".campo[data-id]");
+  if (!campo || !estado.ajuste) return;
+  lerFormAjuste();
+  estado.ajuste.marcados.add(campo.dataset.id);
+  const linha = campo.closest(".ajuste-linha");
+  if (linha) { linha.classList.add("marcada"); const cb = linha.querySelector("input[data-marcar]"); if (cb) cb.checked = true; }
+});
 
 $("d-gate").addEventListener("click", async (e) => {
+  const remover = e.target.closest("[data-remover]");
+  if (remover && estado.ajuste) { lerFormAjuste(); estado.ajuste.linhas = estado.ajuste.linhas.filter((x) => x !== remover.dataset.remover); estado.ajuste.marcados.delete(remover.dataset.remover); repintarGate(); return; }
   const cancelar = e.target.closest("[data-cancelar]");
-  if (cancelar) { estado.gateUI = null; pintarGate(estado.detalhe); return; }
+  if (cancelar) { estado.gateUI = null; estado.ajuste = null; repintarGate(); return; }
   const b = e.target.closest("button[data-acao]");
   if (!b || !estado.rota) return;
   const acao = b.dataset.acao;
-  if ((acao === "ajustar" || acao === "rejeitar") && !b.dataset.confirmado) { estado.gateUI = acao; pintarGate(estado.detalhe); $("gate-texto")?.focus(); return; }
-  const texto = $("gate-texto")?.value ?? "";
-  if (acao === "ajustar" && !texto.trim()) { $("gate-texto")?.focus(); return; }
+  if ((acao === "ajustar" || acao === "rejeitar") && !b.dataset.confirmado) { estado.gateUI = acao; estado.ajuste = null; repintarGate(); return; }
+  let texto = "";
+  if (acao === "ajustar") {
+    texto = montarTextoAjuste(estado.detalhe);
+    if (!texto.trim()) { estado.ajuste.erro = "Marque pelo menos uma pergunta ou escreva um pedido."; repintarGate(); return; }
+    estado.ajuste.erro = "";
+  }
   const { cidade, slug } = estado.rota;
   $("d-gate").querySelectorAll("button").forEach((x) => (x.disabled = true));
   estado.gateSaida = { ok: true, texto: `Executando “${acao}”…`, em: Date.now(), rota: `${cidade}/${slug}` };
@@ -415,6 +540,7 @@ $("d-gate").addEventListener("click", async (e) => {
   const saida = String(r.corpo.saida ?? "").trim();
   estado.gateSaida = { ok: r.ok, texto: r.ok ? (saida || "Feito.") : `Não foi possível (${r.status}): ${r.corpo.erro ?? saida}`, em: Date.now(), rota: `${cidade}/${slug}` };
   estado.gateUI = null;
+  estado.ajuste = null;
   delete estado.assinaturas["d-gate"];
   tick();
 });
@@ -846,6 +972,7 @@ function aplicarRota() {
   if (mudou) {
     estado.detalhe = null;
     estado.gateUI = null;
+    estado.ajuste = null;
     estado.confirmaModo = null;
     estado.mostrarNotas = false;
     for (const k of Object.keys(estado.assinaturas)) if (k.startsWith("d-") || k === "chatRolado") delete estado.assinaturas[k];
