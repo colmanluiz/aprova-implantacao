@@ -705,7 +705,8 @@ async function rodarColetor(c: Contexto, deps: Dependencias & { runAgent: RunAge
   const mensagens = historicoParaMensagens(store.estado(c).historico.slice(-30));
   const { texto } = await deps.runAgent({ agente: "coletor", mensagens, tools: t.coletor });
   // Append atômico: as ferramentas e o canal mexeram no estado durante a execução.
-  if (texto) store.anexarHistorico(c, { role: "assistant", content: texto });
+  // autor "nota": texto final do turno, que não foi ao analista (o critério de coletar e o painel distinguem pelo autor).
+  if (texto) store.anexarHistorico(c, { role: "assistant", content: texto, autor: "nota" });
 }
 
 /** Sub-etapa extrair: lê o anexo, avalia os critérios do extrator, tenta de novo ou abre gate. */

@@ -75,7 +75,7 @@ export const CRITERIOS: Record<string, Criterio> = {
     // se a última mensagem ao analista é uma pergunta sem resposta: o Coletor fecha com uma mensagem sem "?".
     const hist = store.estado(ctx).historico;
     let iUlt = hist.length - 1;
-    while (iUlt >= 0 && !(hist[iUlt].role === "assistant" && hist[iUlt].autor !== "cobranca")) iUlt--;
+    while (iUlt >= 0 && !(hist[iUlt].role === "assistant" && hist[iUlt].autor !== "cobranca" && hist[iUlt].autor !== "nota")) iUlt--;
     if (iUlt >= 0 && hist[iUlt].content.includes("?") && !hist.slice(iUlt + 1).some((h) => h.role === "user")) {
       return { resultado: "aguardando", detalhe: "a última mensagem ao analista é uma pergunta ainda sem resposta" };
     }

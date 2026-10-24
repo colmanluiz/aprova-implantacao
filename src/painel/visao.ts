@@ -230,6 +230,7 @@ export function classificarMensagem(m: Mensagem): { voz: Voz; texto: string; ane
   const content = String(m.content ?? "");
   if (m.autor === "implantador") return { voz: "implantador", texto: content, anexo: null };
   if (m.role === "assistant") {
+    if (m.autor === "nota") return { voz: "nota", texto: content, anexo: null };
     const nota = /^(enviei|não enviei|nada enviado|registrei|não registrei)\b/i.test(content.trim());
     return { voz: nota ? "nota" : "agente", texto: content, anexo: null };
   }

@@ -69,6 +69,6 @@ export async function tratarMensagem(
 }
 
 function ultimaResposta(ctx: Contexto, nAntes: number): string {
-  const novas = store.estado(ctx).historico.slice(nAntes).filter((h) => h.role === "assistant" && !h.autor);
+  const novas = store.estado(ctx).historico.slice(nAntes).filter((h) => h.role === "assistant" && (!h.autor || h.autor === "nota"));
   return novas.at(-1)?.content ?? "";
 }

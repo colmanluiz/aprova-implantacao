@@ -372,6 +372,7 @@ test("coletar não fecha com a ficha tratada se a última mensagem ao analista �
   store.salvarFicha(ctx, fichaFechada(ctx.cidade));
   store.salvarPlano(ctx, { decisao: "atende", itens: [] });
   store.anexarHistorico(ctx, { role: "assistant", content: "Casa na ZR1 com 3 m de recuo volta. Certo?" });
+  store.anexarHistorico(ctx, { role: "assistant", content: "Perguntei dataset-28 com caso concreto.", autor: "nota" });
   let run = await avancar(ctx, deps);
   assert.equal(run.etapa_atual, "coletar");
   assert.match(etapaRun(run, "coletar").criterios.find((k) => k.nome === "nenhuma pergunta em aberto")!.detalhe, /pergunta ainda sem resposta/);
