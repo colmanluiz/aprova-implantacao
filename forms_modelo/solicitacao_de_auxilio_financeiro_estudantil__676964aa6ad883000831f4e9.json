@@ -1,0 +1,935 @@
+{
+  "_id": "676964aa6ad883000831f4e9",
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_solicitacao",
+              "type": "select",
+              "templateOptions": {
+                "label": "Tipo de Solicitação",
+                "options": [
+                  {
+                    "label": "Evento (Congresso, Seminário, etc.)",
+                    "value": "Evento (Congresso, Seminário, etc.)"
+                  },
+                  {
+                    "label": "Mobilidade",
+                    "value": "Mobilidade"
+                  },
+                  {
+                    "label": "Permanência",
+                    "value": "Permanência"
+                  },
+                  {
+                    "label": "Outros",
+                    "value": "Outros"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "columns": "12",
+                "placeholder": "---selecione---",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "className": "col-12"
+            },
+            {
+              "key": "descricao_tipo_auxilio",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Descrição do tipo de auxílio",
+                "placeholder": "Descreva o tipo de auxílio",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "model.tipo_solicitacao !== 'Outros'"
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Tipo de Solicitação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              }
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/ CNPJ",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? '00.000.000/0000-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Notificação",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "documento_requerente",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos (Carteira de Identidade e CPF, se pessoa física, OU CNPJ e contrato social, se pessoa jurídica)",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "doc_procurador",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Procuração",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "hideExpression": "!model.requerente || model.requerente !== 'Outro' "
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "renda",
+              "type": "select",
+              "templateOptions": {
+                "label": "Renda Familiar",
+                "options": [
+                  {
+                    "label": "Inferior a 1 salário mínimo",
+                    "value": "Inferior a 1 salário mínimo"
+                  },
+                  {
+                    "label": "Entre 1 e 3 salários mínimos",
+                    "value": "Entre 1 e 3 salários mínimos"
+                  },
+                  {
+                    "label": "Entre 3 e 5 salários mínimos",
+                    "value": "Entre 3 e 5 salários mínimos"
+                  },
+                  {
+                    "label": "Superior a 5 salários mínimos",
+                    "value": "Superior a 5 salários mínimos"
+                  }
+                ],
+                "required": true,
+                "placeholder": "---selecione---"
+              },
+              "hideExpression": "!model.tipo_solicitacao || model.tipo_solicitacao !== 'Mobilidade' && model.tipo_solicitacao !== 'Permanência'"
+            },
+            {
+              "key": "tipo_instituicao",
+              "type": "select",
+              "templateOptions": {
+                "label": "Tipo de Instituição de Ensino",
+                "options": [
+                  {
+                    "label": "Ensino Fundamental",
+                    "value": "Ensino Fundamental"
+                  },
+                  {
+                    "label": "Ensino Médio",
+                    "value": "Ensino Médio"
+                  },
+                  {
+                    "label": "Ensino Superior",
+                    "value": "Ensino Superior"
+                  },
+                  {
+                    "label": "Pós-gradução",
+                    "value": "Pós-gradução"
+                  }
+                ],
+                "required": true,
+                "placeholder": "---selecione---"
+              }
+            },
+            {
+              "key": "nome_instituicao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome da Instituição de Ensino",
+                "required": true
+              }
+            },
+            {
+              "key": "nome_departamento",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do departamento",
+                "required": true
+              },
+              "hideExpression": "model.tipo_instituicao !== 'Ensino Superior' && model.tipo_instituicao !== 'Pós-graduação'"
+            },
+            {
+              "key": "nome_curso",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do curso",
+                "required": true
+              },
+              "hideExpression": "model.tipo_instituicao !== 'Ensino Superior' && model.tipo_instituicao !== 'Pós-graduação'"
+            },
+            {
+              "key": "valor_solicitado",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Valor solicitado",
+                "type": "text",
+                "required": true,
+                "floatNumber": true,
+                "currency": {
+                  "prefix": "R$ ",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                }
+              }
+            },
+            {
+              "key": "nome_evento",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do evento",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "model.tipo_solicitacao !== 'Evento (Congresso, Seminário, etc.)'"
+            },
+            {
+              "key": "inicio_evento",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Início do evento",
+                "required": true
+              },
+              "hideExpression": "model.tipo_solicitacao !== 'Evento (Congresso, Seminário, etc.)'"
+            },
+            {
+              "key": "fim_evento",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Fim do evento",
+                "required": true
+              },
+              "hideExpression": "model.tipo_solicitacao !== 'Evento (Congresso, Seminário, etc.)'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados da Solicitação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_conta",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de Conta",
+                "options": [
+                  {
+                    "value": "Conta Corrente"
+                  },
+                  {
+                    "value": "Conta Poupança"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "nome_banco",
+              "type": "select",
+              "templateOptions": {
+                "label": "Banco",
+                "options": [
+                  {
+                    "label": "Banco do Brasil",
+                    "value": "Banco do Brasil"
+                  },
+                  {
+                    "label": "Bradesco",
+                    "value": "Bradesco"
+                  },
+                  {
+                    "label": "Caixa Federal",
+                    "value": "Caixa Federal"
+                  },
+                  {
+                    "label": "Itaú",
+                    "value": "Itaú"
+                  },
+                  {
+                    "label": "Nubank",
+                    "value": "Nubank"
+                  },
+                  {
+                    "label": "Inter",
+                    "value": "Inter"
+                  },
+                  {
+                    "label": "Banrisul",
+                    "value": "Banrisul"
+                  },
+                  {
+                    "label": "Sicredi",
+                    "value": "Sicredi"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "placeholder": "---selecione---",
+                "required": true
+              }
+            },
+            {
+              "key": "banco_outro",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do Banco",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "!model.nome_banco || model.nome_banco !== 'Outro'"
+            },
+            {
+              "className": "col-4",
+              "key": "agencia",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Agência",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "mask": "AAAA"
+              }
+            },
+            {
+              "className": "col-4",
+              "key": "numero_conta",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número da Conta",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "className": "col-4",
+              "key": "digito",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Dígito verificador da conta",
+                "placeholder": "",
+                "mask": "A",
+                "pattern": "^[a-zA-Z0-9]$",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados Bancários",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "atestado_matricula",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Atestado de Matrícula",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "documentacao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Anexos Obrigatórios",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Anexos",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">\nAnexos</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\"><b>Documentação Necessária:</b> apresente toda a documentação necessária para a sequência do seu processo aqui.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "infos_gerais",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Informações Complementares",
+                "placeholder": "Escreva sobre a solicitação",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    }
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Informações Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">\nInformações Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Adicione no card ao lado qualquer informação ou anexo complementar à sua solicitação.</b>&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "67d82ffaf4cd24000841cded"
+    }
+  ],
+  "step": {},
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Solicitação de Auxílio Financeiro Estudantil",
+    "descricao": "Pedido de auxílio financeiro para estudantes.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "AFE",
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "useNewSidebarForwarding": true,
+    "sendToEmailExpression": "Array.from(new Set([...(context.proprietario?.map((RL) => RL.email_proprietario ) || []), ...(context['requerente']?.map((RL) => RL.email_requerente) || []) ]))",
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Documento - Geral",
+        "template": "ModeloAD/certidao_afe.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "numeration": "protocolo_geral ",
+        "official": true,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Observações Gerais",
+        "text_action": "Realizou ação",
+        "key": "obs_gerais",
+        "form": [
+          {
+            "key": "obs_geral",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "obs_geral",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Emissão de Documento",
+        "text_action": "Realizou ação",
+        "key": "card_emissao_doc",
+        "form": [
+          {
+            "key": "tipo_documento",
+            "type": "select",
+            "templateOptions": {
+              "label": "Tipo de Documento",
+              "options": [
+                {
+                  "label": "Licença/Alvará",
+                  "value": "Licença/Alvará"
+                },
+                {
+                  "label": "Certidão",
+                  "value": "Certidão"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "titulo_documento",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Título",
+              "placeholder": "Título do documento",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "cards_exibidos",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Cards a serem exibidos no documento",
+              "options": [
+                {
+                  "label": "Card 2 – Tipo de Solicitação",
+                  "value": "Card 2 – Tipo de Solicitação"
+                },
+                {
+                  "label": "Card 3 – Dados do Requerente",
+                  "value": "Card 3 – Dados do Requerente"
+                },
+                {
+                  "label": "Card 4 – Dados da Solicitação",
+                  "value": "Card 4 – Dados da Solicitação"
+                },
+                {
+                  "label": "Card 5 – Dados Bancários",
+                  "value": "Card 5 – Dados Bancários"
+                },
+                {
+                  "label": "Card 7 – Informações Complementares",
+                  "value": "Card 7 – Informações Complementares"
+                }
+              ],
+              "focus": "false",
+              "required": false
+            }
+          },
+          {
+            "key": "texto_doc_final",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Texto do Documento",
+              "placeholder": "Insira aqui o texto que será impresso no documento final",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "emissor_doc",
+            "type": "select",
+            "templateOptions": {
+              "label": "Emissor",
+              "options": [
+                {
+                  "label": "Divisão de Licenciamento e Controle",
+                  "value": "Divisão de Licenciamento e Controle"
+                },
+                {
+                  "label": "Seção de Edificações Particulares",
+                  "value": "Seção de Edificações Particulares"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "tipo_documento",
+            "type": "select",
+            "templateOptions": {
+              "label": "Tipo de Documento",
+              "options": [
+                {
+                  "label": "Licença/Alvará",
+                  "value": "Licença/Alvará"
+                },
+                {
+                  "label": "Certidão",
+                  "value": "Certidão"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "titulo_documento",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Título",
+              "placeholder": "Título do documento",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "cards_exibidos",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Cards a serem exibidos no documento",
+              "options": [
+                {
+                  "label": "Card 2 – Tipo de Solicitação",
+                  "value": "Card 2 – Tipo de Solicitação"
+                },
+                {
+                  "label": "Card 3 – Dados do Requerente",
+                  "value": "Card 3 – Dados do Requerente"
+                },
+                {
+                  "label": "Card 4 – Dados da Solicitação",
+                  "value": "Card 4 – Dados da Solicitação"
+                },
+                {
+                  "label": "Card 5 – Dados Bancários",
+                  "value": "Card 5 – Dados Bancários"
+                },
+                {
+                  "label": "Card 7 – Informações Complementares",
+                  "value": "Card 7 – Informações Complementares"
+                }
+              ],
+              "focus": "false",
+              "required": false
+            }
+          },
+          {
+            "key": "texto_doc_final",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Texto do Documento",
+              "placeholder": "Insira aqui o texto que será impresso no documento final",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "emissor_doc",
+            "type": "select",
+            "templateOptions": {
+              "label": "Emissor",
+              "options": [
+                {
+                  "label": "Divisão de Licenciamento e Controle",
+                  "value": "Divisão de Licenciamento e Controle"
+                },
+                {
+                  "label": "Seção de Edificações Particulares",
+                  "value": "Seção de Edificações Particulares"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "educacao_modeload"
+      ]
+    },
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "tramite": [
+    {
+      "_id": "65ef4752bc99830008ae23f3",
+      "groupId": "sorocaba_implantacaoad"
+    }
+  ],
+  "__v": 0,
+  "city_id": 38
+}

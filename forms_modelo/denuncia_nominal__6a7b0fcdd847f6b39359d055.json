@@ -1,0 +1,2935 @@
+{
+  "_id": "6a7b0fcdd847f6b39359d055",
+  "__v": 0,
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Denúncia Nominal",
+    "descricao": "",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "DEN",
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "sendToEmailExpression": "Array.from(new Set([...(context.proprietario?.map((RL) => RL.email_proprietario ) || []), ...(context['requerente']?.map((RL) => RL.email_requerente) || []) ]))",
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Notificação",
+        "template": "ModeloAD/notificacao_fiscalizacao_denuncias.html",
+        "function": "processComplete",
+        "official": true,
+        "possui_prazo_validade": true,
+        "viewed": true
+      },
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Auto de Infração",
+        "template": "ModeloAD/auto_fiscalizacao_denuncias_v2.html",
+        "function": "processComplete",
+        "official": true,
+        "possui_prazo_validade": true,
+        "viewed": true
+      },
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Relatório de Vistoria",
+        "template": "ModeloAD/relatorio_vistoria_semass.html",
+        "function": "processComplete",
+        "official": true,
+        "internal": true,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Relatório de vistoria",
+        "text_action": "Realizou ação",
+        "key": "card_vistoria",
+        "form": [
+          {
+            "key": "data_vistoria",
+            "type": "next-date",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Data da vistoria",
+              "placeholder": "00/00/0000",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "horario_vistoria",
+            "className": "col-6",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Horário:",
+              "placeholder": "00:00",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "nome_empreendimento",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome/Razão Social do empreendimento:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "cpfcnpj_empreendedor",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "CPF/ CNPJ",
+              "placeholder": "Ex: 000.000.000-00",
+              "mask": "000.000.000-009",
+              "required": true
+            },
+            "expressionProperties": {
+              "templateOptions|||mask": "model.cpfcnpj_empreendedor?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' "
+            }
+          },
+          {
+            "key": "inscricao_municipal",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Cadastro Geral:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "local_atividade",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço domicílio fiscal",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "endereco_infracao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço da infração",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "mapa",
+            "type": "next-mapa",
+            "templateOptions": {
+              "label": "Localização",
+              "placeholder": "Placeholder",
+              "focus": "false",
+              "type": "text",
+              "required": false,
+              "mapsOptions": {
+                "center": {
+                  "lat": -29.70398881972259,
+                  "lng": -52.424403497531664
+                },
+                "zoom": 14
+              }
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "lat",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Latitude (Graus, minutos, segundos)",
+              "readonly": false,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||lat": "(model.lat_int || 0) + 'º ' + (Math.trunc((model.lat_2 || 0) )) + '\\' ' + (Math.trunc((model.lat_2_dec || 0) * 6000) / 100) + '\\'\\''"
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "lng",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Longitude (Graus, minutos, segundos)",
+              "readonly": false,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||lng": "(model.lng_int || 0) + 'º ' + (Math.trunc((model.lng_2 || 0))) + '\\' ' + (Math.trunc((model.lng_2_dec || 0) * 6000) / 100) + '\\'\\''"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "latitude",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Latitude",
+              "readonly": true,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||latitude": "model.mapa?.lat",
+              "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "longitude",
+            "type": "next-input",
+            "templateOptions": {
+              "required": true,
+              "readonly": true,
+              "label": "Longitude"
+            },
+            "expressionProperties": {
+              "model|||longitude": "model.mapa?.lng",
+              "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lat_int",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_int",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_int": "Math.abs(Math.trunc(model.latitude || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_dec": "Math.abs(model.latitude || 0) - Math.abs(Math.trunc(model.latitude || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_2",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_2",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_2": "(model.lat_dec || 0) * 60"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_2_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_2_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_2_dec": "Math.abs(model.lat_2 || 0) - Math.abs(Math.trunc(model.lat_2 || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lng_int",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_int",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_int": "Math.abs(Math.trunc(model.longitude || 0))"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_dec": "Math.abs(model.longitude || 0) - Math.abs(Math.trunc(model.longitude || 0))"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_2",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_2",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_2": "(model.lng_dec || 0) * 60"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_2_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_2_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_2_dec": "Math.abs(model.lng_2 || 0) - Math.abs(Math.trunc(model.lng_2 || 0))"
+            }
+          },
+          {
+            "key": "classificacao_territorial",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Classificação territorial:",
+              "options": [
+                {
+                  "value": "Zona Urbana"
+                },
+                {
+                  "value": "Zona Rural"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "constatacoes",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Constatações e observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "relatorio_fotografico",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Relatório fotográfico",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "consideracoes_finais",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Considerações finais",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "data_vistoria",
+            "type": "next-date",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Data da vistoria",
+              "placeholder": "00/00/0000",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "horario_vistoria",
+            "className": "col-6",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Horário:",
+              "placeholder": "00:00",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "nome_empreendimento",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome/Razão Social do empreendimento:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "cpfcnpj_empreendedor",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "CPF/ CNPJ",
+              "placeholder": "Ex: 000.000.000-00",
+              "mask": "000.000.000-009",
+              "required": true
+            },
+            "expressionProperties": {
+              "templateOptions|||mask": "model.cpfcnpj_empreendedor?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' "
+            }
+          },
+          {
+            "key": "inscricao_municipal",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Cadastro Geral:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "local_atividade",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço domicílio fiscal",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "endereco_infracao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço da infração",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "mapa",
+            "type": "next-mapa",
+            "templateOptions": {
+              "label": "Localização",
+              "placeholder": "Placeholder",
+              "focus": "false",
+              "type": "text",
+              "required": false,
+              "mapsOptions": {
+                "center": {
+                  "lat": -29.70398881972259,
+                  "lng": -52.424403497531664
+                },
+                "zoom": 14
+              }
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "lat",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Latitude (Graus, minutos, segundos)",
+              "readonly": false,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||lat": "(model.lat_int || 0) + 'º ' + (Math.trunc((model.lat_2 || 0) )) + '\\' ' + (Math.trunc((model.lat_2_dec || 0) * 6000) / 100) + '\\'\\''"
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "lng",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Longitude (Graus, minutos, segundos)",
+              "readonly": false,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||lng": "(model.lng_int || 0) + 'º ' + (Math.trunc((model.lng_2 || 0))) + '\\' ' + (Math.trunc((model.lng_2_dec || 0) * 6000) / 100) + '\\'\\''"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "latitude",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Latitude",
+              "readonly": true,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||latitude": "model.mapa?.lat",
+              "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "longitude",
+            "type": "next-input",
+            "templateOptions": {
+              "required": true,
+              "readonly": true,
+              "label": "Longitude"
+            },
+            "expressionProperties": {
+              "model|||longitude": "model.mapa?.lng",
+              "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lat_int",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_int",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_int": "Math.abs(Math.trunc(model.latitude || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_dec": "Math.abs(model.latitude || 0) - Math.abs(Math.trunc(model.latitude || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_2",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_2",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_2": "(model.lat_dec || 0) * 60"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_2_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_2_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_2_dec": "Math.abs(model.lat_2 || 0) - Math.abs(Math.trunc(model.lat_2 || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lng_int",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_int",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_int": "Math.abs(Math.trunc(model.longitude || 0))"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_dec": "Math.abs(model.longitude || 0) - Math.abs(Math.trunc(model.longitude || 0))"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_2",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_2",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_2": "(model.lng_dec || 0) * 60"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_2_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_2_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_2_dec": "Math.abs(model.lng_2 || 0) - Math.abs(Math.trunc(model.lng_2 || 0))"
+            }
+          },
+          {
+            "key": "classificacao_territorial",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Classificação territorial:",
+              "options": [
+                {
+                  "value": "Zona Urbana"
+                },
+                {
+                  "value": "Zona Rural"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "constatacoes",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Constatações e observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "relatorio_fotografico",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Relatório fotográfico",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "consideracoes_finais",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Considerações finais",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "permission": "process:analista",
+        "checkPermission": true
+      },
+      {
+        "nome": "Taxas",
+        "type": "taxa",
+        "text_action": "Emitiu Taxa",
+        "key": "taxasProcesso",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "permission": "taxas"
+      },
+      {
+        "nome": "Notificação",
+        "text_action": "Realizou ação",
+        "key": "card_notificacao",
+        "form": [
+          {
+            "key": "data_infracao",
+            "type": "next-date",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Data da infração",
+              "placeholder": "00/00/0000",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "horario_infracao",
+            "className": "col-6",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Horário:",
+              "placeholder": "00:00",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "nome_notificado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome/Razão Social do Notificado",
+              "placeholder": "Ex: João da Silva",
+              "required": true
+            }
+          },
+          {
+            "key": "cpfcnpj_notificado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "CPF/ CNPJ do Notificado",
+              "placeholder": "Ex: 000.000.000-00",
+              "mask": "000.000.000-009",
+              "required": false
+            },
+            "expressionProperties": {
+              "templateOptions|||mask": "model.cpfcnpj_notificado?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' "
+            }
+          },
+          {
+            "key": "inscricao_municipal",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Cadastro Geral:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "local_correspondencia",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço domicílio fiscal:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "local",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço da infração:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "mapa",
+            "type": "next-mapa",
+            "templateOptions": {
+              "label": "Localização",
+              "placeholder": "Placeholder",
+              "focus": "false",
+              "type": "text",
+              "required": false,
+              "mapsOptions": {
+                "center": {
+                  "lat": -29.70398881972259,
+                  "lng": -52.424403497531664
+                },
+                "zoom": 14
+              }
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "lat",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Latitude (Graus, minutos, segundos)",
+              "readonly": false,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||lat": "(model.lat_int || 0) + 'º ' + (Math.trunc((model.lat_2 || 0) )) + '\\' ' + (Math.trunc((model.lat_2_dec || 0) * 6000) / 100) + '\\'\\''"
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "lng",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Longitude (Graus, minutos, segundos)",
+              "readonly": false,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||lng": "(model.lng_int || 0) + 'º ' + (Math.trunc((model.lng_2 || 0))) + '\\' ' + (Math.trunc((model.lng_2_dec || 0) * 6000) / 100) + '\\'\\''"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "latitude",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Latitude",
+              "readonly": true,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||latitude": "model.mapa?.lat",
+              "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "longitude",
+            "type": "next-input",
+            "templateOptions": {
+              "required": true,
+              "readonly": true,
+              "label": "Longitude"
+            },
+            "expressionProperties": {
+              "model|||longitude": "model.mapa?.lng",
+              "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lat_int",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_int",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_int": "Math.abs(Math.trunc(model.latitude || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_dec": "Math.abs(model.latitude || 0) - Math.abs(Math.trunc(model.latitude || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_2",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_2",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_2": "(model.lat_dec || 0) * 60"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_2_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_2_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_2_dec": "Math.abs(model.lat_2 || 0) - Math.abs(Math.trunc(model.lat_2 || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lng_int",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_int",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_int": "Math.abs(Math.trunc(model.longitude || 0))"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_dec": "Math.abs(model.longitude || 0) - Math.abs(Math.trunc(model.longitude || 0))"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_2",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_2",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_2": "(model.lng_dec || 0) * 60"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_2_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_2_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_2_dec": "Math.abs(model.lng_2 || 0) - Math.abs(Math.trunc(model.lng_2 || 0))"
+            }
+          },
+          {
+            "key": "cadastro_imovel",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Cadastro Imóvel",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "atividade",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Atividade",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "tipo_notificacao",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Tipo de notificação:",
+              "options": [
+                {
+                  "value": "Limpeza de terreno"
+                },
+                {
+                  "value": "Condicionantes"
+                },
+                {
+                  "value": "Outro"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "texto_notif_introducao",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Texto introdutório da notificação:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            },
+            "hideExpression": "model.tipo_notificacao !== 'Limpeza de terreno' && model.tipo_notificacao !== 'Condicionantes'",
+            "expressionProperties": {
+              "model|||texto_notif_introducao": "model.texto_notif_introducao ? model.texto_notif_introducao : 'A Secretaria Municipal do Meio Ambiente, Saneamento e Sustentabilidade NOTIFICA o contribuinte supracitado, na forma do Decreto Federal nº 6.514/2008, que dispõe as infrações e sanções administrativas ao meio ambiente, estabelece o processo administrativo federal para a apuração destas infrações e dá outras providências, para que atente para a(s) seguinte(s) orientações, conforme prescrito nas legislações pertinentes:'"
+            }
+          },
+          {
+            "key": "texto_notif_consequencia",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Texto sobre consequências do não atendimento:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            },
+            "hideExpression": "model.tipo_notificacao !== 'Limpeza de terreno' && model.tipo_notificacao !== 'Condicionantes'",
+            "expressionProperties": {
+              "model|||texto_notif_consequencia": "model.texto_notif_consequencia ? model.texto_notif_consequencia : 'O não atendimento a esta notificação de orientação pode tornar o(a) notificado(a) infracionado(a), conforme o Decreto Federal nº 6.514/2008, com base no artigo 80: Art. 80 do Decreto Federal nº 6.514/2008. \"Deixar de atender a exigências legais ou regulamentares quando devidamente notificado pela autoridade ambiental competente no prazo concedido, visando à regularização, correção ou adoção de medidas de controle para cessar a degradação ambiental [...].\"'"
+            }
+          },
+          {
+            "key": "descricao_notificacao2",
+            "type": "next-ck",
+            "defaultValue": "Art. 1º É dever do proprietário ou do possuidor a qualquer título, de terreno localizado no perímetro urbano do Município de Santa Cruz do Sul, mantê-lo limpo, roçado e drenado, devendo também providenciar na eliminação de quaisquer objetos ou entulhos prejudiciais à saúde e à segurança pública. §1º O proprietário ou possuidor a qualquer título deve tomar medidas para que os terrenos não sejam utilizados por terceiros como depósitos de resíduos de qualquer natureza, se necessário, providenciando o cercamento do terreno de modo que impeça o acesso não autorizado. §7º Considera-se terreno passível de autuação, para fins da aplicação da presente Lei, o imóvel com cobertura vegetal composta por gramíneas e herbáceas, com altura predominante igual ou superior à 50 (cinquenta) cm.” <br>Art.1º, § 2º Constatado o não cumprimento das obrigações previstas neste artigo, será aplicada ao proprietário, ou possuidor a qualquer título do imóvel, pena de multa, mediante auto de infração, conforme tabela abaixo:  <br>1) terrenos de metragem: Até 300 m², multa de 01 (uma) UPM ; 2) de 300,01 m² até 500 m², 02 (duas) UPM; <br>3) de 500,01 m² a 1.000 m², 03 (três) UPM; 4) acima de 1.000 m², 04 (quatro) UPM <br>§ 3º Na Zona Comercial Preferencial – ZCP, Mapa IV, definida pelo Plano Diretor do Município, o valor da multa a ser aplicada será de 02 (duas) vezes o valor descrito na tabela acima, observada a área dos terrenos. <br>Lei nº.9.603 de 12 de março de 2024, Art. 2º, 5º, 6º, 7º e 10º; e Art. 4º, que acrece §7º ao art.1º da Lei nº.7.120/14, e altera os Art. 1º-§1º, 2º, 3º, 4º e 6º da Lei nº. 7.120 de 14 de outubro de 2014. <br> <br>Lavrei o auto de notificação em 2 (duas) vias, o qual vai por mim assinado e entregue ao contribuinte, ficando este ciente de que responderá pelo fato em processo administrativo e que terá o prazo de 20 (vinte) dias para comprovar ter realizado a limpeza do terreno junto a SEMASS (Secretaria Municipal de Meio Ambiente, Saneamento e Sustentabilidade) sito à Rua Cel Oscar Jost, 1576, fundos 2º Piso Poliesportivo, Santa Cruz do Sul, RS ou pelo e-mail atendimento.meioambiente@santacruz.rs.gov.br contados da data de recebimento deste auto de notificação, e/ou querendo apresente defesa no prazo de 20 (vinte) dias, no endereço supracitado, sob pena de revelia. Em caso de recusa ou ausência, o prazo se inicia a partir da data de entrega.",
+            "templateOptions": {
+              "label": "Descrição da notificação (Limpeza de terreno):",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            },
+            "hideExpression": "model.tipo_notificacao !== 'Limpeza de terreno'"
+          },
+          {
+            "key": "descricao_notificacao3",
+            "type": "next-ck",
+            "defaultValue": "A Secretaria Municipal do Meio Ambiente, Saneamento e Sustentabilidade NOTIFICA o empreendedor supracitado, na forma do Decreto Federal nº 6.514/2008, que dispõe as infrações e sanções administrativas ao meio ambiente, estabelece o processo administrativo federal para a apuração destas infrações e dá outras providências, para que atente para a(s) seguinte(s) orientações, conforme prescrito nas legislações pertinentes: <br> • Encaminhar a comprovação do cumprimento às condicionantes referente a Licença Ambiental L.O. nº. 000/2000, através do Sysnova, por não ter atendido satisfatoriamente aos seguintes itens:",
+            "templateOptions": {
+              "label": "Descrição da notificação (Condicionantes):",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            },
+            "hideExpression": "model.tipo_notificacao !== 'Condicionantes'"
+          },
+          {
+            "key": "numero_licenca",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Número da licença",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "descricao_notificacao",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Descrição da notificação (Outro):",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            },
+            "hideExpression": "model.tipo_notificacao !== 'Outro'"
+          },
+          {
+            "key": "prazo",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Prazo",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "user",
+            "className": "col-6",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome do servidor",
+              "placeholder": "Ex: João da Silva",
+              "required": true
+            }
+          },
+          {
+            "key": "matricula_servidor",
+            "className": "col-6",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Matrícula do servidor",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "data_infracao",
+            "type": "next-date",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Data da infração",
+              "placeholder": "00/00/0000",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "horario_infracao",
+            "className": "col-6",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Horário:",
+              "placeholder": "00:00",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "nome_notificado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome/Razão Social do Notificado",
+              "placeholder": "Ex: João da Silva",
+              "required": true
+            }
+          },
+          {
+            "key": "cpfcnpj_notificado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "CPF/ CNPJ do Notificado",
+              "placeholder": "Ex: 000.000.000-00",
+              "mask": "000.000.000-009",
+              "required": false
+            },
+            "expressionProperties": {
+              "templateOptions|||mask": "model.cpfcnpj_notificado?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' "
+            }
+          },
+          {
+            "key": "inscricao_municipal",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Cadastro Geral:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "local_correspondencia",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço domicílio fiscal:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "local",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço da infração:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "mapa",
+            "type": "next-mapa",
+            "templateOptions": {
+              "label": "Localização",
+              "placeholder": "Placeholder",
+              "focus": "false",
+              "type": "text",
+              "required": false,
+              "mapsOptions": {
+                "center": {
+                  "lat": -29.70398881972259,
+                  "lng": -52.424403497531664
+                },
+                "zoom": 14
+              }
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "lat",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Latitude (Graus, minutos, segundos)",
+              "readonly": false,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||lat": "(model.lat_int || 0) + 'º ' + (Math.trunc((model.lat_2 || 0) )) + '\\' ' + (Math.trunc((model.lat_2_dec || 0) * 6000) / 100) + '\\'\\''"
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "lng",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Longitude (Graus, minutos, segundos)",
+              "readonly": false,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||lng": "(model.lng_int || 0) + 'º ' + (Math.trunc((model.lng_2 || 0))) + '\\' ' + (Math.trunc((model.lng_2_dec || 0) * 6000) / 100) + '\\'\\''"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "latitude",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Latitude",
+              "readonly": true,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||latitude": "model.mapa?.lat",
+              "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "longitude",
+            "type": "next-input",
+            "templateOptions": {
+              "required": true,
+              "readonly": true,
+              "label": "Longitude"
+            },
+            "expressionProperties": {
+              "model|||longitude": "model.mapa?.lng",
+              "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lat_int",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_int",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_int": "Math.abs(Math.trunc(model.latitude || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_dec": "Math.abs(model.latitude || 0) - Math.abs(Math.trunc(model.latitude || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_2",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_2",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_2": "(model.lat_dec || 0) * 60"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_2_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_2_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_2_dec": "Math.abs(model.lat_2 || 0) - Math.abs(Math.trunc(model.lat_2 || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lng_int",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_int",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_int": "Math.abs(Math.trunc(model.longitude || 0))"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_dec": "Math.abs(model.longitude || 0) - Math.abs(Math.trunc(model.longitude || 0))"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_2",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_2",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_2": "(model.lng_dec || 0) * 60"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_2_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_2_dec",
+              "required": true,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_2_dec": "Math.abs(model.lng_2 || 0) - Math.abs(Math.trunc(model.lng_2 || 0))"
+            }
+          },
+          {
+            "key": "cadastro_imovel",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Cadastro Imóvel",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "atividade",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Atividade",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "tipo_notificacao",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Tipo de notificação:",
+              "options": [
+                {
+                  "value": "Limpeza de terreno"
+                },
+                {
+                  "value": "Condicionantes"
+                },
+                {
+                  "value": "Outro"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "texto_notif_introducao",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Texto introdutório da notificação:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            },
+            "hideExpression": "model.tipo_notificacao !== 'Limpeza de terreno' && model.tipo_notificacao !== 'Condicionantes'",
+            "expressionProperties": {
+              "model|||texto_notif_introducao": "model.texto_notif_introducao ? model.texto_notif_introducao : 'A Secretaria Municipal do Meio Ambiente, Saneamento e Sustentabilidade NOTIFICA o contribuinte supracitado, na forma do Decreto Federal nº 6.514/2008, que dispõe as infrações e sanções administrativas ao meio ambiente, estabelece o processo administrativo federal para a apuração destas infrações e dá outras providências, para que atente para a(s) seguinte(s) orientações, conforme prescrito nas legislações pertinentes:'"
+            }
+          },
+          {
+            "key": "texto_notif_consequencia",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Texto sobre consequências do não atendimento:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            },
+            "hideExpression": "model.tipo_notificacao !== 'Limpeza de terreno' && model.tipo_notificacao !== 'Condicionantes'",
+            "expressionProperties": {
+              "model|||texto_notif_consequencia": "model.texto_notif_consequencia ? model.texto_notif_consequencia : 'O não atendimento a esta notificação de orientação pode tornar o(a) notificado(a) infracionado(a), conforme o Decreto Federal nº 6.514/2008, com base no artigo 80: Art. 80 do Decreto Federal nº 6.514/2008. \"Deixar de atender a exigências legais ou regulamentares quando devidamente notificado pela autoridade ambiental competente no prazo concedido, visando à regularização, correção ou adoção de medidas de controle para cessar a degradação ambiental [...].\"'"
+            }
+          },
+          {
+            "key": "descricao_notificacao2",
+            "type": "next-ck",
+            "defaultValue": "Art. 1º É dever do proprietário ou do possuidor a qualquer título, de terreno localizado no perímetro urbano do Município de Santa Cruz do Sul, mantê-lo limpo, roçado e drenado, devendo também providenciar na eliminação de quaisquer objetos ou entulhos prejudiciais à saúde e à segurança pública. §1º O proprietário ou possuidor a qualquer título deve tomar medidas para que os terrenos não sejam utilizados por terceiros como depósitos de resíduos de qualquer natureza, se necessário, providenciando o cercamento do terreno de modo que impeça o acesso não autorizado. §7º Considera-se terreno passível de autuação, para fins da aplicação da presente Lei, o imóvel com cobertura vegetal composta por gramíneas e herbáceas, com altura predominante igual ou superior à 50 (cinquenta) cm.” <br>Art.1º, § 2º Constatado o não cumprimento das obrigações previstas neste artigo, será aplicada ao proprietário, ou possuidor a qualquer título do imóvel, pena de multa, mediante auto de infração, conforme tabela abaixo:  <br>1) terrenos de metragem: Até 300 m², multa de 01 (uma) UPM ; 2) de 300,01 m² até 500 m², 02 (duas) UPM; <br>3) de 500,01 m² a 1.000 m², 03 (três) UPM; 4) acima de 1.000 m², 04 (quatro) UPM <br>§ 3º Na Zona Comercial Preferencial – ZCP, Mapa IV, definida pelo Plano Diretor do Município, o valor da multa a ser aplicada será de 02 (duas) vezes o valor descrito na tabela acima, observada a área dos terrenos. <br>Lei nº.9.603 de 12 de março de 2024, Art. 2º, 5º, 6º, 7º e 10º; e Art. 4º, que acrece §7º ao art.1º da Lei nº.7.120/14, e altera os Art. 1º-§1º, 2º, 3º, 4º e 6º da Lei nº. 7.120 de 14 de outubro de 2014. <br> <br>Lavrei o auto de notificação em 2 (duas) vias, o qual vai por mim assinado e entregue ao contribuinte, ficando este ciente de que responderá pelo fato em processo administrativo e que terá o prazo de 20 (vinte) dias para comprovar ter realizado a limpeza do terreno junto a SEMASS (Secretaria Municipal de Meio Ambiente, Saneamento e Sustentabilidade) sito à Rua Cel Oscar Jost, 1576, fundos 2º Piso Poliesportivo, Santa Cruz do Sul, RS ou pelo e-mail atendimento.meioambiente@santacruz.rs.gov.br contados da data de recebimento deste auto de notificação, e/ou querendo apresente defesa no prazo de 20 (vinte) dias, no endereço supracitado, sob pena de revelia. Em caso de recusa ou ausência, o prazo se inicia a partir da data de entrega.",
+            "templateOptions": {
+              "label": "Descrição da notificação (Limpeza de terreno):",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            },
+            "hideExpression": "model.tipo_notificacao !== 'Limpeza de terreno'"
+          },
+          {
+            "key": "descricao_notificacao3",
+            "type": "next-ck",
+            "defaultValue": "A Secretaria Municipal do Meio Ambiente, Saneamento e Sustentabilidade NOTIFICA o empreendedor supracitado, na forma do Decreto Federal nº 6.514/2008, que dispõe as infrações e sanções administrativas ao meio ambiente, estabelece o processo administrativo federal para a apuração destas infrações e dá outras providências, para que atente para a(s) seguinte(s) orientações, conforme prescrito nas legislações pertinentes: <br> • Encaminhar a comprovação do cumprimento às condicionantes referente a Licença Ambiental L.O. nº. 000/2000, através do Sysnova, por não ter atendido satisfatoriamente aos seguintes itens:",
+            "templateOptions": {
+              "label": "Descrição da notificação (Condicionantes):",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            },
+            "hideExpression": "model.tipo_notificacao !== 'Condicionantes'"
+          },
+          {
+            "key": "numero_licenca",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Número da licença",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "descricao_notificacao",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Descrição da notificação (Outro):",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            },
+            "hideExpression": "model.tipo_notificacao !== 'Outro'"
+          },
+          {
+            "key": "prazo",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Prazo",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "user",
+            "className": "col-6",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome do servidor",
+              "placeholder": "Ex: João da Silva",
+              "required": true
+            }
+          },
+          {
+            "key": "matricula_servidor",
+            "className": "col-6",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Matrícula do servidor",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "permission": "process:analista",
+        "checkPermission": true
+      },
+      {
+        "nome": "Auto de infração",
+        "text_action": "Realizou ação",
+        "key": "card_auto_infracao",
+        "form": [
+          {
+            "key": "data_infracao",
+            "type": "next-date",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Data da infração",
+              "placeholder": "00/00/0000",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "horario_infracao",
+            "className": "col-6",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Horário:",
+              "placeholder": "00:00",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "nome_infrator",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome/Razão Social do infrator",
+              "placeholder": "Ex: João da Silva",
+              "required": false
+            }
+          },
+          {
+            "key": "cpfcnpj_infrator",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "CPF/ CNPJ do Infrator",
+              "placeholder": "Ex: 000.000.000-00",
+              "mask": "000.000.000-009",
+              "required": false
+            },
+            "expressionProperties": {
+              "templateOptions|||mask": "model.cpfcnpj_infrator?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' "
+            }
+          },
+          {
+            "key": "inscricao_municipal",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Cadastro Geral:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "local_correspondencia",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço domicílio fiscal:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "local_infracao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço da infração:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "mapa",
+            "type": "next-mapa",
+            "templateOptions": {
+              "label": "Localização",
+              "placeholder": "Placeholder",
+              "focus": "false",
+              "type": "text",
+              "required": false,
+              "mapsOptions": {
+                "center": {
+                  "lat": -29.70398881972259,
+                  "lng": -52.424403497531664
+                },
+                "zoom": 14
+              }
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "lat",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Latitude (Graus, minutos, segundos)",
+              "readonly": true,
+              "required": false
+            },
+            "expressionProperties": {
+              "model|||lat": "(model.lat_int || 0) + 'º ' + (Math.trunc((model.lat_2 || 0) )) + '\\' ' + (Math.trunc((model.lat_2_dec || 0) * 6000) / 100) + '\\'\\''"
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "lng",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Longitude (Graus, minutos, segundos)",
+              "readonly": true,
+              "required": false
+            },
+            "expressionProperties": {
+              "model|||lng": "(model.lng_int || 0) + 'º ' + (Math.trunc((model.lng_2 || 0))) + '\\' ' + (Math.trunc((model.lng_2_dec || 0) * 6000) / 100) + '\\'\\''"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "latitude",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Latitude",
+              "readonly": true,
+              "required": false
+            },
+            "expressionProperties": {
+              "model|||latitude": "model.mapa?.lat",
+              "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "longitude",
+            "type": "next-input",
+            "templateOptions": {
+              "required": false,
+              "readonly": true,
+              "label": "Longitude"
+            },
+            "expressionProperties": {
+              "model|||longitude": "model.mapa?.lng",
+              "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lat_int",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_int",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_int": "Math.abs(Math.trunc(model.latitude || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_dec",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_dec": "Math.abs(model.latitude || 0) - Math.abs(Math.trunc(model.latitude || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_2",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_2",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_2": "(model.lat_dec || 0) * 60"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_2_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_2_dec",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_2_dec": "Math.abs(model.lat_2 || 0) - Math.abs(Math.trunc(model.lat_2 || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lng_int",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_int",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_int": "Math.abs(Math.trunc(model.longitude || 0))"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_dec",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_dec": "Math.abs(model.longitude || 0) - Math.abs(Math.trunc(model.longitude || 0))"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_2",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_2",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_2": "(model.lng_dec || 0) * 60"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_2_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_2_dec",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_2_dec": "Math.abs(model.lng_2 || 0) - Math.abs(Math.trunc(model.lng_2 || 0))"
+            }
+          },
+          {
+            "key": "cadastro_imovel",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Cadastro Imóvel",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "numero_licenca",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Número da licença",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "descricao_infracao",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Descrição da infração:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "dispositivo",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Dispositivo(s) legal(is) transgredido(s):",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "penalidade",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Penalidade(s):",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "dispositivos_penalidade",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Dispositivo(s) legal(is) fundamenta(m) a(s) penalidade(s):",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "prazo",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Prazo",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "texto_auto_lavrei",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Texto do termo de lavratura:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            },
+            "expressionProperties": {
+              "model|||texto_auto_lavrei": "model.texto_auto_lavrei ? model.texto_auto_lavrei : 'Lavrei o Auto de Infração em 2 (duas) vias, o qual vai por mim assinado e entregue ao autuado, ficando este notificado de que responderá pelo fato em processo administrativo e que terá o prazo de 20 (vinte) dias, a contar da data do recebimento desta, para querendo apresentar defesa ou impugnação a este auto, sob pena de revelia, perante Secretaria Municipal de Meio Ambiente, Saneamento e Sustentabilidade, sito à Rua Cel Oscar Jost, 1576, fundos 2º Piso Poliesportivo, Santa Cruz do Sul, RS, via protocolo online (APROVADIGITAL) https://santacruzdosul.aprova.com.br/home (CARD-23), informando o n°. do processo, e desde já notificado que o não pagamento da multa aplicada implicará em inscrição como divida ativa.'"
+            }
+          },
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observação:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "obs_fixa",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações fixas:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            },
+            "expressionProperties": {
+              "model|||obs_fixa": "model.obs_fixa ? model.obs_fixa :'<p>1. Fica assegurado o direito ao contraditório, à ampla defesa, e às informações relativas ao processo administrativo de infração, as quais poderão ser obtidas junto à Secretaria Municipal de Meio Ambiente, Saneamento e Sustentabilidade – SEMASS, podendo utilizar-se de todos os benefícios previstos na legislação vigente, as quais fundamentaram este auto de infração.&nbsp;</p><p>2. Após o julgamento da defesa, o autuado poderá interpor recurso ao resultado deste, no prazo de 20 dias, a contar da ciência da decisão do julgamento, cujo recurso será encaminhado por esta Secretaria ao Conselho Municipal de Meio Ambiente e Saneamento Básico – CMMASB.&nbsp;</p><p>3. Caso o infrator tenha direito aos benefícios previstos na legislação, após transitado em julgado, poderá requerer o Termo de Compromisso Ambiental – TCA, onde serão ajustadas as condições e obrigações a serem cumpridas pelos responsáveis pelas fontes de degradação ambiental.&nbsp;</p><p>4. A celebração do TCA não finda o processo administrativo e o órgão ambiental fiscalizará, a qualquer tempo, o cumprimento das obrigações pactuadas entre as partes.&nbsp;</p><p>5. O infrator fica cientificado que, independente de sua manifestação, o processo administrativo de infração ambiental terá continuidade, caso não queira aderir aos termos dos artigos nº.96, §5º, II-A) e nº.113, parágrafo único, do Decreto Federal nº.6.514/08.&nbsp;</p><p>6. Caso o infrator tenha direito aos benefícios, após transitado em julgado, poderá requerer o Termo de Compromisso Ambiental – TCA, onde serão ajustadas as condições e obrigações a serem cumpridas pelos responsáveis pelas fontes de degradação ambiental.&nbsp;</p><p>7. O não pagamento do valor aplicado, dentro do prazo estipulado, acarretará nas sanções previstas em lei e sob pena de inscrição em dívida ativa para cobrança da multa no seu valor integral, nos termos da Lei.&nbsp;</p><p>8. A não quitação do débito ambiental após o processo transitado em julgado será encaminhado para inscrição em dívida ativa municipal.</p><p>&nbsp;</p>'"
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "data_infracao",
+            "type": "next-date",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Data da infração",
+              "placeholder": "00/00/0000",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "horario_infracao",
+            "className": "col-6",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Horário:",
+              "placeholder": "00:00",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "nome_infrator",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome/Razão Social do infrator",
+              "placeholder": "Ex: João da Silva",
+              "required": false
+            }
+          },
+          {
+            "key": "cpfcnpj_infrator",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "CPF/ CNPJ do Infrator",
+              "placeholder": "Ex: 000.000.000-00",
+              "mask": "000.000.000-009",
+              "required": false
+            },
+            "expressionProperties": {
+              "templateOptions|||mask": "model.cpfcnpj_infrator?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' "
+            }
+          },
+          {
+            "key": "inscricao_municipal",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Cadastro Geral:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "local_correspondencia",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço domicílio fiscal:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "local_infracao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço da infração:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "mapa",
+            "type": "next-mapa",
+            "templateOptions": {
+              "label": "Localização",
+              "placeholder": "Placeholder",
+              "focus": "false",
+              "type": "text",
+              "required": false,
+              "mapsOptions": {
+                "center": {
+                  "lat": -29.70398881972259,
+                  "lng": -52.424403497531664
+                },
+                "zoom": 14
+              }
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "lat",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Latitude (Graus, minutos, segundos)",
+              "readonly": true,
+              "required": false
+            },
+            "expressionProperties": {
+              "model|||lat": "(model.lat_int || 0) + 'º ' + (Math.trunc((model.lat_2 || 0) )) + '\\' ' + (Math.trunc((model.lat_2_dec || 0) * 6000) / 100) + '\\'\\''"
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "lng",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Longitude (Graus, minutos, segundos)",
+              "readonly": true,
+              "required": false
+            },
+            "expressionProperties": {
+              "model|||lng": "(model.lng_int || 0) + 'º ' + (Math.trunc((model.lng_2 || 0))) + '\\' ' + (Math.trunc((model.lng_2_dec || 0) * 6000) / 100) + '\\'\\''"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "latitude",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Latitude",
+              "readonly": true,
+              "required": false
+            },
+            "expressionProperties": {
+              "model|||latitude": "model.mapa?.lat",
+              "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "longitude",
+            "type": "next-input",
+            "templateOptions": {
+              "required": false,
+              "readonly": true,
+              "label": "Longitude"
+            },
+            "expressionProperties": {
+              "model|||longitude": "model.mapa?.lng",
+              "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lat_int",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_int",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_int": "Math.abs(Math.trunc(model.latitude || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_dec",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_dec": "Math.abs(model.latitude || 0) - Math.abs(Math.trunc(model.latitude || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_2",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_2",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_2": "(model.lat_dec || 0) * 60"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lat_2_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lat_2_dec",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lat_2_dec": "Math.abs(model.lat_2 || 0) - Math.abs(Math.trunc(model.lat_2 || 0))"
+            }
+          },
+          {
+            "className": "col-3",
+            "key": "lng_int",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_int",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_int": "Math.abs(Math.trunc(model.longitude || 0))"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_dec",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_dec": "Math.abs(model.longitude || 0) - Math.abs(Math.trunc(model.longitude || 0))"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_2",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_2",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_2": "(model.lng_dec || 0) * 60"
+            }
+          },
+          {
+            "className": "col-4",
+            "key": "lng_2_dec",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "lng_2_dec",
+              "required": false,
+              "hidden": true
+            },
+            "expressionProperties": {
+              "model|||lng_2_dec": "Math.abs(model.lng_2 || 0) - Math.abs(Math.trunc(model.lng_2 || 0))"
+            }
+          },
+          {
+            "key": "cadastro_imovel",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Cadastro Imóvel",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "numero_licenca",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Número da licença",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "descricao_infracao",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Descrição da infração:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "dispositivo",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Dispositivo(s) legal(is) transgredido(s):",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "penalidade",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Penalidade(s):",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "dispositivos_penalidade",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Dispositivo(s) legal(is) fundamenta(m) a(s) penalidade(s):",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "prazo",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Prazo",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "texto_auto_lavrei",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Texto do termo de lavratura:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            },
+            "expressionProperties": {
+              "model|||texto_auto_lavrei": "model.texto_auto_lavrei ? model.texto_auto_lavrei : 'Lavrei o Auto de Infração em 2 (duas) vias, o qual vai por mim assinado e entregue ao autuado, ficando este notificado de que responderá pelo fato em processo administrativo e que terá o prazo de 20 (vinte) dias, a contar da data do recebimento desta, para querendo apresentar defesa ou impugnação a este auto, sob pena de revelia, perante Secretaria Municipal de Meio Ambiente, Saneamento e Sustentabilidade, sito à Rua Cel Oscar Jost, 1576, fundos 2º Piso Poliesportivo, Santa Cruz do Sul, RS, via protocolo online (APROVADIGITAL) https://santacruzdosul.aprova.com.br/home (CARD-23), informando o n°. do processo, e desde já notificado que o não pagamento da multa aplicada implicará em inscrição como divida ativa.'"
+            }
+          },
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observação:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "obs_fixa",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações fixas:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            },
+            "expressionProperties": {
+              "model|||obs_fixa": "model.obs_fixa ? model.obs_fixa :'<p>1. Fica assegurado o direito ao contraditório, à ampla defesa, e às informações relativas ao processo administrativo de infração, as quais poderão ser obtidas junto à Secretaria Municipal de Meio Ambiente, Saneamento e Sustentabilidade – SEMASS, podendo utilizar-se de todos os benefícios previstos na legislação vigente, as quais fundamentaram este auto de infração.&nbsp;</p><p>2. Após o julgamento da defesa, o autuado poderá interpor recurso ao resultado deste, no prazo de 20 dias, a contar da ciência da decisão do julgamento, cujo recurso será encaminhado por esta Secretaria ao Conselho Municipal de Meio Ambiente e Saneamento Básico – CMMASB.&nbsp;</p><p>3. Caso o infrator tenha direito aos benefícios previstos na legislação, após transitado em julgado, poderá requerer o Termo de Compromisso Ambiental – TCA, onde serão ajustadas as condições e obrigações a serem cumpridas pelos responsáveis pelas fontes de degradação ambiental.&nbsp;</p><p>4. A celebração do TCA não finda o processo administrativo e o órgão ambiental fiscalizará, a qualquer tempo, o cumprimento das obrigações pactuadas entre as partes.&nbsp;</p><p>5. O infrator fica cientificado que, independente de sua manifestação, o processo administrativo de infração ambiental terá continuidade, caso não queira aderir aos termos dos artigos nº.96, §5º, II-A) e nº.113, parágrafo único, do Decreto Federal nº.6.514/08.&nbsp;</p><p>6. Caso o infrator tenha direito aos benefícios, após transitado em julgado, poderá requerer o Termo de Compromisso Ambiental – TCA, onde serão ajustadas as condições e obrigações a serem cumpridas pelos responsáveis pelas fontes de degradação ambiental.&nbsp;</p><p>7. O não pagamento do valor aplicado, dentro do prazo estipulado, acarretará nas sanções previstas em lei e sob pena de inscrição em dívida ativa para cobrança da multa no seu valor integral, nos termos da Lei.&nbsp;</p><p>8. A não quitação do débito ambiental após o processo transitado em julgado será encaminhado para inscrição em dívida ativa municipal.</p><p>&nbsp;</p>'"
+            }
+          }
+        ],
+        "permission": "process:analista",
+        "checkPermission": true
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Meio Ambiente",
+    "initialReceiverConfig": {
+      "type": "multiple",
+      "possibleReceivers": []
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": true
+  },
+  "city_id": 38,
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "declaracao_veracidade_lgpd",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaração LGPD",
+                "options": [
+                  {
+                    "label": "Declaro que li sobre a LGPD e estou de acordo.",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n\n\n<br><br>\n<b>Declaração LGPD</b><br>\nConforme Lei nº 13.709, de 14 de agosto de 2018 (Lei Geral de Proteção de Dados Pessoais, informamos: Os usuários do Serviço de Agendamento Eletrônico devem autorizar a coleta de dados pessoais. As informações coletadas no Serviço de Agendamento Eletrônico serão utilizados exclusivamente para o agendamento e identificação do usuário dos serviços oferecidos pelo Município de Santa Cruz do Sul. Cada órgão da Administração Municipal é responsável pelos dados coletados para agendamento de seus serviços. Nenhum órgão da Administração Municipal compartilhará os dados coletados em nenhuma hipótese. Os dados pessoais coletados podem incluir: Nome, e CPF do usuário Endereço completo e telefones para contato. Quaisquer dúvidas ou questionamentos devem encaminhados ao órgão onde se pretende agendar atendimento. \n\n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "tipo_denuncia",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de denúncia:",
+                "options": [
+                  {
+                    "label": "Terrenos",
+                    "value": "Terrenos"
+                  },
+                  {
+                    "label": "Resíduos",
+                    "value": "Resíduos"
+                  },
+                  {
+                    "label": "Arborização",
+                    "value": "Arborização"
+                  },
+                  {
+                    "label": "Queima irregular",
+                    "value": "Queima irregular"
+                  },
+                  {
+                    "label": "Poluição Sonora",
+                    "value": "Poluição Sonora"
+                  },
+                  {
+                    "label": "Sem licenciamento",
+                    "value": "Sem licenciamento"
+                  },
+                  {
+                    "label": "Ministério Público",
+                    "value": "Ministério Público"
+                  },
+                  {
+                    "label": "Descumprimento de licença",
+                    "value": "Outros"
+                  },
+                  {
+                    "label": "Outros",
+                    "value": "Outros"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "hideLabel": false,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "numero_mp",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número do processo do MP:",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_denuncia !== 'Ministério Público'"
+            },
+            {
+              "key": "descricao_solicitacao",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Descrição da solicitação",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Solicitação",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Solicitação</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n\n\n\n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step",
+            "mirror"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome/Razão Social do Requerente",
+                "placeholder": "Ex: João da Silva",
+                "required": false
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "E-mail do Requerente",
+                "required": false
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.email_requerente ? model.email_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.usuario_email",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone do Requerente",
+                "placeholder": "(00) 00000-0000",
+                "required": false,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step",
+            "mirror"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroupClassName": "row items-end",
+          "fieldGroup": [
+            {
+              "key": "descricao_localizacao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Descrição da localização",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "ponto_referencia",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Ponto de referência:",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "classificacao_territorial",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Classificação territorial",
+                "options": [
+                  {
+                    "value": "Zona Urbana"
+                  },
+                  {
+                    "value": "Zona Rural"
+                  }
+                ],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "mapa",
+              "type": "next-mapa",
+              "templateOptions": {
+                "label": "Localização",
+                "placeholder": "Placeholder",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "mapsOptions": {
+                  "center": {
+                    "lat": -29.70398881972259,
+                    "lng": -52.424403497531664
+                  },
+                  "zoom": 14
+                }
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "lat",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Latitude (Graus, minutos, segundos)",
+                "readonly": true,
+                "required": true,
+                "suffix": "S"
+              },
+              "expressionProperties": {
+                "model|||lat": "(model.lat_int || 0) + 'º ' + (Math.trunc((model.lat_2 || 0) )) + '\\' ' + (Math.trunc((model.lat_2_dec || 0) * 6000) / 100) + '\\'\\''"
+              }
+            },
+            {
+              "className": "col-12",
+              "key": "lng",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Longitude (Graus, minutos, segundos)",
+                "readonly": true,
+                "required": true,
+                "suffix": "O"
+              },
+              "expressionProperties": {
+                "model|||lng": "(model.lng_int || 0) + 'º ' + (Math.trunc((model.lng_2 || 0))) + '\\' ' + (Math.trunc((model.lng_2_dec || 0) * 6000) / 100) + '\\'\\''"
+              }
+            },
+            {
+              "className": "col-4",
+              "key": "latitude",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Latitude",
+                "readonly": true,
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||latitude": "model.mapa?.lat",
+                "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+              }
+            },
+            {
+              "className": "col-4",
+              "key": "longitude",
+              "type": "next-input",
+              "templateOptions": {
+                "required": true,
+                "readonly": true,
+                "label": "Longitude"
+              },
+              "expressionProperties": {
+                "model|||longitude": "model.mapa?.lng",
+                "templateOptions|||required": "model.tipo_solicitacao == 'Certidão de cadastramento de poços' || model.tipo_solicitacao == 'Certidão de registro ou cancelamento de gravame referente a vegetação nativa'"
+              }
+            },
+            {
+              "className": "col-4",
+              "key": "lat_int",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lat_int",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lat_int": "Math.abs(Math.trunc(model.latitude || 0))"
+              }
+            },
+            {
+              "className": "col-3",
+              "key": "lat_dec",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lat_dec",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lat_dec": "Math.abs(model.latitude || 0) - Math.abs(Math.trunc(model.latitude || 0))"
+              }
+            },
+            {
+              "className": "col-3",
+              "key": "lat_2",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lat_2",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lat_2": "(model.lat_dec || 0) * 60"
+              }
+            },
+            {
+              "className": "col-3",
+              "key": "lat_2_dec",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lat_2_dec",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lat_2_dec": "Math.abs(model.lat_2 || 0) - Math.abs(Math.trunc(model.lat_2 || 0))"
+              }
+            },
+            {
+              "className": "col-3",
+              "key": "lng_int",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lng_int",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lng_int": "Math.abs(Math.trunc(model.longitude || 0))"
+              }
+            },
+            {
+              "className": "col-4",
+              "key": "lng_dec",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lng_dec",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lng_dec": "Math.abs(model.longitude || 0) - Math.abs(Math.trunc(model.longitude || 0))"
+              }
+            },
+            {
+              "className": "col-4",
+              "key": "lng_2",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lng_2",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lng_2": "(model.lng_dec || 0) * 60"
+              }
+            },
+            {
+              "className": "col-4",
+              "key": "lng_2_dec",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lng_2_dec",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lng_2_dec": "Math.abs(model.lng_2 || 0) - Math.abs(Math.trunc(model.lng_2 || 0))"
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Local",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Local</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Descreva detalhadamente as informações do local da denúncia para facilitar a identificação deste pelo órgão ambiental. </li> \n<br>\n<b>Importante</b><br>\nCaso não seja possível localizar o local informado, a denúncia será arquivada. \n\n\n\n\n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step",
+            "mirror"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Arquivos",
+                "focus": "false",
+                "btnAddText": "arquivos",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do arquivo",
+                      "required": true,
+                      "placeholder": "Ex: Foto"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Anexo",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": "true",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": "true",
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "placeholder": "",
+                "focus": "false",
+                "sensitiveField": false,
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true,
+                "hideLabel": false,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Anexos",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step",
+            "mirror"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "step": {
+    "config": [],
+    "shared": {
+      "automatic": [
+        {
+          "subscribe": [
+            "process/create"
+          ],
+          "execute": "({ resume, activities, signatures, documents, process }) => {\n     if (process.last_version.tipo_solicitacao == 'Alvará de Funcionamento em Horário Especial' || process.last_version.tipo_solicitacao == 'Autorização para Panfletagem' || process.last_version.tipo_solicitacao == 'Licença para Engenho Indicativo (Publicidade)' || process.last_version.tipo_solicitacao == 'Licença para Engenho Publicitário (Publicidade)') {\n      return [sendTo({ groupId: 'sfpp_sorocabasp' })];\n    }\n}\n"
+        }
+      ],
+      "tab": [],
+      "action": []
+    }
+  }
+}

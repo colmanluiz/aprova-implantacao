@@ -1,0 +1,560 @@
+{
+  "_id": "6765c0af95938400087162c5",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/ CNPJ",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Notificação",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "documento_requerente",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos (Carteira de Identidade e CPF, se pessoa física, OU CNPJ e contrato social, se pessoa jurídica)",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_solicitacao",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de solicitação:",
+                "options": [
+                  {
+                    "value": "Subsídio Financeiro"
+                  },
+                  {
+                    "value": "Benefício Fiscal"
+                  },
+                  {
+                    "value": "Incentivo Econômico"
+                  },
+                  {
+                    "value": "Isenção Tributária"
+                  },
+                  {
+                    "value": "Outro (especificar)"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "especificar_tipo",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Especificar",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_solicitacao !== 'Outro (especificar)'"
+            },
+            {
+              "key": "detalhamento_solicitacao",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Detalhamento:",
+                "placeholder": "Exemplo: quantia específica ou tipo de incentivo detalhado (como isenção de impostos); nome do projeto ou iniciativa, descrição, público-alvo beneficiado, localização, impacto esperado etc. ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Solicitação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "plano_trabalho_anexo",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Plano de Trabalho do Projeto (descrição detalhada, objetivos, metas, prazos e indicadores)",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "orcamento_anexo",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Orçamento Detalhado (distribuição dos custos: materiais, mão de obra, etc.)",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Solicitação de Subsídios ou Incentivos Culturais",
+    "descricao": "Pedido formal feito por empresas ou organizações para obter recursos financeiros ou benefícios fiscais da prefeitura, com o objetivo de fomentar atividades econômicas, culturais ou sociais no município.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "sigla": "SSI",
+    "useNewSidebarForwarding": true,
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Termo de Concessão do Subsídio ou Incentivo",
+        "template": "ModeloAD/termo_concessao_subsidio.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Parecer",
+        "text_action": "Realizou ação",
+        "key": "card_parecer",
+        "form": [
+          {
+            "key": "obs_parecer",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Parecer",
+              "placeholder": "Viabilidade técnica e financeira do pedido, avaliação dos impactos esperados e exigências adicionais, se necessárias.",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "valor_isencao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Valor ou isenção autorizada:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "cronograma_vigencia",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Cronograma de repasse ou vigência do benefício:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "obrigacoes_beneficiario",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Obrigações do beneficiário:",
+              "placeholder": "Relatórios, prestação de contas, etc.",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "anexos_interna",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos:",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "obs_parecer",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Parecer",
+              "placeholder": "Viabilidade técnica e financeira do pedido, avaliação dos impactos esperados e exigências adicionais, se necessárias.",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "valor_isencao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Valor ou isenção autorizada:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "cronograma_vigencia",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Cronograma de repasse ou vigência do benefício:",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "obrigacoes_beneficiario",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Obrigações do beneficiário:",
+              "placeholder": "Relatórios, prestação de contas, etc.",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "anexos_interna",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos:",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Taxas",
+        "text_action": "Emitiu Taxa",
+        "key": "taxasProcesso",
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "permission": "taxas",
+        "type": "taxa",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "cultura_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "allowMultipleForwarding": true
+  },
+  "city_id": 38,
+  "tramite": [
+    {
+      "_id": "676ed1033bc047000881eda7",
+      "groupId": "cultura_modeload"
+    }
+  ],
+  "__v": 0,
+  "step": {}
+}

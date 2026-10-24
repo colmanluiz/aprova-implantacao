@@ -1,0 +1,467 @@
+{
+  "_id": "6765c27f85f7f4000847a276",
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12"
+            },
+            {
+              "key": "vinculo_requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de vínculo do requerente com a solicitação:",
+                "options": [
+                  {
+                    "label": "Interessado",
+                    "value": "Interessado"
+                  },
+                  {
+                    "label": "Secretaria do Departamento",
+                    "value": "Secretaria do Departamento"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              }
+            },
+            {
+              "key": "nome_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do Requerente (usuário logado no sistema)",
+                "readonly": true,
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||nome_requerente": "model.user_dados?.user?.user_metadata.name",
+                "templateOptions|||label": "model.vinculo_requerente == 'Interessado' ? 'Nome do Interessado' : 'Nome do Requerente (usuário logado no sistema)'"
+              }
+            },
+            {
+              "key": "nome_interessado",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do Interessado",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "!model.vinculo_requerente || model.vinculo_requerente == 'Interessado'"
+            },
+            {
+              "key": "cpf_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF",
+                "mask": "000.000.000-00",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpf_requerente": "model.cpf_requerente ? model.cpf_requerente : model.vinculo_requerente == 'Interessado' ? model.user_dados?.user?.user_metadata.cpf : model.cpf_requerente",
+                "templateOptions|||mask": "model.user_dados?.user?.user_metadata.cpf?.length == 11 ? '000.000.000-00' : ''",
+                "templateOptions|||readonly": "model.vinculo_requerente == 'Interessado'"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Email",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.email_requerente ? model.email_requerente : model.vinculo_requerente == 'Interessado' ? model.user_dados?.user?.email : model.email_requerente"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.vinculo_requerente == 'Interessado' ? model.user_dados?.user?.user_metadata.telefone : model.telefone_requerente",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              }
+            },
+            {
+              "key": "cargo_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cargo/ Função",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cargo_requerente": "model.cargo_requerente ? model.cargo_requerente : model.vinculo_requerente == 'Interessado' ? model.user_dados?.user?.user_metadata.cargo : model.cargo_requerente"
+              }
+            },
+            {
+              "key": "matricula_req",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Matrícula",
+                "placeholder": "  ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "subsetor_dataset",
+              "type": "next-input",
+              "wrappers": [
+                "form-field",
+                "consumeDataset"
+              ],
+              "templateOptions": {
+                "label": "Setor solicitante",
+                "datasetKey": "setor",
+                "datasetReference": "",
+                "autocomplete": true,
+                "hideData": true,
+                "focus": false,
+                "disabled": false,
+                "required": false
+              }
+            },
+            {
+              "key": "documento_interessado",
+              "resetOnHide": true,
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento de identificação do interessado",
+                "options": [],
+                "focus": "false",
+                "required": false
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do tipo de vínculo do requerente com a solicitação ser o interessado, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "regime_trabalho",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Regime de trabalho",
+                "options": [
+                  {
+                    "value": "CLT"
+                  },
+                  {
+                    "value": "Estatutário"
+                  },
+                  {
+                    "value": "Comissionado"
+                  },
+                  {
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "especificar_regime_trabalho",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Especificar",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "model.regime_trabalho !== 'Outro'"
+            },
+            {
+              "className": "col-6",
+              "key": "inicio_afast",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Data de início do afastamento",
+                "placeholder": "Ex: 15/06/2022",
+                "focus": "false",
+                "type": "text",
+                "mask": "00/00/0000",
+                "keepMask": true,
+                "required": true
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "termino_afast",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Data de término do afastamento",
+                "placeholder": "Ex: 18/06/2022",
+                "focus": "false",
+                "type": "text",
+                "mask": "00/00/0000",
+                "keepMask": true,
+                "required": true
+              }
+            },
+            {
+              "key": "total_dias",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Informe o período de afastamento",
+                "placeholder": "Ex: 4 horas",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "cid",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CID",
+                "focus": "false",
+                "type": "text"
+              }
+            },
+            {
+              "key": "atestado",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cópia do atestado",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados da Solicitação",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">\nDados da Solicitação</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">O atestado deve ser enviado no prazo máximo de 10 dias após o início do afastamento.</li> \n \n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "obs_solic",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Observações sobre a solicitação",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    }
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "68e55bfe42d4f9d00ecf6157"
+    }
+  ],
+  "config": {
+    "experimentalMode": true,
+    "devolverAoUltimo": true,
+    "title": "Envio de Atestado Médico",
+    "descricao": "Processo destinado à apresentação e registro de atestados médicos ou documentos comprobatórios de afastamento, utilizado por servidores para justificar ausências no trabalho.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "NEW",
+    "templates": [],
+    "form_tramites": [
+      {
+        "nome": "Observações",
+        "text_action": "Realizou ação",
+        "key": "card_obs",
+        "fieldGroup": [
+          {
+            "key": "observacoes",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexos",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "observacoes",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "anexos",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos",
+              "options": [],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "newSignatureStrategy": true,
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "single",
+      "possibleReceivers": [
+        "departamentorh_modeload"
+      ]
+    },
+    "requiresPreCreationSignature": true,
+    "useNewSidebarForwarding": true,
+    "subClassId": "numeracao_padrao",
+    "allowMultipleForwarding": true
+  },
+  "tramite": [],
+  "__v": 0,
+  "city_id": 38,
+  "step": {}
+}

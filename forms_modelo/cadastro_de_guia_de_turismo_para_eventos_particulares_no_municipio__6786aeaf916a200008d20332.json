@@ -1,0 +1,695 @@
+{
+  "_id": "6786aeaf916a200008d20332",
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              }
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/ CNPJ",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? '00.000.000/0000-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Notificação",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "datanascimento",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Data de nascimento",
+                "placeholder": "Data de nascimento do Guia",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "fotocracha",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Foto para identificacão no crachá (Ex: Perfil/3x4)",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "anexo_doc"
+                ]
+              }
+            },
+            {
+              "key": "documento_requerente",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos (Carteira de Identidade e CPF, se pessoa física, OU CNPJ e contrato social, se pessoa jurídica)",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "sensitiveField": false,
+                "hidden": true
+              },
+              "className": "col-12"
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "predefined",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "cultura_modeload",
+                      "label": "Secretaria de Cultura, Esporte e Lazer",
+                      "id": "676d994a56664e000806919d"
+                    }
+                  ]
+                },
+                "sensitiveField": false,
+                "destinationAccessLevel": "FULL",
+                "multiple": true,
+                "useNewSidebarForwarding": true,
+                "hidden": true
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "cadastur",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Possuí vínculo com a Cadastur?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "cadasturnv",
+              "type": "next-input",
+              "expressionProperties": {
+                "templateOptions|||required": "model.cadastur == 'Sim'",
+                "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+              },
+              "templateOptions": {
+                "label": "Número do Vínculo",
+                "placeholder": "Ex: 12345678",
+                "focus": "false",
+                "type": "text"
+              },
+              "hideExpression": "model.cadastur !== 'Sim' "
+            }
+          ],
+          "templateOptions": {
+            "title": "Cadastur",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Cadastur</span>\n\n\n<ol class=\"pl-4\">\n<li align = \"\">Caso não possua vínculo e deseje realizar, cadastre-se no site à seguir: <a href=https://cadastur.turismo.gov.br> Cadastur </a> .\n</li>\n\n\n</ol>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "idiomas",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Fluência em:",
+                "options": [
+                  {
+                    "label": "Português do Brasil",
+                    "value": "ptbr"
+                  },
+                  {
+                    "label": "Português Portugal",
+                    "value": "pt"
+                  },
+                  {
+                    "label": "Chinês",
+                    "value": "zh-CN"
+                  },
+                  {
+                    "label": "Espanhol",
+                    "value": "es"
+                  },
+                  {
+                    "label": "Francês",
+                    "value": "fr"
+                  },
+                  {
+                    "label": "Inglês",
+                    "value": "en"
+                  },
+                  {
+                    "label": "Italiano",
+                    "value": "it"
+                  },
+                  {
+                    "label": "Japonês",
+                    "value": "ja"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "especialidades",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Especialista em:",
+                "options": [
+                  {
+                    "label": "História Local",
+                    "value": "historia_local"
+                  },
+                  {
+                    "label": "Culinária Local",
+                    "value": "culinaria_local"
+                  },
+                  {
+                    "label": "Ecoturismo",
+                    "value": "ecoturismo"
+                  },
+                  {
+                    "label": "Aventura e Esportes",
+                    "value": "aventura_esportes"
+                  },
+                  {
+                    "label": "Arte e Cultura",
+                    "value": "arte_cultura"
+                  },
+                  {
+                    "label": "Turismo Religioso",
+                    "value": "turismo_religioso"
+                  },
+                  {
+                    "label": "Turismo de Compras",
+                    "value": "turismo_compras"
+                  },
+                  {
+                    "label": "Turismo de Luxo",
+                    "value": "turismo_luxo"
+                  },
+                  {
+                    "label": "Turismo Fotográfico",
+                    "value": "turismo_fotografico"
+                  }
+                ],
+                "focus": "false",
+                "required": false
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Especialidade e Idiomas",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "xp",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Experiência Profissional",
+                "placeholder": "Descreva suas experiências",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Experiência Profissinal",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "diasdasemana",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Dias da Semana",
+                "options": [
+                  {
+                    "label": "Domingo",
+                    "value": "domingo"
+                  },
+                  {
+                    "label": "Segunda-feira",
+                    "value": "segunda"
+                  },
+                  {
+                    "label": "Terça-Feira",
+                    "value": "terça"
+                  },
+                  {
+                    "label": "Quarta-Feira",
+                    "value": "quarta"
+                  },
+                  {
+                    "label": "Quinta-Feira",
+                    "value": "quinta"
+                  },
+                  {
+                    "label": "Sexta-Feira",
+                    "value": "sexta"
+                  },
+                  {
+                    "label": "Sábado",
+                    "value": "sabado"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "periodos",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Período(s)",
+                "options": [
+                  {
+                    "label": "Matutino",
+                    "value": "mat"
+                  },
+                  {
+                    "label": "Vespertino",
+                    "value": "vesp"
+                  },
+                  {
+                    "label": "Noturno",
+                    "value": "not"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "textocomp",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Caso as opções acima não sejam suficientes, descreva abaixo",
+                "placeholder": "Ex: Segunda-Feira: Noturno, Terça-Feira: Matutino",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Disponibilidade para serviços",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    }
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "67d9c783a4c3b20008226364"
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "requiresPreCreationSignature": true,
+    "title": "Cadastro de Guia de Turismo para Eventos Particulares no Munícipio",
+    "descricao": "Registro de profissionais que atuam como guias turísticos em eventos particulares, como casamentos, aniversários, etc. Esse cadastro garante que os guias tenham as qualificações necessárias e estejam autorizados a trabalhar no município.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "sigla": "CGT",
+    "useNewSidebarForwarding": true,
+    "newSignatureStrategy": true,
+    "experimentalMode": true,
+    "subClassId": "numeracao_padrao",
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Crachá",
+        "template": "ModeloAD/crachaturismo.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true,
+        "possui_prazo_validade": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Observações",
+        "text_action": "Realizou ação",
+        "key": "new_key542021",
+        "form": [
+          {
+            "key": "obs_pref",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_obs",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "obs_pref",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_obs",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Taxas",
+        "text_action": "Inseriu informações referente Taxas",
+        "key": "taxasProcesso",
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado e então selecione a opção 'Enviar para Análise' para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "permission": "taxas",
+        "type": "taxa",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado e então selecione a opção 'Enviar para Análise' para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "cultura_modeload"
+      ]
+    },
+    "allowMultipleForwarding": true
+  },
+  "tramite": [],
+  "__v": 0,
+  "city_id": 38,
+  "step": {}
+}

@@ -1,0 +1,199 @@
+{
+  "_id": "69271a26c507f16143056059",
+  "__v": 0,
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Ofício externo",
+    "descricao": "Formulário utilizado para emissão de Ofícios Externos pela Prefeitura, permitindo solicitar informações, documentos ou ações de usuários externos, como pesquisas de preço ou outras demandas administrativas. O processo pode incluir o envio de convite para cadastro no sistema, caso o destinatário ainda não possua acesso.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "useNewSidebarForwarding": true,
+    "newSignatureStrategy": true,
+    "experimentalMode": true,
+    "sigla": "OFE",
+    "templates": [],
+    "form_tramites": [],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Obras",
+    "initialReceiverConfig": {
+      "type": "multiple",
+      "possibleReceivers": []
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "city_id": 38,
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "9",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "objeto_contrato",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Assunto",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "addressee": {}
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "informacao",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Conteúdo do Ofício",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "placeholder": "Corpo do texto explicando a solicitação, informação, recomendação ou determinação administrativa"
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Informações",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">\nInformações</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "obs_solic",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Observações sobre a solicitação",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "tramite": [
+    {
+      "groupId": "admmodelo_modeload",
+      "_id": "676f0e8d45275b00081258f9"
+    }
+  ],
+  "step": {
+    "shared": {
+      "informative": "Acesse a aba Resumo para verificar o andamento do seu processo"
+    }
+  }
+}

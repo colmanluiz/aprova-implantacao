@@ -1,0 +1,1551 @@
+{
+  "_id": "691dda4d227649960cfe7948",
+  "__v": 0,
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Compra Direta - Dispensa e Inexigibilidade de Licitação",
+    "descricao": "Processo interno para aquisição de bens e serviços, envolvendo a definição das necessidades, a escolha dos fornecedores e a realização de licitações, quando necessário.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "sigla": "LIC",
+    "useNewSidebarForwarding": true,
+    "newSignatureStrategy": true,
+    "experimentalMode": true,
+    "requiresPreCreationSignature": true,
+    "templates": [],
+    "experimentalmode": true,
+    "form_tramites": [],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Administração ou RH",
+    "initialReceiverConfig": {
+      "type": "conditional",
+      "possibleReceivers": [
+        "admmodelo_modeload",
+        "financas_modeload",
+        "educacao_modeload",
+        "saude_modeload",
+        "obras_modeload",
+        "planejamento_modeload",
+        "assistencia_modeload",
+        "meioambiente_modeload",
+        "cultura_modeload",
+        "defesacivil_modeload",
+        "ouvidoriageral_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "city_id": 38,
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "setor_requerente",
+              "type": "select",
+              "templateOptions": {
+                "label": "Setor Requerente",
+                "options": [
+                  {
+                    "label": "Secretaria de Administração",
+                    "value": "Secretaria de Administração"
+                  },
+                  {
+                    "label": "Secretaria de Finanças",
+                    "value": "Secretaria de Finanças"
+                  },
+                  {
+                    "label": "Secretaria de Educação",
+                    "value": "Secretaria de Educação"
+                  },
+                  {
+                    "label": "Secretaria de Saúde",
+                    "value": "Secretaria de Saúde"
+                  },
+                  {
+                    "label": "Secretaria de Obras e Infraestrutura",
+                    "value": "Secretaria de Obras e Infraestrutura"
+                  },
+                  {
+                    "label": "Secretaria de Planejamento Urbano",
+                    "value": "Secretaria de Planejamento Urbano"
+                  },
+                  {
+                    "label": "Secretaria de Assistência Social",
+                    "value": "Secretaria de Assistência Social"
+                  },
+                  {
+                    "label": "Secretaria de Meio Ambiente",
+                    "value": "Secretaria de Meio Ambiente"
+                  },
+                  {
+                    "label": "Secretaria de Cultura, Esporte e Lazer",
+                    "value": "Secretaria de Cultura, Esporte e Lazer"
+                  },
+                  {
+                    "label": "Segurança Pública/Defesa Civil",
+                    "value": "Segurança Pública/Defesa Civil"
+                  },
+                  {
+                    "label": "Ouvidoria Geral",
+                    "value": "Ouvidoria Geral"
+                  }
+                ],
+                "required": true,
+                "placeholder": "--selecione--",
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "nome_requerente",
+              "type": "input",
+              "templateOptions": {
+                "label": "Nome completo",
+                "required": true,
+                "placeholder": "Ex: Maria da Silva",
+                "readonly": "true"
+              },
+              "expressionProperties": {
+                "model|||nome_requerente": " model.user_dados?.user?.user_metadata.name "
+              }
+            },
+            {
+              "key": "usuario_email",
+              "type": "input",
+              "templateOptions": {
+                "label": "E-mail para correspondência",
+                "placeholder": "nome@dominio.com",
+                "required": true,
+                "readonly": true
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "expressionProperties": {
+                "model|||usuario_email": "model.user_dados?.user?.email"
+              }
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "sensitiveField": false,
+                "accessLevel": "FULL",
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "matricula",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Matrícula",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "cargo",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cargo/ Função",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Responsável pela Solicitação",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Responsável pela Solicitação</span>\n\n\n<p>Você deve informar corretamente os dados ao lado para evitar erros no processo de compras. </p>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "natureza_demanda",
+              "type": "select",
+              "templateOptions": {
+                "label": "Natureza da demanda",
+                "options": [
+                  {
+                    "label": "Serviço não continuado",
+                    "value": "Serviço não continuado"
+                  },
+                  {
+                    "label": "Serviço continuado SEM dedicação exclusiva de mão de obra",
+                    "value": "Serviço continuado SEM dedicação exclusiva de mão de obra"
+                  },
+                  {
+                    "label": "Serviço continuado COM dedicação exclusiva de mão de obra",
+                    "value": "Serviço continuado COM dedicação exclusiva de mão de obra"
+                  },
+                  {
+                    "label": "Material de consumo",
+                    "value": "Material de consumo"
+                  },
+                  {
+                    "label": "Material permanente / equipamento",
+                    "value": "Material permanente / equipamento"
+                  },
+                  {
+                    "label": "Obras e Serviços de Engenharia",
+                    "value": "Obras e Serviços de Engenharia"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "placeholder": "--selecione--"
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "data_conclusao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Data prevista para conclusão do processo",
+                "placeholder": "00/00/0000",
+                "mask": "00/00/0000",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "id_necessidade",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Descrição sucinta do objeto",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "grau_prioridade",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Grau de prioridade da compra ou da contratação",
+                "options": [
+                  {
+                    "value": "Baixo"
+                  },
+                  {
+                    "value": "Médio"
+                  },
+                  {
+                    "value": "Alto"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "justificativa",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Justificativa da necessidade da contratação",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "indicacao_vinculacao",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Indicação de vinculação ou dependência com o objeto de outro documento de formalização de demanda",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "vinculo_dfd",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número do processo vinculado",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.indicacao_vinculacao !== 'Sim' "
+            },
+            {
+              "className": "col-12",
+              "key": "valor",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Valor estimado",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "floatNumber": true,
+                "currency": {
+                  "prefix": "",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "min": "0",
+                "suffix": "R$",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "quest_cotacoes",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Possui cotações preliminares?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "cotacoes_doc",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Anexe aqui as cotações realizadas",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.quest_cotacoes !== 'Sim'"
+            },
+            {
+              "key": "quest_itens",
+              "type": "radio",
+              "templateOptions": {
+                "label": "A descrição dos itens será:",
+                "options": [
+                  {
+                    "value": "Redigida"
+                  },
+                  {
+                    "value": "Em anexo"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "materiais_servicos",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Descrição dos itens",
+                "focus": "false",
+                "btnAddText": "Item",
+                "required": true
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "item",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Item",
+                      "required": true,
+                      "placeholder": "Ex: Resma de Papel"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "descricao",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Item Solicitado",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "qtde",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Quantidade",
+                      "required": true,
+                      "placeholder": "Ex: 40 unidades"
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.quest_itens !== 'Redigida'"
+            },
+            {
+              "key": "descricao_itens_anexo",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Descrição dos itens",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.quest_itens !== 'Em anexo'"
+            },
+            {
+              "key": "modalidade",
+              "type": "select",
+              "templateOptions": {
+                "label": "Modalidade",
+                "options": [
+                  {
+                    "label": "Pregão",
+                    "value": "Pregão"
+                  },
+                  {
+                    "label": "Concorrência",
+                    "value": "Concorrência"
+                  },
+                  {
+                    "label": "Credenciamento",
+                    "value": "Credenciamento"
+                  },
+                  {
+                    "label": "Dispensa",
+                    "value": "Dispensa"
+                  },
+                  {
+                    "label": "Inexigibilidade",
+                    "value": "Inexigibilidade"
+                  },
+                  {
+                    "label": "Adesão a ARP",
+                    "value": "Adesão a ARP"
+                  }
+                ],
+                "focus": "false",
+                "required": false,
+                "placeholder": "--selecione--",
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "description": "Esta modalidade será validada pelo Planejamento",
+                "sensitiveField": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "DFD - Documento de formalização de Demanda",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "obs_solic",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Observações sobre a solicitação",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": "true",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": "true",
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "conditional",
+                  "values": [
+                    {
+                      "field": {
+                        "value": "setor_requerente",
+                        "id": "setor_requerente",
+                        "label": "Setor Requerente",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "setor_requerente",
+                          "field": {
+                            "key": "setor_requerente",
+                            "type": "select",
+                            "templateOptions": {
+                              "label": "Setor Requerente",
+                              "options": [
+                                {
+                                  "label": "Secretaria de Administração",
+                                  "value": "Secretaria de Administração"
+                                },
+                                {
+                                  "label": "Secretaria de Finanças",
+                                  "value": "Secretaria de Finanças"
+                                },
+                                {
+                                  "label": "Secretaria de Educação",
+                                  "value": "Secretaria de Educação"
+                                },
+                                {
+                                  "label": "Secretaria de Saúde",
+                                  "value": "Secretaria de Saúde"
+                                },
+                                {
+                                  "label": "Secretaria de Obras e Infraestrutura",
+                                  "value": "Secretaria de Obras e Infraestrutura"
+                                },
+                                {
+                                  "label": "Secretaria de Planejamento Urbano",
+                                  "value": "Secretaria de Planejamento Urbano"
+                                },
+                                {
+                                  "label": "Secretaria de Assistência Social",
+                                  "value": "Secretaria de Assistência Social"
+                                },
+                                {
+                                  "label": "Secretaria de Meio Ambiente",
+                                  "value": "Secretaria de Meio Ambiente"
+                                },
+                                {
+                                  "label": "Secretaria de Cultura, Esporte e Lazer",
+                                  "value": "Secretaria de Cultura, Esporte e Lazer"
+                                },
+                                {
+                                  "label": "Segurança Pública/Defesa Civil",
+                                  "value": "Segurança Pública/Defesa Civil"
+                                },
+                                {
+                                  "label": "Ouvidoria Geral",
+                                  "value": "Ouvidoria Geral"
+                                }
+                              ],
+                              "required": true,
+                              "placeholder": "--selecione--",
+                              "columns": "12",
+                              "hiddenTemp": false,
+                              "readonly": false,
+                              "sensitiveField": false,
+                              "multiple": false
+                            },
+                            "className": "col-12",
+                            "expressionProperties": {}
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Secretaria de Administração",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "admmodelo_modeload",
+                        "id": "675c980a96ab6200088ea449",
+                        "label": "Secretaria de Administração"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "setor_requerente",
+                        "id": "setor_requerente",
+                        "label": "Setor Requerente",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "setor_requerente",
+                          "field": {
+                            "key": "setor_requerente",
+                            "type": "select",
+                            "templateOptions": {
+                              "label": "Setor Requerente",
+                              "options": [
+                                {
+                                  "label": "Secretaria de Administração",
+                                  "value": "Secretaria de Administração"
+                                },
+                                {
+                                  "label": "Secretaria de Finanças",
+                                  "value": "Secretaria de Finanças"
+                                },
+                                {
+                                  "label": "Secretaria de Educação",
+                                  "value": "Secretaria de Educação"
+                                },
+                                {
+                                  "label": "Secretaria de Saúde",
+                                  "value": "Secretaria de Saúde"
+                                },
+                                {
+                                  "label": "Secretaria de Obras e Infraestrutura",
+                                  "value": "Secretaria de Obras e Infraestrutura"
+                                },
+                                {
+                                  "label": "Secretaria de Planejamento Urbano",
+                                  "value": "Secretaria de Planejamento Urbano"
+                                },
+                                {
+                                  "label": "Secretaria de Assistência Social",
+                                  "value": "Secretaria de Assistência Social"
+                                },
+                                {
+                                  "label": "Secretaria de Meio Ambiente",
+                                  "value": "Secretaria de Meio Ambiente"
+                                },
+                                {
+                                  "label": "Secretaria de Cultura, Esporte e Lazer",
+                                  "value": "Secretaria de Cultura, Esporte e Lazer"
+                                },
+                                {
+                                  "label": "Segurança Pública/Defesa Civil",
+                                  "value": "Segurança Pública/Defesa Civil"
+                                },
+                                {
+                                  "label": "Ouvidoria Geral",
+                                  "value": "Ouvidoria Geral"
+                                }
+                              ],
+                              "required": true,
+                              "placeholder": "--selecione--",
+                              "columns": "12",
+                              "hiddenTemp": false,
+                              "readonly": false,
+                              "sensitiveField": false,
+                              "multiple": false
+                            },
+                            "className": "col-12",
+                            "expressionProperties": {}
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Secretaria de Finanças",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "financas_modeload",
+                        "id": "676d98df3507ea0008066f6e",
+                        "label": "Secretaria de Finanças"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "setor_requerente",
+                        "id": "setor_requerente",
+                        "label": "Setor Requerente",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "setor_requerente",
+                          "field": {
+                            "key": "setor_requerente",
+                            "type": "select",
+                            "templateOptions": {
+                              "label": "Setor Requerente",
+                              "options": [
+                                {
+                                  "label": "Secretaria de Administração",
+                                  "value": "Secretaria de Administração"
+                                },
+                                {
+                                  "label": "Secretaria de Finanças",
+                                  "value": "Secretaria de Finanças"
+                                },
+                                {
+                                  "label": "Secretaria de Educação",
+                                  "value": "Secretaria de Educação"
+                                },
+                                {
+                                  "label": "Secretaria de Saúde",
+                                  "value": "Secretaria de Saúde"
+                                },
+                                {
+                                  "label": "Secretaria de Obras e Infraestrutura",
+                                  "value": "Secretaria de Obras e Infraestrutura"
+                                },
+                                {
+                                  "label": "Secretaria de Planejamento Urbano",
+                                  "value": "Secretaria de Planejamento Urbano"
+                                },
+                                {
+                                  "label": "Secretaria de Assistência Social",
+                                  "value": "Secretaria de Assistência Social"
+                                },
+                                {
+                                  "label": "Secretaria de Meio Ambiente",
+                                  "value": "Secretaria de Meio Ambiente"
+                                },
+                                {
+                                  "label": "Secretaria de Cultura, Esporte e Lazer",
+                                  "value": "Secretaria de Cultura, Esporte e Lazer"
+                                },
+                                {
+                                  "label": "Segurança Pública/Defesa Civil",
+                                  "value": "Segurança Pública/Defesa Civil"
+                                },
+                                {
+                                  "label": "Ouvidoria Geral",
+                                  "value": "Ouvidoria Geral"
+                                }
+                              ],
+                              "required": true,
+                              "placeholder": "--selecione--",
+                              "columns": "12",
+                              "hiddenTemp": false,
+                              "readonly": false,
+                              "sensitiveField": false,
+                              "multiple": false
+                            },
+                            "className": "col-12",
+                            "expressionProperties": {}
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Secretaria de Educação",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "educacao_modeload",
+                        "id": "676d98ec56664e0008068fe2",
+                        "label": "Secretaria de Educação"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "setor_requerente",
+                        "id": "setor_requerente",
+                        "label": "Setor Requerente",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "setor_requerente",
+                          "field": {
+                            "key": "setor_requerente",
+                            "type": "select",
+                            "templateOptions": {
+                              "label": "Setor Requerente",
+                              "options": [
+                                {
+                                  "label": "Secretaria de Administração",
+                                  "value": "Secretaria de Administração"
+                                },
+                                {
+                                  "label": "Secretaria de Finanças",
+                                  "value": "Secretaria de Finanças"
+                                },
+                                {
+                                  "label": "Secretaria de Educação",
+                                  "value": "Secretaria de Educação"
+                                },
+                                {
+                                  "label": "Secretaria de Saúde",
+                                  "value": "Secretaria de Saúde"
+                                },
+                                {
+                                  "label": "Secretaria de Obras e Infraestrutura",
+                                  "value": "Secretaria de Obras e Infraestrutura"
+                                },
+                                {
+                                  "label": "Secretaria de Planejamento Urbano",
+                                  "value": "Secretaria de Planejamento Urbano"
+                                },
+                                {
+                                  "label": "Secretaria de Assistência Social",
+                                  "value": "Secretaria de Assistência Social"
+                                },
+                                {
+                                  "label": "Secretaria de Meio Ambiente",
+                                  "value": "Secretaria de Meio Ambiente"
+                                },
+                                {
+                                  "label": "Secretaria de Cultura, Esporte e Lazer",
+                                  "value": "Secretaria de Cultura, Esporte e Lazer"
+                                },
+                                {
+                                  "label": "Segurança Pública/Defesa Civil",
+                                  "value": "Segurança Pública/Defesa Civil"
+                                },
+                                {
+                                  "label": "Ouvidoria Geral",
+                                  "value": "Ouvidoria Geral"
+                                }
+                              ],
+                              "required": true,
+                              "placeholder": "--selecione--",
+                              "columns": "12",
+                              "hiddenTemp": false,
+                              "readonly": false,
+                              "sensitiveField": false,
+                              "multiple": false
+                            },
+                            "className": "col-12",
+                            "expressionProperties": {}
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Secretaria de Saúde",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "saude_modeload",
+                        "id": "676d98f956664e0008069026",
+                        "label": "Secretaria de Saúde"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "setor_requerente",
+                        "id": "setor_requerente",
+                        "label": "Setor Requerente",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "setor_requerente",
+                          "field": {
+                            "key": "setor_requerente",
+                            "type": "select",
+                            "templateOptions": {
+                              "label": "Setor Requerente",
+                              "options": [
+                                {
+                                  "label": "Secretaria de Administração",
+                                  "value": "Secretaria de Administração"
+                                },
+                                {
+                                  "label": "Secretaria de Finanças",
+                                  "value": "Secretaria de Finanças"
+                                },
+                                {
+                                  "label": "Secretaria de Educação",
+                                  "value": "Secretaria de Educação"
+                                },
+                                {
+                                  "label": "Secretaria de Saúde",
+                                  "value": "Secretaria de Saúde"
+                                },
+                                {
+                                  "label": "Secretaria de Obras e Infraestrutura",
+                                  "value": "Secretaria de Obras e Infraestrutura"
+                                },
+                                {
+                                  "label": "Secretaria de Planejamento Urbano",
+                                  "value": "Secretaria de Planejamento Urbano"
+                                },
+                                {
+                                  "label": "Secretaria de Assistência Social",
+                                  "value": "Secretaria de Assistência Social"
+                                },
+                                {
+                                  "label": "Secretaria de Meio Ambiente",
+                                  "value": "Secretaria de Meio Ambiente"
+                                },
+                                {
+                                  "label": "Secretaria de Cultura, Esporte e Lazer",
+                                  "value": "Secretaria de Cultura, Esporte e Lazer"
+                                },
+                                {
+                                  "label": "Segurança Pública/Defesa Civil",
+                                  "value": "Segurança Pública/Defesa Civil"
+                                },
+                                {
+                                  "label": "Ouvidoria Geral",
+                                  "value": "Ouvidoria Geral"
+                                }
+                              ],
+                              "required": true,
+                              "placeholder": "--selecione--",
+                              "columns": "12",
+                              "hiddenTemp": false,
+                              "readonly": false,
+                              "sensitiveField": false,
+                              "multiple": false
+                            },
+                            "className": "col-12",
+                            "expressionProperties": {}
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Secretaria de Obras e Infraestrutura",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "obras_modeload",
+                        "id": "676d9915809d0b0008748c9a",
+                        "label": "Secretaria de Obras e Infraestrutura"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "setor_requerente",
+                        "id": "setor_requerente",
+                        "label": "Setor Requerente",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "setor_requerente",
+                          "field": {
+                            "key": "setor_requerente",
+                            "type": "select",
+                            "templateOptions": {
+                              "label": "Setor Requerente",
+                              "options": [
+                                {
+                                  "label": "Secretaria de Administração",
+                                  "value": "Secretaria de Administração"
+                                },
+                                {
+                                  "label": "Secretaria de Finanças",
+                                  "value": "Secretaria de Finanças"
+                                },
+                                {
+                                  "label": "Secretaria de Educação",
+                                  "value": "Secretaria de Educação"
+                                },
+                                {
+                                  "label": "Secretaria de Saúde",
+                                  "value": "Secretaria de Saúde"
+                                },
+                                {
+                                  "label": "Secretaria de Obras e Infraestrutura",
+                                  "value": "Secretaria de Obras e Infraestrutura"
+                                },
+                                {
+                                  "label": "Secretaria de Planejamento Urbano",
+                                  "value": "Secretaria de Planejamento Urbano"
+                                },
+                                {
+                                  "label": "Secretaria de Assistência Social",
+                                  "value": "Secretaria de Assistência Social"
+                                },
+                                {
+                                  "label": "Secretaria de Meio Ambiente",
+                                  "value": "Secretaria de Meio Ambiente"
+                                },
+                                {
+                                  "label": "Secretaria de Cultura, Esporte e Lazer",
+                                  "value": "Secretaria de Cultura, Esporte e Lazer"
+                                },
+                                {
+                                  "label": "Segurança Pública/Defesa Civil",
+                                  "value": "Segurança Pública/Defesa Civil"
+                                },
+                                {
+                                  "label": "Ouvidoria Geral",
+                                  "value": "Ouvidoria Geral"
+                                }
+                              ],
+                              "required": true,
+                              "placeholder": "--selecione--",
+                              "columns": "12",
+                              "hiddenTemp": false,
+                              "readonly": false,
+                              "sensitiveField": false,
+                              "multiple": false
+                            },
+                            "className": "col-12",
+                            "expressionProperties": {}
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Secretaria de Planejamento Urbano",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "planejamento_modeload",
+                        "id": "676d992256664e00080690e5",
+                        "label": "Secretaria de Planejamento Urbano"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "setor_requerente",
+                        "id": "setor_requerente",
+                        "label": "Setor Requerente",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "setor_requerente",
+                          "field": {
+                            "key": "setor_requerente",
+                            "type": "select",
+                            "templateOptions": {
+                              "label": "Setor Requerente",
+                              "options": [
+                                {
+                                  "label": "Secretaria de Administração",
+                                  "value": "Secretaria de Administração"
+                                },
+                                {
+                                  "label": "Secretaria de Finanças",
+                                  "value": "Secretaria de Finanças"
+                                },
+                                {
+                                  "label": "Secretaria de Educação",
+                                  "value": "Secretaria de Educação"
+                                },
+                                {
+                                  "label": "Secretaria de Saúde",
+                                  "value": "Secretaria de Saúde"
+                                },
+                                {
+                                  "label": "Secretaria de Obras e Infraestrutura",
+                                  "value": "Secretaria de Obras e Infraestrutura"
+                                },
+                                {
+                                  "label": "Secretaria de Planejamento Urbano",
+                                  "value": "Secretaria de Planejamento Urbano"
+                                },
+                                {
+                                  "label": "Secretaria de Assistência Social",
+                                  "value": "Secretaria de Assistência Social"
+                                },
+                                {
+                                  "label": "Secretaria de Meio Ambiente",
+                                  "value": "Secretaria de Meio Ambiente"
+                                },
+                                {
+                                  "label": "Secretaria de Cultura, Esporte e Lazer",
+                                  "value": "Secretaria de Cultura, Esporte e Lazer"
+                                },
+                                {
+                                  "label": "Segurança Pública/Defesa Civil",
+                                  "value": "Segurança Pública/Defesa Civil"
+                                },
+                                {
+                                  "label": "Ouvidoria Geral",
+                                  "value": "Ouvidoria Geral"
+                                }
+                              ],
+                              "required": true,
+                              "placeholder": "--selecione--",
+                              "columns": "12",
+                              "hiddenTemp": false,
+                              "readonly": false,
+                              "sensitiveField": false,
+                              "multiple": false
+                            },
+                            "className": "col-12",
+                            "expressionProperties": {}
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Secretaria de Assistência Social",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "assistencia_modeload",
+                        "id": "676d993056664e0008069139",
+                        "label": "Secretaria de Assistência Social"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "setor_requerente",
+                        "id": "setor_requerente",
+                        "label": "Setor Requerente",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "setor_requerente",
+                          "field": {
+                            "key": "setor_requerente",
+                            "type": "select",
+                            "templateOptions": {
+                              "label": "Setor Requerente",
+                              "options": [
+                                {
+                                  "label": "Secretaria de Administração",
+                                  "value": "Secretaria de Administração"
+                                },
+                                {
+                                  "label": "Secretaria de Finanças",
+                                  "value": "Secretaria de Finanças"
+                                },
+                                {
+                                  "label": "Secretaria de Educação",
+                                  "value": "Secretaria de Educação"
+                                },
+                                {
+                                  "label": "Secretaria de Saúde",
+                                  "value": "Secretaria de Saúde"
+                                },
+                                {
+                                  "label": "Secretaria de Obras e Infraestrutura",
+                                  "value": "Secretaria de Obras e Infraestrutura"
+                                },
+                                {
+                                  "label": "Secretaria de Planejamento Urbano",
+                                  "value": "Secretaria de Planejamento Urbano"
+                                },
+                                {
+                                  "label": "Secretaria de Assistência Social",
+                                  "value": "Secretaria de Assistência Social"
+                                },
+                                {
+                                  "label": "Secretaria de Meio Ambiente",
+                                  "value": "Secretaria de Meio Ambiente"
+                                },
+                                {
+                                  "label": "Secretaria de Cultura, Esporte e Lazer",
+                                  "value": "Secretaria de Cultura, Esporte e Lazer"
+                                },
+                                {
+                                  "label": "Segurança Pública/Defesa Civil",
+                                  "value": "Segurança Pública/Defesa Civil"
+                                },
+                                {
+                                  "label": "Ouvidoria Geral",
+                                  "value": "Ouvidoria Geral"
+                                }
+                              ],
+                              "required": true,
+                              "placeholder": "--selecione--",
+                              "columns": "12",
+                              "hiddenTemp": false,
+                              "readonly": false,
+                              "sensitiveField": false,
+                              "multiple": false
+                            },
+                            "className": "col-12",
+                            "expressionProperties": {}
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Secretaria de Meio Ambiente",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "meioambiente_modeload",
+                        "id": "676d993e3507ea0008067058",
+                        "label": "Secretaria de Meio Ambiente"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "setor_requerente",
+                        "id": "setor_requerente",
+                        "label": "Setor Requerente",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "setor_requerente",
+                          "field": {
+                            "key": "setor_requerente",
+                            "type": "select",
+                            "templateOptions": {
+                              "label": "Setor Requerente",
+                              "options": [
+                                {
+                                  "label": "Secretaria de Administração",
+                                  "value": "Secretaria de Administração"
+                                },
+                                {
+                                  "label": "Secretaria de Finanças",
+                                  "value": "Secretaria de Finanças"
+                                },
+                                {
+                                  "label": "Secretaria de Educação",
+                                  "value": "Secretaria de Educação"
+                                },
+                                {
+                                  "label": "Secretaria de Saúde",
+                                  "value": "Secretaria de Saúde"
+                                },
+                                {
+                                  "label": "Secretaria de Obras e Infraestrutura",
+                                  "value": "Secretaria de Obras e Infraestrutura"
+                                },
+                                {
+                                  "label": "Secretaria de Planejamento Urbano",
+                                  "value": "Secretaria de Planejamento Urbano"
+                                },
+                                {
+                                  "label": "Secretaria de Assistência Social",
+                                  "value": "Secretaria de Assistência Social"
+                                },
+                                {
+                                  "label": "Secretaria de Meio Ambiente",
+                                  "value": "Secretaria de Meio Ambiente"
+                                },
+                                {
+                                  "label": "Secretaria de Cultura, Esporte e Lazer",
+                                  "value": "Secretaria de Cultura, Esporte e Lazer"
+                                },
+                                {
+                                  "label": "Segurança Pública/Defesa Civil",
+                                  "value": "Segurança Pública/Defesa Civil"
+                                },
+                                {
+                                  "label": "Ouvidoria Geral",
+                                  "value": "Ouvidoria Geral"
+                                }
+                              ],
+                              "required": true,
+                              "placeholder": "--selecione--",
+                              "columns": "12",
+                              "hiddenTemp": false,
+                              "readonly": false,
+                              "sensitiveField": false,
+                              "multiple": false
+                            },
+                            "className": "col-12",
+                            "expressionProperties": {}
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Secretaria de Cultura, Esporte e Lazer",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "cultura_modeload",
+                        "id": "676d994a56664e000806919d",
+                        "label": "Secretaria de Cultura, Esporte e Lazer"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "setor_requerente",
+                        "id": "setor_requerente",
+                        "label": "Setor Requerente",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "setor_requerente",
+                          "field": {
+                            "key": "setor_requerente",
+                            "type": "select",
+                            "templateOptions": {
+                              "label": "Setor Requerente",
+                              "options": [
+                                {
+                                  "label": "Secretaria de Administração",
+                                  "value": "Secretaria de Administração"
+                                },
+                                {
+                                  "label": "Secretaria de Finanças",
+                                  "value": "Secretaria de Finanças"
+                                },
+                                {
+                                  "label": "Secretaria de Educação",
+                                  "value": "Secretaria de Educação"
+                                },
+                                {
+                                  "label": "Secretaria de Saúde",
+                                  "value": "Secretaria de Saúde"
+                                },
+                                {
+                                  "label": "Secretaria de Obras e Infraestrutura",
+                                  "value": "Secretaria de Obras e Infraestrutura"
+                                },
+                                {
+                                  "label": "Secretaria de Planejamento Urbano",
+                                  "value": "Secretaria de Planejamento Urbano"
+                                },
+                                {
+                                  "label": "Secretaria de Assistência Social",
+                                  "value": "Secretaria de Assistência Social"
+                                },
+                                {
+                                  "label": "Secretaria de Meio Ambiente",
+                                  "value": "Secretaria de Meio Ambiente"
+                                },
+                                {
+                                  "label": "Secretaria de Cultura, Esporte e Lazer",
+                                  "value": "Secretaria de Cultura, Esporte e Lazer"
+                                },
+                                {
+                                  "label": "Segurança Pública/Defesa Civil",
+                                  "value": "Segurança Pública/Defesa Civil"
+                                },
+                                {
+                                  "label": "Ouvidoria Geral",
+                                  "value": "Ouvidoria Geral"
+                                }
+                              ],
+                              "required": true,
+                              "placeholder": "--selecione--",
+                              "columns": "12",
+                              "hiddenTemp": false,
+                              "readonly": false,
+                              "sensitiveField": false,
+                              "multiple": false
+                            },
+                            "className": "col-12",
+                            "expressionProperties": {}
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Segurança Pública/Defesa Civil",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "defesacivil_modeload",
+                        "id": "6773d5a41098d000080b0480",
+                        "label": "Segurança Pública/Defesa Civil"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "setor_requerente",
+                        "id": "setor_requerente",
+                        "label": "Setor Requerente",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "setor_requerente",
+                          "field": {
+                            "key": "setor_requerente",
+                            "type": "select",
+                            "templateOptions": {
+                              "label": "Setor Requerente",
+                              "options": [
+                                {
+                                  "label": "Secretaria de Administração",
+                                  "value": "Secretaria de Administração"
+                                },
+                                {
+                                  "label": "Secretaria de Finanças",
+                                  "value": "Secretaria de Finanças"
+                                },
+                                {
+                                  "label": "Secretaria de Educação",
+                                  "value": "Secretaria de Educação"
+                                },
+                                {
+                                  "label": "Secretaria de Saúde",
+                                  "value": "Secretaria de Saúde"
+                                },
+                                {
+                                  "label": "Secretaria de Obras e Infraestrutura",
+                                  "value": "Secretaria de Obras e Infraestrutura"
+                                },
+                                {
+                                  "label": "Secretaria de Planejamento Urbano",
+                                  "value": "Secretaria de Planejamento Urbano"
+                                },
+                                {
+                                  "label": "Secretaria de Assistência Social",
+                                  "value": "Secretaria de Assistência Social"
+                                },
+                                {
+                                  "label": "Secretaria de Meio Ambiente",
+                                  "value": "Secretaria de Meio Ambiente"
+                                },
+                                {
+                                  "label": "Secretaria de Cultura, Esporte e Lazer",
+                                  "value": "Secretaria de Cultura, Esporte e Lazer"
+                                },
+                                {
+                                  "label": "Segurança Pública/Defesa Civil",
+                                  "value": "Segurança Pública/Defesa Civil"
+                                },
+                                {
+                                  "label": "Ouvidoria Geral",
+                                  "value": "Ouvidoria Geral"
+                                }
+                              ],
+                              "required": true,
+                              "placeholder": "--selecione--",
+                              "columns": "12",
+                              "hiddenTemp": false,
+                              "readonly": false,
+                              "sensitiveField": false,
+                              "multiple": false
+                            },
+                            "className": "col-12",
+                            "expressionProperties": {}
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Ouvidoria Geral",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriageral_modeload",
+                        "id": "682e203c3113a400084079b3",
+                        "label": "Ouvidoria Geral"
+                      }
+                    }
+                  ]
+                },
+                "placeholder": "",
+                "focus": "false",
+                "disabled": "false",
+                "sensitiveField": false,
+                "multiple": false,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "tramite": [
+    {
+      "groupId": "admmodelo_modeload",
+      "_id": "676ecfe032fd27000809f460"
+    }
+  ],
+  "step": {
+    "config": [],
+    "shared": {
+      "informative": "Acesse a aba Resumo para verificar o andamento do seu processo",
+      "automatic": [
+        {
+          "subscribe": [
+            "process/update/activities",
+            "process/timeline"
+          ],
+          "execute": "({ resume, activities, signatures, documents, process }) => {\n    if (process.timeline.reverse().slice()[0].data.action == 'Realizou ação do processo licitatório e modalidade') {\n        set({activities: activities})\n    };\n};"
+        },
+        {
+          "subscribe": [
+            "process/update/activities",
+            "process/timeline"
+          ],
+          "execute": "({ resume, activities, signatures, documents, process }) => {\n    if (process.timeline.reverse().slice()[0].data.action == 'Realizou ação do processo licitatório e modalidade') {\n        set({activities: activities})\n    };\n};"
+        }
+      ],
+      "tab": [],
+      "action": []
+    }
+  }
+}

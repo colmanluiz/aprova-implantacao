@@ -1,0 +1,3344 @@
+{
+  "_id": "682f3a5f63bd2d0008c7d4af",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "templateOptions": {
+            "title": "Responsável(is) pelo imóvel",
+            "subtitle": "Insira as informações dos proprietários das edificações",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Responsável(is) pelo imóvel</span>\n\n\n<ul class = \"pt-2\">\n<li>Quando o <strong>Requerente do processo</strong> for o <strong>Proprietário do imóvel</strong> as informações ao lado serão preenchidas automaticamente.</li>\n  <li align=\"justify\">Para adicionar os dados, clique em <b>'Adicionar Responsável pelo imóvel'.</b>&nbsp;</li> \n\n</ul>",
+            "fieldGroup": [
+              {
+                "key": "proprietario",
+                "type": "next-repeat",
+                "templateOptions": {
+                  "label": "Proprietarios",
+                  "btnAddText": "Proprietário",
+                  "required": true
+                },
+                "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+                "fieldArray": {
+                  "fieldGroup": [
+                    {
+                      "key": "nome-proprietario",
+                      "type": "input",
+                      "templateOptions": {
+                        "label": "Nome do Proprietário",
+                        "required": true
+                      },
+                      "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                    },
+                    {
+                      "key": "CPF_CNPJ",
+                      "type": "radio",
+                      "templateOptions": {
+                        "label": "CPF/CNPJ",
+                        "options": [
+                          {
+                            "value": "CPF"
+                          },
+                          {
+                            "value": "CNPJ"
+                          }
+                        ],
+                        "focus": "false",
+                        "required": true
+                      }
+                    },
+                    {
+                      "fieldGroup": [
+                        {
+                          "key": "tipo_prop",
+                          "type": "radio",
+                          "templateOptions": {
+                            "label": "Tipo de proprietário",
+                            "options": [
+                              {
+                                "value": "CPF"
+                              },
+                              {
+                                "value": "CNPJ"
+                              }
+                            ],
+                            "focus": "false",
+                            "required": true
+                          }
+                        },
+                        {
+                          "className": "col-12",
+                          "type": "next-upload",
+                          "wrappers": [
+                            "lume-ai"
+                          ],
+                          "templateOptions": {
+                            "hideNestedField": true,
+                            "label": "Cartão CNPJ",
+                            "required": true,
+                            "columns": "12",
+                            "extends": [
+                              "PDF"
+                            ],
+                            "hiddenTemp": false,
+                            "readonly": false,
+                            "sensitiveField": false,
+                            "multiple": false,
+                            "agentId": "a942f192-9e0d-41d8-852e-45d89a1ba289"
+                          },
+                          "key": "carto_cnpj",
+                          "hideExpression": "model.tipo_prop !== 'CNPJ' || !model.tipo_prop "
+                        },
+                        {
+                          "key": "documento_valido_cartaoCNPJ",
+                          "type": "next-html",
+                          "resetOnHide": true,
+                          "templateOptions": {
+                            "focus": "false",
+                            "label": "next-html - Documento válido CNPJ",
+                            "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>O Cartão CNPJ anexado não foi reconhecido como válido. Verifique o arquivo e tente novamente.</div></div><br/>",
+                            "readonly": true,
+                            "required": true
+                          },
+                          "hideExpression": "model?.carto_cnpj?.lume_data?.isValidDocument || Object.keys(model.carto_cnpj || {})?.length == 0"
+                        },
+                        {
+                          "className": "col-12",
+                          "key": "contrato_social",
+                          "type": "next-upload",
+                          "templateOptions": {
+                            "label": "Contrato Social",
+                            "options": [],
+                            "focus": "false",
+                            "required": true
+                          },
+                          "hideExpression": "model.tipo_prop !== 'CNPJ' || !model.tipo_prop "
+                        },
+                        {
+                          "type": "next-upload",
+                          "wrappers": [
+                            "lume-ai"
+                          ],
+                          "templateOptions": {
+                            "hideNestedField": true,
+                            "label": "Documento de identificação do Proprietário ou Responsável do CNPJ (CPF/ RG/CNH)",
+                            "required": true,
+                            "columns": "12",
+                            "extends": [
+                              "PDF",
+                              "PNG",
+                              "JPG",
+                              "JPEG"
+                            ],
+                            "hiddenTemp": false,
+                            "readonly": false,
+                            "sensitiveField": false,
+                            "multiple": false,
+                            "agentId": "67d56dc2-1456-449a-bf1f-41e193e536e0"
+                          },
+                          "key": "documento_proprietario",
+                          "className": "col-12",
+                          "hideExpression": " !model.tipo_prop "
+                        },
+                        {
+                          "key": "documento_valido_identifidade",
+                          "type": "next-html",
+                          "resetOnHide": true,
+                          "templateOptions": {
+                            "focus": "false",
+                            "label": "next-html - Documento válido",
+                            "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>O documento anexado não foi reconhecido como válido. Verifique o arquivo e tente novamente.</div></div><br/>",
+                            "readonly": true,
+                            "required": true
+                          },
+                          "hideExpression": "model?.documento_proprietario?.lume_data?.isValidDocument ||  !model?.documento_proprietario?.lume_data?.extractedData || Object.keys(model.documento_proprietario || {})?.length == 0 "
+                        },
+                        {
+                          "key": "razao_social",
+                          "type": "input",
+                          "templateOptions": {
+                            "label": "Razão Social",
+                            "required": true
+                          },
+                          "hideExpression": "model.tipo_prop !== 'CNPJ' || !model.tipo_prop ",
+                          "className": "col-12",
+                          "expressionProperties": {
+                            "modelrazao_social": "model?.carto_cnpj?.lume_data?.extractedData?.nome_empresarial || ''"
+                          }
+                        },
+                        {
+                          "key": "cpfcnpj_solicitante",
+                          "type": "next-input",
+                          "validators": {
+                            "validation": [
+                              "cpfCnpj"
+                            ]
+                          },
+                          "templateOptions": {
+                            "label": "CNPJ",
+                            "mask": "AA.AAA.AAA/AAAA-00",
+                            "required": true,
+                            "readonly": false
+                          },
+                          "hideExpression": "model.tipo_prop !== 'CNPJ' || !model.tipo_prop ",
+                          "className": "col-12",
+                          "expressionProperties": {
+                            "modelcpfcnpj_solicitante": "model?.carto_cnpj?.lume_data?.extractedData?.cnpj?.replace(/\\D/g, '') || ''"
+                          }
+                        },
+                        {
+                          "key": "nome_rt",
+                          "resetOnHide": true,
+                          "type": "next-input",
+                          "templateOptions": {
+                            "label": "Nome do Responsável",
+                            "required": true,
+                            "readonly": false
+                          },
+                          "expressionProperties": {
+                            "modelnome_rt": "model?.documento_proprietario?.lume_data?.extractedData?.nome_completo || ''"
+                          },
+                          "hideExpression": "!model.tipo_prop ",
+                          "className": "col-12"
+                        },
+                        {
+                          "type": "next-input",
+                          "key": "cpf_identidade",
+                          "validators": {
+                            "validation": [
+                              "cpfCnpj"
+                            ]
+                          },
+                          "templateOptions": {
+                            "label": "CPF do Responsável",
+                            "required": true,
+                            "columns": "6",
+                            "hiddenTemp": false,
+                            "mask": "000.000.000-00",
+                            "readonly": false,
+                            "sensitiveField": false,
+                            "multiple": false,
+                            "useNewSidebarForwarding": true
+                          },
+                          "expressionProperties": {
+                            "modelcpf_identidade": "model?.documento_proprietario?.lume_data?.extractedData?.cpf?.replace(/[.-]/g, '') || ''"
+                          },
+                          "hideExpression": " !model.tipo_prop ",
+                          "className": "col-12"
+                        },
+                        {
+                          "key": "documento_semCPF",
+                          "type": "next-html",
+                          "resetOnHide": true,
+                          "templateOptions": {
+                            "focus": "false",
+                            "label": "next-html - Validação se tem CPF",
+                            "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>O documento do proprietário deve possuir o número do CPF para conferência.</div></div><br/>",
+                            "readonly": true,
+                            "required": false
+                          },
+                          "hideExpression": "model?.documento_proprietario?.lume_data?.extractedData?.cpf ||  Object.keys(model.documento_proprietario || {})?.length == 0 || !model?.documento_proprietario?.lume_data?.extractedData"
+                        },
+                        {
+                          "newField": true,
+                          "type": "next-from",
+                          "key": "from",
+                          "templateOptions": {
+                            "label": "Remetente",
+                            "required": true,
+                            "columns": "12",
+                            "readonly": true,
+                            "sectorFromToggle": false,
+                            "sensitiveField": false,
+                            "hidden": true
+                          },
+                          "className": "col-12"
+                        },
+                        {
+                          "newField": true,
+                          "type": "next-destinatario",
+                          "key": "destinatario",
+                          "templateOptions": {
+                            "label": "Destinatário",
+                            "required": true,
+                            "columns": "12",
+                            "readonly": true,
+                            "addressee": {
+                              "type": "predefined",
+                              "values": [
+                                {
+                                  "type": "sector",
+                                  "value": "entrada_produtoad",
+                                  "label": "Setor de Entrada",
+                                  "id": "635fcf97addce800094a5475"
+                                }
+                              ]
+                            },
+                            "sensitiveField": false,
+                            "multiple": false,
+                            "hidden": true
+                          },
+                          "className": "col-12"
+                        }
+                      ],
+                      "templateOptions": {
+                        "title": "Dados do Proprietário",
+                        "subtitle": "\n",
+                        "textHtml": "<figure class=\"image\"><img src=\"https://api.producao.aprova.com.br/blob/url/redirect/blueprint-editor/21736188138670.png\"></figure>",
+                        "editMode": true
+                      },
+                      "wrappers": [
+                        "text-right",
+                        "step"
+                      ]
+                    },
+                    {
+                      "key": "cel-proprietario",
+                      "type": "input",
+                      "templateOptions": {
+                        "label": "Telefone ou Celular do Proprietário",
+                        "required": true
+                      },
+                      "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                    },
+                    {
+                      "key": "email-proprietario",
+                      "type": "input",
+                      "templateOptions": {
+                        "label": "Email do Proprietário",
+                        "required": true
+                      },
+                      "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                    },
+                    {
+                      "key": "rua-proprietario",
+                      "type": "input",
+                      "templateOptions": {
+                        "label": "Endereço do Proprietário",
+                        "required": true
+                      },
+                      "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                    },
+                    {
+                      "key": "numero-proprietario",
+                      "type": "input",
+                      "templateOptions": {
+                        "label": "Número Residencial do Proprietário",
+                        "required": true
+                      },
+                      "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                    },
+                    {
+                      "key": "bairro-proprietario",
+                      "type": "input",
+                      "templateOptions": {
+                        "label": "Bairro do Proprietário",
+                        "required": true
+                      },
+                      "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                    },
+                    {
+                      "key": "cep-proprietario",
+                      "type": "input",
+                      "templateOptions": {
+                        "label": "CEP do Proprietário",
+                        "required": true
+                      },
+                      "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                    },
+                    {
+                      "key": "uf-proprietario",
+                      "type": "select",
+                      "templateOptions": {
+                        "label": "UF do Proprietário",
+                        "options": [
+                          {
+                            "label": "Acre",
+                            "value": "AC"
+                          },
+                          {
+                            "label": "Alagoas",
+                            "value": "AL"
+                          },
+                          {
+                            "label": "Amapá",
+                            "value": "AP"
+                          },
+                          {
+                            "label": "Amazonas",
+                            "value": "AM"
+                          },
+                          {
+                            "label": "Bahia",
+                            "value": "BA"
+                          },
+                          {
+                            "label": "Ceará",
+                            "value": "CE"
+                          },
+                          {
+                            "label": "Distrito Federal",
+                            "value": "DF"
+                          },
+                          {
+                            "label": "Espírito Santo",
+                            "value": "ES"
+                          },
+                          {
+                            "label": "Goiás",
+                            "value": "GO"
+                          },
+                          {
+                            "label": "Maranhão",
+                            "value": "MA"
+                          },
+                          {
+                            "label": "Mato Grosso",
+                            "value": "MT"
+                          },
+                          {
+                            "label": "Mato Grosso do Sul",
+                            "value": "MS"
+                          },
+                          {
+                            "label": "Minas Gerais",
+                            "value": "MG"
+                          },
+                          {
+                            "label": "Pará",
+                            "value": "PA"
+                          },
+                          {
+                            "label": "Paraíba",
+                            "value": "PB"
+                          },
+                          {
+                            "label": "Paraná",
+                            "value": "PR"
+                          },
+                          {
+                            "label": "Pernambuco",
+                            "value": "PE"
+                          },
+                          {
+                            "label": "Piauí",
+                            "value": "PI"
+                          },
+                          {
+                            "label": "Rio de Janeiro",
+                            "value": "RJ"
+                          },
+                          {
+                            "label": "Rio Grande do Norte",
+                            "value": "RN"
+                          },
+                          {
+                            "label": "Rio Grande do Sul",
+                            "value": "RS"
+                          },
+                          {
+                            "label": "Rondônia",
+                            "value": "RO"
+                          },
+                          {
+                            "label": "Roraima",
+                            "value": "RR"
+                          },
+                          {
+                            "label": "Santa Catarina",
+                            "value": "SC"
+                          },
+                          {
+                            "label": "São Paulo",
+                            "value": "SP"
+                          },
+                          {
+                            "label": "Sergipe",
+                            "value": "SE"
+                          },
+                          {
+                            "label": "Tocantins",
+                            "value": "TO"
+                          }
+                        ],
+                        "required": true
+                      },
+                      "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                    },
+                    {
+                      "key": "cidade-proprietario",
+                      "type": "input",
+                      "templateOptions": {
+                        "label": "Cidade do Proprietário",
+                        "required": true
+                      },
+                      "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                    },
+                    {
+                      "key": "documento-proprietario",
+                      "type": "next-upload",
+                      "templateOptions": {
+                        "label": "Documento do Proprietário - Arquivo",
+                        "placeholder": "",
+                        "type": "text"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "key": "contrato_social",
+                "type": "next-upload",
+                "templateOptions": {
+                  "label": "Cópia Contrato Social (CNPJ",
+                  "placeholder": "Placeholder",
+                  "type": "text"
+                }
+              }
+            ]
+          },
+          "fieldGroup": [
+            {
+              "key": "proprietario",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Proprietarios",
+                "focus": "false",
+                "btnAddText": "Proprietário",
+                "required": true
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "tipo_prop",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Tipo de proprietário",
+                      "options": [
+                        {
+                          "value": "CPF"
+                        },
+                        {
+                          "value": "CNPJ"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "type": "next-upload",
+                    "wrappers": [
+                      "lume-ai"
+                    ],
+                    "templateOptions": {
+                      "hideNestedField": true,
+                      "label": "Cartão CNPJ",
+                      "required": true,
+                      "columns": "12",
+                      "extends": [
+                        "PDF"
+                      ],
+                      "hiddenTemp": false,
+                      "readonly": false,
+                      "sensitiveField": false,
+                      "addressee": {},
+                      "multiple": false,
+                      "agentId": "a942f192-9e0d-41d8-852e-45d89a1ba289"
+                    },
+                    "key": "carto_cnpj",
+                    "hideExpression": "model.tipo_prop !== 'CNPJ' || !model.tipo_prop ",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "documento_valido_cartaoCNPJ",
+                    "type": "next-html",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "focus": "false",
+                      "label": "next-html - Documento válido CNPJ",
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>O Cartão CNPJ anexado não foi reconhecido como válido. Verifique o arquivo e tente novamente.</div></div><br/>",
+                      "readonly": true,
+                      "required": true
+                    },
+                    "expressionProperties": {},
+                    "hideExpression": "model.carto_cnpj?.lume_data?.isValidDocument || !model.carto_cnpj?.lume_data || model.carto_cnpj?.lume_data === null || model.tipo_prop !== 'CNPJ' || !model.tipo_prop"
+                  },
+                  {
+                    "type": "next-upload",
+                    "wrappers": [
+                      "lume-ai"
+                    ],
+                    "templateOptions": {
+                      "hideNestedField": true,
+                      "label": "Documento de identificação do Proprietário ou Responsável do CNPJ (CPF/ RG/CNH)",
+                      "required": true,
+                      "columns": "12",
+                      "extends": [
+                        "PDF",
+                        "PNG",
+                        "JPG",
+                        "JPEG"
+                      ],
+                      "hiddenTemp": false,
+                      "readonly": false,
+                      "sensitiveField": false,
+                      "multiple": false,
+                      "agentId": "67d56dc2-1456-449a-bf1f-41e193e536e0"
+                    },
+                    "key": "documento_proprietario",
+                    "className": "col-12",
+                    "expressionProperties": {},
+                    "hideExpression": " !model.tipo_prop "
+                  },
+                  {
+                    "key": "documento_valido_identifidade",
+                    "type": "next-html",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "focus": "false",
+                      "label": "next-html - Documento válido identidade",
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>O documento anexado não foi reconhecido como válido. Verifique o arquivo e tente novamente.</div></div><br/>",
+                      "readonly": true,
+                      "required": true
+                    },
+                    "expressionProperties": {},
+                    "hideExpression": "model?.documento_proprietario?.lume_data?.isValidDocument ||  !model.documento_proprietario?.lume_data || model.documento_proprietario?.lume_data === null || !model.tipo_prop"
+                  },
+                  {
+                    "key": "documento_semCPF",
+                    "type": "next-html",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "focus": "false",
+                      "label": "next-html - Validação se tem CPF",
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>O documento do proprietário deve possuir o número do CPF para conferência.</div></div><br/>",
+                      "readonly": true,
+                      "required": false
+                    },
+                    "hideExpression": "model.documento_proprietario?.lume_data?.extractedData?.cpf ||  !model.documento_proprietario?.lume_data || model.documento_proprietario?.lume_data === null || !model.tipo_prop",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "pergunta_validacaoLume_CNPJ",
+                    "type": "radio",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "<b>Atenção</b>: As informações abaixo foram extraídas automaticamente pela inteligência artificial com base no documento enviado. Caso escolha editá-las, você confirma que a extração não foi precisa e se compromete a inserir os dados corretos. <b>Deseja editar as informações?</b>",
+                      "options": [
+                        {
+                          "value": "Sim"
+                        },
+                        {
+                          "value": "Não"
+                        }
+                      ],
+                      "labelHtml": true,
+                      "required": true
+                    },
+                    "hideExpression": "!model.carto_cnpj?.lume_data || model.carto_cnpj?.lume_data === null",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "razao_social",
+                    "resetOnHide": true,
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Razão Social",
+                      "required": true
+                    },
+                    "hideExpression": "model.tipo_prop !== 'CNPJ' || !model.tipo_prop ",
+                    "className": "col-12",
+                    "expressionProperties": {
+                      "model|||razao_social": "model.pergunta_validacaoLume_CNPJ == 'Sim' ? model.razao_social : model?.carto_cnpj?.lume_data?.extractedData?.nome_empresarial  ",
+                      "templateOptions|||readonly": "model.pergunta_validacaoLume_CNPJ == 'Não' || !model.pergunta_validacaoLume_CNPJ"
+                    }
+                  },
+                  {
+                    "key": "cpfcnpj_solicitante",
+                    "resetOnHide": true,
+                    "type": "next-input",
+                    "validators": {
+                      "validation": [
+                        "cpfCnpj"
+                      ]
+                    },
+                    "templateOptions": {
+                      "label": "CNPJ",
+                      "mask": "AA.AAA.AAA/AAAA-00",
+                      "required": true,
+                      "readonly": false
+                    },
+                    "hideExpression": "model.tipo_prop !== 'CNPJ' || !model.tipo_prop ",
+                    "className": "col-12",
+                    "expressionProperties": {
+                      "model|||cpfcnpj_solicitante": "model.pergunta_validacaoLume_CNPJ == 'Sim' ? model.cpfcnpj_solicitante : model?.carto_cnpj?.lume_data?.extractedData?.cnpj?.replace(/\\D/g, '') ",
+                      "templateOptions|||readonly": "model.pergunta_validacaoLume_CNPJ == 'Não' || !model.pergunta_validacaoLume_CNPJ"
+                    }
+                  },
+                  {
+                    "key": "pergunta_validacaoLume_IDENTIDADE",
+                    "resetOnHide": true,
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "<b>Atenção</b>: As informações abaixo foram extraídas automaticamente pela inteligência artificial com base no documento enviado. Caso escolha editá-las, você confirma que a extração não foi precisa e se compromete a inserir os dados corretos. <b>Deseja editar as informações?</b>",
+                      "options": [
+                        {
+                          "value": "Sim"
+                        },
+                        {
+                          "value": "Não"
+                        }
+                      ],
+                      "labelHtml": true,
+                      "required": true
+                    },
+                    "hideExpression": "!model.documento_proprietario?.lume_data || model.documento_proprietario?.lume_data === null",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "nome_rt",
+                    "resetOnHide": true,
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Nome do Responsável",
+                      "required": true,
+                      "readonly": false
+                    },
+                    "expressionProperties": {
+                      "model|||nome_rt": "model.pergunta_validacaoLume_IDENTIDADE == 'Sim' ?  model.nome_rt : model?.documento_proprietario?.lume_data?.extractedData?.nome_completo ",
+                      "templateOptions|||readonly": "model.pergunta_validacaoLume_IDENTIDADE == 'Não' || !model.pergunta_validacaoLume_IDENTIDADE"
+                    },
+                    "hideExpression": "!model.tipo_prop ",
+                    "className": "col-12"
+                  },
+                  {
+                    "type": "next-input",
+                    "key": "cpf_identidade",
+                    "resetOnHide": true,
+                    "validators": {
+                      "validation": [
+                        "cpfCnpj"
+                      ]
+                    },
+                    "templateOptions": {
+                      "label": "CPF do Responsável",
+                      "required": true,
+                      "columns": "6",
+                      "hiddenTemp": false,
+                      "mask": "000.000.000-00",
+                      "readonly": false,
+                      "sensitiveField": false,
+                      "multiple": false,
+                      "useNewSidebarForwarding": true
+                    },
+                    "expressionProperties": {
+                      "model|||cpf_identidade": "model.pergunta_validacaoLume_IDENTIDADE == 'Sim' ?  model.cpf_identidade : model?.documento_proprietario?.lume_data?.extractedData?.cpf?.replace(/[.-]/g, '')",
+                      "templateOptions|||readonly": "model.pergunta_validacaoLume_IDENTIDADE == 'Não' || !model.pergunta_validacaoLume_IDENTIDADE"
+                    },
+                    "hideExpression": " !model.tipo_prop ",
+                    "className": "col-12"
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "bot": {
+            "title": "Existem alguma regras sobre os participantes",
+            "subtitle": "Saiba mais sobre quem pode ser responsável por um projeto",
+            "textButton": "Ver Artigo",
+            "link": "http://ajuda.aprovadigital.com.br/"
+          },
+          "expressionProperties": {}
+        },
+        {
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "templateOptions": {
+            "title": "Endereço do Imóvel",
+            "subtitle": "Informe a Quadra, Lote e Loteamento",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">\nEndereço do Imóvel</span>\n\n<ul class=\"pt-2\">\n  <li align=\"justify\">\n    Aconselhamos que este processo seja protocolado por <b>Responsáveis Técnicos</b> devido a questões técnicas para preenchimento do formulário.\n  </li>\n  <li align=\"justify\">\n    Você deve obedecer todos os requisitos do <strong><a href=\"https://leismunicipais.com.br/codigo-de-obras-cascavel-pr\" target=\"_blank\" rel=\"noopener\" style=\"color: #007BFF;\">Código de Obras</a></strong>.\n  </li>\n  <li align=\"justify\">\n    Preencha todos os campos obrigatórios para conseguir finalizar a sua solicitação.\n  </li>\n  <li align=\"justify\">\n    <b>Exemplos de Inscrição Imobiliária:</b><br>\n    0001.053A.0020.0001<br>\n    0001.0300.0001.0000\n  </li>\n  <li align=\"justify\">\n    Você pode consultar o <strong><a href=\"https://geocascavel.cascavel.pr.gov.br/geo-view/index.ctm\" target=\"_blank\" rel=\"noopener\" style=\"color: #007BFF;\">Geoportal</a></strong> para obter a Inscrição Imobiliária do imóvel.\n  </li>\n</ul>",
+            "editMode": false
+          },
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "sensitiveField": false,
+                "accessLevel": "RESTRICTED",
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "integ_inscricao",
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "Inscrição Imobiliária",
+                "placeholder": "0000.0000.0000.00000",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "idIntegration": "60bf6976f5ace0000afcd584",
+                "saveIntegrationResponse": false,
+                "compact": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "msg_erro",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Erro",
+                "placeholder": "mensagem de erro",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||placeholder": "model?.integ_inscricao?.data?.response?.mensagem ? (model.integ_inscricao.data.response.mensagem) : 'não'  "
+              },
+              "hideExpression": "model?.integ_inscricao?.data?.response?.mensagem ? false : true"
+            },
+            {
+              "key": "bloq",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "bloqueador",
+                "placeholder": "Você não deveria estar me vendo",
+                "focus": "false",
+                "type": "text"
+              },
+              "hide": true,
+              "expressionProperties": {
+                "templateOptions|||required": "model.integ_inscricao ? model.integ_inscricao.data  ? false: true: true "
+              }
+            },
+            {
+              "key": "mapa",
+              "type": "next-mapa",
+              "templateOptions": {
+                "label": "Localização do imóvel",
+                "mapsOptions": {
+                  "center": {
+                    "lat": -27.495833,
+                    "lng": -48.654516
+                  },
+                  "zoom": 14
+                },
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "type": "next-upload",
+              "wrappers": [
+                "lume-ai"
+              ],
+              "templateOptions": {
+                "hideNestedField": true,
+                "label": "Matrícula atualizada (somente PDF)",
+                "required": true,
+                "columns": "12",
+                "extends": [
+                  "PDF"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "multiple": false,
+                "agentId": "12b55d79-71f7-4a0d-a4b5-358d4da6cc90"
+              },
+              "key": "matricula_atualizada",
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "faixa_somatotal_areas",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 mb-4 p-2 rounded bg-blue-500 font-medium';  style='background-color: #003A40; font-medium; color: #FFFFFF;'><div class=' text-gray-200  font-bold text-align: center'  style='text-align: center'>Dados da matrícula</div></div>",
+                "focus": "false",
+                "label": "Faixa dadso da matrícula",
+                "type": "text",
+                "readonly": true,
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "type": "next-input",
+              "key": "numero_matricula",
+              "templateOptions": {
+                "label": " Número da Matrícula",
+                "required": true,
+                "columns": "6",
+                "hiddenTemp": false,
+                "readonly": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||numero_matricula": "model?.matricula_atualizada?.lume_data?.extractedData?.numero_matricula ? model?.matricula_atualizada?.lume_data?.extractedData?.numero_matricula : 'Não identificado'  "
+              },
+              "className": "col-6",
+              "hideExpression": "!model?.matricula_atualizada?.lume_data?.extractedData || Object.keys(model.matricula_atualizada || {})?.length == 0"
+            },
+            {
+              "type": "next-input",
+              "key": "data_emissao_matricula",
+              "templateOptions": {
+                "label": "Data de emissão",
+                "required": true,
+                "columns": "6",
+                "hiddenTemp": false,
+                "readonly": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||data_emissao_matricula": "model?.matricula_atualizada?.lume_data?.extractedData?.data_emissao_matricula "
+              },
+              "className": "col-12",
+              "hideExpression": "!model?.matricula_atualizada?.lume_data?.extractedData || Object.keys(model.matricula_atualizada || {})?.length == 0"
+            },
+            {
+              "key": "documento_vencido_matricula",
+              "type": "next-html",
+              "resetOnHide": true,
+              "templateOptions": {
+                "focus": "false",
+                "label": "next-html - Validação data de emissão documento",
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Atenção</div></div><div>Documento anexado foi emitido há mais de 90 dias, anexe um documento atualizado.</div></div><br/>",
+                "readonly": true,
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "(function() { try { let partes = model.data_emissao_matricula?.split('/'); let dataEmissao = new Date(partes[2], partes[1] - 1, partes[0]); let hoje = new Date(); let tresMesesAtras = new Date(hoje?.setMonth(hoje.getMonth() - 3)); return dataEmissao < tresMesesAtras; } catch (e) { return false; } })()"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})() || formState.mode !== 'create'"
+            },
+            {
+              "type": "next-input",
+              "key": "arealote_matricula",
+              "templateOptions": {
+                "label": "Área do Lote (matrícula)",
+                "required": true,
+                "columns": "6",
+                "hiddenTemp": false,
+                "floatNumber": true,
+                "currency": {
+                  "prefix": "",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "min": "0",
+                "suffix": "m²",
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||arealote_matricula": "model?.matricula_atualizada?.lume_data?.extractedData?.endereco_imovel?.area_terreno ? parseFloat(model?.matricula_atualizada?.lume_data?.extractedData?.endereco_imovel?.area_terreno?.replace(/[^\\d,]/g, '')?.replace(',', '.') ?? 0 ) : 'Não identificado'  "
+              },
+              "className": "col-12",
+              "hideExpression": "!model?.matricula_atualizada?.lume_data?.extractedData || Object.keys(model.matricula_atualizada || {})?.length == 0"
+            },
+            {
+              "key": "autorizacao_construcao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Autorização de Construção (Somente quando necessário) ",
+                "placeholder": "Placeholder",
+                "type": "text"
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "anuencia_condo",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Termo de Anuência do Condomínio (Somente quando necessário)",
+                "placeholder": "Placeholder",
+                "type": "text"
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "sindico",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Ata de Nomeação do Síndico ou Documento Similar (Somente quando necessário) ",
+                "placeholder": "Placeholder",
+                "type": "text"
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Matrícula Atualizada",
+            "subtitle": "",
+            "textHtml": "<p><img src=\"https://api.producao.aprova.com.br/blob/url/redirect/blueprint-editor/41737382106516.png\"></p>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroupClassName": "row items-end",
+          "fieldGroup": [
+            {
+              "className": "col-12",
+              "key": "area_terreno_real",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "greaterThanZero"
+                ]
+              },
+              "templateOptions": {
+                "label": "Área real do terreno",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "floatNumber": true,
+                "currency": {
+                  "prefix": "",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "min": "0",
+                "suffix": "m²",
+                "required": false,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "quadro_areas",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Quadro de áreas por tipo de uso",
+                "focus": "false",
+                "required": true,
+                "btnAddText": "edificação",
+                "placeholder": "",
+                "disabled": false
+              },
+              "fieldArray": {
+                "fieldGroupClassName": "row",
+                "fieldGroup": [
+                  {
+                    "className": "col-12",
+                    "key": "tipo_uso",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "Tipo de uso",
+                      "focus": "false",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "Residencial unifamiliar",
+                          "value": "Residencial unifamiliar"
+                        },
+                        {
+                          "label": "Residencial multifamiliar",
+                          "value": "Residencial multifamiliar"
+                        },
+                        {
+                          "label": "Comercial salas e lojas",
+                          "value": "Comercial salas e lojas"
+                        },
+                        {
+                          "label": "Edifício de garagens",
+                          "value": "Edifício de garagens"
+                        },
+                        {
+                          "label": "Galpão industrial",
+                          "value": "Galpão industrial"
+                        },
+                        {
+                          "label": "Casa popular",
+                          "value": "Casa popular"
+                        },
+                        {
+                          "label": "Conjunto habitacional popular",
+                          "value": "Conjunto habitacional popular"
+                        }
+                      ]
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "unidade",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Identificação da edificação",
+                      "placeholder": "Ex: Unidade 01",
+                      "focus": "false",
+                      "required": true,
+                      "type": "text"
+                    },
+                    "hideExpression": "!model.tipo_uso",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "quantidade",
+                    "validators": {
+                      "validation": [
+                        "greaterThanZero"
+                      ]
+                    },
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Quantidade de unidades do tipo",
+                      "options": [],
+                      "focus": "false",
+                      "required": true,
+                      "type": "number",
+                      "suffix": "unidades",
+                      "placeholder": "Ex: 5"
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.tipo_uso == 'Residencial multifamiliar' || model.tipo_uso == 'Conjunto habitacional popular'",
+                      "templateOptions|||label": "(()=>{try{const isTipoUso=model.tipo_uso?model.tipo_uso:'';return'Quantidade de unidades do '+isTipoUso}catch(err){return err}})()"
+                    },
+                    "hideExpression": "model.tipo_uso != 'Residencial multifamiliar' && model.tipo_uso != 'Conjunto habitacional popular'"
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "area_complementar",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Esta área é complementar?",
+                      "options": [
+                        {
+                          "label": "Sim",
+                          "value": "Sim"
+                        },
+                        {
+                          "label": "Não",
+                          "value": "Não"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true
+                    },
+                    "hideExpression": "!model.tipo_uso",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "tipo_uso_complementar",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "Tipo de uso complementar",
+                      "focus": "false",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "Quadra esportiva e poliesportiva",
+                          "value": "Quadra esportiva e poliesportiva"
+                        },
+                        {
+                          "label": "Estacionamento térreo",
+                          "value": "Estacionamento térreo"
+                        },
+                        {
+                          "label": "Piscina",
+                          "value": "Piscina"
+                        },
+                        {
+                          "label": "Área complementar de posto de gasolina",
+                          "value": "Área complementar de posto de gasolina"
+                        }
+                      ]
+                    },
+                    "hideExpression": "model.area_complementar != 'Sim' ",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "modalidade_aprovacao",
+                    "type": "multicheckbox",
+                    "className": "col-7",
+                    "templateOptions": {
+                      "label": "Tipo da solicitação para esta edificação",
+                      "options": [
+                        {
+                          "label": "Construção nova",
+                          "value": "Construção nova"
+                        },
+                        {
+                          "label": "Ampliação",
+                          "value": "Ampliação"
+                        },
+                        {
+                          "label": "Regularização",
+                          "value": "Regularização"
+                        },
+                        {
+                          "label": "Reforma",
+                          "value": "Reforma"
+                        },
+                        {
+                          "label": "Demolição",
+                          "value": "Demolição"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true
+                    },
+                    "hideExpression": "!model.tipo_uso",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-5",
+                    "key": "material_construtivo",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Material",
+                      "focus": "false",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "Alvenaria",
+                          "value": "Alvenaria"
+                        },
+                        {
+                          "label": "Madeira",
+                          "value": "Madeira"
+                        },
+                        {
+                          "label": "Mista",
+                          "value": "Mista"
+                        }
+                      ]
+                    },
+                    "hideExpression": "!model.tipo_uso",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "validConstNova",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-2 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20'fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Ao selecionar a opção \"Construção nova\", não deve ser selecionado outro tipo de pedido.</div></div><br>",
+                      "focus": "false",
+                      "type": "text",
+                      "readonly": true,
+                      "required": false,
+                      "label": "* Aviso Construção nova *",
+                      "placeholder": "",
+                      "disabled": false,
+                      "hidden": true
+                    },
+                    "hideExpression": "((model, field, formState) => { const checarPeloMenosUm = (checkbox, options) => {const chavesSelecionadas = Object.keys(checkbox ?? {})?.filter((f) => checkbox[f]);for (let option of options) {    if (!!chavesSelecionadas.find((chave) => chave === option)) {        return true;    }}return false;};return checarPeloMenosUm(model.modalidade_aprovacao, ['Reforma' , 'Ampliação', 'Regularização', 'Demolição'] );})(model, field, formState) && ((model, field, formState) => { const checarAlguns = (checkbox, options) => { const chavesSelecionadas = Object.keys(checkbox ?? {})?.filter((f) => checkbox[f]); for (let option of options) {if (!chavesSelecionadas.find((chave) => chave === option)) {    return true;        }    } return false; };return checarAlguns(model.modalidade_aprovacao, ['Construção nova'] );})(model, field, formState) || ((model,field,formState)=> {const checarUmaopcao = (checkbox) => {const chavesSelecionadas = Object.keys(checkbox ?? {})?.filter((f) => checkbox[f]); return chavesSelecionadas.length === 1; };  return checarUmaopcao(model.modalidade_aprovacao);})(model, field, formState) && ((model, field, formState) => { const checarAlguns = (checkbox, options) => { const chavesSelecionadas = Object.keys(checkbox ?? {})?.filter((f) => checkbox[f]); for (let option of options) {if (!chavesSelecionadas.find((chave) => chave === option)) {    return false;        }    } return true; };return checarAlguns(model.modalidade_aprovacao, ['Construção nova'] );})(model, field, formState) || ((model,field,formState)=> {const checarNenhum = (checkbox) => {const chavesSelecionadas = Object.keys(checkbox ?? {})?.filter((f) => checkbox[f]); return chavesSelecionadas.length === 0; };  return checarNenhum(model.modalidade_aprovacao);})(model, field, formState)",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "validDemolicao",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-2 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20'fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Não é possível solicitar \"Demolição\" individualmente.</div></div><br>",
+                      "focus": "false",
+                      "type": "text",
+                      "readonly": true,
+                      "required": false,
+                      "label": "* Aviso Demolição *",
+                      "placeholder": "",
+                      "disabled": false,
+                      "hidden": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Demolição'] && !model.modalidade_aprovacao?.['Reforma'] && !model.modalidade_aprovacao?.['Ampliação'] && !model.modalidade_aprovacao?.['Regularização'] && !model.modalidade_aprovacao?.['Construção nova']"
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "area_existente",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Área existente aprovada (Com Alvará e Habite-se)",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Construção nova'] != true && model.area_complementar != 'Sim'"
+                    },
+                    "hideExpression": "!model.modalidade_aprovacao || (()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "area_construir",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Área de acréscimo (construir)",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Construção nova'] && model.area_complementar != 'Sim'"
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "area_ampliar",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Área de acréscimo (ampliar)",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Ampliação'] && model.area_complementar != 'Sim'"
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "area_regularizar",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Área a regularizar",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Regularização'] && model.area_complementar != 'Sim'"
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "area_reformar",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Área a reformar",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Reforma'] && model.area_complementar != 'Sim'"
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "area_demolir",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Área a demolir",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Demolição'] && model.area_complementar != 'Sim'"
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "area_total",
+                    "type": "next-input",
+                    "validators": {
+                      "validation": [
+                        "greaterThanZero"
+                      ]
+                    },
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Área final da edificação",
+                      "placeholder": "",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||area_total": "(model.area_existente ?? 0 )+ (model.area_construir ?? 0) + (model.area_regularizar ?? 0) + (model.area_ampliar ?? 0) - (model.area_demolir ?? 0)",
+                      "templateOptions|||label": "(()=>{try{const isTipoUso=model.tipo_uso?model.tipo_uso:'';return'Área final '+isTipoUso}catch(err){return err}})()",
+                      "templateOptions|||required": "model.area_complementar != 'Sim' && model.modalidade_aprovacao"
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "existente_comp_coberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "hideExpression": "!model.modalidade_aprovacao || (()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "templateOptions": {
+                      "label": "Área complementar existente coberta Aprovada",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Construção nova'] != true && model.area_complementar == 'Sim'"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "existente_comp_descoberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "hideExpression": "!model.modalidade_aprovacao || (()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "templateOptions": {
+                      "label": "Área complementar existente descoberta Aprovada",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Construção nova'] != true && model.area_complementar == 'Sim'"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "construir_comp_coberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "templateOptions": {
+                      "label": "Área complementar a construir coberta",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Construção nova'] && model.area_complementar == 'Sim'"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "construir_comp_descoberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "templateOptions": {
+                      "label": "Área complementar a construir descoberta",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Construção nova'] && model.area_complementar == 'Sim'"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "ampliar_comp_coberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "templateOptions": {
+                      "label": "Área complementar a ampliar coberta",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Ampliação'] && model.area_complementar == 'Sim'"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "ampliar_comp_descoberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "templateOptions": {
+                      "label": "Área complementar a ampliar descoberta",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Ampliação'] && model.area_complementar == 'Sim'"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "regularizar_comp_coberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "templateOptions": {
+                      "label": "Área complementar a regularizar coberta",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Regularização'] && model.area_complementar == 'Sim'"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "regularizar_comp_descoberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "templateOptions": {
+                      "label": "Área complementar a regularizar descoberta",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Regularização'] && model.area_complementar == 'Sim'"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "reformar_comp_coberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "templateOptions": {
+                      "label": "Área complementar a reformar coberta",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Reforma'] && model.area_complementar == 'Sim'"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "reformar_comp_descoberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "templateOptions": {
+                      "label": "Área complementar a reformar descoberta",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Reforma'] && model.area_complementar == 'Sim'"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "demolir_comp_coberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "templateOptions": {
+                      "label": "Área complementar a demolir coberta",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Demolição'] && model.area_complementar == 'Sim'"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "demolir_comp_descoberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "templateOptions": {
+                      "label": "Área complementar a demolir descoberta",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.modalidade_aprovacao?.['Demolição'] && model.area_complementar == 'Sim'"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "total_comp_coberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Área complementar final coberta",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||total_comp_coberta": "(model.existente_comp_coberta ?? 0) + (model.construir_comp_coberta ?? 0) + (model.regularizar_comp_coberta ?? 0) + (model.ampliar_comp_coberta ?? 0) - (model.demolir_comp_coberta ?? 0)",
+                      "templateOptions|||required": "model.area_complementar == 'Sim' && model.modalidade_aprovacao"
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "total_comp_descoberta",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Área complementar final descoberta",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||total_comp_descoberta": "(model.existente_comp_descoberta ?? 0) + (model.construir_comp_descoberta ?? 0) + (model.regularizar_comp_descoberta ?? 0) + (model.ampliar_comp_descoberta ?? 0) - (model.demolir_comp_descoberta ?? 0)",
+                      "templateOptions|||required": "model.area_complementar == 'Sim' && model.modalidade_aprovacao"
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "total_total",
+                    "validators": {
+                      "validation": [
+                        "greaterThanZero"
+                      ]
+                    },
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Área complementar final total",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "text",
+                      "suffix": "m²",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||label": "(()=>{try{const isTipoUso=model.tipo_uso?model.tipo_uso:'';return'Área complementar final total '+isTipoUso}catch(err){return err}})()",
+                      "model|||total_total": "(model.total_comp_descoberta ?? 0) + (model.total_comp_coberta ?? 0)",
+                      "templateOptions|||required": "model.area_complementar == 'Sim' && model.modalidade_aprovacao"
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "aviso_area_reforma",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "label": "* Aviso area reforma",
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Área a reformar não pode ser maior que a Área existente aprovada</div></div><br>",
+                      "readonly": true,
+                      "labelBadge": "danger",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "!['Quadra esportiva e poliesportiva','Estacionamento térreo','Piscina','Área complementar de posto de gasolina'].includes(model.tipo_uso) && (model.area_reformar ?? 0) > (model.area_existente ?? 0)"
+                    },
+                    "hideExpression": "['Quadra esportiva e poliesportiva','Estacionamento térreo','Piscina','Área complementar de posto de gasolina'].includes(model.tipo_uso) || (model.area_reformar ?? 0) <= (model.area_existente ?? 0)"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "aviso_area_demolir",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "label": "* Aviso area demolir",
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Área a demolir não pode ser maior que Área existente aprovada - Área a reformar</div></div><br>",
+                      "readonly": true,
+                      "labelBadge": "danger",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "!['Quadra esportiva e poliesportiva','Estacionamento térreo','Piscina','Área complementar de posto de gasolina'].includes(model.tipo_uso) && model.area_demolir && (model.area_demolir ?? 0) > (model.area_existente ?? 0) - (model.area_reformar ?? 0)"
+                    },
+                    "hideExpression": "['Quadra esportiva e poliesportiva','Estacionamento térreo','Piscina','Área complementar de posto de gasolina'].includes(model.tipo_uso) || !model.area_demolir || (model.area_demolir ?? 0) <= (model.area_existente ?? 0) - (model.area_reformar ?? 0)"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "aviso_area_reformar_coberta",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "label": "* Aviso area reformar coberta *",
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Área complementar a reformar coberta não pode ser maior que a Área complementar existente coberta Aprovada</div></div><br>",
+                      "readonly": true,
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "['Quadra esportiva e poliesportiva','Estacionamento térreo','Piscina','Área complementar de posto de gasolina'].includes(model.tipo_uso_complementar) && (model.reformar_comp_coberta ?? 0) > (model.existente_comp_coberta ?? 0)"
+                    },
+                    "hideExpression": "!['Quadra esportiva e poliesportiva','Estacionamento térreo','Piscina','Área complementar de posto de gasolina'].includes(model.tipo_uso_complementar) || (model.reformar_comp_coberta ?? 0) <= (model.existente_comp_coberta ?? 0)"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "aviso_area_reformar_descoberta",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "label": "* Aviso area reformar descoberta *",
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Área complementar a reformar descoberta não pode ser maior que a Área complementar existente descoberta Aprovada</div></div><br>",
+                      "readonly": true,
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "['Quadra esportiva e poliesportiva','Estacionamento térreo','Piscina','Área complementar de posto de gasolina'].includes(model.tipo_uso_complementar) && (model.reformar_comp_descoberta ?? 0) > (model.existente_comp_descoberta ?? 0)"
+                    },
+                    "hideExpression": "!['Quadra esportiva e poliesportiva','Estacionamento térreo','Piscina','Área complementar de posto de gasolina'].includes(model.tipo_uso_complementar) || (model.reformar_comp_descoberta ?? 0) <= (model.existente_comp_descoberta ?? 0)"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "aviso_area_demolir_coberta",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "label": "* Aviso area demolir coberta *",
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Área complementar a demolir coberta não pode ser maior que Área complementar existente coberta Aprovada - Área complementar a reformar coberta</div></div><br>",
+                      "readonly": true,
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "['Quadra esportiva e poliesportiva','Estacionamento térreo','Piscina','Área complementar de posto de gasolina'].includes(model.tipo_uso_complementar) && (model.demolir_comp_coberta ?? 0) > 0 && (model.demolir_comp_coberta ?? 0) > (model.existente_comp_coberta ?? 0) - (model.reformar_comp_coberta ?? 0)"
+                    },
+                    "hideExpression": "!['Quadra esportiva e poliesportiva','Estacionamento térreo','Piscina','Área complementar de posto de gasolina'].includes(model.tipo_uso_complementar) || (model.demolir_comp_coberta  ?? 0) == 0 || (model.demolir_comp_coberta ?? 0) <= (model.existente_comp_coberta ?? 0) - (model.reformar_comp_coberta ?? 0)"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "aviso_area_demolir_descoberta",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "label": "* Aviso area demolir descoberta *",
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Área complementar a demolir descoberta não pode ser maior que Área complementar existente descoberta Aprovada - Área complementar a reformar descoberta</div></div><br>",
+                      "readonly": true,
+                      "type": "text"
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "['Quadra esportiva e poliesportiva','Estacionamento térreo','Piscina','Área complementar de posto de gasolina'].includes(model.tipo_uso_complementar) && (model.demolir_comp_descoberta ?? 0) > 0 && (model.demolir_comp_descoberta ?? 0) > (model.existente_comp_descoberta ?? 0) - (model.reformar_comp_descoberta ?? 0)"
+                    },
+                    "hideExpression": "!['Quadra esportiva e poliesportiva','Estacionamento térreo','Piscina','Área complementar de posto de gasolina'].includes(model.tipo_uso_complementar) || (model.demolir_comp_descoberta  ?? 0) == 0 || (model.demolir_comp_descoberta ?? 0) <= (model.existente_comp_descoberta ?? 0) - (model.reformar_comp_descoberta ?? 0)"
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "validConstNova2",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-2 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20'fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Ao selecionar a opção \"Construção nova\", não deve ser selecionado outro tipo de pedido, <b>independente da edificação</b>.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "required": false,
+                "label": "* Aviso Construção nova *",
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "((model,field,formState)=>{const temConstrucaoNova=model.quadro_areas?.some(area=>area.modalidade_aprovacao?.['Construção nova']);const temOutroTipo=model.quadro_areas?.some(area=>{return Object.keys(area.modalidade_aprovacao).some(key=>key!=='Construção nova'&&area.modalidade_aprovacao[key])});return temConstrucaoNova&&temOutroTipo})(model,field,formState)"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "className": "col-12",
+              "key": "validDemolicao2",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-2 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20'fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Não é possível solicitar \"Demolição\" individualmente.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "required": false,
+                "label": "* Aviso Demolição *",
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.quadro_areas?.length > 0 && model.quadro_areas?.every(area=>{const keys=Object.keys(area.modalidade_aprovacao||{});return keys.length===1&&area.modalidade_aprovacao?.['Demolição']})"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "type": "next-upload",
+              "key": "teste",
+              "templateOptions": {
+                "label": "Teste",
+                "required": true,
+                "columns": "12",
+                "extends": "",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Quadro de áreas ",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Quadro de áreas</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\"><b>Área complementar</b>: são consideradas áreas complementares as seguintes construções, que complementam a construção principal:&nbsp;</li> \na) quadra esportiva ou poliesportiva;<br>\nb) piscina;<br>\nc) garagem e estacionamento térreos, localizados fora da área de projeção do corpo principal;<br>\nd) nos postos de gasolina, a área coberta sobre as bombas, a área para lavagem de veículos, desde que não faça parte do corpo principal, a área destinada à circulação de veículos e as áreas mencionadas na alínea \"c\".<br>\n<br>\n<li align = \"justify\"><b>Área existente aprovada</b>: Preencha com a área existente de construção correspondente a área licenciada com Alvará de Construção e/ou habite-se e/ou devidamente averbada na matrícula do imóvel. Caso a área existente não esteja devidamente regularizada, deverá ser preenchido o campo “Área a regularizar”. <br></li>\n<br>\n<li align = \"justify\"><b>Área de acréscimo (construir)</B>: Preencha com a metragem quadrada da construção nova pretendida. <br></li><br>\n<li align = \"justify\"><b>Área de acréscimo (ampliar)</B>: Preencha com a metragem quadrada da construção pretendida. <br></li><br>\n<li align = \"justify\"><b>Área a regularizar</B>: Preencha com a metragem quadrada da regularização pretendida. <BR></li><br>\n<li align = \"justify\"><b>Área a reformar</B>: Preencha com a metragem quadrada da reforma pretendida. <BR></li><br>\n<li align = \"justify\"><b>Área a demolir</B>: A área a ser demolida deverá estar relacionada a área existente Regularizada. <br></li><br>\n<li align = \"justify\"><b>Quadro de áreas detalhado</B>: Anexar em formato \"pdf\" o quadro de áreas detalhado contendo todas as edificações (conforme o caso) e a áreas informadas anteriormente, constando ainda o cálculo dos índices urbanísticos do projeto, devendo ser discriminadas as áreas computáveis para cada índice urbanístico. <br></li>\n<br><br>\n\n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step",
+            "mirror"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "templateOptions": {
+            "title": "Quadro de áreas totais",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Quadro de áreas totais</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso existam Áreas complementares estas <strong>também serão somadas</strong>.&nbsp;</li> \n\n</ul>"
+          },
+          "fieldGroup": [
+            {
+              "key": "totalarea_existente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Total de área existente (aprovada com Alvará e Habite-se)",
+                "placeholder": "Ex: 200m²",
+                "focus": "false",
+                "floatNumber": true,
+                "readonly": true,
+                "type": "text",
+                "suffix": "m²",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {
+                "model|||totalarea_existente": "((model, formState)=>{try{const existente = (model.quadro_areas?.filter((q)=> q.area_existente)?.reduce((acc, q) => acc + q.area_existente, 0  ) ?? 0  ); const existente_coberta = (model.quadro_areas?.filter((q)=> q.existente_comp_coberta)?.reduce((acc, q) => acc + q.existente_comp_coberta, 0  ) ?? 0  ); const existente_descoberta = (model.quadro_areas?.filter((q)=> q.existente_comp_descoberta)?.reduce((acc, q) => acc + q.existente_comp_descoberta, 0  ) ?? 0  ); return(Number(existente + existente_coberta + existente_descoberta)).toFixed(2);}catch(err){return err}})(model, formState)"
+              }
+            },
+            {
+              "key": "totalarea_construir",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Total de área a construir",
+                "placeholder": "Ex: 200m²",
+                "focus": "false",
+                "floatNumber": true,
+                "readonly": true,
+                "type": "text",
+                "suffix": "m²",
+                "required": true
+              },
+              "resetOnHide": true,
+              "expressionProperties": {
+                "model|||totalarea_construir": "((model, formState)=>{try{const construir = (model.quadro_areas?.filter((q)=> q.area_construir)?.reduce((acc, q) => acc + q.area_construir, 0  ) ?? 0  ); const construir_coberta = (model.quadro_areas?.filter((q)=> q.construir_comp_coberta)?.reduce((acc, q) => acc + q.construir_comp_coberta, 0  ) ?? 0  ); const construir_descoberta = (model.quadro_areas?.filter((q)=> q.construir_comp_descoberta)?.reduce((acc, q) => acc + q.construir_comp_descoberta, 0  ) ?? 0  ); return(Number(construir + construir_coberta + construir_descoberta)).toFixed(2);}catch(err){return err}})(model, formState)"
+              }
+            },
+            {
+              "key": "totalarea_ampliar",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Total de área a ampliar",
+                "placeholder": "Ex: 200m²",
+                "focus": "false",
+                "floatNumber": true,
+                "readonly": true,
+                "type": "text",
+                "suffix": "m²",
+                "required": true
+              },
+              "resetOnHide": true,
+              "expressionProperties": {
+                "model|||totalarea_ampliar": "((model, formState)=>{try{const ampliar = (model.quadro_areas?.filter((q)=> q.area_ampliar)?.reduce((acc, q) => acc + q.area_ampliar, 0  ) ?? 0  ); const ampliar_coberta = (model.quadro_areas?.filter((q)=> q.ampliar_comp_coberta)?.reduce((acc, q) => acc + q.ampliar_comp_coberta, 0  ) ?? 0  ); const ampliar_descoberta = (model.quadro_areas?.filter((q)=> q.ampliar_comp_descoberta)?.reduce((acc, q) => acc + q.ampliar_comp_descoberta, 0  ) ?? 0  ); return(Number(ampliar + ampliar_coberta + ampliar_descoberta)).toFixed(2);}catch(err){return err}})(model, formState)"
+              }
+            },
+            {
+              "key": "totalarea_regularizar",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Total de área a regularizar",
+                "placeholder": "Ex: 200m²",
+                "focus": "false",
+                "floatNumber": true,
+                "readonly": true,
+                "type": "text",
+                "suffix": "m²",
+                "required": true
+              },
+              "resetOnHide": true,
+              "expressionProperties": {
+                "model|||totalarea_regularizar": "((model, formState)=>{try{const regularizar = (model.quadro_areas?.filter((q)=> q.area_regularizar)?.reduce((acc, q) => acc + q.area_regularizar, 0  ) ?? 0  ); const regularizar_coberta = (model.quadro_areas?.filter((q)=> q.regularizar_comp_coberta)?.reduce((acc, q) => acc + q.regularizar_comp_coberta, 0  ) ?? 0  ); const regularizar_descoberta = (model.quadro_areas?.filter((q)=> q.regularizar_comp_descoberta)?.reduce((acc, q) => acc + q.regularizar_comp_descoberta, 0  ) ?? 0  ); return(Number(regularizar + regularizar_coberta + regularizar_descoberta)).toFixed(2);}catch(err){return err}})(model, formState)"
+              }
+            },
+            {
+              "key": "totalarea_reformar",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Total de área a reformar",
+                "placeholder": "Ex: 200m²",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "text",
+                "readonly": true,
+                "suffix": "m²",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||totalarea_reformar": "((model, formState)=>{try{const reformar = (model.quadro_areas?.filter((q)=> q.area_reformar)?.reduce((acc, q) => acc + q.area_reformar, 0  ) ?? 0  ); const reformar_coberta = (model.quadro_areas?.filter((q)=> q.reformar_comp_coberta)?.reduce((acc, q) => acc + q.reformar_comp_coberta, 0  ) ?? 0  ); const reformar_descoberta = (model.quadro_areas?.filter((q)=> q.reformar_comp_descoberta)?.reduce((acc, q) => acc + q.reformar_comp_descoberta, 0  ) ?? 0  ); return(Number(reformar + reformar_coberta + reformar_descoberta)).toFixed(2);}catch(err){return err}})(model, formState)"
+              }
+            },
+            {
+              "key": "totalarea_demolir",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Total de área a demolir",
+                "placeholder": "Ex: 200m²",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "text",
+                "readonly": true,
+                "suffix": "m²",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||totalarea_demolir": "((model, formState)=>{try{const demolir = (model.quadro_areas?.filter((q)=> q.area_demolir)?.reduce((acc, q) => acc + q.area_demolir, 0  ) ?? 0  ); const demolir_coberta = (model.quadro_areas?.filter((q)=> q.demolir_comp_coberta)?.reduce((acc, q) => acc + q.demolir_comp_coberta, 0  ) ?? 0  ); const demolir_descoberta = (model.quadro_areas?.filter((q)=> q.demolir_comp_descoberta)?.reduce((acc, q) => acc + q.demolir_comp_descoberta, 0  ) ?? 0  ); return(Number(demolir + demolir_coberta + demolir_descoberta)).toFixed(2);}catch(err){return err}})(model, formState)"
+              }
+            },
+            {
+              "key": "totalarea_total",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Total de área das edificações",
+                "placeholder": "Ex: 200m²",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "text",
+                "readonly": true,
+                "suffix": "m²",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||totalarea_total": "((model, formState)=>{try{const total = (model.quadro_areas?.filter((q)=> q.area_total)?.reduce((acc, q) => acc + q.area_total, 0  ) ?? 0  ); const total_coberta = (model.quadro_areas?.filter((q)=> q.total_comp_coberta)?.reduce((acc, q) => acc + q.total_comp_coberta, 0  ) ?? 0  ); const total_descoberta = (model.quadro_areas?.filter((q)=> q.total_comp_descoberta)?.reduce((acc, q) => acc + q.total_comp_descoberta, 0  ) ?? 0  ); return(Number(total + total_coberta + total_descoberta)).toFixed(2);}catch(err){return err}})(model, formState)"
+              }
+            },
+            {
+              "key": "total_unidades",
+              "className": "col-12",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Total de unidades",
+                "placeholder": "",
+                "focus": "false",
+                "type": "number",
+                "required": true,
+                "min": 0,
+                "disabled": false,
+                "pattern": "^[0-9]*$"
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroupClassName": "row items-end",
+          "fieldGroup": [
+            {
+              "key": "zoneamento_dataset",
+              "type": "select",
+              "wrappers": [
+                "form-field",
+                "consumeDataset"
+              ],
+              "templateOptions": {
+                "label": "Zoneamento",
+                "datasetReference": "67acfd1fe0503500076c4a95",
+                "datasetKey": "ZONA",
+                "autocomplete": true,
+                "hideData": false,
+                "placeholder": "--selecione",
+                "object": true,
+                "options": [
+                  {
+                    "label": "Z1",
+                    "value": "Z1"
+                  },
+                  {
+                    "label": "Z2",
+                    "value": "Z2"
+                  },
+                  {
+                    "label": "Z3",
+                    "value": "Z3"
+                  },
+                  {
+                    "label": "Z4",
+                    "value": "Z4"
+                  }
+                ],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "total_pavimentos",
+              "className": "col-6",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Total de pavimentos",
+                "placeholder": "",
+                "focus": "false",
+                "type": "number",
+                "min": 0,
+                "required": true,
+                "pattern": "^[0-9]*$"
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "aviso_pavimentos",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-red-800' >Aviso</div></div><div>Quantidade de pavimentos fora do limite permitido para o zoneamento selecionado</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "label": "* Aviso Pavimentos *",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.total_pavimentos > parseFloat(model.zoneamento_dataset?.input_data?.data?.find((k)=>k.key == 'PAVIMENTOS')?.value)"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "zona_atividades",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Atividades",
+                "focus": "false",
+                "btnAddText": "atividade",
+                "required": true
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "atividade",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "Atividades",
+                      "options": [
+                        {
+                          "label": "1 - Residência Unifamiliar",
+                          "value": "1 - Residência Unifamiliar"
+                        },
+                        {
+                          "label": "2 - Residência Multifamiliar",
+                          "value": "2 - Residência Multifamiliar"
+                        },
+                        {
+                          "label": "3 - Comércio e Serviços",
+                          "value": "3 - Comércio e Serviços"
+                        },
+                        {
+                          "label": "4 - Condomínios Horizontais",
+                          "value": "4 - Condomínios Horizontais"
+                        },
+                        {
+                          "label": "5 - Empreendimentos de Hotelaria e Turísticos",
+                          "value": "5 - Empreendimentos de Hotelaria e Turísticos"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true,
+                      "placeholder": "",
+                      "disabled": false
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "permissao",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Permissão de Exercício",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true,
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||permissao": "(() => {const config={\"atividades\":{\"1 - Residência Unifamiliar\":{\"key\":\"1_RES_UNIFAMILIAR\",\"permitido\":\"A atividade é permitida para o zoneamento do lote\",\"naoPermitido\":\"A atividade não é permitida para o zoneamento do lote\"},\"2 - Residência Multifamiliar\":{\"key\":\"2_RES_MULTIFAMILIAR\",\"permitido\":\"A atividade é permitida para o zoneamento do lote\",\"naoPermitido\":\"A atividade não é permitida para o zoneamento do lote\"},\"3 - Comércio e Serviços\":{\"key\":\"3_COMERCIO_SERVICOS_LOCAL\",\"permitido\":\"A atividade é permitida para o zoneamento do lote\",\"naoPermitido\":\"A atividade não é permitida para o zoneamento do lote\"},\"4 - Condomínios Horizontais\":{\"key\":\"4_COND_HORIZONTAIS\",\"permitido\":\"A atividade é permitida para o zoneamento do lote\",\"naoPermitido\":\"A atividade não é permitida para o zoneamento do lote\"},\"5 - Empreendimentos de Hotelaria e Turísticos\":{\"key\":\"5_EMPREEND_HOTAL_TURISTICO\",\"permitido\":\"A atividade é permitida para o zoneamento do lote\",\"naoPermitido\":\"A atividade não é permitida para o zoneamento do lote\"}}};const atividade=config.atividades[model.atividade];if(!atividade)return '';const zoneamento=model.zoneamento_dataset?.input_data?.data?.find(item=>item.key===atividade.key);if(!zoneamento)return 'Zoneamento não encontrado para a atividade';return zoneamento.value==='Não permitido'?atividade.naoPermitido:atividade.permitido;})()"
+                    }
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "altura_testada_principal",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Altura da Testada Principal",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "floatNumber": true,
+                "suffix": "metros",
+                "currency": {
+                  "prefix": "",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                }
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "altura_testada_secundaria",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Altura da Testada Secundária",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "floatNumber": true,
+                "suffix": "metros",
+                "currency": {
+                  "prefix": "",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                }
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.quest_logradouroadicional || model.quest_logradouroadicional !== 'Sim'"
+            },
+            {
+              "key": "recuo_frontal",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Recuo frontal",
+                "placeholder": "Ex: 10",
+                "focus": "false",
+                "floatNumber": true,
+                "readonly": false,
+                "type": "text",
+                "suffix": "m",
+                "required": true
+              },
+              "resetOnHide": true,
+              "expressionProperties": {}
+            },
+            {
+              "key": "aviso_recuo_frontal",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-red-800' >Aviso</div></div><div>Recuo frontal fora do limite permitido para o zoneamento selecionado</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "label": "* Aviso Recuo Frontal *",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.recuo_frontal < parseFloat(model.zoneamento_dataset?.input_data?.data?.find((k)=>k.key == 'RECUO_FRONTAL')?.value)"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "recuo_lateral_maior",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Recuo lateral (maior medida)",
+                "placeholder": "Ex: 10",
+                "focus": "false",
+                "floatNumber": true,
+                "readonly": false,
+                "type": "text",
+                "suffix": "m",
+                "required": true
+              },
+              "resetOnHide": true,
+              "expressionProperties": {}
+            },
+            {
+              "key": "aviso_lateralMa",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-red-800' >Aviso</div></div><div>Recuo lateral fora do limite permitido para o zoneamento selecionado</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "label": "* Aviso Lateral Maior*",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.recuo_lateral_maior < parseFloat(model.zoneamento_dataset?.input_data?.data?.find((k)=>k.key == 'RECUO_LATERAL_MAIOR')?.value)"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "recuo_lateral_menor",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Recuo lateral (menor medida)",
+                "placeholder": "Ex: 10",
+                "focus": "false",
+                "floatNumber": true,
+                "readonly": false,
+                "type": "text",
+                "suffix": "m",
+                "required": true
+              },
+              "resetOnHide": true,
+              "expressionProperties": {}
+            },
+            {
+              "key": "aviso_lateralMe",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-red-800' >Aviso</div></div><div>Recuo lateral fora do limite permitido para o zoneamento selecionado</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "label": "* Aviso Lateral Menor *",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.recuo_frontal >= 15 && model.recuo_lateral_menor < parseFloat(model.zoneamento_dataset?.input_data?.data?.find((k) => k.key === 'RECUO_LATERAL_MENOR')?.value)"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "recuo_fundo",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Recuo de fundo",
+                "placeholder": "Ex: 10",
+                "focus": "false",
+                "floatNumber": true,
+                "readonly": false,
+                "type": "text",
+                "suffix": "m",
+                "required": true
+              },
+              "resetOnHide": true,
+              "expressionProperties": {}
+            },
+            {
+              "key": "aviso_recuo_fundo",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-red-800' >Aviso</div></div><div>Recuo de fundo fora do limite permitido para o zoneamento selecionado</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "label": "* Aviso Recuo Fundo *",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.recuo_fundo < parseFloat(model.zoneamento_dataset?.input_data?.data?.find((k)=>k.key == 'RECUO_FUNDOS')?.value)"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "className": "col-6",
+              "key": "area_totalcomputavel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Área utilizada no cálculo do IA",
+                "labelHtml": true,
+                "placeholder": "",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "text",
+                "currency": {
+                  "prefix": "",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "min": "0",
+                "suffix": "m²",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-6",
+              "key": "coeficiente_aproveitamentoprojeto",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Índice de Aproveitamento",
+                "focus": "false",
+                "type": "text",
+                "floatNumber": true,
+                "currency": {
+                  "prefix": "",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "required": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||coeficiente_aproveitamentoprojeto": " parseFloat(model.area_totalcomputavel ?? 0) / parseFloat(model.area_terreno_real ?? 1)  "
+              }
+            },
+            {
+              "key": "aviso_indice_aproveitamento",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-red-800' >Aviso</div></div><div>Índice de Aproveitamento fora do limite permitido para o zoneamento selecionado</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "label": "* Aviso IA *",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.coeficiente_aproveitamentoprojeto > parseFloat(model.zoneamento_dataset?.input_data?.data?.find((k)=>k.key == 'INDICE_APROVEITAMENTO')?.value)"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "className": "col-6",
+              "key": "area_projecao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Área utilizada no cálculo da TO",
+                "focus": "false",
+                "type": "text",
+                "floatNumber": true,
+                "currency": {
+                  "prefix": "",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "m²",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-6",
+              "key": "taxa_ocup",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Taxa de Ocupação",
+                "focus": "false",
+                "floatNumber": true,
+                "currency": {
+                  "prefix": "",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "%",
+                "type": "text",
+                "required": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||taxa_ocup": " parseFloat(model.area_projecao ?? 0) / parseFloat(model.area_terreno_real ?? 1)  * 100 "
+              }
+            },
+            {
+              "key": "aviso_taxa_ocup",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-red-800' >Aviso</div></div><div>Taxa de Ocupação fora do limite permitido para o zoneamento selecionado</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "label": "* Aviso TO *",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.taxa_ocup > parseFloat(model.zoneamento_dataset?.input_data?.data?.find((k)=>k.key == 'TAXA_OCUPACAO')?.value)"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "className": "col-6",
+              "key": "area_permeavel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Área permeável total",
+                "focus": "false",
+                "type": "text",
+                "floatNumber": true,
+                "currency": {
+                  "prefix": "",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "m²",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-6",
+              "key": "taxa_permeabilidade_projeto",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Taxa de Permeabilidade",
+                "focus": "false",
+                "type": "text",
+                "floatNumber": true,
+                "currency": {
+                  "prefix": "",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "%",
+                "required": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||taxa_permeabilidade_projeto": " parseFloat(model.area_permeavel ?? 0) / parseFloat(model.area_terreno_real ?? 1)  * 100  "
+              }
+            },
+            {
+              "key": "aviso_taxa_permeabilidade",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-red-800' >Aviso</div></div><div>Taxa de Permeabilidade fora do limite permitido para o zoneamento selecionado</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "label": "* Aviso TP *",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "((model.taxa_permeabilidade_projeto ?? 0) < parseFloat(model.zoneamento_dataset?.input_data?.data.find((item)=> item.key == 'TAXA_PERMEABILIDADE')?.value ?? 0)) "
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            }
+          ],
+          "templateOptions": {
+            "title": "Parâmetros Urbanísticos",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "templateOptions": {
+            "title": "Projeto Arquitetônico",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Projetos</span>\n\n\n<div class=\"p-2 rounded\" style=\"background-color: #FBE8D7; color: #300000;\">\n<ul class = \"pt-2\">\n  <li align=\"justify\"> <b>ATENÇÃO:</b> O local onde é atribuído o selo é definido <b>automaticamente</b> pelo sistema. Se a prancha não seguir os padrões aqui especificados, o selo pode cobrir informações do documento, podendo também tornar a prancha ilegível.&nbsp;</li> \n\n</ul>\n</div>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Para que a peça gráfica aprovada possa ser gerada corretamente indicamos alguns pontos de atenção:<br></li> \n <ol class=\"pl-4\">\n    <b>Antes da plotagem:</b>\n    <li> No <u><a target='_blank' style=\"color: #007BFF\" href='https://knowledge.autodesk.com/pt-br/support/autocad/learn-explore/caas/sfdcarticles/sfdcarticles/PTB/How-to-turn-off-layers-in-your-AutoCAD-PDF-Plots.html'> AutoCAD</a></u> é possível desativar a função camadas para evitar que sejam transferidas do DWG para o PDF. \n    <li> TODAS as páginas das prancha devem ser <b>geradas</b> no sentido de PAISAGEM para que seja possível sempre receber o selo corretamente.\n    <li> Ajustes de tamanho e dimensões devem ser realizados somente ao gerar o arquivo em sua ferramenta de edição de projetos (autoCAD, Revit, entre outros).</li>\n<li>O pdf deve estar em escala (<u><a target='_blank' style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/article/339596/como-plotar-meu-projeto-com-a-escala-adequada?ticketId=&q=prancha'>este artigo</a></u> pode ajudar).\n<li>A prancha deve ser anexada com espaço em branco de 6cm x 18,50cm no canto inferior direito, para Aprovação da Prefeitura. Deve ser considerado 1cm de margem inferior e superior, 1cm de margem na lateral direita e 2,5cm na lateral esquerda.</li> \n\n    <b>Após a plotagem:</b>\n    <li>Indicamos buscar o achatamento e/ou compressão do documento caso o mesmo tenha sido plotado com várias camadas.  <u><a target='_blank' style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/article/316750/como-reduzir-o-tamanho-minha-prancha-digital'> Neste artigo</a></u> é possível conferir um passo a passo de como realizar este procedimento.\n    <li>Não efetue cortes no PDF, isso fará com que o arquivo fique inconsistente.</li>\n<br>Confira como deve ser a formatação do seu projeto para garantir uma aprovação mais rápida: \n<img class=\"w-75\" src='https://assets-publicos.s3.amazonaws.com/customer_success/exemploCarimbo.png'>\n<u><a target='_blank' style=\"color: #007BFF\" href='https://assets-publicos.s3.amazonaws.com/customer_success/exemploCarimbo.png'> Clique aqui para ver maior </a></u><br>\n<br>\n\n\n</ul>",
+            "fieldGroup": [
+              {
+                "key": "proj-arq",
+                "type": "next-upload",
+                "templateOptions": {
+                  "label": "Projeto Arquitetônico",
+                  "placeholder": "",
+                  "type": "text",
+                  "required": true
+                }
+              }
+            ]
+          },
+          "fieldGroup": [
+            {
+              "type": "radio",
+              "key": "anlise_de_projeto_arquitetnico",
+              "templateOptions": {
+                "label": "Análise de Projeto Arquitetônico",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "options": [
+                  {
+                    "label": "Humana",
+                    "value": "humana"
+                  },
+                  {
+                    "label": "LUME (IA)",
+                    "value": "lume_(ia)"
+                  }
+                ]
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "type": "next-upload",
+              "key": "proj-arq",
+              "templateOptions": {
+                "label": "Projeto Arquitetônico",
+                "required": true,
+                "columns": "12",
+                "extends": [
+                  "PDF",
+                  "DWG",
+                  "DXF",
+                  "SHP"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "className": "col-12",
+              "expressionProperties": {},
+              "hideExpression": "model.anlise_de_projeto_arquitetnico !== 'humana'"
+            },
+            {
+              "type": "next-upload",
+              "wrappers": [
+                "lume-ai"
+              ],
+              "templateOptions": {
+                "hideNestedField": true,
+                "label": "Projeto Arquitetônico",
+                "required": true,
+                "agentId": "6f87dd04-9758-47a4-8fbc-2f68adc7d9a5",
+                "columns": "12",
+                "extends": [
+                  "PDF",
+                  "JPG",
+                  "PNG"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "key": "projeto_arquitetnico",
+              "className": "col-12",
+              "expressionProperties": {},
+              "hideExpression": "model.anlise_de_projeto_arquitetnico !== 'lume_(ia)'"
+            },
+            {
+              "type": "next-ck",
+              "key": "observaes_e_ressalvas",
+              "templateOptions": {
+                "label": "Observações e ressalvas",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": true,
+                "sensitiveField": false
+              },
+              "className": "col-12",
+              "expressionProperties": {
+                "model|||observaes_e_ressalvas": "model?.projeto_arquitetnico?.lume_data?.extractedData?.descricao_geral"
+              },
+              "hideExpression": "model.anlise_de_projeto_arquitetnico !== 'lume_(ia)'"
+            }
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "templateOptions": {
+            "title": "Responsável Técnico - Execução",
+            "subtitle": "Insira o responsável técnico da Execução.",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Responsável Técnico</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Lembre-se de anexar documentos legíveis;&nbsp;</li> \n  <li align=\"justify\">É necessário informar ao menos um <b>Responsável pelo projeto</b> e um <b>Responsável pela execução</b>.&nbsp;</li> \n\n</ul>",
+            "fieldGroup": [
+              {
+                "key": "responsavel-execucao",
+                "type": "next-repeat",
+                "templateOptions": {
+                  "label": "Nome do Responsável Técnico pela Execução.",
+                  "btnAddText": "Responsável",
+                  "required": true
+                },
+                "fieldArray": {
+                  "fieldGroup": [
+                    {
+                      "key": "nome-execucao",
+                      "type": "input",
+                      "templateOptions": {
+                        "label": "Nome do Responsável pela Execução",
+                        "required": true
+                      }
+                    },
+                    {
+                      "key": "cpfcnpj-execucao",
+                      "type": "next-cpf-cnpj",
+                      "templateOptions": {
+                        "label": "CPF/CNPJ do Responsável pela Execução",
+                        "required": true
+                      }
+                    },
+                    {
+                      "key": "art-execucao",
+                      "type": "next-input",
+                      "templateOptions": {
+                        "label": "Número da(s) ART(s)/RRT(s) (ou outros) de Execução, separadas por virgula",
+                        "placeholder": "000000,000000,",
+                        "type": "text",
+                        "required": true
+                      }
+                    },
+                    {
+                      "key": "art-responsavel-arquivo",
+                      "type": "next-upload",
+                      "templateOptions": {
+                        "label": "ART/RRT/Outros - Arquivo",
+                        "placeholder": "",
+                        "type": "text"
+                      }
+                    },
+                    {
+                      "key": "iss_profissional",
+                      "type": "next-upload",
+                      "templateOptions": {
+                        "label": "Cópia simples do Recibo de ISS do profissional",
+                        "placeholder": "",
+                        "type": "text"
+                      }
+                    },
+                    {
+                      "key": "copia_registro_profissional",
+                      "type": "next-upload",
+                      "templateOptions": {
+                        "label": "Cópia do Título de Registro de Profissional e/ou Firma junto à PMMC",
+                        "placeholder": "",
+                        "type": "text"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "fieldGroup": [
+            {
+              "key": "responsavel_tecnico",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Responsável Técnico",
+                "focus": "false",
+                "btnAddText": "Responsável Técnico",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "responsavel_tecnico_vinculo",
+                    "type": "multicheckbox",
+                    "templateOptions": {
+                      "label": "Responsabilidade",
+                      "options": [
+                        {
+                          "label": "Projeto",
+                          "value": "Projeto"
+                        },
+                        {
+                          "label": "Execução",
+                          "value": "Execução"
+                        }
+                      ],
+                      "focus": "false",
+                      "placeholder": "-- selecione --",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "nome_responsavel_tecnico",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Nome/ Razão Social",
+                      "placeholder": "",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "cpfcnpj_responsavel_tecnico",
+                    "type": "next-cpf-cnpj",
+                    "templateOptions": {
+                      "label": "CPF/CNPJ",
+                      "labelNomeResp": "Nome do Representante Legal",
+                      "placeholderNomeResp": "João da Silva",
+                      "labelCpfResp": "CPF do Representante Legal",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "email_responsavel_tecnico",
+                    "type": "next-input",
+                    "validators": {
+                      "validation": [
+                        "email"
+                      ]
+                    },
+                    "templateOptions": {
+                      "label": "E-mail",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "numero_art",
+                    "className": "col-12",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Número da ART/ RRT",
+                      "description": "Caso necessário separe com vírgula",
+                      "placeholder": "Ex: 123, 456",
+                      "focus": "false",
+                      "type": "text",
+                      "required": false
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "documento_art",
+                    "className": "col-12",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "ART/RRT",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": "true",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": "true",
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "predefined",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "planejamento_modeload",
+                      "label": "Secretaria de Planejamento Urbano",
+                      "id": "676d992256664e00080690e5"
+                    }
+                  ]
+                },
+                "placeholder": "",
+                "focus": "false",
+                "disabled": "false",
+                "sensitiveField": false,
+                "destinationAccessLevel": "FULL",
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "bot": {
+            "title": "Existem alguma regras sobre os participantes",
+            "subtitle": "Saiba mais sobre quem pode ser responsável por um projeto",
+            "textButton": "Ver Artigo",
+            "link": "http://ajuda.aprovadigital.com.br/"
+          },
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "step": {
+    "config": [],
+    "shared": {
+      "informative": "Acesse a aba Resumo para verificar o andamento do seu processo",
+      "automatic": [],
+      "tab": [],
+      "action": []
+    }
+  },
+  "config": {
+    "hide": {
+      "steps": true
+    },
+    "devolverAoUltimo": true,
+    "title": "Alvará de Obras - Com LUME",
+    "descricao": "Aconselhamos que este processo seja protocolado por Responsáveis Técnicos devido a questões técnicas para preenchimento do formulário.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "sigla": "ALV",
+    "useNewSidebarForwarding": false,
+    "newSignatureStrategy": true,
+    "experimentalMode": true,
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Alvará de obras",
+        "template": "ModeloAD/alvara_lume.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "viewed": true,
+        "official": true,
+        "possui_prazo_validade": true
+      },
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Peça gráfica",
+        "template": "ModeloAD/prancha_alvara_construcao_wk.html",
+        "function": "processComplete",
+        "internal": false,
+        "permission": "process:viewAll:all",
+        "official": true,
+        "possui_prazo_validade": true,
+        "wk": true,
+        "viewed": true,
+        "numeration": "prancha_alvara_construcao_wk"
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Observações",
+        "text_action": "Realizou ação",
+        "checkPermission": true,
+        "permission": "process:analista",
+        "key": "observacao",
+        "fieldGroup": [
+          {
+            "key": "observacao",
+            "type": "next-input",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observação",
+              "placeholder": "",
+              "type": "text"
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "observacao",
+            "type": "next-input",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observação",
+              "placeholder": "",
+              "type": "text"
+            }
+          }
+        ]
+      },
+      {
+        "permission": "taxas",
+        "nome": "Emissão de Taxas do Processo",
+        "text_action": "Emitiu Taxas do Processo",
+        "key": "taxasProcesso",
+        "type": "taxa",
+        "fieldGroup": [
+          {
+            "className": "col-6",
+            "key": "areaconstruirtaxas",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "<div class='mb-2'><span class='p-1 rounded bg-gray-500 text-white'>Total de área a construir informada na solicitação:</span></div>",
+              "labelHtml": true,
+              "placeholder": "",
+              "suffix": "m²",
+              "focus": "false",
+              "readonly": true,
+              "type": "text"
+            },
+            "expressionProperties": {
+              "model|||areaconstruirtaxas": "formState.resume.somaarea "
+            }
+          },
+          {
+            "className": "col-6",
+            "key": "valor_final_taxas",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "<div class='mb-2'><span class='p-1 rounded bg-gray-500 text-white'>Valor final da taxa sob Total de área à construir:</span></div>",
+              "labelHtml": true,
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "floatNumber": true,
+              "currency": {
+                "prefix": "R$ ",
+                "thousands": ".",
+                "decimal": ",",
+                "precision": 2,
+                "allowNegative": false
+              },
+              "readonly": true
+            },
+            "expressionProperties": {
+              "model|||valor_final_taxas": "(formState.resume.somaarea ?? 0) * 3.5"
+            }
+          },
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-wig",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-wig",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          }
+        ]
+      },
+      {
+        "permission": "taxas",
+        "nome": "A Taxa de aprovação está anexada na Aba Taxas, e o Imposto relativo aos serviços da obra (ISSQN), será realizado conforme legislação tributária.",
+        "text_action": "Alteradas informações de comprovantes",
+        "type": "resume.bckp",
+        "key": "anexoComprovante",
+        "hidden": "process.tramites.find((tramite) => tramite['taxasProcesso'])",
+        "fieldGroup": [
+          {
+            "key": "comprovante",
+            "type": "next-upload",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Comprovante - (Anexe aqui o comprovante de pagamento, e após isto, clique em Enviar para Análise, para que seu processo continue)"
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "comprovante",
+            "type": "next-upload",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Comprovante - (Anexe aqui o comprovante de pagamento, e após isto, clique em Enviar para Análise, para que seu processo continue)"
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Parecer da Fiscalização",
+        "checkPermission": true,
+        "permission": "process:analista",
+        "text_action": "Inseriu parecer de fiscalização",
+        "setoresResponsaveis": [
+          {
+            "nome": "Setor de Fiscalização"
+          }
+        ],
+        "key": "parecer_fisca",
+        "fieldGroup": [
+          {
+            "key": "parecer_fisca",
+            "type": "next-wig",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Parecer Fiscalização:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "anexofisc",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "parecer_fisca",
+            "type": "next-wig",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Parecer Fiscalização:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "anexofisc",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "permission": "process:analista",
+        "nome": "Numeração Predial",
+        "text_action": "Inseriu dados de Numeração predial",
+        "key": "numeracao_card",
+        "fieldGroup": [
+          {
+            "key": "numeracao_text",
+            "type": "next-wig",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Dados sobre a numeração predial",
+              "placeholder": "",
+              "type": "text"
+            }
+          },
+          {
+            "key": "numeracao_complementares",
+            "type": "next-upload",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Documentos complementares",
+              "placeholder": "",
+              "type": "text"
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "numeracao_text",
+            "type": "next-wig",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Dados sobre a numeração predial",
+              "placeholder": "",
+              "type": "text"
+            }
+          },
+          {
+            "key": "numeracao_complementares",
+            "type": "next-upload",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Documentos complementares",
+              "placeholder": "",
+              "type": "text"
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Espelho do Imóvel",
+        "permission": "process:analista",
+        "text_action": "Inseriu informações do imóvel",
+        "key": "espelho_imovel",
+        "fieldGroup": [
+          {
+            "key": "espelho_imovel",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Espelho do Imóvel",
+              "placeholder": "Placeholder",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "data_flex",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "DataFlex",
+              "placeholder": "Placeholder",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "infos_imovel",
+            "type": "next-wig",
+            "templateOptions": {
+              "label": "Informações do Imóvel",
+              "placeholder": "Placeholder",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "anexo_implantacao",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Implantação",
+              "placeholder": "Placeholder",
+              "type": "text"
+            }
+          },
+          {
+            "key": "anexo_selo",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Selo tecnico",
+              "placeholder": "Placeholder",
+              "type": "text"
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "espelho_imovel",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Espelho do Imóvel",
+              "placeholder": "Placeholder",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "data_flex",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "DataFlex",
+              "placeholder": "Placeholder",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "infos_imovel",
+            "type": "next-wig",
+            "templateOptions": {
+              "label": "Informações do Imóvel",
+              "placeholder": "Placeholder",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "anexo_implantacao",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Implantação",
+              "placeholder": "Placeholder",
+              "type": "text"
+            }
+          },
+          {
+            "key": "anexo_selo",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Selo tecnico",
+              "placeholder": "Placeholder",
+              "type": "text"
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": [],
+      "version": 2
+    },
+    "tenance": "Obras",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "planejamento_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": false,
+    "autoConcludeParticipation": true
+  },
+  "tramite": [
+    {
+      "groupId": "seplau_demoad",
+      "_id": "64ff0788dcdb6000084c5276"
+    }
+  ],
+  "__v": 0,
+  "options": {
+    "showStepViewControl": true
+  },
+  "city_id": 38
+}

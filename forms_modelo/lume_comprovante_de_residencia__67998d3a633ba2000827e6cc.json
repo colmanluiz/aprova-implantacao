@@ -1,0 +1,2051 @@
+{
+  "_id": "67998d3a633ba2000827e6cc",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "type": "next-upload",
+              "wrappers": [
+                "lume-ai"
+              ],
+              "templateOptions": {
+                "hideNestedField": true,
+                "label": "Comprovante de residência (documentos aceitos: conta de água, luz ou telefone)",
+                "required": true,
+                "columns": "12",
+                "extends": [
+                  "PDF",
+                  "PNG",
+                  "JPG",
+                  "JPEG"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "agentId": "48d45c69-6191-4171-b55b-420270326199"
+              },
+              "key": "comprovante_de_residencia",
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "documento_valido_residencia",
+              "type": "next-html",
+              "resetOnHide": true,
+              "templateOptions": {
+                "focus": "false",
+                "label": "next-html - Documento válido",
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>O documento anexado não foi reconhecido como válido. Verifique o arquivo e tente novamente.</div></div><br/>",
+                "readonly": true,
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model?.comprovante_de_residencia?.lume_data?.isValidDocument ||  !model?.comprovante_de_residencia?.lume_data  ||  model.comprovante_de_residencia?.lume_data === null"
+            },
+            {
+              "type": "next-input",
+              "key": "nome_completo",
+              "templateOptions": {
+                "label": "Nome completo",
+                "required": true,
+                "columns": "6",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||nome_completo": "model?.comprovante_de_residencia?.lume_data?.extractedData?.nome_completo || ''"
+              },
+              "className": "col-6",
+              "hideExpression": " !model?.comprovante_de_residencia?.lume_data"
+            },
+            {
+              "type": "next-input",
+              "key": "cpf",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "templateOptions": {
+                "label": "CPF",
+                "required": true,
+                "columns": "6",
+                "mask": "000.000.000-00",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||cpf": "model.cpf || (model.comprovante_de_residencia?.lume_data?.extractedData?.cpf?.length === 11 || model.comprovante_de_residencia?.lume_data?.extractedData?.cpf?.length === 14? model.comprovante_de_residencia?.lume_data?.extractedData?.cpf : model.cpf)"
+              },
+              "className": "col-6",
+              "hideExpression": "!model?.comprovante_de_residencia?.lume_data"
+            },
+            {
+              "type": "next-input",
+              "key": "rua",
+              "templateOptions": {
+                "label": "Rua",
+                "required": true,
+                "columns": "6",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||rua": "model?.comprovante_de_residencia?.lume_data?.extractedData?.rua || ''"
+              },
+              "className": "col-6",
+              "hideExpression": " !model?.comprovante_de_residencia?.lume_data"
+            },
+            {
+              "type": "next-input",
+              "key": "numero",
+              "templateOptions": {
+                "label": "Número",
+                "required": true,
+                "columns": "6",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||numero": "model?.comprovante_de_residencia?.lume_data?.extractedData?.numero || ''"
+              },
+              "className": "col-6",
+              "hideExpression": " !model?.comprovante_de_residencia?.lume_data"
+            },
+            {
+              "type": "next-input",
+              "key": "bairro",
+              "templateOptions": {
+                "label": "Bairro",
+                "required": true,
+                "columns": "6",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||bairro": "model?.comprovante_de_residencia?.lume_data?.extractedData?.bairro || ''"
+              },
+              "className": "col-6",
+              "hideExpression": " !model?.comprovante_de_residencia?.lume_data"
+            },
+            {
+              "type": "next-input",
+              "key": "cidade",
+              "templateOptions": {
+                "label": "Cidade",
+                "required": true,
+                "columns": "6",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||cidade": "model?.comprovante_de_residencia?.lume_data?.extractedData?.cidade || ''"
+              },
+              "className": "col-6",
+              "hideExpression": " !model?.comprovante_de_residencia?.lume_data"
+            },
+            {
+              "type": "next-input",
+              "key": "estado",
+              "templateOptions": {
+                "label": "Estado",
+                "required": true,
+                "columns": "6",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||estado": "model?.comprovante_de_residencia?.lume_data?.extractedData?.estado || ''"
+              },
+              "className": "col-6",
+              "hideExpression": " !model?.comprovante_de_residencia?.lume_data"
+            },
+            {
+              "type": "next-input",
+              "key": "cep",
+              "templateOptions": {
+                "label": "CEP",
+                "required": true,
+                "columns": "6",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||cep": "model?.comprovante_de_residencia?.lume_data?.extractedData?.cep || ''"
+              },
+              "className": "col-6",
+              "hideExpression": " !model?.comprovante_de_residencia?.lume_data"
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "sensitiveField": false,
+                "accessLevel": "FULL",
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "predefined",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "admmodelo_modeload",
+                      "label": "Secretaria de Administração",
+                      "id": "675c980a96ab6200088ea449"
+                    }
+                  ]
+                },
+                "sensitiveField": false,
+                "destinationAccessLevel": "FULL",
+                "multiple": true,
+                "useNewSidebarForwarding": true,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Comprovante de residência",
+            "subtitle": "",
+            "textHtml": "<p><img src=\"https://api.producao.aprova.com.br/blob/url/redirect/blueprint-editor/21738863246324.png\"></p>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Lume - Comprovante de Residência",
+    "descricao": "IA desenvolvida para gerar impactos reais na Gestão Pública.",
+    "cidade": "modeload",
+    "siglaCidade": "DEM",
+    "approveActionText": "Deferir",
+    "sigla": "LAP",
+    "useNewSidebarForwarding": true,
+    "newSignatureStrategy": true,
+    "experimentalMode": true,
+    "bpmEditProperties": true,
+    "sendToEmailExpression": "Array.from(new Set([context.email_requerente, ...(context.adicionar_email_empreedimento?.map((RL) => RL.email ) || []), context['email-responsavel'],  ...(context.adicionar_email_responsavel?.map((RL) => RL.email ) || []), ...(context['responsavel-tecnico']?.map((RL) => RL.email_responsaveltecnico) || []),...(context.adicionar_email_tecnico?.map((RL) => RL.email) || []) ]))",
+    "templates": [],
+    "form_tramites": [
+      {
+        "nome": "Cálculo de Taxas",
+        "permission": "process:areaPref",
+        "checkPermission": true,
+        "text_action": "Realizou ação",
+        "key": "calculo_taxas",
+        "type": "taxa",
+        "fieldGroup": [
+          {
+            "key": "formula_taxas",
+            "type": "next-input",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Cálculo da Taxa",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "readonly": true,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||formula_taxas": "(()=>{try{const isPortePP=formState.resume.porte==='< Pequeno'; const isPorteP=formState.resume.porte==='Pequeno'; const isPorteM=formState.resume.porte==='Médio'; const isPorteG=formState.resume.porte==='Grande'; const isPorteUnico=formState.resume.porte==='Porte Único'; const isPotPorteP=formState.resume.potencial_poluidor==='P'; const isPotPorteM=formState.resume.potencial_poluidor==='M'; const isPotPorteG=formState.resume.potencial_poluidor==='G'; const UMA=135.71; if (isPorteP && isPotPorteP){return '1.7516 * UMA';}else if (isPorteM && isPotPorteP){return '3.0801 * UMA';}else if (isPorteP && isPotPorteM){return '5.3607 * UMA';}else if (isPorteM && isPotPorteM){return '9.3813 * UMA';}else if (isPorteG && isPotPorteP){return '14.0954 * UMA';}else if (isPorteP && isPotPorteG){return '16.4114 * UMA';}else if (isPorteM && isPotPorteG){return '23.4767 * UMA';}else if (isPorteG && isPotPorteM){return '28.7199 * UMA';}else if (isPorteG && isPotPorteG){return '50.2216 * UMA';}return 'Não especificado';}catch (err){return err;}})();"
+            }
+          },
+          {
+            "key": "valor_taxas",
+            "type": "next-input",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Valor da Taxa",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "readonly": true,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||valor_taxas": "(()=>{try{const isPortePP=formState.resume.porte==='< Pequeno'; const isPorteP=formState.resume.porte==='Pequeno'; const isPorteM=formState.resume.porte==='Médio'; const isPorteG=formState.resume.porte==='Grande'; const isPorteUnico=formState.resume.porte==='Porte Único'; const isPotPorteP=formState.resume.potencial_poluidor==='P'; const isPotPorteM=formState.resume.potencial_poluidor==='M'; const isPotPorteG=formState.resume.potencial_poluidor==='G'; const UMA=135.71; if (isPorteP && isPotPorteP){return ('R$' + (1.7516 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteM && isPotPorteP){return ('R$' + (3.0801 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteP && isPotPorteM){return ('R$' + (5.3607 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteM && isPotPorteM){return ('R$' + (9.3813 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteG && isPotPorteP){return ('R$' + (14.0954 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteP && isPotPorteG){return ('R$' + (16.4114 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteM && isPotPorteG){return ('R$' + (23.4767 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteG && isPotPorteM){return ('R$' + (28.7199 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteG && isPotPorteG){return ('R$' + (50.2216 * UMA).toFixed(2)).replace('.', ',');}return 'Não especificado';}catch (err){return err;}})();"
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "formula_taxas",
+            "type": "next-input",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Cálculo da Taxa",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "readonly": true,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||formula_taxas": "(()=>{try{const isPortePP=formState.resume.porte==='< Pequeno'; const isPorteP=formState.resume.porte==='Pequeno'; const isPorteM=formState.resume.porte==='Médio'; const isPorteG=formState.resume.porte==='Grande'; const isPorteUnico=formState.resume.porte==='Porte Único'; const isPotPorteP=formState.resume.potencial_poluidor==='P'; const isPotPorteM=formState.resume.potencial_poluidor==='M'; const isPotPorteG=formState.resume.potencial_poluidor==='G'; const UMA=135.71; if (isPorteP && isPotPorteP){return '1.7516 * UMA';}else if (isPorteM && isPotPorteP){return '3.0801 * UMA';}else if (isPorteP && isPotPorteM){return '5.3607 * UMA';}else if (isPorteM && isPotPorteM){return '9.3813 * UMA';}else if (isPorteG && isPotPorteP){return '14.0954 * UMA';}else if (isPorteP && isPotPorteG){return '16.4114 * UMA';}else if (isPorteM && isPotPorteG){return '23.4767 * UMA';}else if (isPorteG && isPotPorteM){return '28.7199 * UMA';}else if (isPorteG && isPotPorteG){return '50.2216 * UMA';}return 'Não especificado';}catch (err){return err;}})();"
+            }
+          },
+          {
+            "key": "valor_taxas",
+            "type": "next-input",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Valor da Taxa",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "readonly": true,
+              "required": true
+            },
+            "expressionProperties": {
+              "model|||valor_taxas": "(()=>{try{const isPortePP=formState.resume.porte==='< Pequeno'; const isPorteP=formState.resume.porte==='Pequeno'; const isPorteM=formState.resume.porte==='Médio'; const isPorteG=formState.resume.porte==='Grande'; const isPorteUnico=formState.resume.porte==='Porte Único'; const isPotPorteP=formState.resume.potencial_poluidor==='P'; const isPotPorteM=formState.resume.potencial_poluidor==='M'; const isPotPorteG=formState.resume.potencial_poluidor==='G'; const UMA=135.71; if (isPorteP && isPotPorteP){return ('R$' + (1.7516 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteM && isPotPorteP){return ('R$' + (3.0801 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteP && isPotPorteM){return ('R$' + (5.3607 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteM && isPotPorteM){return ('R$' + (9.3813 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteG && isPotPorteP){return ('R$' + (14.0954 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteP && isPotPorteG){return ('R$' + (16.4114 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteM && isPotPorteG){return ('R$' + (23.4767 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteG && isPotPorteM){return ('R$' + (28.7199 * UMA).toFixed(2)).replace('.', ',');}else if (isPorteG && isPotPorteG){return ('R$' + (50.2216 * UMA).toFixed(2)).replace('.', ',');}return 'Não especificado';}catch (err){return err;}})();"
+            }
+          }
+        ]
+      },
+      {
+        "permission": "taxas",
+        "nome": "Emissão de Taxas do Processo",
+        "text_action": "Atualizou informações de Taxas",
+        "key": "taxasProcesso",
+        "type": "taxa",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Taxa do Processo (Boleto)",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Taxa do Processo (Boleto)",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          }
+        ]
+      },
+      {
+        "permission": "taxas",
+        "nome": "Anexo de comprovantes de pagamento (Os boletos se encontram na aba de taxas)",
+        "text_action": "Alteradas informações de comprovantes",
+        "type": "resume.bckp",
+        "key": "anexoComprovante",
+        "hidden": "process.tramites.find((tramite) => tramite['taxasProcesso'])",
+        "fieldGroup": [
+          {
+            "key": "comprovante",
+            "type": "next-upload",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Comprovante - (Anexe aqui o comprovante de pagamento, e após isto, clique em Enviar para Análise, para que seu processo continue)"
+            }
+          },
+          {
+            "key": "observacoes",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "comprovante",
+            "type": "next-upload",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Comprovante - (Anexe aqui o comprovante de pagamento, e após isto, clique em Enviar para Análise, para que seu processo continue)"
+            }
+          },
+          {
+            "key": "observacoes",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          }
+        ]
+      },
+      {
+        "nome": "OFÍCIO",
+        "text_action": "Realizou ação",
+        "key": "documento_oficio",
+        "permission": "process:areaPref",
+        "checkPermission": true,
+        "fieldGroup": [
+          {
+            "key": "data_oficio",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Data do Ofício",
+              "placeholder": "data",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "consideracoes_oficios",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Considerações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "solicitações_oficio",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Solicitações/Adequações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "equipetecnica_oficio",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Equipe Técnica",
+              "options": [
+                {
+                  "label": "Sandra Regina Batista - Gestora Ambiental",
+                  "value": "Sandra Regina Batista - Gestora Ambiental "
+                },
+                {
+                  "label": "Ricardo Augusto de O. Xavier Araújo - Advogado - OAB/SC 17.721",
+                  "value": "Ricardo Augusto de O. Xavier Araújo - Advogado - OAB/SC 17.721"
+                },
+                {
+                  "label": "Rafael Paludo - Engenheiro Florestal - CREA/SC 129840-0",
+                  "value": "Rafael Paludo - Engenheiro Florestal - CREA/SC 129840-0"
+                },
+                {
+                  "label": "Eduarda de Castro - Engenheira Ambiental - CREA/SC 129702-0",
+                  "value": "Eduarda de Castro - Engenheira Ambiental - CREA/SC 129702-0"
+                },
+                {
+                  "label": "Milena Nasato - Engenheira Ambiental - CREA/SC 158127-6",
+                  "value": "Milena Nasato - Engenheira Ambiental - CREA/SC 158127-6"
+                },
+                {
+                  "label": "Juca Esthevam Tassi Sardagna - Engenheiro Florestal - CREA/SC 167563-0",
+                  "value": "Juca Esthevam Tassi Sardagna - Engenheiro Florestal - CREA/SC 167563-0"
+                },
+                {
+                  "label": "Mauricio Chiste - Engenheiro Ambiental - CREA/SC 164067-1",
+                  "value": "Mauricio Chiste - Engenheiro Ambiental - CREA/SC 164067-1"
+                },
+                {
+                  "label": "Jozete Teixeira Nunes - Engenheira Ambiental - CREA/SC 145566-4",
+                  "value": "Jozete Teixeira Nunes - Engenheira Ambiental - CREA/SC 145566-4"
+                },
+                {
+                  "label": "Jessica Lara Nunes de Souza - Engenheira Ambiental - CREA/SC 172809-0",
+                  "value": "Jessica Lara Nunes de Souza - Engenheira Ambiental - CREA/SC 172809-0"
+                },
+                {
+                  "label": "Paula Cristina de Morais - Engenheira Ambiental - CREA/SC 188658-8",
+                  "value": "Paula Cristina de Morais - Engenheira Ambiental - CREA/SC 188658-8"
+                },
+                {
+                  "label": "Victor Vinícius de Santana Palmeira - Auxiliar Administrativo",
+                  "value": "Victor Vinícius de Santana Palmeira - Auxiliar Administrativo"
+                },
+                {
+                  "label": "Luciane Barth - Engenheira Ambiental - CREA/SC 172529-0",
+                  "value": "Luciane Barth - Engenheira Ambiental - CREA/SC 172529-0"
+                },
+                {
+                  "label": "Odirlei Fistarol - Engenheiro Florestal - CREA/SC 063939-1",
+                  "value": "Odirlei Fistarol - Engenheiro Florestal - CREA/SC 063939-1"
+                },
+                {
+                  "label": "Camila Sanick Leal - Engenheira Florestal - CREA/SC 169768-2",
+                  "value": "Camila Sanick Leal - Engenheira Florestal - CREA/SC 169768-2"
+                },
+                {
+                  "label": "Marina dos Santos Hoffmann - Engenheira Ambiental - CREA/SC 157941-7",
+                  "value": "Marina dos Santos Hoffmann - Engenheira Ambiental - CREA/SC 157941-7"
+                },
+                {
+                  "label": "Daniela Konell Kreyssig - Engenheira Ambiental - CREA/SC 187121-0",
+                  "value": "Daniela Konell Kreyssig - Engenheira Ambiental - CREA/SC 187121-0"
+                },
+                {
+                  "label": "Mateus Nascimento Vieira de Melo - Engenheiro Ambiental - CREA/SC 176501-0",
+                  "value": "Mateus Nascimento Vieira de Melo - Engenheiro Ambiental - CREA/SC 176501-0"
+                },
+                {
+                  "label": "Francisco José Sousa Dias -  Auxiliar Administrativo",
+                  "value": "Francisco José Sousa Dias -  Auxiliar Administrativo"
+                },
+                {
+                  "label": "Camila da Silva - Engenheira Ambiental - CREA/SC 185342-0",
+                  "value": "Camila da Silva - Engenheira Ambiental - CREA/SC 185342-0"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "prazo_oficio",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Prazo (Meses)",
+              "placeholder": " EX: 03 (três) meses",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "prazo_oficio_controle",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Prazo - Controle",
+              "placeholder": "data",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "data_oficio",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Data do Ofício",
+              "placeholder": "data",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "consideracoes_oficios",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Considerações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "solicitações_oficio",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Solicitações/Adequações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "equipetecnica_oficio",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Equipe Técnica",
+              "options": [
+                {
+                  "label": "Sandra Regina Batista - Gestora Ambiental",
+                  "value": "Sandra Regina Batista - Gestora Ambiental "
+                },
+                {
+                  "label": "Ricardo Augusto de O. Xavier Araújo - Advogado - OAB/SC 17.721",
+                  "value": "Ricardo Augusto de O. Xavier Araújo - Advogado - OAB/SC 17.721"
+                },
+                {
+                  "label": "Rafael Paludo - Engenheiro Florestal - CREA/SC 129840-0",
+                  "value": "Rafael Paludo - Engenheiro Florestal - CREA/SC 129840-0"
+                },
+                {
+                  "label": "Eduarda de Castro - Engenheira Ambiental - CREA/SC 129702-0",
+                  "value": "Eduarda de Castro - Engenheira Ambiental - CREA/SC 129702-0"
+                },
+                {
+                  "label": "Milena Nasato - Engenheira Ambiental - CREA/SC 158127-6",
+                  "value": "Milena Nasato - Engenheira Ambiental - CREA/SC 158127-6"
+                },
+                {
+                  "label": "Juca Esthevam Tassi Sardagna - Engenheiro Florestal - CREA/SC 167563-0",
+                  "value": "Juca Esthevam Tassi Sardagna - Engenheiro Florestal - CREA/SC 167563-0"
+                },
+                {
+                  "label": "Mauricio Chiste - Engenheiro Ambiental - CREA/SC 164067-1",
+                  "value": "Mauricio Chiste - Engenheiro Ambiental - CREA/SC 164067-1"
+                },
+                {
+                  "label": "Jozete Teixeira Nunes - Engenheira Ambiental - CREA/SC 145566-4",
+                  "value": "Jozete Teixeira Nunes - Engenheira Ambiental - CREA/SC 145566-4"
+                },
+                {
+                  "label": "Jessica Lara Nunes de Souza - Engenheira Ambiental - CREA/SC 172809-0",
+                  "value": "Jessica Lara Nunes de Souza - Engenheira Ambiental - CREA/SC 172809-0"
+                },
+                {
+                  "label": "Paula Cristina de Morais - Engenheira Ambiental - CREA/SC 188658-8",
+                  "value": "Paula Cristina de Morais - Engenheira Ambiental - CREA/SC 188658-8"
+                },
+                {
+                  "label": "Victor Vinícius de Santana Palmeira - Auxiliar Administrativo",
+                  "value": "Victor Vinícius de Santana Palmeira - Auxiliar Administrativo"
+                },
+                {
+                  "label": "Luciane Barth - Engenheira Ambiental - CREA/SC 172529-0",
+                  "value": "Luciane Barth - Engenheira Ambiental - CREA/SC 172529-0"
+                },
+                {
+                  "label": "Odirlei Fistarol - Engenheiro Florestal - CREA/SC 063939-1",
+                  "value": "Odirlei Fistarol - Engenheiro Florestal - CREA/SC 063939-1"
+                },
+                {
+                  "label": "Camila Sanick Leal - Engenheira Florestal - CREA/SC 169768-2",
+                  "value": "Camila Sanick Leal - Engenheira Florestal - CREA/SC 169768-2"
+                },
+                {
+                  "label": "Marina dos Santos Hoffmann - Engenheira Ambiental - CREA/SC 157941-7",
+                  "value": "Marina dos Santos Hoffmann - Engenheira Ambiental - CREA/SC 157941-7"
+                },
+                {
+                  "label": "Daniela Konell Kreyssig - Engenheira Ambiental - CREA/SC 187121-0",
+                  "value": "Daniela Konell Kreyssig - Engenheira Ambiental - CREA/SC 187121-0"
+                },
+                {
+                  "label": "Mateus Nascimento Vieira de Melo - Engenheiro Ambiental - CREA/SC 176501-0",
+                  "value": "Mateus Nascimento Vieira de Melo - Engenheiro Ambiental - CREA/SC 176501-0"
+                },
+                {
+                  "label": "Francisco José Sousa Dias -  Auxiliar Administrativo",
+                  "value": "Francisco José Sousa Dias -  Auxiliar Administrativo"
+                },
+                {
+                  "label": "Camila da Silva - Engenheira Ambiental - CREA/SC 185342-0",
+                  "value": "Camila da Silva - Engenheira Ambiental - CREA/SC 185342-0"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "prazo_oficio",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Prazo (Meses)",
+              "placeholder": " EX: 03 (três) meses",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "prazo_oficio_controle",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Prazo - Controle",
+              "placeholder": "data",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "RELATÓRIO DE VISTORIA",
+        "permission": "process:areaPref",
+        "checkPermission": true,
+        "text_action": "Realizou ação",
+        "key": "relatorio_vistoria",
+        "fieldGroup": [
+          {
+            "key": "data_vistoria",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Data de Vistoria",
+              "placeholder": "data",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "participantes_internos",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Participantes Internos e/ou Externos",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "condição_tempo",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Condições de Tempo:",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "topografia",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Topografia",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "residuos",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Resíduos",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "recursos_hidricos",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Água/Consumo/Recursos Hídricos",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "tratamento_efluentes",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Tratamento de Efluentes",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "infraestrutura_existente",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Infraestruturas Existentes no Local",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "observaçoes",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações do entorno e/ou informações relevantes",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "auto_infracao",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Auto de Infração",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "equipetecnica_relatorio",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Equipe Técnica",
+              "options": [
+                {
+                  "label": "Engenheiro 01",
+                  "value": "Engenheiro 01"
+                },
+                {
+                  "label": "Engenheiro 02",
+                  "value": "Engenheiro 02"
+                },
+                {
+                  "label": "Engenheiro 03",
+                  "value": "Engenheiro 03"
+                },
+                {
+                  "label": "Engenheiro 04",
+                  "value": "Engenheiro 04"
+                },
+                {
+                  "label": "Engenheiro 05",
+                  "value": "Engenheiro 05"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "data_relatorio",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Data do Relatório de Vistoria",
+              "placeholder": "data",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "fotos_vistoria",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Fotos da Vistoria ",
+              "options": [],
+              "focus": "false",
+              "required": true,
+              "extends": [
+                "pdf",
+                "PDF"
+              ],
+              "includeTemplates": [
+                "fotos_vistoria"
+              ]
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "data_vistoria",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Data de Vistoria",
+              "placeholder": "data",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "participantes_internos",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Participantes Internos e/ou Externos",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "condição_tempo",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Condições de Tempo:",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "topografia",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Topografia",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "residuos",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Resíduos",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "recursos_hidricos",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Água/Consumo/Recursos Hídricos",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "tratamento_efluentes",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Tratamento de Efluentes",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "infraestrutura_existente",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Infraestruturas Existentes no Local",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "observaçoes",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações do entorno e/ou informações relevantes",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "auto_infracao",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Auto de Infração",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "equipetecnica_relatorio",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Equipe Técnica",
+              "options": [
+                {
+                  "label": "Engenheiro 01",
+                  "value": "Engenheiro 01"
+                },
+                {
+                  "label": "Engenheiro 02",
+                  "value": "Engenheiro 02"
+                },
+                {
+                  "label": "Engenheiro 03",
+                  "value": "Engenheiro 03"
+                },
+                {
+                  "label": "Engenheiro 04",
+                  "value": "Engenheiro 04"
+                },
+                {
+                  "label": "Engenheiro 05",
+                  "value": "Engenheiro 05"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "data_relatorio",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Data do Relatório de Vistoria",
+              "placeholder": "data",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "fotos_vistoria",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Fotos da Vistoria ",
+              "options": [],
+              "focus": "false",
+              "required": true,
+              "extends": [
+                "pdf",
+                "PDF"
+              ],
+              "includeTemplates": [
+                "fotos_vistoria"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "nome": "PARECER TÉCNICO",
+        "permission": "process:areaPref",
+        "checkPermission": true,
+        "text_action": "Realizou ação",
+        "key": "parecer_tecnico",
+        "fieldGroupClassName": "row",
+        "fieldGroup": [
+          {
+            "className": "col-12",
+            "key": "inclusao_responsaveltecnico",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Responsável Técnico",
+              "focus": "false",
+              "btnAddText": "Responsável Técnico",
+              "required": false
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-12",
+                  "key": "inclusaonome-responsaveltecnico",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Nome do Responsável",
+                    "required": true
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "inclusaocpfcnpj-responsaveltecnico",
+                  "type": "next-cpf-cnpj",
+                  "templateOptions": {
+                    "label": "CPF/CNPJ do Responsável",
+                    "required": true,
+                    "omitirCrea": false
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "inclusaoform_responsaveltecnico",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Formação Técnica:",
+                    "placeholder": " ",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "inclusaoart-responsaveltecnico",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Número da ART/AFT/RRT",
+                    "placeholder": "000000,000000,",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "bacias_recursos_hidrograficos",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Bacia Hidrográficas/ Recursos Hídricos",
+              "options": [
+                {
+                  "value": "Bacia Hidrográfica do Rio Itajaí"
+                },
+                {
+                  "value": "Bacia Hidrográfica do Rio Itapocu"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "zona_matricula",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Zona / Matrícula e Área do Imóvel",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "descrição_empreedimento",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Descrição do Empreendimento",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "aspectos_florafauna",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Aspectos da Flora e Fauna",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "controle_ambiental_repeticao",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Controles Ambientais",
+              "focus": "false",
+              "btnAddText": "Controle Ambiental",
+              "required": true
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-12",
+                  "key": "controle_ambiental",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Controle Ambiental",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "programas_ambientais_repeticao",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Programa Ambiental",
+              "focus": "false",
+              "btnAddText": "Programa Ambiental",
+              "required": true
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-12",
+                  "key": "programasambientais",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Programa Ambiental",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "medidas_compensatorias",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Medidas Compensatórias",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "condicionantes_repeticao",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Condições Específicas e Condicionantes",
+              "focus": "false",
+              "btnAddText": "Condições Específicas e Condicionantes",
+              "required": true
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-12",
+                  "key": "condicionantes_condicoes",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Condições Específicas e Condicionantes",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "prazo_condicionantes_controle",
+                  "type": "next-date",
+                  "templateOptions": {
+                    "label": "Prazo - Controle",
+                    "placeholder": "data",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "data_parecer",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Data do Parecer",
+              "placeholder": "data",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "className": "col-12",
+            "key": "inclusao_responsaveltecnico",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Responsável Técnico",
+              "focus": "false",
+              "btnAddText": "Responsável Técnico",
+              "required": false
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-12",
+                  "key": "inclusaonome-responsaveltecnico",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Nome do Responsável",
+                    "required": true
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "inclusaocpfcnpj-responsaveltecnico",
+                  "type": "next-cpf-cnpj",
+                  "templateOptions": {
+                    "label": "CPF/CNPJ do Responsável",
+                    "required": true,
+                    "omitirCrea": false
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "inclusaoform_responsaveltecnico",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Formação Técnica:",
+                    "placeholder": " ",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "inclusaoart-responsaveltecnico",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Número da ART/AFT/RRT",
+                    "placeholder": "000000,000000,",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "bacias_recursos_hidrograficos",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Bacia Hidrográficas/ Recursos Hídricos",
+              "options": [
+                {
+                  "value": "Bacia Hidrográfica do Rio Itajaí"
+                },
+                {
+                  "value": "Bacia Hidrográfica do Rio Itapocu"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "zona_matricula",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Zona / Matrícula e Área do Imóvel",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "descrição_empreedimento",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Descrição do Empreendimento",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "aspectos_florafauna",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Aspectos da Flora e Fauna",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "controle_ambiental_repeticao",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Controles Ambientais",
+              "focus": "false",
+              "btnAddText": "Controle Ambiental",
+              "required": true
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-12",
+                  "key": "controle_ambiental",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Controle Ambiental",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "programas_ambientais_repeticao",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Programa Ambiental",
+              "focus": "false",
+              "btnAddText": "Programa Ambiental",
+              "required": true
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-12",
+                  "key": "programasambientais",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Programa Ambiental",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "medidas_compensatorias",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Medidas Compensatórias",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "condicionantes_repeticao",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Condições Específicas e Condicionantes",
+              "focus": "false",
+              "btnAddText": "Condições Específicas e Condicionantes",
+              "required": true
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-12",
+                  "key": "condicionantes_condicoes",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Condições Específicas e Condicionantes",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "prazo_condicionantes_controle",
+                  "type": "next-date",
+                  "templateOptions": {
+                    "label": "Prazo - Controle",
+                    "placeholder": "data",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "className": "col-12",
+            "key": "data_parecer",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Data do Parecer",
+              "placeholder": "data",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "LICENÇA",
+        "text_action": "Realizou ação",
+        "key": "licenca",
+        "permission": "process:areaPref",
+        "checkPermission": true,
+        "fieldGroup": [
+          {
+            "key": "validade_licenca",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Prazo (meses)",
+              "placeholder": " 48 (quarenta e oito) ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "licenca_repeticao",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Prazo - Controle",
+              "focus": "false",
+              "btnAddText": "Prazos - Controle",
+              "required": true
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "prazo_licenca_controle",
+                  "type": "next-date",
+                  "templateOptions": {
+                    "label": "Prazo - Controle",
+                    "placeholder": "data",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "validade_licenca",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Prazo (meses)",
+              "placeholder": " 48 (quarenta e oito) ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "licenca_repeticao",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Prazo - Controle",
+              "focus": "false",
+              "btnAddText": "Prazos - Controle",
+              "required": true
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "prazo_licenca_controle",
+                  "type": "next-date",
+                  "templateOptions": {
+                    "label": "Prazo - Controle",
+                    "placeholder": "data",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "nome": "RETIFICAÇÃO",
+        "text_action": "Realizou ação",
+        "key": "new_key971936",
+        "fieldGroup": [
+          {
+            "key": "documento_retificado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Insira o Número do Documento Retificado",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "data_retificacao",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Data da Retificação",
+              "placeholder": "data",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "documento_retificado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Insira o Número do Documento Retificado",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "data_retificacao",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Data da Retificação",
+              "placeholder": "data",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "ALTERAÇÕES NA LICENÇA",
+        "text_action": "Realizou ação",
+        "key": "alteracao_licenca",
+        "fieldGroup": [
+          {
+            "key": "rep_licenca",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Alterações",
+              "focus": "false",
+              "btnAddText": "Alterações",
+              "required": false
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "desc_alteracao",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Descritivo das Alterações",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                },
+                {
+                  "key": "doc_alteracoes",
+                  "type": "next-upload",
+                  "templateOptions": {
+                    "label": "Alterações",
+                    "options": [],
+                    "focus": "false",
+                    "required": true
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "rep_licenca",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Alterações",
+              "focus": "false",
+              "btnAddText": "Alterações",
+              "required": false
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "desc_alteracao",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Descritivo das Alterações",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                },
+                {
+                  "key": "doc_alteracoes",
+                  "type": "next-upload",
+                  "templateOptions": {
+                    "label": "Alterações",
+                    "options": [],
+                    "focus": "false",
+                    "required": true
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "nome": "CONDICIONANTES",
+        "text_action": "Realizou ação",
+        "key": "condicionantes_card",
+        "form": [
+          {
+            "className": "col-12",
+            "key": "condicionantes_repeticao",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Condições Específicas e Condicionantes",
+              "focus": "false",
+              "btnAddText": "Condições Específicas e Condicionantes",
+              "required": true
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-12",
+                  "key": "condicionantes_condicoes",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Condições Específicas e Condicionantes",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "prazo_condicionantes_repeat",
+                  "type": "next-repeat",
+                  "templateOptions": {
+                    "label": "Prazos para a condicionante",
+                    "focus": "false",
+                    "btnAddText": "Prazo para a condicionante",
+                    "required": false
+                  },
+                  "fieldArray": {
+                    "fieldGroup": [
+                      {
+                        "className": "col-6",
+                        "key": "prazo_condicionantes_controle",
+                        "type": "next-date",
+                        "templateOptions": {
+                          "label": "Prazo - Controle",
+                          "placeholder": "data",
+                          "focus": "false",
+                          "type": "text",
+                          "required": false
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "className": "col-12",
+        "type": "next-repeat",
+        "templateOptions": {
+          "label": "Condições Específicas e Condicionantes",
+          "focus": "false",
+          "btnAddText": "Condições Específicas e Condicionantes",
+          "required": true
+        },
+        "fieldArray": {
+          "fieldGroup": [
+            {
+              "className": "col-12",
+              "key": "condicionantes_condicoes",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Condições Específicas e Condicionantes",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "prazo_condicionantes_repeat",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Prazos para a condicionante",
+                "focus": "false",
+                "btnAddText": "Prazo para a condicionante",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "className": "col-6",
+                    "key": "prazo_condicionantes_controle",
+                    "type": "next-date",
+                    "templateOptions": {
+                      "label": "Prazo - Controle",
+                      "placeholder": "data",
+                      "focus": "false",
+                      "type": "text",
+                      "required": false
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ]
+        },
+        "fieldGroup": [
+          {
+            "className": "col-12",
+            "key": "condicionantes_repeticao",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Condições Específicas e Condicionantes",
+              "focus": "false",
+              "btnAddText": "Condições Específicas e Condicionantes",
+              "required": true
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-12",
+                  "key": "condicionantes_condicoes",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Condições Específicas e Condicionantes",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "prazo_condicionantes_repeat",
+                  "type": "next-repeat",
+                  "templateOptions": {
+                    "label": "Prazos para a condicionante",
+                    "focus": "false",
+                    "btnAddText": "Prazo para a condicionante",
+                    "required": false
+                  },
+                  "fieldArray": {
+                    "fieldGroup": [
+                      {
+                        "className": "col-6",
+                        "key": "prazo_condicionantes_controle",
+                        "type": "next-date",
+                        "templateOptions": {
+                          "label": "Prazo - Controle",
+                          "placeholder": "data",
+                          "focus": "false",
+                          "type": "text",
+                          "required": false
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": [
+        {
+          "name": "Atribuir município ao processo",
+          "fluxos": [
+            {
+              "titulo": "Atribuir município ao processo",
+              "key": "att_municipio",
+              "descricao": "Atribuir município ao processo",
+              "acao": "Encaminhar",
+              "integrations": [
+                {
+                  "integrationIdReference": "608b1c5ffad3710008cbc967",
+                  "descricao": "Atribuir Município",
+                  "cron": false,
+                  "cronValidate": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "events": {
+      "create": [
+        {
+          "integrationIdx": 0,
+          "etapaIdx": 0,
+          "columnIdx": 0
+        }
+      ]
+    },
+    "consultaTemplate": "61083a09adf2261e7c972247",
+    "tenance": "Obras",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "admmodelo_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "tramite": [],
+  "__v": 0,
+  "step": {
+    "shared": {
+      "informative": "Acesse a aba Resumo para verificar o andamento do seu processo",
+      "automatic": [
+        {
+          "subscribe": [
+            "process/update/activities"
+          ],
+          "execute": "({ resume, activities, signatures, documents, process }) => {\n    const candidateConditioning = (process.tramites.reverse().find((tramite)=>tramite.parecer_tecnico && tramite.parecer_tecnico.condicionantes_repeticao)||{}).parecer_tecnico.condicionantes_repeticao;\n    const existingConditioning = (process.step.storage || {}).conditioning || [];\n    const newConditioning = [];\n    let i=0; \n    for(const conditioning of candidateConditioning) {\n        const currentDeadline = conditioning.prazo_condicionantes_controle;\n        if (!currentDeadline){\n            continue;\n        }\n        const description = (conditioning.condicionantes_condicoes).replace(/<[^>]*>?/gm, '');\t\t\n\t let deadline = new Date(currentDeadline); \n deadline.setUTCHours(23,59,59,999); \n deadline.setHours(deadline.getHours() + 3) \n        const currentTopic = `parecer_tecnico/${i}`;\n\n        const indexExistingConditioning = existingConditioning.findIndex(c => c.topic == currentTopic);\n        const alreadyExist = indexExistingConditioning >= 0;\n\n        const conditioningParams = {\n            deadline, \n            topic: currentTopic,\n            label: description, \n            description\n        };\n\n        if(alreadyExist) {\n            updateConditioning(conditioningParams);\n            existingConditioning.splice(indexExistingConditioning, 1);\n        } else {\n            createConditioning(conditioningParams);\n        }\n\n        newConditioning.push(conditioningParams);\t\t\n        i++;\n    }\n\n    for(const condToRemove of existingConditioning) {\n        removeConditioning(condToRemove);\n    }\n\n    set({ conditioning: newConditioning })\n}"
+        }
+      ]
+    },
+    "config": [
+      {
+        "title": "Condicionantes",
+        "description": "Insira a descrição da etapa",
+        "sector": null,
+        "estimatedTime": null,
+        "timeUnit": 86400000,
+        "reponseTimeLimit": null,
+        "applicantActivitiesVisible": null,
+        "activities": [],
+        "automatic": [],
+        "hideFinishedFeedback": "Sim",
+        "tab": [],
+        "action": []
+      }
+    ]
+  },
+  "city_id": 38
+}

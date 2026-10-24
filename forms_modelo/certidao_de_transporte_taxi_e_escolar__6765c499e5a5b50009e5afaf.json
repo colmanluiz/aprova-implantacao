@@ -1,0 +1,1205 @@
+{
+  "_id": "6765c499e5a5b50009e5afaf",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_certidao",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de Certidão",
+                "options": [
+                  {
+                    "value": "Táxi"
+                  },
+                  {
+                    "value": "Transporte Escolar"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "repeat_solicitacao",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Tipo de Solicitação",
+                "focus": "false",
+                "btnAddText": "Tipo de Solicitação",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "tipo_certidao_taxi",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Selecione o tipo de certidão",
+                      "options": [
+                        {
+                          "value": "Certidão de IPI"
+                        },
+                        {
+                          "value": "Certidão de ICMS"
+                        },
+                        {
+                          "value": "Certidão de Tempo de Serviço"
+                        },
+                        {
+                          "value": "Certidão para Isenção de IPVA"
+                        },
+                        {
+                          "value": "Outra"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "outro_taxi",
+                    "type": "input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Certidão (outra)",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "hideExpression": "model.tipo_certidao_taxi != 'Outra' || !model.tipo_certidao_taxi",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "permissao_data",
+                    "type": "next-date",
+                    "templateOptions": {
+                      "label": "Permissão desde:",
+                      "placeholder": "digite aqui",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.tipo_certidao == 'Táxi'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "repeat_solicitacao2",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Tipo de Solicitação",
+                "focus": "false",
+                "btnAddText": "Tipo de Solicitação",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "tipo_certidao_escolar",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Selecione o tipo de certidão",
+                      "options": [
+                        {
+                          "value": "Certidão de Tempo de Serviço"
+                        },
+                        {
+                          "value": "Certidão para Isenção de IPVA"
+                        },
+                        {
+                          "value": "Outra"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "outro_escolar",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Certidão (outra)",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "hideExpression": "model.tipo_certidao_escolar !== 'Outra' || !model.tipo_certidao_escolar",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "permissao_data",
+                    "type": "next-date",
+                    "templateOptions": {
+                      "label": "Permissão desde:",
+                      "placeholder": "digite aqui",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.tipo_certidao == 'Transporte Escolar'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            }
+          ],
+          "templateOptions": {
+            "title": "Solicitação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/ CNPJ",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "rgreq",
+              "className": "col-6",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Identidade",
+                "placeholder": "Digite aqui o número do RG",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "cnhreq",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número da CNH",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Notificação",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "className": "col-12",
+              "key": "endereco_cep",
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP",
+                "placeholder": "Ex: 00000-000",
+                "mask": "00000-000",
+                "required": true,
+                "hideData": true,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "status_integracaocep_imovel",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.endereco_cep?.status == 'LOADING' "
+              },
+              "hideExpression": " model.endereco_cep?.status !== 'LOADING'  || !model.endereco_cep?.input"
+            },
+            {
+              "className": "col-12",
+              "key": "erro_integracaocep_imovel",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "(model.endereco_cep?.status !== 'SUCCESS') || (model.endereco_cep?.data?.response?.result?.erro === true) || (model.endereco_cep?.input?.length === 8 && model.endereco_cep?.status === 'KNOWN_FAILED') "
+              },
+              "hideExpression": "(model.endereco_cep?.status === 'SUCCESS' && model.endereco_cep?.data?.response?.result?.erro !== true) || (model.endereco_cep?.input?.length !== 8 && model.endereco_cep?.status !== 'KNOWN_FAILED') || !model.endereco_cep.input "
+            },
+            {
+              "className": "col-12",
+              "key": "logradouro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Logradouro",
+                "required": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {
+                "model|||logradouro_imovel": "model.logradouro_imovel && model.logradouro_imovel == model.endereco_cep?.data?.response?.result?.logradouro ? model.logradouro_imovel : model.endereco_cep?.data?.response?.result?.logradouro"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "erro_logradouro",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O 'Logradouro' informado deve possuir no máximo 50 caracteres. Informações adicionais devem ser inseridas em 'Complemento'.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": " model.logradouro_imovel?.length > 50  "
+              },
+              "hideExpression": "model.logradouro_imovel?.length <= 50 || !model.logradouro_imovel  "
+            },
+            {
+              "className": "col-12",
+              "key": "numero_imovel",
+              "type": "input",
+              "templateOptions": {
+                "label": "Número Predial",
+                "placeholder": "Ex: S/N",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": " !model.endereco_cep?.input "
+            },
+            {
+              "className": "col-12",
+              "key": "erro_numero_predial",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Número Predial da Obra' informado deve possuir no máximo 10 caracteres.</div></div><br>",
+                "label": "",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.numero_imovel?.length > 10  "
+              },
+              "hideExpression": "model.numero_imovel?.length <= 10 || !model.numero_imovel "
+            },
+            {
+              "className": "col-12",
+              "key": "bairro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Bairro",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "placeholder": "",
+                "focus": false
+              },
+              "expressionProperties": {
+                "model|||bairro_imovel": "model.bairro_imovel && model.bairro_imovel ==  model.endereco_cep?.data?.response?.result?.bairro ? model.bairro_imovel :  model.endereco_cep?.data?.response?.result?.bairro"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "complemento_imovel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento",
+                "placeholder": "Ex: Esquina com Rua São Paulo",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-6",
+              "key": "cidade_obra",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Município",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||cidade_obra": "model.cidade_obra && model.cidade_obra ==  model.endereco_cep?.data?.response?.result?.localidade ? model.cidade_obra :  model.endereco_cep?.data?.response?.result?.localidade"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-6",
+              "key": "uf_obra",
+              "type": "next-input",
+              "resetOnHide": true,
+              "templateOptions": {
+                "label": "Estado",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||uf_obra": "model.uf_obra && model.uf_obra ==  model.endereco_cep?.data?.response?.result?.uf ? model.uf_obra :  model.endereco_cep?.data?.response?.result?.uf"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "placa",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Placa",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "chassi",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Chassi",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "renavam",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "RENAVAM",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "marca_modelo",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Marca e Modelo",
+                "placeholder": "Volkswagen Fusca",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "modelo",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Ano do modelo",
+                "placeholder": "Ex: 2025",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "mask": "0000"
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "ano_fabricacao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Ano de Fabricação",
+                "placeholder": "Ex: 2025",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "mask": "0000"
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "cor",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cor",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "numero_permissao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número da permissão",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Veículo",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "comprovante_residencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovante de residência",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "doc_req",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "procuracao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Procuração",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "categoria_taxi",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CRLV - Categoria Taxi",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "ultimo_alvara",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Último alvará",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos obrigatórios",
+            "subtitle": "",
+            "textHtml": "\n\n\n<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos obrigatórios</span>\n\n\n <ol class=\"pl-4 list-decimal\">\n    <li>\n      <strong>Comprovante de residência:</strong>\n      <ul class=\"pl-4 list-none\">\n        <li>Emitido nos últimos 60 dias.</li>\n      </ul>\n    </li>\n     <li>\n      <strong>Documentos pessoais:</strong>\n      <ul class=\"pl-4 list-none\">\n         <li>RG e CNH (ou documento de identificação equivalente) em nome do interessado.</li>\n      </ul>\n    </li>\n     <li>\n      <strong>Procuração:</strong>\n       <ul class=\"pl-4 list-none\">\n        <li>Caso não tenha comprovante de residência em nome do proprietário, anexar também documento que comprove vínculo legal a este.</li>\n      </ul>\n    </li>\n    <li>\n      <strong>CRLV - Categoria Taxi:</strong>\n      <ul class=\"pl-4 list-none\">\n        <li>Documento do veículo atualizado.</li>\n      </ul>\n    </li>\n       <li>\n      <strong>Último alvará:</strong>\n      <ul class=\"pl-4 list-none\">\n        <li>Alvará de operação do serviço de transporte.</li>\n      </ul>\n    </li>\n</ol>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {
+            "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+          }
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Certidão de Transporte – Táxi e Escolar",
+    "descricao": "Documento que autoriza a prestação de serviços de transporte por táxi ou escolar, comprovando que o veículo e o motorista atendem aos requisitos legais.",
+    "cidade": "modeload",
+    "newSignatureStrategy": true,
+    "experimentalMode": true,
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "TAX",
+    "templates": [
+      {
+        "text_button": "Certidão Transporte",
+        "template": "ModeloAD/certidao_taxi.html",
+        "function": "processComplete",
+        "official": true,
+        "internal": false,
+        "possui_prazo_validade": false,
+        "numeration": "certidao_taxi",
+        "wk": false
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Checklist para emissão de Taxas",
+        "text_action": "Realizou ação",
+        "key": "checklist_card",
+        "form": [
+          {
+            "className": "col-6",
+            "key": "servico_taxa",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Serviço",
+              "options": [
+                {
+                  "label": "Autorização para transporte através de motocicletas",
+                  "value": "Autorização para transporte através de motocicletas"
+                },
+                {
+                  "label": "Vistoria de Táxi",
+                  "value": "Vistoria de Táxi"
+                },
+                {
+                  "label": "Vistoria Van escolar",
+                  "value": "Vistoria Van escolar"
+                },
+                {
+                  "label": "Vistoria transporte coletivo intramunicipal de passageiros. Vistoria ônibus escolar",
+                  "value": "Vistoria transporte coletivo intramunicipal de passageiros. Vistoria ônibus escolar"
+                },
+                {
+                  "label": "Certidão de reserva de placa(permissão)",
+                  "value": "Certidão de reserva de placa(permissão)"
+                },
+                {
+                  "label": "Cadastramento de motorista auxiliar (táxi ou transporte escolar)",
+                  "value": "Cadastramento de motorista auxiliar (táxi ou transporte escolar)"
+                },
+                {
+                  "label": "Segunda via de qualquer documento",
+                  "value": "Segunda via de qualquer documento"
+                },
+                {
+                  "label": "Certidão de tempo de serviço, IPI, ICMS, Rendas, Isenção de IPVA",
+                  "value": "Certidão de tempo de serviço, IPI, ICMS, Rendas, Isenção de IPVA"
+                },
+                {
+                  "label": "Credenciamento de cooperativa",
+                  "value": "Credenciamento de cooperativa"
+                },
+                {
+                  "label": "Placa parcial ou total refletiva",
+                  "value": "Placa parcial ou total refletiva"
+                },
+                {
+                  "label": "Implantação de lombada fisica, faixa elevada de pedestres, sinalização viária",
+                  "value": "Implantação de lombada fisica, faixa elevada de pedestres, sinalização viária"
+                },
+                {
+                  "label": "Certidão de Permuta, Corte de Placa, emplacamento motofrete, Emplacamento serviço fretado, Emplacamento(concessão)",
+                  "value": "Certidão de Permuta, Corte de Placa, emplacamento motofrete, Emplacamento serviço fretado, Emplacamento(concessão)"
+                },
+                {
+                  "label": "Transferência de concessão municipal",
+                  "value": "Transferência de concessão municipal"
+                },
+                {
+                  "label": "Certidão de Autorização de Tráfego, Serviços Fretados, Motofrete",
+                  "value": "Certidão de Autorização de Tráfego, Serviços Fretados, Motofrete"
+                },
+                {
+                  "label": "Autorização para fechamento e utilização de via pública",
+                  "value": "Autorização para fechamento e utilização de via pública"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "quantidade_taxa",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Quantidade",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "className": "col-6",
+            "key": "servico_taxa",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Serviço",
+              "options": [
+                {
+                  "label": "Autorização para transporte através de motocicletas",
+                  "value": "Autorização para transporte através de motocicletas"
+                },
+                {
+                  "label": "Vistoria de Táxi",
+                  "value": "Vistoria de Táxi"
+                },
+                {
+                  "label": "Vistoria Van escolar",
+                  "value": "Vistoria Van escolar"
+                },
+                {
+                  "label": "Vistoria transporte coletivo intramunicipal de passageiros. Vistoria ônibus escolar",
+                  "value": "Vistoria transporte coletivo intramunicipal de passageiros. Vistoria ônibus escolar"
+                },
+                {
+                  "label": "Certidão de reserva de placa(permissão)",
+                  "value": "Certidão de reserva de placa(permissão)"
+                },
+                {
+                  "label": "Cadastramento de motorista auxiliar (táxi ou transporte escolar)",
+                  "value": "Cadastramento de motorista auxiliar (táxi ou transporte escolar)"
+                },
+                {
+                  "label": "Segunda via de qualquer documento",
+                  "value": "Segunda via de qualquer documento"
+                },
+                {
+                  "label": "Certidão de tempo de serviço, IPI, ICMS, Rendas, Isenção de IPVA",
+                  "value": "Certidão de tempo de serviço, IPI, ICMS, Rendas, Isenção de IPVA"
+                },
+                {
+                  "label": "Credenciamento de cooperativa",
+                  "value": "Credenciamento de cooperativa"
+                },
+                {
+                  "label": "Placa parcial ou total refletiva",
+                  "value": "Placa parcial ou total refletiva"
+                },
+                {
+                  "label": "Implantação de lombada fisica, faixa elevada de pedestres, sinalização viária",
+                  "value": "Implantação de lombada fisica, faixa elevada de pedestres, sinalização viária"
+                },
+                {
+                  "label": "Certidão de Permuta, Corte de Placa, emplacamento motofrete, Emplacamento serviço fretado, Emplacamento(concessão)",
+                  "value": "Certidão de Permuta, Corte de Placa, emplacamento motofrete, Emplacamento serviço fretado, Emplacamento(concessão)"
+                },
+                {
+                  "label": "Transferência de concessão municipal",
+                  "value": "Transferência de concessão municipal"
+                },
+                {
+                  "label": "Certidão de Autorização de Tráfego, Serviços Fretados, Motofrete",
+                  "value": "Certidão de Autorização de Tráfego, Serviços Fretados, Motofrete"
+                },
+                {
+                  "label": "Autorização para fechamento e utilização de via pública",
+                  "value": "Autorização para fechamento e utilização de via pública"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "quantidade_taxa",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Quantidade",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Vistoria",
+        "text_action": "Realizou ação",
+        "key": "vistoria_card",
+        "form": [
+          {
+            "key": "nome_fiscal",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome do Fiscal",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "vistoria",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Vistoria",
+              "placeholder": "Digite aqui",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "nome_fiscal",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome do Fiscal",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "vistoria",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Vistoria",
+              "placeholder": "Digite aqui",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Observações",
+        "text_action": "Realizou ação",
+        "key": "obs_card",
+        "form": [
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "Digite aqui",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "Digite aqui",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Taxas",
+        "text_action": "Emitiu Taxa",
+        "key": "taxasProcesso",
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "type": "taxa",
+        "permission": "taxas"
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "multiple",
+      "possibleReceivers": []
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "requiresPreCreationSignature": true,
+    "useNewSidebarForwarding": true,
+    "subClassId": "numeracao_padrao",
+    "allowMultipleForwarding": true
+  },
+  "city_id": 38,
+  "tramite": [],
+  "__v": 0,
+  "step": {}
+}

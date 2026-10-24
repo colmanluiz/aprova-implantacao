@@ -1,0 +1,645 @@
+{
+  "_id": "678953e77fad5700082a88e0",
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12"
+            },
+            {
+              "key": "vinculo_requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de vínculo do requerente com a solicitação:",
+                "options": [
+                  {
+                    "label": "Interessado",
+                    "value": "Interessado"
+                  },
+                  {
+                    "label": "Secretaria de lotação do interessado",
+                    "value": "Secretaria de lotação do interessado"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              }
+            },
+            {
+              "key": "nome_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do Requerente (usuário logado no sistema)",
+                "readonly": true,
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||nome_requerente": "model.user_dados?.user?.user_metadata.name",
+                "templateOptions|||label": "model.vinculo_requerente == 'Interessado' ? 'Nome do Interessado' : 'Nome do Requerente (usuário logado no sistema)'"
+              }
+            },
+            {
+              "key": "nome_interessado",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do Interessado",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "!model.vinculo_requerente || model.vinculo_requerente == 'Interessado'"
+            },
+            {
+              "key": "cpf_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF",
+                "mask": "000.000.000-00",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpf_requerente": "model.cpf_requerente ? model.cpf_requerente : model.vinculo_requerente == 'Interessado' ? model.user_dados?.user?.user_metadata.cpf : model.cpf_requerente",
+                "templateOptions|||mask": "model.user_dados?.user?.user_metadata.cpf?.length == 11 ? '000.000.000-00' : ''",
+                "templateOptions|||readonly": "model.vinculo_requerente == 'Interessado'"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Email",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.email_requerente ? model.email_requerente : model.vinculo_requerente == 'Interessado' ? model.user_dados?.user?.email : model.email_requerente"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.vinculo_requerente == 'Interessado' ? model.user_dados?.user?.user_metadata.telefone : model.telefone_requerente",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              }
+            },
+            {
+              "key": "cargo_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cargo/ Função",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cargo_requerente": "model.cargo_requerente ? model.cargo_requerente : model.vinculo_requerente == 'Interessado' ? model.user_dados?.user?.user_metadata.cargo : model.cargo_requerente"
+              }
+            },
+            {
+              "key": "matricula_req",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Matrícula",
+                "placeholder": "  ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "subsetor",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Setor de lotação",
+                "focus": false,
+                "disabled": false,
+                "required": true
+              }
+            },
+            {
+              "key": "doc_interessado",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento de identificação do interessado",
+                "options": [],
+                "focus": "false",
+                "required": false
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Os dados do interessado serão preenchidos automaticamente se o usuário cadastrado que está solicitando o processo for o próprio interessado.&nbsp;</li> \n\n</ul>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_licenca",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Informe o tipo de licença solicitada:",
+                "options": [
+                  {
+                    "value": "Prêmio"
+                  },
+                  {
+                    "value": "Médica"
+                  },
+                  {
+                    "value": "Médica - Familiar do Servidor"
+                  },
+                  {
+                    "value": "Casamento"
+                  },
+                  {
+                    "value": "Maternidade"
+                  },
+                  {
+                    "value": "Paternidade"
+                  },
+                  {
+                    "value": "Para concorrer a cargo político"
+                  },
+                  {
+                    "value": "Luto"
+                  },
+                  {
+                    "value": "Sem vencimento/ Sem remuneração"
+                  },
+                  {
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "especificar_licenca",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Especificar",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "model.tipo_licenca !== 'Outro'"
+            },
+            {
+              "key": "regime_trabalho",
+              "resetOnHide": true,
+              "type": "radio",
+              "templateOptions": {
+                "label": "Regime de trabalho",
+                "options": [
+                  {
+                    "value": "Estatutário INSS"
+                  },
+                  {
+                    "value": "Estatutário Regime Próprio - IPSEM"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.tipo_licenca == 'Médica' || model.tipo_licenca == 'Médica - Familiar do Servidor' || model.tipo_licenca == 'Casamento' || model.tipo_licenca == 'Maternidade' || model.tipo_licenca == 'Paternidade'  || model.tipo_licenca == 'Luto' "
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})() "
+            },
+            {
+              "key": "periodo_trabalhado",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Licença prêmio relativa ao período aquisitivo de:",
+                "placeholder": "Ex: 14/06/2021 a 13/06/2022",
+                "focus": "false",
+                "type": "text"
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.tipo_licenca == 'Prêmio' "
+              },
+              "hideExpression": "!model.tipo_licenca || (()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})() "
+            },
+            {
+              "key": "tipo_premio",
+              "resetOnHide": true,
+              "type": "radio",
+              "templateOptions": {
+                "label": "Informe tipo de Licença Prêmio:",
+                "options": [
+                  {
+                    "value": "Em pecúnia/ indenizada"
+                  },
+                  {
+                    "value": "Para gozo"
+                  }
+                ],
+                "focus": "false"
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.tipo_licenca == 'Prêmio' "
+              },
+              "hideExpression": "!model.tipo_licenca || (()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})() "
+            },
+            {
+              "className": "col-6",
+              "key": "inicio_afast",
+              "resetOnHide": true,
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Início do afastamento",
+                "placeholder": "Ex: 15/06/2022",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "!model.tipo_licenca || model.tipo_licenca == 'Prêmio' && model.tipo_premio == 'Em pecúnia/ indenizada'"
+            },
+            {
+              "className": "col-6",
+              "key": "termino_afast",
+              "resetOnHide": true,
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Término do afastamento",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "hideExpression": "!model.tipo_licenca || model.tipo_licenca == 'Sem vencimento/ Sem remuneração' || model.tipo_licenca == 'Prêmio'"
+            },
+            {
+              "className": "col-6",
+              "key": "periodo",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Período:",
+                "options": [
+                  {
+                    "value": "30 dias"
+                  },
+                  {
+                    "value": "60 dias"
+                  },
+                  {
+                    "value": "90 dias"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "hideExpression": "!model.tipo_licenca || model.tipo_licenca !== 'Prêmio'"
+            },
+            {
+              "key": "perg_acidente_trabalho",
+              "resetOnHide": true,
+              "type": "radio",
+              "templateOptions": {
+                "label": "O motivo do afastamento foi acidente de trabalho?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.tipo_licenca == 'Médica' "
+              },
+              "hideExpression": "model.tipo_licenca !== 'Médica' "
+            },
+            {
+              "key": "documento_licenca",
+              "resetOnHide": true,
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cópia do atestado",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "extends": [
+                  "PDF",
+                  "pdf"
+                ],
+                "placeholder": "",
+                "disabled": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.tipo_licenca !== 'Sem vencimento/ Sem remuneração' && model.tipo_licenca !== 'Prêmio'",
+                "templateOptions|||label": "model.tipo_licenca == 'Médica' ? 'Cópia do atestado' : model.tipo_licenca == 'Médica - Familiar do Servidor' ? 'Cópia do atestado' : model.tipo_licenca == 'Casamento' ? 'Cópia da Certidão de Casamento' : model.tipo_licenca == 'Maternidade' ? 'Cópia da Certidão de Nascimento' : model.tipo_licenca == 'Paternidade' ? 'Cópia da Certidão de Nascimento' : model.tipo_licenca == 'Luto' ? 'Cópia da Declaração de Óbito' : model.tipo_licenca == 'Concorrer a cargo político' ? 'Comprovante de candidatura' : 'Documento' "
+              },
+              "hideExpression": "!model.tipo_licenca || model.tipo_licenca == 'Sem vencimento/ Sem remuneração' || model.tipo_licenca == 'Prêmio' "
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados da Solicitação",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados da Solicitação</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Para solicitar licença para tratar de interesses particulares, selecione a opção \"Sem remuneração\".&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "obs_solic",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Observações sobre a solicitação",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    }
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "681df53c5e5eff00089eaece"
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Solicitação de Licença",
+    "descricao": "Formulário para solicitar licença devido a questões de saúde, casamento, maternidade/paternidade, concorrer a cargo político, luto, licença sem vencimento, sem remuneração ou Licença Prêmio.",
+    "cidade": "modeload",
+    "experimentalMode": true,
+    "useNewSidebarForwarding": true,
+    "newSignatureStrategy": true,
+    "approveActionText": "Deferir",
+    "sigla": "RHL",
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Solicitação",
+        "template": "ModeloAD/solicitacao_licencas.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "possui_prazo_validade": false,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Parecer Complementar",
+        "text_action": "Realizou ação",
+        "key": "card_parecer_comp",
+        "form": [
+          {
+            "key": "pareceres",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Pareceres",
+              "focus": "false",
+              "btnAddText": "parecer",
+              "required": false
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "parecer_complementar",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Parecer Complementar",
+                    "placeholder": " ",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "pareceres",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Pareceres",
+              "focus": "false",
+              "btnAddText": "parecer",
+              "required": false
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "parecer_complementar",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Parecer Complementar",
+                    "placeholder": " ",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Observações",
+        "text_action": "Realizou ação",
+        "key": "card_obs",
+        "fieldGroup": [
+          {
+            "key": "obs_pref",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_obs",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "obs_pref",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_obs",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "admmodelo_modeload"
+      ]
+    },
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "tramite": [
+    {
+      "_id": "63a4babc10ba910008efa000",
+      "groupId": "dgp_santaritadopassaquatrosp"
+    }
+  ],
+  "__v": 0,
+  "options": {
+    "showStepViewControl": false
+  },
+  "step": {},
+  "city_id": 38
+}

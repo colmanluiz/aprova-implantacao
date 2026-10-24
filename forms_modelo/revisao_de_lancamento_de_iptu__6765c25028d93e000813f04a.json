@@ -1,0 +1,595 @@
+{
+  "_id": "6765c25028d93e000813f04a",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/ CNPJ",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? '00.000.000/0000-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Notificação",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "documento_requerente",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos (Carteira de Identidade e CPF, se pessoa física, OU CNPJ e contrato social, se pessoa jurídica)",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "vinculo_requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de vínculo do requerente:",
+                "options": [
+                  {
+                    "label": "Proprietário do imóvel",
+                    "value": "Proprietário do imóvel"
+                  },
+                  {
+                    "label": "Responsável Técnico",
+                    "value": "Responsável Técnico"
+                  },
+                  {
+                    "label": "Procurador",
+                    "value": "Procurador"
+                  }
+                ],
+                "focus": "false",
+                "placeholder": "--selecione--",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "doc_procurador",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Procuração",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.vinculo_requerente || model.vinculo_requerente !== 'Procurador' "
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "cepdom",
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP Domicílio Fiscal (Somente números)",
+                "mask": "99999999",
+                "required": true,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "numerodom",
+              "type": "input",
+              "templateOptions": {
+                "label": "Número Predial Domicílio Fiscal ",
+                "required": true
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "expressionProperties": {}
+            },
+            {
+              "key": "compresiddom",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento Domicílio Fiscal ",
+                "placeholder": "Ex: Sala 01",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "cepcor",
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP Correspondência (Somente números)",
+                "mask": "99999999",
+                "required": false,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "numerocor",
+              "type": "input",
+              "templateOptions": {
+                "label": "Número Predial Correspondência",
+                "required": false
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "expressionProperties": {}
+            },
+            {
+              "key": "compresidcor",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento Correspondência",
+                "placeholder": "Ex: Sala 01",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "bancoreq",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Banco para restituição de valores",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tiporequerimento !== 'Restituição de Tributos/Valores'"
+            },
+            {
+              "key": "agenciareq",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Agência para restituição de valores",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tiporequerimento !== 'Restituição de Tributos/Valores'"
+            },
+            {
+              "key": "contareq",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Conta Corrente para restituição de valores",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tiporequerimento !== 'Restituição de Tributos/Valores'"
+            },
+            {
+              "key": "declaracaoconta",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Declaro que estou ciente que a Conta Bancária informada deve ser em nome do Requerente.",
+                "options": [
+                  {
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tiporequerimento !== 'Restituição de Tributos/Valores'"
+            },
+            {
+              "key": "documentoimovel",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Anexar documentos do imóvel",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "Solicitante_Motivo",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Motivo",
+                "placeholder": "Digite aqui, brevemente, o motivo da solicitação.",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Solicitação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "documentos_complementares",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Observação",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text"
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Observação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Revisão de Lançamento de IPTU",
+    "descricao": "Solicitação formal para reavaliação do valor do IPTU, visando corrigir possíveis inconsistências no cálculo ou na cobrança do imposto municipal.",
+    "cidade": "modeload",
+    "useNewSidebarForwarding": true,
+    "experimentalMode": true,
+    "approveActionText": "Deferir",
+    "newSignatureStrategy": true,
+    "sigla": "CDF",
+    "templates": [],
+    "form_tramites": [
+      {
+        "nome": "Área de Aprovação da Revisão de IPTU",
+        "text_action": "Analisou solicitação",
+        "key": "analisesolicitacao",
+        "fieldGroup": [
+          {
+            "key": "aprovacao",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Aprova/Não Aprova",
+              "options": [
+                {
+                  "value": "Aprova a Revisão de IPTU"
+                },
+                {
+                  "value": "Não Aprova a Revisão de IPTU"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "senha",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexa certidão, se necessário",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "aprovacao",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Aprova/Não Aprova",
+              "options": [
+                {
+                  "value": "Aprova a Revisão de IPTU"
+                },
+                {
+                  "value": "Não Aprova a Revisão de IPTU"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "senha",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexa certidão, se necessário",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Finanças",
+    "initialReceiverConfig": {
+      "type": "multiple",
+      "possibleReceivers": []
+    },
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "city_id": 38,
+  "tramite": [
+    {
+      "_id": "6793d8052c6b870008d91e5b",
+      "groupId": "financas_modeload"
+    }
+  ],
+  "__v": 0,
+  "step": {}
+}

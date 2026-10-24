@@ -1,0 +1,2393 @@
+{
+  "_id": "6777d46cf34675000872b8c5",
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_solicitacao",
+              "type": "select",
+              "templateOptions": {
+                "label": "Tipo de Programa Social",
+                "placeholder": "-selecione-",
+                "options": [
+                  {
+                    "label": "Vale Gás",
+                    "value": "Vale Gás"
+                  },
+                  {
+                    "label": "Programa Habitacional",
+                    "value": "Programa Habitacional"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Tipo de Solicitação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "aviso_explicacao",
+              "type": "next-html",
+              "templateOptions": {
+                "focus": "false",
+                "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Informação</div></div><div>O Responsável familiar é a pessoa maior de 18 (dezoito) anos, ou menor 18 (dezoito) emancipada, responsável pelo grupo familiar a ser cadastrado. Podendo ser ainda, aquele indivíduo que more sozinho.</div></div><br>",
+                "readonly": true,
+                "label": "*Aviso Explicação Responsável Familiar*",
+                "required": false
+              }
+            },
+            {
+              "key": "perg_mulher_chefe",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Trata-se de mulher chefe de família?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "nome-proprietario",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome Completo",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "cpfcnpj_proprietario",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "templateOptions": {
+                "label": "CPF",
+                "placeholder": "000.000.000-00",
+                "focus": "false",
+                "required": true,
+                "mask": "000.000.000-00",
+                "keepMask": true
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "raca_cor",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Raça/cor autodeclarada",
+                "options": [
+                  {
+                    "value": "Branca"
+                  },
+                  {
+                    "value": "Negra/Preta"
+                  },
+                  {
+                    "value": "Parda"
+                  },
+                  {
+                    "value": "Indígena"
+                  },
+                  {
+                    "value": "Amarela"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "email_requerente",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "E-mail do Requerente",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "usuario_telefone",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone do Requerente (celular)",
+                "type": "text",
+                "required": true,
+                "autocomplete": true,
+                "readonly": false,
+                "mask": "(00) 00000-0000"
+              }
+            },
+            {
+              "className": "col-12",
+              "key": "identidade",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número RG",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "className": "col-12",
+              "key": "expedidor_rg",
+              "wrappers": [
+                "form-field",
+                "consumeDataset"
+              ],
+              "type": "input",
+              "templateOptions": {
+                "label": "Orgão Expedidor do documento de identificação",
+                "datasetReference": "63ca65c8bad542000786019e",
+                "datasetKey": "Orgão Expedidor RG",
+                "object": true,
+                "autocomplete": true,
+                "hideData": true,
+                "placeholder": "Ex: SSP",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "className": "col-12",
+              "key": "uf_expedidor_rg",
+              "type": "select",
+              "templateOptions": {
+                "label": "UF Expedidor do documento de identificação",
+                "placeholder": "--selecione--",
+                "options": [
+                  {
+                    "label": "AC",
+                    "value": "AC"
+                  },
+                  {
+                    "label": "AL",
+                    "value": "AL"
+                  },
+                  {
+                    "label": "AP",
+                    "value": "AP"
+                  },
+                  {
+                    "label": "AM",
+                    "value": "AM"
+                  },
+                  {
+                    "label": "BA",
+                    "value": "BA"
+                  },
+                  {
+                    "label": "CE",
+                    "value": "CE"
+                  },
+                  {
+                    "label": "DF",
+                    "value": "DF"
+                  },
+                  {
+                    "label": "ES",
+                    "value": "ES"
+                  },
+                  {
+                    "label": "GO",
+                    "value": "GO"
+                  },
+                  {
+                    "label": "MA",
+                    "value": "MA"
+                  },
+                  {
+                    "label": "MT",
+                    "value": "MT"
+                  },
+                  {
+                    "label": "MS",
+                    "value": "MS"
+                  },
+                  {
+                    "label": "MG",
+                    "value": "MG"
+                  },
+                  {
+                    "label": "PA",
+                    "value": "PA"
+                  },
+                  {
+                    "label": "PB",
+                    "value": "PB"
+                  },
+                  {
+                    "label": "PR",
+                    "value": "PR"
+                  },
+                  {
+                    "label": "PE",
+                    "value": "PE"
+                  },
+                  {
+                    "label": "PI",
+                    "value": "PI"
+                  },
+                  {
+                    "label": "RJ",
+                    "value": "RJ"
+                  },
+                  {
+                    "label": "RN",
+                    "value": "RN"
+                  },
+                  {
+                    "label": "RS",
+                    "value": "RS"
+                  },
+                  {
+                    "label": "RO",
+                    "value": "RO"
+                  },
+                  {
+                    "label": "RR",
+                    "value": "RR"
+                  },
+                  {
+                    "label": "SC",
+                    "value": "SC"
+                  },
+                  {
+                    "label": "SP",
+                    "value": "SP"
+                  },
+                  {
+                    "label": "SE",
+                    "value": "SE"
+                  },
+                  {
+                    "label": "TO",
+                    "value": "TO"
+                  }
+                ],
+                "focus": "false",
+                "required": false
+              }
+            },
+            {
+              "key": "Documento_Identidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento de Identificação com foto (RG, Carteira de Motorista, Passaporte)",
+                "placeholder": "Placeholder",
+                "focus": "false",
+                "required": false
+              }
+            },
+            {
+              "key": "nis",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número de Inscrição Social – NIS (CadÚnico)",
+                "focus": "false",
+                "required": false,
+                "mask": "00000000000"
+              }
+            },
+            {
+              "key": "aviso_explicacao_cadunico",
+              "type": "next-html",
+              "templateOptions": {
+                "focus": "false",
+                "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Informação</div></div><div>O Número de Identificação Social (NIS) é um número de registro atribuído pelo Governo Federal para cidadãos elegíveis a programas sociais fornecidos pelo mesmo. Caso você não possua NIS, procure o CRAS do seu território para criar o seu registro no Cadastro Único do Governo Federal (CadÚnico).</div></div><br>",
+                "readonly": true,
+                "label": "*Aviso Explicação Cadunico*",
+                "required": false
+              }
+            },
+            {
+              "key": "data_nascimento",
+              "className": "col-6",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Data de Nascimento",
+                "placeholder": "Placeholder",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "idade",
+              "type": "next-input",
+              "className": "col-6",
+              "templateOptions": {
+                "label": "Idade",
+                "type": "number",
+                "required": false,
+                "readonly": true,
+                "hidden": false,
+                "suffix": "anos",
+                "placeholder": "",
+                "focus": false
+              },
+              "expressionProperties": {
+                "model|||idade": "model.data_nascimento ? (()=>{try{let nascimento=model.data_nascimento;let partes=nascimento.split('T')[0].split('-');let dataFormatada=partes[0]+'-'+partes[1]+'-'+partes[2];let ageDifMs=Date.now()-new Date(dataFormatada).getTime();let ageDate=new Date(ageDifMs);return Math.abs(ageDate.getUTCFullYear()-1970)}catch(err){return err}})() : ''"
+              }
+            },
+            {
+              "key": "doc_emancipa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento de emancipação",
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "parseFloat(model.idade ?? 0) >= 16 && parseFloat(model.idade ?? 0) < 18"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})() || !model.data_nascimento"
+            },
+            {
+              "key": "aviso_menor",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Não é possível prosseguir</div></div><div>Solicitação não permitida para menores de 16 anos</div></div><br>",
+                "focus": "false",
+                "label": "***** aviso menor de idade *****",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.idade < 16"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})() || !model.data_nascimento"
+            },
+            {
+              "key": "nacionalidade",
+              "wrappers": [
+                "form-field",
+                "consumeDataset"
+              ],
+              "type": "input",
+              "templateOptions": {
+                "label": "Selecione seu país de nascimento",
+                "datasetReference": "65e9fe7a74b1c90007f1e54f",
+                "datasetKey": "Pais",
+                "placeholder": "digite algo para buscar",
+                "autocomplete": true,
+                "hideData": true,
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false
+              }
+            },
+            {
+              "key": "uf_nascimento",
+              "type": "next-cidade-estado",
+              "templateOptions": {
+                "label": "Selecione o Estado e o Municipio de Nascimento",
+                "placeholder": "Placeholder",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "model.nacionalidade?.input !== 'Brasil' || !model.nacionalidade?.input"
+            },
+            {
+              "className": "col-12",
+              "key": "sexo",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Gênero",
+                "options": [
+                  {
+                    "value": "Feminino"
+                  },
+                  {
+                    "value": "Masculino"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              }
+            },
+            {
+              "className": "col-12",
+              "key": "estado_civil",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Estado Civil",
+                "options": [
+                  {
+                    "value": "Solteiro"
+                  },
+                  {
+                    "value": "União Estável"
+                  },
+                  {
+                    "value": "Casado"
+                  },
+                  {
+                    "value": "Separado"
+                  },
+                  {
+                    "value": "Divorciado"
+                  },
+                  {
+                    "value": "Viúvo"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              }
+            },
+            {
+              "key": "comprovante_civil",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovante de Estado Civil",
+                "options": [],
+                "focus": "false",
+                "required": false
+              }
+            },
+            {
+              "key": "nome_mae",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome completo da Mãe",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "nome_pai",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome completo do Pai",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "tipo_escolaridade",
+              "type": "select",
+              "templateOptions": {
+                "label": "Grau de Escolaridade",
+                "placeholder": "--selecione--",
+                "options": [
+                  {
+                    "label": "Não alfabetizado",
+                    "value": "Não alfabetizado"
+                  },
+                  {
+                    "label": "Até a 4ª série incompleta",
+                    "value": "Até a 4ª série incompleta"
+                  },
+                  {
+                    "label": "4ª série completa",
+                    "value": "4ª série completa"
+                  },
+                  {
+                    "label": "Até 8ª série incompleta",
+                    "value": "Até 8ª série incompleta"
+                  },
+                  {
+                    "label": "8ª série completa",
+                    "value": "8ª série completa"
+                  },
+                  {
+                    "label": "9º ano completo",
+                    "value": "9º ano completo"
+                  },
+                  {
+                    "label": "2º grau ou Ensino médio incompleto",
+                    "value": "2º grau ou Ensino médio incompleto"
+                  },
+                  {
+                    "label": "2º grau ou Ensino médio completo",
+                    "value": "2º grau ou Ensino médio completo"
+                  },
+                  {
+                    "label": "Superior Incompleto",
+                    "value": "Superior Incompleto"
+                  },
+                  {
+                    "label": "Superior Completo",
+                    "value": "Superior Completo"
+                  },
+                  {
+                    "label": "Pós-Graduação",
+                    "value": "Pós-Graduação"
+                  },
+                  {
+                    "label": "Doutorado",
+                    "value": "Doutorado"
+                  },
+                  {
+                    "label": "PhD",
+                    "value": "PhD"
+                  }
+                ],
+                "focus": false,
+                "required": true,
+                "columns": "12"
+              },
+              "className": "col-12"
+            },
+            {
+              "key": "estudante",
+              "type": "radio",
+              "templateOptions": {
+                "label": "O(A) Responsável Familiar é estudante?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "nome_unidade_ensino",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome da Unidade de Ensino",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "model.estudante !== 'Sim' || !model.estudante"
+            },
+            {
+              "key": "vaga_deficiente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Trata-se de Pessoa com Deficiência?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "tipo_deficiencia",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Tipo de deficiência",
+                "options": [
+                  {
+                    "label": "Fisica",
+                    "value": "Fisica"
+                  },
+                  {
+                    "label": "Visual ",
+                    "value": "Visual "
+                  },
+                  {
+                    "label": "Auditiva",
+                    "value": "Auditiva"
+                  },
+                  {
+                    "label": "Transtorno Mental",
+                    "value": "Transtorno Mental"
+                  },
+                  {
+                    "label": "Intelectual",
+                    "value": "Intelectual"
+                  },
+                  {
+                    "label": "Transtorno Espectro Autista",
+                    "value": "Transtorno Autista"
+                  }
+                ],
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.vaga_deficiente === 'Sim'"
+              },
+              "hideExpression": "model.vaga_deficiente=== 'Não' || !model.vaga_deficiente"
+            },
+            {
+              "key": "cid",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Laudo ou parecer médico com o CID",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "hideExpression": "model.vaga_deficiente == 'Não' || !model.vaga_deficiente"
+            },
+            {
+              "key": "proc_resp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Procuração Responsável Legal",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "hideExpression": "!model.tipo_deficiencia || !model.tipo_deficiencia['Transtorno Mental'] == true"
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Responsável Familiar",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Responsável Familiar</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">O que significa <b>mulher chefe de família</b>: Significa que a mulher é a principal responsável pelo sustento da casa e dos filhos.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "renda_dados_empregaticios",
+              "type": "radio",
+              "templateOptions": {
+                "label": "O(A) responsável possui algum vínculo empregatício?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "categoria_trabalho_card",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Categoria de Trabalho",
+                "focus": "false",
+                "btnAddText": "Categoria de Trabalho",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "categoria_trabalho",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "Categoria de Trabalho",
+                      "options": [
+                        {
+                          "label": "Trabalho com Carteira Assinada (CLT)",
+                          "value": "Trabalho com Carteira Assinada (CLT)"
+                        },
+                        {
+                          "label": "Trabalhador Autônomo (Segurado pelo INSS)",
+                          "value": "Trabalhador Autônomo (Segurado pelo INSS)"
+                        },
+                        {
+                          "label": "Trabalho Informal (Não segurado pelo INSS)",
+                          "value": "Trabalho Informal (Não segurado pelo INSS)"
+                        },
+                        {
+                          "label": "Profissional Liberal",
+                          "value": "Profissional Liberal"
+                        },
+                        {
+                          "label": "Empresário",
+                          "value": "Empresário"
+                        },
+                        {
+                          "label": "Estagiário Remunerado",
+                          "value": "Estagiário Remunerado"
+                        },
+                        {
+                          "label": "Jovem Aprendiz",
+                          "value": "Jovem Aprendiz"
+                        },
+                        {
+                          "label": "Servidor Público",
+                          "value": "Servidor Público"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true,
+                      "placeholder": "--selecione--",
+                      "disabled": false
+                    }
+                  },
+                  {
+                    "key": "renda_empregaticia_responsavel",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Valor da Renda Empregatícia",
+                      "placeholder": "R$ 0000,00",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "number",
+                      "readonly": false,
+                      "currency": {
+                        "prefix": "R$",
+                        "thousands": ".",
+                        "decimal": ",",
+                        "precision": 2,
+                        "allowNegative": false
+                      },
+                      "suffix": "reais",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||label": "model.categoria_trabalho ? 'Valor da Renda Empregatícia - ' + model.categoria_trabalho : 'Valor da Renda Empregatícia' "
+                    }
+                  },
+                  {
+                    "key": "funcao_ramo",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Função ou ramo",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "hideExpression": " !model.categoria_trabalho"
+                  }
+                ]
+              },
+              "hideExpression": "model.renda_dados_empregaticios == 'Não' || !model.renda_dados_empregaticios"
+            },
+            {
+              "key": "renda",
+              "type": "radio",
+              "templateOptions": {
+                "label": "O responsável possui outra fonte de renda?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "outras_fontes_renda",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Outras fontes de renda",
+                "focus": "false",
+                "btnAddText": "Outras fontes de renda",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "categoria_trabalho_outras",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "Categoria de fontes de renda ",
+                      "options": [
+                        {
+                          "label": "Aposentado",
+                          "value": "Aposentado"
+                        },
+                        {
+                          "label": "Pensionista",
+                          "value": "Pensionista"
+                        },
+                        {
+                          "label": "Bolsa Família",
+                          "value": "Bolsa Família"
+                        },
+                        {
+                          "label": "Beneficiário do Benefício de Prestação Continuada - BPC",
+                          "value": "Beneficiário do Benefício de Prestação Continuada - BPC"
+                        },
+                        {
+                          "label": "Pensão Alimentícia",
+                          "value": "Pensão Alimentícia"
+                        },
+                        {
+                          "label": "Outra",
+                          "value": "Outra"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true,
+                      "placeholder": "--selecione--",
+                      "disabled": false
+                    }
+                  },
+                  {
+                    "key": "outra_fonte_renda",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Especifique a outra fonte de renda",
+                      "focus": "false",
+                      "required": true
+                    },
+                    "hideExpression": " model.categoria_trabalho_outras !== 'Outra'  || !model.categoria_trabalho_outras"
+                  },
+                  {
+                    "key": "valor_outra_fonte_responsavel",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Valor absoluto da Outra Fonte de Renda",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "number",
+                      "readonly": false,
+                      "currency": {
+                        "prefix": "R$",
+                        "thousands": ".",
+                        "decimal": ",",
+                        "precision": 2,
+                        "allowNegative": false
+                      },
+                      "suffix": "reais",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||label": "!model.outra_fonte_renda ? 'Valor da Outra Fonte de Renda' : model.categoria_trabalho_outras == 'Outra' ?  'Valor da Renda - ' + model.outra_fonte_renda : 'Valor da Renda - ' + model.categoria_trabalho_outras"
+                    }
+                  },
+                  {
+                    "key": "anexar_arquivo",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Anexe comprovante de depósito do ultimo mês",
+                      "focus": "false",
+                      "required": false
+                    }
+                  },
+                  {
+                    "key": "aviso_outro_renda",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-1 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-blue-800' >Aviso</div></div><div>No caso de existir outra fonte de renda, você deve adiciona-la clicando no botão abaixo</div></div><br>",
+                      "focus": "false",
+                      "type": "text",
+                      "readonly": true,
+                      "label": "Aviso outra fonte de renda",
+                      "required": false
+                    }
+                  }
+                ]
+              },
+              "hideExpression": "model.renda == 'Não' || !model.renda"
+            },
+            {
+              "key": "total_renda_empregaticia_responsavel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Somatório da Renda Empregatícia do/a Responsável",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "number",
+                "readonly": true,
+                "currency": {
+                  "prefix": "R$",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "reais",
+                "required": true,
+                "description": "Caso o responsável não possua renda empregatícia, o valor será zero."
+              },
+              "expressionProperties": {
+                "model|||total_renda_empregaticia_responsavel": "model.categoria_trabalho_card?.filter((q)=> q?.renda_empregaticia_responsavel)?.reduce((acc, q) => acc + q.renda_empregaticia_responsavel , 0) ?? 0"
+              },
+              "hideExpression": "!model.renda_dados_empregaticios || model.renda_dados_empregaticios === 'Não'"
+            },
+            {
+              "key": "outras_fontes_renda_com_beneficios_responsavel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Somatório dos Benefícios Sociais recebidos pelo/a Responsável",
+                "description": "Outras fontes de renda, incluindo apenas BPC e Bolsa Família. Pode ser igual a zero.",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "number",
+                "readonly": true,
+                "currency": {
+                  "prefix": "R$",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "reais",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "expressionProperties": {
+                "model|||outras_fontes_renda_com_beneficios_responsavel": "(model.outras_fontes_renda?.filter((q)=> q.categoria_trabalho_outras == 'Beneficiário do Benefício de Prestação Continuada - BPC' )?.reduce((acc, q) => acc + q.valor_outra_fonte_responsavel , 0) ?? 0 ) + (model.outras_fontes_renda?.filter((q)=> q.categoria_trabalho_outras == 'Bolsa Família' )?.reduce((acc, q) => acc + q.valor_outra_fonte_responsavel , 0) ?? 0)"
+              },
+              "hideExpression": "!model.renda || model.renda == 'Não'"
+            },
+            {
+              "key": "outras_fontes_renda_responsavel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Somatório das demais de fontes de renda (com Benefícios Sociais) do/a Responsável",
+                "description": "Soma todas as demais fontes de renda (incluindo BPC e Bolsa Família)",
+                "focus": "false",
+                "readonly": true,
+                "floatNumber": true,
+                "type": "number",
+                "currency": {
+                  "prefix": "R$",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "reais",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||outras_fontes_renda_responsavel": "model.outras_fontes_renda?.filter((q)=> q?.valor_outra_fonte_responsavel)?.reduce((acc, q) => acc + q.valor_outra_fonte_responsavel , 0) ?? 0"
+              },
+              "hideExpression": "!model.renda || model.renda == 'Não'"
+            },
+            {
+              "key": "outras_fontes_renda_sem_beneficios_responsavel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Somatório das demais fontes de renda (sem Benefícios Sociais) do/a Responsável",
+                "description": "Soma das demais fontes de rendas, excluindo BPC e Bolsa Família. Se não houver nenhum Benefício preechido, esse campo será igual ao somatório COM Benefícios.",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "number",
+                "readonly": true,
+                "currency": {
+                  "prefix": "R$",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "reais",
+                "required": true,
+                "disabled": false,
+                "placeholder": ""
+              },
+              "expressionProperties": {
+                "model|||outras_fontes_renda_sem_beneficios_responsavel": "(model.outras_fontes_renda?.filter((q)=> q.valor_outra_fonte_responsavel)?.reduce((acc, q) => acc +  (q.categoria_trabalho_outras !== 'Beneficiário do Benefício de Prestação Continuada - BPC' ? q.categoria_trabalho_outras !== 'Bolsa Família' ? q.valor_outra_fonte_responsavel : 0 : 0) ,0) ?? 0 )"
+              },
+              "hideExpression": "!model.renda_dados_empregaticios || model.renda_dados_empregaticios === 'Não'"
+            },
+            {
+              "key": "total_com_beneficios_responsavel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Renda Total Individual do/a Responsável (com Benefícios Sociais)",
+                "description": "Renda empregatícia somada das demais fontes, incluindo BPC e Bolsa Família, se houver",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "number",
+                "readonly": true,
+                "currency": {
+                  "prefix": "R$",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "reais",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||total_com_beneficios_responsavel": "(model.total_renda_empregaticia_responsavel ?? 0 ) + (model.outras_fontes_renda_responsavel ?? 0 ) "
+              },
+              "hideExpression": "!model.renda || model.renda == 'Não'"
+            },
+            {
+              "key": "total_sem_beneficios_responsavel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Renda Total Individual do/a Responsável (sem Benefícios Sociais)",
+                "description": "Renda empregatícia somada das demais fontes, excluindo BPC e Bolsa Família, se houver",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "number",
+                "readonly": true,
+                "currency": {
+                  "prefix": "R$",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "reais",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||total_sem_beneficios_responsavel": "(model.total_renda_empregaticia_responsavel ?? 0 ) + (model.outras_fontes_renda_sem_beneficios_responsavel ?? 0 ) "
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados de Renda do(a) Responsável Familiar",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "salario_minimo",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Salário Mínimo",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false,
+                "readonly": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||salario_minimo": "1.518"
+              }
+            },
+            {
+              "key": "perg_mora_sozinho",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Mora sozinho?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "composicao_familiar",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Composição Familiar",
+                "focus": "false",
+                "btnAddText": "Familiar",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "nome_familiar",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Nome Completo",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "parentesco_familiar",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "Qual o parentesco?",
+                      "options": [
+                        {
+                          "label": "Cônjuge",
+                          "value": "Cônjuge"
+                        },
+                        {
+                          "label": "Filho",
+                          "value": "Filho"
+                        },
+                        {
+                          "label": "Neto",
+                          "value": "Neto"
+                        },
+                        {
+                          "label": "Pai do Responsável",
+                          "value": "Pai do Responsável"
+                        },
+                        {
+                          "label": "Mãe do Responsável",
+                          "value": "Mãe do Responsável"
+                        },
+                        {
+                          "label": "Irmão",
+                          "value": "Irmão"
+                        },
+                        {
+                          "label": "Sogro(a)",
+                          "value": "Sogro(a)"
+                        },
+                        {
+                          "label": "Avô(a)",
+                          "value": "Avô(a)"
+                        },
+                        {
+                          "label": "Genro",
+                          "value": "Genro"
+                        },
+                        {
+                          "label": "Nora",
+                          "value": "Nora"
+                        },
+                        {
+                          "label": "Enteado(a)",
+                          "value": "Enteado(a)"
+                        },
+                        {
+                          "label": "Sobrinho(a)",
+                          "value": "Sobrinho(a)"
+                        },
+                        {
+                          "label": "Outro",
+                          "value": "Outro"
+                        }
+                      ],
+                      "placeholder": "--selecione--",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "parentesco_outros",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Qual?",
+                      "required": true
+                    },
+                    "hideExpression": " model.parentesco_familiar !== 'Outro'  || !model.parentesco_familiar"
+                  },
+                  {
+                    "key": "cpf_familiar",
+                    "validators": {
+                      "validation": [
+                        "cpfCnpj"
+                      ]
+                    },
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "CPF do Familiar",
+                      "required": true,
+                      "mask": "000.000.000-00",
+                      "keepMask": true
+                    }
+                  },
+                  {
+                    "key": "Documento_Identidade_familiar",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento de Identificação com foto (RG, Carteira de Motorista, Passaporte)",
+                      "focus": "false",
+                      "required": false
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "data_nascimento_familiar",
+                    "type": "next-date",
+                    "templateOptions": {
+                      "label": "Data de Nascimento",
+                      "placeholder": "Placeholder",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "idade_familiar",
+                    "type": "next-input",
+                    "className": "col-6",
+                    "templateOptions": {
+                      "label": "Idade",
+                      "type": "text",
+                      "required": true,
+                      "readonly": true,
+                      "hidden": false,
+                      "suffix": "anos",
+                      "placeholder": "",
+                      "focus": false,
+                      "disabled": false
+                    },
+                    "expressionProperties": {
+                      "model|||idade_familiar": "model.data_nascimento_familiar ? (()=>{try{let nascimento=model.data_nascimento_familiar;let partes=nascimento.split('T')[0].split('-');let dataFormatada=partes[0]+'-'+partes[1]+'-'+partes[2];let ageDifMs=Date.now()-new Date(dataFormatada).getTime();let ageDate=new Date(ageDifMs);return Math.abs(ageDate.getUTCFullYear()-1970)}catch(err){return err}})() : ''"
+                    }
+                  },
+                  {
+                    "key": "tipo_escolaridade_familiar",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "Grau Escolaridade",
+                      "placeholder": "--selecione--",
+                      "options": [
+                        {
+                          "label": "Não alfabetizado",
+                          "value": "Não alfabetizado"
+                        },
+                        {
+                          "label": "Até a 4ª série incompleta",
+                          "value": "Até a 4ª série incompleta"
+                        },
+                        {
+                          "label": "4ª série completa",
+                          "value": "4ª série completa"
+                        },
+                        {
+                          "label": "Até 8ª série incompleta",
+                          "value": "Até 8ª série incompleta"
+                        },
+                        {
+                          "label": "8ª série completa",
+                          "value": "8ª série completa"
+                        },
+                        {
+                          "label": "9º ano completo",
+                          "value": "9º ano completo"
+                        },
+                        {
+                          "label": "2º grau ou Ensino médio incompleto",
+                          "value": "2º grau ou Ensino médio incompleto"
+                        },
+                        {
+                          "label": "2º grau ou Ensino médio completo",
+                          "value": "2º grau ou Ensino médio completo"
+                        },
+                        {
+                          "label": "Superior Incompleto",
+                          "value": "Superior Incompleto"
+                        },
+                        {
+                          "label": "Superior Completo",
+                          "value": "Superior Completo"
+                        },
+                        {
+                          "label": "Pós-Graduação",
+                          "value": "Pós-Graduação"
+                        },
+                        {
+                          "label": "Doutorado",
+                          "value": "Doutorado"
+                        },
+                        {
+                          "label": "PhD",
+                          "value": "PhD"
+                        }
+                      ],
+                      "focus": false,
+                      "required": true,
+                      "columns": "12"
+                    },
+                    "className": "col-12"
+                  },
+                  {
+                    "key": "estudante_familiar",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Trata-se de estudante?",
+                      "options": [
+                        {
+                          "value": "Sim"
+                        },
+                        {
+                          "value": "Não"
+                        }
+                      ],
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "radio_vinculo_empregaticio",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "O familiar possui algum vínculo empregatício?",
+                      "options": [
+                        {
+                          "value": "Sim"
+                        },
+                        {
+                          "value": "Não"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true
+                    },
+                    "hideExpression": "model.idade_familiar < 14"
+                  },
+                  {
+                    "key": "categoria_trabalho_card_familiar",
+                    "type": "next-repeat",
+                    "templateOptions": {
+                      "label": "Categoria de Trabalho",
+                      "focus": "false",
+                      "btnAddText": "Categoria de Trabalho",
+                      "required": true,
+                      "placeholder": "",
+                      "disabled": false
+                    },
+                    "hideExpression": "model.radio_vinculo_empregaticio == 'Não' || !model.radio_vinculo_empregaticio || model.idade_familiar < 14",
+                    "fieldArray": {
+                      "fieldGroup": [
+                        {
+                          "key": "categoria_trabalho",
+                          "type": "select",
+                          "templateOptions": {
+                            "label": "Categoria de Trabalho",
+                            "options": [
+                              {
+                                "label": "Trabalho com Carteira Assinada (CLT)",
+                                "value": "Trabalho com Carteira Assinada (CLT)"
+                              },
+                              {
+                                "label": "Trabalhador Autônomo (Segurado pelo INSS)",
+                                "value": "Trabalhador Autônomo (Segurado pelo INSS)"
+                              },
+                              {
+                                "label": "Trabalho Informal (Não segurado pelo INSS)",
+                                "value": "Trabalho Informal (Não segurado pelo INSS)"
+                              },
+                              {
+                                "label": "Profissional Liberal",
+                                "value": "Profissional Liberal"
+                              },
+                              {
+                                "label": "Empresário",
+                                "value": "Empresário"
+                              },
+                              {
+                                "label": "Estagiário Remunerado",
+                                "value": "Estagiário Remunerado"
+                              },
+                              {
+                                "label": "Jovem Aprendiz",
+                                "value": "Jovem Aprendiz"
+                              },
+                              {
+                                "label": "Servidor Público",
+                                "value": "Servidor Público"
+                              }
+                            ],
+                            "focus": "false",
+                            "required": true,
+                            "placeholder": "--selecione--",
+                            "disabled": false
+                          }
+                        },
+                        {
+                          "key": "renda_empregaticia_familiar",
+                          "type": "next-input",
+                          "templateOptions": {
+                            "label": "Valor da Renda Empregatícia",
+                            "placeholder": "R$ 0000,00",
+                            "focus": "false",
+                            "floatNumber": true,
+                            "type": "number",
+                            "readonly": false,
+                            "currency": {
+                              "prefix": "R$",
+                              "thousands": ".",
+                              "decimal": ",",
+                              "precision": 2,
+                              "allowNegative": false
+                            },
+                            "suffix": "reais",
+                            "required": true
+                          },
+                          "expressionProperties": {
+                            "templateOptions|||label": "model.categoria_trabalho ? 'Valor da Renda Empregatícia - ' + model.categoria_trabalho : 'Valor da Renda Empregatícia' "
+                          }
+                        },
+                        {
+                          "key": "funcao_ramo",
+                          "type": "next-input",
+                          "templateOptions": {
+                            "label": "Função ou ramo",
+                            "focus": "false",
+                            "type": "text",
+                            "required": true
+                          },
+                          "hideExpression": " !model.categoria_trabalho"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "key": "total_renda_empregaticia_familiar",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Somatório da Renda Empregatícia",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "number",
+                      "readonly": true,
+                      "currency": {
+                        "prefix": "R$",
+                        "thousands": ".",
+                        "decimal": ",",
+                        "precision": 2,
+                        "readonly": true,
+                        "allowNegative": false
+                      },
+                      "suffix": "reais",
+                      "required": true,
+                      "hidden": true
+                    },
+                    "expressionProperties": {
+                      "model|||total_renda_empregaticia_familiar": "model.categoria_trabalho_card_familiar?.filter((q)=> q?.renda_empregaticia_familiar)?.reduce((acc, q) => acc + q.renda_empregaticia_familiar , 0) ?? 0"
+                    }
+                  },
+                  {
+                    "key": "perg_outra_fonte_renda",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Possui outro tipo de fonte de renda?",
+                      "options": [
+                        {
+                          "value": "Sim"
+                        },
+                        {
+                          "value": "Não"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "outras_fontes_renda_familia",
+                    "type": "next-repeat",
+                    "templateOptions": {
+                      "label": "Outras fontes de renda",
+                      "focus": "false",
+                      "btnAddText": "Outras fontes de renda",
+                      "required": true,
+                      "placeholder": ""
+                    },
+                    "hideExpression": "model.perg_outra_fonte_renda == 'Não' || !model.perg_outra_fonte_renda",
+                    "fieldArray": {
+                      "fieldGroup": [
+                        {
+                          "key": "categoria_trabalho_outras_familia",
+                          "type": "select",
+                          "templateOptions": {
+                            "label": "Categoria de fontes de renda ",
+                            "options": [
+                              {
+                                "label": "Aposentado",
+                                "value": "Aposentado"
+                              },
+                              {
+                                "label": "Pensionista",
+                                "value": "Pensionista"
+                              },
+                              {
+                                "label": "Bolsa Família",
+                                "value": "Bolsa Família"
+                              },
+                              {
+                                "label": "Beneficiário do Benefício de Prestação Continuada - BPC",
+                                "value": "Beneficiário do Benefício de Prestação Continuada - BPC"
+                              },
+                              {
+                                "label": "Pensão Alimentícia",
+                                "value": "Pensão Alimentícia"
+                              },
+                              {
+                                "label": "Outra",
+                                "value": "Outra"
+                              }
+                            ],
+                            "focus": "false",
+                            "required": true,
+                            "placeholder": "--selecione--",
+                            "disabled": false
+                          }
+                        },
+                        {
+                          "key": "outra_fonte_renda_familia",
+                          "type": "next-input",
+                          "templateOptions": {
+                            "label": "Especifique a outra fonte de renda",
+                            "focus": "false",
+                            "required": true
+                          },
+                          "hideExpression": " model.categoria_trabalho_outras_familia !== 'Outra'  || !model.categoria_trabalho_outras_familia"
+                        },
+                        {
+                          "key": "valor_outra_fonte_familiar",
+                          "type": "next-input",
+                          "templateOptions": {
+                            "label": "Valor absoluto da Outra Fonte de Renda",
+                            "focus": "false",
+                            "placeholder": "R$ 0000,00",
+                            "floatNumber": true,
+                            "type": "number",
+                            "readonly": false,
+                            "currency": {
+                              "prefix": "R$",
+                              "thousands": ".",
+                              "decimal": ",",
+                              "precision": 2,
+                              "allowNegative": false
+                            },
+                            "suffix": "reais",
+                            "required": true
+                          },
+                          "expressionProperties": {
+                            "templateOptions|||label": "!model.outra_fonte_renda ? 'Valor da Outra Fonte de Renda' : model.categoria_trabalho_outras_familia == 'Outra' ?  'Valor da Renda - ' + model.outra_fonte_renda_familia : 'Valor da Renda - ' + model.categoria_trabalho_outras_familia"
+                          }
+                        },
+                        {
+                          "key": "anexar_arquivo_familia",
+                          "type": "next-upload",
+                          "templateOptions": {
+                            "label": "Anexe comprovante de depósito do ultimo mês",
+                            "focus": "false",
+                            "required": false
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "key": "bpc_familiar",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "BPC - Familiar",
+                      "description": "Pode ser igual a zero.",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "number",
+                      "readonly": true,
+                      "currency": {
+                        "prefix": "R$",
+                        "thousands": ".",
+                        "decimal": ",",
+                        "precision": 2,
+                        "allowNegative": false
+                      },
+                      "suffix": "reais",
+                      "required": true,
+                      "hidden": true
+                    },
+                    "expressionProperties": {
+                      "model|||bpc_familiar": "(model.outras_fontes_renda_familia ?.filter((q)=> q.categoria_trabalho_outras_familia == 'Beneficiário do Benefício de Prestação Continuada - BPC' )?.reduce((acc, q) => acc + q.valor_outra_fonte_familiar , 0) ?? 0 )"
+                    }
+                  },
+                  {
+                    "key": "bolsa_familia_familiar",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Bolsa Família - Familiar",
+                      "description": "Pode ser igual a zero.",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "number",
+                      "readonly": true,
+                      "currency": {
+                        "prefix": "R$",
+                        "thousands": ".",
+                        "decimal": ",",
+                        "precision": 2,
+                        "allowNegative": false
+                      },
+                      "suffix": "reais",
+                      "required": true,
+                      "hidden": true
+                    },
+                    "expressionProperties": {
+                      "model|||bolsa_familia_familiar": " (model.outras_fontes_renda_familia?.filter((q)=> q.categoria_trabalho_outras_familia == 'Bolsa Família' )?.reduce((acc, q) => acc + q.valor_outra_fonte_familiar , 0) ?? 0)"
+                    }
+                  },
+                  {
+                    "key": "outras_fontes_renda_com_beneficios_familiar",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Somatório dos Benefícios Sociais do Familiar",
+                      "description": "Inclui apenas BPC e Bolsa Família. Pode ser igual a zero.",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "number",
+                      "readonly": true,
+                      "currency": {
+                        "prefix": "R$",
+                        "thousands": ".",
+                        "decimal": ",",
+                        "precision": 2,
+                        "allowNegative": false
+                      },
+                      "suffix": "reais",
+                      "required": true,
+                      "hidden": true
+                    },
+                    "expressionProperties": {
+                      "model|||outras_fontes_renda_com_beneficios_familiar": "(model.outras_fontes_renda_familia ?.filter((q)=> q.categoria_trabalho_outras_familia == 'Beneficiário do Benefício de Prestação Continuada - BPC' )?.reduce((acc, q) => acc + q.valor_outra_fonte_familiar , 0) ?? 0 ) + (model.outras_fontes_renda_familia?.filter((q)=> q.categoria_trabalho_outras_familia == 'Bolsa Família' )?.reduce((acc, q) => acc + q.valor_outra_fonte_familiar , 0) ?? 0)"
+                    }
+                  },
+                  {
+                    "key": "outras_fontes_renda_familiar_com_beneficios",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Somatório das demais de fontes de renda do Familiar (com Benefícios Sociais)",
+                      "description": "Soma todas as demais fontes de renda (incluindo BPC e Bolsa Família)",
+                      "focus": "false",
+                      "readonly": true,
+                      "floatNumber": true,
+                      "type": "number",
+                      "currency": {
+                        "prefix": "R$",
+                        "thousands": ".",
+                        "decimal": ",",
+                        "precision": 2,
+                        "allowNegative": false
+                      },
+                      "suffix": "reais",
+                      "required": true,
+                      "hidden": true
+                    },
+                    "expressionProperties": {
+                      "model|||outras_fontes_renda_familiar_com_beneficios": "model.outras_fontes_renda_familia?.filter((q)=> q?.valor_outra_fonte_familiar)?.reduce((acc, q) => acc + q.valor_outra_fonte_familiar , 0) ?? 0"
+                    }
+                  },
+                  {
+                    "key": "outras_fontes_renda_familiar_sem_beneficios",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Somatório das demais fontes de renda do Familiar (sem Benefícios Sociais)",
+                      "description": "Soma das demais fontes de rendas, excluindo BPC e Bolsa Família. Se não houver nenhum Benefício preechido, esse campo será igual ao somatório COM Benefícios.",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "number",
+                      "readonly": true,
+                      "currency": {
+                        "prefix": "R$",
+                        "thousands": ".",
+                        "decimal": ",",
+                        "precision": 2,
+                        "allowNegative": false
+                      },
+                      "suffix": "reais",
+                      "required": true,
+                      "disabled": false,
+                      "hidden": true
+                    },
+                    "expressionProperties": {
+                      "model|||outras_fontes_renda_familiar_sem_beneficios": "(model.outras_fontes_renda_familia?.filter((q)=> q.valor_outra_fonte_familiar)?.reduce((acc, q) => acc +  (q.categoria_trabalho_outras_familia !== 'Beneficiário do Benefício de Prestação Continuada - BPC' ? q.categoria_trabalho_outras_familia !== 'Bolsa Família' ? q.valor_outra_fonte_familiar : 0 : 0) ,0) ?? 0 )"
+                    }
+                  },
+                  {
+                    "key": "total_com_beneficios_familiar",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Renda Total Individual do Familiar (com Benefícios Sociais)",
+                      "placeholder": "Renda empregatícia somada das demais fontes, incluindo benefícios",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "number",
+                      "readonly": true,
+                      "currency": {
+                        "prefix": "R$",
+                        "thousands": ".",
+                        "decimal": ",",
+                        "precision": 2,
+                        "allowNegative": false
+                      },
+                      "suffix": "reais",
+                      "required": true,
+                      "hidden": true
+                    },
+                    "expressionProperties": {
+                      "model|||total_com_beneficios_familiar": "(model.total_renda_empregaticia_familiar ?? 0 ) + (model.outras_fontes_renda_familiar_com_beneficios ?? 0 ) "
+                    }
+                  },
+                  {
+                    "key": "total_sem_beneficios_familiar",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Renda Total Individual do Familiar (sem Benefícios Sociais)",
+                      "placeholder": "Renda empregatícia somada das demais fontes, excluindo benefícios",
+                      "focus": "false",
+                      "floatNumber": true,
+                      "type": "number",
+                      "readonly": true,
+                      "currency": {
+                        "prefix": "R$",
+                        "thousands": ".",
+                        "decimal": ",",
+                        "precision": 2,
+                        "allowNegative": false
+                      },
+                      "suffix": "reais",
+                      "required": true,
+                      "hidden": true
+                    },
+                    "expressionProperties": {
+                      "model|||total_sem_beneficios_familiar": "(model.total_renda_empregaticia_familiar ?? 0 ) + (model.outras_fontes_renda_familiar_sem_beneficios ?? 0 ) "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "perg_pcd_familiar",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Possui Deficiência?",
+                      "options": [
+                        {
+                          "value": "Sim"
+                        },
+                        {
+                          "value": "Não"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true,
+                      "placeholder": "",
+                      "disabled": false
+                    }
+                  },
+                  {
+                    "key": "tipo_deficiencia_familiar",
+                    "type": "multicheckbox",
+                    "templateOptions": {
+                      "label": "Tipo de deficiência",
+                      "options": [
+                        {
+                          "label": "Fisica",
+                          "value": "Fisica"
+                        },
+                        {
+                          "label": "Visual ",
+                          "value": "Visual "
+                        },
+                        {
+                          "label": "Auditiva",
+                          "value": "Auditiva"
+                        },
+                        {
+                          "label": "Transtorno Mental",
+                          "value": "Transtorno Mental"
+                        },
+                        {
+                          "label": "Intelectual",
+                          "value": "Intelectual"
+                        },
+                        {
+                          "label": "Transtorno Espectro Autista",
+                          "value": "Transtorno Autista"
+                        }
+                      ],
+                      "focus": "false",
+                      "type": "text",
+                      "required": true,
+                      "disabled": false
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.vaga_deficiente === 'Sim'"
+                    },
+                    "hideExpression": "model.vaga_deficiente=== 'Não' || !model.vaga_deficiente"
+                  },
+                  {
+                    "key": "laudo_parecer_medico",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": " Laudo ou parecer médico com CID",
+                      "focus": "false",
+                      "required": false
+                    },
+                    "hideExpression": "model.perg_pcd_familiar=== 'Não' || !model.perg_pcd_familiar"
+                  }
+                ]
+              },
+              "hideExpression": " model.perg_mora_sozinho !== 'Não'  || !model.perg_mora_sozinho"
+            },
+            {
+              "key": "membros_familia",
+              "className": "col-6",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Quantidade de Membros",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "suffix": "membro(s)",
+                "required": true,
+                "readonly": true,
+                "description": "Critério de cálculo da renda per capita"
+              },
+              "expressionProperties": {
+                "model|||membros_familia": "(model.composicao_familiar?.length ?? 0) + 1"
+              }
+            },
+            {
+              "key": "total_com_beneficios_composicao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Renda Total da Composição Familiar (com Benefícios Sociais)",
+                "focus": "false",
+                "description": "Todas as regras empregatícias somadas de todas as outras fontes de renda, incluindo BPC e Bolsa Família",
+                "floatNumber": true,
+                "type": "number",
+                "readonly": true,
+                "currency": {
+                  "prefix": "R$",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "reais",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {
+                "model|||total_com_beneficios_composicao": "(model.total_com_beneficios_responsavel ?? 0) + (model.composicao_familiar?.filter((q)=> q?.total_com_beneficios_familiar)?.reduce((acc, q) => acc + q.total_com_beneficios_familiar , 0) ?? 0)"
+              }
+            },
+            {
+              "key": "faixa_renda_composicao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Faixa de Renda da Composição Familiar (com Benefícios Sociais)",
+                "description": "Cálculo a partir do salário mínimo vigente",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "readonly": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "expressionProperties": {
+                "model|||faixa_renda_composicao": "Number(model.total_com_beneficios_composicao) < Number(model.salario_minimo)*0.5 ? 'Até meio salário mínimo': Number(model.total_com_beneficios_composicao) < Number(model.salario_minimo) ? 'Acima de meio salário mínimo a 01 salário mínimo' : Number(model.total_com_beneficios_composicao) < Number(model.salario_minimo)*1.5 ? 'Acima de 01 salário mínimo a 01 salário mínimo e meio' : Number(model.total_com_beneficios_composicao) < Number(model.salario_minimo)*2.0 ? 'Acima de 01 salário mínimo e meio a 02 salários mínimos' : Number(model.total_com_beneficios_composicao) < Number(model.salario_minimo)*2.5 ? 'Acima de 02 salários a 02 salários mínimios e meio' : Number(model.total_com_beneficios_composicao) < Number(model.salario_minimo)*3.0 ? 'Acima de 02 salários mínimos e meio a 03 salários mínimos' : Number(model.total_com_beneficios_composicao) < Number(model.salario_minimo)*4.0 ? 'Acima de 03 salários mínimos a 04 salários mínimos' : Number(model.total_com_beneficios_composicao) < Number(model.salario_minimo)*5.0 ? 'Acima de 04 salários mínimos a 05 salários mínimos' : Number(model.total_com_beneficios_composicao) > Number(model.salario_minimo)*5.0 ? 'Acima de 05 salários mínimos' : 'Não possui renda'"
+              }
+            },
+            {
+              "key": "renda_per_capita_com_beneficios",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Renda per Capita (com Benefícios Sociais)",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "number",
+                "readonly": true,
+                "currency": {
+                  "prefix": "R$",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "reais",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {
+                "model|||renda_per_capita_com_beneficios": "(model.total_com_beneficios_composicao ?? 0) / (model.membros_familia ?? 1)"
+              }
+            },
+            {
+              "key": "total_sem_beneficios_composicao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Renda Total da Composição Familiar (sem Benefícios Sociais)",
+                "description": "Todas as rendas empregatícias somadas a todas as demais fontes de renda, excluindo BPC e Bolsa Família, se houver",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "number",
+                "readonly": true,
+                "currency": {
+                  "prefix": "R$",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "reais",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {
+                "model|||total_sem_beneficios_composicao": "(model.total_sem_beneficios_responsavel ?? 0) + (model.composicao_familiar?.filter((q)=> q?.total_sem_beneficios_familiar)?.reduce((acc, q) => acc + q.total_sem_beneficios_familiar , 0) ?? 0)"
+              }
+            },
+            {
+              "key": "renda_per_capita_sem_beneficios",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Renda per Capita (sem Benefícios Sociais)",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "number",
+                "readonly": true,
+                "currency": {
+                  "prefix": "R$",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "suffix": "reais",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {
+                "model|||renda_per_capita_sem_beneficios": "(model.total_sem_beneficios_composicao ?? 0) / (model.membros_familia ?? 1)"
+              }
+            },
+            {
+              "key": "faixa_renda_familiar_sem_beneficios",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Faixa de Renda da Composição Familiar (sem Benefícios Sociais)",
+                "description": "Cálculo a partir do salário mínimo vigente",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||faixa_renda_familiar_sem_beneficios": "Number(model.total_sem_beneficios_composicao) < Number(model.salario_minimo)*0.5 ? 'Até meio salário mínimo': Number(model.total_sem_beneficios_composicao) < Number(model.salario_minimo) ? 'Acima de meio salário mínimo a 01 salário mínimo' : Number(model.total_sem_beneficios_composicao) < Number(model.salario_minimo)*1.5 ? 'Acima de 01 salário mínimo a 01 salário mínimo e meio' : Number(model.total_sem_beneficios_composicao) < Number(model.salario_minimo)*2.0 ? 'Acima de 01 salário mínimo e meio a 02 salários mínimos' : Number(model.total_sem_beneficios_composicao) < Number(model.salario_minimo)*2.5 ? 'Acima de 02 salários a 02 salários mínimios e meio' : Number(model.total_sem_beneficios_composicao) < Number(model.salario_minimo)*3.0 ? 'Acima de 02 salários mínimos e meio a 03 salários mínimos' : Number(model.total_sem_beneficios_composicao) < Number(model.salario_minimo)*4.0 ? 'Acima de 03 salários mínimos a 04 salários mínimos' : Number(model.total_sem_beneficios_composicao) < Number(model.salario_minimo)*5.0 ? 'Acima de 04 salários mínimos a 05 salários mínimos' : Number(model.total_sem_beneficios_composicao) > Number(model.salario_minimo)*5.0 ? 'Acima de 05 salários mínimos' : 'Não possui renda'"
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Composição Familiar",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "forma_moradia",
+              "type": "select",
+              "templateOptions": {
+                "label": "Forma de Moradia",
+                "options": [
+                  {
+                    "label": "Aluguel",
+                    "value": "Aluguel"
+                  },
+                  {
+                    "label": "Cedido",
+                    "value": "Cedido"
+                  },
+                  {
+                    "label": "Coabitação",
+                    "value": "Coabitação"
+                  },
+                  {
+                    "label": "Em situação de Rua",
+                    "value": "Em situação de Rua"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "placeholder": "--selecione--",
+                "required": true
+              }
+            },
+            {
+              "className": "col-12",
+              "key": "endereco_cep",
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP",
+                "placeholder": "Ex: 00000-000",
+                "mask": "00000-000",
+                "required": true,
+                "hideData": true,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true,
+                "triggerOnlyWhenEditing": true
+              }
+            },
+            {
+              "className": "col-12",
+              "key": "status_integracaocep",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.endereco_cep_empreendimento?.status == 'LOADING' "
+              },
+              "hideExpression": " model.endereco_cep?.status !== 'LOADING'  || !model.endereco_cep?.input"
+            },
+            {
+              "className": "col-12",
+              "key": "erro_integracaocep_empreendimento",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "(model.endereco_cep?.status !== 'SUCCESS') || (model.endereco_cep?.data?.response?.result?.erro === true) || (model.endereco_cep?.input?.length === 8 && model.endereco_cep?.status === 'KNOWN_FAILED') "
+              },
+              "hideExpression": "(model.endereco_cep?.status === 'SUCCESS' && model.endereco_cep?.data?.response?.result?.erro !== true) || (model.endereco_cep?.input?.length !== 8 && model.endereco_cep?.status !== 'KNOWN_FAILED') || !model.endereco_cep.input "
+            },
+            {
+              "className": "col-12",
+              "key": "logradouro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Logradouro",
+                "required": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {
+                "model|||logradouro_imovel": "model.logradouro_imovel && model.logradouro_imovel == model.endereco_cep?.data?.response?.result?.logradouro ? model.logradouro_imovel : model.endereco_cep?.data?.response?.result?.logradouro"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "numero_imovel",
+              "type": "input",
+              "templateOptions": {
+                "label": "Número Residencial",
+                "placeholder": "Ex: S/N",
+                "required": true
+              },
+              "hideExpression": " !model.endereco_cep?.input "
+            },
+            {
+              "className": "col-12",
+              "key": "bairro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Bairro",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "placeholder": "",
+                "focus": false
+              },
+              "expressionProperties": {
+                "model|||bairro_imovel": "model.bairro_imovel && model.bairro_imovel ==  model.endereco_cep?.data?.response?.result?.bairro ? model.bairro_imovel :  model.endereco_cep?.data?.response?.result?.bairro"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "complemento_imovel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento de endereço",
+                "placeholder": "Ex: Esquina com Rua São Paulo",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "disabled": false
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "cidade",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cidade",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||cidade": "model.cidade && model.cidade ==  model.endereco_cep?.data?.response?.result?.localidade ? model.cidade :  model.endereco_cep?.data?.response?.result?.localidade"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-6",
+              "key": "uf",
+              "type": "next-input",
+              "resetOnHide": true,
+              "templateOptions": {
+                "label": "Estado",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||uf": "model.uf && model.uf ==  model.endereco_cep?.data?.response?.result?.uf ? model.uf :  model.endereco_cep?.data?.response?.result?.uf"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados de Endereço",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "67d827b28059930008254b4d"
+    }
+  ],
+  "step": {},
+  "config": {
+    "title": "Solicitação de Cadastro em Programas Sociais",
+    "descricao": "Processo de inscrição para ter acesso a benefícios sociais fornecidos pelo município, como auxílio-gás, etc.",
+    "devolverAoUltimo": true,
+    "cidade": "modeload",
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "approveActionText": "Deferir",
+    "useNewSidebarForwarding": true,
+    "sigla": "CIF",
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Cartão",
+        "template": "LagoasantaMG/estacionamento_idoso.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Observações",
+        "text_action": "Realizou ação",
+        "key": "new_key228019",
+        "form": [
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observação",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_ai",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observação",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_ai",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "single",
+      "possibleReceivers": [
+        "educacao_modeload"
+      ]
+    },
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true,
+    "allowActingFromSectorBox": true
+  },
+  "tramite": [
+    {
+      "_id": "63445d2d76aed00009e23dcf",
+      "groupId": "translagorecebimento_lagoasantamg"
+    }
+  ],
+  "__v": 0,
+  "city_id": 38
+}

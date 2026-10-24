@@ -1,0 +1,205 @@
+{
+  "_id": "6965511036ba2b5f0d14ce04",
+  "__v": 0,
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Comunicação Interna",
+    "descricao": "",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "newSignatureStrategy": true,
+    "useNewSidebarForwarding": true,
+    "experimentalMode": true,
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "CIP",
+    "subClassId": "numeracao_padrao",
+    "requiresPreCreationSignature": true,
+    "templates": [],
+    "form_tramites": [],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "multiple",
+      "possibleReceivers": []
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "city_id": 38,
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12"
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12"
+            },
+            {
+              "key": "cargo_destinatario",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cargo/ Função do destinatário:",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "objeto_contrato",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Assunto",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12"
+            },
+            {
+              "key": "informacao",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Conteúdo",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "placeholder": "Corpo do texto explicando a solicitação, informação, recomendação ou determinação administrativa",
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "className": "col-12"
+            },
+            {
+              "key": "anexo",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Anexo",
+                "options": [],
+                "focus": "false",
+                "required": false,
+                "columns": "12",
+                "extends": [
+                  "PDF",
+                  "PNG",
+                  "IMG",
+                  "JPG",
+                  "JPEG",
+                  "DWG",
+                  "MP3",
+                  "MP4",
+                  "WAV",
+                  "WMA",
+                  "OGG",
+                  "MOV",
+                  "3GP",
+                  "RMVB",
+                  "KML",
+                  "ZIP",
+                  "RAR",
+                  "ODS",
+                  "ODT",
+                  "DOC",
+                  "DOCX",
+                  "DOCM",
+                  "DOTX",
+                  "DOTM",
+                  "XML",
+                  "XLS",
+                  "XLSM",
+                  "XLSX",
+                  "XLSB",
+                  "XLTX",
+                  "PPTX",
+                  "PPTM",
+                  "POTX",
+                  "POTM",
+                  "CSV",
+                  "TXT",
+                  "webP",
+                  "DXF",
+                  "GPKG",
+                  "SHP"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Informações",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">\nInformações</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "6965591f1c45b77bbc040957"
+    }
+  ],
+  "tramite": [
+    {
+      "groupId": "setorentrada_exploread",
+      "_id": "67588f233257500008bf9003"
+    }
+  ],
+  "step": {}
+}

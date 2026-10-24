@@ -1,0 +1,3755 @@
+{
+  "_id": "6a7627f2ccd19a6f55b6ed7f",
+  "__v": 0,
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Denúncia Anônima",
+    "descricao": "",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "NEW",
+    "experimentalMode": true,
+    "useNewSidebarForwarding": true,
+    "newSignatureStrategy": true,
+    "templates": [],
+    "form_tramites": [],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "conditional",
+      "possibleReceivers": [
+        "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialpostura_umuaramapr",
+        "ouvidoriasetorialmeioambiente_umuaramapr",
+        "ouvidoriasetorialfundacaocultural_umuaramapr",
+        "ouvidoriasetorialfundacaocultural_umuaramapr",
+        "ouvidoriasetorialfundacaocultural_umuaramapr",
+        "ouvidoriasetorialfundacaocultural_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+        "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+        "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+        "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+        "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+        "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+        "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+        "ouvidoriasetorialmeioambiente_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialrodoviarios_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialrodoviarios_umuaramapr",
+        "ouvidoriasetorialpostura_umuaramapr",
+        "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+        "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+        "ouvidoriasetorialmeioambiente_umuaramapr",
+        "ouvidoriasetorialdivisaocadastroimobiliario_umuaramapr",
+        "ouvidoriasetorialpostura_umuaramapr",
+        "ouvidoriasetorialpostura_umuaramapr",
+        "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialrodoviarios_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialpostura_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialdivisaotransito_umuaramapr",
+        "ouvidoriasetorialengenhariatransito_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+        "ouvidoriasetorialpostura_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialmeioambiente_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialdivisaocadastroimobiliario_umuaramapr",
+        "ouvidoriasetorialdivisaocadastroimobiliario_umuaramapr",
+        "ouvidoriasetorialengenhariatransito_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialpostura_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialrodoviarios_umuaramapr",
+        "ouvidoriasetorialsecretariaeducacao_umuaramapr",
+        "ouvidoriasetorialesportelazer_umuaramapr",
+        "ouvidoriasetorialesportelazer_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialesportelazer_umuaramapr",
+        "ouvidoriasetorialesportelazer_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialsecretariaeducacao_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialpostura_umuaramapr",
+        "ouvidoriasetorialmeioambiente_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialpostura_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialengenhariatransito_umuaramapr",
+        "ouvidoriasetorialmeioambiente_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialdivisaotransito_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialservicospublicos_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialesportelazer_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialrodoviarios_umuaramapr",
+        "ouvidoriasetorialmeioambiente_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialengenhariatransito_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialfundacaocultural_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialsecretariaeducacao_umuaramapr",
+        "ouvidoriasetorialdivisaotransito_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialsdopuept_umuaramapr",
+        "ouvidoriasetorialsecretariaeducacao_umuaramapr",
+        "ouvidoriasetorialpostura_umuaramapr",
+        "ouvidoriasetorialengenhariatransito_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "72ouvidoria_umuaramapr",
+        "72ouvidoria_umuaramapr"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "city_id": 38,
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "tema",
+              "type": "select",
+              "templateOptions": {
+                "label": "Tema",
+                "options": [
+                  {
+                    "label": "Denúncia",
+                    "value": "Denúncia"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "assunto",
+              "type": "select",
+              "templateOptions": {
+                "label": "Assunto",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "-selecione-"
+              },
+              "expressionProperties": {
+                "templateOptions|||options": "(()=>{const m={\"Denúncia\": [\"Específica\", \"Servidores Municipais\"], \"Elogio\": [\"Ambulantes\", \"Animais\", \"Assistência Social\", \"Banco de Alimentos\", \"Bueiros e Galerias Pluviais\", \"Buraco no Asfalto\", \"CMEI Municipal\", \"Capina\", \"Casa do Empreendedor\", \"Cemitério\", \"Coleta de Lixo\", \"Concurso Público Municipal\", \"Condomínio do Idoso\", \"Enfeites de Natal\", \"Escola Municipal\", \"Esportes\", \"Estação Rodoviária Municipal\", \"Estradas Rurais\", \"Feiras\", \"Fiscalização - Obras\", \"Fossas\", \"Fundação Cultural\", \"Iluminação Pública\", \"Locais Abandonados\", \"Obstrução\", \"PROCON\", \"Patrimônio Municipal\", \"Postes\", \"Restaurante Popular\", \"Servidores Municipais\", \"Telefones Municipais\", \"Terreno\", \"Transporte\", \"Trânsito\", \"Varrição\", \"Veículo Abandonado\"], \"Informação\": [\"Ambulantes\", \"Animais\", \"Assistência Social\", \"Aterro Sanitário\", \"Banco de Alimentos\", \"Bueiros e Galerias Pluviais\", \"Buraco no Asfalto\", \"CMEI Municipal\", \"Capina\", \"Casa do Empreendedor\", \"Cemitério\", \"Coleta de Lixo\", \"Concurso Público Municipal\", \"Condomínio do Idoso\", \"Enfeites de Natal\", \"Escola Municipal\", \"Esportes\", \"Estacionamento\", \"Estação Rodoviária Municipal\", \"Estradas Rurais\", \"Feiras\", \"Fiscalização - Obras\", \"Fossas\", \"Fundação Cultural\", \"Iluminação Pública\", \"Locais Abandonados\", \"Obstrução\", \"PROCON\", \"Patrimônio Municipal\", \"Placas e Sinalizações\", \"Postes\", \"Restaurante Popular\", \"Servidores Municipais\", \"Taxas\", \"Terreno\", \"Transporte\", \"Trânsito\", \"Varrição\", \"Veículo Abandonado\"], \"Reclamação\": [\"Ambulantes\", \"Animais\", \"Assistência Social\", \"Ateamento de Fogo\", \"Aterro Sanitário\", \"Banco de Alimentos\", \"Bueiros e Galerias Pluviais\", \"Buraco no Asfalto\", \"CMEI Municipal\", \"Capina\", \"Casa do Empreendedor\", \"Cemitério\", \"Coleta de Lixo\", \"Concurso Público Municipal\", \"Condomínio do Idoso\", \"Empresa Sem Alvará\", \"Enfeites de Natal\", \"Escola Municipal\", \"Esportes\", \"Estacionamento\", \"Estação Rodoviária Municipal\", \"Estradas Rurais\", \"Feiras\", \"Fiscalização - Obras\", \"Fossas\", \"Fundação Cultural\", \"Iluminação Pública\", \"Imposto\", \"Locais Abandonados\", \"Manutenções Públicas - Obras\", \"Obstrução\", \"PROCON\", \"Patrimônio Municipal\", \"Perturbação de Sossego\", \"Placas e Sinalizações\", \"Postes\", \"Restaurante Popular\", \"Servidores Municipais\", \"Taxas\", \"Telefones Municipais\", \"Terreno\", \"Transporte\", \"Trânsito\", \"Varrição\", \"Veículo Abandonado\", \"Árvore\"], \"Sic - Pedido de Acesso à Informação\": [\"Sic - Pedido de Acesso à Informação\"], \"Solicitação\": [\"Ambulantes\", \"Animais\", \"Assistência Social\", \"Banco de Alimentos\", \"Bueiros e Galerias Pluviais\", \"Buraco no Asfalto\", \"CMEI Municipal\", \"Capina\", \"Casa do Empreendedor\", \"Cemitério\", \"Coleta de Lixo\", \"Concurso Público Municipal\", \"Condomínio do Idoso\", \"Enfeites de Natal\", \"Escola Municipal\", \"Esportes\", \"Estacionamento\", \"Estação Rodoviária Municipal\", \"Estradas Rurais\", \"Fiscalização - Obras\", \"Fossas\", \"Fundação Cultural\", \"Iluminação Pública\", \"Locais Abandonados\", \"Manutenções Públicas - Obras\", \"Obstrução\", \"PROCON\", \"Patrimônio Municipal\", \"Placas e Sinalizações\", \"Postes\", \"Restaurante Popular\", \"Servidores Municipais\", \"Telefones Municipais\", \"Terreno\", \"Transporte\", \"Trânsito\", \"Varrição\", \"Veículo Abandonado\", \"Árvore\"], \"Sugestão\": [\"Ambulantes\", \"Animais\", \"Assistência Social\", \"Aterro Sanitário\", \"Banco de Alimentos\", \"Bueiros e Galerias Pluviais\", \"Buraco no Asfalto\", \"CMEI Municipal\", \"Capina\", \"Casa do Empreendedor\", \"Cemitério\", \"Coleta de Lixo\", \"Concurso Público Municipal\", \"Condomínio do Idoso\", \"Enfeites de Natal\", \"Escola Municipal\", \"Esportes\", \"Estacionamento\", \"Estação Rodoviária Municipal\", \"Estradas Rurais\", \"Feiras\", \"Fiscalização - Obras\", \"Fossas\", \"Fundação Cultural\", \"Iluminação Pública\", \"Locais Abandonados\", \"Obstrução\", \"PROCON\", \"Patrimônio Municipal\", \"Placas e Sinalizações\", \"Postes\", \"Restaurante Popular\", \"Servidores Municipais\", \"Taxas\", \"Telefones Municipais\", \"Terreno\", \"Transporte\", \"Trânsito\", \"Varrição\", \"Veículo Abandonado\"]};const o=m[model.tema]||[];return o.map(v=>({label:v,value:v}))})()",
+                "templateOptions|||required": "!!model.tema"
+              },
+              "hideExpression": "!model.tema"
+            },
+            {
+              "key": "servico",
+              "type": "select",
+              "templateOptions": {
+                "label": "Serviço",
+                "options": [],
+                "focus": "false",
+                "required": false,
+                "placeholder": "-selecione-"
+              },
+              "expressionProperties": {
+                "templateOptions|||options": "(()=>{const m={\"Denúncia||Específica\": [\"Outros\"], \"Denúncia||Servidores Municipais\": [\"Assédio Moral\", \"Assédio Sexual\", \"Má Conduta\", \"Outros\"], \"Elogio||Ambulantes\": [\"Outros\"], \"Elogio||Animais\": [\"Outros\"], \"Elogio||Assistência Social\": [\"APROMO\", \"Benefícios Sociais\", \"CRAM\", \"CRAS I\", \"CRAS II\", \"CRAS III\", \"CREAS I\", \"CREAS II\", \"Centro Pop\", \"Centro da Juventude\", \"Conselho Tutelar\", \"Família Acolhedora\", \"Outros\"], \"Elogio||Banco de Alimentos\": [\"Outros\"], \"Elogio||Bueiros e Galerias Pluviais\": [\"Outros\"], \"Elogio||Buraco no Asfalto\": [\"Outros\"], \"Elogio||CMEI Municipal\": [\"Outros\"], \"Elogio||Capina\": [\"Outros\"], \"Elogio||Casa do Empreendedor\": [\"Microempreendedor Individual – MEI\", \"Outros\"], \"Elogio||Cemitério\": [\"Outros\"], \"Elogio||Coleta de Lixo\": [\"Outros\"], \"Elogio||Concurso Público Municipal\": [\"Outros\"], \"Elogio||Condomínio do Idoso\": [\"Outros\"], \"Elogio||Enfeites de Natal\": [\"Outros\"], \"Elogio||Escola Municipal\": [\"Outros\"], \"Elogio||Esportes\": [\"Outros\"], \"Elogio||Estação Rodoviária Municipal\": [\"Outros\"], \"Elogio||Estradas Rurais\": [\"Outros\"], \"Elogio||Feiras\": [\"Outros\"], \"Elogio||Fiscalização - Obras\": [\"Outros\"], \"Elogio||Fossas\": [\"Outros\"], \"Elogio||Fundação Cultural\": [\"Aulas de Artes\", \"Aulas de Dança\", \"Aulas de Instrumentos\", \"Aulas de Teatro\", \"Outros\", \"Teatro Municipal\"], \"Elogio||Iluminação Pública\": [\"Outros\"], \"Elogio||Locais Abandonados\": [\"Outros\"], \"Elogio||Obstrução\": [\"Outros\"], \"Elogio||PROCON\": [\"Outros\"], \"Elogio||Patrimônio Municipal\": [\"Outros\"], \"Elogio||Postes\": [\"Outros\"], \"Elogio||Restaurante Popular\": [\"Outros\"], \"Elogio||Servidores Municipais\": [\"Aposentadoria\", \"Outros\"], \"Elogio||Telefones Municipais\": [\"Outros\"], \"Elogio||Terreno\": [\"Outros\"], \"Elogio||Transporte\": [\"Ponto de Tranporte Urbano (Circular)\", \"Transporte Escolar\", \"Transporte Urbano (Circular)\"], \"Elogio||Trânsito\": [\"Outros\"], \"Elogio||Varrição\": [\"Outros\"], \"Elogio||Veículo Abandonado\": [\"Outros\"], \"Informação||Ambulantes\": [\"Outros\"], \"Informação||Animais\": [\"Outros\"], \"Informação||Assistência Social\": [\"APROMO\", \"Benefícios Sociais\", \"CRAM\", \"CRAS I\", \"CRAS II\", \"CRAS III\", \"CREAS I\", \"CREAS II\", \"Centro Pop\", \"Centro da Juventude\", \"Conselho Tutelar\", \"Família Acolhedora\", \"Outros\"], \"Informação||Aterro Sanitário\": [\"Aterro Sanitário\"], \"Informação||Banco de Alimentos\": [\"Outros\"], \"Informação||Bueiros e Galerias Pluviais\": [\"Outros\"], \"Informação||Buraco no Asfalto\": [\"Outros\"], \"Informação||CMEI Municipal\": [\"Outros\"], \"Informação||Capina\": [\"Outros\"], \"Informação||Casa do Empreendedor\": [\"Microempreendedor Individual – MEI\", \"Outros\"], \"Informação||Cemitério\": [\"Outros\"], \"Informação||Coleta de Lixo\": [\"Dias Que é Feita a Coleta\", \"Outros\"], \"Informação||Concurso Público Municipal\": [\"Outros\"], \"Informação||Condomínio do Idoso\": [\"Outros\"], \"Informação||Enfeites de Natal\": [\"Outros\"], \"Informação||Escola Municipal\": [\"Outros\"], \"Informação||Esportes\": [\"Outros\", \"Reserva de Quadras dos Ginásios Municipais\"], \"Informação||Estacionamento\": [\"Estacionamento Rotativo\", \"Vagas Especiais\"], \"Informação||Estação Rodoviária Municipal\": [\"Outros\"], \"Informação||Estradas Rurais\": [\"Outros\"], \"Informação||Feiras\": [\"Outros\"], \"Informação||Fiscalização - Obras\": [\"Outros\"], \"Informação||Fossas\": [\"Outros\"], \"Informação||Fundação Cultural\": [\"Aulas de Artes\", \"Aulas de Dança\", \"Aulas de Instrumentos\", \"Aulas de Teatro\", \"Outros\", \"Teatro Municipal\"], \"Informação||Iluminação Pública\": [\"Outros\"], \"Informação||Locais Abandonados\": [\"Outros\"], \"Informação||Obstrução\": [\"Outros\"], \"Informação||PROCON\": [\"Outros\"], \"Informação||Patrimônio Municipal\": [\"Outros\"], \"Informação||Placas e Sinalizações\": [\"Outros\", \"Placas de Trânsito\", \"Sinalização Vertical e Horizontal\"], \"Informação||Postes\": [\"Outros\"], \"Informação||Restaurante Popular\": [\"Outros\"], \"Informação||Servidores Municipais\": [\"Aposentadoria\", \"Outros\"], \"Informação||Taxas\": [\"Outros\"], \"Informação||Terreno\": [\"Outros\"], \"Informação||Transporte\": [\"Transporte Escolar\", \"Transporte Urbano (Circular)\", \"Transporte de Atletas\"], \"Informação||Trânsito\": [\"Estudo de Tráfego\", \"Implantação ou Alteração de Dispositivos de Controle Viário\", \"Outros\"], \"Informação||Varrição\": [\"Outros\"], \"Informação||Veículo Abandonado\": [\"Outros\"], \"Reclamação||Ambulantes\": [\"Vendedores Irregulares\"], \"Reclamação||Animais\": [\"Cachorro Abandonado\", \"Cavalo Solto\", \"Gato Abandonado\", \"Maus-Tratos\", \"Outros\", \"SAAU\", \"Vaca / Boi Soltos\"], \"Reclamação||Assistência Social\": [\"APROMO\", \"Benefícios Sociais\", \"CRAM\", \"CRAS I\", \"CRAS II\", \"CRAS III\", \"CREAS I\", \"CREAS II\", \"Centro Pop\", \"Centro da Juventude\", \"Conselho Tutelar\", \"Família Acolhedora\", \"Outros\"], \"Reclamação||Ateamento de Fogo\": [\"Ateamento de Fogo\"], \"Reclamação||Aterro Sanitário\": [\"Aterro Sanitário\"], \"Reclamação||Banco de Alimentos\": [\"Outros\"], \"Reclamação||Bueiros e Galerias Pluviais\": [\"Manutenção em Geral\", \"Outros\", \"Reparo\", \"Retira de Animais, Objetos e Pessoas\", \"Troca de Tampa\"], \"Reclamação||Buraco no Asfalto\": [\"Outros\", \"Recapeamento Asfáltico\", \"Tapa Buracos\"], \"Reclamação||CMEI Municipal\": [\"Alimentação Escolar\", \"Falta de Profissional de Apoio a Estudante Com Necessidades Especiais\", \"Manutenção em Ar-Condicionado\", \"Manutenção em Geral do CMEI\", \"Material Escolar\", \"Outros\", \"Uniforme Escolar\"], \"Reclamação||Capina\": [\"Outros\", \"Serviço Mal Executado\", \"Serviço Não Executado\"], \"Reclamação||Casa do Empreendedor\": [\"Microempreendedor Individual – MEI\", \"Outros\"], \"Reclamação||Cemitério\": [\"Manutenção em Geral\", \"Outros\"], \"Reclamação||Coleta de Lixo\": [\"Entulhos\", \"Folhas Ensacadas\", \"Grama Ensacada\", \"Orgânico\", \"Outros\", \"Reciclável\"], \"Reclamação||Concurso Público Municipal\": [\"Outros\"], \"Reclamação||Condomínio do Idoso\": [\"Outros\"], \"Reclamação||Empresa Sem Alvará\": [\"Empresa Sem Alvará\"], \"Reclamação||Enfeites de Natal\": [\"Ausência da Instalação\", \"Serviço Mal Executado\", \"Serviço Não Executado\"], \"Reclamação||Escola Municipal\": [\"Alimentação Escolar\", \"Falta de Profissional de Apoio a Estudante Com Necessidades Especiais\", \"Manutenção em Ar-Condicionado\", \"Manutenção em Geral da Escola\", \"Material Escolar\", \"Outros\", \"Uniforme Escolar\"], \"Reclamação||Esportes\": [\"Manutenção em Campo de Futebol\", \"Manutenção em Estádio Municipal\", \"Manutenção em Ginásio de Esportes\", \"Manutenção em Quadra Esportivas em Locais Públicos\", \"Outros\", \"Reserva de Quadras dos Ginásios Municipais\"], \"Reclamação||Estacionamento\": [\"Estacionamento Rotativo\", \"Vagas Especiais\"], \"Reclamação||Estação Rodoviária Municipal\": [\"Outros\"], \"Reclamação||Estradas Rurais\": [\"Manutenção da Estrada\", \"Outros\", \"Serviço Mal Executado\", \"Serviço Não Executado\"], \"Reclamação||Feiras\": [\"Outros\"], \"Reclamação||Fiscalização - Obras\": [\"Armazenamento Irregular de Materiais de Construção\", \"Ausência de Construção de Calçada\", \"Calçada Com Danificação\", \"Construção Abandonada\", \"Construção Irregular de Calçada\", \"Descarte Irregular de Entulhos de Construção\", \"Encanamentos Irregulares\", \"Outros\", \"Residência Com Infiltração\"], \"Reclamação||Fossas\": [\"Outros\"], \"Reclamação||Fundação Cultural\": [\"Aulas de Artes\", \"Aulas de Dança\", \"Aulas de Instrumentos\", \"Aulas de Teatro\", \"Outros\", \"Teatro Municipal\"], \"Reclamação||Iluminação Pública\": [\"Outros\", \"Serviço Mal Executado\", \"Serviço Não Executado\"], \"Reclamação||Imposto\": [\"IPTU\"], \"Reclamação||Locais Abandonados\": [\"Casa Abandonada\", \"Construção Abandonada\", \"Outros\", \"Ponto Comercial Abandonado\", \"Prédio Abandonado\"], \"Reclamação||Manutenções Públicas - Obras\": [\"Aparelhos da Academia da Terceira Idade\", \"Bebedouros Públicos\", \"Canaletas e Meio-Fio\", \"Outros\", \"Parque Infantil\", \"Pontos de Transporte Coletivo (De concreto)\", \"Praças Públicas\", \"Salão Comunitário\"], \"Reclamação||Obstrução\": [\"Calçada Com Materiais de Construção\", \"Comércios Com Mesas na Calçada\", \"Comércios Com Produtos na Calçada\", \"Outros\", \"Passagem do Passeio Público\", \"Placa de Anúncios\", \"Serviço Não Executado\"], \"Reclamação||PROCON\": [\"Outros\"], \"Reclamação||Patrimônio Municipal\": [\"Outros\"], \"Reclamação||Perturbação de Sossego\": [\"Perturbação de Sossego\"], \"Reclamação||Placas e Sinalizações\": [\"Placas de Trânsito\", \"Sinalização Vertical e Horizontal\"], \"Reclamação||Postes\": [\"Outros\", \"Pintura de Nome da Rua e CEP\"], \"Reclamação||Restaurante Popular\": [\"Outros\"], \"Reclamação||Servidores Municipais\": [\"Aposentadoria\", \"Outros\"], \"Reclamação||Taxas\": [\"Coleta de Lixo - Público\", \"Iluminação Pública\", \"Outros\"], \"Reclamação||Telefones Municipais\": [\"Outros\", \"Sem Funcionamento\"], \"Reclamação||Terreno\": [\"Desnível\", \"Outros\", \"Serviço Mal Executado\", \"Serviço Não Executado\", \"Terreno Sujo\"], \"Reclamação||Transporte\": [\"Ponto de Tranporte Urbano (Circular)\", \"Transporte Escolar\", \"Transporte Urbano (Circular)\", \"Transporte de Atletas\"], \"Reclamação||Trânsito\": [\"Estudo de Tráfego\", \"Implantação ou Alteração de Dispositivos de Controle Viário\", \"Outros\"], \"Reclamação||Varrição\": [\"Outros\", \"Serviço Mal Executado\", \"Serviço Não Executado\"], \"Reclamação||Veículo Abandonado\": [\"Caminhão Abandonado\", \"Carro Abandonado\", \"Outros\"], \"Reclamação||Árvore\": [\"Outros\", \"Poda ou Corte Irregular\", \"Serviço Não Executado\"], \"Sic - Pedido de Acesso à Informação||Sic - Pedido de Acesso à Informação\": [\"Sic - Pedido de Acesso à Informação\"], \"Solicitação||Ambulantes\": [\"Fiscalização\"], \"Solicitação||Animais\": [\"Cachorro Abandonado\", \"Cavalo Solto\", \"Gato Abandonado\", \"Outros\", \"Vaca / Boi Soltos\"], \"Solicitação||Assistência Social\": [\"APROMO\", \"Benefícios Sociais\", \"CRAM\", \"CRAS I\", \"CRAS II\", \"CRAS III\", \"CREAS I\", \"CREAS II\", \"Centro Pop\", \"Centro da Juventude\", \"Conselho Tutelar\", \"Família Acolhedora\", \"Outros\"], \"Solicitação||Banco de Alimentos\": [\"Outros\"], \"Solicitação||Bueiros e Galerias Pluviais\": [\"Manutenção em Geral\", \"Outros\", \"Reparo\", \"Retira de Animais, Objetos e Pessoas\", \"Troca de Tampa\"], \"Solicitação||Buraco no Asfalto\": [\"Outros\", \"Recapeamento Asfáltico\", \"Tapa Buracos\"], \"Solicitação||CMEI Municipal\": [\"Manutenção em Ar-Condicionado\", \"Manutenção em Geral do CMEI\", \"Material Escolar\", \"Outros\", \"Uniforme Escolar\"], \"Solicitação||Capina\": [\"Campo de Futebol\", \"Canteiros de Avenidas\", \"Estádio Municipal\", \"Ginásios de Esportes\", \"Outros\", \"Parques InfantIs\", \"Pista de Caminhada\", \"Praças Públicas\"], \"Solicitação||Casa do Empreendedor\": [\"Microempreendedor Individual – MEI\", \"Outros\"], \"Solicitação||Cemitério\": [\"Manutenção em Geral\", \"Outros\"], \"Solicitação||Coleta de Lixo\": [\"Entulhos\", \"Folhas Ensacadas\", \"Grama Ensacada\", \"Orgânico\", \"Outros\", \"Reciclável\"], \"Solicitação||Concurso Público Municipal\": [\"Outros\"], \"Solicitação||Condomínio do Idoso\": [\"Outros\"], \"Solicitação||Enfeites de Natal\": [\"Instalação de Enfeites\", \"Manutenção nos Enfeites\", \"Outros\", \"Retirada dos Enfeites\"], \"Solicitação||Escola Municipal\": [\"Manutenção em Ar-Condicionado\", \"Manutenção em Geral da Escola\", \"Material Escolar\", \"Outros\", \"Uniforme Escolar\"], \"Solicitação||Esportes\": [\"Manutenção em Campo de Futebol\", \"Manutenção em Estádio Municipal\", \"Manutenção em Ginásio de Esportes\", \"Manutenção em Quadra Esportivas em Locais Públicos\", \"Outros\", \"Reserva de Quadras dos Ginásios Municipais\"], \"Solicitação||Estacionamento\": [\"Estacionamento Rotativo\", \"Vagas Especiais\"], \"Solicitação||Estação Rodoviária Municipal\": [\"Outros\"], \"Solicitação||Estradas Rurais\": [\"Capina\", \"Cascalhamento da Estrada\", \"Desnível na Estrada\", \"Manutenção da Estrada\", \"Outros\", \"Retirada de Automóveis Atolados\"], \"Solicitação||Fiscalização - Obras\": [\"Armazenamento Irregular de Materiais de Construção\", \"Ausência de Construção de Calçada\", \"Calçada Com Danificação\", \"Construção Abandonada\", \"Construção Irregular de Calçada\", \"Descarte Irregular de Entulhos de Construção\", \"Encanamentos Irregulares\", \"Outros\", \"Residência Com Infiltração\"], \"Solicitação||Fossas\": [\"Esvaziamento\", \"Outros\"], \"Solicitação||Fundação Cultural\": [\"Aulas de Artes\", \"Aulas de Dança\", \"Aulas de Instrumentos\", \"Aulas de Teatro\", \"Outros\", \"Teatro Municipal\"], \"Solicitação||Iluminação Pública\": [\"Globo Quebrado\", \"Luz Piscando\", \"Lâmpada Queimada\", \"Outros\", \"Refletores em Praças Públicas\", \"Troca de Lâmpada Antiga Para Led\"], \"Solicitação||Locais Abandonados\": [\"Outros\"], \"Solicitação||Manutenções Públicas - Obras\": [\"Aparelhos da Academia da Terceira Idade\", \"Bebedouros Públicos\", \"Canaletas e Meio-Fio\", \"Outros\", \"Parque Infantil\", \"Pontos de Transporte Coletivo (De concreto)\", \"Praças Públicas\", \"Salão Comunitário\"], \"Solicitação||Obstrução\": [\"Calçada Com Materiais de Construção\", \"Comércios Com Mesas na Calçada\", \"Comércios Com Produtos na Calçada\", \"Outros\", \"Passagem do Passeio Público\", \"Placa de Anúncios\"], \"Solicitação||PROCON\": [\"Outros\"], \"Solicitação||Patrimônio Municipal\": [\"Outros\"], \"Solicitação||Placas e Sinalizações\": [\"Placa de Proibido Jogar Lixos\", \"Placas de Trânsito\", \"Sinalização Vertical e Horizontal\"], \"Solicitação||Postes\": [\"Outros\", \"Pintura de Nome da Rua e CEP\"], \"Solicitação||Restaurante Popular\": [\"Outros\"], \"Solicitação||Servidores Municipais\": [\"Aposentadoria\", \"Outros\"], \"Solicitação||Telefones Municipais\": [\"Outros\"], \"Solicitação||Terreno\": [\"Limpeza em Terreno do Munípio\", \"Outros\"], \"Solicitação||Transporte\": [\"Ponto de Tranporte Urbano (Circular)\", \"Transporte Escolar\", \"Transporte Urbano (Circular)\"], \"Solicitação||Trânsito\": [\"Estudo de Tráfego\", \"Implantação ou Alteração de Dispositivos de Controle Viário\", \"Outros\"], \"Solicitação||Varrição\": [\"Limpeza de Avenida\", \"Limpeza de Rua\", \"Outros\"], \"Solicitação||Veículo Abandonado\": [\"Fiscalização\", \"Outros\"], \"Solicitação||Árvore\": [\"Cobrindo a Iluminação Pública\", \"Outros\", \"Retirada de Árvore Caída\"], \"Sugestão||Ambulantes\": [\"Outros\"], \"Sugestão||Animais\": [\"Outros\"], \"Sugestão||Assistência Social\": [\"APROMO\", \"Benefícios Sociais\", \"CRAM\", \"CRAS I\", \"CRAS II\", \"CRAS III\", \"CREAS I\", \"CREAS II\", \"Centro Pop\", \"Centro da Juventude\", \"Conselho Tutelar\", \"Família Acolhedora\", \"Outros\"], \"Sugestão||Aterro Sanitário\": [\"Aterro Sanitário\"], \"Sugestão||Banco de Alimentos\": [\"Outros\"], \"Sugestão||Bueiros e Galerias Pluviais\": [\"Outros\"], \"Sugestão||Buraco no Asfalto\": [\"Outros\"], \"Sugestão||CMEI Municipal\": [\"Outros\"], \"Sugestão||Capina\": [\"Outros\"], \"Sugestão||Casa do Empreendedor\": [\"Microempreendedor Individual – MEI\", \"Outros\"], \"Sugestão||Cemitério\": [\"Outros\"], \"Sugestão||Coleta de Lixo\": [\"Outros\"], \"Sugestão||Concurso Público Municipal\": [\"Outros\"], \"Sugestão||Condomínio do Idoso\": [\"Outros\"], \"Sugestão||Enfeites de Natal\": [\"Outros\"], \"Sugestão||Escola Municipal\": [\"Outros\"], \"Sugestão||Esportes\": [\"Outros\"], \"Sugestão||Estacionamento\": [\"Outros\"], \"Sugestão||Estação Rodoviária Municipal\": [\"Outros\"], \"Sugestão||Estradas Rurais\": [\"Outros\"], \"Sugestão||Feiras\": [\"Outros\"], \"Sugestão||Fiscalização - Obras\": [\"Outros\"], \"Sugestão||Fossas\": [\"Outros\"], \"Sugestão||Fundação Cultural\": [\"Aulas de Artes\", \"Aulas de Dança\", \"Aulas de Instrumentos\", \"Aulas de Teatro\", \"Outros\", \"Teatro Municipal\"], \"Sugestão||Iluminação Pública\": [\"Outros\"], \"Sugestão||Locais Abandonados\": [\"Outros\"], \"Sugestão||Obstrução\": [\"Outros\"], \"Sugestão||PROCON\": [\"Outros\"], \"Sugestão||Patrimônio Municipal\": [\"Outros\"], \"Sugestão||Placas e Sinalizações\": [\"Outros\"], \"Sugestão||Postes\": [\"Outros\"], \"Sugestão||Restaurante Popular\": [\"Outros\"], \"Sugestão||Servidores Municipais\": [\"Aposentadoria\", \"Outros\"], \"Sugestão||Taxas\": [\"Outros\"], \"Sugestão||Telefones Municipais\": [\"Outros\"], \"Sugestão||Terreno\": [\"Outros\"], \"Sugestão||Transporte\": [\"Ponto de Tranporte Urbano (Circular)\", \"Transporte Escolar\", \"Transporte Urbano (Circular)\"], \"Sugestão||Trânsito\": [\"Outros\"], \"Sugestão||Varrição\": [\"Outros\"], \"Sugestão||Veículo Abandonado\": [\"Outros\"]};const k=model.tema+'||'+model.assunto;const o=m[k]||[];return o.map(v=>({label:v,value:v}))})()",
+                "templateOptions|||required": "!!model.tema && !!model.assunto"
+              },
+              "hideExpression": "!model.assunto"
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": false,
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "conditional",
+                  "values": [
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "APROMO",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+                        "id": "69df79cfb3729c17e0feff7a",
+                        "label": "Ouvidoria Setorial – Secretaria da Assistência Social"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Alimentação Escolar",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Aparelhos da Academia da Terceira Idade",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Aposentadoria",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Armazenamento Irregular de Materiais de Construção",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Assédio Moral",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Assédio Sexual",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Ateamento de Fogo",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialpostura_umuaramapr",
+                        "id": "69e02897ea9b37ecc085d9a2",
+                        "label": "Ouvidoria Setorial – Divisão de Postura"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Aterro Sanitário",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialmeioambiente_umuaramapr",
+                        "id": "69e67a68362ec39c4b195be8",
+                        "label": "Ouvidoria Setorial – Meio Ambiente"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Aulas de Artes",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialfundacaocultural_umuaramapr",
+                        "id": "69e02bc60adc9b417bc354bd",
+                        "label": "Ouvidoria Setorial – Fundação Cultural"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Aulas de Dança",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialfundacaocultural_umuaramapr",
+                        "id": "69e02bc60adc9b417bc354bd",
+                        "label": "Ouvidoria Setorial – Fundação Cultural"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Aulas de Instrumentos",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialfundacaocultural_umuaramapr",
+                        "id": "69e02bc60adc9b417bc354bd",
+                        "label": "Ouvidoria Setorial – Fundação Cultural"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Aulas de Teatro",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialfundacaocultural_umuaramapr",
+                        "id": "69e02bc60adc9b417bc354bd",
+                        "label": "Ouvidoria Setorial – Fundação Cultural"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Ausência da Instalação",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Ausência de Construção de Calçada",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Bebedouros Públicos",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Benefícios Sociais",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+                        "id": "69df79cfb3729c17e0feff7a",
+                        "label": "Ouvidoria Setorial – Secretaria da Assistência Social"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "CRAM",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+                        "id": "69df79cfb3729c17e0feff7a",
+                        "label": "Ouvidoria Setorial – Secretaria da Assistência Social"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "CRAS I",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+                        "id": "69df79cfb3729c17e0feff7a",
+                        "label": "Ouvidoria Setorial – Secretaria da Assistência Social"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "CRAS II",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+                        "id": "69df79cfb3729c17e0feff7a",
+                        "label": "Ouvidoria Setorial – Secretaria da Assistência Social"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "CRAS III",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+                        "id": "69df79cfb3729c17e0feff7a",
+                        "label": "Ouvidoria Setorial – Secretaria da Assistência Social"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "CREAS I",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+                        "id": "69df79cfb3729c17e0feff7a",
+                        "label": "Ouvidoria Setorial – Secretaria da Assistência Social"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "CREAS II",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+                        "id": "69df79cfb3729c17e0feff7a",
+                        "label": "Ouvidoria Setorial – Secretaria da Assistência Social"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Cachorro Abandonado",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialmeioambiente_umuaramapr",
+                        "id": "69e67a68362ec39c4b195be8",
+                        "label": "Ouvidoria Setorial – Meio Ambiente"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Calçada Com Danificação",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Calçada Com Materiais de Construção",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Caminhão Abandonado",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Campo de Futebol",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Canaletas e Meio-Fio",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Canteiros de Avenidas",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Capina",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialrodoviarios_umuaramapr",
+                        "id": "69e6691d362ec39c4b193f6d",
+                        "label": "Ouvidoria Setorial – Serviços Rodoviários"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Carro Abandonado",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Casa Abandonada",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Cascalhamento da Estrada",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialrodoviarios_umuaramapr",
+                        "id": "69e6691d362ec39c4b193f6d",
+                        "label": "Ouvidoria Setorial – Serviços Rodoviários"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Cavalo Solto",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialpostura_umuaramapr",
+                        "id": "69e02897ea9b37ecc085d9a2",
+                        "label": "Ouvidoria Setorial – Divisão de Postura"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Centro Pop",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+                        "id": "69df79cfb3729c17e0feff7a",
+                        "label": "Ouvidoria Setorial – Secretaria da Assistência Social"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Centro da Juventude",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+                        "id": "69df79cfb3729c17e0feff7a",
+                        "label": "Ouvidoria Setorial – Secretaria da Assistência Social"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Cobrindo a Iluminação Pública",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialmeioambiente_umuaramapr",
+                        "id": "69e67a68362ec39c4b195be8",
+                        "label": "Ouvidoria Setorial – Meio Ambiente"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Coleta de Lixo - Público",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialdivisaocadastroimobiliario_umuaramapr",
+                        "id": "69e02a970adc9b417bc353a2",
+                        "label": "Ouvidoria Setorial – Divisão de Cadastro Imobiliário"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Comércios Com Mesas na Calçada",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialpostura_umuaramapr",
+                        "id": "69e02897ea9b37ecc085d9a2",
+                        "label": "Ouvidoria Setorial – Divisão de Postura"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Comércios Com Produtos na Calçada",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialpostura_umuaramapr",
+                        "id": "69e02897ea9b37ecc085d9a2",
+                        "label": "Ouvidoria Setorial – Divisão de Postura"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Conselho Tutelar",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+                        "id": "69df79cfb3729c17e0feff7a",
+                        "label": "Ouvidoria Setorial – Secretaria da Assistência Social"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Construção Abandonada",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Construção Irregular de Calçada",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Descarte Irregular de Entulhos de Construção",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Desnível",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Desnível na Estrada",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialrodoviarios_umuaramapr",
+                        "id": "69e6691d362ec39c4b193f6d",
+                        "label": "Ouvidoria Setorial – Serviços Rodoviários"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Dias Que é Feita a Coleta",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Empresa Sem Alvará",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialpostura_umuaramapr",
+                        "id": "69e02897ea9b37ecc085d9a2",
+                        "label": "Ouvidoria Setorial – Divisão de Postura"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Encanamentos Irregulares",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Entulhos",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Estacionamento Rotativo",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialdivisaotransito_umuaramapr",
+                        "id": "69e0d4f5ddb0968f08d13eea",
+                        "label": "Ouvidoria Setorial – Divisão de Trãnsito"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Estudo de Tráfego",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialengenhariatransito_umuaramapr",
+                        "id": "69e0d5308af218add9a021bf",
+                        "label": "Ouvidoria Setorial – Divisão de Engenharia de Trânsito"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Estádio Municipal",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Esvaziamento",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Falta de Profissional de Apoio a Estudante Com Necessidades Especiais",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Família Acolhedora",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoirasetorialsecretariaassistencia_umuaramapr",
+                        "id": "69df79cfb3729c17e0feff7a",
+                        "label": "Ouvidoria Setorial – Secretaria da Assistência Social"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Fiscalização",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialpostura_umuaramapr",
+                        "id": "69e02897ea9b37ecc085d9a2",
+                        "label": "Ouvidoria Setorial – Divisão de Postura"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Folhas Ensacadas",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Gato Abandonado",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialmeioambiente_umuaramapr",
+                        "id": "69e67a68362ec39c4b195be8",
+                        "label": "Ouvidoria Setorial – Meio Ambiente"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Ginásios de Esportes",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Globo Quebrado",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Grama Ensacada",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "IPTU",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialdivisaocadastroimobiliario_umuaramapr",
+                        "id": "69e02a970adc9b417bc353a2",
+                        "label": "Ouvidoria Setorial – Divisão de Cadastro Imobiliário"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Iluminação Pública",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialdivisaocadastroimobiliario_umuaramapr",
+                        "id": "69e02a970adc9b417bc353a2",
+                        "label": "Ouvidoria Setorial – Divisão de Cadastro Imobiliário"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Implantação ou Alteração de Dispositivos de Controle Viário",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialengenhariatransito_umuaramapr",
+                        "id": "69e0d5308af218add9a021bf",
+                        "label": "Ouvidoria Setorial – Divisão de Engenharia de Trânsito"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Instalação de Enfeites",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Limpeza de Avenida",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Limpeza de Rua",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Limpeza em Terreno do Munípio",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialpostura_umuaramapr",
+                        "id": "69e02897ea9b37ecc085d9a2",
+                        "label": "Ouvidoria Setorial – Divisão de Postura"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Luz Piscando",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Lâmpada Queimada",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Manutenção da Estrada",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialrodoviarios_umuaramapr",
+                        "id": "69e6691d362ec39c4b193f6d",
+                        "label": "Ouvidoria Setorial – Serviços Rodoviários"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Manutenção em Ar-Condicionado",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsecretariaeducacao_umuaramapr",
+                        "id": "69df7c38590459e0008a6b5a",
+                        "label": "Ouvidoria Setorial – Secretaria de Educação"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Manutenção em Campo de Futebol",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialesportelazer_umuaramapr",
+                        "id": "69df7cabd29eee13eee0533e",
+                        "label": "Ouvidoria Setorial – Secretaria de Esporte e Lazer"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Manutenção em Estádio Municipal",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialesportelazer_umuaramapr",
+                        "id": "69df7cabd29eee13eee0533e",
+                        "label": "Ouvidoria Setorial – Secretaria de Esporte e Lazer"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Manutenção em Geral da Escola",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Manutenção em Geral do CMEI",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Manutenção em Ginásio de Esportes",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialesportelazer_umuaramapr",
+                        "id": "69df7cabd29eee13eee0533e",
+                        "label": "Ouvidoria Setorial – Secretaria de Esporte e Lazer"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Manutenção em Quadra Esportivas em Locais Públicos",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialesportelazer_umuaramapr",
+                        "id": "69df7cabd29eee13eee0533e",
+                        "label": "Ouvidoria Setorial – Secretaria de Esporte e Lazer"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Manutenção nos Enfeites",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Material Escolar",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsecretariaeducacao_umuaramapr",
+                        "id": "69df7c38590459e0008a6b5a",
+                        "label": "Ouvidoria Setorial – Secretaria de Educação"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Maus-Tratos",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Microempreendedor Individual – MEI",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Má Conduta",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Orgânico",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Outros",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Parque Infantil",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Parques InfantIs",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Passagem do Passeio Público",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialpostura_umuaramapr",
+                        "id": "69e02897ea9b37ecc085d9a2",
+                        "label": "Ouvidoria Setorial – Divisão de Postura"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Perturbação de Sossego",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialmeioambiente_umuaramapr",
+                        "id": "69e67a68362ec39c4b195be8",
+                        "label": "Ouvidoria Setorial – Meio Ambiente"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Pintura de Nome da Rua e CEP",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Pista de Caminhada",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Placa de Anúncios",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialpostura_umuaramapr",
+                        "id": "69e02897ea9b37ecc085d9a2",
+                        "label": "Ouvidoria Setorial – Divisão de Postura"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Placa de Proibido Jogar Lixos",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Placas de Trânsito",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialengenhariatransito_umuaramapr",
+                        "id": "69e0d5308af218add9a021bf",
+                        "label": "Ouvidoria Setorial – Divisão de Engenharia de Trânsito"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Poda ou Corte Irregular",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialmeioambiente_umuaramapr",
+                        "id": "69e67a68362ec39c4b195be8",
+                        "label": "Ouvidoria Setorial – Meio Ambiente"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Ponto Comercial Abandonado",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Ponto de Tranporte Urbano (Circular)",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialdivisaotransito_umuaramapr",
+                        "id": "69e0d4f5ddb0968f08d13eea",
+                        "label": "Ouvidoria Setorial – Divisão de Trãnsito"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Pontos de Transporte Coletivo (De concreto)",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Prédio Abandonado",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Recapeamento Asfáltico",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Reciclável",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialservicospublicos_umuaramapr",
+                        "id": "69e668dceffd86d601da2241",
+                        "label": "Ouvidoria Setorial – Serviços Públicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Refletores em Praças Públicas",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Reparo",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Reserva de Quadras dos Ginásios Municipais",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialesportelazer_umuaramapr",
+                        "id": "69df7cabd29eee13eee0533e",
+                        "label": "Ouvidoria Setorial – Secretaria de Esporte e Lazer"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Residência Com Infiltração",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Retira de Animais, Objetos e Pessoas",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Retirada de Automóveis Atolados",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialrodoviarios_umuaramapr",
+                        "id": "69e6691d362ec39c4b193f6d",
+                        "label": "Ouvidoria Setorial – Serviços Rodoviários"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Retirada de Árvore Caída",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialmeioambiente_umuaramapr",
+                        "id": "69e67a68362ec39c4b195be8",
+                        "label": "Ouvidoria Setorial – Meio Ambiente"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Retirada dos Enfeites",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "SAAU",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Salão Comunitário",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Sem Funcionamento",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Serviço Mal Executado",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Serviço Não Executado",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Sic - Pedido de Acesso à Informação",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Sinalização Vertical e Horizontal",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialengenhariatransito_umuaramapr",
+                        "id": "69e0d5308af218add9a021bf",
+                        "label": "Ouvidoria Setorial – Divisão de Engenharia de Trânsito"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Tapa Buracos",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Teatro Municipal",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialfundacaocultural_umuaramapr",
+                        "id": "69e02bc60adc9b417bc354bd",
+                        "label": "Ouvidoria Setorial – Fundação Cultural"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Terreno Sujo",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Transporte Escolar",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsecretariaeducacao_umuaramapr",
+                        "id": "69df7c38590459e0008a6b5a",
+                        "label": "Ouvidoria Setorial – Secretaria de Educação"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Transporte Urbano (Circular)",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialdivisaotransito_umuaramapr",
+                        "id": "69e0d4f5ddb0968f08d13eea",
+                        "label": "Ouvidoria Setorial – Divisão de Trãnsito"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Transporte de Atletas",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Troca de Lâmpada Antiga Para Led",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Troca de Tampa",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsdopuept_umuaramapr",
+                        "id": "69dd8c1bdcd7ae3c6add47a1",
+                        "label": "Ouvidoria Setorial – Secretaria de Obras, Planejamento Urbano e Projetos Técnicos"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Uniforme Escolar",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialsecretariaeducacao_umuaramapr",
+                        "id": "69df7c38590459e0008a6b5a",
+                        "label": "Ouvidoria Setorial – Secretaria de Educação"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Vaca / Boi Soltos",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialpostura_umuaramapr",
+                        "id": "69e02897ea9b37ecc085d9a2",
+                        "label": "Ouvidoria Setorial – Divisão de Postura"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Vagas Especiais",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "ouvidoriasetorialengenhariatransito_umuaramapr",
+                        "id": "69e0d5308af218add9a021bf",
+                        "label": "Ouvidoria Setorial – Divisão de Engenharia de Trânsito"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Vendedores Irregulares",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Praças Públicas",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    },
+                    {
+                      "field": {
+                        "value": "servico",
+                        "id": "servico",
+                        "label": "Serviço",
+                        "type": "select",
+                        "fieldConfig": {
+                          "id": "servico",
+                          "field": {
+                            "key": "servico",
+                            "type": "select"
+                          }
+                        }
+                      },
+                      "operator": "equal",
+                      "value": "Manutenção em Geral",
+                      "valueType": "select",
+                      "destination": {
+                        "type": "sector",
+                        "value": "72ouvidoria_umuaramapr",
+                        "id": "6980e721dfa19ba0d3c48d66",
+                        "label": "7.2 Ouvidoria Geral do Município"
+                      }
+                    }
+                  ]
+                },
+                "sensitiveField": false,
+                "destinationAccessLevel": "FULL",
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "hideLabel": false,
+                "hidden": false,
+                "hiddenTemp": false
+              },
+              "className": "col-12",
+              "hide": true,
+              "expressionProperties": {}
+            },
+            {
+              "type": "next-ck",
+              "key": "corpo_do_texto",
+              "templateOptions": {
+                "label": "Manifestação",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "endereco_cep",
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP",
+                "placeholder": "Ex: 00000-000",
+                "mask": "00000-000",
+                "required": false,
+                "hideData": true,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "status_integracaocep_imovel",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.endereco_cep?.status == 'LOADING' "
+              },
+              "hideExpression": " model.endereco_cep?.status !== 'LOADING'  || !model.endereco_cep?.input"
+            },
+            {
+              "className": "col-12",
+              "key": "erro_integracaocep_imovel",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "(model.endereco_cep?.status !== 'SUCCESS') || (model.endereco_cep?.data?.response?.result?.erro === true) || (model.endereco_cep?.input?.length === 8 && model.endereco_cep?.status === 'KNOWN_FAILED') "
+              },
+              "hideExpression": "(model.endereco_cep?.status === 'SUCCESS' && model.endereco_cep?.data?.response?.result?.erro !== true) || (model.endereco_cep?.input?.length !== 8 && model.endereco_cep?.status !== 'KNOWN_FAILED') || !model.endereco_cep.input "
+            },
+            {
+              "className": "col-12",
+              "key": "logradouro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Logradouro",
+                "required": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {
+                "model|||logradouro_imovel": "model.logradouro_imovel && model.logradouro_imovel == model.endereco_cep?.data?.response?.result?.logradouro ? model.logradouro_imovel : model.endereco_cep?.data?.response?.result?.logradouro"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "erro_logradouro",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O 'Logradouro' informado deve possuir no máximo 50 caracteres. Informações adicionais devem ser inseridas em 'Complemento'.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": " model.logradouro_imovel?.length > 50  "
+              },
+              "hideExpression": "model.logradouro_imovel?.length <= 50 || !model.logradouro_imovel  "
+            },
+            {
+              "className": "col-12",
+              "key": "numero_imovel",
+              "type": "input",
+              "templateOptions": {
+                "label": "Número Predial",
+                "placeholder": "Ex: S/N",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": " !model.endereco_cep?.input "
+            },
+            {
+              "className": "col-12",
+              "key": "erro_numero_predial",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Número Predial da Obra' informado deve possuir no máximo 10 caracteres.</div></div><br>",
+                "label": "",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.numero_imovel?.length > 10  "
+              },
+              "hideExpression": "model.numero_imovel?.length <= 10 || !model.numero_imovel "
+            },
+            {
+              "className": "col-12",
+              "key": "bairro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Bairro",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "placeholder": "",
+                "focus": false
+              },
+              "expressionProperties": {
+                "model|||bairro_imovel": "model.bairro_imovel && model.bairro_imovel ==  model.endereco_cep?.data?.response?.result?.bairro ? model.bairro_imovel :  model.endereco_cep?.data?.response?.result?.bairro"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "complemento_imovel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento",
+                "placeholder": "Ex: Esquina com Rua São Paulo",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-6",
+              "key": "cidade_obra",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Município",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||cidade_obra": "model.cidade_obra && model.cidade_obra ==  model.endereco_cep?.data?.response?.result?.localidade ? model.cidade_obra :  model.endereco_cep?.data?.response?.result?.localidade"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-6",
+              "key": "uf_obra",
+              "type": "next-input",
+              "resetOnHide": true,
+              "templateOptions": {
+                "label": "Estado",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||uf_obra": "model.uf_obra && model.uf_obra ==  model.endereco_cep?.data?.response?.result?.uf ? model.uf_obra :  model.endereco_cep?.data?.response?.result?.uf"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "mapa",
+              "type": "next-mapa",
+              "templateOptions": {
+                "label": "Localização",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "mapsOptions": {
+                  "center": {
+                    "lat": -23.7641,
+                    "lng": -53.3184
+                  },
+                  "zoom": 14
+                }
+              },
+              "expressionProperties": {}
+            },
+            {
+              "type": "next-upload",
+              "key": "anexos",
+              "templateOptions": {
+                "label": "Anexos (fotos, documentos etc)",
+                "required": false,
+                "columns": "12",
+                "extends": [
+                  "PDF",
+                  "PNG",
+                  "IMG",
+                  "JPG",
+                  "JPEG",
+                  "MP3",
+                  "MP4",
+                  "ZIP",
+                  "XLSX",
+                  "XLS",
+                  "DOC",
+                  "DOCX",
+                  "CSV"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "hideLabel": false,
+                "compactView": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "ocorrencia_pergunta",
+              "type": "radio",
+              "templateOptions": {
+                "label": "A manifestação refere-se a alguma unidade de atendimento da Prefeitura ou endereço específico ?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "tipo_local_ocorrencia",
+              "type": "select",
+              "templateOptions": {
+                "label": "Selecione o tipo do local da ocorrência",
+                "options": [
+                  {
+                    "label": "Unidade da Prefeitura",
+                    "value": "Unidade da Prefeitura"
+                  },
+                  {
+                    "label": "Endereço específico (Ex.: Em alguma rua da sua região, praças, parques e etc.)",
+                    "value": "Endereço específico"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.ocorrencia_pergunta !== 'Sim'"
+            },
+            {
+              "className": "col-12",
+              "key": "unidade_prefeitura",
+              "type": "next-input-data-autocomplete",
+              "wrappers": [
+                "form-field",
+                "consumeDataset"
+              ],
+              "templateOptions": {
+                "label": "Qual unidade?",
+                "placeholder": "Digite o nome da unidade em que foi atendido",
+                "focus": false,
+                "datasetReference": "69d54d9611e0c3a3f5617095",
+                "datasetKey": "unidades",
+                "object": true,
+                "hideData": true,
+                "autocomplete": true,
+                "required": false,
+                "hidden": false,
+                "readonly": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.tipo_local_ocorrencia === 'Unidade da Prefeitura'"
+              },
+              "hideExpression": "model.tipo_local_ocorrencia !== 'Unidade da Prefeitura'"
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": true,
+                "hideLabel": false,
+                "sectorFromToggle": false,
+                "sensitiveField": false,
+                "accessLevel": "RESTRICTED",
+                "anonymousSenderToggle": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados da solicitação",
+            "subtitle": "",
+            "textHtml": "<div class=\"text-sm text-gray-700\"><h4 class=\"font-bold mb-3 text-gray-900\">Entenda os Tipos de Manifestação:</h4><ul class=\"space-y-3\"><li class=\"bg-blue-50 p-2 rounded border-l-4 border-blue-500\"><strong>Solicitação:</strong> É o <u>pedido inicial</u> para que a prefeitura realize um serviço. <i>Ex: pedir para tapar um buraco, capinar um canteiro ou trocar uma lâmpada apagada.</i></li><li class=\"bg-red-50 p-2 rounded border-l-4 border-red-500\"><strong>Reclamação:</strong> É a demonstração de insatisfação. Deve ser usada quando um serviço já solicitado <u>não foi resolvido no prazo</u> ou foi prestado de forma ineficiente pela prefeitura.</li><li class=\"pt-2\"><strong>Denúncia:</strong> Comunicação de irregularidade, ato ilícito ou infração na administração pública.</li><li><strong>Sugestão:</strong> Proposta de melhoria para a cidade ou para os serviços públicos.</li><li><strong>Elogio:</strong> Reconhecimento e satisfação por um bom atendimento ou serviço prestado.</li><li><strong>Informação:</strong> Pedido de orientação ou instrução sobre processos da prefeitura.</li></ul></div>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ]
+}

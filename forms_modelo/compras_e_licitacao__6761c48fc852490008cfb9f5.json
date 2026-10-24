@@ -1,0 +1,2580 @@
+{
+  "_id": "6761c48fc852490008cfb9f5",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "sensitiveField": false,
+                "accessLevel": "FULL",
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "assunto",
+              "type": "select",
+              "templateOptions": {
+                "label": "Assunto ",
+                "options": [
+                  {
+                    "label": "Pregão/Dispensa por Valor",
+                    "value": "Pregão/Dispensa por Valor"
+                  },
+                  {
+                    "label": "Pregão de serviços de Engenharia",
+                    "value": "Pregão de serviços de Engenharia"
+                  },
+                  {
+                    "label": "Concorrência Pública de obras",
+                    "value": "Concorrência Pública de obras"
+                  },
+                  {
+                    "label": "Concorrência Pública (outros)",
+                    "value": "Concorrência Pública (outros)"
+                  },
+                  {
+                    "label": "Dispensa (outros)",
+                    "value": "Dispensa (outros)"
+                  },
+                  {
+                    "label": "Inexigibilidade",
+                    "value": "Inexigibilidade"
+                  },
+                  {
+                    "label": "Credenciamento/Chamamento",
+                    "value": "Credenciamento/Chamamento"
+                  },
+                  {
+                    "label": "Adesão ARP",
+                    "value": "Adesão ARP"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "placeholder": "-selecione-",
+                "disabled": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "especificar_assunto",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Especificar",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.assunto !=='Outro'"
+            },
+            {
+              "key": "nome_objeto",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "Nome do Objeto",
+                "placeholder": "Digite aqui",
+                "focus": "false",
+                "type": "text",
+                "rows": "5",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Assunto",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "matricula",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Matricula",
+                "placeholder": "Insira o número da matrícula",
+                "readonly": false,
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Notificação",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone/Ramal",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "setor_solicitante",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do Setor Solicitante",
+                "placeholder": "Ex: Setor de Trânsito",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "aviso_pregao",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='p-1 rounded' style='background-color: #add8e6; color: #003366; text-align: center'>Esse card só estará disponível para preenchimento quando o assunto for Pregão/Dispensa por valor.</div><br>",
+                "focus": "false",
+                "required": false,
+                "label": "aviso pregao",
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.assunto === 'Pregão/Dispensa por Valor'"
+            },
+            {
+              "key": "comunicacao_inicial",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comunicação Inicial",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_dispensa"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão/Dispensa por Valor'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão/Dispensa por Valor'"
+            },
+            {
+              "key": "doc_formalizador_demanda",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento Formalizador de Demanda",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_dispensa"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão/Dispensa por Valor'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão/Dispensa por Valor'"
+            },
+            {
+              "key": "estudo_tecnico_preliminar",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Estudo Técnico Preliminar - ETP",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_dispensa"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão/Dispensa por Valor'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão/Dispensa por Valor'"
+            },
+            {
+              "key": "termo_referencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Termo de Referência - TR",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_dispensa"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão/Dispensa por Valor'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão/Dispensa por Valor'"
+            },
+            {
+              "key": "mapa_risco",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Mapa de Risco",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_dispensa"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão/Dispensa por Valor'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão/Dispensa por Valor'"
+            },
+            {
+              "key": "reserva_orcamentaria",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Reserva Orçamentária para as despesas do exercício corrente",
+                "options": [],
+                "focus": "false",
+                "required": false,
+                "placeholder": "",
+                "disabled": false,
+                "includeTemplates": [
+                  "pregao_dispensa"
+                ],
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão/Dispensa por Valor'"
+            },
+            {
+              "key": "declaracao_ordenador",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declaração do Ordenador de Despesas",
+                "options": [],
+                "focus": "false",
+                "required": false,
+                "includeTemplates": [
+                  "pregao_dispensa"
+                ]
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão/Dispensa por Valor'"
+            },
+            {
+              "key": "portaria_designacao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Portaria de Designação de Gestor e Fiscal",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_dispensa"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão/Dispensa por Valor'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão/Dispensa por Valor'"
+            },
+            {
+              "key": "publicacao_portaria_diario_oficial",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cópia da Publicação da portaria no Diário oficial",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_dispensa"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão/Dispensa por Valor'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão/Dispensa por Valor'"
+            },
+            {
+              "key": "autorizacao_contratacao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Autorização de contratação",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_dispensa"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão/Dispensa por Valor'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão/Dispensa por Valor'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Pregão / Dispensa por valor",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Pregão / Dispensa por valor</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">A definição da modalidade se aplicável pregão ou dispensa por valor será realizada pela unidade de planejamento da contratação responsável,\nconsiderando o ramo de atividade da contratação e o planejamento anual;&nbsp;</li>\n</li>\n<li align = \"justify\">Estudo Técnico Preliminar, facultado nas hipóteses de inexigibilidade de licitação previstas nos incisos I, II e IV do art. 74 e hipóteses de dispensa previstas nos\nincisos VII e VIII do art. 75 da Lei Federal nº 14.133, de 2021 e nas pequenas compras. Fonte: Decreto 5.156/24.\n</li>\n<li align = \"justify\">Análise de Riscos, facultada nos casos de pronta entrega e pronto pagamento cujo objeto não enseje em obrigações e garantias posteriores. Fonte: Decreto 5.156/24.\n</li>\n\n\n<li align = \"justify\">A Reserva orçamentária é exigida quando o procedimento que não for de aplicado o sistema de registro de preços, e deve suportar as despesas previstas para o\nano corrente.\n</li>\n<li align = \"justify\"> A Declaração do ordenador de despesas deverá estar presente quando a contratação representar criação, expansão ou aperfeiçoamento de ação governamental\nque acarrete aumento da despesa. Art. 16 - Lei Complementar 101 - Lei de Responsabilidade Fiscal.\n\n</li>\n\n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "aviso_pregao_engenharia",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='p-1 rounded' style='background-color: #add8e6; color: #003366; text-align: center'>Esse card só estará disponível para preenchimento quando o assunto for Pregão de serviços de Engenharia.</div><br>",
+                "focus": "false",
+                "required": false,
+                "label": "aviso pregao",
+                "placeholder": "",
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.assunto === 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "comunicacao_engenharia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comunicação Inicial",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão de serviços de Engenharia'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "doc_demanda_engenharia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento Formalizador de Demanda - DFD",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão de serviços de Engenharia'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "estudo_tecnico_engenharia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Estudo Técnico Preliminar - ETP",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão de serviços de Engenharia'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "termo_referencia_engenharia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Termo de Referência - TR",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão de serviços de Engenharia'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "anexo_bdi",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Anexo BDI",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão de serviços de Engenharia'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "planilha_engenharia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Planilha Orçamentária",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão de serviços de Engenharia'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "cronograma_fisico_engenharia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cronograma Físico-Financeiro",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão de serviços de Engenharia'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "relatorio_fotografico_engenharia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Relatório Fotográfico",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão de serviços de Engenharia'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "mapa_risco_engenharia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Mapa de Risco",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão de serviços de Engenharia'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "reserva_orcamentaria_engenharia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Reserva Orçamentária para as despesas do exercício corrente",
+                "options": [],
+                "focus": "false",
+                "required": false,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "ordenador_engenharia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declaração do Ordenador de Despesas",
+                "options": [],
+                "focus": "false",
+                "required": false,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "designacao_engenharia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Portaria de Designação de Gestor e Fiscal",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão de serviços de Engenharia'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "publicacao_engenharia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cópia da Publicação da portaria no Diário Oficial",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão de serviços de Engenharia'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            },
+            {
+              "key": "autorizacao_engenharia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Autorização de contratação ",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "pregao_engenharia"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Pregão de serviços de Engenharia'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Pregão de serviços de Engenharia'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Pregão de Serviços de Engenharia",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Pregão de Serviços de Engenharia</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">A Reserva orçamentária é exigida quando o procedimento que não for de aplicado o sistema de registro de preços, e deve suportar as despesas previstas para o ano corrente.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "aviso_pregao_concorrencia",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='p-1 rounded' style='background-color: #add8e6; color: #003366; text-align: center'>Esse card só estará disponível para preenchimento quando o assunto for Concorrência Pública de Obras.</div><br>",
+                "focus": "false",
+                "required": false,
+                "label": "aviso pregao",
+                "placeholder": "",
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.assunto === 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "comunicacao_oficial_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comunicação oficial",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública de obras'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "documento_formalizar_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento Formalizador de Demanda - DFD",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública de obras'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "estudo_tecnico_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Estudo Técnico Preliminar - ETP",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública de obras'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "projeto_basico_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Projeto Básico",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública de obras'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "memorial_descritivo_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Memorial Descritivo",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública de obras'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "anexo_bdi_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Anexo BDI",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública de obras'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "planilha_orcamentaria_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Planilha Orçamentária",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública de obras'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "cronograma_fisico_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cronograma Físico Financeiro",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública de obras'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "relatorio_fotografico_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Relatório Fotográfico",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública de obras'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "mapa_risco_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Mapa de Risco",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública de obras'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "reserva_orcamentaria_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Reserva Orçamentária para as despesas do exercício corrente",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "declaracao_ordenador_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declaração do Ordenador de Despesas",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "portaria_designacao_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Portaria de Designação de Gestor e Fiscal",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública de obras'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "copia_publicacao_portaria_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cópia da Publicação da portaria no Diário Oficial",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública de obras'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            },
+            {
+              "key": "autorizacao_contratacao_concorrencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Autorização de contratação",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública de obras'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública de obras'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Concorrência Pública de Obras",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Concorrência Pública de Obras</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">A Reserva orçamentária é exigida quando o procedimento que não for de aplicado o sistema de registro de preços, e deve suportar as despesas previstas para o\nano corrente.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "aviso_pregao_concorrencia_outros",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='p-1 rounded' style='background-color: #add8e6; color: #003366; text-align: center'>Esse card só estará disponível para preenchimento quando o assunto for Concorrência Pública (outros).</div><br>",
+                "focus": "false",
+                "required": false,
+                "label": "aviso pregao",
+                "placeholder": "",
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.assunto === 'Concorrência Pública (outros)'"
+            },
+            {
+              "key": "comunicacao_oficial_concorrencia_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comunicação oficial",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública (outros)'"
+            },
+            {
+              "key": "documento_formalizar_concorrencia_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento Formalizador de Demanda - DFD",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública (outros)'"
+            },
+            {
+              "key": "estudo_tecnico_concorrencia_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Estudo Técnico Preliminar - ETP",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública (outros)'"
+            },
+            {
+              "key": "projeto_basico_concorrencia_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Projeto Básico - PB (Termo de Referência - TR)",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública (outros)'"
+            },
+            {
+              "key": "mapa_risco_concorrencia_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Mapa de Risco",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública (outros)'"
+            },
+            {
+              "key": "reserva_orcamentaria_concorrencia_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Reserva Orçamentária para as despesas do exercício corrente",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública (outros)'"
+            },
+            {
+              "key": "declaracao_ordenador_concorrencia_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declaração do Ordenador de Despesas",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública (outros)'"
+            },
+            {
+              "key": "portaria_designacao_concorrencia_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Portaria de Designação de Gestor e Fiscal",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública (outros)'"
+            },
+            {
+              "key": "copia_publicacao_portaria_concorrencia_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cópia da Publicação da portaria no Diário Oficial",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública (outros)'"
+            },
+            {
+              "key": "autorizacao_contratacao_concorrencia_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Autorização de contratação",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Concorrência Pública (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Concorrência Pública (outros)'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Concorrência Pública (outros)",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Concorrência Pública (outros)</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">A Reserva orçamentária é exigida quando o procedimento que não for de aplicado o sistema de registro de preços, e deve suportar as despesas previstas para o\nano corrente.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "aviso_pregao_dispensa_outros",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='p-1 rounded' style='background-color: #add8e6; color: #003366; text-align: center'>Esse card só estará disponível para preenchimento quando o assunto for Dispensa (outros).</div><br>",
+                "focus": "false",
+                "required": false,
+                "label": "aviso pregao",
+                "placeholder": "",
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.assunto === 'Dispensa (outros)'"
+            },
+            {
+              "key": "comunicacao_oficial_dispensa_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comunicação oficial",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "documento_formalizar_dispensa_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento Formalizador de Demanda - DFD",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "estudo_tecnico_diespensa_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Estudo Técnico Preliminar - ETP",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "projeto_basico_dispensa_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Termo de Referência - TR",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "mapa_risco_dispensa_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Mapa de Risco",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "reserva_orcamentaria_dispensa_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Reserva Orçamentária para as despesas do exercício corrente",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "declaracao_ordenador_dispensa_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declaração do Ordenador de Despesas",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "portaria_designacao_dispensa_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Portaria de Designação de Gestor e Fiscal",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "copia_publicacao_portaria_dispensa_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cópia da Publicação da portaria no Diário Oficial",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "proposta_empresa_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Proposta da empresa",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "justificativa_contratacao_dispensa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Justificativa de Contratação Direta",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "autorizacao_contratacao_dispensa_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Autorização de contratação",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "habilitacao_juridica_dispensa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Habilitação Jurídica (Contrato Social, Requerimento, etc)",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "certidao_negativa_dispensa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Certidão negativa de falência e recuperação",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "inscricao_estadual_dispensa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Inscrição Municipal e Estadual",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "comprovacao_cnpj_dispensa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovação de cadastro no CNPJ ou CPF",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "cnd_trabalhista_dispensa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND Trabalhista",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "cnd_fgts_dispensa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND FGTS",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "cnd_federal",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND Federal",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "cnd_estadual",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND Estadual",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "cnd_municipal_dispensa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND Municipal",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "declaracao_unificada_dispensa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declaração Unificada",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            },
+            {
+              "key": "cadastro_sicaf_dispensa_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cadastro no SICAF",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Dispensa (outros)'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Dispensa (outros)'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Dispensa (outros)",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dispensa (outros)</span>\n\n\n<ul class = \"pt-2\">\n <li align = \"justify\"> Estudo Técnico Preliminar, facultado nas hipóteses de inexigibilidade de licitação previstas nos incisos I, II e IV do art. 74 e hipóteses de dispensa previstas nos\nincisos VII e VIII do art. 75 da Lei Federal nº 14.133, de 2021 e nas pequenas compras. Fonte: Decreto 5.156/24.\n</li>\n\n<li align = \"justify\">Análise de Riscos, facultada nos casos de pronta entrega e pronto pagamento cujo objeto não enseje em obrigações e garantias posteriores. Fonte: Decreto 5.156/24.\n</li>\n\n\n<li align = \"justify\">A Reserva orçamentária é exigida quando o procedimento que não for de aplicado o sistema de registro de preços, e deve suportar as despesas previstas para o ano corrente.\n</li>\n\n\n<li align = \"justify\">A Declaração do ordenador de despesas deverá estar presente quando a contratação representar criação, expansão ou aperfeiçoamento de ação governamental que acarrete aumento da despesa. Art. 16 - Lei Complementar 101 - Lei de Responsabilidade Fiscal.\n</li>\n\n\n<li align = \"justify\"> Inscrição municipal obrigatório no caso de contratação de serviços, inscrição estadual obrigatória no caso de fornecimento de bens. \n</li>\n\n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "aviso_inexigibilidade",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='p-1 rounded' style='background-color: #add8e6; color: #003366; text-align: center'>Esse card só estará disponível para preenchimento quando o assunto for Inexigibilidade.</div><br>",
+                "focus": "false",
+                "required": false,
+                "label": "aviso Inexigibilidade",
+                "placeholder": "",
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.assunto === 'Inexigibilidade'"
+            },
+            {
+              "key": "comunicacao_oficial_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comunicação oficial",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "documento_formalizar_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento Formalizador de Demanda - DFD",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ],
+                "hidden": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "estudo_tecnico_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Estudo Técnico Preliminar - ETP",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "projeto_basico_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Termo de Referência - TR",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "mapa_risco_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Mapa de Risco",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "reserva_orcamentaria_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Reserva Orçamentária para as despesas do exercício corrente",
+                "options": [],
+                "focus": "false",
+                "required": false,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "declaracao_ordenador_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declaração do Ordenador de Despesas",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "portaria_designacao_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Portaria de Designação de Gestor e Fiscal",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "copia_publicacao_portaria_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cópia da Publicação da portaria no Diário Oficial",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "proposta_empresa_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Proposta da empresa",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "comprovacao_exclusividade_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovação de exclusividade",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "avaliacao_previa_bem_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Avaliação Prévia do Bem",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "certifcacao_inexistencia_inexigilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Certificação da inexistência de imóveis públicos vagos e disponíveis que atendam ao objeto",
+                "options": [],
+                "focus": "false",
+                "required": false,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "justificativa_singularidade_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Justificativa de singularidade do imóvel que mostre vantajosidade",
+                "options": [],
+                "focus": "false",
+                "required": false,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "justificativa_contratacao_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Justificativa de Contratação Direta",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "autorizacao_contratacao_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Autorização de contratação",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "habilitacao_juridica_dispensa_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Habilitação Jurídica (Contrato Social, Requerimento, etc)",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "certidao_negativa_dispensa_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Certidão negativa de falência e recuperação",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "inscricao_estadual_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Inscrição Municipal e Estadual",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "comprovacao_cnpj_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovação de cadastro no CNPJ ou CPF",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "cnd_trabalhista_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND Trabalhista",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "cnd_fgts_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND FGTS",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "cnd_federa_inexigibilidadel",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND Federal",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "cnd_estadual_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND Estadual",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "cnd_municipal_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND Municipal",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "declaracao_unificada_inexigibilidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declaração Unificada",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            },
+            {
+              "key": "cadastro_sicaf_inexigibilidade_outros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cadastro no SICAF",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "includeTemplates": [
+                  "inexigibilidade"
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Inexigibilidade'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Inexigibilidade'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Inexigibilidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Inexigibilidade</span>\n\n\n<ul class = \"pt-2\">\n <li align = \"justify\"> Estudo Técnico Preliminar, facultado nas hipóteses de inexigibilidade de licitação previstas nos incisos I, II e IV do art. 74 e hipóteses de dispensa previstas nos\nincisos VII e VIII do art. 75 da Lei Federal nº 14.133, de 2021 e nas pequenas compras. Fonte: Decreto 5.156/24.\n</li>\n\n<li align = \"justify\">Análise de Riscos, facultada nos casos de pronta entrega e pronto pagamento cujo objeto não enseje em obrigações e garantias posteriores. Fonte: Decreto\n5.156/24.\n</li>\n\n\n<li align = \"justify\">A Reserva orçamentária é exigida quando o procedimento que não for de aplicado o sistema de registro de preços, e deve suportar as despesas previstas para o\nano corrente.\n</li>\n\n\n<li align = \"justify\">A Declaração do ordenador de despesas deverá estar presente quando a contratação representar criação, expansão ou aperfeiçoamento de ação governamental\nque acarrete aumento da despesa. Art. 16 - Lei Complementar 101 - Lei de Responsabilidade Fiscal.\n</li>\n\n\n<li align = \"justify\"> Inscrição municipal obrigatório no caso de contratação de serviços, inscrição estadual obrigatória no caso de fornecimento de bens. \n</li>\n\n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "aviso_credenciamento",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='p-1 rounded' style='background-color: #add8e6; color: #003366; text-align: center'>Esse card só estará disponível para preenchimento quando o assunto for Credenciamento/Chamamento.</div><br>",
+                "focus": "false",
+                "required": false,
+                "label": "aviso Chamamento",
+                "placeholder": "",
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.assunto === 'Credenciamento/Chamamento'"
+            },
+            {
+              "key": "comunicacao_chamamento",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comunicação Inicial",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Credenciamento/Chamamento'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Credenciamento/Chamamento'"
+            },
+            {
+              "key": "doc_formalizador_chamamento",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento Formalizador de demanda - DFD",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Credenciamento/Chamamento'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Credenciamento/Chamamento'"
+            },
+            {
+              "key": "estudo_chamamento",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Estudo Técnico Preliminar - ETP",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Credenciamento/Chamamento'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Credenciamento/Chamamento'"
+            },
+            {
+              "key": "termo_referencia_chamamento",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Termo de Referência - TR",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Credenciamento/Chamamento'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Credenciamento/Chamamento'"
+            },
+            {
+              "key": "mapa_risco_chamamento",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Mapa de Risco",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Credenciamento/Chamamento'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Credenciamento/Chamamento'"
+            },
+            {
+              "key": "autorizacao_chamamento",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Autorização de contratação",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Credenciamento/Chamamento'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Credenciamento/Chamamento'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Credeciamento/Chamamento",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Credeciamento/Chamamento</span>\n\n\n<ol class = \"pt-2\">\n <li align = \"justify\"> Estudo Técnico Preliminar, facultado nas hipóteses de inexigibilidade de licitação previstas nos incisos I, II e IV do art. 74 e hipóteses de dispensa previstas nos\nincisos VII e VIII do art. 75 da Lei Federal nº 14.133, de 2021 e nas pequenas compras. Fonte: Decreto 5.156/24.\n</li>\n\n\n<li align = \"justify\">Análise de Riscos, facultada nos casos de pronta entrega e pronto pagamento cujo objeto não enseje em obrigações e garantias posteriores. Fonte: Decreto 5.156/24.\n</li>\n\n</ol>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "aviso_adesao_arp",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='p-1 rounded' style='background-color: #add8e6; color: #003366; text-align: center'>Esse card só estará disponível para preenchimento quando o assunto for Adesão ARP.</div><br>",
+                "focus": "false",
+                "required": false,
+                "label": "aviso adesao arp",
+                "placeholder": "",
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.assunto === 'Adesão ARP'"
+            },
+            {
+              "key": "comunicacao_oficial_adesaoarp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comunicação oficial",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "documento_formalizar_adesaoarp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento Formalizador de Demanda - DFD",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "estudo_tecnico_adesaoarp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Estudo Técnico Preliminar - ETP (Que conclua pela Adesão)",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "comprovacao_vantajosidade_adesao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovação de Vantajosidade de adesão",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "anuencia_adesaoarp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Anuência da entidade gerenciadora",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "anuencia_empresa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Anuência da empresa",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "mapa_risco_adesaoarp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Mapa de Risco",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "reserva_orcamentaria_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Reserva Orçamentária para as despesas do exercício corrente",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "declaracao_ordenador_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declaração do Ordenador de Despesas",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "portaria_designacao_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Portaria de Designação de Gestor e Fiscal",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "copia_publicacao_portaria_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cópia da Publicação da portaria no Diário Oficial",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "proposta_empresa_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Proposta da empresa",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "autorizacao_contratacao_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Autorização de contratação",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "habilitacao_juridica_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Habilitação Jurídica (Contrato Social, Requerimento, etc)",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "certidao_negativa_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Certidão negativa de falência e recuperação",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "inscricao_estadual_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Inscrição Municipal e Estadual",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "comprovacao_cnpj_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovação de cadastro no CNPJ ou CPF",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "cnd_trabalhista_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND Trabalhista",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "cnd_fgts_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND FGTS",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "cnd_federal_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND Federal",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "cnd_estadual_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND Estadual",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "cnd_municipal_adesao_arp",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CND Municipal",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "declaracao_unificada_adesao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declaração Unificada",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            },
+            {
+              "key": "cadastro_sicaf",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cadastro no SICAF",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.assunto == 'Adesão ARP'"
+              },
+              "hideExpression": "!model.assunto || model.assunto !== 'Adesão ARP'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Adesão ARP",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Adesão ARP</span>\n\n\n<ol class = \"pt-2\">\n <li align = \"justify\"> Estudo Técnico Preliminar, facultado nas hipóteses de inexigibilidade de licitação previstas nos incisos I, II e IV do art. 74 e hipóteses de dispensa previstas nos\nincisos VII e VIII do art. 75 da Lei Federal nº 14.133, de 2021 e nas pequenas compras. Fonte: Decreto 5.156/24.\n</li>\n\n<li align = \"justify\">Análise de Riscos, facultada nos casos de pronta entrega e pronto pagamento cujo objeto não enseje em obrigações e garantias posteriores. Fonte: Decreto 5.156/24.\n</li>\n\n\n<li align = \"justify\">A Reserva orçamentária é exigida quando o procedimento que não for de aplicado o sistema de registro de preços, e deve suportar as despesas previstas para o ano corrente.\n</li>\n\n\n<li align = \"justify\">A Declaração do ordenador de despesas deverá estar presente quando a contratação representar criação, expansão ou aperfeiçoamento de ação governamental\nque acarrete aumento da despesa. Art. 16 - Lei Complementar 101 - Lei de Responsabilidade Fiscal.\n</li>\n\n\n<li align = \"justify\"> Inscrição municipal obrigatório no caso de contratação de serviços, inscrição estadual obrigatória no caso de fornecimento de bens. \n</li>\n\n\n</ol>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "obs_solic",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Observações sobre a solicitação",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": "true",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": "true",
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "predefined",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "admmodelo_modeload",
+                      "label": "Secretaria de Administração",
+                      "id": "675c980a96ab6200088ea449"
+                    }
+                  ]
+                },
+                "placeholder": "",
+                "focus": "false",
+                "disabled": "false",
+                "sensitiveField": false,
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "step": {
+    "shared": {
+      "informative": "Acesse a aba Resumo para verificar o andamento do seu processo",
+      "automatic": [
+        {
+          "subscribe": [
+            "process/update/activities",
+            "process/timeline"
+          ],
+          "execute": "({ resume, activities, signatures, documents, process }) => {\n    if (process.timeline.reverse().slice()[0].data.action == 'Realizou ação do processo licitatório e modalidade') {\n        set({activities: activities})\n    };\n};"
+        },
+        {
+          "subscribe": [
+            "process/update/activities",
+            "process/timeline"
+          ],
+          "execute": "({ resume, activities, signatures, documents, process }) => {\n    if (process.timeline.reverse().slice()[0].data.action == 'Realizou ação do processo licitatório e modalidade') {\n        set({activities: activities})\n    };\n};"
+        }
+      ],
+      "tab": [],
+      "action": []
+    },
+    "config": []
+  },
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Compras e Licitação",
+    "descricao": "Processo interno para aquisição de bens e serviços, envolvendo a definição das necessidades, a escolha dos fornecedores e a realização de licitações, quando necessário.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "sigla": "LIC",
+    "useNewSidebarForwarding": true,
+    "newSignatureStrategy": true,
+    "experimentalMode": true,
+    "templates": [],
+    "experimentalmode": true,
+    "form_tramites": [],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Administração ou RH",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "admmodelo_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "tramite": [
+    {
+      "_id": "676ecfe032fd27000809f460",
+      "groupId": "admmodelo_modeload"
+    }
+  ],
+  "__v": 0,
+  "city_id": 38
+}

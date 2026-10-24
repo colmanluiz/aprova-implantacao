@@ -1,0 +1,1054 @@
+{
+  "_id": "6a7a4132e8dd5d78244f35c9",
+  "__v": 0,
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Recurso sobre Intimação/ Notificação/ Auto de Infração",
+    "descricao": "Processo para entrada online de Recurso sobre Intimação/Notificação.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "REC",
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Ofício",
+        "template": "ModeloAD/oficio_defesaV10.html",
+        "function": "processComplete",
+        "official": true,
+        "viewed": true
+      },
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Ofício - 2ª Instância",
+        "template": "ModeloAD/oficio_defesa_2instancaV10.html",
+        "function": "processComplete",
+        "official": true,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Dados do Autuado",
+        "text_action": "Realizou ação",
+        "key": "new_key217203",
+        "form": [
+          {
+            "key": "nome_razao_autuado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome/Razão Social do Autuado",
+              "placeholder": "João...",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "endereco_autuado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço do Autuado",
+              "placeholder": "Informe o Endereço do Autuado",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "numero_protocolo",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Número do Protocolo",
+              "placeholder": "Informe o número do protocolo",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "numero_auto_infracao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Número do Auto de Infração",
+              "placeholder": "Informe  número do Auto de Infração",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "nome_razao_autuado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome/Razão Social do Autuado",
+              "placeholder": "João...",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "endereco_autuado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Endereço do Autuado",
+              "placeholder": "Informe o Endereço do Autuado",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "numero_protocolo",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Número do Protocolo",
+              "placeholder": "Informe o número do protocolo",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "numero_auto_infracao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Número do Auto de Infração",
+              "placeholder": "Informe  número do Auto de Infração",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Julgamento de defesa",
+        "text_action": "Realizou ação",
+        "key": "analisederecurso_card",
+        "form": [
+          {
+            "key": "local_infracao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Local da Infração",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "motivo_autuacoes",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Motivo das autuações",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "resumo_defesa",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Resumo da defesa",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "conclusao_julgamento",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Conclusão do Julgamento",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "anexos_analise",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "local_infracao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Local da Infração",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "motivo_autuacoes",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Motivo das autuações",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "resumo_defesa",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Resumo da defesa",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "conclusao_julgamento",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Conclusão do Julgamento",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "anexos_analise",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "permission": "process:analista",
+        "checkPermission": true
+      },
+      {
+        "nome": "Julgamento em Segunda Instância",
+        "text_action": "Realizou ação",
+        "key": "julgamento_segunda_instancia",
+        "form": [
+          {
+            "key": "texto_apresentacao_2instancia",
+            "type": "next-ck",
+            "defaultValue": "Ao cumprimentá-lo cordialmente, por meio deste, a Secretaria Municipal de Meio Ambiente, Saneamento e Sustentabilidade, considerando a decisão de julgamento em 2ª instância por parte do Conselho Municipal de Meio Ambiente, Saneamento Básico e Sustentabilidade de Santa Cruz do Sul/RS em relação ao recurso administrativo apresentado.",
+            "templateOptions": {
+              "label": "Texto de apresentação",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "motivo_autuacoes_2instanca",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações (conteúdo incluído no ofício)",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexos_analise",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "texto_apresentacao_2instancia",
+            "type": "next-ck",
+            "defaultValue": "Ao cumprimentá-lo cordialmente, por meio deste, a Secretaria Municipal de Meio Ambiente, Saneamento e Sustentabilidade, considerando a decisão de julgamento em 2ª instância por parte do Conselho Municipal de Meio Ambiente, Saneamento Básico e Sustentabilidade de Santa Cruz do Sul/RS em relação ao recurso administrativo apresentado.",
+            "templateOptions": {
+              "label": "Texto de apresentação",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "motivo_autuacoes_2instanca",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações (conteúdo incluído no ofício)",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexos_analise",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "permission": "process:analista",
+        "checkPermission": true
+      },
+      {
+        "nome": "Taxa de Aprovação",
+        "text_action": "Emitiu taxa de Aprovação",
+        "key": "taxasProcesso",
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado e então selecione a opção 'Enviar para Análise' para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "permission": "taxas",
+        "type": "taxa",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado e então selecione a opção 'Enviar para Análise' para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "multiple",
+      "possibleReceivers": []
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": true
+  },
+  "city_id": 38,
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "verif_processo",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Este processo está sendo aberto para envio de defesa pelo autuado ?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Verificação Processo",
+            "subtitle": "Novo subtitulo",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": false,
+                "sectorFromToggle": false,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "wrappers": [
+                "search-user"
+              ],
+              "key": "user_dados",
+              "type": "next-input",
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "nomerecorrente",
+              "type": "input",
+              "templateOptions": {
+                "label": "Nome/Razão Social do Recorrente",
+                "required": true,
+                "readonly": false,
+                "placeholder": "Ex: Maria da Silva",
+                "hideLabel": false,
+                "columns": "12",
+                "hiddenTemp": false,
+                "sensitiveField": false
+              },
+              "expressionProperties": {
+                "model|||nomerecorrente": "model.user_dados?.user?.user_metadata.name"
+              },
+              "className": "col-12"
+            },
+            {
+              "wrappers": [
+                "mirror"
+              ],
+              "key": "cpf_cnpj_responsavel",
+              "type": "radio",
+              "templateOptions": {
+                "label": "CPF/CNPJ do Recorrente",
+                "options": [
+                  {
+                    "value": "CPF"
+                  },
+                  {
+                    "value": "CNPJ"
+                  }
+                ],
+                "focus": "false",
+                "readonly": false,
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpf_cnpj_responsavel": "model.cpf_cnpj_responsavel ? model.cpf_cnpj_responsavel : ' ' "
+              }
+            },
+            {
+              "wrappers": [
+                "mirror"
+              ],
+              "key": "responsavel_cpf",
+              "type": "next-input",
+              "resetOnHide": false,
+              "templateOptions": {
+                "label": "CPF do Recorrente",
+                "placeholder": "Insira o CPF do Recorrente",
+                "mask": "000.000.000-009",
+                "readonly": false,
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hideLabel": false,
+                "columns": "12",
+                "sensitiveField": false,
+                "hidden": true
+              },
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "expressionProperties": {
+                "model|||responsavel_cpf": "model.user_dados?.user?.user_metadata.cpf",
+                "templateOptions|||mask": "model.responsavel_cpf?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' "
+              },
+              "className": "col-12",
+              "hideExpression": "model.cpf_cnpj_responsavel != 'CPF'"
+            },
+            {
+              "wrappers": [
+                "mirror"
+              ],
+              "key": "responsavel_cnpj",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CNPJ do Recorrente",
+                "placeholder": "Insira o CNPJ do Recorrente",
+                "mask": "AA.AAA.AAA/AAAA-00",
+                "readonly": false,
+                "required": false,
+                "hideLabel": false,
+                "columns": "12",
+                "hiddenTemp": false,
+                "sensitiveField": false
+              },
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "resetOnHide": true,
+              "expressionProperties": {
+                "model|||responsavel_cnpj": "model.user_dados?.user?.user_metadata.cpf",
+                "templateOptions|||required": "model.cpf_cnpj_responsavel == 'CNPJ'"
+              },
+              "className": "col-12",
+              "hideExpression": "model.cpf_cnpj_responsavel !== 'CNPJ'"
+            },
+            {
+              "key": "emailrecorrente",
+              "type": "input",
+              "templateOptions": {
+                "label": "E-mail do Recorrente",
+                "required": true,
+                "readonly": false,
+                "placeholder": "",
+                "hideLabel": false,
+                "columns": "12",
+                "hiddenTemp": false,
+                "sensitiveField": false
+              },
+              "expressionProperties": {
+                "model|||emailrecorrente": "model.user_dados?.user?.email"
+              },
+              "className": "col-12"
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.user_dados?.user?.user_metadata.telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'",
+                "templateOptions|||required": "model.verif_processo != 'Não'"
+              }
+            },
+            {
+              "key": "rua_recorrente",
+              "className": "col-6",
+              "type": "input",
+              "templateOptions": {
+                "label": "Rua",
+                "placeholder": "Ex: Rua São Paulo",
+                "required": true,
+                "readonly": false
+              },
+              "expressionProperties": {
+                "model|||rua_recorrente": "model.user_dados?.user?.user_metadata.rua",
+                "templateOptions|||required": "model.verif_processo != 'Não'"
+              }
+            },
+            {
+              "key": "bairro_recorrente",
+              "className": "col-6",
+              "type": "input",
+              "templateOptions": {
+                "label": "Bairro",
+                "placeholder": "Ex: Centro",
+                "required": true,
+                "readonly": false
+              },
+              "expressionProperties": {
+                "model|||bairro_recorrente": "model.user_dados?.user?.user_metadata.bairro",
+                "templateOptions|||required": "model.verif_processo != 'Não'"
+              }
+            },
+            {
+              "key": "numero_recorrente",
+              "className": "col-6",
+              "type": "input",
+              "templateOptions": {
+                "label": "Número",
+                "placeholder": "Ex: 100",
+                "required": true,
+                "readonly": false
+              },
+              "expressionProperties": {
+                "model|||numero_recorrente": "model.user_dados?.user?.user_metadata.numero",
+                "templateOptions|||required": "model.verif_processo != 'Não'"
+              }
+            },
+            {
+              "key": "complemento_recorrente",
+              "className": "col-6",
+              "type": "input",
+              "templateOptions": {
+                "label": "Complemento",
+                "placeholder": "Ex: Bloco A, apto 101",
+                "required": false,
+                "readonly": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "cidade_recorrente",
+              "className": "col-6",
+              "type": "input",
+              "templateOptions": {
+                "label": "Cidade",
+                "placeholder": "Ex: Sorocaba",
+                "required": true,
+                "readonly": false
+              },
+              "expressionProperties": {
+                "model|||cidade_recorrente": "model.user_dados?.user?.user_metadata.cidade",
+                "templateOptions|||required": "model.verif_processo != 'Não'"
+              }
+            },
+            {
+              "key": "estado_recorrente",
+              "className": "col-6",
+              "type": "input",
+              "templateOptions": {
+                "label": "Estado",
+                "placeholder": "Ex: São Paulo",
+                "required": true,
+                "readonly": false
+              },
+              "expressionProperties": {
+                "model|||estado_recorrente": "model.user_dados?.user?.user_metadata.estado",
+                "templateOptions|||required": "model.verif_processo != 'Não'"
+              }
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "readonly": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "sensitiveField": false,
+                "multiple": true,
+                "hideLabel": false,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Identificação do Recorrente/Consultor",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "templateOptions": {
+            "title": "Identificação do Autuado",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "fieldGroup": [
+            {
+              "type": "next-input",
+              "key": "nomerazo_social",
+              "templateOptions": {
+                "label": "Nome/Razão Social",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.verif_processo != 'Não'"
+              },
+              "className": "col-12"
+            },
+            {
+              "type": "next-cpf-cnpj",
+              "key": "cpfcnpj",
+              "templateOptions": {
+                "label": "CPF/CNPJ",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "omitirCrea": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.verif_processo != 'Não'"
+              },
+              "className": "col-12"
+            },
+            {
+              "type": "next-input",
+              "key": "endereo_da_autuao",
+              "templateOptions": {
+                "label": "Endereço da autuação",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.verif_processo != 'Não'"
+              },
+              "className": "col-12"
+            },
+            {
+              "type": "next-input",
+              "key": "email",
+              "templateOptions": {
+                "label": "E-mail",
+                "required": false,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "type": "next-input",
+              "key": "telefone",
+              "templateOptions": {
+                "label": "Telefone",
+                "required": false,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "solicitacao_intimacao",
+              "type": "radio",
+              "className": "col-6",
+              "templateOptions": {
+                "label": "A notificação/infração foi realizada via:",
+                "options": [
+                  {
+                    "label": "Processo Aprova",
+                    "value": "Processo Aprova"
+                  },
+                  {
+                    "label": "Processo Físico/Sysnova",
+                    "value": "Processo Físico/Sysnova"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "columns": "6"
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "numero_processo",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número do Processo de Intimação/Notificação",
+                "placeholder": "Ex: O número deve ser completo, com traços e siglas se possuir.",
+                "focus": "false",
+                "type": "text",
+                "checkIfExist": true,
+                "required": true,
+                "allowedTypes": []
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.solicitacao_intimacao == 'Processo Aprova'"
+              },
+              "hideExpression": "model.solicitacao_intimacao !== 'Processo Aprova'"
+            },
+            {
+              "key": "processo_fisico",
+              "className": "col-6",
+              "type": "next-input",
+              "resetOnHide": true,
+              "templateOptions": {
+                "label": "Número da Notificação/ Auto de Infração",
+                "placeholder": "01/2000",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.solicitacao_intimacao !== 'Processo Físico/Sysnova'"
+            },
+            {
+              "key": "processo_fisico2",
+              "className": "col-6",
+              "type": "next-input",
+              "resetOnHide": true,
+              "templateOptions": {
+                "label": "Número do processo",
+                "placeholder": "01/2000",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.solicitacao_intimacao !== 'Processo Físico/Sysnova'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Identificação da Notificação/Auto de Infração",
+            "subtitle": "",
+            "textHtml": "<div class=\"\" >\n  <span class=\"p-1 rounded bg-yellow-500 text-white  \">Atenção</span>\n</div>\n<br>\n\nInsira os dados da Notificação/ Auto de Infração, conforme solicitado ao lado e confira os dados, se trata-se da situação correta.\n<br><BR>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "templateOptions": {
+            "title": "Identificação do Protocolo de Cumprimento da Solicitação do Auto de Infração/Notificação",
+            "subtitle": "",
+            "textHtml": "<p><span style=\"background-color:rgb(253,253,253);color:rgb(51,51,51);\"><span style=\"-webkit-text-stroke-width:0px;display:inline !important;float:none;font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">Este campo é destinado ao registro do protocolo referente ao cumprimento das exigências constantes no Auto de Infração/Notificação.</span></span><br><span style=\"background-color:rgb(253,253,253);color:rgb(51,51,51);\"><span style=\"-webkit-text-stroke-width:0px;display:inline !important;float:none;font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">Devem ser informados aqui os dados do protocolo de </span></span><strong style=\"-webkit-text-stroke-width:0px;background-color:rgb(253, 253, 253);color:rgb(51, 51, 51);font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">pedido de licenciamento ambiental</strong><span style=\"background-color:rgb(253,253,253);color:rgb(51,51,51);\"><span style=\"-webkit-text-stroke-width:0px;display:inline !important;float:none;font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">,&nbsp;</span></span><strong style=\"-webkit-text-stroke-width:0px;background-color:rgb(253, 253, 253);color:rgb(51, 51, 51);font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">pedido de aprovação de PRAD</strong><span style=\"background-color:rgb(253,253,253);color:rgb(51,51,51);\"><span style=\"-webkit-text-stroke-width:0px;display:inline !important;float:none;font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">, entre outros.</span></span><br><span style=\"background-color:rgb(253,253,253);color:rgb(51,51,51);\"><span style=\"-webkit-text-stroke-width:0px;display:inline !important;float:none;font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">Cabe salientar que este protocolo é utilizado </span></span><strong style=\"-webkit-text-stroke-width:0px;background-color:rgb(253, 253, 253);color:rgb(51, 51, 51);font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">apenas para o envio da defesa/recurso</strong><span style=\"background-color:rgb(253,253,253);color:rgb(51,51,51);\"><span style=\"-webkit-text-stroke-width:0px;display:inline !important;float:none;font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\"> e&nbsp;</span></span><strong style=\"-webkit-text-stroke-width:0px;background-color:rgb(253, 253, 253);color:rgb(51, 51, 51);font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">não corresponde ao protocolo de análise ou aprovação</strong><span style=\"background-color:rgb(253,253,253);color:rgb(51,51,51);\"><span style=\"-webkit-text-stroke-width:0px;display:inline !important;float:none;font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\"> de nenhum outro processo.</span></span><br><span style=\"background-color:rgb(253,253,253);color:rgb(51,51,51);\"><span style=\"-webkit-text-stroke-width:0px;display:inline !important;float:none;font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">O pedido de análise/aprovação deverá ser encaminhado </span></span><strong style=\"-webkit-text-stroke-width:0px;background-color:rgb(253, 253, 253);color:rgb(51, 51, 51);font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">separadamente</strong><span style=\"background-color:rgb(253,253,253);color:rgb(51,51,51);\"><span style=\"-webkit-text-stroke-width:0px;display:inline !important;float:none;font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">, conforme determinado no respectivo Auto de Infração.</span></span></p>",
+            "editMode": false
+          },
+          "fieldGroup": [
+            {
+              "type": "radio",
+              "key": "o_processo_foi_encaminhado",
+              "templateOptions": {
+                "label": "O processo foi encaminhado",
+                "required": false,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "options": [
+                  {
+                    "label": "Processo Aprova",
+                    "value": "Processo Aprova"
+                  },
+                  {
+                    "label": "Processo Físico/Sysnova",
+                    "value": "Processo Físico/Sysnova"
+                  }
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||readonly": "model.verif_processo == 'Não'"
+              },
+              "className": "col-12"
+            },
+            {
+              "className": "col-12",
+              "key": "numero_processo_auto",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número do Processo",
+                "placeholder": "Ex: O número deve ser completo, com traços e siglas se possuir.",
+                "focus": "false",
+                "type": "text",
+                "checkIfExist": true,
+                "required": true,
+                "allowedTypes": []
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.o_processo_foi_encaminhado == 'Processo Aprova'"
+              },
+              "hideExpression": "model.o_processo_foi_encaminhado !== 'Processo Aprova'"
+            },
+            {
+              "key": "processo_fisico3",
+              "className": "col-6",
+              "type": "next-input",
+              "resetOnHide": true,
+              "templateOptions": {
+                "label": "Número do processo",
+                "placeholder": "01/2000",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.o_processo_foi_encaminhado !== 'Processo Físico/Sysnova'"
+            }
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "justificativa",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Justificativa/Observação",
+                "placeholder": "Insira aqui sua justificativa/observação",
+                "focus": "false",
+                "rows": "4",
+                "required": false,
+                "readonly": false
+              },
+              "expressionProperties": {
+                "templateOptions|||readonly": "model.verif_processo == 'Não'",
+                "templateOptions|||required": "model.verif_processo != 'Não'"
+              }
+            },
+            {
+              "key": "anexos_solicitacao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Anexos",
+                "options": [],
+                "focus": "false",
+                "extends": [
+                  "pdf",
+                  "PDF",
+                  "png",
+                  "PNG",
+                  "img",
+                  "IMG",
+                  "jpg",
+                  "JPG",
+                  "jpeg",
+                  "JPEG"
+                ],
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||readonly": "model.verif_processo == 'Não'"
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Recurso",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ]
+}

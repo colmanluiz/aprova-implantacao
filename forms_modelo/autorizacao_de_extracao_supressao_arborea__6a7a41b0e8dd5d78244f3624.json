@@ -1,0 +1,3170 @@
+{
+  "_id": "6a7a41b0e8dd5d78244f3624",
+  "__v": 0,
+  "config": {
+    "title": "Autorização de extração (supressão) arbórea",
+    "descricao": "",
+    "devolverAoUltimo": true,
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "newSignatureStrategy": true,
+    "experimentalMode": true,
+    "requiresPreCreationSignature": true,
+    "useNewSidebarForwarding": true,
+    "sigla": "AEA",
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Autorização",
+        "template": "ModeloAD/corte_poda.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "possui_prazo_validade": true,
+        "viewed": true
+      },
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Relatório de Vistoria",
+        "template": "ModeloAD/relatorio_vistoria_extracao.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Autorização",
+        "text_action": "Realizou ação",
+        "key": "card_autorizacao",
+        "form": [
+          {
+            "key": "texto_doc",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Conclusão do técnico",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "user_dados",
+            "type": "next-input",
+            "wrappers": [
+              "search-user"
+            ],
+            "templateOptions": {
+              "searchUser": {
+                "myself": true,
+                "show": "name"
+              },
+              "label": "User Dados",
+              "type": "text",
+              "required": true,
+              "hidden": true
+            }
+          },
+          {
+            "key": "user",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome do técnico responsável",
+              "required": true,
+              "readonly": true
+            },
+            "expressionProperties": {
+              "model|||user": "model.user_dados?.user?.user_metadata.name"
+            }
+          },
+          {
+            "key": "compensacao",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Compensação",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "local_compensacao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": " Localização da propriedade da compensação",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "imagens",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Imagens",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "texto_doc",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Conclusão do técnico",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "user_dados",
+            "type": "next-input",
+            "wrappers": [
+              "search-user"
+            ],
+            "templateOptions": {
+              "searchUser": {
+                "myself": true,
+                "show": "name"
+              },
+              "label": "User Dados",
+              "type": "text",
+              "required": true,
+              "hidden": true
+            }
+          },
+          {
+            "key": "user",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Nome do técnico responsável",
+              "required": true,
+              "readonly": true
+            },
+            "expressionProperties": {
+              "model|||user": "model.user_dados?.user?.user_metadata.name"
+            }
+          },
+          {
+            "key": "compensacao",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Compensação",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "local_compensacao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": " Localização da propriedade da compensação",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "imagens",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Imagens",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Laudo de Caracterização Vegetal",
+        "text_action": "Realizou ação",
+        "key": "card_carac_vegetal",
+        "form": [
+          {
+            "key": "quadro_especies",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Laudo de Caraterização da Vegetação",
+              "focus": "false",
+              "required": true,
+              "btnAddText": "espécie",
+              "hideButtons": false,
+              "placeholder": "",
+              "disabled": false
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-6",
+                  "key": "nome_cient",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Nome Científico",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||nome_cient": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.nome_cient"
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "nome_pop",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Nome popular",
+                    "readonly": false,
+                    "labelHtml": true,
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||nome_pop": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.nome_pop"
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "origem",
+                  "type": "select",
+                  "templateOptions": {
+                    "label": "Origem",
+                    "placeholder": "-selecione-",
+                    "focus": "false",
+                    "options": [
+                      {
+                        "label": "Exótica",
+                        "value": "Exótica"
+                      },
+                      {
+                        "label": "Nativa Regional",
+                        "value": "Nativa Regional"
+                      },
+                      {
+                        "label": "Nativa Nacional",
+                        "value": "Nativa Nacional"
+                      },
+                      {
+                        "label": "Relevante Nativa",
+                        "value": "Relevante Nativa"
+                      },
+                      {
+                        "label": "Relevante Exótica",
+                        "value": "Relevante Exótica"
+                      },
+                      {
+                        "label": "Em Extinção",
+                        "value": "Em Extinção"
+                      },
+                      {
+                        "label": "Invasora – Remoção",
+                        "value": "Invasora – Remoção"
+                      },
+                      {
+                        "label": "Comercial",
+                        "value": "Comercial"
+                      },
+                      {
+                        "label": "Moita",
+                        "value": "Moita"
+                      },
+                      {
+                        "label": "Declínio / Oco / Pragas ou Doenças",
+                        "value": "Declínio / Oco / Pragas ou Doenças"
+                      },
+                      {
+                        "label": "Morta por causas naturais",
+                        "value": "Morta por causas naturais"
+                      },
+                      {
+                        "label": "Cerca-viva",
+                        "value": "Cerca-viva"
+                      },
+                      {
+                        "label": "MUITÍSSIMO RELEVANTE",
+                        "value": "MUITÍSSIMO RELEVANTE"
+                      }
+                    ],
+                    "type": "text",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||origem": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.origem"
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "origem_dataset",
+                  "type": "next-input",
+                  "wrappers": [
+                    "form-field",
+                    "consumeDataset"
+                  ],
+                  "templateOptions": {
+                    "label": "ORIGEM",
+                    "datasetReference": "699cb37f10e7210007506c6c",
+                    "datasetKey": "origem",
+                    "autocomplete": true,
+                    "hideData": false,
+                    "placeholder": "--selecione--",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true,
+                    "hidden": true
+                  },
+                  "expressionProperties": {
+                    "model|||origem_dataset": " { 'input': model.origem}  "
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "descricao_origem",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Descrição",
+                    "readonly": true,
+                    "labelHtml": true,
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||descricao_origem": "model.origem_dataset?.input_data?.data.find((item)=> (item.key == 'descricao'))?.value"
+                  }
+                },
+                {
+                  "key": "valor",
+                  "className": "col-4",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Valor da compensação por árvore",
+                    "floatNumber": true,
+                    "readonly": false,
+                    "type": "text",
+                    "suffix": "",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||valor": "model.origem_dataset?.input_data?.data.find((item)=> (item.key == 'valor_compensacao'))?.value?.replace('%', '')?.replace(',', '.')"
+                  }
+                },
+                {
+                  "key": "total_arvores",
+                  "className": "col-4",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Total de árvores",
+                    "floatNumber": true,
+                    "readonly": false,
+                    "type": "text",
+                    "suffix": "",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||total_arvores": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.total_arvores"
+                  }
+                },
+                {
+                  "key": "valor_total_comp",
+                  "className": "col-4",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Valor total da compensação",
+                    "floatNumber": true,
+                    "readonly": false,
+                    "type": "text",
+                    "suffix": "",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||valor_total_comp": " (parseFloat(model.valor ?? 0) * parseFloat(model.total_arvores ?? 0))   "
+                  }
+                },
+                {
+                  "key": "fitossanidade",
+                  "type": "select",
+                  "templateOptions": {
+                    "label": "Fitossanidade (estado geral da saúde da árvore ou intercorrências que fizeram o requerente pedir a extração)",
+                    "required": true,
+                    "options": [
+                      {
+                        "label": "Sadia (M) ou árvore imune a corte (por força de diretriz ambiental ou legislação ou regulamento prévio; a árvore está sadia e o técnico avaliador não autorizará a extração ou poda;",
+                        "value": "Sadia (M) ou árvore imune a corte (por força de diretriz ambiental ou legislação ou regulamento prévio; a árvore está sadia e o técnico avaliador não autorizará a extração ou poda;"
+                      },
+                      {
+                        "label": "Oco, Pragas ou Morta (I - quando o estado sanitário da árvore justificar);",
+                        "value": "Oco, Pragas ou Morta (I - quando o estado sanitário da árvore justificar);"
+                      },
+                      {
+                        "label": "Inclinação ou plantada em talude (II - quando a árvore, ou parte dela, apresentar risco de queda);",
+                        "value": "Inclinação ou plantada em talude (II - quando a árvore, ou parte dela, apresentar risco de queda);"
+                      },
+                      {
+                        "label": "Sadia, mas muito próxima a muros com risco de invasão por terceiros no imóvel utilizando como meio a árvore (lll - quando a árvore constituir risco à segurança nas edificações, sem que haja outra solução para o problema);",
+                        "value": "Sadia, mas muito próxima a muros com risco de invasão por terceiros no imóvel utilizando como meio a árvore (lll - quando a árvore constituir risco à segurança nas edificações, sem que haja outra solução para o problema);"
+                      },
+                      {
+                        "label": "Sadia, mas raízes estourando calçamento ou causando trincas em paredes (IV - quando a árvore estiver causando danos comprovados ao patrimônio público ou privado, não havendo alternativas para solução);",
+                        "value": "Sadia, mas raízes estourando calçamento ou causando trincas em paredes (IV - quando a árvore estiver causando danos comprovados ao patrimônio público ou privado, não havendo alternativas para solução);"
+                      },
+                      {
+                        "label": "Sadia, mas foi plantada ou nasceu espontaneamente em local irregular, causando problemas a outras árvores ou a transeuntes (V - quando o plantio irregular ou a propagação espontânea de espécies impossibilitar o desenvolvimento adequado de árvores vizinhas);",
+                        "value": "Sadia, mas foi plantada ou nasceu espontaneamente em local irregular, causando problemas a outras árvores ou a transeuntes (V - quando o plantio irregular ou a propagação espontânea de espécies impossibilitar o desenvolvimento adequado de árvores vizinhas);"
+                      },
+                      {
+                        "label": "Sadia, mas de espécie exótica invasora ou que possa ser tóxicas ao ser humano ou a fauna (desde que cientificamente comprovado, que foi plantada ou nasceu espontaneamente em local irregular, causando problemas ao ser humano, à fauna ou a outras árvores (VI - quando se tratar de espécie invasora, tóxica e/ou com princípio alérgico, com propagação prejudicial comprovada);",
+                        "value": "Sadia, mas de espécie exótica invasora ou que possa ser tóxicas ao ser humano ou a fauna (desde que cientificamente comprovado, que foi plantada ou nasceu espontaneamente em local irregular, causando problemas ao ser humano, à fauna ou a outras árvores (VI - quando se tratar de espécie invasora, tóxica e/ou com princípio alérgico, com propagação prejudicial comprovada);"
+                      },
+                      {
+                        "label": "Sadia, mas está em área que será urbanizada, haverá abertura de via ou obra pública, sem alternativa técnica para mantê-la (VII - quando da implantação de empreendimentos públicos ou privados, não havendo solução técnica comprovada que evite a necessidade da extração ou corte, implicando no transplante ou reposição);",
+                        "value": "Sadia, mas está em área que será urbanizada, haverá abertura de via ou obra pública, sem alternativa técnica para mantê-la (VII - quando da implantação de empreendimentos públicos ou privados, não havendo solução técnica comprovada que evite a necessidade da extração ou corte, implicando no transplante ou reposição);"
+                      },
+                      {
+                        "label": "Sadia, mas está em área que será reformada, sem alternativa técnica para mantê-la (VIII - quando da execução de reformas ou benfeitorias em propriedades públicas ou privadas, não havendo solução técnica comprovada que evite a necessidade da extração ou corte, implicando no transplante ou reposição);",
+                        "value": "Sadia, mas está em área que será reformada, sem alternativa técnica para mantê-la (VIII - quando da execução de reformas ou benfeitorias em propriedades públicas ou privadas, não havendo solução técnica comprovada que evite a necessidade da extração ou corte, implicando no transplante ou reposição);"
+                      },
+                      {
+                        "label": "Podas além do recomendado de um terço (1/3) ou rebaixamento de copa em espécies onde este tipo de poda não conflita com a sua sanidade.",
+                        "value": "Podas além do recomendado de um terço (1/3) ou rebaixamento de copa em espécies onde este tipo de poda não conflita com a sua sanidade."
+                      }
+                    ]
+                  },
+                  "expressionProperties": {
+                    "model|||fitossanidade": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.fitossanidade"
+                  }
+                },
+                {
+                  "key": "interferencias",
+                  "type": "multicheckbox",
+                  "templateOptions": {
+                    "label": "Interferências: um ou mais itens que possam estar relacionados com a possibilidade de extração",
+                    "required": true,
+                    "options": [
+                      {
+                        "label": "Doenças na árvore ou pragas atacando a árvore e que possam torná-la senescente;",
+                        "value": "Doenças na árvore ou pragas atacando a árvore e que possam torná-la senescente;"
+                      },
+                      {
+                        "label": "Queimaduras por incêndio desconhecido ou criminal;",
+                        "value": "Queimaduras por incêndio desconhecido ou criminal;"
+                      },
+                      {
+                        "label": "Conflitos com fiação aérea ou subterrânea e sem solução técnica;",
+                        "value": "Conflitos com fiação aérea ou subterrânea e sem solução técnica;"
+                      },
+                      {
+                        "label": "Conflitos com tubulação subterrânea / bocas de lobo / caixas de inspeção / poços de visita e sem solução técnica;",
+                        "value": "Conflitos com tubulação subterrânea / bocas de lobo / caixas de inspeção / poços de visita e sem solução técnica;"
+                      },
+                      {
+                        "label": "Conflitos com estruturas urbanas e de edificações tanto aérea como subterrânea e sem solução técnica;",
+                        "value": "Conflitos com estruturas urbanas e de edificações tanto aérea como subterrânea e sem solução técnica;"
+                      },
+                      {
+                        "label": "Conflitos com rebaixamento de guias para entrada e saída de veículos, acessibilidade NBR9050, calçamento, esquinas e sem solução técnica;",
+                        "value": "Conflitos com rebaixamento de guias para entrada e saída de veículos, acessibilidade NBR9050, calçamento, esquinas e sem solução técnica;"
+                      },
+                      {
+                        "label": "Obra pública sem solução técnica;",
+                        "value": "Obra pública sem solução técnica;"
+                      },
+                      {
+                        "label": "Emergencial, com risco de queda em eventos climáticos extremos.",
+                        "value": "Emergencial, com risco de queda em eventos climáticos extremos."
+                      }
+                    ]
+                  },
+                  "expressionProperties": {
+                    "model|||interferencias": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.interferencias"
+                  }
+                },
+                {
+                  "key": "parecer_final",
+                  "type": "select",
+                  "templateOptions": {
+                    "label": "Parecer final dado pelo Técnico Avaliador:",
+                    "options": [
+                      {
+                        "label": "MANTER",
+                        "value": "MANTER"
+                      },
+                      {
+                        "label": "PODAS",
+                        "value": "PODAS"
+                      },
+                      {
+                        "label": "TRANSPLANTAR",
+                        "value": "TRANSPLANTAR"
+                      },
+                      {
+                        "label": "EXTRAÇÃO",
+                        "value": "EXTRAÇÃO"
+                      }
+                    ],
+                    "focus": "false",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||parecer_final": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.parecer_final"
+                  }
+                },
+                {
+                  "key": "total_compensacao",
+                  "className": "col-6",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Total de compensação",
+                    "placeholder": "Ex: 10",
+                    "required": true,
+                    "type": "number",
+                    "readonly": true
+                  },
+                  "expressionProperties": {
+                    "model|||total_compensacao": "model.parecer_final === 'EXTRAÇÃO' ? parseFloat(model.valor_total_comp ?? 0) : 0"
+                  }
+                },
+                {
+                  "key": "deferimento",
+                  "type": "select",
+                  "templateOptions": {
+                    "label": "Deferimento",
+                    "options": [
+                      {
+                        "label": "Deferido",
+                        "value": "Deferido"
+                      },
+                      {
+                        "label": "Indeferido",
+                        "value": "Indeferido"
+                      }
+                    ],
+                    "focus": "false",
+                    "required": true
+                  }
+                }
+              ]
+            },
+            "expressionProperties": {
+              "templateOptions|||repeats": "formState.resume?.quadro_especies?.length"
+            }
+          },
+          {
+            "key": "qtd_arvores_laudo",
+            "className": "col-6",
+            "type": "input",
+            "templateOptions": {
+              "label": "Quantidade de árvores (laudo)",
+              "placeholder": "Ex: 10",
+              "required": true,
+              "type": "number",
+              "readonly": false
+            },
+            "expressionProperties": {
+              "model|||qtd_arvores_laudo": "model.quadro_especies ? model.quadro_especies.reduce((total, item) => total + parseFloat(item.total_arvores ?? 0), 0) : 0"
+            }
+          },
+          {
+            "key": "total_compensacao",
+            "className": "col-6",
+            "type": "input",
+            "templateOptions": {
+              "label": "Total de compensação",
+              "placeholder": "Ex: 10",
+              "required": true,
+              "type": "number",
+              "readonly": false,
+              "focus": false,
+              "disabled": false
+            },
+            "expressionProperties": {
+              "model|||total_compensacao": "model.quadro_especies ? model.quadro_especies.reduce((total, item) => total + parseFloat(item.total_compensacao ?? 0), 0) : 0"
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "quadro_especies",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Laudo de Caraterização da Vegetação",
+              "focus": "false",
+              "required": true,
+              "btnAddText": "espécie",
+              "hideButtons": false,
+              "placeholder": "",
+              "disabled": false
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-6",
+                  "key": "nome_cient",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Nome Científico",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||nome_cient": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.nome_cient"
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "nome_pop",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Nome popular",
+                    "readonly": false,
+                    "labelHtml": true,
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||nome_pop": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.nome_pop"
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "origem",
+                  "type": "select",
+                  "templateOptions": {
+                    "label": "Origem",
+                    "placeholder": "-selecione-",
+                    "focus": "false",
+                    "options": [
+                      {
+                        "label": "Exótica",
+                        "value": "Exótica"
+                      },
+                      {
+                        "label": "Nativa Regional",
+                        "value": "Nativa Regional"
+                      },
+                      {
+                        "label": "Nativa Nacional",
+                        "value": "Nativa Nacional"
+                      },
+                      {
+                        "label": "Relevante Nativa",
+                        "value": "Relevante Nativa"
+                      },
+                      {
+                        "label": "Relevante Exótica",
+                        "value": "Relevante Exótica"
+                      },
+                      {
+                        "label": "Em Extinção",
+                        "value": "Em Extinção"
+                      },
+                      {
+                        "label": "Invasora – Remoção",
+                        "value": "Invasora – Remoção"
+                      },
+                      {
+                        "label": "Comercial",
+                        "value": "Comercial"
+                      },
+                      {
+                        "label": "Moita",
+                        "value": "Moita"
+                      },
+                      {
+                        "label": "Declínio / Oco / Pragas ou Doenças",
+                        "value": "Declínio / Oco / Pragas ou Doenças"
+                      },
+                      {
+                        "label": "Morta por causas naturais",
+                        "value": "Morta por causas naturais"
+                      },
+                      {
+                        "label": "Cerca-viva",
+                        "value": "Cerca-viva"
+                      },
+                      {
+                        "label": "MUITÍSSIMO RELEVANTE",
+                        "value": "MUITÍSSIMO RELEVANTE"
+                      }
+                    ],
+                    "type": "text",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||origem": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.origem"
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "origem_dataset",
+                  "type": "next-input",
+                  "wrappers": [
+                    "form-field",
+                    "consumeDataset"
+                  ],
+                  "templateOptions": {
+                    "label": "ORIGEM",
+                    "datasetReference": "699cb37f10e7210007506c6c",
+                    "datasetKey": "origem",
+                    "autocomplete": true,
+                    "hideData": false,
+                    "placeholder": "--selecione--",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true,
+                    "hidden": true
+                  },
+                  "expressionProperties": {
+                    "model|||origem_dataset": " { 'input': model.origem}  "
+                  }
+                },
+                {
+                  "className": "col-12",
+                  "key": "descricao_origem",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Descrição",
+                    "readonly": true,
+                    "labelHtml": true,
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||descricao_origem": "model.origem_dataset?.input_data?.data.find((item)=> (item.key == 'descricao'))?.value"
+                  }
+                },
+                {
+                  "key": "valor",
+                  "className": "col-4",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Valor da compensação por árvore",
+                    "floatNumber": true,
+                    "readonly": false,
+                    "type": "text",
+                    "suffix": "",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||valor": "model.origem_dataset?.input_data?.data.find((item)=> (item.key == 'valor_compensacao'))?.value?.replace('%', '')?.replace(',', '.')"
+                  }
+                },
+                {
+                  "key": "total_arvores",
+                  "className": "col-4",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Total de árvores",
+                    "floatNumber": true,
+                    "readonly": false,
+                    "type": "text",
+                    "suffix": "",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||total_arvores": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.total_arvores"
+                  }
+                },
+                {
+                  "key": "valor_total_comp",
+                  "className": "col-4",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Valor total da compensação",
+                    "floatNumber": true,
+                    "readonly": false,
+                    "type": "text",
+                    "suffix": "",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||valor_total_comp": " (parseFloat(model.valor ?? 0) * parseFloat(model.total_arvores ?? 0))   "
+                  }
+                },
+                {
+                  "key": "fitossanidade",
+                  "type": "select",
+                  "templateOptions": {
+                    "label": "Fitossanidade (estado geral da saúde da árvore ou intercorrências que fizeram o requerente pedir a extração)",
+                    "required": true,
+                    "options": [
+                      {
+                        "label": "Sadia (M) ou árvore imune a corte (por força de diretriz ambiental ou legislação ou regulamento prévio; a árvore está sadia e o técnico avaliador não autorizará a extração ou poda;",
+                        "value": "Sadia (M) ou árvore imune a corte (por força de diretriz ambiental ou legislação ou regulamento prévio; a árvore está sadia e o técnico avaliador não autorizará a extração ou poda;"
+                      },
+                      {
+                        "label": "Oco, Pragas ou Morta (I - quando o estado sanitário da árvore justificar);",
+                        "value": "Oco, Pragas ou Morta (I - quando o estado sanitário da árvore justificar);"
+                      },
+                      {
+                        "label": "Inclinação ou plantada em talude (II - quando a árvore, ou parte dela, apresentar risco de queda);",
+                        "value": "Inclinação ou plantada em talude (II - quando a árvore, ou parte dela, apresentar risco de queda);"
+                      },
+                      {
+                        "label": "Sadia, mas muito próxima a muros com risco de invasão por terceiros no imóvel utilizando como meio a árvore (lll - quando a árvore constituir risco à segurança nas edificações, sem que haja outra solução para o problema);",
+                        "value": "Sadia, mas muito próxima a muros com risco de invasão por terceiros no imóvel utilizando como meio a árvore (lll - quando a árvore constituir risco à segurança nas edificações, sem que haja outra solução para o problema);"
+                      },
+                      {
+                        "label": "Sadia, mas raízes estourando calçamento ou causando trincas em paredes (IV - quando a árvore estiver causando danos comprovados ao patrimônio público ou privado, não havendo alternativas para solução);",
+                        "value": "Sadia, mas raízes estourando calçamento ou causando trincas em paredes (IV - quando a árvore estiver causando danos comprovados ao patrimônio público ou privado, não havendo alternativas para solução);"
+                      },
+                      {
+                        "label": "Sadia, mas foi plantada ou nasceu espontaneamente em local irregular, causando problemas a outras árvores ou a transeuntes (V - quando o plantio irregular ou a propagação espontânea de espécies impossibilitar o desenvolvimento adequado de árvores vizinhas);",
+                        "value": "Sadia, mas foi plantada ou nasceu espontaneamente em local irregular, causando problemas a outras árvores ou a transeuntes (V - quando o plantio irregular ou a propagação espontânea de espécies impossibilitar o desenvolvimento adequado de árvores vizinhas);"
+                      },
+                      {
+                        "label": "Sadia, mas de espécie exótica invasora ou que possa ser tóxicas ao ser humano ou a fauna (desde que cientificamente comprovado, que foi plantada ou nasceu espontaneamente em local irregular, causando problemas ao ser humano, à fauna ou a outras árvores (VI - quando se tratar de espécie invasora, tóxica e/ou com princípio alérgico, com propagação prejudicial comprovada);",
+                        "value": "Sadia, mas de espécie exótica invasora ou que possa ser tóxicas ao ser humano ou a fauna (desde que cientificamente comprovado, que foi plantada ou nasceu espontaneamente em local irregular, causando problemas ao ser humano, à fauna ou a outras árvores (VI - quando se tratar de espécie invasora, tóxica e/ou com princípio alérgico, com propagação prejudicial comprovada);"
+                      },
+                      {
+                        "label": "Sadia, mas está em área que será urbanizada, haverá abertura de via ou obra pública, sem alternativa técnica para mantê-la (VII - quando da implantação de empreendimentos públicos ou privados, não havendo solução técnica comprovada que evite a necessidade da extração ou corte, implicando no transplante ou reposição);",
+                        "value": "Sadia, mas está em área que será urbanizada, haverá abertura de via ou obra pública, sem alternativa técnica para mantê-la (VII - quando da implantação de empreendimentos públicos ou privados, não havendo solução técnica comprovada que evite a necessidade da extração ou corte, implicando no transplante ou reposição);"
+                      },
+                      {
+                        "label": "Sadia, mas está em área que será reformada, sem alternativa técnica para mantê-la (VIII - quando da execução de reformas ou benfeitorias em propriedades públicas ou privadas, não havendo solução técnica comprovada que evite a necessidade da extração ou corte, implicando no transplante ou reposição);",
+                        "value": "Sadia, mas está em área que será reformada, sem alternativa técnica para mantê-la (VIII - quando da execução de reformas ou benfeitorias em propriedades públicas ou privadas, não havendo solução técnica comprovada que evite a necessidade da extração ou corte, implicando no transplante ou reposição);"
+                      },
+                      {
+                        "label": "Podas além do recomendado de um terço (1/3) ou rebaixamento de copa em espécies onde este tipo de poda não conflita com a sua sanidade.",
+                        "value": "Podas além do recomendado de um terço (1/3) ou rebaixamento de copa em espécies onde este tipo de poda não conflita com a sua sanidade."
+                      }
+                    ]
+                  },
+                  "expressionProperties": {
+                    "model|||fitossanidade": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.fitossanidade"
+                  }
+                },
+                {
+                  "key": "interferencias",
+                  "type": "multicheckbox",
+                  "templateOptions": {
+                    "label": "Interferências: um ou mais itens que possam estar relacionados com a possibilidade de extração",
+                    "required": true,
+                    "options": [
+                      {
+                        "label": "Doenças na árvore ou pragas atacando a árvore e que possam torná-la senescente;",
+                        "value": "Doenças na árvore ou pragas atacando a árvore e que possam torná-la senescente;"
+                      },
+                      {
+                        "label": "Queimaduras por incêndio desconhecido ou criminal;",
+                        "value": "Queimaduras por incêndio desconhecido ou criminal;"
+                      },
+                      {
+                        "label": "Conflitos com fiação aérea ou subterrânea e sem solução técnica;",
+                        "value": "Conflitos com fiação aérea ou subterrânea e sem solução técnica;"
+                      },
+                      {
+                        "label": "Conflitos com tubulação subterrânea / bocas de lobo / caixas de inspeção / poços de visita e sem solução técnica;",
+                        "value": "Conflitos com tubulação subterrânea / bocas de lobo / caixas de inspeção / poços de visita e sem solução técnica;"
+                      },
+                      {
+                        "label": "Conflitos com estruturas urbanas e de edificações tanto aérea como subterrânea e sem solução técnica;",
+                        "value": "Conflitos com estruturas urbanas e de edificações tanto aérea como subterrânea e sem solução técnica;"
+                      },
+                      {
+                        "label": "Conflitos com rebaixamento de guias para entrada e saída de veículos, acessibilidade NBR9050, calçamento, esquinas e sem solução técnica;",
+                        "value": "Conflitos com rebaixamento de guias para entrada e saída de veículos, acessibilidade NBR9050, calçamento, esquinas e sem solução técnica;"
+                      },
+                      {
+                        "label": "Obra pública sem solução técnica;",
+                        "value": "Obra pública sem solução técnica;"
+                      },
+                      {
+                        "label": "Emergencial, com risco de queda em eventos climáticos extremos.",
+                        "value": "Emergencial, com risco de queda em eventos climáticos extremos."
+                      }
+                    ]
+                  },
+                  "expressionProperties": {
+                    "model|||interferencias": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.interferencias"
+                  }
+                },
+                {
+                  "key": "parecer_final",
+                  "type": "select",
+                  "templateOptions": {
+                    "label": "Parecer final dado pelo Técnico Avaliador:",
+                    "options": [
+                      {
+                        "label": "MANTER",
+                        "value": "MANTER"
+                      },
+                      {
+                        "label": "PODAS",
+                        "value": "PODAS"
+                      },
+                      {
+                        "label": "TRANSPLANTAR",
+                        "value": "TRANSPLANTAR"
+                      },
+                      {
+                        "label": "EXTRAÇÃO",
+                        "value": "EXTRAÇÃO"
+                      }
+                    ],
+                    "focus": "false",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||parecer_final": "formState.resume?.quadro_especies?.[field.parent.templateOptions.index]?.parecer_final"
+                  }
+                },
+                {
+                  "key": "total_compensacao",
+                  "className": "col-6",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Total de compensação",
+                    "placeholder": "Ex: 10",
+                    "required": true,
+                    "type": "number",
+                    "readonly": true
+                  },
+                  "expressionProperties": {
+                    "model|||total_compensacao": "model.parecer_final === 'EXTRAÇÃO' ? parseFloat(model.valor_total_comp ?? 0) : 0"
+                  }
+                },
+                {
+                  "key": "deferimento",
+                  "type": "select",
+                  "templateOptions": {
+                    "label": "Deferimento",
+                    "options": [
+                      {
+                        "label": "Deferido",
+                        "value": "Deferido"
+                      },
+                      {
+                        "label": "Indeferido",
+                        "value": "Indeferido"
+                      }
+                    ],
+                    "focus": "false",
+                    "required": true
+                  }
+                }
+              ]
+            },
+            "expressionProperties": {
+              "templateOptions|||repeats": "formState.resume?.quadro_especies?.length"
+            }
+          },
+          {
+            "key": "qtd_arvores_laudo",
+            "className": "col-6",
+            "type": "input",
+            "templateOptions": {
+              "label": "Quantidade de árvores (laudo)",
+              "placeholder": "Ex: 10",
+              "required": true,
+              "type": "number",
+              "readonly": false
+            },
+            "expressionProperties": {
+              "model|||qtd_arvores_laudo": "model.quadro_especies ? model.quadro_especies.reduce((total, item) => total + parseFloat(item.total_arvores ?? 0), 0) : 0"
+            }
+          },
+          {
+            "key": "total_compensacao",
+            "className": "col-6",
+            "type": "input",
+            "templateOptions": {
+              "label": "Total de compensação",
+              "placeholder": "Ex: 10",
+              "required": true,
+              "type": "number",
+              "readonly": false,
+              "focus": false,
+              "disabled": false
+            },
+            "expressionProperties": {
+              "model|||total_compensacao": "model.quadro_especies ? model.quadro_especies.reduce((total, item) => total + parseFloat(item.total_compensacao ?? 0), 0) : 0"
+            }
+          }
+        ]
+      },
+      {
+        "permission": "taxas",
+        "nome": "Taxa de Aprovação",
+        "text_action": "Emitiu Taxa de Aprovação",
+        "key": "taxasProcesso",
+        "type": "taxa",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado e então selecione a opção 'Enviar para Análise' para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado e então selecione a opção 'Enviar para Análise' para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Meio Ambiente",
+    "initialReceiverConfig": {
+      "type": "multiple",
+      "possibleReceivers": []
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "city_id": 38,
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "hideLabel": false,
+                "anonymousSenderToggle": false,
+                "sensitiveField": false,
+                "accessLevel": "RESTRICTED",
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n <ul class=\"pl-4\">\n  <li align = \"justify\">Siga as dicas e instruções contidas nos textos laterais para correto preenchimento do seu processo;\n  </li>\n  <li align = \"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <a target='_blank' class=\"font-weight-bold\" href='https://aprova.movidesk.com/kb/'><strong>Ajuda</strong></a>. Você também pode entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;\n  </li>\n  <li align = \"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato ou compareça à Secretaria de de Meio Ambiente nos horários de atendimento técnico.\n  </li>\n  \n  \n  \n  \n  </ul>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_solicitacao",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Onde está localizada a árvore?",
+                "options": [
+                  {
+                    "value": "Calçada"
+                  },
+                  {
+                    "value": "Calçada de Condomínio"
+                  },
+                  {
+                    "value": "Imóvel Particular"
+                  },
+                  {
+                    "value": "Praça, Parque ou Canteiro Central"
+                  },
+                  {
+                    "value": "Próprios Públicos Municipais"
+                  },
+                  {
+                    "value": "Próprios Públicos Estaduais ou Federais"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "inscricao_imobiliaria",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cadastro Municipal",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Calçada' || model.tipo_solicitacao == 'Calçada de Condomínio' || model.tipo_solicitacao == 'Imóvel Particular')"
+            },
+            {
+              "key": "termo_compromisso",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Venho firmar o compromisso de efetuar o plantio de reposição obrigatória caso deferida e executada(s) a(s) extração(ões) por mim solicitadas.  Respeitando os prazos e as instruções técnicas da Divisão de Licenciamento e Controle Ambiental da Secretaria Municipal do Meio Ambiente, principalmente no que se refere às espécies recomendadas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Calçada' || model.tipo_solicitacao == 'Calçada de Condomínio' || model.tipo_solicitacao == 'Imóvel Particular')"
+            }
+          ],
+          "templateOptions": {
+            "title": "Tipo da solicitação",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Tipo da solicitação</span><br>\n\n\nSe a árvore estiver na calçada PÚBLICA, o item “Árvore – Autorização de Extração em Calçada” deve ser selecionado;<br>\nSe a árvore estiver na calçada INTERNA A CONDOMÍNIO OU LOTEAMENTO COM RESTRIÇÃO DE ACESSO, o item “Árvore – Autorização de Extração em Calçada Interna a Condomínio” deve ser selecionado;<br>\nSe a árvore estiver no interior do terreno/imóvel/gleba, o item “Árvore – Autorização de Extração imóvel particular” deve ser selecionado;<br>\nSe a árvore estiver em local público (canteiro central, praça, vias etc) , o item “Árvore – Autorização de Extração em Praça, Parque ou Canteiro Central” deve ser selecionado;<br>\nSe a árvore estiver em um órgão público (Escolas Estaduais, Departamentos, Órgãos Federais ou Estaduais, etc): - o item “Árvore – Autorização de Extração em Próprios Públicos Estaduais ou Federais” deve ser selecionado; <br>\nSe a árvore estiver em um órgão público municipal (CEI, EMEI, EMEF, UPA, UBS, Secretarias, etc.): o item “Árvore – Autorização de Extração em Próprios Públicos Municipais” deve ser selecionado.",
+            "validateWithAnalyzis": true,
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome/Razão Social",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/ CNPJ",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "insc_rg",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "RG/ Inscrição Municipal",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Notificação",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "documento_requerente",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos (Carteira de Identidade e CPF, se pessoa física, OU CNPJ e contrato social, se pessoa jurídica)",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "vinculo_requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de vínculo do requerente:",
+                "options": [
+                  {
+                    "label": "Proprietário do imóvel",
+                    "value": "Proprietário do imóvel"
+                  },
+                  {
+                    "label": "Representante Legal",
+                    "value": "Representante Legal"
+                  },
+                  {
+                    "label": "Responsável Técnico",
+                    "value": "Responsável Técnico"
+                  },
+                  {
+                    "label": "Procurador",
+                    "value": "Procurador"
+                  }
+                ],
+                "focus": "false",
+                "placeholder": "--selecione--",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "doc_procurador",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Procuração",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.vinculo_requerente || model.vinculo_requerente !== 'Procurador' "
+            },
+            {
+              "className": "col-12",
+              "key": "endereco_cep_requerente",
+              "resetOnHide": true,
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP",
+                "placeholder": "Ex: 00000-000",
+                "mask": "00000-000",
+                "required": true,
+                "hideData": true,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "status_integracaocep_imovel_requerente",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.endereco_cep_requerente?.status == 'LOADING' "
+              },
+              "hideExpression": " model.endereco_cep_requerente?.status !== 'LOADING'  || !model.endereco_cep_requerente?.input"
+            },
+            {
+              "className": "col-12",
+              "key": "erro_integracaocep_imovel_requerente",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "(model.endereco_cep_requerente?.status !== 'SUCCESS') || (model.endereco_cep_requerente?.data?.response?.result?.erro === true) || (model.endereco_cep_requerente?.input?.length === 8 && model.endereco_cep_requerente?.status === 'KNOWN_FAILED') "
+              },
+              "hideExpression": "(model.endereco_cep_requerente?.status === 'SUCCESS' && model.endereco_cep_requerente?.data?.response?.result?.erro !== true) || (model.endereco_cep_requerente?.input?.length !== 8 && model.endereco_cep_requerente?.status !== 'KNOWN_FAILED') || !model.endereco_cep_requerente.input "
+            },
+            {
+              "className": "col-8",
+              "key": "logradouro_imovel_requerente",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Logradouro",
+                "required": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {
+                "model|||logradouro_imovel_requerente": "model.logradouro_imovel_requerente ? model.logradouro_imovel_requerente : model.endereco_cep_requerente?.data?.response?.result?.logradouro"
+              },
+              "hideExpression": "model.endereco_cep_requerente?.input?.length !== 8 "
+            },
+            {
+              "className": "col-4",
+              "key": "numero_imovel_requerente",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Número predial",
+                "placeholder": "Ex: S/N",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": " model.endereco_cep_requerente?.input?.length !== 8"
+            },
+            {
+              "className": "col-12",
+              "key": "complemento_imovel_requerente",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento ou ponto de referência",
+                "placeholder": "Ex: cor de portão, muro, comércio próximo, etc",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "bairro_imovel_requerente",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Bairro",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "placeholder": "",
+                "focus": false
+              },
+              "expressionProperties": {
+                "model|||bairro_imovel_requerente": "model.bairro_imovel_requerente ? model.bairro_imovel_requerente : model.endereco_cep_requerente?.data?.response?.result?.bairro"
+              },
+              "hideExpression": "model.endereco_cep_requerente?.input?.length !== 8 "
+            },
+            {
+              "className": "col-6",
+              "key": "cidade_obra_requerente",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Município",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||cidade_obra_requerente": "model.cidade_obra_requerente ? model.cidade_obra_requerente : model.endereco_cep_requerente?.data?.response?.result?.localidade"
+              },
+              "hideExpression": "model.endereco_cep_requerente?.input?.length !== 8 "
+            },
+            {
+              "className": "col-6",
+              "key": "uf_obra_requerente",
+              "type": "next-input",
+              "resetOnHide": true,
+              "templateOptions": {
+                "label": "Estado",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||uf_obra_requerente": "model.uf_obra_requerente ? model.uf_obra_requerente : model.endereco_cep_requerente?.data?.response?.result?.uf"
+              },
+              "hideExpression": "model.endereco_cep_requerente?.input?.length !== 8 "
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "loc_arvore_quest",
+              "type": "radio",
+              "templateOptions": {
+                "label": "A localização da árvore é o mesmo endereço do requerente?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "endereco_cep",
+              "resetOnHide": true,
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP",
+                "placeholder": "Ex: 00000-000",
+                "mask": "00000-000",
+                "required": false,
+                "hideData": true,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "status_integracaocep_imovel",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.endereco_cep?.status == 'LOADING' "
+              },
+              "hideExpression": " model.endereco_cep?.status !== 'LOADING'  || !model.endereco_cep?.input"
+            },
+            {
+              "className": "col-12",
+              "key": "erro_integracaocep_imovel",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "(model.endereco_cep?.status !== 'SUCCESS') || (model.endereco_cep?.data?.response?.result?.erro === true) || (model.endereco_cep?.input?.length === 8 && model.endereco_cep?.status === 'KNOWN_FAILED') "
+              },
+              "hideExpression": "(model.endereco_cep?.status === 'SUCCESS' && model.endereco_cep?.data?.response?.result?.erro !== true) || (model.endereco_cep?.input?.length !== 8 && model.endereco_cep?.status !== 'KNOWN_FAILED') || !model.endereco_cep.input "
+            },
+            {
+              "className": "col-8",
+              "key": "logradouro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Logradouro",
+                "required": false,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {
+                "model|||logradouro_imovel": "model.logradouro_imovel ? model.logradouro_imovel : model.endereco_cep?.data?.response?.result?.logradouro",
+                "templateOptions|||required": "model.tipo_solicitacao == 'Imóvel Particular'"
+              }
+            },
+            {
+              "className": "col-4",
+              "key": "numero_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Número predial",
+                "placeholder": "Ex: S/N",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.tipo_solicitacao == 'Imóvel Particular'"
+              }
+            },
+            {
+              "className": "col-12",
+              "key": "complemento_imovel",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento ou ponto de referência",
+                "placeholder": "Ex: cor de portão, muro, comércio próximo, etc",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "disabled": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipo_solicitacao || model.tipo_solicitacao !== 'Outras áreas'"
+            },
+            {
+              "className": "col-12",
+              "key": "bairro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Bairro",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "placeholder": "",
+                "focus": false
+              },
+              "expressionProperties": {
+                "model|||bairro_imovel": "model.bairro_imovel ? model.bairro_imovel : model.endereco_cep?.data?.response?.result?.bairro",
+                "templateOptions|||required": "model.tipo_solicitacao == 'Imóvel Particular'"
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "cidade_obra",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Município",
+                "required": false,
+                "triggerOnlyWhenEditing": true,
+                "readonly": false
+              },
+              "expressionProperties": {
+                "model|||cidade_obra": "model.cidade_obra ? model.cidade_obra : model.endereco_cep?.data?.response?.result?.localidade"
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "uf_obra",
+              "type": "next-input",
+              "resetOnHide": true,
+              "templateOptions": {
+                "label": "Estado",
+                "required": false,
+                "triggerOnlyWhenEditing": true,
+                "readonly": false
+              },
+              "expressionProperties": {
+                "model|||uf_obra": "model.uf_obra ? model.uf_obra : model.endereco_cep?.data?.response?.result?.uf"
+              }
+            },
+            {
+              "key": "mapa",
+              "type": "next-mapa",
+              "templateOptions": {
+                "label": "Localização",
+                "placeholder": "Placeholder",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "mapsOptions": {
+                  "center": {
+                    "lat": -21.17128051251702,
+                    "lng": -47.77498893166607
+                  },
+                  "zoom": 14
+                }
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "latitude",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Latitude",
+                "readonly": true,
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||latitude": "model.mapa?.lat"
+              }
+            },
+            {
+              "key": "longitude",
+              "type": "next-input",
+              "templateOptions": {
+                "required": true,
+                "readonly": false,
+                "label": "Longitude",
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||longitude": "model.mapa?.lng"
+              }
+            },
+            {
+              "key": "lat_int",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lat_int",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lat_int": "Math.abs(Math.trunc(model.latitude || 0))"
+              }
+            },
+            {
+              "key": "lat_dec",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lat_dec",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lat_dec": "Math.abs(model.latitude || 0) - Math.abs(Math.trunc(model.latitude || 0))"
+              }
+            },
+            {
+              "key": "lat_2",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lat_2",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lat_2": "(model.lat_dec || 0) * 60"
+              }
+            },
+            {
+              "key": "lat_2_dec",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lat_2_dec",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lat_2_dec": "Math.abs(model.lat_2 || 0) - Math.abs(Math.trunc(model.lat_2 || 0))"
+              }
+            },
+            {
+              "key": "lat",
+              "className": "col-6",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Latitude (graus, minutos, segundos)",
+                "readonly": false,
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||lat": "(model.lat_int || 0) + 'º ' + (Math.trunc((model.lat_2 || 0) )) + '\\' ' + (Math.trunc((model.lat_2_dec || 0) * 6000) / 100) + '\\'\\''"
+              }
+            },
+            {
+              "key": "lng",
+              "className": "col-6",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Longitude (graus, minutos, segundos)",
+                "readonly": false,
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||lng": "(model.lng_int || 0) + 'º ' + (Math.trunc((model.lng_2 || 0))) + '\\' ' + (Math.trunc((model.lng_2_dec || 0) * 6000) / 100) + '\\'\\''"
+              }
+            },
+            {
+              "key": "lng_int",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lng_int",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lng_int": "Math.abs(Math.trunc(model.longitude || 0))"
+              }
+            },
+            {
+              "key": "lng_dec",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lng_dec",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lng_dec": "Math.abs(model.longitude || 0) - Math.abs(Math.trunc(model.longitude || 0))"
+              }
+            },
+            {
+              "key": "lng_2",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lng_2",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lng_2": "(model.lng_dec || 0) * 60"
+              }
+            },
+            {
+              "key": "lng_2_dec",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "lng_2_dec",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||lng_2_dec": "Math.abs(model.lng_2 || 0) - Math.abs(Math.trunc(model.lng_2 || 0))"
+              }
+            },
+            {
+              "key": "localizacao_arvore",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "Descrição da localização da árvore ",
+                "placeholder": "Descrever da melhor forma possível a localização da árvore, informando ponto de referência, nome da praça ou numeração próxima",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Localização da  árvore",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "quest_quant_arvores",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Se trata de supressão maior que 10 árvores?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "arvore_repeat",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Árvore",
+                "focus": "false",
+                "btnAddText": "Árvore",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "especie",
+                    "className": "col-6",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Espécie:",
+                      "focus": "false",
+                      "required": false
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "motivo_solicitacao",
+                    "type": "next-ck",
+                    "templateOptions": {
+                      "label": "Informe o motivo da solicitação",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true,
+                      "disabled": false
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "tipo_imovel",
+                    "resetOnHide": true,
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Tipo do imóvel",
+                      "options": [
+                        {
+                          "value": "Urbano"
+                        },
+                        {
+                          "value": "Rural"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true
+                    },
+                    "hideExpression": "!model.tipo_solicitacao || model.tipo_solicitacao !== 'Imóvel Particular'",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "endereco_cep",
+                    "resetOnHide": true,
+                    "type": "next-input-data",
+                    "wrappers": [
+                      "form-field",
+                      "integrations"
+                    ],
+                    "templateOptions": {
+                      "label": "CEP",
+                      "placeholder": "Ex: 00000-000",
+                      "mask": "00000-000",
+                      "required": false,
+                      "hideData": true,
+                      "idIntegration": "5f916ab6a926a9000875587d",
+                      "saveIntegrationResponse": true,
+                      "triggerOnlyWhenEditing": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "status_integracaocep_imovel",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                      "focus": "false",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.endereco_cep?.status == 'LOADING' "
+                    },
+                    "hideExpression": " model.endereco_cep?.status !== 'LOADING'  || !model.endereco_cep?.input"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "erro_integracaocep_imovel",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                      "focus": "false",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "(model.endereco_cep?.status !== 'SUCCESS') || (model.endereco_cep?.data?.response?.result?.erro === true) || (model.endereco_cep?.input?.length === 8 && model.endereco_cep?.status === 'KNOWN_FAILED') "
+                    },
+                    "hideExpression": "(model.endereco_cep?.status === 'SUCCESS' && model.endereco_cep?.data?.response?.result?.erro !== true) || (model.endereco_cep?.input?.length !== 8 && model.endereco_cep?.status !== 'KNOWN_FAILED') || !model.endereco_cep.input "
+                  },
+                  {
+                    "className": "col-8",
+                    "key": "logradouro_imovel",
+                    "resetOnHide": true,
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Logradouro",
+                      "required": false,
+                      "triggerOnlyWhenEditing": true
+                    },
+                    "expressionProperties": {
+                      "model|||logradouro_imovel": "model.logradouro_imovel ? model.logradouro_imovel : model.endereco_cep?.data?.response?.result?.logradouro",
+                      "templateOptions|||required": "model.tipo_solicitacao == 'Imóvel Particular'"
+                    }
+                  },
+                  {
+                    "className": "col-4",
+                    "key": "numero_imovel",
+                    "resetOnHide": true,
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Número predial",
+                      "placeholder": "Ex: S/N",
+                      "required": false
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.tipo_solicitacao == 'Imóvel Particular'"
+                    }
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "complemento_imovel",
+                    "resetOnHide": true,
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Complemento ou ponto de referência",
+                      "placeholder": "Ex: cor de portão, muro, comércio próximo, etc",
+                      "focus": "false",
+                      "type": "text",
+                      "required": false,
+                      "disabled": false
+                    },
+                    "hideExpression": "!model.tipo_solicitacao || model.tipo_solicitacao !== 'Outras áreas'",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "bairro_imovel",
+                    "resetOnHide": true,
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Bairro",
+                      "required": true,
+                      "triggerOnlyWhenEditing": true,
+                      "placeholder": "",
+                      "focus": false
+                    },
+                    "expressionProperties": {
+                      "model|||bairro_imovel": "model.bairro_imovel ? model.bairro_imovel : model.endereco_cep?.data?.response?.result?.bairro",
+                      "templateOptions|||required": "model.tipo_solicitacao == 'Imóvel Particular'"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "cidade_obra",
+                    "resetOnHide": true,
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Município",
+                      "required": false,
+                      "triggerOnlyWhenEditing": true,
+                      "readonly": false
+                    },
+                    "expressionProperties": {
+                      "model|||cidade_obra": "model.cidade_obra ? model.cidade_obra : model.endereco_cep?.data?.response?.result?.localidade"
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "uf_obra",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Estado",
+                      "required": false,
+                      "triggerOnlyWhenEditing": true,
+                      "readonly": false
+                    },
+                    "expressionProperties": {
+                      "model|||uf_obra": "model.uf_obra ? model.uf_obra : model.endereco_cep?.data?.response?.result?.uf"
+                    }
+                  },
+                  {
+                    "key": "localizacao_arvore",
+                    "type": "textarea",
+                    "templateOptions": {
+                      "label": "Descrição da localização da árvore ",
+                      "placeholder": "Descrever da melhor forma possível a localização da árvore, informando ponto de referência, nome da praça ou numeração próxima",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true,
+                      "disabled": false
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {},
+              "hideExpression": "(model.quest_quant_arvores == 'Sim' && model.tipo_solicitacao == 'Imóvel Particular')"
+            },
+            {
+              "key": "quadro_especies",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Laudo de Caraterização da Vegetação",
+                "focus": "false",
+                "required": true,
+                "btnAddText": "espécie",
+                "hideButtons": false,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "className": "col-12",
+                    "key": "nome_cient",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Nome Científico",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "nome_pop",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Nome popular",
+                      "readonly": false,
+                      "labelHtml": true,
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "origem",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "Origem",
+                      "placeholder": "-selecione-",
+                      "focus": "false",
+                      "options": [
+                        {
+                          "label": "Exótica",
+                          "value": "Exótica"
+                        },
+                        {
+                          "label": "Nativa Regional",
+                          "value": "Nativa Regional"
+                        },
+                        {
+                          "label": "Nativa Nacional",
+                          "value": "Nativa Nacional"
+                        },
+                        {
+                          "label": "Relevante Nativa",
+                          "value": "Relevante Nativa"
+                        },
+                        {
+                          "label": "Relevante Exótica",
+                          "value": "Relevante Exótica"
+                        },
+                        {
+                          "label": "Em Extinção",
+                          "value": "Em Extinção"
+                        },
+                        {
+                          "label": "Invasora – Remoção",
+                          "value": "Invasora – Remoção"
+                        },
+                        {
+                          "label": "Comercial",
+                          "value": "Comercial"
+                        },
+                        {
+                          "label": "Moita",
+                          "value": "Moita"
+                        },
+                        {
+                          "label": "Declínio / Oco / Pragas ou Doenças",
+                          "value": "Declínio / Oco / Pragas ou Doenças"
+                        },
+                        {
+                          "label": "Morta por causas naturais",
+                          "value": "Morta por causas naturais"
+                        },
+                        {
+                          "label": "Cerca-viva",
+                          "value": "Cerca-viva"
+                        },
+                        {
+                          "label": "MUITÍSSIMO RELEVANTE",
+                          "value": "MUITÍSSIMO RELEVANTE"
+                        }
+                      ],
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "origem_dataset",
+                    "type": "next-input",
+                    "wrappers": [
+                      "form-field",
+                      "consumeDataset"
+                    ],
+                    "templateOptions": {
+                      "label": "ORIGEM",
+                      "datasetReference": "699cb37f10e7210007506c6c",
+                      "datasetKey": "origem",
+                      "autocomplete": true,
+                      "hideData": false,
+                      "placeholder": "--selecione--",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true,
+                      "hidden": true
+                    },
+                    "expressionProperties": {
+                      "model|||origem_dataset": " { 'input': model.origem}  "
+                    }
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "descricao_origem",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Descrição",
+                      "readonly": true,
+                      "labelHtml": true,
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||descricao_origem": "model.origem_dataset?.input_data?.data.find((item)=> (item.key == 'descricao'))?.value?.replace('%', '')?.replace(',', '.')"
+                    }
+                  },
+                  {
+                    "key": "valor",
+                    "className": "col-4",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Valor da compensação por árvore",
+                      "floatNumber": true,
+                      "readonly": true,
+                      "type": "text",
+                      "suffix": "",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||valor": "model.origem_dataset?.input_data?.data.find((item)=> (item.key == 'valor_compensacao'))?.value?.replace('%', '')?.replace(',', '.')"
+                    }
+                  },
+                  {
+                    "key": "total_arvores",
+                    "className": "col-4",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Total de árvores",
+                      "floatNumber": true,
+                      "readonly": false,
+                      "type": "text",
+                      "suffix": "",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "valor_total_comp",
+                    "className": "col-4",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Valor total da compensação",
+                      "floatNumber": true,
+                      "readonly": true,
+                      "type": "text",
+                      "suffix": "",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||valor_total_comp": " (parseFloat(model.valor ?? 0) * parseFloat(model.total_arvores ?? 0))   "
+                    }
+                  },
+                  {
+                    "key": "fitossanidade",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "Fitossanidade (estado geral da saúde da árvore ou intercorrências que fizeram o requerente pedir a extração)",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "Sadia (M) ou árvore imune a corte (por força de diretriz ambiental ou legislação ou regulamento prévio; a árvore está sadia e o técnico avaliador não autorizará a extração ou poda;",
+                          "value": "Sadia (M) ou árvore imune a corte (por força de diretriz ambiental ou legislação ou regulamento prévio; a árvore está sadia e o técnico avaliador não autorizará a extração ou poda;"
+                        },
+                        {
+                          "label": "Oco, Pragas ou Morta (I - quando o estado sanitário da árvore justificar);",
+                          "value": "Oco, Pragas ou Morta (I - quando o estado sanitário da árvore justificar);"
+                        },
+                        {
+                          "label": "Inclinação ou plantada em talude (II - quando a árvore, ou parte dela, apresentar risco de queda);",
+                          "value": "Inclinação ou plantada em talude (II - quando a árvore, ou parte dela, apresentar risco de queda);"
+                        },
+                        {
+                          "label": "Sadia, mas muito próxima a muros com risco de invasão por terceiros no imóvel utilizando como meio a árvore (lll - quando a árvore constituir risco à segurança nas edificações, sem que haja outra solução para o problema);",
+                          "value": "Sadia, mas muito próxima a muros com risco de invasão por terceiros no imóvel utilizando como meio a árvore (lll - quando a árvore constituir risco à segurança nas edificações, sem que haja outra solução para o problema);"
+                        },
+                        {
+                          "label": "Sadia, mas raízes estourando calçamento ou causando trincas em paredes (IV - quando a árvore estiver causando danos comprovados ao patrimônio público ou privado, não havendo alternativas para solução);",
+                          "value": "Sadia, mas raízes estourando calçamento ou causando trincas em paredes (IV - quando a árvore estiver causando danos comprovados ao patrimônio público ou privado, não havendo alternativas para solução);"
+                        },
+                        {
+                          "label": "Sadia, mas foi plantada ou nasceu espontaneamente em local irregular, causando problemas a outras árvores ou a transeuntes (V - quando o plantio irregular ou a propagação espontânea de espécies impossibilitar o desenvolvimento adequado de árvores vizinhas);",
+                          "value": "Sadia, mas foi plantada ou nasceu espontaneamente em local irregular, causando problemas a outras árvores ou a transeuntes (V - quando o plantio irregular ou a propagação espontânea de espécies impossibilitar o desenvolvimento adequado de árvores vizinhas);"
+                        },
+                        {
+                          "label": "Sadia, mas de espécie exótica invasora ou que possa ser tóxicas ao ser humano ou a fauna (desde que cientificamente comprovado, que foi plantada ou nasceu espontaneamente em local irregular, causando problemas ao ser humano, à fauna ou a outras árvores (VI - quando se tratar de espécie invasora, tóxica e/ou com princípio alérgico, com propagação prejudicial comprovada);",
+                          "value": "Sadia, mas de espécie exótica invasora ou que possa ser tóxicas ao ser humano ou a fauna (desde que cientificamente comprovado, que foi plantada ou nasceu espontaneamente em local irregular, causando problemas ao ser humano, à fauna ou a outras árvores (VI - quando se tratar de espécie invasora, tóxica e/ou com princípio alérgico, com propagação prejudicial comprovada);"
+                        },
+                        {
+                          "label": "Sadia, mas está em área que será urbanizada, haverá abertura de via ou obra pública, sem alternativa técnica para mantê-la (VII - quando da implantação de empreendimentos públicos ou privados, não havendo solução técnica comprovada que evite a necessidade da extração ou corte, implicando no transplante ou reposição);",
+                          "value": "Sadia, mas está em área que será urbanizada, haverá abertura de via ou obra pública, sem alternativa técnica para mantê-la (VII - quando da implantação de empreendimentos públicos ou privados, não havendo solução técnica comprovada que evite a necessidade da extração ou corte, implicando no transplante ou reposição);"
+                        },
+                        {
+                          "label": "Sadia, mas está em área que será reformada, sem alternativa técnica para mantê-la (VIII - quando da execução de reformas ou benfeitorias em propriedades públicas ou privadas, não havendo solução técnica comprovada que evite a necessidade da extração ou corte, implicando no transplante ou reposição);",
+                          "value": "Sadia, mas está em área que será reformada, sem alternativa técnica para mantê-la (VIII - quando da execução de reformas ou benfeitorias em propriedades públicas ou privadas, não havendo solução técnica comprovada que evite a necessidade da extração ou corte, implicando no transplante ou reposição);"
+                        },
+                        {
+                          "label": "Podas além do recomendado de um terço (1/3) ou rebaixamento de copa em espécies onde este tipo de poda não conflita com a sua sanidade.",
+                          "value": "Podas além do recomendado de um terço (1/3) ou rebaixamento de copa em espécies onde este tipo de poda não conflita com a sua sanidade."
+                        }
+                      ]
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "interferencias",
+                    "type": "multicheckbox",
+                    "templateOptions": {
+                      "label": "Interferências: um ou mais itens que possam estar relacionados com a possibilidade de extração",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "Doenças na árvore ou pragas atacando a árvore e que possam torná-la senescente;",
+                          "value": "Doenças na árvore ou pragas atacando a árvore e que possam torná-la senescente;"
+                        },
+                        {
+                          "label": "Queimaduras por incêndio desconhecido ou criminal;",
+                          "value": "Queimaduras por incêndio desconhecido ou criminal;"
+                        },
+                        {
+                          "label": "Conflitos com fiação aérea ou subterrânea e sem solução técnica;",
+                          "value": "Conflitos com fiação aérea ou subterrânea e sem solução técnica;"
+                        },
+                        {
+                          "label": "Conflitos com tubulação subterrânea / bocas de lobo / caixas de inspeção / poços de visita e sem solução técnica;",
+                          "value": "Conflitos com tubulação subterrânea / bocas de lobo / caixas de inspeção / poços de visita e sem solução técnica;"
+                        },
+                        {
+                          "label": "Conflitos com estruturas urbanas e de edificações tanto aérea como subterrânea e sem solução técnica;",
+                          "value": "Conflitos com estruturas urbanas e de edificações tanto aérea como subterrânea e sem solução técnica;"
+                        },
+                        {
+                          "label": "Conflitos com rebaixamento de guias para entrada e saída de veículos, acessibilidade NBR9050, calçamento, esquinas e sem solução técnica;",
+                          "value": "Conflitos com rebaixamento de guias para entrada e saída de veículos, acessibilidade NBR9050, calçamento, esquinas e sem solução técnica;"
+                        },
+                        {
+                          "label": "Obra pública sem solução técnica;",
+                          "value": "Obra pública sem solução técnica;"
+                        },
+                        {
+                          "label": "Emergencial, com risco de queda em eventos climáticos extremos.",
+                          "value": "Emergencial, com risco de queda em eventos climáticos extremos."
+                        }
+                      ]
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "parecer_final",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "Parecer final dado pelo Técnico Avaliador:",
+                      "options": [
+                        {
+                          "label": "MANTER",
+                          "value": "MANTER"
+                        },
+                        {
+                          "label": "PODAS",
+                          "value": "PODAS"
+                        },
+                        {
+                          "label": "TRANSPLANTAR",
+                          "value": "TRANSPLANTAR"
+                        },
+                        {
+                          "label": "EXTRAÇÃO",
+                          "value": "EXTRAÇÃO"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "total_compensacao",
+                    "className": "col-6",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Total de compensação",
+                      "placeholder": "Ex: 10",
+                      "required": true,
+                      "type": "number",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||total_compensacao": "model.parecer_final === 'EXTRAÇÃO' ? parseFloat(model.valor_total_comp ?? 0) : 0"
+                    }
+                  },
+                  {
+                    "key": "foto",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Foto",
+                      "options": [],
+                      "focus": "false",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.quest_quant_arvores == 'Sim' && model.tipo_solicitacao == 'Imóvel Particular')"
+            },
+            {
+              "key": "qtd_arvores",
+              "className": "col-6",
+              "type": "input",
+              "templateOptions": {
+                "label": "Quantidade de árvores (simples)",
+                "placeholder": "Ex: 10",
+                "required": true,
+                "type": "number",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||qtd_arvores": "model.arvore_repeat ? model.arvore_repeat?.length : 0"
+              },
+              "hideExpression": "(model.quest_quant_arvores == 'Sim' && model.tipo_solicitacao == 'Imóvel Particular')"
+            },
+            {
+              "key": "qtd_arvores_laudo",
+              "className": "col-6",
+              "type": "input",
+              "templateOptions": {
+                "label": "Quantidade de árvores (laudo)",
+                "placeholder": "Ex: 10",
+                "required": true,
+                "type": "number",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||qtd_arvores_laudo": "model.quadro_especies ? model.quadro_especies.reduce((total, item) => total + parseFloat(item.total_arvores ?? 0), 0) : 0"
+              },
+              "hideExpression": "!(model.quest_quant_arvores == 'Sim' && model.tipo_solicitacao == 'Imóvel Particular')"
+            },
+            {
+              "key": "total_compensacao",
+              "className": "col-6",
+              "type": "input",
+              "templateOptions": {
+                "label": "Total de compensação",
+                "placeholder": "Ex: 10",
+                "required": true,
+                "type": "number",
+                "readonly": true,
+                "focus": false,
+                "disabled": false
+              },
+              "expressionProperties": {
+                "model|||total_compensacao": "model.quadro_especies ? model.quadro_especies.reduce((total, item) => total + parseFloat(item.total_compensacao ?? 0), 0) : 0"
+              },
+              "hideExpression": "!(model.quest_quant_arvores == 'Sim' && model.tipo_solicitacao == 'Imóvel Particular')"
+            }
+          ],
+          "templateOptions": {
+            "title": "Descrição da árvore",
+            "subtitle": "",
+            "textHtml": "<b>Para o Laudo de Caracterização da Vegetação: </b><br>\n\nParecer final dado pelo Técnico Avaliador:<br>\n\nSe colocar MANTER, não será autorizado a extração e a compensação será ORIGEM x 0 = 0<br>\n\nSe colocar PODAS, não será autorizado a extração e sim, apenas podas. A compensação será ORIGEM x 0 = 0<br>\n\nSe colocar TRANSPLANTAR, não será autorizado a extração e apenas transplante da árvore. A compensação será ORIGEM x 0 = 0<br>\n\nSe colocar EXTRAÇÃO, será AUTORIZADO A EXTRAÇÃO e a compensação será ORIGEM x 1 = QUANTIDADE DETERMINADA NA COLUNA ORIGEM<br>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "proprietario",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Responsável pelo imóvel",
+                "focus": "false",
+                "btnAddText": "Responsável pelo imóvel",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "tipo_vinculo_proprietario",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "Tipo de vínculo:",
+                      "options": [
+                        {
+                          "label": "Proprietário",
+                          "value": "Proprietário"
+                        },
+                        {
+                          "label": "Possuidor",
+                          "value": "Possuidor"
+                        },
+                        {
+                          "label": "Condomínio",
+                          "value": "Condomínio"
+                        },
+                        {
+                          "label": "Espólio",
+                          "value": "Espólio"
+                        },
+                        {
+                          "label": "Massa Falida",
+                          "value": "Massa Falida"
+                        }
+                      ],
+                      "focus": "false",
+                      "placeholder": "--selecione--",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "nome-proprietario",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Nome/ Razão Social",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||nome-proprietario": "(model.vinculo_requerente == 'Proprietário do imóvel' && field.parent.templateOptions.index == 0) ? model.user : model['nome-proprietario']",
+                      "templateOptions|||readonly": "(model.vinculo_requerente == 'Proprietário do imóvel' && field.parent.templateOptions.index == 0) ? true : false"
+                    }
+                  },
+                  {
+                    "key": "cpfcnpj_proprietario",
+                    "className": "col-12",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "CPF/CNPJ ",
+                      "mask": "000.000.000-009",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||cpfcnpj_proprietario": "(model.vinculo_requerente == 'Proprietário do imóvel' && field.parent.templateOptions.index == 0) ? model.cpfcnpj_requerente : model.cpfcnpj_proprietario",
+                      "templateOptions|||mask": "model.cpfcnpj_proprietario?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' ",
+                      "templateOptions|||readonly": "(model.vinculo_requerente == 'Proprietário do imóvel' && field.parent.templateOptions.index == 0) ? true : false"
+                    }
+                  },
+                  {
+                    "key": "email_proprietario",
+                    "type": "input",
+                    "validators": {
+                      "validation": [
+                        "email"
+                      ]
+                    },
+                    "templateOptions": {
+                      "label": "E-mail para Notificação",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||email_proprietario": "(model.vinculo_requerente == 'Proprietário do imóvel' && field.parent.templateOptions.index == 0) ? model.email_requerente : model.email_proprietario",
+                      "templateOptions|||readonly": "(model.vinculo_requerente == 'Proprietário do imóvel' && field.parent.templateOptions.index == 0) ? true : false"
+                    }
+                  },
+                  {
+                    "key": "documento_proprietario",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documentos pessoais (Carteira de Identidade e CPF)",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_proprietario?.length == 11",
+                      "model|||documento_proprietario": "(model.vinculo_requerente == 'Proprietário do imóvel' && field.parent.templateOptions.index == 0) ? model.documento_requerente : model.documento_proprietario",
+                      "templateOptions|||readonly": "(model.vinculo_requerente == 'Proprietário do imóvel' && field.parent.templateOptions.index == 0) ? true : false"
+                    }
+                  },
+                  {
+                    "key": "contratosocial_pessoajuridica",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Contrato Social da Pessoa Jurídica",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_proprietario?.length > 11 ",
+                      "model|||contratosocial_pessoajuridica": "(model.vinculo_requerente == 'Proprietário do imóvel' && field.parent.templateOptions.index == 0) ? model.documento_requerente : model.contratosocial_pessoajuridica",
+                      "templateOptions|||readonly": "(model.vinculo_requerente == 'Proprietário do imóvel' && field.parent.templateOptions.index == 0) ? true : false"
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Responsável(is) pelo imóvel",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Responsável(is) pelo imóvel</span>\n\n\n<ul class = \"pt-2\">\n<li>Quando o <strong>Requerente do processo</strong> for o <strong>Proprietário do imóvel</strong> as informações ao lado serão preenchidas automaticamente.</li>\n  <li align=\"justify\">Para adicionar os dados, clique em <b>'Adicionar Responsável pelo imóvel'.</b>&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step",
+            "mirror"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "compromissario",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Representante Legal",
+                "focus": "false",
+                "btnAddText": "Representante Legal",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "nome-proprietario",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Nome/ Razão Social",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||nome-proprietario": "(model.vinculo_requerente == 'Representante Legal' && field.parent.templateOptions.index == 0) ? model.user : model['nome-proprietario']",
+                      "templateOptions|||readonly": "(model.vinculo_requerente == 'Representante Legal' && field.parent.templateOptions.index == 0) ? true : false"
+                    }
+                  },
+                  {
+                    "key": "cpfcnpj_proprietario",
+                    "className": "col-12",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "CPF/CNPJ ",
+                      "mask": "000.000.000-009",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||cpfcnpj_proprietario": "(model.vinculo_requerente == 'Representante Legal' && field.parent.templateOptions.index == 0) ? model.cpfcnpj_requerente : model.cpfcnpj_proprietario",
+                      "templateOptions|||mask": "model.cpfcnpj_proprietario?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' ",
+                      "templateOptions|||readonly": "(model.vinculo_requerente == 'Representante Legal' && field.parent.templateOptions.index == 0) ? true : false"
+                    }
+                  },
+                  {
+                    "key": "email_proprietario",
+                    "type": "input",
+                    "validators": {
+                      "validation": [
+                        "email"
+                      ]
+                    },
+                    "templateOptions": {
+                      "label": "E-mail para Notificação",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||email_proprietario": "(model.vinculo_requerente == 'Representante Legal' && field.parent.templateOptions.index == 0) ? model.email_requerente : model.email_proprietario",
+                      "templateOptions|||readonly": "(model.vinculo_requerente == 'Representante Legal' && field.parent.templateOptions.index == 0) ? true : false"
+                    }
+                  },
+                  {
+                    "key": "documento_proprietario",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documentos pessoais (Carteira de Identidade e CPF)",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_proprietario?.length == 11",
+                      "model|||documento_proprietario": "(model.vinculo_requerente == 'Representante Legal' && field.parent.templateOptions.index == 0) ? model.documento_requerente : model.documento_proprietario",
+                      "templateOptions|||readonly": "(model.vinculo_requerente == 'Representante Legal' && field.parent.templateOptions.index == 0) ? true : false"
+                    }
+                  },
+                  {
+                    "key": "contratosocial_pessoajuridica",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Contrato Social da Pessoa Jurídica",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_proprietario?.length > 11 ",
+                      "model|||contratosocial_pessoajuridica": "(model.vinculo_requerente == 'Representante Legal' && field.parent.templateOptions.index == 0) ? model.documento_requerente : model.contratosocial_pessoajuridica",
+                      "templateOptions|||readonly": "(model.vinculo_requerente == 'Representante Legal' && field.parent.templateOptions.index == 0) ? true : false"
+                    },
+                    "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Representante Legal",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Representante Legal</span>\n\n\n<ul class = \"pt-2\">\n<li>Quando o <strong>Requerente do processo</strong> for o <strong>Representante Legal</strong> as informações ao lado serão preenchidas automaticamente.</li>\n  <li align=\"justify\">Para adicionar os dados, clique em <b>'Adicionar Representante Legal'.</b>&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step",
+            "mirror"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "responsavel_tecnico",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Responsável Técnico",
+                "focus": "false",
+                "btnAddText": "Responsável Técnico",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "responsavel_tecnico_vinculo",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Tipo de responsabilidade:",
+                      "focus": "false",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "nome_responsavel_tecnico",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Nome/ Razão Social do Profissional",
+                      "placeholder": "",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "cpfcnpj_responsavel_tecnico",
+                    "type": "next-cpf-cnpj",
+                    "templateOptions": {
+                      "label": "CPF/CNPJ do Profissional",
+                      "labelNomeResp": "Nome do Representante Legal",
+                      "labelCpfResp": "CPF do Representante Legal",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "email_responsavel_tecnico",
+                    "type": "next-input",
+                    "validators": {
+                      "validation": [
+                        "email"
+                      ]
+                    },
+                    "templateOptions": {
+                      "label": "E-mail para Correspondência",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "numero_art",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Número da(s) ART(s)/RRT(s), separadas por virgula",
+                      "placeholder": "Ex: 000000,000000",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "documento_art",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Anotação de Responsabilidade Técnica (ART) e/ou Registro de Responsabilidade Técnica (RRT) - Arquivo escaneado e assinado",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Responsável Técnico",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "foto_arvore",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Ao menos uma foto da árvore que possibilite sua identificação no momento da vistoria",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Calçada' || model.tipo_solicitacao == 'Calçada de Condomínio' || model.tipo_solicitacao == 'Imóvel Particular' || model.tipo_solicitacao == 'Praça, Parque ou Canteiro Central' || model.tipo_solicitacao == 'Próprios Públicos Municipais' || model.tipo_solicitacao == 'Próprios Públicos Estaduais ou Federais')"
+            },
+            {
+              "key": "iptu",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Espelho do carnê do IPTU (capa) do imóvel",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Calçada' || model.tipo_solicitacao == 'Imóvel Particular')"
+            },
+            {
+              "key": "termo_reposicao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Termo de Compromisso de Reposição devidamente preenchido",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Calçada')"
+            },
+            {
+              "key": "prova_dominio",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Prova dominial ou prova de origem possessória",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Imóvel Particular')"
+            },
+            {
+              "key": "planta_imovel",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Planta do imóvel ou croqui, indicando a vegetação existente e destacando a(s) árvore(s)",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Calçada de Condomínio' || model.tipo_solicitacao == 'Imóvel Particular' || model.tipo_solicitacao == 'Próprios Públicos Estaduais ou Federais')"
+            },
+            {
+              "key": "doc_identificacao_condominio",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cédula de Identidade e CPF do proprietário ou síndico/presidente da associação",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Calçada de Condomínio')"
+            },
+            {
+              "key": "cnpj_condominio",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovante de Inscrição e de Situação Cadastral do CNPJ do condomínio ou associação",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Calçada de Condomínio')"
+            },
+            {
+              "key": "estatuto_condominio",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Contrato Social ou Estatuto (com última atualização contratual)",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Calçada de Condomínio')"
+            },
+            {
+              "key": "abaixo_assinado",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Abaixo-assinado com concordância de pelo menos 50% + 1 dos moradores ou deliberação em assembleia",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Calçada de Condomínio')"
+            },
+            {
+              "key": "ata_eleicao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Ata de eleição do síndico ou representante legal",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Calçada de Condomínio')"
+            },
+            {
+              "key": "ato_nomeacao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Ato de nomeação do representante legal publicado no Diário Oficial competente",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Próprios Públicos Municipais' || model.tipo_solicitacao == 'Próprios Públicos Estaduais ou Federais')"
+            },
+            {
+              "key": "planta_paisagismo",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Planta do Projeto de Paisagismo Aprovado (se for gleba, desmembramento ou parcelamento do solo)",
+                "required": false,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!(model.tipo_solicitacao == 'Imóvel Particular')"
+            },
+            {
+              "className": "col-6",
+              "key": "doc_registroimovel",
+              "resetOnHide": true,
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Matrícula atualizada",
+                "options": [],
+                "extends": [
+                  "pdf",
+                  "PDF"
+                ],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_solicitacao !== 'Imóvel Particular'"
+            },
+            {
+              "key": "comp_propriedade",
+              "className": "col-6",
+              "resetOnHide": true,
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovação de propriedade",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_solicitacao !== 'Imóvel Particular'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": false,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": false,
+                      "extends": [
+                        "pdf",
+                        "PDF",
+                        "shp",
+                        "SHP",
+                        "dwg",
+                        "DWG",
+                        "gpkg",
+                        "GPKG",
+                        "zip",
+                        "ZIP",
+                        "xlsx",
+                        "XLSX"
+                      ],
+                      "placeholder": "Ex: 10,00m²"
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": "true",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": "true",
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "placeholder": "",
+                "focus": "false",
+                "disabled": "false",
+                "sensitiveField": false,
+                "multiple": true,
+                "hideLabel": false,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true,
+                "hidden": "true"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class=\"pl-4\">\n<li align = \"justify\">Você pode adicionar documentos complementares para este processo acionando o botão <b>\"Fazer Upload\"</b> quantas vezes necessitar.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ]
+}

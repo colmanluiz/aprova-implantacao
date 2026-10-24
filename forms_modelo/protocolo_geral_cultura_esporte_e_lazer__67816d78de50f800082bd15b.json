@@ -1,0 +1,920 @@
+{
+  "_id": "67816d78de50f800082bd15b",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_solicitacao",
+              "type": "select",
+              "templateOptions": {
+                "label": "Tipo de Solicitação",
+                "options": [
+                  {
+                    "label": "Solicitação de espaço público para evento (biblioteca, ginásio de esportes, etc.)",
+                    "value": "Solicitação de espaço público para evento (praça, quadra pública, etc.)"
+                  },
+                  {
+                    "label": "Solicitação de apoio financeiro ou logístico para evento esportivo ou cultural",
+                    "value": "Solicitação de apoio financeiro ou logístico para evento esportivo ou cultural"
+                  },
+                  {
+                    "label": "Inscrição em cursos, oficinas ou palestras culturais",
+                    "value": "Inscrição em cursos, oficinas ou palestras culturais"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "placeholder": "-selecione-",
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "solicitacao_especificar",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Descrição da solicitação",
+                "placeholder": "Descreva a solicitação",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipo_solicitacao || model.tipo_solicitacao !== 'Outro'"
+            },
+            {
+              "key": "descricao_solicitacao",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Descrição da solicitação",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Solicitação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/ CNPJ",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Notificação",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "documento_requerente",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos (Carteira de Identidade e CPF)",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "doc_procurador",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Procuração",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.requerente || model.requerente !== 'Outro' "
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "nome_espaco_publico",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do espaço público",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_solicitacao !== 'Solicitação de espaço público para evento (praça, quadra pública, etc.)'"
+            },
+            {
+              "key": "finalidade",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Finalidade de uso",
+                "placeholder": "Ex.: Visita escolar",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "model.tipo_solicitacao !== 'Solicitação de espaço público para evento (praça, quadra pública, etc.)'"
+            },
+            {
+              "className": "col-12",
+              "key": "endereco_cep",
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP do local",
+                "placeholder": "Ex: 00000-000",
+                "mask": "00000-000",
+                "required": true,
+                "hideData": true,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_solicitacao !== 'Solicitação de espaço público para evento (praça, quadra pública, etc.)'"
+            },
+            {
+              "className": "col-12",
+              "key": "status_integracaocep",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.endereco_cep_empreendimento?.status == 'LOADING' "
+              },
+              "hideExpression": " model.endereco_cep?.status !== 'LOADING'  || !model.endereco_cep?.input"
+            },
+            {
+              "className": "col-12",
+              "key": "erro_integracaocep_empreendimento",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "(model.endereco_cep?.status !== 'SUCCESS') || (model.endereco_cep?.data?.response?.result?.erro === true) || (model.endereco_cep?.input?.length === 8 && model.endereco_cep?.status === 'KNOWN_FAILED') "
+              },
+              "hideExpression": "(model.endereco_cep?.status === 'SUCCESS' && model.endereco_cep?.data?.response?.result?.erro !== true) || (model.endereco_cep?.input?.length !== 8 && model.endereco_cep?.status !== 'KNOWN_FAILED') || !model.endereco_cep.input "
+            },
+            {
+              "className": "col-12",
+              "key": "logradouro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Logradouro do local",
+                "required": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {
+                "model|||logradouro_empreendimento": "model.logradouro_empreendimento && model.logradouro_empreendimento == model.endereco_cep?.data?.response?.result?.logradouro ? model.logradouro_empreendimento : model.endereco_cep?.data?.response?.result?.logradouro"
+              },
+              "hideExpression": "model.tipo_solicitacao !== 'Solicitação de espaço público para evento (praça, quadra pública, etc.)'"
+            },
+            {
+              "className": "col-12",
+              "key": "numero_imovel",
+              "type": "input",
+              "templateOptions": {
+                "label": "Número Residencial do local",
+                "placeholder": "Ex: S/N",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_solicitacao !== 'Solicitação de espaço público para evento (praça, quadra pública, etc.)'"
+            },
+            {
+              "className": "col-12",
+              "key": "bairro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Bairro do local",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "placeholder": "",
+                "focus": false
+              },
+              "expressionProperties": {
+                "model|||bairro_empreendimento": "model.bairro_empreendimento && model.bairro_empreendimento ==  model.endereco_cep?.data?.response?.result?.bairro ? model.bairro_empreendimento :  model.endereco_cep?.data?.response?.result?.bairro"
+              },
+              "hideExpression": "model.tipo_solicitacao !== 'Solicitação de espaço público para evento (praça, quadra pública, etc.)'"
+            },
+            {
+              "className": "col-12",
+              "key": "complemento_imovel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento de endereço",
+                "placeholder": "Ex: Esquina com Rua São Paulo",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "disabled": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_solicitacao !== 'Solicitação de espaço público para evento (praça, quadra pública, etc.)'"
+            },
+            {
+              "key": "nome_evento",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do evento",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_solicitacao !== 'Solicitação de apoio financeiro ou logístico para evento esportivo ou cultural'"
+            },
+            {
+              "key": "cidade_evento",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cidade de realização do evento",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_solicitacao !== 'Solicitação de apoio financeiro ou logístico para evento esportivo ou cultural'"
+            },
+            {
+              "key": "estado_evento",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Estado de realização do evento",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_solicitacao !== 'Solicitação de apoio financeiro ou logístico para evento esportivo ou cultural'"
+            },
+            {
+              "key": "tipo_apoio",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de apoio",
+                "options": [
+                  {
+                    "value": "Logístico"
+                  },
+                  {
+                    "value": "Financeiro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipo_solicitacao || model.tipo_solicitacao !== 'Solicitação de apoio financeiro ou logístico para evento esportivo ou cultural'"
+            },
+            {
+              "key": "despesas_custo",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Despesas a serem custeadas:",
+                "options": [
+                  {
+                    "label": "Passagem",
+                    "value": "Passagem"
+                  },
+                  {
+                    "label": "Refeição",
+                    "value": "Refeição"
+                  },
+                  {
+                    "label": "Taxa de inscrição",
+                    "value": "Taxa de inscrição"
+                  },
+                  {
+                    "label": "Embelezamento",
+                    "value": "Embelezamento"
+                  },
+                  {
+                    "label": "Transporte",
+                    "value": "Transporte"
+                  },
+                  {
+                    "label": "Hospedagem",
+                    "value": "Hospedagem"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipo_apoio || model.tipo_apoio !== 'Financeiro'"
+            },
+            {
+              "key": "valor_passa",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Custo do Translado",
+                "placeholder": " ",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "text",
+                "required": true,
+                "currency": {
+                  "prefix": "R$ ",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                }
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.despesas_custo?.['Passagem'] !== true"
+            },
+            {
+              "key": "custo_alimenta",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Custo de Alimentação",
+                "placeholder": " ",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "text",
+                "required": true,
+                "currency": {
+                  "prefix": "R$ ",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                }
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.despesas_custo?.['Refeição'] !== true"
+            },
+            {
+              "key": "custo_taxa",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Custo da Taxa de Inscrição",
+                "placeholder": " ",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "text",
+                "required": true,
+                "currency": {
+                  "prefix": "R$ ",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                }
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.despesas_custo?.['Taxa de inscrição'] !== true"
+            },
+            {
+              "key": "custo_embeleza",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Custo de Embelezamento",
+                "placeholder": " ",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "text",
+                "required": true,
+                "currency": {
+                  "prefix": "R$ ",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                }
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.despesas_custo?.['Embelezamento'] !== true"
+            },
+            {
+              "key": "custo_transporte",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Custo de Transporte Interno na Cidade do Evento",
+                "placeholder": " ",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "text",
+                "required": true,
+                "currency": {
+                  "prefix": "R$ ",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                }
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.despesas_custo?.['Transporte'] !== true"
+            },
+            {
+              "key": "custo_hospedagem",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Custo de Hospedagem",
+                "placeholder": " ",
+                "focus": "false",
+                "floatNumber": true,
+                "type": "text",
+                "required": true,
+                "currency": {
+                  "prefix": "R$ ",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                }
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.despesas_custo?.['Hospedagem'] !== true"
+            },
+            {
+              "key": "valor_total",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Valor total da despesa",
+                "placeholder": "",
+                "floatNumber": true,
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "readonly": true,
+                "currency": {
+                  "prefix": "R$ ",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                }
+              },
+              "expressionProperties": {
+                "model|||valor_total": "((model.valor_passa && !isNaN(parseFloat(model.valor_passa)) ? parseFloat(model.valor_passa) : 0) + (model.custo_alimenta && !isNaN(parseFloat(model.custo_alimenta)) ? parseFloat(model.custo_alimenta) : 0) + (model.custo_taxa && !isNaN(parseFloat(model.custo_taxa)) ? parseFloat(model.custo_taxa) : 0) + (model.custo_embeleza && !isNaN(parseFloat(model.custo_embeleza)) ? parseFloat(model.custo_embeleza) : 0) + (model.custo_transporte && !isNaN(parseFloat(model.custo_transporte)) ? parseFloat(model.custo_transporte) : 0) + (model.custo_hospedagem && !isNaN(parseFloat(model.custo_hospedagem)) ? parseFloat(model.custo_hospedagem) : 0)).toFixed(2)"
+              },
+              "hideExpression": "!model.tipo_apoio || model.tipo_apoio !== 'Financeiro'"
+            },
+            {
+              "key": "nome_curso",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do curso, oficina ou palestra",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_solicitacao !== 'Inscrição em cursos, oficinas ou palestras culturais'"
+            },
+            {
+              "key": "data_inicio_evento",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Data de início do evento",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_solicitacao !== 'Solicitação de apoio financeiro ou logístico para evento esportivo ou cultural' && model.tipo_solicitacao !== 'Solicitação de espaço público para evento (biblioteca, ginásio de esportes, etc.)'"
+            },
+            {
+              "key": "data_fim_evento",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Data de fim do evento",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_solicitacao !== 'Solicitação de apoio financeiro ou logístico para evento esportivo ou cultural' && model.tipo_solicitacao !== 'Solicitação de espaço público para evento (biblioteca, ginásio de esportes, etc.)'"
+            },
+            {
+              "key": "desc_solicitacao",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Descrição da solicitação",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "!model.tipo_solicitacao || model.tipo_solicitacao !== 'Outro'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados da Solicitação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "documentacao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentação Necessária",
+                "options": [],
+                "focus": "false",
+                "required": false,
+                "extends": [
+                  "pdf",
+                  "PDF"
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "step": {},
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Protocolo Geral | Cultura, Esporte e Lazer",
+    "descricao": "",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "PGC",
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "useNewSidebarForwarding": true,
+    "sendToEmailExpression": "Array.from(new Set([...(context.proprietario?.map((RL) => RL.email_proprietario ) || []), ...(context['requerente']?.map((RL) => RL.email_requerente) || []) ]))",
+    "templates": [],
+    "form_tramites": [
+      {
+        "nome": "Taxas",
+        "type": "taxa",
+        "text_action": "Inseriu informações referente Taxas",
+        "key": "taxasProcesso",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado e então selecione a opção 'Enviar para Análise' para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado e então selecione a opção 'Enviar para Análise' para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "permission": "taxas"
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "cultura_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "allowMultipleForwarding": true
+  },
+  "tramite": [
+    {
+      "_id": "65ef4752bc99830008ae23f3",
+      "groupId": "sorocaba_implantacaoad"
+    }
+  ],
+  "__v": 0,
+  "city_id": 38
+}

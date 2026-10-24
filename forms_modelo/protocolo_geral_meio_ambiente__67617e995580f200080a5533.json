@@ -1,0 +1,1622 @@
+{
+  "_id": "67617e995580f200080a5533",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_solicitacao",
+              "type": "select",
+              "templateOptions": {
+                "label": "Tipo de Solicitação",
+                "options": [
+                  {
+                    "label": "Remoção e/ou substituição de indivíduos arbustivos e arbóreos",
+                    "value": "Remoção e/ou substituição de indivíduos arbustivos e arbóreos"
+                  },
+                  {
+                    "label": "Declaração de Regularidade de Esgoto",
+                    "value": "Declaração de Regularidade de Esgoto"
+                  },
+                  {
+                    "label": "Cancelamento de Processos - Meio Ambiente",
+                    "value": "Cancelamento de Processos - Meio Ambiente"
+                  },
+                  {
+                    "label": "Monitoramento de Som e Autorização Ambiental para Eventos",
+                    "value": "Monitoramento de Som e Autorização Ambiental para Eventos"
+                  },
+                  {
+                    "label": "Cadastro de Empresas e Profissionais de Serviços de Jardinagem e Paisagismo",
+                    "value": "Cadastro de Empresas e Profissionais de Serviços de Jardinagem e Paisagismo"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "columns": "12",
+                "placeholder": "-selecione-",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "descricao_solicitacao",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Descrição da solicitação",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Solicitação",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Solicitação</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente;</li>\n<li align=\"justify\">Caso seu processo necessite de responsabilidade técnica, <b>o próprio responsável técnico deverá abri-lo e acompanhá-lo</b>. Questões técnicas deverão ser tratadas durante o andamento do processo, que precisarão ser respondidas/verificadas pelo próprio responsável técnico.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/ CNPJ",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Notificação",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "documento_requerente",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos (Carteira de Identidade e CPF, se pessoa física, OU CNPJ e contrato social, se pessoa jurídica)",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "proprietario",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Responsável pelo imóvel",
+                "focus": "false",
+                "btnAddText": "Responsável pelo imóvel",
+                "required": false,
+                "placeholder": "",
+                "disabled": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "tipo_vinculo_proprietario",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "Tipo de vínculo:",
+                      "options": [
+                        {
+                          "label": "Proprietário",
+                          "value": "Proprietário"
+                        },
+                        {
+                          "label": "Possuidor",
+                          "value": "Possuidor"
+                        },
+                        {
+                          "label": "Condomínio",
+                          "value": "Condomínio"
+                        },
+                        {
+                          "label": "Espólio",
+                          "value": "Espólio"
+                        },
+                        {
+                          "label": "Massa Falida",
+                          "value": "Massa Falida"
+                        }
+                      ],
+                      "focus": "false",
+                      "placeholder": "--selecione--",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "nome-proprietario",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Nome/ Razão Social",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "cpfcnpj_proprietario",
+                    "type": "next-cpf-cnpj",
+                    "templateOptions": {
+                      "label": "CPF/CNPJ",
+                      "labelNomeResp": "Nome do Administrador",
+                      "labelCpfResp": "CPF do Administrador",
+                      "omitirCrea": true,
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "email_proprietario",
+                    "type": "input",
+                    "validators": {
+                      "validation": [
+                        "email"
+                      ]
+                    },
+                    "templateOptions": {
+                      "label": "E-mail para Notificação",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "documento_proprietario",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documentos pessoais (Carteira de Identidade e CPF)",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "hideExpression": "!model.cpfcnpj_proprietario",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "contratosocial_pessoajuridica",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Contrato Social da Pessoa Jurídica",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_proprietario?.type == 'cnpj' "
+                    },
+                    "hideExpression": "model.cpfcnpj_proprietario?.type !== 'cnpj' || !model.cpfcnpj_proprietario"
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Responsável(is) pelo imóvel",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Responsável(is) pelo imóvel</span>\n\n\n<ul class = \"pt-2\">\n<li align=\"justify\">Caso o seu processo envolva um imóvel, <b>favor inserir os dados do proprietário</b> aqui. Isso vai facilitar a sequência do processo e evitar possíveis retornos para correções (comunique-ses).</li> \n  <li align=\"justify\">Os <b>e-mails</b> inseridos aqui serão informados de todas as movimentações pelas quais este processo passar!&nbsp;</li> \n\n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "templateOptions": {
+            "title": "Dados do Imóvel",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Imóvel</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso o seu processo envolva um imóvel, <b>favor inserir a maioria dos dados</b> aqui. Isso vai facilitar a sequência do processo e evitar possíveis retornos para correções (comunique-ses).</li> \n<li align=\"justify\">Caso a sua solicitação envolva mais de um imóvel (contíguos, vizinhos), o <b>primeiro imóvel</> será considerado como endereço principal para fins da documentação resultante desse processo.&nbsp;</li> \n\n</ul>",
+            "fieldGroup": [
+              {
+                "key": "id-loteamento",
+                "type": "next-input",
+                "templateOptions": {
+                  "label": "Loteamento",
+                  "placeholder": "000000",
+                  "focus": "false",
+                  "type": "text",
+                  "required": true
+                }
+              },
+              {
+                "key": "id-quadra",
+                "type": "next-input",
+                "templateOptions": {
+                  "label": "Número da Quadra",
+                  "placeholder": "000000",
+                  "focus": "false",
+                  "type": "text",
+                  "required": true
+                }
+              },
+              {
+                "key": "id-lote",
+                "type": "next-input",
+                "templateOptions": {
+                  "label": "Número do Lote",
+                  "placeholder": "000000",
+                  "focus": "false",
+                  "type": "text",
+                  "required": true
+                }
+              },
+              {
+                "key": "id-bairro",
+                "type": "next-input",
+                "templateOptions": {
+                  "label": "Bairro",
+                  "placeholder": "Centro",
+                  "focus": "false",
+                  "type": "text",
+                  "required": true
+                }
+              },
+              {
+                "key": "endereco-cep",
+                "type": "next-input",
+                "templateOptions": {
+                  "label": "CEP da Obra",
+                  "placeholder": "00000-000",
+                  "focus": "false",
+                  "type": "text",
+                  "required": true
+                }
+              },
+              {
+                "key": "endereco-obra",
+                "type": "next-input",
+                "templateOptions": {
+                  "label": "Endereço completo da Obra",
+                  "placeholder": "Avenida Brasil, S/N",
+                  "focus": "false",
+                  "type": "text",
+                  "required": true
+                }
+              }
+            ]
+          },
+          "fieldGroup": [
+            {
+              "wrappers": [
+                "mirror"
+              ],
+              "key": "imovel",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Imóvel",
+                "focus": "false",
+                "btnAddText": "Imóvel",
+                "required": false,
+                "placeholder": "",
+                "disabled": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "className": "col-12",
+                    "key": "inscricao_imobiliaria",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Inscrição do Imóvel",
+                      "mask": "000000-0",
+                      "placeholder": "Ex: 000000-0",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "endereco_cep",
+                    "type": "next-input-data",
+                    "wrappers": [
+                      "form-field",
+                      "integrations"
+                    ],
+                    "templateOptions": {
+                      "label": "CEP",
+                      "placeholder": "Ex: 00000-000",
+                      "mask": "00000-000",
+                      "required": true,
+                      "hideData": true,
+                      "idIntegration": "5f916ab6a926a9000875587d",
+                      "saveIntegrationResponse": true,
+                      "triggerOnlyWhenEditing": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "status_integracaocep_imovel",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                      "focus": "false",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.endereco_cep?.status == 'LOADING' "
+                    },
+                    "hideExpression": " model.endereco_cep?.status !== 'LOADING'  || !model.endereco_cep?.input"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "erro_integracaocep_imovel",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                      "focus": "false",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "(model.endereco_cep?.status !== 'SUCCESS') || (model.endereco_cep?.data?.response?.result?.erro === true) || (model.endereco_cep?.input?.length === 8 && model.endereco_cep?.status === 'KNOWN_FAILED') "
+                    },
+                    "hideExpression": "(model.endereco_cep?.status === 'SUCCESS' && model.endereco_cep?.data?.response?.result?.erro !== true) || (model.endereco_cep?.input?.length !== 8 && model.endereco_cep?.status !== 'KNOWN_FAILED') || !model.endereco_cep.input "
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "logradouro_imovel",
+                    "resetOnHide": true,
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Logradouro",
+                      "required": true,
+                      "triggerOnlyWhenEditing": true
+                    },
+                    "expressionProperties": {
+                      "model|||logradouro_imovel": "model.logradouro_imovel && model.logradouro_imovel == model.endereco_cep?.data?.response?.result?.logradouro ? model.logradouro_imovel : model.endereco_cep?.data?.response?.result?.logradouro"
+                    },
+                    "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "erro_logradouro",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O 'Logradouro' informado deve possuir no máximo 50 caracteres. Informações adicionais devem ser inseridas em 'Complemento'.</div></div><br>",
+                      "focus": "false",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": " model.logradouro_imovel?.length > 50  "
+                    },
+                    "hideExpression": "model.logradouro_imovel?.length <= 50 || !model.logradouro_imovel  "
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "numero_imovel",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Número Predial",
+                      "placeholder": "Ex: S/N",
+                      "required": true
+                    },
+                    "expressionProperties": {},
+                    "hideExpression": " !model.endereco_cep?.input "
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "erro_numero_predial",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Número Predial da Obra' informado deve possuir no máximo 10 caracteres.</div></div><br>",
+                      "label": "",
+                      "focus": "false",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.numero_imovel?.length > 10  "
+                    },
+                    "hideExpression": "model.numero_imovel?.length <= 10 || !model.numero_imovel "
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "bairro_imovel",
+                    "resetOnHide": true,
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Bairro",
+                      "required": true,
+                      "triggerOnlyWhenEditing": true,
+                      "placeholder": "",
+                      "focus": false
+                    },
+                    "expressionProperties": {
+                      "model|||bairro_imovel": "model.bairro_imovel && model.bairro_imovel ==  model.endereco_cep?.data?.response?.result?.bairro ? model.bairro_imovel :  model.endereco_cep?.data?.response?.result?.bairro"
+                    },
+                    "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "complemento_imovel",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Complemento",
+                      "placeholder": "Ex: Esquina com Rua São Paulo",
+                      "focus": "false",
+                      "type": "text",
+                      "required": false,
+                      "disabled": false
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "cidade_obra",
+                    "resetOnHide": true,
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Município",
+                      "required": true,
+                      "triggerOnlyWhenEditing": true,
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||cidade_obra": "model.cidade_obra && model.cidade_obra ==  model.endereco_cep?.data?.response?.result?.localidade ? model.cidade_obra :  model.endereco_cep?.data?.response?.result?.localidade"
+                    },
+                    "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "uf_obra",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Estado",
+                      "required": true,
+                      "triggerOnlyWhenEditing": true,
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||uf_obra": "model.uf_obra && model.uf_obra ==  model.endereco_cep?.data?.response?.result?.uf ? model.uf_obra :  model.endereco_cep?.data?.response?.result?.uf"
+                    },
+                    "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "quest_logradouroadicional",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "O Lote possui mais de uma frente?",
+                      "options": [
+                        {
+                          "value": "Sim"
+                        },
+                        {
+                          "value": "Não"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "endereco_complementar",
+                    "type": "next-repeat",
+                    "templateOptions": {
+                      "label": "Logradouro",
+                      "focus": "false",
+                      "restartKey": "quest_logradouroadicional",
+                      "btnAddText": "Logradouro",
+                      "hideLabel": false,
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.quest_logradouroadicional === 'Sim'"
+                    },
+                    "fieldArray": {
+                      "fieldGroupClassName": "row items-end",
+                      "fieldGroup": [
+                        {
+                          "className": "col-12",
+                          "key": "logradouro_complementar",
+                          "resetOnHide": true,
+                          "type": "next-input",
+                          "templateOptions": {
+                            "label": "Logradouro Secundário da Obra",
+                            "required": true
+                          },
+                          "expressionProperties": {}
+                        }
+                      ]
+                    },
+                    "hideExpression": "model.quest_logradouroadicional === 'Não' || !model.quest_logradouroadicional  "
+                  },
+                  {
+                    "key": "zoneamento_repeat",
+                    "type": "next-repeat",
+                    "className": "col-12",
+                    "templateOptions": {
+                      "label": "Macrozoneamento/ Zoneamento",
+                      "btnAddText": "Macrozoneamento/ Zoneamento",
+                      "required": true
+                    },
+                    "fieldArray": {
+                      "fieldGroup": [
+                        {
+                          "className": "col-12",
+                          "key": "macrozoneamento",
+                          "type": "select",
+                          "templateOptions": {
+                            "label": "Macrozoneamento",
+                            "placeholder": "--selecione--",
+                            "focus": "false",
+                            "type": "text",
+                            "options": [
+                              {
+                                "label": "ZNA",
+                                "value": "ZNA"
+                              },
+                              {
+                                "label": "ZANP",
+                                "value": "ZANP"
+                              },
+                              {
+                                "label": "ZAP",
+                                "value": "ZAP"
+                              },
+                              {
+                                "label": "SAA",
+                                "value": "SAA"
+                              },
+                              {
+                                "label": "ZPA",
+                                "value": "ZPA"
+                              },
+                              {
+                                "label": "APP",
+                                "value": "APP"
+                              }
+                            ],
+                            "required": true
+                          },
+                          "expressionProperties": {}
+                        },
+                        {
+                          "className": "col-12",
+                          "key": "zoneamento",
+                          "type": "select",
+                          "templateOptions": {
+                            "label": "Zoneamento",
+                            "placeholder": "--selecione--",
+                            "focus": "false",
+                            "type": "text",
+                            "options": [
+                              {
+                                "label": "ACB",
+                                "value": "ACB"
+                              },
+                              {
+                                "label": "APP",
+                                "value": "APP"
+                              },
+                              {
+                                "label": "BCB",
+                                "value": "BCB"
+                              },
+                              {
+                                "label": "CCB",
+                                "value": "CCB"
+                              },
+                              {
+                                "label": "DPS",
+                                "value": "DPS"
+                              },
+                              {
+                                "label": "EPS",
+                                "value": "EPS"
+                              },
+                              {
+                                "label": "PARQUE CABO BRANCO",
+                                "value": "PARQUE CABO BRANCO"
+                              },
+                              {
+                                "label": "SAA",
+                                "value": "SAA"
+                              },
+                              {
+                                "label": "SDTRL",
+                                "value": "SDTRL"
+                              },
+                              {
+                                "label": "SPP",
+                                "value": "SPP"
+                              },
+                              {
+                                "label": "SRE",
+                                "value": "SRE"
+                              },
+                              {
+                                "label": "STE",
+                                "value": "STE"
+                              },
+                              {
+                                "label": "ZA1",
+                                "value": "ZA1"
+                              },
+                              {
+                                "label": "ZA2",
+                                "value": "ZA2"
+                              },
+                              {
+                                "label": "ZA3",
+                                "value": "ZA3"
+                              },
+                              {
+                                "label": "ZA4",
+                                "value": "ZA4"
+                              },
+                              {
+                                "label": "ZA5",
+                                "value": "ZA5"
+                              },
+                              {
+                                "label": "ZA6",
+                                "value": "ZA6"
+                              },
+                              {
+                                "label": "ZA7",
+                                "value": "ZA7"
+                              },
+                              {
+                                "label": "ZB",
+                                "value": "ZB"
+                              },
+                              {
+                                "label": "ZC",
+                                "value": "ZC"
+                              },
+                              {
+                                "label": "ZCS1",
+                                "value": "ZCS1"
+                              },
+                              {
+                                "label": "ZCS2",
+                                "value": "ZCS2"
+                              },
+                              {
+                                "label": "ZCT",
+                                "value": "ZCT"
+                              },
+                              {
+                                "label": "ZEP2",
+                                "value": "ZEP2"
+                              },
+                              {
+                                "label": "ZEP3",
+                                "value": "ZEP3"
+                              },
+                              {
+                                "label": "ZEP4",
+                                "value": "ZEP4"
+                              },
+                              {
+                                "label": "ZER",
+                                "value": "ZER"
+                              },
+                              {
+                                "label": "ZGE",
+                                "value": "ZGE"
+                              },
+                              {
+                                "label": "ZI1",
+                                "value": "ZI1"
+                              },
+                              {
+                                "label": "ZI2",
+                                "value": "ZI2"
+                              },
+                              {
+                                "label": "ZI3",
+                                "value": "ZI3"
+                              },
+                              {
+                                "label": "ZIS",
+                                "value": "ZIS"
+                              },
+                              {
+                                "label": "ZEP",
+                                "value": "ZEP"
+                              },
+                              {
+                                "label": "ZR1",
+                                "value": "ZR1"
+                              },
+                              {
+                                "label": "ZR2",
+                                "value": "ZR2"
+                              },
+                              {
+                                "label": "ZR3",
+                                "value": "ZR3"
+                              },
+                              {
+                                "label": "ZT1",
+                                "value": "ZT1"
+                              },
+                              {
+                                "label": "ZT2",
+                                "value": "ZT2"
+                              },
+                              {
+                                "label": "ZT3",
+                                "value": "ZT3"
+                              },
+                              {
+                                "label": "ZT4",
+                                "value": "ZT4"
+                              },
+                              {
+                                "label": "POLO TURISTICO",
+                                "value": "POLO TURISTICO"
+                              },
+                              {
+                                "label": "CORREDOR ECOLÓGICO - CE",
+                                "value": "CORREDOR ECOLÓGICO - CE"
+                              },
+                              {
+                                "label": "SETOR DE ANIMAÇÃO TURÍSTICA - SAT",
+                                "value": "SETOR DE ANIMAÇÃO TURÍSTICA - SAT"
+                              },
+                              {
+                                "label": "COMERCIO E SERVIÇOS - CS",
+                                "value": "COMERCIO E SERVIÇOS - CS"
+                              },
+                              {
+                                "label": "SETOR DE EVENTOS I - SE I",
+                                "value": "SETOR DE EVENTOS I - SE I"
+                              },
+                              {
+                                "label": "SETOR DE EVENTOS II - SE II",
+                                "value": "SETOR DE EVENTOS II - SE II"
+                              },
+                              {
+                                "label": "SETOR HOTELEIRO I - SH I",
+                                "value": "SETOR HOTELEIRO I - SH I"
+                              },
+                              {
+                                "label": "SETOR HOTELEIRO II - SH II",
+                                "value": "SETOR HOTELEIRO II - SH II"
+                              },
+                              {
+                                "label": "SETOR HOTELEIRO III - SH III",
+                                "value": "SETOR HOTELEIRO III - SH III"
+                              }
+                            ],
+                            "required": true
+                          },
+                          "expressionProperties": {}
+                        }
+                      ]
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "doc_registroimovel",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Certidão de Registro do Imóvel atualizada",
+                      "options": [],
+                      "focus": "false",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "documentacao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentação Necessária",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "documentos_autenticados",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos para Autenticação",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentação",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentação</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\"><b>Documentação Necessária:</b> apresente toda a documentação necessária para a sequência do seu processo aqui. &nbsp;</li> \n  <li align=\"justify\"><b>Documentos para Autenticação:</b> caso o sua solicitação envolva documentos simples (formato A4) que precisem ser carimbados/autenticados, anexe-o neste campo, mesmo que também façam parte da documentação necessária. Procure reservar um espaço adequado para que o carimbo/autenticação não sobreponha as informações do documentos, conforme abaixo (medidas em cm):\n<img class=\"w-50\" src='http://planejamento.sorocaba.sp.gov.br/wp-content/uploads/2024/08/modelo-documento-autenticado-v2.png'>\n<br> &nbsp;</li> \n\n  <li align=\"justify\"><b>Documentação Complementar:</b> insira qualquer documento que julgar importante e que não é obrigatório para a sequência do seu processo. &nbsp;</li> \n\n</ul>\n<br>\n\n\n<div class=\"p-2 rounded\" style=\"background-color: #FBE8D7; color: #300000;\">\n<b>Atenção:</b>\n<ul class = \"pt-2\">\n  <li>Organize os <b>nomes dos arquivos</b> de modo a facilitar a identificação dos documentos.</li>\n<li>Dê preferência para anexar arquivos em <b>PDF pesquisáveis</b>, para facilitar eventuais buscas no futuro.</li><br>\n\n</ul>\n</div>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "step": {},
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Protocolo Geral | Meio Ambiente",
+    "descricao": "",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "MEI",
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "sendToEmailExpression": "Array.from(new Set([...(context.proprietario?.map((RL) => RL.email_proprietario ) || []), ...(context['requerente']?.map((RL) => RL.email_requerente) || []) ]))",
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Documento - Geral",
+        "template": "ModeloAD/certidao_protocolo_geral.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "numeration": "protocolo_geral ",
+        "official": true,
+        "viewed": true
+      },
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Documentos Autenticados",
+        "template": "ModeloAD/carimbo_a4_wk.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "wk": "true",
+        "official": true,
+        "viewed": true,
+        "viewedByUser": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Taxas",
+        "type": "taxa",
+        "text_action": "Emitiu Taxa",
+        "key": "taxasProcesso",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "permission": "taxas"
+      },
+      {
+        "nome": "Retificar documento",
+        "text_action": "Realizou ação",
+        "key": "card_reti",
+        "fieldGroup": [
+          {
+            "key": "atualizar_data",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Atualizar a data no documento emitido?",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": false
+            }
+          },
+          {
+            "key": "aviso_novo_deferimento",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-orange-100 font-medium text-orange-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http: //www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>Caso seja marcado ''Não'', o documento será retificado com a data do documento anteriormente emitido.</div></div><br/>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "atualizar_data",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Atualizar a data no documento emitido?",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": false
+            }
+          },
+          {
+            "key": "aviso_novo_deferimento",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-orange-100 font-medium text-orange-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http: //www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>Caso seja marcado ''Não'', o documento será retificado com a data do documento anteriormente emitido.</div></div><br/>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Emissão de documento",
+        "text_action": "Realizou ação",
+        "key": "card_emissao_doc",
+        "fieldGroup": [
+          {
+            "key": "tipo_documento",
+            "type": "select",
+            "templateOptions": {
+              "label": "Tipo do documento",
+              "options": [
+                {
+                  "label": "Licença/Alvará",
+                  "value": "Licença/Alvará"
+                },
+                {
+                  "label": "Certidão",
+                  "value": "Certidão"
+                },
+                {
+                  "label": "Carta de Autorização",
+                  "value": "Carta de Autorização"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "titulo_documento",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Título",
+              "placeholder": "Título do documento",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "cards_exibidos",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Cards a serem exibidos no documento",
+              "options": [
+                {
+                  "label": "Card 1 – Solicitação",
+                  "value": "Card 1 – Solicitação"
+                },
+                {
+                  "label": "Card 2 – Dados do Requerente",
+                  "value": "Card 2 – Dados do Requerente"
+                },
+                {
+                  "label": "Card 3 – Responsável(is) pelo imóvel",
+                  "value": "Card 3 – Responsável(is) pelo imóvel"
+                },
+                {
+                  "label": "Card 4 – Dados do Imóvel",
+                  "value": "Card 4 – Dados do Imóvel"
+                }
+              ],
+              "focus": "false",
+              "required": false
+            }
+          },
+          {
+            "key": "texto_doc_final",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Texto do documento",
+              "placeholder": "Insira aqui o texto que será impresso no documento final",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "emissor_doc",
+            "type": "select",
+            "templateOptions": {
+              "label": "Emissor",
+              "options": [
+                {
+                  "label": "Divisão de Licenciamento e Controle",
+                  "value": "Divisão de Licenciamento e Controle"
+                },
+                {
+                  "label": "Seção de Edificações Particulares",
+                  "value": "Seção de Edificações Particulares"
+                },
+                {
+                  "label": "Seção de Fiscalização de Obras Particulares",
+                  "value": "Seção de Fiscalização de Obras Particulares"
+                },
+                {
+                  "label": "Seção de Perícias e Avaliações",
+                  "value": "Seção de Perícias e Avaliações"
+                },
+                {
+                  "label": "Divisão de Parcelamento e Uso do Solo",
+                  "value": "Divisão de Parcelamento e Uso do Solo"
+                },
+                {
+                  "label": "Seção de Parcelamento e Uso do Solo",
+                  "value": "Seção de Parcelamento e Uso do Solo"
+                },
+                {
+                  "label": "Seção de Posturas",
+                  "value": "Seção de Posturas"
+                },
+                {
+                  "label": "Divisão de Geoprocessamento e Geotecnologia Aplicada",
+                  "value": "Divisão de Geoprocessamento e Geotecnologia Aplicada"
+                },
+                {
+                  "label": "Seção de Topografia",
+                  "value": "Seção de Topografia"
+                },
+                {
+                  "label": "Seção de Cadastro Técnico e Georreferenciamento",
+                  "value": "Seção de Cadastro Técnico e Georreferenciamento"
+                },
+                {
+                  "label": "Seção de Pesquisa e Cartografia",
+                  "value": "Seção de Pesquisa e Cartografia"
+                },
+                {
+                  "label": "Divisão de Fiscalização de Áreas Públicas",
+                  "value": "Divisão de Fiscalização de Áreas Públicas"
+                },
+                {
+                  "label": "Seção de Fiscalização de Áreas Públicas",
+                  "value": "Seção de Fiscalização de Áreas Públicas"
+                },
+                {
+                  "label": "Seção de Intervenção Administrativa em Área Pública",
+                  "value": "Seção de Intervenção Administrativa em Área Pública"
+                },
+                {
+                  "label": "Seção de Fiscalização e Permissão de Uso",
+                  "value": "Seção de Fiscalização e Permissão de Uso"
+                },
+                {
+                  "label": "Divisão de Fiscalização de Posturas Mobiliárias e Imobiliárias",
+                  "value": "Divisão de Fiscalização de Posturas Mobiliárias e Imobiliárias"
+                },
+                {
+                  "label": "Seção de Fiscalização de Férias e Ambulantes",
+                  "value": "Seção de Fiscalização de Férias e Ambulantes"
+                },
+                {
+                  "label": "Seção de Fiscalização de Limpeza de Terrenos Particulares",
+                  "value": "Seção de Fiscalização de Limpeza de Terrenos Particulares"
+                },
+                {
+                  "label": "Seção de Fiscalização de Publicidade e Propaganda",
+                  "value": "Seção de Fiscalização de Publicidade e Propaganda"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "tipo_documento",
+            "type": "select",
+            "templateOptions": {
+              "label": "Tipo do documento",
+              "options": [
+                {
+                  "label": "Licença/Alvará",
+                  "value": "Licença/Alvará"
+                },
+                {
+                  "label": "Certidão",
+                  "value": "Certidão"
+                },
+                {
+                  "label": "Carta de Autorização",
+                  "value": "Carta de Autorização"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "titulo_documento",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Título",
+              "placeholder": "Título do documento",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "cards_exibidos",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Cards a serem exibidos no documento",
+              "options": [
+                {
+                  "label": "Card 1 – Solicitação",
+                  "value": "Card 1 – Solicitação"
+                },
+                {
+                  "label": "Card 2 – Dados do Requerente",
+                  "value": "Card 2 – Dados do Requerente"
+                },
+                {
+                  "label": "Card 3 – Responsável(is) pelo imóvel",
+                  "value": "Card 3 – Responsável(is) pelo imóvel"
+                },
+                {
+                  "label": "Card 4 – Dados do Imóvel",
+                  "value": "Card 4 – Dados do Imóvel"
+                }
+              ],
+              "focus": "false",
+              "required": false
+            }
+          },
+          {
+            "key": "texto_doc_final",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Texto do documento",
+              "placeholder": "Insira aqui o texto que será impresso no documento final",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "emissor_doc",
+            "type": "select",
+            "templateOptions": {
+              "label": "Emissor",
+              "options": [
+                {
+                  "label": "Divisão de Licenciamento e Controle",
+                  "value": "Divisão de Licenciamento e Controle"
+                },
+                {
+                  "label": "Seção de Edificações Particulares",
+                  "value": "Seção de Edificações Particulares"
+                },
+                {
+                  "label": "Seção de Fiscalização de Obras Particulares",
+                  "value": "Seção de Fiscalização de Obras Particulares"
+                },
+                {
+                  "label": "Seção de Perícias e Avaliações",
+                  "value": "Seção de Perícias e Avaliações"
+                },
+                {
+                  "label": "Divisão de Parcelamento e Uso do Solo",
+                  "value": "Divisão de Parcelamento e Uso do Solo"
+                },
+                {
+                  "label": "Seção de Parcelamento e Uso do Solo",
+                  "value": "Seção de Parcelamento e Uso do Solo"
+                },
+                {
+                  "label": "Seção de Posturas",
+                  "value": "Seção de Posturas"
+                },
+                {
+                  "label": "Divisão de Geoprocessamento e Geotecnologia Aplicada",
+                  "value": "Divisão de Geoprocessamento e Geotecnologia Aplicada"
+                },
+                {
+                  "label": "Seção de Topografia",
+                  "value": "Seção de Topografia"
+                },
+                {
+                  "label": "Seção de Cadastro Técnico e Georreferenciamento",
+                  "value": "Seção de Cadastro Técnico e Georreferenciamento"
+                },
+                {
+                  "label": "Seção de Pesquisa e Cartografia",
+                  "value": "Seção de Pesquisa e Cartografia"
+                },
+                {
+                  "label": "Divisão de Fiscalização de Áreas Públicas",
+                  "value": "Divisão de Fiscalização de Áreas Públicas"
+                },
+                {
+                  "label": "Seção de Fiscalização de Áreas Públicas",
+                  "value": "Seção de Fiscalização de Áreas Públicas"
+                },
+                {
+                  "label": "Seção de Intervenção Administrativa em Área Pública",
+                  "value": "Seção de Intervenção Administrativa em Área Pública"
+                },
+                {
+                  "label": "Seção de Fiscalização e Permissão de Uso",
+                  "value": "Seção de Fiscalização e Permissão de Uso"
+                },
+                {
+                  "label": "Divisão de Fiscalização de Posturas Mobiliárias e Imobiliárias",
+                  "value": "Divisão de Fiscalização de Posturas Mobiliárias e Imobiliárias"
+                },
+                {
+                  "label": "Seção de Fiscalização de Férias e Ambulantes",
+                  "value": "Seção de Fiscalização de Férias e Ambulantes"
+                },
+                {
+                  "label": "Seção de Fiscalização de Limpeza de Terrenos Particulares",
+                  "value": "Seção de Fiscalização de Limpeza de Terrenos Particulares"
+                },
+                {
+                  "label": "Seção de Fiscalização de Publicidade e Propaganda",
+                  "value": "Seção de Fiscalização de Publicidade e Propaganda"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "meioambiente_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "requiresPreCreationSignature": true,
+    "useNewSidebarForwarding": true,
+    "subClassId": "numeracao_padrao",
+    "allowMultipleForwarding": true
+  },
+  "tramite": [
+    {
+      "_id": "65ef4752bc99830008ae23f3",
+      "groupId": "sorocaba_implantacaoad"
+    }
+  ],
+  "__v": 0,
+  "city_id": 38
+}

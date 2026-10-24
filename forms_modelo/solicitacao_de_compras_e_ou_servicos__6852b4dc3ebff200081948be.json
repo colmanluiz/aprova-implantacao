@@ -1,0 +1,818 @@
+{
+  "_id": "6852b4dc3ebff200081948be",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "declararesp",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Declaro a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "value": "Declaro para os devidos fins."
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Responsabilidade",
+            "subtitle": "Novo subtitulo",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "setor_requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Setor requerente",
+                "focus": "false",
+                "options": [
+                  {
+                    "value": "Secretaria de Administração"
+                  },
+                  {
+                    "value": "Secretaria de Saúde"
+                  },
+                  {
+                    "value": "Setor de Compras"
+                  },
+                  {
+                    "value": "Fiscalização de Obras"
+                  },
+                  {
+                    "value": "Setor de Reparos e Manutenção"
+                  },
+                  {
+                    "value": "DPUR - Departamento de Urbanismo"
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "O usuário solicitante da demanda é o:",
+                "options": [
+                  {
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do Solicitante",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF do Solicitante",
+                "mask": "000.000.000-00",
+                "required": false,
+                "placeholder": "",
+                "focus": false,
+                "disabled": false
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              },
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Email do Solicitante",
+                "required": false
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.usuario_email",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do requerente",
+            "subtitle": "Preencha de acordo com suas informações",
+            "textHtml": "<div class=\"p-4 border-l-4 border-blue-500 text-sm text-blue-800 font-medium leading-6 bg-blue-100\">\n<div class=\"\" >\n  <span class=\"p-1 rounded bg-blue-500 text-white  \">Informação</span>\n</div>\n<ol class=\"pl-4\">\n<li align = \"\">Caso seja selecionada a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.\n</li>\n\n\n</ol></div>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "itens-solicitados",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Item Solicitado",
+                "focus": "false",
+                "btnAddText": "Item Solicitado",
+                "required": true
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "descricao",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "Selecione o objeto desejado",
+                      "options": [
+                        {
+                          "label": "Criação e Hospedagem de Sites",
+                          "value": "Criação e Hospedagem de Sites"
+                        },
+                        {
+                          "label": "Aplicativos",
+                          "value": "Aplicativos"
+                        },
+                        {
+                          "label": "Implantação de Sistemas",
+                          "value": "Implantação de Sistemas"
+                        },
+                        {
+                          "label": "Desenvolvimento e implantação de sistemas",
+                          "value": "Desenvolvimento e implantação de sistemas"
+                        }
+                      ],
+                      "required": true,
+                      "placeholder": "Ex: Selecione o desejado"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "desc",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Descritivo",
+                      "required": false,
+                      "placeholder": "Descritivo"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "tiposoftware",
+                    "type": "radio",
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.descricao == 'Desenvolvimento e implantação de sistemas'",
+                      "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+                    },
+                    "hideExpression": "model.descricao !== 'Desenvolvimento e implantação de sistemas' ",
+                    "templateOptions": {
+                      "label": "Selecione o software",
+                      "placeholder": "Selecione o software",
+                      "focus": "false",
+                      "options": [
+                        {
+                          "label": "Software 1",
+                          "value": "Software 1"
+                        },
+                        {
+                          "label": "Software 2",
+                          "value": "Software 2"
+                        },
+                        {
+                          "label": "Software 3",
+                          "value": "Software 3"
+                        }
+                      ],
+                      "type": "text"
+                    }
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Objetos da Solicitação",
+            "subtitle": "Novo subtitulo",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "justificativa",
+              "type": "next-wig",
+              "templateOptions": {
+                "label": "Justificativa",
+                "placeholder": "Qual é a justificativa da solicitação?",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Justificativa da Contratação",
+            "subtitle": "Novo subtitulo",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "orcamento",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Anexe aqui um orçamento atualizado com prazo máximo de 90 dias",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Orçamento atualizado",
+            "subtitle": "Numero de Empenho",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "previsao-orcamentaria",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Recursos orçamentários",
+                "focus": "false",
+                "btnAddText": "Previsão ",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "fonte-recurso",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Fonte de recurso",
+                      "required": true,
+                      "placeholder": "Ex: Secretaria de Administração"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "valor-reserva",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Valor da reserva",
+                      "required": true,
+                      "placeholder": "Ex: R$ 123.000,67",
+                      "suffix": "R$",
+                      "floatNumber": true,
+                      "mask": "9999999999999"
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": "true",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": "true",
+                "columns": "12",
+                "readonly": false,
+                "addressee": {
+                  "type": "single",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "admmodelo_modeload",
+                      "id": "675c980a96ab6200088ea449",
+                      "label": "Secretaria de Administração"
+                    }
+                  ]
+                },
+                "placeholder": "",
+                "focus": "false",
+                "disabled": "false",
+                "sensitiveField": false,
+                "multiple": false,
+                "hidden": "true"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Previsão orçamentária",
+            "subtitle": "Novo subtitulo",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Solicitação de Compras e/ou Serviços",
+    "descricao": "(Belém/PA) Formulário para solicitação de compras e/ou serviços",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "sigla": "NEW",
+    "useNewSidebarForwarding": true,
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "templates": [],
+    "form_tramites": [
+      {
+        "nome": "Realização de Visita Presencial",
+        "text_action": "Realizou ação",
+        "key": "visprecs",
+        "fieldGroup": [
+          {
+            "key": "vispres",
+            "type": "radio",
+            "templateOptions": {
+              "label": "É necessário visita presencial?",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "propcomer",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Proposta Comercial",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "vispres",
+            "type": "radio",
+            "templateOptions": {
+              "label": "É necessário visita presencial?",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "propcomer",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Proposta Comercial",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Análise da Solicitação de Compra",
+        "text_action": "Realizou ação",
+        "setoresResponsaveis": [
+          {
+            "nome": "Comitê Gestor",
+            "color": "#00008B"
+          }
+        ],
+        "key": "analise_solicitacao",
+        "fieldGroup": [
+          {
+            "key": "complexidade",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Parecer de complexidade",
+              "options": [
+                {
+                  "value": "Baixa complexidade"
+                },
+                {
+                  "value": "Média complexidade"
+                },
+                {
+                  "value": "Alta complexidade"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "justificativacomite",
+            "type": "next-wig",
+            "templateOptions": {
+              "label": "Campo para justificativa da aprovação ou rejeição do pedido de compras",
+              "placeholder": "Escreva aqui o seu parecer",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "complexidade",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Parecer de complexidade",
+              "options": [
+                {
+                  "value": "Baixa complexidade"
+                },
+                {
+                  "value": "Média complexidade"
+                },
+                {
+                  "value": "Alta complexidade"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "justificativacomite",
+            "type": "next-wig",
+            "templateOptions": {
+              "label": "Campo para justificativa da aprovação ou rejeição do pedido de compras",
+              "placeholder": "Escreva aqui o seu parecer",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Análise do Produto - Setores de Complexidade",
+        "text_action": "Realizou ação",
+        "key": "pth",
+        "fieldGroup": [
+          {
+            "key": "prodth",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Produto pronto para teste e homologação?",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "prodth",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Produto pronto para teste e homologação?",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Teste e Homologações",
+        "text_action": "Realizou ação",
+        "key": "resultado",
+        "fieldGroup": [
+          {
+            "key": "confirma",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Testes e Homologações estão ok?",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "confirma",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Testes e Homologações estão ok?",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": [],
+      "version": 2
+    },
+    "tenance": "Administração",
+    "initialReceiverConfig": {
+      "type": "single",
+      "possibleReceivers": [
+        "admmodelo_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "tramite": [
+    {
+      "groupId": "contabilidade_demoad",
+      "_id": "633333c75603510009c468be"
+    }
+  ],
+  "__v": 0,
+  "step": {
+    "shared": {
+      "informative": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Processo de Solicitação de Compras e/ou Serviços Belém/PA</span><!-- notionvc: 1c2772d3-0e51-4495-b5e5-8c17ed835e07 -->",
+      "automatic": [],
+      "tab": [],
+      "action": []
+    },
+    "config": [
+      {
+        "title": "01. Protocolo do Processo",
+        "description": "Prezado usuário, seu processo foi criado, neste momento ele será encaminhado para o setor responsável das tratativas iniciais. ",
+        "sector": null,
+        "estimatedTime": null,
+        "timeUnit": 86400000,
+        "reponseTimeLimit": null,
+        "applicantActivitiesVisible": null,
+        "activities": [],
+        "automatic": [
+          {
+            "subscribe": [
+              "process/create"
+            ],
+            "execute": "({ resume, activities, signatures, documents, process }) => {\n    finishStep();\n}\n"
+          }
+        ],
+        "hideFinishedFeedback": "Não",
+        "finishedInformation": "Processo protocolado com sucesso!",
+        "tab": null,
+        "action": null
+      },
+      {
+        "title": "02. Averiguação de dados e definição da necessidade de visita presencial.",
+        "description": "Neste momento a coordenação de requisitos irá avaliar o processo para identificar e mencionar a necessidade ou não de uma visita presencial. Caso não seja necessário, o processo será encaminhado para a gerência de produção de sistema.",
+        "sector": "req_demoad",
+        "estimatedTime": 10,
+        "timeUnit": 86400000,
+        "reponseTimeLimit": 10,
+        "startStepDate": "2023-10-26T18:20:26.766Z",
+        "applicantActivitiesVisible": null,
+        "activities": null,
+        "automatic": [
+          {
+            "subscribe": [
+              "process/update/activities"
+            ],
+            "execute": "({ resume, activities, signatures, documents, process }) => {\n    if (activities.visprecs.vispres === 'Não') {\n        sendTo({ groupId: 'gps_demoad' })\n        finishStep();\n    } else {\n        finishStep ();\n    }\n}"
+          }
+        ],
+        "hideFinishedFeedback": "Não",
+        "finishedInformation": "Etapa finalizada! O processo foi encaminhado para a Gerência de produção de sistemas",
+        "tab": [],
+        "action": []
+      },
+      {
+        "title": "03. Análise de Complexidade",
+        "description": "Nessa etapa o gerente de produção de sistema irá indicar qual a complexidade da solicitação.",
+        "sector": "gps_demoad",
+        "estimatedTime": 3,
+        "timeUnit": 86400000,
+        "reponseTimeLimit": null,
+        "applicantActivitiesVisible": false,
+        "activities": [],
+        "automatic": [
+          {
+            "subscribe": [
+              "process/update/activities"
+            ],
+            "execute": "({ resume, activities, signatures, documents, process }) => {\n    if (activities.analise_solicitacao.complexidade === 'Baixa complexidade') {\n        return [sendTo({ groupId: 'baixademoad_demoad' }), finishStep()];\n    } else if (activities.analise_solicitacao.complexidade === 'Média complexidade') {\n        return [sendTo({ groupId: 'cdmc_demoad' }), finishStep()];\n    } else if (activities.analise_solicitacao.complexidade === 'Alta complexidade') {\n        return [sendTo({ groupId: 'altaa_demoad' }), finishStep()];\n    }\n}"
+          }
+        ],
+        "hideFinishedFeedback": "Não",
+        "finishedInformation": "Etapa finalizada. Após a triagem, o processo foi encaminhado para a coordenação de sua respectiva complexidade!",
+        "tab": [],
+        "action": []
+      },
+      {
+        "title": "04. Avaliação do Setor de Complexidade Destacado",
+        "description": "Após a avalição de aptidão validada, o processo será continuado.",
+        "sector": null,
+        "estimatedTime": 10,
+        "timeUnit": 86400000,
+        "reponseTimeLimit": 9,
+        "startStepDate": "2023-10-25T18:23:52.703Z",
+        "applicantActivitiesVisible": null,
+        "activities": null,
+        "automatic": [
+          {
+            "subscribe": [
+              "process/update/activities"
+            ],
+            "execute": "({ resume, activities, signatures, documents, process }) => {\n    if (activities.pth.prodth === 'Sim') {\n        sendTo({ groupId: 'testes_demoad' })\n        finishStep();\n    } else {\n        finishStep();\n    }\n}"
+          }
+        ],
+        "hideFinishedFeedback": "Não",
+        "finishedInformation": "Etapa finalizada. Com o produto pronto, a coordenação de testes e homologação passa a ser responsável pelo processo agora!",
+        "tab": [],
+        "action": []
+      },
+      {
+        "title": "5. Setor de Coordenação de Teste e Homologação",
+        "description": "Após o parecer do comitê gestor. o processo (se aprovado totalmente ou parcialmente) é enviado para Coord. de Testes e Homologação",
+        "sector": null,
+        "estimatedTime": 3,
+        "timeUnit": 86400000,
+        "reponseTimeLimit": null,
+        "applicantActivitiesVisible": null,
+        "activities": [],
+        "automatic": [
+          {
+            "subscribe": [
+              "process/update/activities"
+            ],
+            "execute": "({ resume, activities, signatures, documents, process }) => {\n    if (activities.parecer_comite.parecercomite === 'Aprovado totalmente')\n        return [sendTo({ groupId: 'testes_demoad' }), finishStep()]}"
+          }
+        ],
+        "hideFinishedFeedback": "Sim",
+        "tab": [],
+        "action": []
+      },
+      {
+        "title": "Resultado do Processo",
+        "description": "Nessa etapa o processo será finalizadfo conforme a análise interna",
+        "sector": null,
+        "estimatedTime": 3,
+        "timeUnit": 86400000,
+        "reponseTimeLimit": 1,
+        "startStepDate": "2023-10-17T18:47:47.185Z",
+        "applicantActivitiesVisible": null,
+        "activities": [],
+        "automatic": [
+          {
+            "subscribe": [
+              "process/update/activities"
+            ],
+            "execute": "({ resume, activities, signatures, documents, process }) => {\n      if (activities.resultado.confirma === 'Sim') {\n        return [\n      \n        accept(),\n        finishStep()\n    ];\n    }\n}\n"
+          }
+        ],
+        "hideFinishedFeedback": "Não",
+        "finishedInformation": "Processo finalizado",
+        "tab": [],
+        "action": []
+      }
+    ]
+  },
+  "city_id": 38
+}

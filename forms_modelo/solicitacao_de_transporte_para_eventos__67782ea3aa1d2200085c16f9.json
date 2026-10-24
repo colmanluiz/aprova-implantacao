@@ -1,0 +1,739 @@
+{
+  "_id": "67782ea3aa1d2200085c16f9",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome/Razão Social",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/ CNPJ",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "vinculo_requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de requerente:",
+                "options": [
+                  {
+                    "label": "Munícipe",
+                    "value": "Munícipe"
+                  },
+                  {
+                    "label": "Servidor da Prefeitura",
+                    "value": "Servidor da Prefeitura"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "cargo_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cargo/ Função",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cargo_requerente": "model.cargo_requerente ? model.cargo_requerente : model.user_dados?.user?.user_metadata.cargo "
+              },
+              "hideExpression": "!model.vinculo_requerente || model.vinculo_requerente == 'Munícipe'"
+            },
+            {
+              "key": "matricula_req",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Matrícula",
+                "placeholder": "  ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.vinculo_requerente || model.vinculo_requerente == 'Munícipe'"
+            },
+            {
+              "key": "origem_req",
+              "type": "select",
+              "templateOptions": {
+                "label": "Setor solicitante",
+                "options": [
+                  {
+                    "label": "Gabinete do Prefeito",
+                    "value": "Gabinete do Prefeito"
+                  },
+                  {
+                    "label": "Assessoria de Planejamento",
+                    "value": "Assessoria de Planejamento"
+                  },
+                  {
+                    "label": "Departamento de Administração",
+                    "value": "Departamento de Administração"
+                  },
+                  {
+                    "label": "Departamento de Gestão de Pessoas",
+                    "value": "Departamento de Gestão de Pessoas"
+                  },
+                  {
+                    "label": "Departamento de Finanças",
+                    "value": "Departamento de Finanças"
+                  },
+                  {
+                    "label": "Departamento de Agricultura e Meio Ambiente",
+                    "value": "Departamento de Agricultura e Meio Ambiente"
+                  },
+                  {
+                    "label": "Departamento de Assistência Social",
+                    "value": "Departamento de Assistência Social"
+                  },
+                  {
+                    "label": "Departamento de Turismo, Cultura, Esportes e Lazer",
+                    "value": "Departamento de Turismo, Cultura, Esportes e Lazer"
+                  },
+                  {
+                    "label": "Departamento de Desenvolvimento Econômico",
+                    "value": "Departamento de Desenvolvimento Econômico"
+                  },
+                  {
+                    "label": "Departamento de Educação",
+                    "value": "Departamento de Educação"
+                  },
+                  {
+                    "label": "Departamento de Obras e Infraestrutura",
+                    "value": "Departamento de Obras e Infraestrutura"
+                  },
+                  {
+                    "label": "Departamento de Serviços Municipais",
+                    "value": "Departamento de Serviços Municipais"
+                  },
+                  {
+                    "label": "Departamento de Saúde",
+                    "value": "Departamento de Saúde"
+                  }
+                ],
+                "focus": "false",
+                "placeholder": "--selecione--",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.vinculo_requerente || model.vinculo_requerente == 'Munícipe'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "motivo_deslocamento",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Motivo do deslocamento",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "qtd_pessoas",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Quantidade de pessoas transportadas",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "publico_alvo",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Público-alvo:",
+                "placeholder": "Ex.: estudantes, idosos, profissionais, comunidade em geral, etc.",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "necessidades_especiais",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Necessidades especiais:",
+                "placeholder": "Ex.: acessibilidade, transporte para equipamentos, etc.",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "local_destino",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Local de destino",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "local_partida",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Local de partida",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "data_viagem",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Data da viagem",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-5",
+              "key": "horario_partida",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Horário de partida",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-5",
+              "key": "horario_retorno",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Horário de retorno (previsão)",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "nome_responsavel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do responsável pela viagem",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "celular_responsavel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Celular de contato do responsável",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||mask": "model.celular_responsavel?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              }
+            },
+            {
+              "key": "declaracao_responsavel",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro para os devidos fins que estou ciente de que é minha total responsabilidade qualquer documentação relativa aos passageiros, bem como o controle de presença e horários.",
+                "options": [
+                  {
+                    "label": "Sim, estou ciente",
+                    "value": "Sim, estou ciente"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "anexos_solicitacao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos complementares",
+                "options": [],
+                "focus": "false",
+                "required": false,
+                "extends": [
+                  "PDF",
+                  "pdf",
+                  "DOC",
+                  "doc",
+                  "PNG",
+                  "png",
+                  "JPEG",
+                  "jpeg"
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Solicitação",
+            "subtitle": "",
+            "textHtml": "<div class=\"p-2 rounded\">\n<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Solicitação</span>\n\n\n<ul class = \"pt-2\">\n<li align='justify'>O responsável deve estar presente na viagem.</li>\n\n</ul>\n</div>\n\n\n\n<div class=\"p-2 rounded\" style=\"background-color: #FBE8D7; color: #300000;\">\n<ul class = \"pt-2\">\n<li align = \"justify\">A solicitação de transporte deve ser realizada, no mínimo, com 10 dias de antecedência à data da viagem.\n</li>\n\n</ul>\n</div>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Solicitação de transporte para eventos",
+    "descricao": "Pedido formal para que a prefeitura forneça transporte público gratuito ou subsidiado para participantes de eventos, como congressos, seminários, etc. Esse tipo de solicitação visa facilitar o acesso ao evento e incentivar a participação da população.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "useNewSidebarForwarding": true,
+    "sigla": "SDT",
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Solicitação de Transporte",
+        "template": "ModeloAD/transporte_eventos.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Atendimento da solicitação",
+        "text_action": "Realizou ação",
+        "key": "card_solicitacao",
+        "fieldGroup": [
+          {
+            "key": "perg_solicitacao",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Solicitação será atendida?",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "dados_transporte",
+            "resetOnHide": true,
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Dados do transporte",
+              "placeholder": "Ex: nome do motorista, tipo de veículo etc ",
+              "focus": "false",
+              "type": "text"
+            },
+            "hideExpression": "!model.perg_solicitacao || model.perg_solicitacao !== 'Sim' "
+          },
+          {
+            "key": "obs_entrega",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            },
+            "expressionProperties": {
+              "templateOptions|||required": "model.perg_solicitacao !== 'Sim' ",
+              "templateOptions|||label": "model.perg_solicitacao !== 'Sim' ? 'Informe o ocorrido' : 'Observações' "
+            },
+            "hideExpression": "!model.perg_solicitacao"
+          },
+          {
+            "key": "anexo_entrega",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos",
+              "options": [],
+              "focus": "false",
+              "required": false
+            },
+            "hideExpression": "!model.perg_solicitacao"
+          }
+        ],
+        "form": [
+          {
+            "key": "perg_solicitacao",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Solicitação será atendida?",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "dados_transporte",
+            "resetOnHide": true,
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Dados do transporte",
+              "placeholder": "Ex: nome do motorista, tipo de veículo etc ",
+              "focus": "false",
+              "type": "text"
+            },
+            "hideExpression": "!model.perg_solicitacao || model.perg_solicitacao !== 'Sim' "
+          },
+          {
+            "key": "obs_entrega",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            },
+            "expressionProperties": {
+              "templateOptions|||required": "model.perg_solicitacao !== 'Sim' ",
+              "templateOptions|||label": "model.perg_solicitacao !== 'Sim' ? 'Informe o ocorrido' : 'Observações' "
+            },
+            "hideExpression": "!model.perg_solicitacao"
+          },
+          {
+            "key": "anexo_entrega",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos",
+              "options": [],
+              "focus": "false",
+              "required": false
+            },
+            "hideExpression": "!model.perg_solicitacao"
+          }
+        ]
+      },
+      {
+        "nome": "Taxas",
+        "text_action": "Emitiu Taxa",
+        "key": "taxasProcesso",
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "permission": "taxas",
+        "type": "taxa",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "cultura_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "allowMultipleForwarding": true
+  },
+  "tramite": [],
+  "__v": 0,
+  "options": {
+    "showStepViewControl": false
+  },
+  "city_id": 38,
+  "step": {}
+}

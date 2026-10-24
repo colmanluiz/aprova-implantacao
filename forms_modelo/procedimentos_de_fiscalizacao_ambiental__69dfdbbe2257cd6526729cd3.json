@@ -1,0 +1,153 @@
+{
+  "_id": "69dfdbbe2257cd6526729cd3",
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Procedimentos de Fiscalização Ambiental",
+    "descricao": "Descrição",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "FIS",
+    "templates": [],
+    "form_tramites": [],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "single",
+      "possibleReceivers": [
+        "meioambiente_modeload"
+      ]
+    },
+    "autoConcludeParticipation": true
+  },
+  "city_id": 38,
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": true,
+                "hideLabel": false,
+                "sectorFromToggle": false,
+                "anonymousSenderToggle": false,
+                "sensitiveField": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": true,
+                "addressee": {
+                  "type": "single",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "meioambiente_modeload",
+                      "id": "676d993e3507ea0008067058",
+                      "label": "Secretaria de Meio Ambiente"
+                    }
+                  ]
+                },
+                "hideLabel": false,
+                "sensitiveField": false,
+                "multiple": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "type": "radio",
+              "key": "tipo_de_procedimento",
+              "templateOptions": {
+                "label": "Tipo de Procedimento",
+                "required": true,
+                "hideLabel": false,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "options": [
+                  {
+                    "label": "Auto de Infração Ambiental",
+                    "value": "Auto de Infração Ambiental"
+                  },
+                  {
+                    "label": "Auto de Penalidade/Multa",
+                    "value": "Auto de Penalidade/Multa"
+                  },
+                  {
+                    "label": "Auto de Inspeção",
+                    "value": "Auto de Inspeção"
+                  }
+                ]
+              },
+              "className": "col-12"
+            },
+            {
+              "type": "next-input",
+              "key": "nome_do_autuado",
+              "templateOptions": {
+                "label": "Nome do Autuado",
+                "required": true,
+                "hideLabel": false,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "className": "col-12"
+            },
+            {
+              "type": "next-ck",
+              "key": "descrio_da_infrao",
+              "templateOptions": {
+                "label": "Descrição da Infração",
+                "required": true,
+                "hideLabel": false,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Novo Titulo",
+            "subtitle": "Novo subtitulo",
+            "textHtml": "Digite algo aqui",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "__v": 0
+}

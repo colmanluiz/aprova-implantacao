@@ -1,0 +1,1516 @@
+{
+  "_id": "6787c452f4308f0008d29ac0",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_solicitacao",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Informe o tipo de Solicitação",
+                "options": [
+                  {
+                    "value": "Alvará Sanitário Inicial"
+                  },
+                  {
+                    "value": "Renovação de Alvará Sanitário"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "tipo_alvara",
+              "className": "col-6",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Selecione a modalidade de aprovação do último Alvará Sanitário",
+                "options": [
+                  {
+                    "value": "Aprovado fora do sistema Aprova"
+                  },
+                  {
+                    "value": "Aprovado pelo sistema Aprova"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipo_solicitacao || model.tipo_solicitacao !== 'Renovação de Alvará Sanitário'"
+            },
+            {
+              "key": "deferimento_alvara",
+              "className": "col-6",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Data de Deferimento/Emissão do Alvará",
+                "placeholder": "Ex: 00/00/0000",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipo_alvara"
+            },
+            {
+              "key": "processo_fisico",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número do processo do Alvará",
+                "placeholder": "Ex: O número deve ser completo, com traços e siglas se possuir.",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipo_alvara || model.tipo_alvara !== 'Aprovado fora do sistema Aprova'"
+            },
+            {
+              "key": "docalvara_fisico",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cópia do Alvará emitido",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipo_alvara || model.tipo_alvara !== 'Aprovado fora do sistema Aprova'"
+            },
+            {
+              "key": "processo_ad",
+              "type": "next-processo",
+              "templateOptions": {
+                "label": "Número do processo do Alvará",
+                "placeholder": "Ex: O número deve ser completo, com traços e siglas se possuir.",
+                "focus": "false",
+                "type": "text",
+                "checkIfExist": false,
+                "allowedTypes": [
+                  "676462159cadbc00084fa0fe"
+                ],
+                "extraFields": [
+                  {
+                    "key": "totalarea_total",
+                    "label": "Total de Área da solicitação anterior"
+                  }
+                ],
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.tipo_alvara == 'Aprovado pelo sistema Aprova'",
+                "templateOptions|||hidden": "!model.tipo_alvara || model.tipo_alvara !== 'Aprovado pelo sistema Aprova'"
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Tipo de Solicitação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/ CNPJ",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Notificação",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "doc_procurador",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Procuração",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.requerente || model.requerente !== 'Outro' "
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "pessoa",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de Pessoa Titular",
+                "options": [
+                  {
+                    "value": "Pessoa Física"
+                  },
+                  {
+                    "value": "Pessoa Jurídica"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Tipo de Pessoa Titular",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "cnpj_empresa",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CNPJ",
+                "placeholder": "",
+                "mask": "AA.AAA.AAA/AAAA-00",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.pessoa || model.pessoa === 'Pessoa Física'"
+            },
+            {
+              "key": "empresa",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Razão Social",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.pessoa || model.pessoa === 'Pessoa Física'"
+            },
+            {
+              "key": "profissional_fant",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome Fantasia",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.pessoa || model.pessoa !== 'Pessoa Jurídica'"
+            },
+            {
+              "key": "inscricao_municipal",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Inscrição Municipal",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.pessoa || model.pessoa === 'Pessoa Física'"
+            },
+            {
+              "key": "cpf_profissional",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF",
+                "placeholder": "",
+                "mask": "000.000.000-00",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.pessoa || model.pessoa === 'Pessoa Jurídica'"
+            },
+            {
+              "key": "profissional",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.pessoa || model.pessoa === 'Pessoa Jurídica'"
+            },
+            {
+              "key": "emailempresa",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "E-mail",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "telefone_empresa",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "Ex: (99) 9 9999-9999",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {
+                "templateOptions|||mask": "model.telefone_empresa?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Identificação do Estabelecimento",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "className": "col-12",
+              "key": "endereco_cep_empreendimento",
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP do Empreendimento",
+                "placeholder": "Ex: 00000-000",
+                "mask": "00000-000",
+                "required": false,
+                "hideData": true,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "logradouro_empreendimento",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Logradouro do Empreendimento",
+                "required": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {
+                "model|||logradouro_empreendimento": "model.logradouro_empreendimento && model.logradouro_empreendimento == model.endereco_cep_empreendimento?.data?.response?.result?.logradouro ? model.logradouro_empreendimento : model.endereco_cep_empreendimento?.data?.response?.result?.logradouro"
+              }
+            },
+            {
+              "className": "col-12",
+              "key": "numero_empreendimento",
+              "type": "input",
+              "templateOptions": {
+                "label": "Número Predial do Empreendimento",
+                "placeholder": "Ex: S/N",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "bairro_empreendimento",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Bairro do Empreendimento",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "placeholder": "",
+                "focus": false
+              },
+              "expressionProperties": {
+                "model|||bairro_empreendimento": "model.bairro_empreendimento && model.bairro_empreendimento ==  model.endereco_cep_empreendimento?.data?.response?.result?.bairro ? model.bairro_empreendimento :  model.endereco_cep_empreendimento?.data?.response?.result?.bairro"
+              }
+            },
+            {
+              "className": "col-12",
+              "key": "complemento_empreendimento",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento do Empreendimento",
+                "placeholder": "Ex: Esquina com Rua São Paulo",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Localização do Estabelecimento",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "className": "col-12",
+              "key": "desc_ativ_eco",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Descrição de Atividade",
+                "focus": "false",
+                "required": true,
+                "btnAddText": "Descrição de Atividade",
+                "placeholder": "",
+                "disabled": false
+              },
+              "fieldArray": {
+                "fieldGroupClassName": "row",
+                "fieldGroup": [
+                  {
+                    "key": "cod_cnae",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Código CNAE",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true,
+                      "readonly": false
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "ativ_eco",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Atividade a ser licenciada",
+                      "placeholder": "",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true,
+                      "readonly": false
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados da Solicitação",
+            "subtitle": "",
+            "textHtml": "",
+            "editMode": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "responsavel_legal",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Responsável Legal",
+                "focus": "false",
+                "hideButtons": false,
+                "hideLabel": false,
+                "btnAddText": "Responsável Legal",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "nome-responsavel",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Nome",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "cpf-responsavel",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "CPF",
+                      "required": true,
+                      "placeholder": "000.000.000-00",
+                      "mask": "000.000.000-00"
+                    },
+                    "validators": {
+                      "validation": [
+                        "cpfCnpj"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.pessoa || model.pessoa !== 'Pessoa Física'"
+            },
+            {
+              "key": "responsavel_tecnico",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Responsável Técnico",
+                "focus": "false",
+                "hideButtons": false,
+                "hideLabel": false,
+                "btnAddText": "Responsável Técnico",
+                "required": false,
+                "placeholder": "",
+                "disabled": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "nome_responsavel_tecnico",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Nome",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "cpf-responsavel",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "CPF",
+                      "required": true,
+                      "placeholder": "000.000.000-00",
+                      "mask": "000.000.000-00"
+                    },
+                    "validators": {
+                      "validation": [
+                        "cpfCnpj"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "conselho",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Conselho Profissional",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "nr_conselho",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Número Inscrição Conselho Profissional",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "copia_identidade_prof",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Cópia da Identidade Profissional",
+                      "options": [],
+                      "focus": "false",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "certidao_regularidade",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": " Certidão de Regularidade Profissional emitida pelo respectivo Conselho de Classe",
+                      "options": [],
+                      "focus": "false",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Responsáveis",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "contrato_mei_upload",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Contrato Social ou Certificado MEI ou Estatuto",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.pessoa || model.pessoa === 'Pessoa Física'"
+            },
+            {
+              "key": "cnpj_upload",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Cartão de CNPJ",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.pessoa || model.pessoa === 'Pessoa Física'"
+            },
+            {
+              "key": "resposavel_upload",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento de Identificação do Responsável Legal ",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "especificos_upload",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos  específicos de acordo com a atividade desenvolvida pelo estabelecimento",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Anexos ",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Alvará Sanitário",
+    "descricao": "",
+    "cidade": "modeload",
+    "newSignatureStrategy": true,
+    "experimentalMode": true,
+    "useNewSidebarForwarding": true,
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "AST",
+    "templates": [
+      {
+        "text_button": "Alvará Sanitário",
+        "template": "ModeloAD/alvara_sanitario.html",
+        "permission": "process:viewAll:all",
+        "function": "processComplete",
+        "icon": "ion-ios-print",
+        "official": true,
+        "viewed": true
+      },
+      {
+        "text_button": "Relatório de Inspeção Nº 1",
+        "template": "ModeloAD/relatorio_inspecao.html",
+        "permission": "process:viewAll:all",
+        "function": "processComplete",
+        "icon": "ion-ios-print",
+        "official": true,
+        "viewed": true
+      },
+      {
+        "text_button": "Relatório de Inspeção nº 2",
+        "template": "ModeloAD/relatorio_inspecao_dois.html",
+        "permission": "process:viewAll:all",
+        "function": "processComplete",
+        "icon": "ion-ios-print",
+        "official": true,
+        "viewed": true
+      },
+      {
+        "text_button": "Relatório de Inspeção Nº 3",
+        "template": "ModeloAD/relatorio_inspecao_tres.html",
+        "permission": "process:viewAll:all",
+        "function": "processComplete",
+        "icon": "ion-ios-print",
+        "official": true,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Setor de Vigilância Sanitária - Informações da Vistoria",
+        "text_action": "Realizou ação",
+        "key": "card_vistoria",
+        "form": [
+          {
+            "key": "info_vistoria",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Informações das vistorias",
+              "focus": "false",
+              "btnAddText": "Registro de Vistoria",
+              "required": true,
+              "placeholder": "",
+              "disabled": false
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "data_visita",
+                  "type": "next-date",
+                  "templateOptions": {
+                    "label": "Data da visita",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "anexo",
+                  "type": "next-upload",
+                  "templateOptions": {
+                    "label": "Anexo do Termo de Vistoria",
+                    "options": [],
+                    "focus": "false",
+                    "required": true
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "conc_vistoria",
+                  "type": "radio",
+                  "templateOptions": {
+                    "label": "Conclusão da Vistoria",
+                    "options": [
+                      {
+                        "value": "Regular"
+                      },
+                      {
+                        "value": "Irregular"
+                      }
+                    ],
+                    "focus": "false",
+                    "required": true
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "fotos_visita",
+                  "type": "next-upload",
+                  "templateOptions": {
+                    "label": "Fotos da visita",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "obs_visita",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Parecer da Vistoria",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "className": "col-6",
+                  "key": "nome_contribuinte",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Nome do Contribuinte",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "className": "col-6",
+                  "key": "cpf_contrib",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "CPF do Contribuinte",
+                    "placeholder": "",
+                    "mask": "000.000.000-00",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "fiscais",
+                  "type": "next-repeat",
+                  "templateOptions": {
+                    "label": "Nomes dos Fiscais Responsáveis",
+                    "focus": "false",
+                    "btnAddText": "nome",
+                    "required": false,
+                    "placeholder": "",
+                    "disabled": false
+                  },
+                  "fieldArray": {
+                    "fieldGroup": [
+                      {
+                        "key": "data_visita",
+                        "type": "next-input",
+                        "templateOptions": {
+                          "label": "Nome do Fiscal Responsável",
+                          "placeholder": "",
+                          "focus": "false",
+                          "type": "text",
+                          "required": false
+                        },
+                        "expressionProperties": {}
+                      }
+                    ]
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "conc_irregular",
+                  "type": "radio",
+                  "templateOptions": {
+                    "label": "Prazo para adequação",
+                    "options": [
+                      {
+                        "value": "Imediata - Autuação"
+                      },
+                      {
+                        "value": "Posterior"
+                      }
+                    ],
+                    "focus": "false",
+                    "required": true
+                  },
+                  "hideExpression": "!model.conc_vistoria || model.conc_vistoria !== 'Irregular'",
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "prazo_regularizacao",
+                  "type": "next-date",
+                  "templateOptions": {
+                    "label": "Prazo para regularização",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  },
+                  "hideExpression": "!model.conc_irregular || model.conc_irregular === 'Imediata - Autuação'",
+                  "expressionProperties": {}
+                }
+              ]
+            }
+          },
+          {
+            "key": "obs_compras_um",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_ai",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "info_vistoria",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Informações das vistorias",
+              "focus": "false",
+              "btnAddText": "Registro de Vistoria",
+              "required": true,
+              "placeholder": "",
+              "disabled": false
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "data_visita",
+                  "type": "next-date",
+                  "templateOptions": {
+                    "label": "Data da visita",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "anexo",
+                  "type": "next-upload",
+                  "templateOptions": {
+                    "label": "Anexo do Termo de Vistoria",
+                    "options": [],
+                    "focus": "false",
+                    "required": true
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "conc_vistoria",
+                  "type": "radio",
+                  "templateOptions": {
+                    "label": "Conclusão da Vistoria",
+                    "options": [
+                      {
+                        "value": "Regular"
+                      },
+                      {
+                        "value": "Irregular"
+                      }
+                    ],
+                    "focus": "false",
+                    "required": true
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "fotos_visita",
+                  "type": "next-upload",
+                  "templateOptions": {
+                    "label": "Fotos da visita",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "obs_visita",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Parecer da Vistoria",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "className": "col-6",
+                  "key": "nome_contribuinte",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Nome do Contribuinte",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "className": "col-6",
+                  "key": "cpf_contrib",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "CPF do Contribuinte",
+                    "placeholder": "",
+                    "mask": "000.000.000-00",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "fiscais",
+                  "type": "next-repeat",
+                  "templateOptions": {
+                    "label": "Nomes dos Fiscais Responsáveis",
+                    "focus": "false",
+                    "btnAddText": "nome",
+                    "required": false,
+                    "placeholder": "",
+                    "disabled": false
+                  },
+                  "fieldArray": {
+                    "fieldGroup": [
+                      {
+                        "key": "data_visita",
+                        "type": "next-input",
+                        "templateOptions": {
+                          "label": "Nome do Fiscal Responsável",
+                          "placeholder": "",
+                          "focus": "false",
+                          "type": "text",
+                          "required": false
+                        },
+                        "expressionProperties": {}
+                      }
+                    ]
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "conc_irregular",
+                  "type": "radio",
+                  "templateOptions": {
+                    "label": "Prazo para adequação",
+                    "options": [
+                      {
+                        "value": "Imediata - Autuação"
+                      },
+                      {
+                        "value": "Posterior"
+                      }
+                    ],
+                    "focus": "false",
+                    "required": true
+                  },
+                  "hideExpression": "!model.conc_vistoria || model.conc_vistoria !== 'Irregular'",
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "prazo_regularizacao",
+                  "type": "next-date",
+                  "templateOptions": {
+                    "label": "Prazo para regularização",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  },
+                  "hideExpression": "!model.conc_irregular || model.conc_irregular === 'Imediata - Autuação'",
+                  "expressionProperties": {}
+                }
+              ]
+            }
+          },
+          {
+            "key": "obs_compras_um",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_ai",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexos",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "checkPermission": true,
+        "permission": "process:analista"
+      },
+      {
+        "nome": "Observações",
+        "text_action": "Realizou ação",
+        "key": "card_obs",
+        "form": [
+          {
+            "key": "obs_pref",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_obs",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "extends": [
+                "pdf",
+                "PDF",
+                "png",
+                "PNG",
+                "img",
+                "IMG",
+                "jpg",
+                "JPG",
+                "jpeg",
+                "JPEG",
+                "dwg",
+                "DWG"
+              ],
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "obs_pref",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_obs",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "extends": [
+                "pdf",
+                "PDF",
+                "png",
+                "PNG",
+                "img",
+                "IMG",
+                "jpg",
+                "JPG",
+                "jpeg",
+                "JPEG",
+                "dwg",
+                "DWG"
+              ],
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Taxas",
+        "text_action": "Inseriu informações referente Taxas",
+        "key": "taxasProcesso",
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado e então selecione a opção 'Enviar para Análise' para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "permission": "taxas",
+        "type": "taxa",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado e então selecione a opção 'Enviar para Análise' para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "single",
+      "possibleReceivers": [
+        "saude_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "allowMultipleForwarding": true
+  },
+  "city_id": 38,
+  "tramite": [
+    {
+      "_id": "6787c4e4f4308f0008d29b16",
+      "groupId": "saude_modeload"
+    }
+  ],
+  "__v": 0,
+  "step": {}
+}

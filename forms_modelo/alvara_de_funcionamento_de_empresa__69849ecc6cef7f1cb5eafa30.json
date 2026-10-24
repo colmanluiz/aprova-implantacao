@@ -1,0 +1,1514 @@
+{
+  "_id": "69849ecc6cef7f1cb5eafa30",
+  "__v": 0,
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Alvará de Funcionamento de Empresa",
+    "descricao": "Preencha o formulário abaixo com os dados solicitados. Após o preenchimento, finalize a solicitação e acompanhe a tramitação do seu requerimento.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "NEW",
+    "useNewSidebarForwarding": true,
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "bpmEditProperties": true,
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Alvará de localização",
+        "template": "ModeloAD/alvara_de_localizacao_alvara_de_funcionamento_de_empresa.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true,
+        "possui_prazo_validade": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "permission": "process:analista",
+        "checkPermission": true,
+        "nome": "Integração",
+        "text_action": "Realizou ação",
+        "key": "new_key260559",
+        "fieldGroup": [
+          {
+            "key": "repeat_cadastro",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Gerar cadastro econômico?",
+              "btnAddText": "Cadastro Econômico",
+              "required": false,
+              "placeholder": "",
+              "focus": false,
+              "disabled": false
+            },
+            "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "campo_integ",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "<div class='mb-2'><span class='p-1 rounded bg-green-500 text-white'>Integração executada com sucesso! O nº do cadastro é:</span></div>",
+                    "labelHtml": true,
+                    "placeholder": " ",
+                    "focus": "false",
+                    "type": "text",
+                    "readonly": true,
+                    "required": false,
+                    "disabled": false
+                  },
+                  "expressionProperties": {
+                    "model|||campo_integ": "formState?.process?.value?.step?.storage?.integracao == 'sucess' ? formState.process.value?.nP?.split('-')[0] : 'Aguardando o retorno da integração, após 30 segundos, atualize a página! Caso não tenha retorno, entre em contato com o suporte.'",
+                    "templateOptions|||label": "formState?.process?.value?.step?.storage?.integracao == 'sucess' ? '<div class=\\'mb-2\\'><span class=\\'p-1 rounded bg-green-500 text-white\\'>Integração executada com sucesso! O nº do cadastro é:</span></div>' : '<div class=\\'mb-2\\'><span class=\\'p-1 rounded bg-yellow-500 text-white\\'>Cadastro sendo gerado. Aguarde...</span></div>'"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "repeat_cadastro",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Gerar cadastro econômico?",
+              "btnAddText": "Cadastro Econômico",
+              "required": false,
+              "placeholder": "",
+              "focus": false,
+              "disabled": false
+            },
+            "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "campo_integ",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "<div class='mb-2'><span class='p-1 rounded bg-green-500 text-white'>Integração executada com sucesso! O nº do cadastro é:</span></div>",
+                    "labelHtml": true,
+                    "placeholder": " ",
+                    "focus": "false",
+                    "type": "text",
+                    "readonly": true,
+                    "required": false,
+                    "disabled": false
+                  },
+                  "expressionProperties": {
+                    "model|||campo_integ": "formState?.process?.value?.step?.storage?.integracao == 'sucess' ? formState.process.value?.nP?.split('-')[0] : 'Aguardando o retorno da integração, após 30 segundos, atualize a página! Caso não tenha retorno, entre em contato com o suporte.'",
+                    "templateOptions|||label": "formState?.process?.value?.step?.storage?.integracao == 'sucess' ? '<div class=\\'mb-2\\'><span class=\\'p-1 rounded bg-green-500 text-white\\'>Integração executada com sucesso! O nº do cadastro é:</span></div>' : '<div class=\\'mb-2\\'><span class=\\'p-1 rounded bg-yellow-500 text-white\\'>Cadastro sendo gerado. Aguarde...</span></div>'"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Taxas",
+        "text_action": "Realizou ação",
+        "key": "taxasProcesso",
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-wig",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-wig",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Comprovante",
+        "text_action": "Realizou ação",
+        "key": "anexoComprovante",
+        "form": [
+          {
+            "key": "comprovante",
+            "type": "next-upload",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Comprovante - (Anexe aqui o comprovante de pagamento, e após isto, clique em Enviar para Análise, para que seu processo continue)"
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "comprovante",
+            "type": "next-upload",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Comprovante - (Anexe aqui o comprovante de pagamento, e após isto, clique em Enviar para Análise, para que seu processo continue)"
+            }
+          }
+        ],
+        "permission": "taxas",
+        "type": "resume.bckp",
+        "hidden": "process.tramites.find((tramite) => tramite['taxasProcesso'])"
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "financas_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "allowMultipleForwarding": true
+  },
+  "city_id": 38,
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12"
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12"
+            },
+            {
+              "key": "processo_ad",
+              "type": "next-processo",
+              "templateOptions": {
+                "label": "Número e código do processo de Viabilidade informado pela Junta Comercial",
+                "placeholder": "Ex: O número deve ser completo, com traços e siglas se possuir.",
+                "focus": "false",
+                "type": "text",
+                "extraFields": [],
+                "required": true,
+                "disabled": false
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Processo de Viabilidade",
+            "subtitle": "Os próximos campos serão preenchidos a partir do seu processo de Viabilidade, protocolado e deferido anteriormente.",
+            "textHtml": "<div class=\"p-4 border-l-4 border-blue-500 text-sm text-blue-800 font-medium leading-6 bg-blue-100\"><div class=\"\"><span class=\"p-1 rounded bg-blue-500 text-white \">Informação</span></div><p><br>Insira o nº de protocolo e código verificador do processo de <strong>Viabilidade</strong> informado pela JUNTA COMERCIAL, como no exemplo abaixo:<br><br><img src=\"https://process-pdf-templates.s3.amazonaws.com/DemoAD/imgcessaoviabilidade.png\" width=\"700\" height=\"400\"><br>O processo deverá estar <strong>deferido</strong> para ser utilizado como referência neste protocolo.&nbsp;<br><br><i><strong>Processo solicitante de Alvará e Habite-se:</strong></i><br>111-25-DEMO-NEW - endtp66h<br><br>&nbsp;</p></div>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "processo_junta_dataset",
+              "type": "next-input",
+              "defaultValue": "16548793",
+              "wrappers": [
+                "form-field",
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Nº do Protocolo de Viabilidade na Junta",
+                "placeholder": " ",
+                "readonly": true,
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "className": "col-8",
+              "wrappers": [
+                "mirror"
+              ],
+              "key": "endereco_cep",
+              "type": "next-input-data",
+              "templateOptions": {
+                "label": "CEP",
+                "mask": "99999-999",
+                "readonly": true,
+                "required": true
+              }
+            },
+            {
+              "key": "logradouro",
+              "wrappers": [
+                "mirror"
+              ],
+              "type": "input",
+              "templateOptions": {
+                "label": "Logradouro",
+                "readonly": true,
+                "required": true
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "nr_predial",
+              "wrappers": [
+                "mirror"
+              ],
+              "type": "input",
+              "templateOptions": {
+                "label": "Número",
+                "readonly": true,
+                "required": true
+              }
+            },
+            {
+              "key": "complemento_sala",
+              "type": "next-repeat",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Complemento",
+                "btnAddText": "Complemento",
+                "readonly": true,
+                "required": false
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "className": "col-6",
+                    "key": "complement",
+                    "type": "select",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Tipo de Complemento",
+                      "options": [
+                        {
+                          "label": "Sala",
+                          "value": "Sala"
+                        },
+                        {
+                          "label": "Ala",
+                          "value": "Ala"
+                        },
+                        {
+                          "label": "Galpão",
+                          "value": "Galpão"
+                        },
+                        {
+                          "label": "Box",
+                          "value": "Box"
+                        }
+                      ],
+                      "readonly": true,
+                      "required": true
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "comp",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Complemento",
+                      "required": false
+                    },
+                    "readonly": true
+                  }
+                ]
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "bairro_empresa",
+              "wrappers": [
+                "mirror"
+              ],
+              "type": "input",
+              "templateOptions": {
+                "label": "Bairro",
+                "readonly": true,
+                "required": true
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "cidade",
+              "wrappers": [
+                "mirror"
+              ],
+              "type": "input",
+              "templateOptions": {
+                "label": "Cidade",
+                "readonly": true,
+                "required": true
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "uf",
+              "wrappers": [
+                "mirror"
+              ],
+              "type": "input",
+              "templateOptions": {
+                "label": "UF",
+                "readonly": true,
+                "required": true
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "area",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Área do Empreendimento (em m²)",
+                "placeholder": "Ex: 100,00",
+                "floatNumber": true,
+                "suffix": "m²",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "required": true,
+                "disabled": false
+              }
+            },
+            {
+              "key": "atividade_resolucao_consema",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "hideData": true,
+                "label": "Código da Atividade Principal (CNAE)",
+                "readonly": true,
+                "required": true
+              }
+            },
+            {
+              "key": "atividade",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Atividade",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "required": true
+              }
+            },
+            {
+              "key": "cnae_secundario",
+              "type": "next-repeat",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Código da(s) Atividade(s) Secundária(s) (CNAE)",
+                "focus": "false",
+                "readonly": true,
+                "required": false,
+                "btnAddText": "CNAE Secundário"
+              },
+              "expressionProperties": {
+                "templateOptions|||disableAdd": "!model.area "
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "cnae_sec",
+                    "type": "next-input",
+                    "wrappers": [
+                      "form-field",
+                      "mirror",
+                      "consumeDataset"
+                    ],
+                    "templateOptions": {
+                      "label": "CNAE SECUNDÁRIO",
+                      "required": true,
+                      "compact": true,
+                      "hideData": true,
+                      "keepMask": true,
+                      "placeholder": "Ex: 01.19-9-04",
+                      "mask": "00.00-0-00",
+                      "datasetReference": "5fc64daf78b8f700085d17d6",
+                      "datasetKey": "codigo",
+                      "autocomplete": true,
+                      "readonly": true
+                    }
+                  },
+                  {
+                    "key": "cnaesec",
+                    "type": "next-input",
+                    "wrappers": [
+                      "form-field",
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "cnae secundario",
+                      "required": false,
+                      "mask": "00.00-0-00",
+                      "hidden": true
+                    },
+                    "expressionProperties": {
+                      "model|||cnaesec": "model?.cnae_sec?.input_data?.data?.find((e)=>e.key ==='codigo')?.value"
+                    }
+                  },
+                  {
+                    "key": "categoria_metragem_cnae_sec",
+                    "type": "next-input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||categoria_metragem_cnae_sec": "model.area ? model.area <= 100 ? 'usoate100' : model.area <= 200 ? 'uso100a200' : model.area <= 400 ? 'uso200a400' : model.area > 400 ? 'usoacima400' : '' : ''"
+                    },
+                    "hideExpression": true
+                  },
+                  {
+                    "key": "denominacaocnae_sec",
+                    "type": "next-input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Denominação do CNAE",
+                      "readonly": true,
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||denominacaocnae_sec": "model?.cnae_sec?.input_data?.data?.find((e)=>e.key ==='denominacao')?.value"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "key": "documentacao",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Documentações requeridas para seguimento do processo",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "readonly": false,
+                "required": false
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Processo de Viabilidade",
+            "subtitle": "Os próximos campos serão preenchidos a partir do seu processo de Viabilidade, protocolado e deferido anteriormente.",
+            "textHtml": "<div class=\"p-4 border-l-4 border-blue-500 text-sm text-blue-800 font-medium leading-6 bg-blue-100\">\n<div>\nConfirme as informações a respeito da empresa aberta."
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "className": "col-6",
+              "key": "cnpj",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "CNPJ",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "mask": "AA.AAA.AAA/AAAA-00",
+                "readonly": false,
+                "required": false
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "capital_social",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Capital Social (em reais)",
+                "placeholder": " ",
+                "readonly": true,
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "razao_social",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Razão Social",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "readonly": false,
+                "required": false
+              }
+            },
+            {
+              "key": "nome_fantasia",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Nome Fantasia",
+                "placeholder": " ",
+                "readonly": false,
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "porte_empresa",
+              "type": "select",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Porte da empresa",
+                "options": [
+                  {
+                    "label": "Microempresa (ME)",
+                    "value": "microempresa"
+                  },
+                  {
+                    "label": "Empresa de Pequeno Porte (EPP)",
+                    "value": "pequeno"
+                  },
+                  {
+                    "label": "Empresa de Médio Porte",
+                    "value": "medio"
+                  },
+                  {
+                    "label": "Empresa de Grande Porte",
+                    "value": "grande"
+                  }
+                ],
+                "focus": "false",
+                "readonly": false,
+                "required": false
+              }
+            },
+            {
+              "key": "tipo_juridico",
+              "type": "select",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Tipo Jurídico",
+                "options": [
+                  {
+                    "label": "Empresário",
+                    "value": "empresario"
+                  },
+                  {
+                    "label": "Sociedade",
+                    "value": "sociedade"
+                  },
+                  {
+                    "label": "MEI - Microempreendedor Individual",
+                    "value": "mei"
+                  },
+                  {
+                    "label": "Sociedade Anônima",
+                    "value": "sociedade_anonima"
+                  },
+                  {
+                    "label": "Cooperativa",
+                    "value": "cooperativa"
+                  },
+                  {
+                    "label": "Consórcio",
+                    "value": "consorcio"
+                  },
+                  {
+                    "label": "Fundação",
+                    "value": "fundacao"
+                  },
+                  {
+                    "label": "Empresa Estrangeira",
+                    "value": "empresa_estrangeira"
+                  }
+                ],
+                "focus": "false",
+                "required": false
+              }
+            },
+            {
+              "key": "proprietario",
+              "type": "next-repeat",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Sócios",
+                "btnAddText": "Sócio",
+                "required": true
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "nome-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Nome do Sócio",
+                      "required": true
+                    },
+                    "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                  },
+                  {
+                    "key": "cpfcnpj-proprietario",
+                    "type": "next-cpf-cnpj",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "CPF/CNPJ do Sócio",
+                      "omitirCrea": true,
+                      "required": true
+                    },
+                    "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required, Validators.minLength(14)])\\n\\t\\t}"
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "cel-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Telefone/Celular do Sócio",
+                      "placeholder": "(00) 00000-0000",
+                      "required": true,
+                      "mask": "(00) 00000-0009"
+                    },
+                    "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "email-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Email do Sócio",
+                      "required": true
+                    },
+                    "validators": {
+                      "validation": [
+                        "email"
+                      ]
+                    }
+                  },
+                  {
+                    "key": "cep-proprietario",
+                    "type": "next-input-data",
+                    "wrappers": [
+                      "form-field",
+                      "mirror",
+                      "integrations"
+                    ],
+                    "templateOptions": {
+                      "label": "CEP do Sócio",
+                      "mask": "99999-999",
+                      "idIntegration": "60bf6970f5ace0000afcd57f",
+                      "saveIntegrationResponse": true,
+                      "required": true,
+                      "hideData": true
+                    }
+                  },
+                  {
+                    "key": "rua-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Endereço do Sócio",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||rua-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.logradouro ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "numero-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Nº Residencial do Sócio",
+                      "required": true
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "bairro-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Bairro do Sócio",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||bairro-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.bairro ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "cidade-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Cidade do Sócio",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||cidade-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.localidade ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "uf-proprietario",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "UF",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||uf-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.uf ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "key": "documento-proprietario",
+                    "type": "next-upload",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Documentos do Sócio (Comprovante de Residência e Cópia do CPF/ RG/CNH, e Contrato Social quando necessário",
+                      "placeholder": "",
+                      "type": "text",
+                      "required": true
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "key": "contador",
+              "type": "next-repeat",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Contador",
+                "btnAddText": "Contador",
+                "required": false
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "nome-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Nome",
+                      "required": true
+                    },
+                    "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                  },
+                  {
+                    "key": "cpfcnpj-contador",
+                    "type": "next-cpf-cnpj",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "CPF/CNPJ",
+                      "omitirCrea": true,
+                      "required": true
+                    },
+                    "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required, Validators.minLength(14)])\\n\\t\\t}"
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "cel-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Telefone/Celular",
+                      "placeholder": "(00) 00000-0000",
+                      "required": true,
+                      "mask": "(00) 00000-0009"
+                    },
+                    "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "email-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Email",
+                      "required": true
+                    },
+                    "validators": {
+                      "validation": [
+                        "email"
+                      ]
+                    }
+                  },
+                  {
+                    "key": "cep-contador",
+                    "type": "next-input-data",
+                    "wrappers": [
+                      "form-field",
+                      "mirror",
+                      "integrations"
+                    ],
+                    "templateOptions": {
+                      "label": "CEP",
+                      "mask": "99999-999",
+                      "idIntegration": "60bf6970f5ace0000afcd57f",
+                      "saveIntegrationResponse": true,
+                      "required": true,
+                      "hideData": true
+                    }
+                  },
+                  {
+                    "key": "rua-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Endereço",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||rua-contador": "model['cep-contador'] ? model['cep-contador'].data ? model['cep-contador'].data.response ? ( model['cep-contador'].data.response.result?.logradouro ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "numero-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Nº Residencial",
+                      "required": true
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "bairro-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Bairro",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||bairro-contador": "model['cep-contador'] ? model['cep-contador'].data ? model['cep-contador'].data.response ? ( model['cep-contador'].data.response.result?.bairro ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "cidade-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Cidade",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||cidade-contador": "model['cep-contador'] ? model['cep-contador'].data ? model['cep-contador'].data.response ? ( model['cep-contador'].data.response.result?.localidade ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "uf-contador",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "UF",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||uf-contador": "model['cep-contador'] ? model['cep-contador'].data ? model['cep-contador'].data.response ? ( model['cep-contador'].data.response.result?.uf ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "key": "documento-contador",
+                    "type": "next-upload",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Documentos do Sócio (Comprovante de Residência e Cópia do CPF/ RG/CNH, e Contrato Social quando necessário",
+                      "placeholder": "",
+                      "type": "text",
+                      "required": false
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados da Empresa",
+            "subtitle": "Insira as informações a respeito do negócio",
+            "textHtml": "<div class=\"p-4 border-l-4 border-blue-500 text-sm text-blue-800 font-medium leading-6 bg-blue-100\">\n<div class=\"\" >\n</div>\nConfirme e/ou insira as informações a respeito da empresa aberta."
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "processoaprova",
+              "type": "radio",
+              "templateOptions": {
+                "label": "O documento foi emitido via Aprova?",
+                "focus": "false",
+                "required": true,
+                "options": [
+                  {
+                    "label": "Sim",
+                    "value": "Sim"
+                  },
+                  {
+                    "label": "Não",
+                    "value": "Não"
+                  }
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+              }
+            },
+            {
+              "key": "processo_digital_aua",
+              "type": "next-processo",
+              "templateOptions": {
+                "label": "Número de Protocolo e Código Verificador da Autorização Ambiental (AuA)",
+                "placeholder": "Ex: O número deve ser completo, com traços e siglas se possuir.",
+                "focus": "false",
+                "type": "text",
+                "extraFields": [],
+                "required": false,
+                "disabled": false
+              },
+              "hideExpression": "model.processoaprova !== 'Sim' || model.documentacao !== 'Autorização Ambiental (AuA)' "
+            },
+            {
+              "className": "col-6",
+              "key": "cnpj_aua",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "CNPJ",
+                "placeholder": " ",
+                "mask": "AA.AAA.AAA/AAAA-00",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "required": true
+              },
+              "hideExpression": "model.processoaprova !== 'Sim' || model.documentacao !== 'Autorização Ambiental (AuA)'"
+            },
+            {
+              "key": "mensagem_cnpj_aua",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "VOCÊ NÃO PODE CONTINUAR",
+                "placeholder": "O CNPJ informado no processo acima não é compatível com o CNPJ informado no card 3 - Dados da Empresa. Por favor, utilize o processo correto.",
+                "type": "text",
+                "focus": "false",
+                "labelBadge": "danger",
+                "required": true,
+                "readonly": true
+              },
+              "hideExpression": "!model.cnpj_aua || model.cnpj_aua === model.cnpj"
+            },
+            {
+              "key": "processo_digital_alvara_obras",
+              "type": "next-processo",
+              "templateOptions": {
+                "label": "Número de Protocolo e Código Verificador do Alvará de Obras",
+                "placeholder": "Ex: O número deve ser completo, com traços e siglas se possuir.",
+                "focus": "false",
+                "type": "text",
+                "extraFields": [],
+                "required": false,
+                "disabled": false
+              },
+              "hideExpression": "model.processoaprova !== 'Sim' || model.documentacao !== 'Alvará de Obras; Habite-se'"
+            },
+            {
+              "className": "col-6",
+              "key": "cnpj_alvara",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "CNPJ",
+                "mask": "AA.AAA.AAA/AAAA-00",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "required": true
+              },
+              "hideExpression": "model.processoaprova !== 'Sim' || model.documentacao !== 'Alvará de Obras; Habite-se'"
+            },
+            {
+              "key": "mensagem_cnpj_alvara",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "VOCÊ NÃO PODE CONTINUAR",
+                "placeholder": "O CNPJ informado no processo acima não é compatível com o CNPJ informado no card 3 - Dados da Empresa. Por favor, utilize o processo correto.",
+                "type": "text",
+                "focus": "false",
+                "labelBadge": "danger",
+                "required": true,
+                "readonly": true
+              },
+              "hideExpression": "!model.cnpj_alvara || model.cnpj_alvara === model.cnpj"
+            },
+            {
+              "key": "processo_digital_haitese",
+              "type": "next-processo",
+              "templateOptions": {
+                "label": "Número de Protocolo e Código Verificador do Habite-se",
+                "placeholder": "Ex: O número deve ser completo, com traços e siglas se possuir.",
+                "focus": "false",
+                "type": "text",
+                "extraFields": [],
+                "required": false,
+                "disabled": false
+              },
+              "hideExpression": "model.processoaprova !== 'Sim' || model.documentacao !== 'Alvará de Obras; Habite-se'"
+            },
+            {
+              "className": "col-6",
+              "key": "cnpj_habitese",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "CNPJ",
+                "mask": "AA.AAA.AAA/AAAA-00",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "required": true
+              },
+              "hideExpression": "model.processoaprova !== 'Sim' || model.documentacao !== 'Alvará de Obras; Habite-se'"
+            },
+            {
+              "key": "mensagem_cnpj_habitese",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "VOCÊ NÃO PODE CONTINUAR",
+                "placeholder": "O CNPJ informado no processo acima não é compatível com o CNPJ informado no card 3 - Dados da Empresa. Por favor, utilize o processo correto.",
+                "type": "text",
+                "focus": "false",
+                "labelBadge": "danger",
+                "required": true,
+                "readonly": true
+              },
+              "hideExpression": "!model.cnpj_habitese || model.cnpj_habitese === model.cnpj"
+            },
+            {
+              "key": "processo_digital_licenca_ambiental",
+              "type": "next-processo",
+              "templateOptions": {
+                "label": "Número de Protocolo e Código Verificador da Licença Ambiental Prévia (LAP)",
+                "placeholder": "Ex: O número deve ser completo, com traços e siglas se possuir.",
+                "focus": "false",
+                "type": "text",
+                "extraFields": [],
+                "required": false,
+                "disabled": false
+              },
+              "hideExpression": "model.processoaprova !== 'Sim' || model.documentacao !== 'Licença Ambiental Prévia (LAP); Licença Ambiental de Instalação (LAI)'"
+            },
+            {
+              "className": "col-6",
+              "key": "cnpj_lap",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "CNPJ",
+                "mask": "AA.AAA.AAA/AAAA-00",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "required": true
+              },
+              "hideExpression": "model.processoaprova !== 'Sim' || model.documentacao !== 'Licença Ambiental Prévia (LAP); Licença Ambiental de Instalação (LAI)'"
+            },
+            {
+              "key": "mensagem_cnpj_lap",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "VOCÊ NÃO PODE CONTINUAR",
+                "placeholder": "O CNPJ informado no processo acima não é compatível com o CNPJ informado no card 3 - Dados da Empresa. Por favor, utilize o processo correto.",
+                "type": "text",
+                "focus": "false",
+                "labelBadge": "danger",
+                "required": true,
+                "readonly": true
+              },
+              "hideExpression": "!model.cnpj_lap || model.cnpj_lap === model.cnpj"
+            },
+            {
+              "key": "processo_digital_licenca_instalacao",
+              "type": "next-processo",
+              "templateOptions": {
+                "label": "Número de Protocolo e Código Verificador da Licença Ambiental de Instalação (LAI)",
+                "placeholder": "Ex: O número deve ser completo, com traços e siglas se possuir.",
+                "focus": "false",
+                "type": "text",
+                "extraFields": [],
+                "required": false,
+                "disabled": false
+              },
+              "hideExpression": "model.processoaprova !== 'Sim' || model.documentacao !== 'Licença Ambiental Prévia (LAP); Licença Ambiental de Instalação (LAI)'"
+            },
+            {
+              "className": "col-6",
+              "key": "cnpj_lai",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "CNPJ",
+                "mask": "AA.AAA.AAA/AAAA-00",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "required": true
+              },
+              "hideExpression": "model.processoaprova !== 'Sim' || model.documentacao !== 'Licença Ambiental Prévia (LAP); Licença Ambiental de Instalação (LAI)'"
+            },
+            {
+              "key": "mensagem_cnpj_lai",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "VOCÊ NÃO PODE CONTINUAR",
+                "placeholder": "O CNPJ informado no processo acima não é compatível com o CNPJ informado no card 3 - Dados da Empresa. Por favor, utilize o processo correto.",
+                "type": "text",
+                "focus": "false",
+                "labelBadge": "danger",
+                "required": true,
+                "readonly": true
+              },
+              "hideExpression": "!model.cnpj_lai || model.cnpj_lai === model.cnpj"
+            },
+            {
+              "key": "processo_digital_laudo_acustico",
+              "type": "next-processo",
+              "templateOptions": {
+                "label": "Número de Protocolo e Código Verificador do Laudo Acústico",
+                "placeholder": "Ex: O número deve ser completo, com traços e siglas se possuir.",
+                "focus": "false",
+                "type": "text",
+                "extraFields": [],
+                "required": false,
+                "disabled": false
+              },
+              "hideExpression": "model.processoaprova !== 'Sim' || model.documentacao !== 'Laudo Acústico'"
+            },
+            {
+              "className": "col-6",
+              "key": "cnpj_laudoacustico",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "CNPJ",
+                "mask": "AA.AAA.AAA/AAAA-00",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "required": true
+              },
+              "hideExpression": "model.processoaprova !== 'Sim' || model.documentacao !== 'Laudo Acústico'"
+            },
+            {
+              "key": "mensagem_cnpj_laudo",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "VOCÊ NÃO PODE CONTINUAR",
+                "placeholder": "O CNPJ informado no processo acima não é compatível com o CNPJ informado no card 3 - Dados da Empresa. Por favor, utilize o processo correto.",
+                "type": "text",
+                "focus": "false",
+                "labelBadge": "danger",
+                "required": true,
+                "readonly": true
+              },
+              "hideExpression": "!model.cnpj_laudoacustico || model.cnpj_laudoacustico === model.cnpj"
+            },
+            {
+              "key": "aua_upload",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Insira o documento de Autorização Ambiental (AuA)",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.processoaprova == 'Não' || model.documentacao == 'Autorização Ambiental (AuA)' "
+              },
+              "hideExpression": "model.processoaprova !== 'Não' || model.documentacao !== 'Autorização Ambiental (AuA)' "
+            },
+            {
+              "key": "alvara_obras_upload",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Insira o documento de Alvará de Obras",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.processoaprova == 'Não' || model.documentacao == 'Alvará de Obras; Habite-se'"
+              },
+              "hideExpression": "model.processoaprova !== 'Não' || model.documentacao !== 'Alvará de Obras; Habite-se'"
+            },
+            {
+              "key": "habitese_upload",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Insira o documento de Habite-se",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.processoaprova == 'Não' || model.documentacao == 'Alvará de Obras; Habite-se'"
+              },
+              "hideExpression": "model.processoaprova !== 'Não' || model.documentacao !== 'Alvará de Obras; Habite-se'"
+            },
+            {
+              "key": "lap_upload",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Insira o documento de Licença Ambiental Prévia (LAP)",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.processoaprova == 'Não' || model.documentacao == 'Licença Ambiental Prévia (LAP); Licença Ambiental de Instalação (LAI)'"
+              },
+              "hideExpression": "model.processoaprova !== 'Não' || model.documentacao !== 'Licença Ambiental Prévia (LAP); Licença Ambiental de Instalação (LAI)'"
+            },
+            {
+              "key": "lai_upload",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Insira o documento de Licença Ambiental de Instalação (LAI)",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.processoaprova == 'Não' || model.documentacao == 'Licença Ambiental Prévia (LAP); Licença Ambiental de Instalação (LAI)'"
+              },
+              "hideExpression": "model.processoaprova !== 'Não' || model.documentacao !== 'Licença Ambiental Prévia (LAP); Licença Ambiental de Instalação (LAI)'"
+            },
+            {
+              "key": "laudo_acustico_upload",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Insira o documento de Laudo Acústico",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.processoaprova == 'Não' || model.documentacao == 'Laudo Acústico'"
+              },
+              "hideExpression": "model.processoaprova !== 'Não' || model.documentacao !== 'Laudo Acústico'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Obrigatórios",
+            "subtitle": "Insira abaixo as documentações anteriormente listadas como obrigatórias no processo de Viabilidade",
+            "textHtml": "<div class=\"p-4 border-l-4 border-blue-500 text-sm text-blue-800 font-medium leading-6 bg-blue-100\"><div><p>Indique a forma de emissão da documentação obrigatória e, em seguida, insira-a nos campos indicados.<br><br>&nbsp;</p><div class=\"badge badge-danger text-wrap text-white\">ATENÇÃO</div><p><br>Em casos de documentos emitidos via Aprova, atente-se a documentação solicitada. Visando minimizar erros, serão aceitos somente os tipos de documentação indicadas no enunciado de cada campo.&nbsp;<br>Ex: Os campos de Licença Ambiental Prévia (LAP) somente aceitarão processos de LAP.&nbsp;<br><br><i><strong>Processos com o mesmo CNPJ (válido):</strong></i><br><strong>LAP: </strong>112-25-DEM-LAP - h6x7cceb<br><strong>LAI: </strong>115-25-CIM-LAI - 1e7sb3tt<br><strong>AuA: </strong>116-25-DEMO-AUA - kcmpbtye<br><strong>Alvará de Obras:</strong> 113-25-DEMO-ALV - l4l8i28m<br><strong>Habite-se: </strong>114-25-DEMO-HAB - 9jcvetyp<br><strong>Laudo Acústico: </strong>117-25-DEMO-NEW - 4zirnw2b<br><br><i><strong>Processo com CNPJ divergente (erro):</strong></i><br><strong>LAP: </strong>118-25-DEM-LAP - 15a2p33f<br><strong>LAI:</strong> 121-25-CIM-LAI - v3mqt5hj<br><strong>AuA:</strong> 123-25-DEMO-AUA - stwnq1sg<br><strong>Alvará de Obras: </strong>119-25-DEMO-ALV - m5ywpcn6<br><strong>Habite-se: </strong>120-25-DEMO-HAB - q0ceho7y<br><strong>Laudo Acústico: </strong>124-25-DEMO-NEW - 3xnlq5uj<br>&nbsp;</p></div></div>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "6989e13c49917568d69abd6f"
+    }
+  ],
+  "tramite": [],
+  "step": {}
+}

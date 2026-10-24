@@ -1,0 +1,2012 @@
+{
+  "_id": "6a4555404d22d5ea74c35486",
+  "__v": 0,
+  "config": {
+    "hide": {
+      "steps": true
+    },
+    "devolverAoUltimo": true,
+    "title": "Recepção - Prontuário Paciente (UPA)",
+    "descricao": "Atendimento Médico",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "UPA",
+    "newSignatureStrategy": true,
+    "experimentalMode": true,
+    "useNewSidebarForwarding": true,
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Atestado ou Declaração",
+        "template": "ModeloAD/atestadooudeclaracao.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true
+      },
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Receita - Prescrição Eletrônica",
+        "template": "ModeloAD/receita.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Classificação de Risco",
+        "text_action": "Realizou ação",
+        "key": "new_key177538",
+        "form": [
+          {
+            "key": "acidente_trabalho",
+            "className": "col-6",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Acidente de trabalho",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "nome_empresa",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Nome da Empresa",
+              "placeholder": "Nome da Empresa",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            },
+            "hideExpression": "model.acidente_trabalho !== 'Sim' "
+          },
+          {
+            "key": "data_ocorrencia",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Data da Ocorrência",
+              "placeholder": "Data da Ocorrência",
+              "focus": "false",
+              "required": true
+            },
+            "hideExpression": "model.acidente_trabalho !== 'Sim' "
+          },
+          {
+            "key": "horario_acidente",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Horário da Ocorrência",
+              "placeholder": "Horário da Ocorrência",
+              "focus": "false",
+              "type": "number",
+              "mask": "00:00",
+              "required": true
+            },
+            "hideExpression": "model.acidente_trabalho !== 'Sim' "
+          },
+          {
+            "key": "sinais_embriaguez",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Sinais de Embriaguez",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "especialidade_atendimento",
+            "type": "select",
+            "templateOptions": {
+              "label": "Especialidade",
+              "options": [
+                {
+                  "label": "Clínico Geral",
+                  "value": "Clínico Geral"
+                },
+                {
+                  "label": "Dentista",
+                  "value": "Dentista"
+                },
+                {
+                  "label": "Ginecologista",
+                  "value": "Ginecologista"
+                },
+                {
+                  "label": "Ortopedista",
+                  "value": "Ortopedista"
+                },
+                {
+                  "label": "UTI",
+                  "value": "UTI"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "saturacao_o2",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Saturação O2 (%)",
+              "placeholder": "Saturação O2 (%)",
+              "focus": "false",
+              "type": "number",
+              "required": true,
+              "mask": "00",
+              "suffix": "%"
+            }
+          },
+          {
+            "key": "hgt",
+            "className": "col-6",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "HGT",
+              "placeholder": "HGT",
+              "focus": "false",
+              "type": "number",
+              "required": true,
+              "suffix": "mg/dl"
+            }
+          },
+          {
+            "key": "peso_triagem",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Peso (kg)",
+              "placeholder": "Peso",
+              "focus": "false",
+              "type": "text",
+              "required": true,
+              "suffix": "kg"
+            }
+          },
+          {
+            "key": "altura_traigem",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Altura (cm)",
+              "placeholder": "Digite aqui",
+              "focus": "false",
+              "type": "text",
+              "required": true,
+              "suffix": "cm"
+            }
+          },
+          {
+            "key": "pa",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Pressão Arterial (PA)",
+              "placeholder": "00",
+              "focus": "false",
+              "type": "number",
+              "mask": "00 x 00",
+              "suffix": "mmHg",
+              "required": true
+            }
+          },
+          {
+            "key": "temp",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Temperatura",
+              "placeholder": "Digite aqui",
+              "focus": "false",
+              "type": "text",
+              "required": true,
+              "suffix": "Cº"
+            }
+          },
+          {
+            "key": "freq_cardiaca",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Frequência Cardíaca",
+              "placeholder": "FC",
+              "focus": "false",
+              "type": "text",
+              "required": true,
+              "suffix": "bpm"
+            }
+          },
+          {
+            "key": "freq_respiratoria",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Frequência Respiratória",
+              "placeholder": "FR",
+              "focus": "false",
+              "type": "text",
+              "required": true,
+              "suffix": "IRPM"
+            }
+          },
+          {
+            "key": "has",
+            "type": "radio",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "HAS",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "diabetes",
+            "type": "radio",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Diabetes",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "def_motora",
+            "type": "radio",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Deficiência Motora",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "med_uso",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Medicação em uso",
+              "placeholder": "Digite aqui",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "alergias_triagem",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Alergias",
+              "placeholder": "Digite aqui",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "avaliacao_neuro",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Avaliação Neurológica",
+              "options": [
+                {
+                  "label": "Convulsão",
+                  "value": "Convulsão"
+                },
+                {
+                  "label": "Inconsciente",
+                  "value": "Inconsciente"
+                },
+                {
+                  "label": "Consciente",
+                  "value": "Consciente"
+                },
+                {
+                  "label": "Orientado",
+                  "value": "Orientado"
+                },
+                {
+                  "label": "Desorientado",
+                  "value": "Desorientado"
+                },
+                {
+                  "label": "Agitado",
+                  "value": "Agitado"
+                },
+                {
+                  "label": "Cooperativo",
+                  "value": "Cooperativo"
+                },
+                {
+                  "label": "Apático",
+                  "value": "Apático"
+                },
+                {
+                  "label": "Irritado",
+                  "value": "Irritado"
+                },
+                {
+                  "label": "Diminuição da Força Motora",
+                  "value": "Diminuição da Força Motora"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "sintomas_referidos",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Sintomas Referidos",
+              "options": [
+                {
+                  "label": "Febre",
+                  "value": "Febre"
+                },
+                {
+                  "label": "Vômito",
+                  "value": "Vômito"
+                },
+                {
+                  "label": "Diarréia",
+                  "value": "Diarréia"
+                },
+                {
+                  "label": "Exantema",
+                  "value": "Exantema"
+                },
+                {
+                  "label": "Prurido",
+                  "value": "Prurido"
+                },
+                {
+                  "label": "Dispneia",
+                  "value": "Dispneia"
+                },
+                {
+                  "label": "Dor",
+                  "value": "Dor"
+                },
+                {
+                  "label": "Inapetência",
+                  "value": "Inapetência"
+                },
+                {
+                  "label": "Alteração Visual",
+                  "value": "Alteração Visual"
+                },
+                {
+                  "label": "Anafilaxia",
+                  "value": "Anafilaxia"
+                },
+                {
+                  "label": "Flebite",
+                  "value": "Flebite"
+                },
+                {
+                  "label": "Epigastralgia",
+                  "value": "Epigastralgia"
+                },
+                {
+                  "label": "Constipação",
+                  "value": "Constipação"
+                },
+                {
+                  "label": "Melena",
+                  "value": "Melena"
+                },
+                {
+                  "label": "Síbilos",
+                  "value": "Síbilos"
+                },
+                {
+                  "label": "Tosse",
+                  "value": "Tosse"
+                },
+                {
+                  "label": "Outros",
+                  "value": "Outros"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "genito_urinario",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Gênito Urinário",
+              "options": [
+                {
+                  "label": "Disúria",
+                  "value": "Disúria"
+                },
+                {
+                  "label": "Hematúria",
+                  "value": "Hemat��ria"
+                },
+                {
+                  "label": "Oligúria",
+                  "value": "Oligúria"
+                },
+                {
+                  "label": "Polaciúria",
+                  "value": "Polaciúria"
+                },
+                {
+                  "label": "S/ Alteração",
+                  "value": "S/ Alteração"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "escala_dor",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Escala de Dor",
+              "options": [
+                {
+                  "value": "Sem Dor"
+                },
+                {
+                  "value": "Dor Leve"
+                },
+                {
+                  "value": "Dor Moderada"
+                },
+                {
+                  "value": "Dor Bastante Forte"
+                },
+                {
+                  "value": "Pior dor possível"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "anamnese",
+            "type": "next-tiny",
+            "templateOptions": {
+              "label": "Anamnese",
+              "placeholder": "Realize a anamnese do paciente que está recebendo atendimento.",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "marcadorconf",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Marcador adicionado? (Classificação realizada)",
+              "options": [
+                {
+                  "value": "Sim"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "acidente_trabalho",
+            "className": "col-6",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Acidente de trabalho",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "nome_empresa",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Nome da Empresa",
+              "placeholder": "Nome da Empresa",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            },
+            "hideExpression": "model.acidente_trabalho !== 'Sim' "
+          },
+          {
+            "key": "data_ocorrencia",
+            "type": "next-date",
+            "templateOptions": {
+              "label": "Data da Ocorrência",
+              "placeholder": "Data da Ocorrência",
+              "focus": "false",
+              "required": true
+            },
+            "hideExpression": "model.acidente_trabalho !== 'Sim' "
+          },
+          {
+            "key": "horario_acidente",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Horário da Ocorrência",
+              "placeholder": "Horário da Ocorrência",
+              "focus": "false",
+              "type": "number",
+              "mask": "00:00",
+              "required": true
+            },
+            "hideExpression": "model.acidente_trabalho !== 'Sim' "
+          },
+          {
+            "key": "sinais_embriaguez",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Sinais de Embriaguez",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "especialidade_atendimento",
+            "type": "select",
+            "templateOptions": {
+              "label": "Especialidade",
+              "options": [
+                {
+                  "label": "Clínico Geral",
+                  "value": "Clínico Geral"
+                },
+                {
+                  "label": "Dentista",
+                  "value": "Dentista"
+                },
+                {
+                  "label": "Ginecologista",
+                  "value": "Ginecologista"
+                },
+                {
+                  "label": "Ortopedista",
+                  "value": "Ortopedista"
+                },
+                {
+                  "label": "UTI",
+                  "value": "UTI"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "saturacao_o2",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Saturação O2 (%)",
+              "placeholder": "Saturação O2 (%)",
+              "focus": "false",
+              "type": "number",
+              "required": true,
+              "mask": "00",
+              "suffix": "%"
+            }
+          },
+          {
+            "key": "hgt",
+            "className": "col-6",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "HGT",
+              "placeholder": "HGT",
+              "focus": "false",
+              "type": "number",
+              "required": true,
+              "suffix": "mg/dl"
+            }
+          },
+          {
+            "key": "peso_triagem",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Peso (kg)",
+              "placeholder": "Peso",
+              "focus": "false",
+              "type": "text",
+              "required": true,
+              "suffix": "kg"
+            }
+          },
+          {
+            "key": "altura_traigem",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Altura (cm)",
+              "placeholder": "Digite aqui",
+              "focus": "false",
+              "type": "text",
+              "required": true,
+              "suffix": "cm"
+            }
+          },
+          {
+            "key": "pa",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Pressão Arterial (PA)",
+              "placeholder": "00",
+              "focus": "false",
+              "type": "number",
+              "mask": "00 x 00",
+              "suffix": "mmHg",
+              "required": true
+            }
+          },
+          {
+            "key": "temp",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Temperatura",
+              "placeholder": "Digite aqui",
+              "focus": "false",
+              "type": "text",
+              "required": true,
+              "suffix": "Cº"
+            }
+          },
+          {
+            "key": "freq_cardiaca",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Frequência Cardíaca",
+              "placeholder": "FC",
+              "focus": "false",
+              "type": "text",
+              "required": true,
+              "suffix": "bpm"
+            }
+          },
+          {
+            "key": "freq_respiratoria",
+            "type": "next-input",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Frequência Respiratória",
+              "placeholder": "FR",
+              "focus": "false",
+              "type": "text",
+              "required": true,
+              "suffix": "IRPM"
+            }
+          },
+          {
+            "key": "has",
+            "type": "radio",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "HAS",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "diabetes",
+            "type": "radio",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Diabetes",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "def_motora",
+            "type": "radio",
+            "className": "col-6",
+            "templateOptions": {
+              "label": "Deficiência Motora",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "med_uso",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Medicação em uso",
+              "placeholder": "Digite aqui",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "alergias_triagem",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Alergias",
+              "placeholder": "Digite aqui",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "avaliacao_neuro",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Avaliação Neurológica",
+              "options": [
+                {
+                  "label": "Convulsão",
+                  "value": "Convulsão"
+                },
+                {
+                  "label": "Inconsciente",
+                  "value": "Inconsciente"
+                },
+                {
+                  "label": "Consciente",
+                  "value": "Consciente"
+                },
+                {
+                  "label": "Orientado",
+                  "value": "Orientado"
+                },
+                {
+                  "label": "Desorientado",
+                  "value": "Desorientado"
+                },
+                {
+                  "label": "Agitado",
+                  "value": "Agitado"
+                },
+                {
+                  "label": "Cooperativo",
+                  "value": "Cooperativo"
+                },
+                {
+                  "label": "Apático",
+                  "value": "Apático"
+                },
+                {
+                  "label": "Irritado",
+                  "value": "Irritado"
+                },
+                {
+                  "label": "Diminuição da Força Motora",
+                  "value": "Diminuição da Força Motora"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "sintomas_referidos",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Sintomas Referidos",
+              "options": [
+                {
+                  "label": "Febre",
+                  "value": "Febre"
+                },
+                {
+                  "label": "Vômito",
+                  "value": "Vômito"
+                },
+                {
+                  "label": "Diarréia",
+                  "value": "Diarr��ia"
+                },
+                {
+                  "label": "Exantema",
+                  "value": "Exantema"
+                },
+                {
+                  "label": "Prurido",
+                  "value": "Prurido"
+                },
+                {
+                  "label": "Dispneia",
+                  "value": "Dispneia"
+                },
+                {
+                  "label": "Dor",
+                  "value": "Dor"
+                },
+                {
+                  "label": "Inapetência",
+                  "value": "Inapetência"
+                },
+                {
+                  "label": "Alteração Visual",
+                  "value": "Alteração Visual"
+                },
+                {
+                  "label": "Anafilaxia",
+                  "value": "Anafilaxia"
+                },
+                {
+                  "label": "Flebite",
+                  "value": "Flebite"
+                },
+                {
+                  "label": "Epigastralgia",
+                  "value": "Epigastralgia"
+                },
+                {
+                  "label": "Constipação",
+                  "value": "Constipação"
+                },
+                {
+                  "label": "Melena",
+                  "value": "Melena"
+                },
+                {
+                  "label": "Síbilos",
+                  "value": "Síbilos"
+                },
+                {
+                  "label": "Tosse",
+                  "value": "Tosse"
+                },
+                {
+                  "label": "Outros",
+                  "value": "Outros"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "genito_urinario",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Gênito Urinário",
+              "options": [
+                {
+                  "label": "Disúria",
+                  "value": "Disúria"
+                },
+                {
+                  "label": "Hematúria",
+                  "value": "Hematúria"
+                },
+                {
+                  "label": "Oligúria",
+                  "value": "Oligúria"
+                },
+                {
+                  "label": "Polaciúria",
+                  "value": "Polaciúria"
+                },
+                {
+                  "label": "S/ Alteração",
+                  "value": "S/ Alteração"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "escala_dor",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Escala de Dor",
+              "options": [
+                {
+                  "value": "Sem Dor"
+                },
+                {
+                  "value": "Dor Leve"
+                },
+                {
+                  "value": "Dor Moderada"
+                },
+                {
+                  "value": "Dor Bastante Forte"
+                },
+                {
+                  "value": "Pior dor possível"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "anamnese",
+            "type": "next-tiny",
+            "templateOptions": {
+              "label": "Anamnese",
+              "placeholder": "Realize a anamnese do paciente que está recebendo atendimento.",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "marcadorconf",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Marcador adicionado? (Classificação realizada)",
+              "options": [
+                {
+                  "value": "Sim"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Atendimento médico",
+        "text_action": "Realizou ação",
+        "key": "new_key98855",
+        "form": [
+          {
+            "key": "anamnesemed",
+            "type": "next-tiny",
+            "templateOptions": {
+              "label": "Anamnese",
+              "placeholder": "Realize a anamnese do paciente",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "receita",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Receita Médica - Prescrição Eletrônica",
+              "placeholder": "Receita - Prescrição Eletrônica",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "obsmedica",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações médicas (encaminhamento, etc)",
+              "placeholder": "Campo destinado a observações do profissional.",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "atestadooudeclaracao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Atestado Médico / Declaração",
+              "placeholder": "Informe o período de afastamento, caso exista",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "anamnesemed",
+            "type": "next-tiny",
+            "templateOptions": {
+              "label": "Anamnese",
+              "placeholder": "Realize a anamnese do paciente",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "receita",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Receita Médica - Prescrição Eletrônica",
+              "placeholder": "Receita - Prescrição Eletrônica",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "obsmedica",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações médicas (encaminhamento, etc)",
+              "placeholder": "Campo destinado a observações do profissional.",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "atestadooudeclaracao",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Atestado Médico / Declaração",
+              "placeholder": "Informe o período de afastamento, caso exista",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Internamento",
+        "text_action": "Realizou ação",
+        "key": "new_key13458",
+        "fieldGroup": [
+          {
+            "key": "Acompnhante_repeat",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Acompanhantes",
+              "focus": "false",
+              "btnAddText": "Acompanhantes",
+              "required": true
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "necessita_acompanhante",
+                  "type": "radio",
+                  "templateOptions": {
+                    "label": "Necessita de acompanhante?",
+                    "options": [
+                      {
+                        "value": "Sim"
+                      },
+                      {
+                        "value": "Não"
+                      }
+                    ],
+                    "focus": "false",
+                    "required": true
+                  }
+                },
+                {
+                  "key": "nome_acompanhante",
+                  "type": "next-input",
+                  "className": "col-8",
+                  "templateOptions": {
+                    "label": "Nome do Acompanhante",
+                    "placeholder": "Digite aqui",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "hideExpression": "model.necessita_acompanhante !== 'Sim' "
+                },
+                {
+                  "key": "data_nascimento_acomp",
+                  "className": "col-4",
+                  "type": "next-date",
+                  "templateOptions": {
+                    "label": "Data de nascimento do acompanhante",
+                    "placeholder": "Digite aqui",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "hideExpression": "model.necessita_acompanhante !== 'Sim' "
+                },
+                {
+                  "key": "Periodo_acompanhamento",
+                  "className": "col-6",
+                  "type": "next-date",
+                  "templateOptions": {
+                    "label": "Período de acompanhamento - Data de Início do Acompanhamento",
+                    "placeholder": "Digite aqui",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "hideExpression": "model.necessita_acompanhante !== 'Sim' "
+                },
+                {
+                  "key": "hora_acompanhante",
+                  "type": "next-input",
+                  "className": "col-6",
+                  "templateOptions": {
+                    "label": "Período de acompanhamento - Horário de Início do acompanhamento",
+                    "placeholder": "00:00",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true,
+                    "mask": "00:00",
+                    "suffix": "hrs"
+                  },
+                  "hideExpression": "model.necessita_acompanhante !== 'Sim' "
+                },
+                {
+                  "key": "fim_acompanhamento",
+                  "type": "next-date",
+                  "className": "col-6",
+                  "templateOptions": {
+                    "label": "Período de acompanhamento - Data do Encerramento de Acompanhamento",
+                    "placeholder": "Digite aqui",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  },
+                  "hideExpression": "model.necessita_acompanhante !== 'Sim' "
+                },
+                {
+                  "key": "fim_horario_acompanhamento",
+                  "type": "next-input",
+                  "className": "col-6",
+                  "templateOptions": {
+                    "label": "Período de acompanhamento - Horário de Encerramento de Acompanhamento",
+                    "placeholder": "00:00",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false,
+                    "mask": "00:00",
+                    "suffix": "hrs"
+                  },
+                  "hideExpression": "model.necessita_acompanhante !== 'Sim' "
+                }
+              ]
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "Acompnhante_repeat",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Acompanhantes",
+              "focus": "false",
+              "btnAddText": "Acompanhantes",
+              "required": true
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "necessita_acompanhante",
+                  "type": "radio",
+                  "templateOptions": {
+                    "label": "Necessita de acompanhante?",
+                    "options": [
+                      {
+                        "value": "Sim"
+                      },
+                      {
+                        "value": "Não"
+                      }
+                    ],
+                    "focus": "false",
+                    "required": true
+                  }
+                },
+                {
+                  "key": "nome_acompanhante",
+                  "type": "next-input",
+                  "className": "col-8",
+                  "templateOptions": {
+                    "label": "Nome do Acompanhante",
+                    "placeholder": "Digite aqui",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "hideExpression": "model.necessita_acompanhante !== 'Sim' "
+                },
+                {
+                  "key": "data_nascimento_acomp",
+                  "className": "col-4",
+                  "type": "next-date",
+                  "templateOptions": {
+                    "label": "Data de nascimento do acompanhante",
+                    "placeholder": "Digite aqui",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "hideExpression": "model.necessita_acompanhante !== 'Sim' "
+                },
+                {
+                  "key": "Periodo_acompanhamento",
+                  "className": "col-6",
+                  "type": "next-date",
+                  "templateOptions": {
+                    "label": "Período de acompanhamento - Data de Início do Acompanhamento",
+                    "placeholder": "Digite aqui",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "hideExpression": "model.necessita_acompanhante !== 'Sim' "
+                },
+                {
+                  "key": "hora_acompanhante",
+                  "type": "next-input",
+                  "className": "col-6",
+                  "templateOptions": {
+                    "label": "Período de acompanhamento - Horário de Início do acompanhamento",
+                    "placeholder": "00:00",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true,
+                    "mask": "00:00",
+                    "suffix": "hrs"
+                  },
+                  "hideExpression": "model.necessita_acompanhante !== 'Sim' "
+                },
+                {
+                  "key": "fim_acompanhamento",
+                  "type": "next-date",
+                  "className": "col-6",
+                  "templateOptions": {
+                    "label": "Período de acompanhamento - Data do Encerramento de Acompanhamento",
+                    "placeholder": "Digite aqui",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false
+                  },
+                  "hideExpression": "model.necessita_acompanhante !== 'Sim' "
+                },
+                {
+                  "key": "fim_horario_acompanhamento",
+                  "type": "next-input",
+                  "className": "col-6",
+                  "templateOptions": {
+                    "label": "Período de acompanhamento - Horário de Encerramento de Acompanhamento",
+                    "placeholder": "00:00",
+                    "focus": "false",
+                    "type": "text",
+                    "required": false,
+                    "mask": "00:00",
+                    "suffix": "hrs"
+                  },
+                  "hideExpression": "model.necessita_acompanhante !== 'Sim' "
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "single",
+      "possibleReceivers": [
+        "sesa_demoad"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "city_id": 38,
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "docidentificacao",
+              "type": "radio",
+              "templateOptions": {
+                "label": "1. Paciente possuí documento de identificação?",
+                "focus": "false",
+                "required": false,
+                "options": [
+                  {
+                    "label": "Não",
+                    "value": "Não"
+                  },
+                  {
+                    "label": "Sim",
+                    "value": "Sim"
+                  }
+                ]
+              },
+              "expressionProperties": {
+                "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+              }
+            },
+            {
+              "key": "certnasci",
+              "type": "next-input",
+              "expressionProperties": {
+                "templateOptions|||required": "model.docidentificacao == 'Não'",
+                "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+              },
+              "templateOptions": {
+                "label": "1.1 Número da Certidão de Nascimento",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "hideExpression": "model.docidentificacao !== 'Não' "
+            },
+            {
+              "key": "cpf",
+              "type": "next-input",
+              "expressionProperties": {
+                "templateOptions|||required": "model.docidentificacao == 'Sim'",
+                "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+              },
+              "templateOptions": {
+                "label": "1.2.1. CPF",
+                "placeholder": "Informe o CPF do Paciente",
+                "focus": "false",
+                "type": "number",
+                "mask": "000.000.000-00",
+                "required": true
+              },
+              "hideExpression": "model.docidentificacao !== 'Sim' "
+            },
+            {
+              "key": "rg",
+              "type": "next-input",
+              "expressionProperties": {
+                "templateOptions|||required": "model.docidentificacao == 'Sim'",
+                "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+              },
+              "templateOptions": {
+                "label": "1.2.2. RG",
+                "placeholder": "Informe o RG do paciente",
+                "focus": "false",
+                "type": "number",
+                "required": false
+              },
+              "hideExpression": "model.docidentificacao !== 'Sim' "
+            },
+            {
+              "key": "nomepaciente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "2. Nome do Paciente",
+                "placeholder": "Informe o nome do paciente",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "datanascimento",
+              "type": "next-date",
+              "className": "col-12",
+              "templateOptions": {
+                "label": "3. Data Nascimento",
+                "placeholder": "Informe a data de nascimento do paciente",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "nomemae",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "4. Nome da mãe",
+                "placeholder": "Informe o nome da mãe do paciente",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "nomepai",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "5. Nome do pai",
+                "placeholder": "Informe o nome do pai do paciente",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "endereco",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "6. Endereço do Paciente",
+                "btnAddText": "Endereço",
+                "required": true
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "cep-proprietario",
+                    "type": "next-input-data",
+                    "wrappers": [
+                      "form-field",
+                      "integrations"
+                    ],
+                    "templateOptions": {
+                      "label": "CEP",
+                      "mask": "99999-999",
+                      "idIntegration": "60bf6970f5ace0000afcd57f",
+                      "saveIntegrationResponse": true,
+                      "required": true,
+                      "hideData": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "rua-proprietario",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Endereço",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||rua-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.logradouro ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "numero-proprietario",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Nº Residencial",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "bairro-proprietario",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Bairro",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||bairro-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.bairro ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "cidade-proprietario",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Cidade",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||cidade-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.localidade ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "uf-proprietario",
+                    "type": "select",
+                    "templateOptions": {
+                      "label": "UF",
+                      "options": [
+                        {
+                          "label": "Acre",
+                          "value": "AC"
+                        },
+                        {
+                          "label": "Alagoas",
+                          "value": "AL"
+                        },
+                        {
+                          "label": "Amapá",
+                          "value": "AP"
+                        },
+                        {
+                          "label": "Amazonas",
+                          "value": "AM"
+                        },
+                        {
+                          "label": "Bahia",
+                          "value": "BA"
+                        },
+                        {
+                          "label": "Ceará",
+                          "value": "CE"
+                        },
+                        {
+                          "label": "Distrito Federal",
+                          "value": "DF"
+                        },
+                        {
+                          "label": "Espírito Santo",
+                          "value": "ES"
+                        },
+                        {
+                          "label": "Goiás",
+                          "value": "GO"
+                        },
+                        {
+                          "label": "Maranhão",
+                          "value": "MA"
+                        },
+                        {
+                          "label": "Mato Grosso",
+                          "value": "MT"
+                        },
+                        {
+                          "label": "Mato Grosso do Sul",
+                          "value": "MS"
+                        },
+                        {
+                          "label": "Minas Gerais",
+                          "value": "MG"
+                        },
+                        {
+                          "label": "Pará",
+                          "value": "PA"
+                        },
+                        {
+                          "label": "Paraíba",
+                          "value": "PB"
+                        },
+                        {
+                          "label": "Paraná",
+                          "value": "PR"
+                        },
+                        {
+                          "label": "Pernambuco",
+                          "value": "PE"
+                        },
+                        {
+                          "label": "Piauí",
+                          "value": "PI"
+                        },
+                        {
+                          "label": "Rio de Janeiro",
+                          "value": "RJ"
+                        },
+                        {
+                          "label": "Rio Grande do Norte",
+                          "value": "RN"
+                        },
+                        {
+                          "label": "Rio Grande do Sul",
+                          "value": "RS"
+                        },
+                        {
+                          "label": "Rondônia",
+                          "value": "RO"
+                        },
+                        {
+                          "label": "Roraima",
+                          "value": "RR"
+                        },
+                        {
+                          "label": "Santa Catarina",
+                          "value": "SC"
+                        },
+                        {
+                          "label": "São Paulo",
+                          "value": "SP"
+                        },
+                        {
+                          "label": "Sergipe",
+                          "value": "SE"
+                        },
+                        {
+                          "label": "Tocantins",
+                          "value": "TO"
+                        }
+                      ],
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "celpaciente",
+              "type": "input",
+              "templateOptions": {
+                "label": "7. Telefone/Celular do Paciente",
+                "required": false,
+                "mask": "(00) 0000-00009"
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "expressionProperties": {}
+            },
+            {
+              "key": "numsus",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "8. Nº Cartão SUS",
+                "placeholder": "Informe o número do SUS",
+                "focus": "false",
+                "type": "number",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "emailpaciente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "9. Email do Paciente",
+                "required": false,
+                "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+              },
+              "validation": {
+                "messages": {
+                  "pattern": "Informe um e-mail no formato válido (ex: nome@dominio.com)."
+                }
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "contatoemergencia",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "10. Nome Contato Emergência",
+                "placeholder": "Informe o nome do contato de emergência do paciente",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "relacao_contato",
+              "type": "select",
+              "templateOptions": {
+                "label": "11. Relação do Paciente com Contato de Emergência",
+                "options": [
+                  {
+                    "label": "Mãe",
+                    "value": "Mãe"
+                  },
+                  {
+                    "label": "Pai",
+                    "value": "Pai"
+                  },
+                  {
+                    "label": "Irmão/Irmã",
+                    "value": "Irmão/Irmã"
+                  },
+                  {
+                    "label": "Tio/Tia",
+                    "value": "Tio/Tia"
+                  },
+                  {
+                    "label": "Conjuge",
+                    "value": "Conjuge"
+                  },
+                  {
+                    "label": "Filho/Filha",
+                    "value": "Filho/Filha"
+                  },
+                  {
+                    "label": "Avó",
+                    "value": "Avó"
+                  },
+                  {
+                    "label": "Avô",
+                    "value": "Avô"
+                  },
+                  {
+                    "label": "Outros",
+                    "value": "Outros"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "contatoemergpaciente",
+              "type": "input",
+              "templateOptions": {
+                "label": "12.Contato de Emergência Paciente - Telefone/Celular",
+                "required": false,
+                "mask": "(00) 0000-00009"
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "expressionProperties": {}
+            },
+            {
+              "key": "observacoes",
+              "type": "next-tiny",
+              "templateOptions": {
+                "label": "13. Observações Adicionais",
+                "placeholder": "Campo para inserção de informações adicionais",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "fatorh",
+              "type": "select",
+              "templateOptions": {
+                "label": "14. Tipo Sanguíneo",
+                "options": [
+                  {
+                    "label": "A+",
+                    "value": "A+"
+                  },
+                  {
+                    "label": "A-",
+                    "value": "A-"
+                  },
+                  {
+                    "label": "B+",
+                    "value": "B+"
+                  },
+                  {
+                    "label": "B-",
+                    "value": "B-"
+                  },
+                  {
+                    "label": "AB+",
+                    "value": "AB+"
+                  },
+                  {
+                    "label": "AB-",
+                    "value": "AB-"
+                  },
+                  {
+                    "label": "O+",
+                    "value": "O+"
+                  },
+                  {
+                    "label": "O-",
+                    "value": "O-"
+                  }
+                ],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": "true",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": "true",
+                "columns": "12",
+                "readonly": "true",
+                "addressee": {
+                  "type": "single",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "sesa_demoad",
+                      "id": "6064d94e0622d9000866742c",
+                      "label": "SESAU - Secretaria da Saúde"
+                    }
+                  ]
+                },
+                "placeholder": "",
+                "focus": "false",
+                "disabled": "false",
+                "hideLabel": false,
+                "sensitiveField": false,
+                "destinationAccessLevel": "FULL",
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "hidden": "true"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Recepção - Paciente",
+            "subtitle": "Dados essenciais para o atendimento.",
+            "textHtml": "<img src=\"https://process-pdf-templates.s3.amazonaws.com/DemoAD/upa.jpg\" width=\"150\" height=\"200\">\n<a target='_blank' href=''> <b>UPA - Unidade de Pronto Atendimento - Cidade/UF </b> </a><img style='width:100px; height=50px; src='https://process-pdf-templates.s3.amazonaws.com/DemoAD/upa.jpg'><br>\n <b>Início do Atendimento:</b><br><br>\n🪪 1. Questionar ao paciente ou acompanhante se o mesmo possuí documento de identificação. (Sim ou Não)<br><br>\n📄1.1. Caso o paciente não possua documento de identificação, deverá apresentar o número da certidão de nascimento p/ preenchimento do campo.<br><br>\n💻1.2. Caso o paciente possua documento de identificação, o mesmo deverá ser solicitado para preenchimento dos demais campos deste formulário. <br><br>\n🪪1.2.1. Informe o CPF do paciente. <br><br>\n🪪1.2.2. Informe o RG do paciente. <br><br>\n📛2. Informar o nome completo do paciente. <br><br>\n🚼3. Informe a data de nascimento do paciente. <br><br>\n👨‍👩‍👧‍👦4. Informe o nome da mãe do paciente. <br><br>\n👨‍👩‍👧‍👦5. Informe o nome do pai do paciente. <br><br>\n🛣️6. Informe o endereço do paciente. Inicie preenchendo o CEP do mesmo que as demais informações se autopreencherão.<br><br>\n📱7. Informe o número do telefone/celular do paciente (Se houver). <br><br>\n👨🏻‍⚕️8. Informar o número do cartão SUS do paciente. <br><br>\n✉️9. Informe o e-mail do paciente (Se houver). <br><br>\n🦺10. Nome de contato para emergências (Se houver). <br><br>\n🧬11. Relação entre Paciente e Contato de Emergência <br><br>\n📱12. Informe o número do telefone/celular do contato de emergência do paciente (Se houver). <br><br>\n📰 13. Campo para preenchimento de informações adicionais (texto livre).<br><br>\n🩸14. Caso exista a informação na identidade do paciente, informar o tipo sanguíneo do mesmo. <br><br><br>\n\nAo finalizar o protocolo, caso o paciente se enquadre como <b>Prioritário (🧓🏼👶🏾♿)</b>, adicionar o Marcador vinculado ao seu setor no processo gerado."
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "step": {
+    "config": [
+      {
+        "title": "Recepção do Paciente",
+        "description": "Durante essa etapa do processo, a recepção da UPA irá colher todos os dados necessários para encaminhamento do paciente a(o) enfermeira/o responsável para encaminhamento à triagem e realização da classificação de risco do paciente.",
+        "sector": null,
+        "estimatedTime": null,
+        "timeUnit": 86400000,
+        "reponseTimeLimit": null,
+        "applicantActivitiesVisible": null,
+        "activities": [],
+        "automatic": [
+          {
+            "subscribe": [
+              "process/create"
+            ],
+            "execute": "({ resume, activities, signatures, documents, process }) => {\n    finishStep();\n}\n"
+          }
+        ],
+        "hideFinishedFeedback": "Não",
+        "finishedInformation": "Paciente recepcionado com sucesso. Encaminhamento ao setor de Classificação de Risco Realizado.",
+        "tab": [],
+        "action": []
+      },
+      {
+        "title": "Classificação de Risco",
+        "description": "Nessa etapa a/o enfermeira/o responsável irá realizar a classificação de risco do paciente e preencher a anamnese do mesmo na área interna.",
+        "sector": null,
+        "estimatedTime": null,
+        "timeUnit": 86400000,
+        "reponseTimeLimit": null,
+        "applicantActivitiesVisible": null,
+        "activities": [],
+        "automatic": [
+          {
+            "subscribe": [
+              "process/update/activities"
+            ],
+            "execute": "({ resume, activities, signatures, documents, process }) => {\n    if (activities.classrisc.marcadorconf === 'Sim') {\n        sendTo({ groupId: 'cmdr_demoad' })\n        finishStep();\n    } \n}\n"
+          }
+        ],
+        "hideFinishedFeedback": "Não",
+        "finishedInformation": "Classificação de Risco Preenchida. Encaminhamento ao médico realizado.",
+        "tab": [],
+        "action": []
+      },
+      {
+        "title": "Atendimento médico e geração de documentos (se houver)",
+        "description": "Nessa etapa, o médico responsável irá realizar o atendimento do paciente e executar as devidas atividades.",
+        "sector": null,
+        "estimatedTime": null,
+        "timeUnit": 86400000,
+        "reponseTimeLimit": null,
+        "applicantActivitiesVisible": null,
+        "activities": [],
+        "automatic": [],
+        "hideFinishedFeedback": "Não",
+        "finishedInformation": "Atendimento finalizado.",
+        "tab": null,
+        "action": null
+      }
+    ],
+    "shared": {
+      "informative": "Este processo é destinado ao atendimento de pacientes recepcionados na UPA.",
+      "automatic": [],
+      "tab": null,
+      "action": null
+    }
+  }
+}

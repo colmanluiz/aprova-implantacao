@@ -1,0 +1,2117 @@
+{
+  "_id": "677822430b7b3b0008685b44",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "setor_requerente",
+              "type": "select",
+              "templateOptions": {
+                "label": "Setor Requerente",
+                "options": [
+                  {
+                    "label": "Gabinete do Prefeito e do vice-prefeito",
+                    "value": "gpvp"
+                  },
+                  {
+                    "label": "Secretaria de Políticas p/ infância, juv., mulher, família e desenv. hum.",
+                    "value": "spijmfdh"
+                  },
+                  {
+                    "label": "Secretaria da Administração",
+                    "value": "sadm"
+                  },
+                  {
+                    "label": "Secretaria de Assistência Social",
+                    "value": "sas"
+                  },
+                  {
+                    "label": "Secretaria de Infraestrutura Rural e Urbana e de Serviços Públicos",
+                    "value": "sirusp"
+                  },
+                  {
+                    "label": "Secretaria da Saúde",
+                    "value": "sus"
+                  },
+                  {
+                    "label": "Secretaria do Agronegócio, de inovação, turismo e desenvolv. econômico",
+                    "value": "saitde"
+                  },
+                  {
+                    "label": "Secretaria do Meio Ambiente",
+                    "value": "sma"
+                  },
+                  {
+                    "label": "Procuradoria Geral",
+                    "value": "pg"
+                  },
+                  {
+                    "label": "Secretaria da Fazenda e Captação de Recursos",
+                    "value": "sfcr"
+                  },
+                  {
+                    "label": "Secretaria da Educação",
+                    "value": "sde"
+                  },
+                  {
+                    "label": "Secretaria de Esportes e Lazer",
+                    "value": "sel"
+                  },
+                  {
+                    "label": "Secretaria do Planejamento, Habitação e Urbanismo",
+                    "value": "sphu"
+                  },
+                  {
+                    "label": "Secretaria da Cultura",
+                    "value": "sdc"
+                  },
+                  {
+                    "label": "Secretaria de Recursos Humanos",
+                    "value": "srh"
+                  },
+                  {
+                    "label": "Secretaria de Segurança e Mobilidade Urbana",
+                    "value": "ssmu"
+                  }
+                ],
+                "required": true,
+                "placeholder": "--selecione--",
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {},
+                "multiple": false
+              },
+              "expressionProperties": {},
+              "className": "col-12"
+            },
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "O requerente é o usuário logado no Sistema?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "nome_requerente",
+              "type": "input",
+              "templateOptions": {
+                "label": "Nome completo",
+                "required": true,
+                "placeholder": "Ex: Maria da Silva"
+              },
+              "expressionProperties": {
+                "model|||nome_requerente": "model.requerente == 'Sim' ? model.user_dados?.user?.user_metadata.name : (()=>{var loweredText=(model['nome-responsavel'])?.toLowerCase();var words=loweredText?.split(' ');for(var a=0;a<words?.filter(f=>f?.length>0)?.length;a++){var w=words[a];var firstLetter=w[0];if(w?.length>2){w=firstLetter?.toUpperCase()+w?.slice(1)}else{w=firstLetter+w?.slice(1)} words[a]=w} return words?.join(' ')})()   ",
+                "templateOptions|||readonly": "model.requerente =='Sim' ? true : false"
+              }
+            },
+            {
+              "key": "matricula",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Matricula",
+                "placeholder": "Insira o número da matrícula",
+                "readonly": false,
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "usuario_email",
+              "type": "input",
+              "templateOptions": {
+                "label": "E-mail para correspondência",
+                "placeholder": "nome@dominio.com",
+                "required": true
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "expressionProperties": {
+                "model|||usuario_email": "model.requerente == 'Sim' ? model.user_dados?.user?.email : model.email_tecnico",
+                "templateOptions|||readonly": "model.requerente =='Sim' ? true : false"
+              }
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "predefined",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "admmodelo_modeload",
+                      "label": "Secretaria de Administração",
+                      "id": "675c980a96ab6200088ea449"
+                    }
+                  ]
+                },
+                "sensitiveField": false,
+                "multiple": false,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Responsável pela Solicitação",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Responsável pela Solicitação</span>\n\n\n<p>Você deve informar corretamente os dados ao lado para evitar erros no processo de compras. </p><br>\n <b>Devem ser preenchidos: </b>\n<ul>\n<li>Disposição do atual setor solicitante conforme organograma</li>\n<li>Nome do responsável pela solicitação.</li> <br>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "anexo_estudo",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Estudo Técnico Preliminar",
+                "required": false,
+                "includeTemplates": [
+                  "anexo_docedital"
+                ],
+                "extends": [
+                  "pdf",
+                  "PDF",
+                  "xls",
+                  "XLS",
+                  "xlxs",
+                  "xlsx",
+                  "XLSX",
+                  "XLXS",
+                  "csv",
+                  "CSV"
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "anexo_termo",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Termo de Referência",
+                "required": false,
+                "includeTemplates": [
+                  "anexo_docedital"
+                ],
+                "extends": [
+                  "pdf",
+                  "PDF",
+                  "xls",
+                  "XLS",
+                  "xlxs",
+                  "xlsx",
+                  "XLSX",
+                  "XLXS",
+                  "csv",
+                  "CSV"
+                ]
+              },
+              "includeTemplates": "doc_referencia",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Necessários - Setor de Compras",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Necessários - Setor de Compras</span>\n\n\n<ul class = \"pt-2\"> <li>Durante essa fase, é necessário o envio dos anexos destacados para geração do documento oficial ao final do processo.</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "objetogeral",
+              "type": "next-tiny",
+              "templateOptions": {
+                "label": "Informe o objeto geral da aquisição",
+                "placeholder": "Materiais de escritório para atender as necessidades do município",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "itens-solicitados",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Item Solicitado",
+                "focus": "false",
+                "btnAddText": "Item Solicitado",
+                "required": true
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "descricao",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Item Solicitado",
+                      "required": true,
+                      "placeholder": "Ex: Resma de Papel"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "qtde",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Quantidade",
+                      "required": true,
+                      "placeholder": "Ex: 40 unidades"
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Objetos da Solicitação",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Objetos da Solicitação</span>\n\n\n<ul class = \"pt-2\"> \n<li><b>Fundamentação:  </b>- Art. 18, § 1º, III, da Lei nº 14.133/2021/ art. 9°, inciso II da IN 58/2022 – requisitos da contratação.</li> \n<li><b>Para o preenchimento da descrição dos requisitos da contratação:  </b>- Descrever os requisitos indispensáveis para adquirir/contratar à necessidade especificada. Importante listar todos os requisitos que sejam essenciais , abstendo-se de relacionar requisitos desnecessários e especificações demasiadas, para não frustrar o caráter competitivo da futura licitação. Deve-se incluir os padrões mínimos de qualidade de forma a permitir a seleção da proposta mais vantajosa.</li> \n<li>Em observância a promoção do desenvolvimento nacional sustentável, inciso IV do art. 11 da Lei Federal 14133/2021, os critérios e práticas de sustentabilidade deverão ser incluídos neste tópico.<br>\nQuanto às práticas de sustentabilidade, é importante destacar que cada objeto deverá observar medidas sustentáveis específicas. <br>Deverá ser consultado o sítio eletrônico da AGU e o Guia Nacional de Contratações Sustentáveis, para verificar as normas a serem aplicadas, de acordo com o objeto da contratação.</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "justificativa",
+              "type": "next-tiny",
+              "templateOptions": {
+                "label": "Justificativa",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Justificativa",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Justificativa</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Insira uma breve justificativa de sua solicitação e caso necessário, anexe os documentos pertinentes.</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "obs_solic",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Observações sobre a solicitação",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "step": {
+    "config": [],
+    "shared": {
+      "informative": "Este processo foi criado com o intuito de estabelecer a conexão entre as diversas secretarias do munícipio e a secretaria de compras, realizando quaisquer tipos de solicitações com total embasamento na nova lei de licitações (14.133/2021)."
+    }
+  },
+  "config": {
+    "title": "Solicitações de Compras",
+    "descricao": "Embasado na Lei 14.133/2021 - Processo interno para aquisição de bens e serviços, envolvendo a definição das necessidades, a escolha dos fornecedores e a realização de licitações, quando necessário.",
+    "hide": {
+      "steps": true
+    },
+    "devolverAoUltimo": true,
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "MCL",
+    "newSignatureStrategy": true,
+    "experimentalMode": true,
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Edital",
+        "template": "ModeloAD/editaltoledo.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true
+      },
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Contrato",
+        "template": "ModeloAD/contratotoledo.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true,
+        "possui_prazo_validade": true
+      },
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Parecer Jurídico",
+        "template": "ModeloAD/parecerjuridicotoledo.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Seleção Tipo Contratação",
+        "text_action": "Realizou ação",
+        "key": "stc",
+        "fieldGroup": [
+          {
+            "key": "tipocontratacao",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Essa contratação se dará através de:",
+              "options": [
+                {
+                  "value": "Contratação Direta"
+                },
+                {
+                  "value": "Modalidade Licitatória"
+                },
+                {
+                  "value": "Credenciamento"
+                }
+              ],
+              "focus": "false",
+              "required": true,
+              "placeholder": "",
+              "disabled": false
+            },
+            "expressionProperties": {
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            }
+          },
+          {
+            "key": "abrecontratacaodireta",
+            "type": "radio",
+            "expressionProperties": {
+              "templateOptions|||required": "model.tipocontratacao == 'Contratação Direta'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.tipocontratacao !== 'Contratação Direta' ",
+            "templateOptions": {
+              "label": "Selecione o segmento da Contratação Direta:",
+              "options": [
+                {
+                  "value": "Inexigibilidade"
+                },
+                {
+                  "value": "Dispensa"
+                },
+                {
+                  "value": "Dispensa Eletrônica"
+                }
+              ],
+              "placeholder": "",
+              "focus": "false"
+            }
+          },
+          {
+            "key": "abremodalidadelicitacao",
+            "type": "radio",
+            "expressionProperties": {
+              "templateOptions|||required": "model.tipocontratacao == 'Modalidade Licitatória'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.tipocontratacao !== 'Modalidade Licitatória' ",
+            "templateOptions": {
+              "label": "Selecione a Modalidade Licitatória que se enquadra na solicitação:",
+              "options": [
+                {
+                  "value": "Pregão Presencial"
+                },
+                {
+                  "value": "Pregão Eletrônico"
+                },
+                {
+                  "value": "Concorrência"
+                },
+                {
+                  "value": "Concurso"
+                },
+                {
+                  "value": "Leilão"
+                },
+                {
+                  "value": "Ata de Registro de Preço"
+                },
+                {
+                  "value": "Diálogo Competitivo"
+                }
+              ],
+              "placeholder": "",
+              "focus": "false"
+            }
+          },
+          {
+            "key": "abrevalorcredenciamento",
+            "type": "radio",
+            "expressionProperties": {
+              "templateOptions|||required": "model.tipocontratacao == 'Credenciamento'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.tipocontratacao !== 'Credenciamento' ",
+            "templateOptions": {
+              "label": "Defina o tipo de valor escolhido (CRED):",
+              "options": [
+                {
+                  "value": "Sigiloso"
+                },
+                {
+                  "value": "Aberto"
+                }
+              ],
+              "placeholder": "",
+              "focus": "false"
+            }
+          },
+          {
+            "key": "abremododedisputa",
+            "type": "radio",
+            "expressionProperties": {
+              "templateOptions|||required": "model.abremodalidadelicitacao == 'Pregão Presencial' || 'Pregão Eletrônico' || 'Concorrência' || 'Concurso' || 'Leilão' || 'Diálogo Competitivo'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.abremodalidadelicitacao !== 'Pregão Presencial' || 'Pregão Eletrônico' || 'Concorrência' || 'Concurso' || 'Leilão' || 'Diálogo Competitivo'",
+            "templateOptions": {
+              "label": "Selecione o modo de disputa escolhido:",
+              "options": [
+                {
+                  "value": "Aberto"
+                },
+                {
+                  "value": "Fechado"
+                },
+                {
+                  "value": "Fechado e Aberto"
+                },
+                {
+                  "value": "Aberto e Fechado"
+                }
+              ],
+              "placeholder": "",
+              "focus": "false"
+            }
+          },
+          {
+            "key": "abrevalormodalidade",
+            "type": "radio",
+            "expressionProperties": {
+              "templateOptions|||required": "model.tipocontratacao == 'Modalidade Licitatória'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.tipocontratacao !== 'Modalidade Licitatória' ",
+            "templateOptions": {
+              "label": "Defina o tipo de valor escolhido (ML):",
+              "options": [
+                {
+                  "value": "Sigiloso"
+                },
+                {
+                  "value": "Aberto"
+                }
+              ],
+              "placeholder": "",
+              "focus": "false"
+            }
+          },
+          {
+            "className": "col-6",
+            "key": "tempocontrato",
+            "type": "select",
+            "templateOptions": {
+              "label": "Duração do Contrato",
+              "options": [
+                {
+                  "label": "01",
+                  "value": "01"
+                },
+                {
+                  "label": "02",
+                  "value": "02"
+                },
+                {
+                  "label": "03",
+                  "value": "03"
+                },
+                {
+                  "label": "04",
+                  "value": ""
+                },
+                {
+                  "label": "05",
+                  "value": "05"
+                },
+                {
+                  "label": "06",
+                  "value": "06"
+                },
+                {
+                  "label": "07",
+                  "value": "07"
+                },
+                {
+                  "label": "08",
+                  "value": "08"
+                },
+                {
+                  "label": "09",
+                  "value": "09"
+                },
+                {
+                  "label": "10",
+                  "value": "10"
+                },
+                {
+                  "label": "11",
+                  "value": "11"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "className": "col-6",
+            "key": "medidatempo",
+            "type": "select",
+            "templateOptions": {
+              "label": "Informe a medida de tempo",
+              "options": [
+                {
+                  "label": "Mês(es)",
+                  "value": "Mês(es)"
+                },
+                {
+                  "label": "Ano(s)",
+                  "value": "Ano(s)"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "confveracidade",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Confirmação de Preenchimento e Veracidade das Informações de Pleno acordo com a lei 14.133/2021",
+              "options": [
+                {
+                  "value": "Afirmo, através deste, que todas as informações preenchidas acima estão de acordo com as regras estabelecidas na lei 14.133/2021"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "tipocontratacao",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Essa contratação se dará através de:",
+              "options": [
+                {
+                  "value": "Contratação Direta"
+                },
+                {
+                  "value": "Modalidade Licitatória"
+                },
+                {
+                  "value": "Credenciamento"
+                }
+              ],
+              "focus": "false",
+              "required": true,
+              "placeholder": "",
+              "disabled": false
+            },
+            "expressionProperties": {
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            }
+          },
+          {
+            "key": "abrecontratacaodireta",
+            "type": "radio",
+            "expressionProperties": {
+              "templateOptions|||required": "model.tipocontratacao == 'Contratação Direta'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.tipocontratacao !== 'Contratação Direta' ",
+            "templateOptions": {
+              "label": "Selecione o segmento da Contratação Direta:",
+              "options": [
+                {
+                  "value": "Inexigibilidade"
+                },
+                {
+                  "value": "Dispensa"
+                },
+                {
+                  "value": "Dispensa Eletrônica"
+                }
+              ],
+              "placeholder": "",
+              "focus": "false"
+            }
+          },
+          {
+            "key": "abremodalidadelicitacao",
+            "type": "radio",
+            "expressionProperties": {
+              "templateOptions|||required": "model.tipocontratacao == 'Modalidade Licitatória'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.tipocontratacao !== 'Modalidade Licitatória' ",
+            "templateOptions": {
+              "label": "Selecione a Modalidade Licitatória que se enquadra na solicitação:",
+              "options": [
+                {
+                  "value": "Pregão Presencial"
+                },
+                {
+                  "value": "Pregão Eletrônico"
+                },
+                {
+                  "value": "Concorrência"
+                },
+                {
+                  "value": "Concurso"
+                },
+                {
+                  "value": "Leilão"
+                },
+                {
+                  "value": "Ata de Registro de Preço"
+                },
+                {
+                  "value": "Diálogo Competitivo"
+                }
+              ],
+              "placeholder": "",
+              "focus": "false"
+            }
+          },
+          {
+            "key": "abrevalorcredenciamento",
+            "type": "radio",
+            "expressionProperties": {
+              "templateOptions|||required": "model.tipocontratacao == 'Credenciamento'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.tipocontratacao !== 'Credenciamento' ",
+            "templateOptions": {
+              "label": "Defina o tipo de valor escolhido (CRED):",
+              "options": [
+                {
+                  "value": "Sigiloso"
+                },
+                {
+                  "value": "Aberto"
+                }
+              ],
+              "placeholder": "",
+              "focus": "false"
+            }
+          },
+          {
+            "key": "abremododedisputa",
+            "type": "radio",
+            "expressionProperties": {
+              "templateOptions|||required": "model.abremodalidadelicitacao == 'Pregão Presencial' || 'Pregão Eletrônico' || 'Concorrência' || 'Concurso' || 'Leilão' || 'Diálogo Competitivo'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.abremodalidadelicitacao !== 'Pregão Presencial' || 'Pregão Eletrônico' || 'Concorrência' || 'Concurso' || 'Leilão' || 'Diálogo Competitivo'",
+            "templateOptions": {
+              "label": "Selecione o modo de disputa escolhido:",
+              "options": [
+                {
+                  "value": "Aberto"
+                },
+                {
+                  "value": "Fechado"
+                },
+                {
+                  "value": "Fechado e Aberto"
+                },
+                {
+                  "value": "Aberto e Fechado"
+                }
+              ],
+              "placeholder": "",
+              "focus": "false"
+            }
+          },
+          {
+            "key": "abrevalormodalidade",
+            "type": "radio",
+            "expressionProperties": {
+              "templateOptions|||required": "model.tipocontratacao == 'Modalidade Licitatória'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.tipocontratacao !== 'Modalidade Licitatória' ",
+            "templateOptions": {
+              "label": "Defina o tipo de valor escolhido (ML):",
+              "options": [
+                {
+                  "value": "Sigiloso"
+                },
+                {
+                  "value": "Aberto"
+                }
+              ],
+              "placeholder": "",
+              "focus": "false"
+            }
+          },
+          {
+            "className": "col-6",
+            "key": "tempocontrato",
+            "type": "select",
+            "templateOptions": {
+              "label": "Duração do Contrato",
+              "options": [
+                {
+                  "label": "01",
+                  "value": "01"
+                },
+                {
+                  "label": "02",
+                  "value": "02"
+                },
+                {
+                  "label": "03",
+                  "value": "03"
+                },
+                {
+                  "label": "04",
+                  "value": ""
+                },
+                {
+                  "label": "05",
+                  "value": "05"
+                },
+                {
+                  "label": "06",
+                  "value": "06"
+                },
+                {
+                  "label": "07",
+                  "value": "07"
+                },
+                {
+                  "label": "08",
+                  "value": "08"
+                },
+                {
+                  "label": "09",
+                  "value": "09"
+                },
+                {
+                  "label": "10",
+                  "value": "10"
+                },
+                {
+                  "label": "11",
+                  "value": "11"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "className": "col-6",
+            "key": "medidatempo",
+            "type": "select",
+            "templateOptions": {
+              "label": "Informe a medida de tempo",
+              "options": [
+                {
+                  "label": "Mês(es)",
+                  "value": "Mês(es)"
+                },
+                {
+                  "label": "Ano(s)",
+                  "value": "Ano(s)"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "confveracidade",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Confirmação de Preenchimento e Veracidade das Informações de Pleno acordo com a lei 14.133/2021",
+              "options": [
+                {
+                  "value": "Afirmo, através deste, que todas as informações preenchidas acima estão de acordo com as regras estabelecidas na lei 14.133/2021"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Avaliação das Informações Preenchidas pela Secretaria de Licitações",
+        "text_action": "Realizou ação",
+        "key": "avalicaolicit",
+        "fieldGroup": [
+          {
+            "key": "avaliacaolicitacoes",
+            "type": "radio",
+            "templateOptions": {
+              "label": "As informações preenchidas estão de acordo para prosseguir, ou necessitam de correções?",
+              "options": [
+                {
+                  "value": "Sim, estão de acordo."
+                },
+                {
+                  "value": "Não, necessitam de correções."
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "abrecorrecoes",
+            "type": "next-tiny",
+            "expressionProperties": {
+              "templateOptions|||required": "model.avaliacaolicitacoes == 'Não, necessitam de correções.'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.avaliacaolicitacoes !== 'Não, necessitam de correções.' ",
+            "templateOptions": {
+              "label": "Informe as correções necessárias:",
+              "placeholder": "",
+              "focus": "false"
+            }
+          },
+          {
+            "key": "confirmacorrec",
+            "type": "radio",
+            "expressionProperties": {
+              "templateOptions|||required": "model.avaliacaolicitacoes == 'Não, necessitam de correções.'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.avaliacaolicitacoes !== 'Não, necessitam de correções.' ",
+            "templateOptions": {
+              "label": "As correções necessárias foram indicadas?",
+              "options": [
+                {
+                  "value": "Sim"
+                }
+              ],
+              "placeholder": "",
+              "focus": "false"
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "avaliacaolicitacoes",
+            "type": "radio",
+            "templateOptions": {
+              "label": "As informações preenchidas estão de acordo para prosseguir, ou necessitam de correções?",
+              "options": [
+                {
+                  "value": "Sim, estão de acordo."
+                },
+                {
+                  "value": "Não, necessitam de correções."
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "abrecorrecoes",
+            "type": "next-tiny",
+            "expressionProperties": {
+              "templateOptions|||required": "model.avaliacaolicitacoes == 'Não, necessitam de correções.'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.avaliacaolicitacoes !== 'Não, necessitam de correções.' ",
+            "templateOptions": {
+              "label": "Informe as correções necessárias:",
+              "placeholder": "",
+              "focus": "false"
+            }
+          },
+          {
+            "key": "confirmacorrec",
+            "type": "radio",
+            "expressionProperties": {
+              "templateOptions|||required": "model.avaliacaolicitacoes == 'Não, necessitam de correções.'",
+              "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+            },
+            "hideExpression": "model.avaliacaolicitacoes !== 'Não, necessitam de correções.' ",
+            "templateOptions": {
+              "label": "As correções necessárias foram indicadas?",
+              "options": [
+                {
+                  "value": "Sim"
+                }
+              ],
+              "placeholder": "",
+              "focus": "false"
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Parecer Jurídico do documento formulado",
+        "text_action": "Realizou ação",
+        "key": "new_key80760",
+        "form": [
+          {
+            "key": "parecerjur",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Parecer Jurídico",
+              "placeholder": "Escreva aqui, o parecer jurídico sobre o processo e as informações contidas nele.",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "parecerjur",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Parecer Jurídico",
+              "placeholder": "Escreva aqui, o parecer jurídico sobre o processo e as informações contidas nele.",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Balizamento - Cotação",
+        "text_action": "Realizou ação",
+        "key": "balizacotacao",
+        "fieldGroup": [
+          {
+            "key": "fornecedores",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Fornecedor(es)",
+              "focus": "false",
+              "btnAddText": "Fornecedor",
+              "required": true,
+              "placeholder": "",
+              "disabled": false
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-6",
+                  "key": "portefornecedor",
+                  "type": "select",
+                  "templateOptions": {
+                    "label": "Tipo:",
+                    "options": [
+                      {
+                        "label": "ME",
+                        "value": "ME"
+                      },
+                      {
+                        "label": "MEI",
+                        "value": "MEI"
+                      },
+                      {
+                        "label": "EPP",
+                        "value": "EPP"
+                      },
+                      {
+                        "label": "Outro",
+                        "value": "Outro"
+                      }
+                    ],
+                    "focus": "false",
+                    "placeholder": "Selecione o porte da empresa",
+                    "required": true
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "razaosocialfornecedor",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Razão Social do Fornecedor",
+                    "placeholder": "Ex: Google Serviços de Internet S/A",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                },
+                {
+                  "key": "cpfcnpj-fornecedor",
+                  "type": "next-cpf-cnpj",
+                  "templateOptions": {
+                    "label": "CPF/CNPJ do fornecedor",
+                    "omitirCrea": true,
+                    "required": true
+                  },
+                  "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required, Validators.minLength(14)])\\n\\t\\t}",
+                  "expressionProperties": {
+                    "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+                  }
+                },
+                {
+                  "key": "valorglobalinformado",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Valor Global",
+                    "labelHtml": true,
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "floatNumber": true,
+                    "currency": {
+                      "prefix": "R$ ",
+                      "thousands": ".",
+                      "decimal": ",",
+                      "precision": 2,
+                      "allowNegative": false
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "docsbalizamento",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Campo para upload dos documentos recebidos",
+              "options": [],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "confirmafornecedores",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Confirmação 03 Fornecedores",
+              "options": [
+                {
+                  "value": "Confirmo através deste, que foram preenchidos os 03 fornecedores necessários para prosseguimento no processo."
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "fornecedores",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Fornecedor(es)",
+              "focus": "false",
+              "btnAddText": "Fornecedor",
+              "required": true,
+              "placeholder": "",
+              "disabled": false
+            },
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "className": "col-6",
+                  "key": "portefornecedor",
+                  "type": "select",
+                  "templateOptions": {
+                    "label": "Tipo:",
+                    "options": [
+                      {
+                        "label": "ME",
+                        "value": "ME"
+                      },
+                      {
+                        "label": "MEI",
+                        "value": "MEI"
+                      },
+                      {
+                        "label": "EPP",
+                        "value": "EPP"
+                      },
+                      {
+                        "label": "Outro",
+                        "value": "Outro"
+                      }
+                    ],
+                    "focus": "false",
+                    "placeholder": "Selecione o porte da empresa",
+                    "required": true
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "razaosocialfornecedor",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Razão Social do Fornecedor",
+                    "placeholder": "Ex: Google Serviços de Internet S/A",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  }
+                },
+                {
+                  "key": "cpfcnpj-fornecedor",
+                  "type": "next-cpf-cnpj",
+                  "templateOptions": {
+                    "label": "CPF/CNPJ do fornecedor",
+                    "omitirCrea": true,
+                    "required": true
+                  },
+                  "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required, Validators.minLength(14)])\\n\\t\\t}",
+                  "expressionProperties": {
+                    "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+                  }
+                },
+                {
+                  "key": "valorglobalinformado",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Valor Global",
+                    "labelHtml": true,
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "floatNumber": true,
+                    "currency": {
+                      "prefix": "R$ ",
+                      "thousands": ".",
+                      "decimal": ",",
+                      "precision": 2,
+                      "allowNegative": false
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "docsbalizamento",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Campo para upload dos documentos recebidos",
+              "options": [],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "confirmafornecedores",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Confirmação 03 Fornecedores",
+              "options": [
+                {
+                  "value": "Confirmo através deste, que foram preenchidos os 03 fornecedores necessários para prosseguimento no processo."
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Designação do Pregoeiro",
+        "text_action": "Realizou ação",
+        "key": "new_key159561",
+        "form": [
+          {
+            "key": "pregoeiroresponsavel",
+            "type": "select",
+            "templateOptions": {
+              "label": "Informe o pregoeiro responsável por conduzir o processo.",
+              "options": [
+                {
+                  "label": "Pregoeiro 1",
+                  "value": "Pregoeiro 1"
+                },
+                {
+                  "label": "Pregoeiro 2",
+                  "value": "Pregoeiro 2"
+                },
+                {
+                  "label": "Pregoeiro 3",
+                  "value": "Pregoeiro 3"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "pregoeiroresponsavel",
+            "type": "select",
+            "templateOptions": {
+              "label": "Informe o pregoeiro responsável por conduzir o processo.",
+              "options": [
+                {
+                  "label": "Pregoeiro 1",
+                  "value": "Pregoeiro 1"
+                },
+                {
+                  "label": "Pregoeiro 2",
+                  "value": "Pregoeiro 2"
+                },
+                {
+                  "label": "Pregoeiro 3",
+                  "value": "Pregoeiro 3"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Acompanhamento pós certame",
+        "text_action": "Realizou ação",
+        "key": "new_key324848",
+        "fieldGroup": [
+          {
+            "key": "proprietario",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Vencedor do certame",
+              "btnAddText": "Vencedor do certame",
+              "required": true
+            },
+            "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "nome-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Nome do Vencedor",
+                    "required": true
+                  },
+                  "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                },
+                {
+                  "key": "cpfcnpj-proprietario",
+                  "type": "next-cpf-cnpj",
+                  "templateOptions": {
+                    "label": "CPF/CNPJ do Vencedor",
+                    "omitirCrea": true,
+                    "required": true
+                  },
+                  "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required, Validators.minLength(14)])\\n\\t\\t}"
+                },
+                {
+                  "key": "cel-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Telefone/Celular do Vencedor",
+                    "required": true,
+                    "mask": "(00) 0000-00009"
+                  },
+                  "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                },
+                {
+                  "key": "email-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Email do Vencedor",
+                    "required": true
+                  },
+                  "validators": {
+                    "validation": [
+                      "email"
+                    ]
+                  }
+                },
+                {
+                  "key": "cep-proprietario",
+                  "type": "next-input-data",
+                  "wrappers": [
+                    "form-field",
+                    "integrations"
+                  ],
+                  "templateOptions": {
+                    "label": "CEP do Vencedor",
+                    "mask": "99999-999",
+                    "idIntegration": "60bf6970f5ace0000afcd57f",
+                    "saveIntegrationResponse": true,
+                    "required": true,
+                    "hideData": true
+                  }
+                },
+                {
+                  "key": "rua-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Endereço Comercial do Vencedor",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||rua-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.logradouro ) : '' : '' : '' "
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "numero-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Nº Comercial do Vencedor",
+                    "required": true
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "bairro-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Bairro do Vencedor",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||bairro-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.bairro ) : '' : '' : '' "
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "cidade-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Cidade do Vencedor",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||cidade-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.localidade ) : '' : '' : '' "
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "uf-proprietario",
+                  "type": "select",
+                  "templateOptions": {
+                    "label": "UF do Vencedor",
+                    "options": [
+                      {
+                        "label": "Acre",
+                        "value": "AC"
+                      },
+                      {
+                        "label": "Alagoas",
+                        "value": "AL"
+                      },
+                      {
+                        "label": "Amapá",
+                        "value": "AP"
+                      },
+                      {
+                        "label": "Amazonas",
+                        "value": "AM"
+                      },
+                      {
+                        "label": "Bahia",
+                        "value": "BA"
+                      },
+                      {
+                        "label": "Ceará",
+                        "value": "CE"
+                      },
+                      {
+                        "label": "Distrito Federal",
+                        "value": "DF"
+                      },
+                      {
+                        "label": "Espírito Santo",
+                        "value": "ES"
+                      },
+                      {
+                        "label": "Goiás",
+                        "value": "GO"
+                      },
+                      {
+                        "label": "Maranhão",
+                        "value": "MA"
+                      },
+                      {
+                        "label": "Mato Grosso",
+                        "value": "MT"
+                      },
+                      {
+                        "label": "Mato Grosso do Sul",
+                        "value": "MS"
+                      },
+                      {
+                        "label": "Minas Gerais",
+                        "value": "MG"
+                      },
+                      {
+                        "label": "Pará",
+                        "value": "PA"
+                      },
+                      {
+                        "label": "Paraíba",
+                        "value": "PB"
+                      },
+                      {
+                        "label": "Paraná",
+                        "value": "PR"
+                      },
+                      {
+                        "label": "Pernambuco",
+                        "value": "PE"
+                      },
+                      {
+                        "label": "Piauí",
+                        "value": "PI"
+                      },
+                      {
+                        "label": "Rio de Janeiro",
+                        "value": "RJ"
+                      },
+                      {
+                        "label": "Rio Grande do Norte",
+                        "value": "RN"
+                      },
+                      {
+                        "label": "Rio Grande do Sul",
+                        "value": "RS"
+                      },
+                      {
+                        "label": "Rondônia",
+                        "value": "RO"
+                      },
+                      {
+                        "label": "Roraima",
+                        "value": "RR"
+                      },
+                      {
+                        "label": "Santa Catarina",
+                        "value": "SC"
+                      },
+                      {
+                        "label": "São Paulo",
+                        "value": "SP"
+                      },
+                      {
+                        "label": "Sergipe",
+                        "value": "SE"
+                      },
+                      {
+                        "label": "Tocantins",
+                        "value": "TO"
+                      }
+                    ],
+                    "required": true
+                  }
+                },
+                {
+                  "key": "documento-proprietario",
+                  "type": "next-upload",
+                  "templateOptions": {
+                    "label": "Documentos do Vencedor (Comprovante de Residência e Cópia do CPF/ RG/CNH, e Contrato Social quando necessário",
+                    "placeholder": "",
+                    "type": "text"
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "contratadoq",
+                  "type": "radio",
+                  "templateOptions": {
+                    "label": "Vencedor foi contratado?",
+                    "options": [
+                      {
+                        "label": "Sim",
+                        "value": "Sim"
+                      },
+                      {
+                        "label": "Não (em caso de negativa, adicionar segundo colocado para avaliação)",
+                        "value": "Não"
+                      }
+                    ],
+                    "required": true
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "proprietario",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Vencedor do certame",
+              "btnAddText": "Vencedor do certame",
+              "required": true
+            },
+            "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+            "fieldArray": {
+              "fieldGroup": [
+                {
+                  "key": "nome-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Nome do Vencedor",
+                    "required": true
+                  },
+                  "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                },
+                {
+                  "key": "cpfcnpj-proprietario",
+                  "type": "next-cpf-cnpj",
+                  "templateOptions": {
+                    "label": "CPF/CNPJ do Vencedor",
+                    "omitirCrea": true,
+                    "required": true
+                  },
+                  "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required, Validators.minLength(14)])\\n\\t\\t}"
+                },
+                {
+                  "key": "cel-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Telefone/Celular do Vencedor",
+                    "required": true,
+                    "mask": "(00) 0000-00009"
+                  },
+                  "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+                },
+                {
+                  "key": "email-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Email do Vencedor",
+                    "required": true
+                  },
+                  "validators": {
+                    "validation": [
+                      "email"
+                    ]
+                  }
+                },
+                {
+                  "key": "cep-proprietario",
+                  "type": "next-input-data",
+                  "wrappers": [
+                    "form-field",
+                    "integrations"
+                  ],
+                  "templateOptions": {
+                    "label": "CEP do Vencedor",
+                    "mask": "99999-999",
+                    "idIntegration": "60bf6970f5ace0000afcd57f",
+                    "saveIntegrationResponse": true,
+                    "required": true,
+                    "hideData": true
+                  }
+                },
+                {
+                  "key": "rua-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Endereço Comercial do Vencedor",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||rua-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.logradouro ) : '' : '' : '' "
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "numero-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Nº Comercial do Vencedor",
+                    "required": true
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "bairro-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Bairro do Vencedor",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||bairro-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.bairro ) : '' : '' : '' "
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "cidade-proprietario",
+                  "type": "input",
+                  "templateOptions": {
+                    "label": "Cidade do Vencedor",
+                    "required": true
+                  },
+                  "expressionProperties": {
+                    "model|||cidade-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.localidade ) : '' : '' : '' "
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "uf-proprietario",
+                  "type": "select",
+                  "templateOptions": {
+                    "label": "UF do Vencedor",
+                    "options": [
+                      {
+                        "label": "Acre",
+                        "value": "AC"
+                      },
+                      {
+                        "label": "Alagoas",
+                        "value": "AL"
+                      },
+                      {
+                        "label": "Amapá",
+                        "value": "AP"
+                      },
+                      {
+                        "label": "Amazonas",
+                        "value": "AM"
+                      },
+                      {
+                        "label": "Bahia",
+                        "value": "BA"
+                      },
+                      {
+                        "label": "Ceará",
+                        "value": "CE"
+                      },
+                      {
+                        "label": "Distrito Federal",
+                        "value": "DF"
+                      },
+                      {
+                        "label": "Espírito Santo",
+                        "value": "ES"
+                      },
+                      {
+                        "label": "Goiás",
+                        "value": "GO"
+                      },
+                      {
+                        "label": "Maranhão",
+                        "value": "MA"
+                      },
+                      {
+                        "label": "Mato Grosso",
+                        "value": "MT"
+                      },
+                      {
+                        "label": "Mato Grosso do Sul",
+                        "value": "MS"
+                      },
+                      {
+                        "label": "Minas Gerais",
+                        "value": "MG"
+                      },
+                      {
+                        "label": "Pará",
+                        "value": "PA"
+                      },
+                      {
+                        "label": "Paraíba",
+                        "value": "PB"
+                      },
+                      {
+                        "label": "Paraná",
+                        "value": "PR"
+                      },
+                      {
+                        "label": "Pernambuco",
+                        "value": "PE"
+                      },
+                      {
+                        "label": "Piauí",
+                        "value": "PI"
+                      },
+                      {
+                        "label": "Rio de Janeiro",
+                        "value": "RJ"
+                      },
+                      {
+                        "label": "Rio Grande do Norte",
+                        "value": "RN"
+                      },
+                      {
+                        "label": "Rio Grande do Sul",
+                        "value": "RS"
+                      },
+                      {
+                        "label": "Rondônia",
+                        "value": "RO"
+                      },
+                      {
+                        "label": "Roraima",
+                        "value": "RR"
+                      },
+                      {
+                        "label": "Santa Catarina",
+                        "value": "SC"
+                      },
+                      {
+                        "label": "São Paulo",
+                        "value": "SP"
+                      },
+                      {
+                        "label": "Sergipe",
+                        "value": "SE"
+                      },
+                      {
+                        "label": "Tocantins",
+                        "value": "TO"
+                      }
+                    ],
+                    "required": true
+                  }
+                },
+                {
+                  "key": "documento-proprietario",
+                  "type": "next-upload",
+                  "templateOptions": {
+                    "label": "Documentos do Vencedor (Comprovante de Residência e Cópia do CPF/ RG/CNH, e Contrato Social quando necessário",
+                    "placeholder": "",
+                    "type": "text"
+                  }
+                },
+                {
+                  "className": "col-6",
+                  "key": "contratadoq",
+                  "type": "radio",
+                  "templateOptions": {
+                    "label": "Vencedor foi contratado?",
+                    "options": [
+                      {
+                        "label": "Sim",
+                        "value": "Sim"
+                      },
+                      {
+                        "label": "Não (em caso de negativa, adicionar segundo colocado para avaliação)",
+                        "value": "Não"
+                      }
+                    ],
+                    "required": true
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Dados Contratuais - Preencha os Dados abaixo para emissão do contrato entre o município e o fornecedor",
+        "text_action": "Realizou ação",
+        "key": "dados_contratuais",
+        "fieldGroup": [
+          {
+            "key": "objetodaresumo",
+            "type": "next-tiny",
+            "templateOptions": {
+              "label": "Objeto informado na aba resumo",
+              "placeholder": "Placeholder",
+              "focus": "false",
+              "type": "text",
+              "required": true,
+              "readonly": true
+            },
+            "expressionProperties": {
+              "model|||objetodaresumo": "formState.resume.objetogeral "
+            }
+          },
+          {
+            "key": "cpfcnpj-proprietario",
+            "type": "next-cpf-cnpj",
+            "templateOptions": {
+              "label": "CPF/CNPJ do Contratado",
+              "omitirCrea": true,
+              "required": true
+            },
+            "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required, Validators.minLength(14)])\\n\\t\\t}"
+          },
+          {
+            "key": "nomeproprietario",
+            "type": "input",
+            "templateOptions": {
+              "label": "Nome/Razão Social do Contratado",
+              "required": true
+            },
+            "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+          },
+          {
+            "key": "valorcontrato",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Insira o valor geral do contrato",
+              "placeholder": "Ex: R$ 10.000,00 ",
+              "focus": "false",
+              "type": "text",
+              "floatNumber": true,
+              "currency": {
+                "prefix": "R$ ",
+                "thousands": ".",
+                "decimal": ",",
+                "precision": 2,
+                "allowNegative": false
+              }
+            }
+          },
+          {
+            "key": "enderecocontratado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Informe o endereço do contratado:",
+              "placeholder": "Ex: Av. Brasil, 1798, Toledo/PR",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "objetodaresumo",
+            "type": "next-tiny",
+            "templateOptions": {
+              "label": "Objeto informado na aba resumo",
+              "placeholder": "Placeholder",
+              "focus": "false",
+              "type": "text",
+              "required": true,
+              "readonly": true
+            },
+            "expressionProperties": {
+              "model|||objetodaresumo": "formState.resume.objetogeral "
+            }
+          },
+          {
+            "key": "cpfcnpj-proprietario",
+            "type": "next-cpf-cnpj",
+            "templateOptions": {
+              "label": "CPF/CNPJ do Contratado",
+              "omitirCrea": true,
+              "required": true
+            },
+            "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required, Validators.minLength(14)])\\n\\t\\t}"
+          },
+          {
+            "key": "nomeproprietario",
+            "type": "input",
+            "templateOptions": {
+              "label": "Nome/Razão Social do Contratado",
+              "required": true
+            },
+            "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+          },
+          {
+            "key": "valorcontrato",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Insira o valor geral do contrato",
+              "placeholder": "Ex: R$ 10.000,00 ",
+              "focus": "false",
+              "type": "text",
+              "floatNumber": true,
+              "currency": {
+                "prefix": "R$ ",
+                "thousands": ".",
+                "decimal": ",",
+                "precision": 2,
+                "allowNegative": false
+              }
+            }
+          },
+          {
+            "key": "enderecocontratado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Informe o endereço do contratado:",
+              "placeholder": "Ex: Av. Brasil, 1798, Toledo/PR",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "admmodelo_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": false,
+    "autoConcludeParticipation": true
+  },
+  "tramite": [
+    {
+      "_id": "679a93060df8a10008096a28",
+      "groupId": "admmodelo_modeload"
+    }
+  ],
+  "__v": 0,
+  "city_id": 38
+}

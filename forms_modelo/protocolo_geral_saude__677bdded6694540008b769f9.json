@@ -1,0 +1,1073 @@
+{
+  "_id": "677bdded6694540008b769f9",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "assuntos",
+              "type": "select",
+              "templateOptions": {
+                "placeholder": "-selecione aqui-",
+                "label": "Assunto",
+                "options": [
+                  {
+                    "label": "Marcação de consultas e exames especializados",
+                    "value": "Marcação de consultas e exames especializados"
+                  },
+                  {
+                    "label": "Solicitação de medicamentos básicos e especializados",
+                    "value": "Solicitação de medicamentos básicos e especializados"
+                  },
+                  {
+                    "label": "Solicitação de medicamentos de alto custo",
+                    "value": "Solicitação de medicamentos de alto custo"
+                  },
+                  {
+                    "label": "Transporte de pacientes (Tratamento Fora de Domicílio - TFD)",
+                    "value": "Transporte de pacientes (Tratamento Fora de Domicílio - TFD)"
+                  },
+                  {
+                    "label": "Solicitação de palestras ou campanhas educativas",
+                    "value": "Solicitação de palestras ou campanhas educativas"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {
+                "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Assunto",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Assunto</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Selecione o assunto de acordo com a sua necessidade.</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {
+            "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+          }
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/ CNPJ",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Notificação",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "documento_requerente",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos (Carteira de Identidade e CPF, se pessoa física, OU CNPJ e contrato social, se pessoa jurídica)",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_solicitacao",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de Solicitação",
+                "options": [
+                  {
+                    "value": "Consulta"
+                  },
+                  {
+                    "value": "Exame"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Marcação de consultas e exames especializados'"
+            },
+            {
+              "key": "solicitacao",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Descrição da Solicitação",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+              }
+            },
+            {
+              "key": "especialidade",
+              "type": "select",
+              "templateOptions": {
+                "label": "Especialidade médica",
+                "options": [
+                  {
+                    "label": "Clínica Geral",
+                    "value": "Clínica Geral"
+                  },
+                  {
+                    "label": "Pediatria",
+                    "value": "Pediatria"
+                  },
+                  {
+                    "label": "Ginecologia e Obstetrícia",
+                    "value": "Ginecologia e Obstetrícia"
+                  },
+                  {
+                    "label": "Psiquiatria",
+                    "value": "Psiquiatria"
+                  },
+                  {
+                    "label": "Dermatologia",
+                    "value": "Dermatologia"
+                  },
+                  {
+                    "label": "Cardiologia",
+                    "value": "Cardiologia"
+                  },
+                  {
+                    "label": "Endocrinologia",
+                    "value": "Endocrinologia"
+                  },
+                  {
+                    "label": "Infectologia",
+                    "value": "Infectologia"
+                  },
+                  {
+                    "label": "Geriatria",
+                    "value": "Geriatria"
+                  },
+                  {
+                    "label": "Pneumologia",
+                    "value": "Pneumologia"
+                  },
+                  {
+                    "label": "Neurologia",
+                    "value": "Neurologia"
+                  },
+                  {
+                    "label": "Reumatologia",
+                    "value": "Reumatologia"
+                  },
+                  {
+                    "label": "Gastroenterologia",
+                    "value": "Gastroenterologia"
+                  },
+                  {
+                    "label": "Cirurgia Geral",
+                    "value": "Cirurgia Geral"
+                  },
+                  {
+                    "label": "Ortopedia e Traumatologia",
+                    "value": "Ortopedia e Traumatologia"
+                  },
+                  {
+                    "label": "Cirurgia Obstétrica",
+                    "value": "Cirurgia Obstétrica"
+                  },
+                  {
+                    "label": "Cirurgia Pediátrica",
+                    "value": "Cirurgia Pediátrica"
+                  },
+                  {
+                    "label": "Cirurgia Vascular",
+                    "value": "Cirurgia Vascular"
+                  },
+                  {
+                    "label": "Cirurgia Urológica",
+                    "value": "Cirurgia Urológica"
+                  },
+                  {
+                    "label": "Otorrinolaringologia",
+                    "value": "Otorrinolaringologia"
+                  },
+                  {
+                    "label": "Oftalmologia",
+                    "value": "Oftalmologia"
+                  },
+                  {
+                    "label": "Cirurgia Bucomaxilofacial",
+                    "value": "Cirurgia Bucomaxilofacial"
+                  },
+                  {
+                    "label": "Anestesiologia",
+                    "value": "Anestesiologia"
+                  },
+                  {
+                    "label": "Radiologia e Diagnóstico por Imagem",
+                    "value": "Radiologia e Diagnóstico por Imagem"
+                  },
+                  {
+                    "label": "Patologia Clínica/Medicina Laboratorial",
+                    "value": "Patologia Clínica/Medicina Laboratorial"
+                  },
+                  {
+                    "label": "Fisioterapia",
+                    "value": "Fisioterapia"
+                  },
+                  {
+                    "label": "Nutrição",
+                    "value": "Nutrição"
+                  },
+                  {
+                    "label": "Fonoaudiologia",
+                    "value": "Fonoaudiologia"
+                  },
+                  {
+                    "label": "Hematologia",
+                    "value": "Hematologia"
+                  },
+                  {
+                    "label": "Oncologia",
+                    "value": "Oncologia"
+                  },
+                  {
+                    "label": "Nefrologia",
+                    "value": "Nefrologia"
+                  },
+                  {
+                    "label": "Urologia",
+                    "value": "Urologia"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Marcação de consultas e exames especializados'"
+            },
+            {
+              "key": "exame",
+              "type": "select",
+              "templateOptions": {
+                "label": "Tipo de exame",
+                "options": [
+                  {
+                    "label": "Hemograma completo",
+                    "value": "Hemograma completo"
+                  },
+                  {
+                    "label": "Exame de urina (EAS)",
+                    "value": "Exame de urina (EAS)"
+                  },
+                  {
+                    "label": "Exame de fezes (parasitológico)",
+                    "value": "Exame de fezes (parasitológico)"
+                  },
+                  {
+                    "label": "Glicemia de jejum",
+                    "value": "Glicemia de jejum"
+                  },
+                  {
+                    "label": "Colesterol total e frações",
+                    "value": "Colesterol total e frações"
+                  },
+                  {
+                    "label": "Triglicerídeos",
+                    "value": "Triglicerídeos"
+                  },
+                  {
+                    "label": "Teste de função renal (ureia e creatinina)",
+                    "value": "Teste de função renal (ureia e creatinina)"
+                  },
+                  {
+                    "label": "Exame de TSH e T4 livre",
+                    "value": "Exame de TSH e T4 livre"
+                  },
+                  {
+                    "label": "Exame de PSA (antígeno prostático específico)",
+                    "value": "Exame de PSA (antígeno prostático específico)"
+                  },
+                  {
+                    "label": "Eletrocardiograma (ECG)",
+                    "value": "Eletrocardiograma (ECG)"
+                  },
+                  {
+                    "label": "Ecocardiograma",
+                    "value": "Ecocardiograma"
+                  },
+                  {
+                    "label": "Raio-X",
+                    "value": "Raio-X"
+                  },
+                  {
+                    "label": "Ultrassonografia",
+                    "value": "Ultrassonografia"
+                  },
+                  {
+                    "label": "Tomografia computadorizada",
+                    "value": "Tomografia computadorizada"
+                  },
+                  {
+                    "label": "Ressonância magnética",
+                    "value": "Ressonância magnética"
+                  },
+                  {
+                    "label": "Densitometria óssea",
+                    "value": "Densitometria óssea"
+                  },
+                  {
+                    "label": "Mamografia",
+                    "value": "Mamografia"
+                  },
+                  {
+                    "label": "Papanicolau (citologia cervical)",
+                    "value": "Papanicolau (citologia cervical)"
+                  },
+                  {
+                    "label": "Exame de sorologia para doenças infecciosas",
+                    "value": "Exame de sorologia para doenças infecciosas"
+                  },
+                  {
+                    "label": "Exame de sangue oculto nas fezes",
+                    "value": "Exame de sangue oculto nas fezes"
+                  },
+                  {
+                    "label": "Teste de tolerância à glicose (curva glicêmica)",
+                    "value": "Teste de tolerância à glicose (curva glicêmica)"
+                  },
+                  {
+                    "label": "Teste de HIV",
+                    "value": "Teste de HIV"
+                  },
+                  {
+                    "label": "Teste de hepatites virais",
+                    "value": "Teste de hepatites virais"
+                  },
+                  {
+                    "label": "Teste de gravidez (beta HCG)",
+                    "value": "Teste de gravidez (beta HCG)"
+                  },
+                  {
+                    "label": "Teste de coagulação (TP e TTPA)",
+                    "value": "Teste de coagulação (TP e TTPA)"
+                  },
+                  {
+                    "label": "Exame de função hepática (TGO, TGP, bilirrubinas)",
+                    "value": "Exame de função hepática (TGO, TGP, bilirrubinas)"
+                  },
+                  {
+                    "label": "Eletroencefalograma (EEG)",
+                    "value": "Eletroencefalograma (EEG)"
+                  },
+                  {
+                    "label": "Espirometria (exame de função pulmonar)",
+                    "value": "Espirometria (exame de função pulmonar)"
+                  },
+                  {
+                    "label": "Teste ergométrico (teste de esforço)",
+                    "value": "Teste ergométrico (teste de esforço)"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipo_solicitacao || model.tipo_solicitacao !== 'Exame'"
+            },
+            {
+              "key": "medicamentoBasicoEspecializado",
+              "type": "select",
+              "templateOptions": {
+                "label": "Medicamento básico ou especializado solicitado",
+                "required": true,
+                "focus": "false",
+                "options": [
+                  {
+                    "label": "Opção 1",
+                    "value": "Opção 1"
+                  },
+                  {
+                    "label": "Opção 2",
+                    "value": "Opção 2"
+                  }
+                ]
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Solicitação de medicamentos básicos e especializados'"
+            },
+            {
+              "key": "medicamentoAltoCusto",
+              "type": "select",
+              "templateOptions": {
+                "label": "Medicamento de alto custo solicitado",
+                "required": true,
+                "focus": "false",
+                "options": [
+                  {
+                    "label": "Opção 1",
+                    "value": "Opção 1"
+                  },
+                  {
+                    "label": "Opção 2",
+                    "value": "Opção 2"
+                  }
+                ]
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Solicitação de medicamentos de alto custo'"
+            },
+            {
+              "key": "cidadeTratamento",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome da cidade de realização do tratamento",
+                "required": true,
+                "type": "text",
+                "focus": "false"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Transporte de pacientes (Tratamento Fora de Domicílio - TFD)'"
+            },
+            {
+              "key": "ufTratamento",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "UF da cidade de realização do tratamento",
+                "required": true,
+                "type": "text",
+                "focus": "false"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Transporte de pacientes (Tratamento Fora de Domicílio - TFD)'"
+            },
+            {
+              "className": "col-6",
+              "key": "dataIda",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Data de ida",
+                "required": true,
+                "focus": "false"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Transporte de pacientes (Tratamento Fora de Domicílio - TFD)'"
+            },
+            {
+              "className": "col-6",
+              "key": "dataRetorno",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Data de retorno",
+                "required": true,
+                "focus": "false"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Transporte de pacientes (Tratamento Fora de Domicílio - TFD)'"
+            },
+            {
+              "key": "nomeTratamento",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Tratamento a ser/sendo realizado",
+                "required": true,
+                "type": "text",
+                "focus": "false"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Transporte de pacientes (Tratamento Fora de Domicílio - TFD)'"
+            },
+            {
+              "key": "nomeHospital",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do hospital em que o tratamento é feito",
+                "required": true,
+                "type": "text",
+                "focus": "false"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Transporte de pacientes (Tratamento Fora de Domicílio - TFD)'"
+            },
+            {
+              "key": "cidPatologia",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CID da patologia a ser tratada/em tratamento",
+                "required": true,
+                "type": "text",
+                "focus": "false"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Transporte de pacientes (Tratamento Fora de Domicílio - TFD)' && model.assuntos !== 'Solicitação de medicamentos básicos e especializados' && model.assuntos !== 'Solicitação de medicamentos de alto custo'"
+            },
+            {
+              "key": "anexoRequisicaoMedica",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Anexo da requisição médica",
+                "required": true,
+                "focus": "false"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Transporte de pacientes (Tratamento Fora de Domicílio - TFD)' && model.assuntos !== 'Solicitação de medicamentos básicos e especializados' && model.assuntos !== 'Solicitação de medicamentos de alto custo'"
+            },
+            {
+              "key": "localAcao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Local da ação",
+                "required": true,
+                "focus": "false",
+                "type": "text"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Solicitação de palestras ou campanhas educativas'"
+            },
+            {
+              "className": "col-6",
+              "key": "dataInicioAcao",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Data de início da ação",
+                "required": true,
+                "focus": "false"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Solicitação de palestras ou campanhas educativas'"
+            },
+            {
+              "className": "col-6",
+              "key": "dataFinalAcao",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Data final da ação",
+                "required": true,
+                "focus": "false"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Solicitação de palestras ou campanhas educativas'"
+            },
+            {
+              "key": "turnoAcao",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Turno da ação",
+                "options": [
+                  {
+                    "value": "Manhã",
+                    "label": "Manhã"
+                  },
+                  {
+                    "value": "Tarde",
+                    "label": "Tarde"
+                  },
+                  {
+                    "value": "Noite",
+                    "label": "Noite"
+                  }
+                ],
+                "required": true,
+                "focus": "false"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Solicitação de palestras ou campanhas educativas'"
+            },
+            {
+              "key": "horarioManha",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Horário pela manhã",
+                "required": true,
+                "type": "text",
+                "focus": "false"
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model['turnoAcao'] ? model['turnoAcao']['Manhã'] == true : false"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "horarioTarde",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Horário pela tarde",
+                "required": true,
+                "type": "text",
+                "focus": "false"
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model['turnoAcao'] ? model['turnoAcao']['Tarde'] == true : false"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "horarioNoite",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Horário pela noite",
+                "required": true,
+                "type": "text",
+                "focus": "false"
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model['turnoAcao'] ? model['turnoAcao']['Noite'] == true : false"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "assuntoAcao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Assunto da ação",
+                "required": true,
+                "focus": "false",
+                "type": "text"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Solicitação de palestras ou campanhas educativas'"
+            },
+            {
+              "key": "tiposProfissionaisSolicitados",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Tipos de profissionais solicitados",
+                "required": true,
+                "focus": "false",
+                "type": "text"
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.assuntos || model.assuntos !== 'Solicitação de palestras ou campanhas educativas'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Descrição da Solicitação",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Descrição da Solicitação</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Descreva de maneira sucinta a sua solicitação.</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {
+            "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+          }
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "useNewSidebarForwarding": true,
+    "experimentalMode": true,
+    "devolverAoUltimo": true,
+    "bpmEditProperties": true,
+    "title": "Protocolo Geral | Saúde",
+    "descricao": "",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "PGS",
+    "newSignatureStrategy": true,
+    "templates": [],
+    "form_tramites": [
+      {
+        "nome": "Observações",
+        "text_action": "Realizou ação",
+        "key": "observacao",
+        "fieldGroup": [
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_pref",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_pref",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Taxa de Aprovação",
+        "text_action": "Emitiu Taxa de Aprovação",
+        "key": "taxasProcesso",
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado e então selecione a opção 'Enviar para Análise' para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "permission": "taxas",
+        "type": "taxa",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado e então selecione a opção 'Enviar para Análise' para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Obras",
+    "initialReceiverConfig": {
+      "type": "single",
+      "possibleReceivers": [
+        "saude_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "allowMultipleForwarding": true
+  },
+  "tramite": [
+    {
+      "_id": "677bde9cd7580f0008e747e8",
+      "groupId": "saude_modeload"
+    }
+  ],
+  "__v": 0,
+  "city_id": 38,
+  "options": {
+    "showStepViewControl": false
+  },
+  "step": {}
+}

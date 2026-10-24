@@ -1,0 +1,969 @@
+{
+  "_id": "688b6fd6b996c70008a728cd",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "* Remetente (ESCONDIDO) *",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaração de Veracidade",
+                "options": [
+                  {
+                    "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": "true",
+              "templateOptions": {
+                "label": "* Destinatário (ESCONDIDO) *",
+                "required": "true",
+                "columns": "12",
+                "readonly": false,
+                "addressee": {
+                  "type": "single",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "meioambiente_modeload",
+                      "id": "676d993e3507ea0008067058",
+                      "label": "Secretaria de Meio Ambiente"
+                    }
+                  ]
+                },
+                "placeholder": "",
+                "focus": "false",
+                "disabled": "false",
+                "sensitiveField": false,
+                "multiple": false,
+                "hidden": "true"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "Declaração de Veracidade",
+            "textHtml": "<div class=\"p-4 border-l-4 border-blue-500 text-sm text-blue-800 font-medium leading-6 bg-blue-100\">\n        <div class=\"\" >\n        <span class=\"p-1 rounded bg-blue-500 text-white  \">Informação</span>\n        </div>\n        <ol class=\"pl-4\"><br>\n        <li align = \"justify\">Siga as dicas e instruções contidas nos textos laterais para o correto preenchimento da sua solicitação;\n        </li>\n        <li align = \"justify\">Caso seja seu primeiro pedido na Aprova e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <a target='_blank' class=\"font-weight-bold\" href='https://aprova.movidesk.com/kb/'><strong>Ajuda</strong></a>. Você também pode entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;\n        </li>\n        </ol>\n        </div><br><br>\n        \n            <div class=\"p-4 border-l-4 border-red-500 text-sm text-red-800 font-medium leading-6 bg-red-100\">\n                    <div class=\"\" >\n                    <span class=\"p-1 rounded bg-red-500 text-white  \">Informação</span>\n                    </div>\n                    <ol class=\"pl-4\"><br>\n                <li align = \"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato com a <strong>Gerência de Vigilância Sanitária - GVS</strong> através do Whatsapp: <a target='_blank' class=\"font-weight-bold\" href=\"https://wa.me/556935363196\">69 3536-3196</a>, eles saberão te auxiliar corretamente.</li>             \n                    </ol>\n                    </div>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "user_dados",
+              "className": "col-0",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "* User dados (escondido) *",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome ",
+                "required": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.user_dados?.user?.user_metadata.name"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "E-mail ",
+                "required": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.user_dados?.user?.email"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "className": "col-6",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/CNPJ ",
+                "mask": "000.000.000-009",
+                "required": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.user_dados?.user?.user_metadata.cpf",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' "
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "className": "col-6",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone ",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "documento_requerente",
+              "className": "col-12",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento de Identificação (RG, CPF, CNH, Carteira Profissional, etc) ",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.vinculo_requerente || model.vinculo_requerente === 'Proprietário/Sócio' "
+            },
+            {
+              "key": "vinculo_requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de vínculo ",
+                "options": [
+                  {
+                    "label": "Proprietário/Sócio",
+                    "value": "Proprietário/Sócio"
+                  },
+                  {
+                    "label": "Procurador",
+                    "value": "Procurador"
+                  }
+                ],
+                "focus": "false",
+                "placeholder": "--selecione--",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "doc_procurador",
+              "className": "col-12",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Procuração",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.vinculo_requerente || model.vinculo_requerente === 'Proprietário/Sócio' "
+            },
+            {
+              "key": "documento_propriedade",
+              "className": "col-12",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento de propriedade oficial do imóvel (Escritura pública, Título de domínio, Certidão Inteiro Teor, Declaração de Posse do Incra, contratos de locação com firma reconhecida em cartorio (em cadeia domínial acompnahado de documentação oficial do imóvel)., contrato de comodato, CAR se for o caso) ",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do peticionante",
+            "subtitle": "Dados do peticionante do processo",
+            "textHtml": "<div class=\"p-4 border-l-4 border-blue-500 text-sm text-blue-800 font-medium leading-6 bg-blue-100\">\n        <div class=\"\" >\n        <span class=\"p-1 rounded bg-blue-500 text-white  \">Informação</span>\n        </div>\n        <ol class=\"pl-4\"><br>\n        <li align = \"\">O requerente é o <b>Usuário logado no sistema</b>, os dados serão preenchidos automaticamente de acordo com o cadastro do usuário, portanto é de extrema importância que você mantenha seu cadastro sempre atualizado junto aos sistemas da Prefeitura.\n        </li>\n        </ol>\n        </div>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "endereco_cep",
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP",
+                "placeholder": "Ex: 00000-000",
+                "mask": "00000-000",
+                "required": true,
+                "hideData": true,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true,
+                "triggerOnlyWhenEditing": true,
+                "focus": false,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "status_integracaocep_imovel",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                "focus": "false",
+                "label": "* Aviso status CEP * ",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.endereco_cep?.status == 'LOADING' "
+              },
+              "hideExpression": " model.endereco_cep?.status !== 'LOADING'  || !model.endereco_cep?.input"
+            },
+            {
+              "className": "col-12",
+              "key": "erro_integracaocep_imovel",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                "focus": "false",
+                "label": "* Aviso erro CEP * ",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "(model.endereco_cep?.status !== 'SUCCESS') || (model.endereco_cep?.data?.response?.erro === true) || (model.endereco_cep?.input?.length === 8 && model.endereco_cep?.status === 'KNOWN_FAILED') "
+              },
+              "hideExpression": "(model.endereco_cep?.status === 'SUCCESS' && model.endereco_cep?.data?.response?.erro !== true) || (model.endereco_cep?.input?.length !== 8 && model.endereco_cep?.status !== 'KNOWN_FAILED') || !model.endereco_cep.input "
+            },
+            {
+              "className": "col-8",
+              "key": "logradouro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Logradouro",
+                "required": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {
+                "model|||logradouro_imovel": "model.logradouro_imovel ? model.logradouro_imovel : model.endereco_cep?.data?.response?.result?.logradouro"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-4",
+              "key": "numero_imovel",
+              "type": "input",
+              "templateOptions": {
+                "label": "Número",
+                "placeholder": "Ex: S/N",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": " !model.endereco_cep?.input "
+            },
+            {
+              "key": "complemento",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "ponto_ref",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Ponto de Referência",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "bairro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Bairro",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "placeholder": "",
+                "focus": false
+              },
+              "expressionProperties": {
+                "model|||bairro_imovel": "model.bairro_imovel ? model.bairro_imovel : model.endereco_cep?.data?.response?.result?.bairro"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "key": "tel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 0000-0000",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||mask": "model.tel?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              }
+            },
+            {
+              "key": "email",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-6",
+              "key": "cidade_imovel",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Município",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": false,
+                "placeholder": "",
+                "focus": false,
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||cidade_imovel": "model.cidade_imovel ? model.cidade_imovel : model.endereco_cep?.data?.response?.result?.localidade"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-6",
+              "key": "uf_imovel",
+              "type": "next-input",
+              "resetOnHide": true,
+              "templateOptions": {
+                "label": "Estado",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": false
+              },
+              "expressionProperties": {
+                "model|||uf_imovel": "model.uf_imovel ? model.uf_imovel : model.endereco_cep?.data?.response?.result?.uf"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "wrappers": [
+                "mirror"
+              ],
+              "key": "mapa",
+              "type": "next-mapa",
+              "templateOptions": {
+                "label": "Localização",
+                "placeholder": "Placeholder",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "mapsOptions": {
+                  "center": {
+                    "lat": -9.903493,
+                    "lng": -63.033202
+                  },
+                  "zoom": 15
+                }
+              },
+              "expressionProperties": {
+                "templateOptions|||readonly": "((field.templateOptions.whitelist || []).length > 0 && ![formState.loggedUserId, ...(formState.sectors || []), ...(formState.groups || [])].some((key) => field.templateOptions.whitelist.includes(key))) || undefined"
+              }
+            },
+            {
+              "wrappers": [
+                "mirror"
+              ],
+              "key": "latitude",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Latitude",
+                "readonly": true,
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||latitude": "model.mapa?.lat"
+              }
+            },
+            {
+              "wrappers": [
+                "mirror"
+              ],
+              "key": "longitude",
+              "type": "next-input",
+              "templateOptions": {
+                "required": false,
+                "readonly": true,
+                "label": "Longitude",
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||longitude": "model.mapa?.lng"
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados de Localização",
+            "subtitle": "Novo subtitulo",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step",
+            "mirror"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_solicitacao",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Tipo de Solicitação",
+                "focus": "false",
+                "btnAddText": "Solicitação",
+                "required": true
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "tipo_autorizacao",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Tipo de autorização ",
+                      "options": [
+                        {
+                          "label": "Poda",
+                          "value": "Poda"
+                        },
+                        {
+                          "label": "Corte",
+                          "value": "Corte"
+                        },
+                        {
+                          "label": "Derrubada",
+                          "value": "Derrubada"
+                        },
+                        {
+                          "label": "Limpeza de capoeira",
+                          "value": "Limpeza"
+                        }
+                      ],
+                      "focus": "false",
+                      "placeholder": "--selecione--",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "especie",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Espécie",
+                      "placeholder": "Espécie da árvore",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "quantidade",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Quantidade",
+                      "placeholder": "Quantidade de árvores",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "situacao_perigo",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Situação de Perigo",
+                      "options": [
+                        {
+                          "label": "Eminente",
+                          "value": "Eminente"
+                        },
+                        {
+                          "label": "Presumível",
+                          "value": "Presumivel"
+                        },
+                        {
+                          "label": "Outros",
+                          "value": "Outros"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true,
+                      "placeholder": "",
+                      "disabled": false
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "local",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Localização da(s) árvore(s)",
+                      "options": [
+                        {
+                          "label": "Calçada",
+                          "value": "Calçada"
+                        },
+                        {
+                          "label": "Quintal",
+                          "value": "Quintal"
+                        },
+                        {
+                          "label": "Alameda",
+                          "value": "Alameda"
+                        },
+                        {
+                          "label": "Outros",
+                          "value": "Outros"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true,
+                      "placeholder": "",
+                      "disabled": false
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "motivo",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Motivo da solicitação",
+                      "placeholder": "Descrever o motivo da solicitação",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "type": "next-upload",
+                    "wrappers": [
+                      "lume-ai"
+                    ],
+                    "templateOptions": {
+                      "hideNestedField": true,
+                      "label": "Relatório fotográfico",
+                      "required": true,
+                      "hiddenTemp": false,
+                      "readonly": false,
+                      "sensitiveField": false,
+                      "agentId": "ea6dea98-e04d-490a-9d83-80a0100cfda9",
+                      "extends": [
+                        "pdf",
+                        "PDF",
+                        "png",
+                        "PNG",
+                        "jpg",
+                        "JPG"
+                      ]
+                    },
+                    "key": "relatorio_fotografico_lume",
+                    "className": "col-12",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "analise_fotos",
+                    "className": "col-12",
+                    "type": "next-ck",
+                    "readonly": true,
+                    "templateOptions": {
+                      "label": "Analise Relatório fotográfico anexado",
+                      "required": true,
+                      "hiddenTemp": false,
+                      "readonly": true,
+                      "sensitiveField": false
+                    },
+                    "expressionProperties": {
+                      "model|||analise_fotos": "model?.relatorio_fotografico_lume?.lume_data?.extractedData?.descricao_geral"
+                    }
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Solicitação",
+            "subtitle": "Tipo de solicitação (poda, corte, derrubada e etc)",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos complementares",
+                "focus": "false",
+                "btnAddText": "documentos complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "className": "col-8",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "className": "col-4",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento",
+                      "required": true,
+                      "extends": [
+                        "pdf",
+                        "PDF",
+                        "shp",
+                        "SHP",
+                        "dwg",
+                        "DWG",
+                        "gpkg",
+                        "GPKG",
+                        "JPG",
+                        "jpg",
+                        "JPEG",
+                        "jpeg",
+                        "PNG",
+                        "png",
+                        "IMG",
+                        "img"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "Novo subtitulo",
+            "textHtml": "<div class=\"p-4 border-l-4 border-blue-500 text-sm text-blue-800 font-medium leading-6 bg-blue-100\">\n        <div class=\"\" >\n        <span class=\"p-1 rounded bg-blue-500 text-white  \">Informação</span>\n        </div>\n        <ol class=\"pl-4\"><br>\n        <li align = \"\">Se houverem documentos complementares, anexar aqui.\n        </li>\n        </ol>\n        </div>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "step": {
+    "config": [],
+    "shared": {
+      "automatic": [],
+      "tab": [],
+      "action": [
+        {
+          "key": "print/protocol",
+          "reason": "O comprovante será disponibilizado assim que a solicitação for validada pela prefeitura",
+          "expression": "({ resume, activities, signatures, documents, user, process }) => {\n  return (activities.card_analise_inicial?.status_analise == 'Aprovada' && activities.taxasProcesso?.taxas_processo[0]?.status == '2');\n}\n"
+        }
+      ]
+    }
+  },
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Lume - Autorização para Corte, Poda ou Derrubada de Árvores",
+    "descricao": "",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "SIS",
+    "newSignatureStrategy": true,
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Licença Sanitária",
+        "template": "JoaoPessoaPB/licenca_interesse_saude.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "possui_prazo_validade": false,
+        "internal": false,
+        "viewed": true
+      },
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Peça gráfica geral",
+        "template": "JoaoPessoaPB/prancha_licenca_sanitaria_geral.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "possui_prazo_validade": false,
+        "internal": false,
+        "wk": true,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Análise Inicial",
+        "text_action": "Realizou ação",
+        "key": "card_analise_inicial",
+        "fieldGroup": [
+          {
+            "key": "info_preenchimento",
+            "type": "next-html",
+            "templateOptions": {
+              "label": "Preenchimento do card",
+              "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-1 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-blue-800' >Informação</div></div><div>O preenchimento deste card deve ser feito na análise inicial, previamente à emissão da taxa.</div></div><br>",
+              "focus": "false",
+              "type": "text",
+              "readonly": true
+            }
+          },
+          {
+            "key": "status_analise",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Status da análise inicial",
+              "options": [
+                {
+                  "value": "Aprovada"
+                },
+                {
+                  "value": "Necessita de correções"
+                },
+                {
+                  "value": "Reprovada"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "autorizacao_obs",
+            "type": "next-wig",
+            "templateOptions": {
+              "label": "Observação para documento de autorização",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "info_preenchimento",
+            "type": "next-html",
+            "templateOptions": {
+              "label": "Preenchimento do card",
+              "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-1 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-blue-800' >Informação</div></div><div>O preenchimento deste card deve ser feito na análise inicial, previamente à emissão da taxa.</div></div><br>",
+              "focus": "false",
+              "type": "text",
+              "readonly": true
+            }
+          },
+          {
+            "key": "status_analise",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Status da análise inicial",
+              "options": [
+                {
+                  "value": "Aprovada"
+                },
+                {
+                  "value": "Necessita de correções"
+                },
+                {
+                  "value": "Reprovada"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "autorizacao_obs",
+            "type": "next-wig",
+            "templateOptions": {
+              "label": "Observação para documento de autorização",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Observações Gerais",
+        "text_action": "Realizou ação",
+        "key": "card_obs",
+        "form": [
+          {
+            "key": "obs_gerais",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações para a Licença Sanitária",
+              "placeholder": "Insira aqui qualquer observação que deva constar na Licença Sanitária.",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "obs_gerais",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações para a Licença Sanitária",
+              "placeholder": "Insira aqui qualquer observação que deva constar na Licença Sanitária.",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "experimentalMode": true,
+    "initialReceiverConfig": {
+      "type": "single",
+      "possibleReceivers": [
+        "meioambiente_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": false,
+    "autoConcludeParticipation": true
+  },
+  "city_id": 38,
+  "tramite": [
+    {
+      "_id": "679b6e1067461500081fbb4e",
+      "groupId": "visaariquemes_implantacaoad"
+    }
+  ],
+  "__v": 0,
+  "options": {
+    "showStepViewControl": false
+  }
+}

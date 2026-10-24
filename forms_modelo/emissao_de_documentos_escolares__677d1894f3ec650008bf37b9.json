@@ -1,0 +1,737 @@
+{
+  "_id": "677d1894f3ec650008bf37b9",
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_documento",
+              "type": "select",
+              "templateOptions": {
+                "label": "Tipo de documento",
+                "options": [
+                  {
+                    "label": "Boletim escolar",
+                    "value": "Boletim escolar"
+                  },
+                  {
+                    "label": "Histórico escolar",
+                    "value": "Histórico escolar"
+                  },
+                  {
+                    "label": "Declaração de matrícula",
+                    "value": "Declaração de matrícula"
+                  },
+                  {
+                    "label": "Declaração de frequência",
+                    "value": "Declaração de frequência"
+                  },
+                  {
+                    "label": "Certificado de conclusão",
+                    "value": "Certificado de conclusão"
+                  },
+                  {
+                    "label": "Relatório pedagógico",
+                    "value": "Relatório pedagógico"
+                  },
+                  {
+                    "label": "Certificados de participação em eventos escolares",
+                    "value": "Certificados de participação em eventos escolares"
+                  },
+                  {
+                    "label": "Transferência escolar",
+                    "value": "Transferência escolar"
+                  },
+                  {
+                    "label": "Mudança de turno",
+                    "value": "Mudança de turno"
+                  },
+                  {
+                    "label": "Pedidos judiciais",
+                    "value": "Pedidos judiciais"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Tipo de Documento",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome Completo",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? '00.000.000/0000-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "E-mail para Correspondência",
+                "required": false
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone para contato",
+                "placeholder": "(00) 00000-0000",
+                "required": false,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "documento_requerente",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento Pessoal (com foto e CPF)",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "nome_mae",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome da mãe",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "nome_pai",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do pai",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do(a) Aluno(a)",
+            "subtitle": "",
+            "textHtml": "",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "valid_responsavel_mae",
+              "type": "radio",
+              "templateOptions": {
+                "label": "A mãe é a responsável legal pelo(a) aluno(a)?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "valid_responsavel_pai",
+              "type": "radio",
+              "templateOptions": {
+                "label": "O pai é o responsável legal pelo(a) aluno(a)?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "hideExpression": "!model.valid_responsavel_mae || model.valid_responsavel_mae == 'Sim'"
+            },
+            {
+              "key": "nome_responsavel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do(a) responsável pelo(a) aluno(a)",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "!model.valid_responsavel_pai || model.valid_responsavel_pai == 'Sim'"
+            },
+            {
+              "key": "email_responsavel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "E-mail para Correspondência",
+                "required": false
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_responsavel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone para contato",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do(a) Responsável pelo(a) aluno(a)",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "nome_instituicao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome da escola",
+                "required": true
+              }
+            },
+            {
+              "key": "tipo_ensino",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de Ensino",
+                "options": [
+                  {
+                    "value": "Ensino Infantil"
+                  },
+                  {
+                    "value": "Ensino Fundamental"
+                  },
+                  {
+                    "value": "Ensino Médio"
+                  },
+                  {
+                    "value": "EJA"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "ano",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Ano Escolar",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||options": "model.tipo_ensino === 'Ensino Infantil'  ? [{ value: 'Berçário' }, { value: 'Maternal' }, { value: 'Pré-escola' }] : ['1º', '2º', '3º', '4º', '5º', '6º', '7º', '8º', '9º'].slice(0, model.tipo_ensino === 'Ensino Médio' ? 3 : 9).map(v => ({ value: v }))"
+              },
+              "hideExpression": "!model.tipo_ensino || model.tipo_ensino === 'EJA'"
+            },
+            {
+              "key": "turma",
+              "type": "select",
+              "templateOptions": {
+                "label": "Turma",
+                "options": [
+                  {
+                    "label": "A",
+                    "value": "A"
+                  },
+                  {
+                    "label": "B",
+                    "value": "B"
+                  },
+                  {
+                    "label": "C",
+                    "value": "C"
+                  },
+                  {
+                    "label": "D",
+                    "value": "D"
+                  },
+                  {
+                    "label": "E",
+                    "value": "E"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "hideExpression": "!model.tipo_documento || model.tipo_documento == 'Declaração de matrícula'"
+            },
+            {
+              "key": "turno",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Turno escolar atual",
+                "options": [
+                  {
+                    "value": "Matutino"
+                  },
+                  {
+                    "value": "Vespertino"
+                  },
+                  {
+                    "value": "Noturno"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "turno_solicitado",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Turno escolar solicitado",
+                "options": [
+                  {
+                    "value": "Matutino"
+                  },
+                  {
+                    "value": "Vespertino"
+                  },
+                  {
+                    "value": "Noturno"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "hideExpression": "!model.tipo_documento || model.tipo_documento !== 'Mudança de turno'"
+            },
+            {
+              "key": "justificativa",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Justificativa da transferência escolar",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "!model.tipo_documento || model.tipo_documento !== 'Transferência escolar'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados da Solicitação",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados da Solicitação</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Insira ao lado as informações escolares necessárias para emissão do documento.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "comprovante_residencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovante de residência do(a) aluno(a)",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "hideExpression": "!model.tipo_documento || model.tipo_documento == 'Transferência escolar'"
+            },
+            {
+              "key": "atestado_matricula",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Atestado de Matrícula",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "hideExpression": "!model.tipo_documento || model.tipo_documento == 'Declaração de matrícula'"
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Anexos",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "infos_gerais",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Informações Complementares",
+                "placeholder": "Escreva sobre a solicitação",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    }
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Informações Complementares",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "67d82f81068a3a0008fbb34b"
+    }
+  ],
+  "step": {},
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Emissão de documentos escolares",
+    "descricao": "Processo para solicitação de emissão de documentos escolares.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "EDE",
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "useNewSidebarForwarding": true,
+    "sendToEmailExpression": "Array.from(new Set([...(context.proprietario?.map((RL) => RL.email_proprietario ) || []), ...(context['requerente']?.map((RL) => RL.email_requerente) || []) ]))",
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Documento",
+        "template": "ModeloAD/documento_escolar.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Dados para emissão de documentos pelo Aprova",
+        "text_action": "Realizou ação",
+        "key": "card_docs_aprova",
+        "form": [
+          {
+            "key": "matricula",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Número de matrícula do(a) aluno(a)",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "frequencia",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Frequência",
+              "options": [
+                {
+                  "value": "De acordo com o esperado"
+                },
+                {
+                  "value": "Abaixo do esperado"
+                }
+              ],
+              "focus": "false",
+              "required": false
+            },
+            "hideExpression": "formState.resume.tipo_documento? formState.resume.tipo_documento !== 'Declaração de frequência' : model.frequencia "
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "matricula",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Número de matrícula do(a) aluno(a)",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "frequencia",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Frequência",
+              "options": [
+                {
+                  "value": "De acordo com o esperado"
+                },
+                {
+                  "value": "Abaixo do esperado"
+                }
+              ],
+              "focus": "false",
+              "required": false
+            },
+            "hideExpression": "formState.resume.tipo_documento? formState.resume.tipo_documento !== 'Declaração de frequência' : model.frequencia "
+          }
+        ]
+      },
+      {
+        "nome": "Observações Gerais",
+        "text_action": "Realizou ação",
+        "key": "obs_gerais",
+        "form": [
+          {
+            "key": "obs_geral",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_ai",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "obs_geral",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "anexo_ai",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "educacao_modeload"
+      ]
+    },
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "allowMultipleForwarding": true
+  },
+  "tramite": [
+    {
+      "_id": "65ef4752bc99830008ae23f3",
+      "groupId": "sorocaba_implantacaoad"
+    }
+  ],
+  "__v": 0,
+  "city_id": 38
+}

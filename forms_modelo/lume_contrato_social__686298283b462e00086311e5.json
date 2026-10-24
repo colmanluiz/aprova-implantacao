@@ -1,0 +1,117 @@
+{
+  "_id": "686298283b462e00086311e5",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "sensitiveField": false,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "addressee": {
+                  "type": "single",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "admmodelo_modeload",
+                      "id": "675c980a96ab6200088ea449",
+                      "label": "Secretaria de Administração"
+                    }
+                  ]
+                },
+                "sensitiveField": false,
+                "multiple": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "type": "next-upload",
+              "wrappers": [
+                "lume-ai"
+              ],
+              "templateOptions": {
+                "hideNestedField": true,
+                "label": "Contrato Social (Somente PDF)",
+                "required": true,
+                "agentId": "3c2d50e9-6da6-4874-85b3-6fea7e4da4c4",
+                "columns": "12",
+                "extends": [
+                  "PDF"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "key": "contrato_social_somente_pdf",
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Contrato Social",
+            "subtitle": "\n",
+            "textHtml": "Digite algo aqui",
+            "editMode": false
+          },
+          "wrappers": [
+            "step",
+            "text-right"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Lume - Contrato Social",
+    "descricao": "IA desenvolvida para gerar impactos reais na Gestão Pública.\n",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "NEW",
+    "templates": [],
+    "form_tramites": [],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "single",
+      "possibleReceivers": [
+        "admmodelo_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": false,
+    "autoConcludeParticipation": true
+  },
+  "city_id": 38,
+  "tramite": [],
+  "__v": 0
+}

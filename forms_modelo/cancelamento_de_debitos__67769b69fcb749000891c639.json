@@ -1,0 +1,522 @@
+{
+  "_id": "67769b69fcb749000891c639",
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12"
+            },
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "cancelamentode",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Cancelamento de:",
+                "options": [
+                  {
+                    "value": "IPTU"
+                  },
+                  {
+                    "value": "ISSQN"
+                  },
+                  {
+                    "value": "ITBI"
+                  },
+                  {
+                    "value": "TAXAS"
+                  },
+                  {
+                    "value": "OUTROS"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "ocancelamento",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Outros",
+                "placeholder": "",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "model.cancelamentode !== 'OUTROS'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Solicitação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              }
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/ CNPJ",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? '00.000.000/0000-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Notificação",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "documento_requerente",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos (Carteira de Identidade e CPF, se pessoa física, OU CNPJ e contrato social, se pessoa jurídica)",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "vinculo_requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de vínculo do requerente:",
+                "options": [
+                  {
+                    "label": "Proprietário do imóvel",
+                    "value": "Proprietário do imóvel"
+                  },
+                  {
+                    "label": "Responsável Técnico",
+                    "value": "Responsável Técnico"
+                  },
+                  {
+                    "label": "Procurador",
+                    "value": "Procurador"
+                  }
+                ],
+                "focus": "false",
+                "placeholder": "--selecione--",
+                "required": true
+              }
+            },
+            {
+              "key": "doc_procurador",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Procuração",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "hideExpression": "!model.vinculo_requerente || model.vinculo_requerente !== 'Procurador' "
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "doccomplement",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos Comprobatórios",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Documento_Extrato_Debitos",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Extrato dos Débitos",
+                "options": [],
+                "focus": "false",
+                "required": false
+              }
+            },
+            {
+              "key": "Reconhecimento",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "options": [
+                  {
+                    "label": "Através do presente requerimento, reconheço os débitos constantes do relatório em anexo, nos termo do art. 174, IV, do Código Tributário Nacional.",
+                    "value": "Reconhecimento_de_Debitos"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Comprobatórios",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "observacoescomp",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Observações Importantes",
+                "placeholder": "Digite aqui suas observações",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Observação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "67ebf539e58bd90008ae18c1"
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Cancelamento de Débitos",
+    "descricao": "Processo para requerimento de cancelamento de débitos (IPTU, ISSQN, ITBI e Taxas).",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "newSignatureStrategy": true,
+    "useNewSidebarForwarding": true,
+    "experimentalMode": true,
+    "sigla": "RCD",
+    "templates": [],
+    "form_tramites": [
+      {
+        "nome": "Conclui processo de baixa - Orçamento (Receita)",
+        "text_action": "Adicionou parecer",
+        "key": "resulan",
+        "fieldGroup": [
+          {
+            "key": "resultanalise",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Parecer do resultado da análise solicitada",
+              "placeholder": "Insira aqui o parecer",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "resultanalise",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Parecer do resultado da análise solicitada",
+              "placeholder": "Insira aqui o parecer",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "permission": "taxas",
+        "nome": "Taxa de Aprovação - Guia DAM (Diretoria de Receita)",
+        "text_action": "Emitiu Taxas do Processo",
+        "key": "taxasProcesso",
+        "type": "taxa",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Anexo da Guia de pagamento - com todas as pendências financeiras (Boleto)",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações - Taxas",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Anexo da Guia de pagamento - com todas as pendências financeiras (Boleto)",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações - Taxas",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          }
+        ]
+      },
+      {
+        "permission": "taxas",
+        "nome": "Anexo de comprovante de pagamento - Guia DAM (Os boletos se encontram na aba Taxa de Aprovação)",
+        "text_action": "Alteradas informações de comprovantes",
+        "type": "resume.bckp",
+        "key": "anexoComprovante",
+        "hidden": "process.tramites.find((tramite) => tramite['taxasProcesso'])",
+        "fieldGroup": [
+          {
+            "key": "comprovante",
+            "type": "next-upload",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Comprovante - (Anexe aqui o comprovante de pagamento, e após isto, clique em Enviar para Análise, para que seu processo continue)"
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "comprovante",
+            "type": "next-upload",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Comprovante - (Anexe aqui o comprovante de pagamento, e após isto, clique em Enviar para Análise, para que seu processo continue)"
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Finanças",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "financas_modeload"
+      ]
+    },
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "tramite": [
+    {
+      "_id": "67b37a6f46295c00081c2a1b",
+      "groupId": "financas_modeload"
+    }
+  ],
+  "__v": 0,
+  "step": {},
+  "city_id": 38
+}

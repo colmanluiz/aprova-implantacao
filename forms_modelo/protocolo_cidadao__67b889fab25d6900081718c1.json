@@ -1,0 +1,1052 @@
+{
+  "_id": "67b889fab25d6900081718c1",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "* Remetente (ESCONDIDO) *",
+                "required": true,
+                "columns": "12",
+                "readonly": false,
+                "sectorFromToggle": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "hidden": true
+              },
+              "className": "col-12"
+            },
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": "true",
+              "templateOptions": {
+                "label": "* Destinatário (ESCONDIDO)* ",
+                "required": "true",
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "predefined",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "admmodelo_modeload",
+                      "label": "Secretaria de Administração",
+                      "id": "675c980a96ab6200088ea449"
+                    }
+                  ]
+                },
+                "placeholder": "",
+                "focus": "false",
+                "disabled": "false",
+                "sensitiveField": false,
+                "useNewSidebarForwarding": true,
+                "destinationAccessLevel": "FULL",
+                "hidden": true
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF/ CNPJ",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||mask": "model.cpfcnpj_requerente?.length >= 12 ? 'AA.AAA.AAA/AAAA-00': '000.000.000-009' ",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Notificação",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "key": "documento_requerente",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos (Carteira de Identidade e CPF, se pessoa física, OU CNPJ e contrato social, se pessoa jurídica)",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja selecionado a opção do requerente ser o usuário logado no sistema, os dados serão preenchidos automaticamente, de acordo com o cadastro do usuário.&nbsp;</li> \n\n</ul>",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipo_solicitacao",
+              "type": "select",
+              "templateOptions": {
+                "label": "Tipo de Solicitação",
+                "options": [
+                  {
+                    "label": "Iluminação pública (reparo ou instalação)",
+                    "value": "Iluminação pública (reparo ou instalação)"
+                  },
+                  {
+                    "label": "Tapa-buracos e manutenção de vias",
+                    "value": "Tapa-buracos e manutenção de vias"
+                  },
+                  {
+                    "label": "Coleta de lixo e limpeza urbana",
+                    "value": "Coleta de lixo e limpeza urbana"
+                  },
+                  {
+                    "label": "Arborização (poda ou remoção de árvores)",
+                    "value": "Arborização (poda ou remoção de árvores)"
+                  },
+                  {
+                    "label": "Sinalização e trânsito (placas, faixas, semáforos)",
+                    "value": "Sinalização e trânsito (placas, faixas, semáforos)"
+                  },
+                  {
+                    "label": "Agendamento de consultas e exames no SUS",
+                    "value": "Agendamento de consultas e exames no SUS"
+                  },
+                  {
+                    "label": "Solicitação de medicamentos",
+                    "value": "Solicitação de medicamentos"
+                  },
+                  {
+                    "label": "Controle de zoonoses (focos de dengue, animais abandonados)",
+                    "value": "Controle de zoonoses (focos de dengue, animais abandonados)"
+                  },
+                  {
+                    "label": "Cadastro em programas sociais",
+                    "value": "Cadastro em programas sociais"
+                  },
+                  {
+                    "label": "Inscrição e matrícula em escolas municipais",
+                    "value": "Inscrição e matrícula em escolas municipais"
+                  },
+                  {
+                    "label": "Solicitação de transporte escolar",
+                    "value": "Solicitação de transporte escolar"
+                  },
+                  {
+                    "label": "Manutenção de prédios escolares",
+                    "value": "Manutenção de prédios escolares"
+                  },
+                  {
+                    "label": "Inscrição em atividades culturais e esportivas",
+                    "value": "Inscrição em atividades culturais e esportivas"
+                  },
+                  {
+                    "label": "Denúncia de veículos abandonados",
+                    "value": "Denúncia de veículos abandonados"
+                  },
+                  {
+                    "label": "Solicitação de lombadas e redutores de velocidade",
+                    "value": "Solicitação de lombadas e redutores de velocidade"
+                  },
+                  {
+                    "label": "Fiscalização de comércio irregular",
+                    "value": "Fiscalização de comércio irregular"
+                  },
+                  {
+                    "label": "Reclamação sobre poluição sonora",
+                    "value": "Reclamação sobre poluição sonora"
+                  },
+                  {
+                    "label": "Denúncia de queimadas ou desmatamento ilegal",
+                    "value": "Denúncia de queimadas ou desmatamento ilegal"
+                  },
+                  {
+                    "label": "Solicitação de coleta seletiva",
+                    "value": "Solicitação de coleta seletiva"
+                  },
+                  {
+                    "label": "Regularização de imóveis e terrenos",
+                    "value": "Regularização de imóveis e terrenos"
+                  },
+                  {
+                    "label": "Outros (especificar)",
+                    "value": "Outros (especificar)"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "placeholder": "-selecione-",
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "especificar_assunto",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Especifique",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "model.tipo_solicitacao !== 'Outros (especificar)'"
+            },
+            {
+              "key": "descricao_solicitacao",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Descrição da solicitação",
+                "placeholder": "Descreva a solicitação",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Solicitação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ]
+    }
+  ],
+  "step": {
+    "config": [],
+    "shared": {
+      "automatic": [
+        {
+          "subscribe": [
+            "process/create"
+          ],
+          "execute": "({ resume, activities, signatures, documents, process }) => {\n     if (process.last_version.tipo_solicitacao == 'Alvará de Funcionamento em Horário Especial' || process.last_version.tipo_solicitacao == 'Autorização para Panfletagem' || process.last_version.tipo_solicitacao == 'Licença para Engenho Indicativo (Publicidade)' || process.last_version.tipo_solicitacao == 'Licença para Engenho Publicitário (Publicidade)') {\n      return [sendTo({ groupId: 'sfpp_sorocabasp' })];\n    }\n}\n"
+        }
+      ],
+      "tab": [],
+      "action": []
+    }
+  },
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Protocolo Cidadão",
+    "descricao": "",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "ADM",
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "sendToEmailExpression": "Array.from(new Set([...(context.proprietario?.map((RL) => RL.email_proprietario ) || []), ...(context['requerente']?.map((RL) => RL.email_requerente) || []) ]))",
+    "templates": [
+      {
+        "text_button": "Documento - Geral",
+        "template": "ModeloAD/certidao_protocolo_cidadao.html",
+        "function": "processComplete",
+        "official": true,
+        "internal": false,
+        "possui_prazo_validade": false,
+        "wk": false
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Taxas",
+        "type": "taxa",
+        "text_action": "Emitiu Taxa",
+        "key": "taxasProcesso",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "permission": "taxas"
+      },
+      {
+        "nome": "Pareceres complementares",
+        "text_action": "Inseriu Parecer",
+        "key": "parecer_complementar",
+        "fieldGroup": [
+          {
+            "className": "col-12",
+            "key": "pareceres_complementar",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Parecer",
+              "focus": "false",
+              "required": false,
+              "btnAddText": "Parecer",
+              "placeholder": "",
+              "disabled": false
+            },
+            "fieldArray": {
+              "fieldGroupClassName": "row",
+              "fieldGroup": [
+                {
+                  "key": "responsavel",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Responsável:",
+                    "placeholder": "Setor, departamento ou servidor responsável pelo parecer",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "parecer",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Parecer",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "anexo",
+                  "type": "next-upload",
+                  "templateOptions": {
+                    "label": "Anexos",
+                    "options": [],
+                    "focus": "false",
+                    "extends": [
+                      "pdf",
+                      "PDF"
+                    ],
+                    "required": false
+                  },
+                  "expressionProperties": {}
+                }
+              ]
+            }
+          }
+        ],
+        "form": [
+          {
+            "className": "col-12",
+            "key": "pareceres_complementar",
+            "type": "next-repeat",
+            "templateOptions": {
+              "label": "Parecer",
+              "focus": "false",
+              "required": false,
+              "btnAddText": "Parecer",
+              "placeholder": "",
+              "disabled": false
+            },
+            "fieldArray": {
+              "fieldGroupClassName": "row",
+              "fieldGroup": [
+                {
+                  "key": "responsavel",
+                  "type": "next-input",
+                  "templateOptions": {
+                    "label": "Responsável:",
+                    "placeholder": "Setor, departamento ou servidor responsável pelo parecer",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "parecer",
+                  "type": "next-ck",
+                  "templateOptions": {
+                    "label": "Parecer",
+                    "placeholder": "",
+                    "focus": "false",
+                    "type": "text",
+                    "required": true
+                  },
+                  "expressionProperties": {}
+                },
+                {
+                  "key": "anexo",
+                  "type": "next-upload",
+                  "templateOptions": {
+                    "label": "Anexos",
+                    "options": [],
+                    "focus": "false",
+                    "extends": [
+                      "pdf",
+                      "PDF"
+                    ],
+                    "required": false
+                  },
+                  "expressionProperties": {}
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Emissão de documento",
+        "text_action": "Realizou ação",
+        "key": "card_emissao_doc",
+        "fieldGroup": [
+          {
+            "key": "tipo_documento",
+            "type": "select",
+            "templateOptions": {
+              "label": "Tipo do documento",
+              "options": [
+                {
+                  "label": "Licença/Alvará",
+                  "value": "Licença/Alvará"
+                },
+                {
+                  "label": "Certidão",
+                  "value": "Certidão"
+                },
+                {
+                  "label": "Carta de Autorização",
+                  "value": "Carta de Autorização"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "titulo_documento",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Título",
+              "placeholder": "Título do documento",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "cards_exibidos",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Cards a serem exibidos no documento",
+              "options": [
+                {
+                  "label": "Card 2 – Dados do Requerente",
+                  "value": "Card 2 – Dados do Requerente"
+                },
+                {
+                  "label": "Card 3 – Solicitação",
+                  "value": "Card 3 – Solicitação"
+                }
+              ],
+              "focus": "false",
+              "required": false
+            }
+          },
+          {
+            "key": "texto_doc_final",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Texto do documento",
+              "placeholder": "Insira aqui o texto que será impresso no documento final",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "emissor_doc",
+            "type": "select",
+            "templateOptions": {
+              "label": "Emissor",
+              "options": [
+                {
+                  "label": "Divisão de Licenciamento e Controle",
+                  "value": "Divisão de Licenciamento e Controle"
+                },
+                {
+                  "label": "Seção de Edificações Particulares",
+                  "value": "Seção de Edificações Particulares"
+                },
+                {
+                  "label": "Seção de Fiscalização de Obras Particulares",
+                  "value": "Seção de Fiscalização de Obras Particulares"
+                },
+                {
+                  "label": "Seção de Perícias e Avaliações",
+                  "value": "Seção de Perícias e Avaliações"
+                },
+                {
+                  "label": "Divisão de Parcelamento e Uso do Solo",
+                  "value": "Divisão de Parcelamento e Uso do Solo"
+                },
+                {
+                  "label": "Seção de Parcelamento e Uso do Solo",
+                  "value": "Seção de Parcelamento e Uso do Solo"
+                },
+                {
+                  "label": "Seção de Posturas",
+                  "value": "Seção de Posturas"
+                },
+                {
+                  "label": "Divisão de Geoprocessamento e Geotecnologia Aplicada",
+                  "value": "Divisão de Geoprocessamento e Geotecnologia Aplicada"
+                },
+                {
+                  "label": "Seção de Topografia",
+                  "value": "Seção de Topografia"
+                },
+                {
+                  "label": "Seção de Cadastro Técnico e Georreferenciamento",
+                  "value": "Seção de Cadastro Técnico e Georreferenciamento"
+                },
+                {
+                  "label": "Seção de Pesquisa e Cartografia",
+                  "value": "Seção de Pesquisa e Cartografia"
+                },
+                {
+                  "label": "Divisão de Fiscalização de Áreas Públicas",
+                  "value": "Divisão de Fiscalização de Áreas Públicas"
+                },
+                {
+                  "label": "Seção de Fiscalização de Áreas Públicas",
+                  "value": "Seção de Fiscalização de Áreas Públicas"
+                },
+                {
+                  "label": "Seção de Intervenção Administrativa em Área Pública",
+                  "value": "Seção de Intervenção Administrativa em Área Pública"
+                },
+                {
+                  "label": "Seção de Fiscalização e Permissão de Uso",
+                  "value": "Seção de Fiscalização e Permissão de Uso"
+                },
+                {
+                  "label": "Divisão de Fiscalização de Posturas Mobiliárias e Imobiliárias",
+                  "value": "Divisão de Fiscalização de Posturas Mobiliárias e Imobiliárias"
+                },
+                {
+                  "label": "Seção de Fiscalização de Férias e Ambulantes",
+                  "value": "Seção de Fiscalização de Férias e Ambulantes"
+                },
+                {
+                  "label": "Seção de Fiscalização de Limpeza de Terrenos Particulares",
+                  "value": "Seção de Fiscalização de Limpeza de Terrenos Particulares"
+                },
+                {
+                  "label": "Seção de Fiscalização de Publicidade e Propaganda",
+                  "value": "Seção de Fiscalização de Publicidade e Propaganda"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "tipo_documento",
+            "type": "select",
+            "templateOptions": {
+              "label": "Tipo do documento",
+              "options": [
+                {
+                  "label": "Licença/Alvará",
+                  "value": "Licença/Alvará"
+                },
+                {
+                  "label": "Certidão",
+                  "value": "Certidão"
+                },
+                {
+                  "label": "Carta de Autorização",
+                  "value": "Carta de Autorização"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "titulo_documento",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Título",
+              "placeholder": "Título do documento",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "cards_exibidos",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "Cards a serem exibidos no documento",
+              "options": [
+                {
+                  "label": "Card 2 – Dados do Requerente",
+                  "value": "Card 2 – Dados do Requerente"
+                },
+                {
+                  "label": "Card 3 – Solicitação",
+                  "value": "Card 3 – Solicitação"
+                }
+              ],
+              "focus": "false",
+              "required": false
+            }
+          },
+          {
+            "key": "texto_doc_final",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Texto do documento",
+              "placeholder": "Insira aqui o texto que será impresso no documento final",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          },
+          {
+            "key": "emissor_doc",
+            "type": "select",
+            "templateOptions": {
+              "label": "Emissor",
+              "options": [
+                {
+                  "label": "Divisão de Licenciamento e Controle",
+                  "value": "Divisão de Licenciamento e Controle"
+                },
+                {
+                  "label": "Seção de Edificações Particulares",
+                  "value": "Seção de Edificações Particulares"
+                },
+                {
+                  "label": "Seção de Fiscalização de Obras Particulares",
+                  "value": "Seção de Fiscalização de Obras Particulares"
+                },
+                {
+                  "label": "Seção de Perícias e Avaliações",
+                  "value": "Seção de Perícias e Avaliações"
+                },
+                {
+                  "label": "Divisão de Parcelamento e Uso do Solo",
+                  "value": "Divisão de Parcelamento e Uso do Solo"
+                },
+                {
+                  "label": "Seção de Parcelamento e Uso do Solo",
+                  "value": "Seção de Parcelamento e Uso do Solo"
+                },
+                {
+                  "label": "Seção de Posturas",
+                  "value": "Seção de Posturas"
+                },
+                {
+                  "label": "Divisão de Geoprocessamento e Geotecnologia Aplicada",
+                  "value": "Divisão de Geoprocessamento e Geotecnologia Aplicada"
+                },
+                {
+                  "label": "Seção de Topografia",
+                  "value": "Seção de Topografia"
+                },
+                {
+                  "label": "Seção de Cadastro Técnico e Georreferenciamento",
+                  "value": "Seção de Cadastro Técnico e Georreferenciamento"
+                },
+                {
+                  "label": "Seção de Pesquisa e Cartografia",
+                  "value": "Seção de Pesquisa e Cartografia"
+                },
+                {
+                  "label": "Divisão de Fiscalização de Áreas Públicas",
+                  "value": "Divisão de Fiscalização de Áreas Públicas"
+                },
+                {
+                  "label": "Seção de Fiscalização de Áreas Públicas",
+                  "value": "Seção de Fiscalização de Áreas Públicas"
+                },
+                {
+                  "label": "Seção de Intervenção Administrativa em Área Pública",
+                  "value": "Seção de Intervenção Administrativa em Área Pública"
+                },
+                {
+                  "label": "Seção de Fiscalização e Permissão de Uso",
+                  "value": "Seção de Fiscalização e Permissão de Uso"
+                },
+                {
+                  "label": "Divisão de Fiscalização de Posturas Mobiliárias e Imobiliárias",
+                  "value": "Divisão de Fiscalização de Posturas Mobiliárias e Imobiliárias"
+                },
+                {
+                  "label": "Seção de Fiscalização de Férias e Ambulantes",
+                  "value": "Seção de Fiscalização de Férias e Ambulantes"
+                },
+                {
+                  "label": "Seção de Fiscalização de Limpeza de Terrenos Particulares",
+                  "value": "Seção de Fiscalização de Limpeza de Terrenos Particulares"
+                },
+                {
+                  "label": "Seção de Fiscalização de Publicidade e Propaganda",
+                  "value": "Seção de Fiscalização de Publicidade e Propaganda"
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Retificar documento",
+        "text_action": "Realizou ação",
+        "key": "card_reti",
+        "fieldGroup": [
+          {
+            "key": "atualizar_data",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Atualizar a data no documento emitido?",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": false
+            }
+          },
+          {
+            "key": "aviso_novo_deferimento",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-orange-100 font-medium text-orange-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http: //www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>Caso seja marcado ''Não'', o documento será retificado com a data do documento anteriormente emitido.</div></div><br/>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "atualizar_data",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Atualizar a data no documento emitido?",
+              "options": [
+                {
+                  "value": "Sim"
+                },
+                {
+                  "value": "Não"
+                }
+              ],
+              "focus": "false",
+              "required": false
+            }
+          },
+          {
+            "key": "aviso_novo_deferimento",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-orange-100 font-medium text-orange-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http: //www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>Caso seja marcado ''Não'', o documento será retificado com a data do documento anteriormente emitido.</div></div><br/>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "admmodelo_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": false,
+    "autoConcludeParticipation": true
+  },
+  "tramite": [
+    {
+      "_id": "67b88a11526e1f0008d89420",
+      "groupId": "admmodelo_modeload"
+    }
+  ],
+  "__v": 0,
+  "city_id": 38
+}

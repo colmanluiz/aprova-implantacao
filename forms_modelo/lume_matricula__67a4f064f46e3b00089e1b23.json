@@ -1,0 +1,306 @@
+{
+  "_id": "67a4f064f46e3b00089e1b23",
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "type": "next-upload",
+              "wrappers": [
+                "lume-ai"
+              ],
+              "templateOptions": {
+                "hideNestedField": true,
+                "label": "Matrícula atualizada (somente PDF)",
+                "required": true,
+                "columns": "12",
+                "extends": [
+                  "PDF"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "multiple": false,
+                "agentId": "12b55d79-71f7-4a0d-a4b5-358d4da6cc90"
+              },
+              "key": "matricula_atualizada",
+              "className": "col-12"
+            },
+            {
+              "key": "documento_apenasconsulta",
+              "type": "next-html",
+              "templateOptions": {
+                "focus": "false",
+                "label": "next-html - Validação matrícula apenas consulta",
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso: Documento identificado como inválido 🚨</div></div><div>Nossa checagem por Inteligência Artificial identificou que o documento anexado é uma versão para simples consulta e não possui validade como Certidão de Matrícula.<br> Para dar continuidade ao processo, é necessário anexar a Certidão de Matrícula do imóvel atualizada, acompanhada da Certidão Negativa de Ônus, ambas emitidas pelo Cartório de Registro de Imóveis.<br><br> Se você acredita que houve um erro na verificação, entre em contato com nosso suporte para que possamos ajudá-lo. </div></div><br/>",
+                "readonly": true,
+                "required": true
+              },
+              "hideExpression": "!model.matricula_atualizada?.lume_data || model.matricula_atualizada?.lume_data === null || !model.matricula_atualizada?.lume_data?.extractedData?.apenas_consulta "
+            },
+            {
+              "key": "documento_valido_matricula",
+              "type": "next-html",
+              "resetOnHide": true,
+              "templateOptions": {
+                "focus": "false",
+                "label": "next-html - Documento válido matrícula",
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>O documento anexado não foi reconhecido como válido. Verifique o arquivo e tente novamente.</div></div><br/>",
+                "readonly": true,
+                "required": true
+              },
+              "hideExpression": "model?.matricula_atualizada?.lume_data?.isValidDocument || !model.matricula_atualizada?.lume_data || model.matricula_atualizada?.lume_data === null"
+            },
+            {
+              "className": "col-12",
+              "key": "faixa_somatotal_areas",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 mb-4 p-2 rounded bg-blue-500 font-medium';  style='background-color: #003A40; font-medium; color: #FFFFFF;'><div class=' text-gray-200  font-bold text-align: center'  style='text-align: center'>Dados da matrícula - Informações gerais</div></div>",
+                "focus": "false",
+                "label": "Faixa dados da matrícula",
+                "type": "text",
+                "readonly": true,
+                "required": false
+              },
+              "hideExpression": "!model.matricula_atualizada?.lume_data || model.matricula_atualizada?.lume_data === null"
+            },
+            {
+              "key": "pergunta_validacaoLume_matriculaGeral",
+              "type": "radio",
+              "templateOptions": {
+                "label": "<b>Atenção</b>: As informações abaixo foram extraídas automaticamente pela inteligência artificial com base no documento enviado. Caso escolha editá-las, você confirma que a extração não foi precisa e se compromete a inserir os dados corretos. <b>Deseja editar as informações?</b>",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "labelHtml": true,
+                "required": true
+              },
+              "hideExpression": "!model.matricula_atualizada?.lume_data || model.matricula_atualizada?.lume_data === null"
+            },
+            {
+              "type": "next-input",
+              "key": "cartorio_matricula",
+              "templateOptions": {
+                "label": "Cartório responsável",
+                "required": true,
+                "columns": "6",
+                "hiddenTemp": false,
+                "readonly": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||cartorio_matricula": "model.pergunta_validacaoLume_matriculaGeral == 'Sim' ?  model.cartorio_matricula : model?.matricula_atualizada?.lume_data?.extractedData?.cartorio_responsavel  ",
+                "templateOptions|||readonly": "model.pergunta_validacaoLume_matriculaGeral == 'Não' || !model.pergunta_validacaoLume_matriculaGeral"
+              },
+              "className": "col-12",
+              "hideExpression": "!model.matricula_atualizada?.lume_data || model.matricula_atualizada?.lume_data === null"
+            },
+            {
+              "type": "next-input",
+              "key": "numero_matricula",
+              "templateOptions": {
+                "label": " Número da Matrícula",
+                "required": true,
+                "columns": "6",
+                "hiddenTemp": false,
+                "readonly": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||numero_matricula": "model.matricula_atualizada?.lume_data && model.pergunta_validacaoLume_matriculaGeral == 'Sim' ? model['numero_matricula'] : model.matricula_atualizada?.lume_data?.extractedData?.numero_matricula",
+                "templateOptions|||readonly": "model.matricula_atualizada?.lume_data && (model.pergunta_validacaoLume_matriculaGeral == 'Não' || !model.pergunta_validacaoLume_matriculaGeral)"
+              },
+              "className": "col-6",
+              "hideExpression": "!model.matricula_atualizada?.lume_data || model.matricula_atualizada?.lume_data === null"
+            },
+            {
+              "type": "next-date",
+              "key": "data_emissao_matricula",
+              "templateOptions": {
+                "label": "Data de emissão",
+                "required": true,
+                "columns": "6",
+                "hiddenTemp": false,
+                "readonly": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||data_emissao_matricula": "model.pergunta_validacaoLume_matriculaGeral == 'Sim' ? model.data_emissao_matricula : ((model, field, formState) => {const formatDateToISO=(dateString)=>{if(!dateString)return null;const[day,month,year]=dateString.split('/').map(Number);const fullYear=year<100?2000+year:year;return new Date(Date.UTC(fullYear,month-1,day,3)).toISOString();};return formatDateToISO(model?.matricula_atualizada?.lume_data?.extractedData?.data_emissao_matricula);})(model, field, formState) ",
+                "templateOptions|||readonly": "model.pergunta_validacaoLume_matriculaGeral == 'Não' || !model.pergunta_validacaoLume_matriculaGeral"
+              },
+              "className": "col-6",
+              "hideExpression": "!model.matricula_atualizada?.lume_data || model.matricula_atualizada?.lume_data === null"
+            },
+            {
+              "key": "documento_vencido",
+              "type": "next-html",
+              "resetOnHide": true,
+              "templateOptions": {
+                "focus": "false",
+                "label": "next-html - Validação data de emissão documento",
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Atenção</div></div><div>Documento anexado foi emitido há mais de 90 dias, anexe um documento atualizado.</div></div><br/>",
+                "readonly": true,
+                "required": true
+              },
+              "hideExpression": "(function() {   try {   let dataEmissao = new Date(model.data_emissao_matricula); let hoje = new Date();  let tresMesesAtras = new Date(hoje.setMonth(hoje.getMonth() - 3)); return dataEmissao >= tresMesesAtras;} catch (e) {  return false;   }})() || formState.mode !== 'create' || !model.data_emissao_matricula"
+            },
+            {
+              "key": "feedback_lume",
+              "type": "next-html",
+              "resetOnHide": true,
+              "templateOptions": {
+                "focus": "false",
+                "label": "next-html - Feedback Lume",
+                "textHtml": "<br><div class='flex items-center p-2 rounded' style='background-color: rgb(236, 253, 255); color: #111827; font-weight: 500; font-family: 'Inter', sans-serif;'><img src='https://assets-publicos.s3.us-east-1.amazonaws.com/customer_success/Lume+2.png' alt='Ícone Lume' width='24' height='24' style='margin-right: 8px;'>Gostaria de deixar um feedback sobre a Lume? <a href='https://forms.gle/k94P76nAXNM6htgy8' target='_blank' style='color: #0284C7; text-decoration: underline; margin-left: 4px;'>Clique aqui</a>.</div>",
+                "readonly": true,
+                "required": false
+              },
+              "hideExpression": "!model.matricula_atualizada?.lume_data || model.matricula_atualizada?.lume_data === null"
+            },
+            {
+              "className": "col-12",
+              "key": "faixa_dados_matricula3",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 mb-4 p-2 rounded bg-blue-500 font-medium';  style='background-color: #003A40; font-medium; color: #FFFFFF;'><div class=' text-gray-200  font-bold text-align: center'  style='text-align: center'></div></div>",
+                "focus": "false",
+                "label": "Faixa dados da matrícula",
+                "type": "text",
+                "readonly": true,
+                "required": false
+              },
+              "hideExpression": "!model.matricula_atualizada?.lume_data || model.matricula_atualizada?.lume_data === null"
+            },
+            {
+              "key": "informacoes_editadas_lume_matricula",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Informações editadas (oculto)",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||informacoes_editadas_lume_matricula": "(function(){let alteracoes=[];if(model.nome_proprietarios_matricula!==model?.matricula_atualizada?.lume_data?.extractedData?.proprietario)alteracoes.push('Proprietários');if(model.data_emissao_matricula!==((model,field,formState)=>{const formatDateToISO=dateString=>{if(!dateString)return null;const[day,month,year]=dateString.split('/').map(Number);const fullYear=year<100?2000+year:year;return new Date(Date.UTC(fullYear,month-1,day,3)).toISOString();};return formatDateToISO(model?.matricula_atualizada?.lume_data?.extractedData?.data_emissao_matricula);})(model,field,formState))alteracoes.push('Data de emissão');if(model.cartorio_matricula!==model?.matricula_atualizada?.lume_data?.extractedData?.cartorio_responsavel)alteracoes.push('Cartório Responsável');if(model.numero_matricula!==model?.matricula_atualizada?.lume_data?.extractedData?.numero_matricula)alteracoes.push('Número da Matrícula');if(model.loteamento_matricula!==model?.matricula_atualizada?.lume_data?.extractedData?.endereco_imovel?.loteamento)alteracoes.push('Loteamento da Matrícula');if(model.quadra_matricula!==model?.matricula_atualizada?.lume_data?.extractedData?.endereco_imovel?.quadra)alteracoes.push('Quadra');if(model.lote_matricula!==model?.matricula_atualizada?.lume_data?.extractedData?.endereco_imovel?.lote)alteracoes.push('Lote');if(model.arealote_matricula!==parseFloat(model?.matricula_atualizada?.lume_data?.extractedData?.endereco_imovel?.area_terreno?.replace(/[^\\d,]/g,'')?.replace(',','.')??0))alteracoes.push('Área do Lote');return alteracoes.length>0?alteracoes.join(', '):'Nenhuma informação alterada';})()",
+                "templateOptions|||label": "JSON.stringify(model.data_emissao_matricula + ' - ' + ((model, field, formState) => {const formatDateToISO=(dateString)=>{if(!dateString)return null;const[day,month,year]=dateString.split('/').map(Number);const fullYear=year<100?2000+year:year;return new Date(Date.UTC(fullYear,month-1,day,3)).toISOString();};return formatDateToISO(model?.matricula_atualizada?.lume_data?.extractedData?.data_emissao_matricula);})(model, field, formState))"
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Matrícula Atualizada",
+            "subtitle": "",
+            "textHtml": "<p><img src=\"https://api.producao.aprova.com.br/blob/url/redirect/blueprint-editor/21738864146672.png\"></p>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "sensitiveField": false,
+                "hidden": true
+              },
+              "className": "col-12"
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "predefined",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "admmodelo_modeload",
+                      "label": "Secretaria de Administração",
+                      "id": "675c980a96ab6200088ea449"
+                    }
+                  ]
+                },
+                "sensitiveField": false,
+                "destinationAccessLevel": "FULL",
+                "multiple": true,
+                "useNewSidebarForwarding": true,
+                "hidden": true
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Novo Titulo",
+            "subtitle": "Novo subtitulo",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "6985f84a0a2da61ef07877c9"
+    }
+  ],
+  "config": {
+    "title": "Lume - Matrícula",
+    "descricao": "IA desenvolvida para gerar impactos reais na Gestão Pública.",
+    "devolverAoUltimo": true,
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "LUM",
+    "templates": [],
+    "form_tramites": [],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "experimentalMode": true,
+    "useNewSidebarForwarding": true,
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "admmodelo_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "tramite": [],
+  "__v": 0,
+  "city_id": 38,
+  "step": {}
+}

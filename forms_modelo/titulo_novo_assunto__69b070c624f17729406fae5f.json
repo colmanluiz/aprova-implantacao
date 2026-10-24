@@ -1,0 +1,31 @@
+{
+  "_id": "69b070c624f17729406fae5f",
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Titulo novo assunto",
+    "descricao": "Descrição",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "NEW",
+    "templates": [],
+    "form_tramites": [],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "keepOpenBoxStateOnCreation": false,
+    "autoConcludeParticipation": true
+  },
+  "city_id": 38,
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": []
+    }
+  ],
+  "tramite": [],
+  "__v": 0
+}

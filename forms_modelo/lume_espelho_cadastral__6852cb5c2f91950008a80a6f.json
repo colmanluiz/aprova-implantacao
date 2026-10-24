@@ -1,0 +1,285 @@
+{
+  "_id": "6852cb5c2f91950008a80a6f",
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "readonly": true,
+                "addressee": {
+                  "type": "predefined",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "admmodelo_modeload",
+                      "label": "Secretaria de Administração",
+                      "id": "675c980a96ab6200088ea449"
+                    }
+                  ]
+                },
+                "sensitiveField": false,
+                "multiple": false,
+                "hidden": true
+              },
+              "className": "col-12"
+            },
+            {
+              "type": "next-upload",
+              "wrappers": [
+                "lume-ai"
+              ],
+              "templateOptions": {
+                "hideNestedField": true,
+                "label": "Espelho Cadastral (somente PDF)",
+                "required": true,
+                "agentId": "fc6749f8-7324-407b-b16e-abf43216bcf1",
+                "extends": [
+                  "PDF"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false
+              },
+              "key": "espelho_cadastral_somente_pdf",
+              "className": "col-12"
+            },
+            {
+              "key": "pergunta_validacao_lume",
+              "type": "radio",
+              "templateOptions": {
+                "label": "<b>Atenção</b>: As informações abaixo foram extraídas automaticamente pela inteligência artificial com base no documento enviado. Caso escolha editá-las, você confirma que a extração não foi precisa e se compromete a inserir os dados corretos. <b>Deseja editar as informações?</b>",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "labelHtml": true,
+                "required": true
+              },
+              "hideExpression": "!model.espelho_cadastral_somente_pdf?.lume_data || model.espelho_cadastral_somente_pdf?.lume_data === null"
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "readonly": true,
+                "sectorFromToggle": false,
+                "sensitiveField": false,
+                "hidden": true
+              },
+              "className": "col-12"
+            },
+            {
+              "key": "logradouro",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Logradouro",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||logradouro": "model?.espelho_cadastral_somente_pdf?.lume_data?.extractedData?.endereco_imovel?.logradouro"
+              }
+            },
+            {
+              "key": "numero",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número Predial",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||numero": "model?.espelho_cadastral_somente_pdf?.lume_data?.extractedData?.endereco_imovel?.numero"
+              }
+            },
+            {
+              "key": "bairro",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Bairro",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||bairro": "model?.espelho_cadastral_somente_pdf?.lume_data?.extractedData?.endereco_imovel?.bairro"
+              }
+            },
+            {
+              "key": "loteamento",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Loteamento",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||loteamento": "model?.espelho_cadastral_somente_pdf?.lume_data?.extractedData?.endereco_imovel?.loteamento"
+              }
+            },
+            {
+              "key": "quadra",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Quadra",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||quadra": "model?.espelho_cadastral_somente_pdf?.lume_data?.extractedData?.endereco_imovel?.quadra"
+              }
+            },
+            {
+              "key": "lote",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Lote",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||lote": "model?.espelho_cadastral_somente_pdf?.lume_data?.extractedData?.endereco_imovel?.lote"
+              }
+            },
+            {
+              "key": "cep",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CEP.",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cep": "model?.espelho_cadastral_somente_pdf?.lume_data?.extractedData?.endereco_imovel?.cep"
+              }
+            },
+            {
+              "key": "inscricao_imobiliaria",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Inscrição Imobiliária",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||inscricao_imobiliaria": "model?.espelho_cadastral_somente_pdf?.lume_data?.extractedData?.inscricao_imobiliaria"
+              }
+            },
+            {
+              "key": "numero_matricula_registro_imoveis",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número da Matricula Registro de Imóveis",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||numero_matricula_registro_imoveis": "model?.espelho_cadastral_somente_pdf?.lume_data?.extractedData?.numero_matricula_registro_imoveis"
+              }
+            },
+            {
+              "key": "area_total_construida",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Área total construída lote",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||area_total_construida": "model?.espelho_cadastral_somente_pdf?.lume_data?.extractedData?.dados_territoriais?.area_total_construida"
+              }
+            },
+            {
+              "key": "total_autonomous_units",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nº total de autônomas",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||total_autonomous_units": "model?.espelho_cadastral_somente_pdf?.lume_data?.extractedData?.dados_territoriais?.total_autonomous_units"
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Espelho Cadastral",
+            "subtitle": "",
+            "textHtml": "<p><img src=\"https://api.producao.aprova.com.br/blob/url/redirect/blueprint-editor/21738864146672.png\"></p>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "68531ad20023a000086073fe"
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Lume - Espelho Cadastral",
+    "descricao": "IA desenvolvida para gerar impactos reais na Gestão Pública.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "NEW",
+    "templates": [],
+    "form_tramites": [],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "admmodelo_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": false,
+    "autoConcludeParticipation": true
+  },
+  "city_id": 38,
+  "tramite": [],
+  "__v": 0,
+  "step": {}
+}

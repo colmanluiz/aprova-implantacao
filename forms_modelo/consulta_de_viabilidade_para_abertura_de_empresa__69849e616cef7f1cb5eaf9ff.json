@@ -1,0 +1,2798 @@
+{
+  "_id": "69849e616cef7f1cb5eaf9ff",
+  "__v": 0,
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Consulta de Viabilidade para Abertura de Empresa",
+    "descricao": "Preencha o formulário abaixo, identifique as documentações necessárias para a abertura da empresa e finalize a solicitação.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "NEW",
+    "useNewSidebarForwarding": true,
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "bpmEditProperties": true,
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Alvará de localização",
+        "template": "ModeloAD/alvara_de_localizacao_solicitacao_de_viabilidade.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "possui_prazo_validade": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Nome novo campo",
+        "text_action": "Realizou ação",
+        "key": "new_key529946",
+        "form": [
+          {
+            "key": "process_junta",
+            "type": "next-input",
+            "defaultValue": "16548793",
+            "templateOptions": {
+              "label": "Nº do processo na Junta",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "process_junta",
+            "type": "next-input",
+            "defaultValue": "16548793",
+            "templateOptions": {
+              "label": "Nº do processo na Junta",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "multiple",
+      "possibleReceivers": []
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "allowMultipleForwarding": true
+  },
+  "city_id": 38,
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "inscricao_imob",
+              "type": "next-input",
+              "wrappers": [
+                "form-field",
+                "consumeDataset"
+              ],
+              "templateOptions": {
+                "datasetReference": "5f93121ea19b470008e88c23",
+                "datasetKey": "inscricao",
+                "autocomplete": true,
+                "label": "Insira a Inscrição Imobiliária com os pontos 1º PARTE (000.000.00.0000)",
+                "placeholder": "000.000.00.0000",
+                "keepMask": true,
+                "mask": "000.000.00.0000",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "inscricao_imob_unidade",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Insira a Unidade da Inscrição Imobiliária com os pontos  2º PARTE (0000.000)",
+                "placeholder": "0000.000",
+                "keepMask": true,
+                "mask": "0000.000",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "inscricao_imob_integration",
+              "type": "next-input",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "Inscrição Imobiliária",
+                "idIntegration": "5f2970c137aceb0008a0b46b",
+                "readonly": true,
+                "required": false
+              },
+              "expressionProperties": {
+                "model|||inscricao_imob_integration": "model.inscricao_imob?.input && model.inscricao_imob_unidade  ? { 'input': model.inscricao_imob?.input + '.' + model.inscricao_imob_unidade } :  {'input': ''} "
+              }
+            },
+            {
+              "key": "area",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Área ocupada pelo Estabelecimento",
+                "placeholder": "Ex: 100",
+                "suffix": "m²",
+                "type": "text",
+                "required": true,
+                "floatNumber": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "alteracao_insc",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Qual é sua solicitação?  (Para alteração de Área Ocupada ou Endereço, deve ser preenchido todos os CNAES existentes que irão permanecer)",
+                "options": [
+                  {
+                    "value": "Primeira Inscrição Mobiliária"
+                  },
+                  {
+                    "value": "Alteração do Cadastro Mobiliário (Em caso de alteração de Endereço, você deve preencher todos os CNAES atuais PRINCIPAL E SECUNDÁRIOS novamente como NOVOS)"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "solicitacao_insc_estadual",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Solicitará Inscrição Estadual?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracao_insc !== 'Primeira Inscrição Mobiliária' "
+            },
+            {
+              "className": "col-6",
+              "key": "cnpj_empresa",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CNPJ da empresa",
+                "placeholder": "AA.AAA.AAA/AAAA-00",
+                "mask": "AA.AAA.AAA/AAAA-00",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracao_insc !== 'Alteração do Cadastro Mobiliário (Em caso de alteração de Endereço, você deve preencher todos os CNAES atuais PRINCIPAL E SECUNDÁRIOS novamente como NOVOS)' "
+            },
+            {
+              "className": "col-6",
+              "key": "nire",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Matrícula/NIRE",
+                "placeholder": "Somente números",
+                "focus": "false",
+                "type": "number",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracao_insc !== 'Alteração do Cadastro Mobiliário (Em caso de alteração de Endereço, você deve preencher todos os CNAES atuais PRINCIPAL E SECUNDÁRIOS novamente como NOVOS)'"
+            },
+            {
+              "className": "col-6",
+              "key": "cmc",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Inscrição Municipal",
+                "placeholder": "Insira Inscrição Municipal ATIVA (Somente números)",
+                "focus": "false",
+                "type": "number",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracao_insc !== 'Alteração do Cadastro Mobiliário (Em caso de alteração de Endereço, você deve preencher todos os CNAES atuais PRINCIPAL E SECUNDÁRIOS novamente como NOVOS)'"
+            },
+            {
+              "className": "col-6",
+              "key": "insc_estadual",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Inscrição Estadual",
+                "placeholder": "Insira Inscrição Estadual ATIVA (Somente números)",
+                "focus": "false",
+                "type": "number",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracao_insc !== 'Alteração do Cadastro Mobiliário (Em caso de alteração de Endereço, você deve preencher todos os CNAES atuais PRINCIPAL E SECUNDÁRIOS novamente como NOVOS)'"
+            },
+            {
+              "className": "col-6",
+              "key": "uf_origem",
+              "type": "select",
+              "templateOptions": {
+                "label": "UF de Origem",
+                "focus": "false",
+                "options": [
+                  {
+                    "label": "Acre",
+                    "value": "AC"
+                  },
+                  {
+                    "label": "Alagoas",
+                    "value": "AL"
+                  },
+                  {
+                    "label": "Amapá",
+                    "value": "AP"
+                  },
+                  {
+                    "label": "Amazonas",
+                    "value": "AM"
+                  },
+                  {
+                    "label": "Bahia",
+                    "value": "BA"
+                  },
+                  {
+                    "label": "Ceará",
+                    "value": "CE"
+                  },
+                  {
+                    "label": "Distrito Federal",
+                    "value": "DF"
+                  },
+                  {
+                    "label": "Espírito Santo",
+                    "value": "ES"
+                  },
+                  {
+                    "label": "Goiás",
+                    "value": "GO"
+                  },
+                  {
+                    "label": "Maranhão",
+                    "value": "MA"
+                  },
+                  {
+                    "label": "Mato Grosso",
+                    "value": "MT"
+                  },
+                  {
+                    "label": "Mato Grosso do Sul",
+                    "value": "MS"
+                  },
+                  {
+                    "label": "Minas Gerais",
+                    "value": "MG"
+                  },
+                  {
+                    "label": "Pará",
+                    "value": "PA"
+                  },
+                  {
+                    "label": "Paraíba",
+                    "value": "PB"
+                  },
+                  {
+                    "label": "Paraná",
+                    "value": "PR"
+                  },
+                  {
+                    "label": "Pernambuco",
+                    "value": "PE"
+                  },
+                  {
+                    "label": "Piauí",
+                    "value": "PI"
+                  },
+                  {
+                    "label": "Rio de Janeiro",
+                    "value": "RJ"
+                  },
+                  {
+                    "label": "Rio Grande do Norte",
+                    "value": "RN"
+                  },
+                  {
+                    "label": "Rio Grande do Sul",
+                    "value": "RS"
+                  },
+                  {
+                    "label": "Rondônia",
+                    "value": "RO"
+                  },
+                  {
+                    "label": "Roraima",
+                    "value": "RR"
+                  },
+                  {
+                    "label": "Santa Catarina",
+                    "value": "SC"
+                  },
+                  {
+                    "label": "São Paulo",
+                    "value": "SP"
+                  },
+                  {
+                    "label": "Sergipe",
+                    "value": "SE"
+                  },
+                  {
+                    "label": "Tocantins",
+                    "value": "TO"
+                  }
+                ],
+                "required": true
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "expressionProperties": {},
+              "hideExpression": "model.alteracao_insc !== 'Alteração do Cadastro Mobiliário (Em caso de alteração de Endereço, você deve preencher todos os CNAES atuais PRINCIPAL E SECUNDÁRIOS novamente como NOVOS)'"
+            },
+            {
+              "key": "opcaoalteracao",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Selecione o que deseja alterar",
+                "options": [
+                  {
+                    "label": "Endereço da Empresa",
+                    "value": "endereco_empresa"
+                  },
+                  {
+                    "label": "Área Ocupada",
+                    "value": "area_ocupada"
+                  },
+                  {
+                    "label": "Tipo de Unidade",
+                    "value": "tipo_unidade"
+                  },
+                  {
+                    "label": "Forma de Atuação",
+                    "value": "forma_atuacao"
+                  },
+                  {
+                    "label": "Razão Social ou Nome Fantasia",
+                    "value": "razaosocial_nomefantasia"
+                  },
+                  {
+                    "label": "Remover Sócio",
+                    "value": "remover_socio"
+                  },
+                  {
+                    "label": "Inserir Sócio",
+                    "value": "inserir_socio"
+                  },
+                  {
+                    "label": "Alteração entre órgãos de registro/Conversão",
+                    "value": "alteracao_orgao"
+                  },
+                  {
+                    "label": "Atividade Econômica",
+                    "value": "atividade_economica"
+                  },
+                  {
+                    "label": "Natureza Jurídica",
+                    "value": "nat_juridica"
+                  },
+                  {
+                    "label": "Capital Social",
+                    "value": "capital_social"
+                  },
+                  {
+                    "label": "Reativação de empresa (CANCELADA - ART.60 LEI 8934/94)",
+                    "value": "reativacao_empresa"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracao_insc !== 'Alteração do Cadastro Mobiliário (Em caso de alteração de Endereço, você deve preencher todos os CNAES atuais PRINCIPAL E SECUNDÁRIOS novamente como NOVOS)'"
+            },
+            {
+              "key": "nova_area",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Insira a nova área ocupada do empreendimento",
+                "placeholder": "250,00",
+                "focus": "false",
+                "suffix": "m²",
+                "floatNumber": true,
+                "type": "number",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.opcaoalteracao ?.area_ocupada"
+            },
+            {
+              "key": "tipo_unidade_alteracao",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Novo tipo de unidade",
+                "options": [
+                  {
+                    "label": "Unidade Produtiva",
+                    "value": "un_produtiva"
+                  },
+                  {
+                    "label": "Unidade de abastecimento de combustíveis",
+                    "value": "un_abastecimento"
+                  },
+                  {
+                    "label": "Sede",
+                    "value": "sede"
+                  },
+                  {
+                    "label": "Ponto de exposição",
+                    "value": "ponto_exposicao"
+                  },
+                  {
+                    "label": "Escritório Administrativo",
+                    "value": "esc_adm"
+                  },
+                  {
+                    "label": "Centro de treinamento",
+                    "value": "centro_treinamento"
+                  },
+                  {
+                    "label": "Depósito Fechado",
+                    "value": "deposito_fechado"
+                  },
+                  {
+                    "label": "Centro de Processamento de Dados",
+                    "value": "centro_dados"
+                  },
+                  {
+                    "label": "Almoxarifado",
+                    "value": "almoxarifado"
+                  },
+                  {
+                    "label": "Posto de Serviço",
+                    "value": "posto_servico"
+                  },
+                  {
+                    "label": "Oficina de Reparação",
+                    "value": "oficina"
+                  },
+                  {
+                    "label": "Posto de Coleta",
+                    "value": "posto_coleta"
+                  },
+                  {
+                    "label": "Garagem",
+                    "value": "garagem"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.opcaoalteracao ?.tipo_unidade"
+            },
+            {
+              "key": "forma_atuacao_alteracao",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Nova forma de atuação",
+                "options": [
+                  {
+                    "label": "Estabelecimento Fixo",
+                    "value": "estab_fixo"
+                  },
+                  {
+                    "label": "Porta a Porta, Postos Móveis ou por Ambulantes",
+                    "value": "porta_porta"
+                  },
+                  {
+                    "label": "Internet",
+                    "value": "internet"
+                  },
+                  {
+                    "label": "Televendas",
+                    "value": "televendas"
+                  },
+                  {
+                    "label": "Em Local Fixo Fora de Loja",
+                    "value": "local_fixo"
+                  },
+                  {
+                    "label": "Máquinas Automáticas",
+                    "value": "maq_auto"
+                  },
+                  {
+                    "label": "Correio",
+                    "value": "correio"
+                  },
+                  {
+                    "label": "Atividade Desenvolvida Fora do Estabelecimento",
+                    "value": "ativ_fora"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.opcaoalteracao ?.forma_atuacao"
+            },
+            {
+              "key": "alteracaocnaeprincipal",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Deseja alterar o CNAE/ATIVIDADE FISCAL PRINCIPAL atual? (Em caso de ALTERAÇÃO DE ENDEREÇO, selecione 'Sim')",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracao_insc !== 'Alteração do Cadastro Mobiliário (Em caso de alteração de Endereço, você deve preencher todos os CNAES atuais PRINCIPAL E SECUNDÁRIOS novamente como NOVOS)'"
+            },
+            {
+              "key": "removerativfiscal",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Deseja remover um CNAE ou Atividade Fiscal Principal? (Em caso de ALTERAÇÃO DE ENDEREÇO, selecione 'CÓDIGO CNAE PRINCIPAL')",
+                "options": [
+                  {
+                    "value": "Código CNAE Principal"
+                  },
+                  {
+                    "value": "Código Atividade Fiscal Principal"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracaocnaeprincipal !== 'Sim'"
+            },
+            {
+              "key": "convertercnae",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Você deseja converter CNAE PRINCIPAL para CNAE SECUNDÁRIO? (Em caso de ALTERAÇÃO DE ENDEREÇO, seleciona abaixo a opção 'Não')",
+                "options": [
+                  {
+                    "value": "Sim, desejo converter o CNAE PRINCIPAL antigo, para um CNAE SECUNDÁRIO"
+                  },
+                  {
+                    "value": "Não, eu desejo remover este CNAE PRINCIPAL, e ele não será um CNAE SECUNDÁRIO"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.removerativfiscal !== 'Código CNAE Principal' || model.alteracaocnaeprincipal !== 'Sim'"
+            },
+            {
+              "key": "avisoconverter",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "Atenção",
+                "placeholder": "Insira o CNAE PRINCIPAL (o antigo, o qual deseja converter para CNAE SECUNDÁRIO) no botão 'Adicionar CNAE Secundário a ser INCLUÍDO/PERMANECIDO', localizado no fim desta sessão",
+                "focus": "false",
+                "readonly": true,
+                "type": "text",
+                "required": false,
+                "labelBadge": "danger"
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.convertercnae !== 'Sim, desejo converter o CNAE PRINCIPAL antigo, para um CNAE SECUNDÁRIO'  || model.alteracaocnaeprincipal !== 'Sim'"
+            },
+            {
+              "key": "tipo_juridico",
+              "type": "select",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Tipo Jurídico",
+                "options": [
+                  {
+                    "label": "Empresário",
+                    "value": "empresario"
+                  },
+                  {
+                    "label": "Sociedade",
+                    "value": "sociedade"
+                  },
+                  {
+                    "label": "Sociedade Anônima",
+                    "value": "sociedade_anonima"
+                  },
+                  {
+                    "label": "Cooperativa",
+                    "value": "cooperativa"
+                  },
+                  {
+                    "label": "Consórcio",
+                    "value": "consorcio"
+                  },
+                  {
+                    "label": "Fundação",
+                    "value": "fundacao"
+                  },
+                  {
+                    "label": "Empresa Estrangeira",
+                    "value": "empresa_estrangeira"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracao_insc !== 'Primeira Inscrição Mobiliária' "
+            },
+            {
+              "key": "nat_jud_um",
+              "type": "select",
+              "templateOptions": {
+                "label": "Natureza Jurídica",
+                "options": [
+                  {
+                    "label": "Empresário (Individual)",
+                    "value": "Empresário (Individual)"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_juridico !== 'empresario' "
+            },
+            {
+              "key": "nat_jud_dois",
+              "type": "select",
+              "templateOptions": {
+                "label": "Natureza Jurídica",
+                "options": [
+                  {
+                    "label": "Sociedade Empresária Limitada",
+                    "value": "Sociedade Empresária Limitada"
+                  },
+                  {
+                    "label": "Sociedade Empresária em Nome Coletivo",
+                    "value": "Sociedade Empresária em Nome Coletivo"
+                  },
+                  {
+                    "label": "Sociedade Empresária em Comandita Simples",
+                    "value": "Sociedade Empresária em Comandita Simples"
+                  },
+                  {
+                    "label": "Sociedade Empresária em Comandita por Ações",
+                    "value": "Sociedade Empresária em Comandita por Ações"
+                  },
+                  {
+                    "label": "Sociedade em Conta de Participação",
+                    "value": "Sociedade em Conta de Participação"
+                  },
+                  {
+                    "label": "Grupo de Sociedades",
+                    "value": "Grupo de Sociedades"
+                  },
+                  {
+                    "label": "Estabelecimento, no Brasil, de Sociedade Estrangeira",
+                    "value": "Estabelecimento, no Brasil, de Sociedade Estrangeira"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_juridico !== 'sociedade' "
+            },
+            {
+              "key": "nat_jud_tres",
+              "type": "select",
+              "templateOptions": {
+                "label": "Natureza Jurídica",
+                "options": [
+                  {
+                    "label": "Empresa Pública",
+                    "value": "Empresa Pública"
+                  },
+                  {
+                    "label": "Sociedade de Economia Mista",
+                    "value": "Sociedade de Economia Mista"
+                  },
+                  {
+                    "label": "Sociedade Anônima Aberta",
+                    "value": "Sociedade Anônima Aberta"
+                  },
+                  {
+                    "label": "Sociedade Anônima Fechada",
+                    "value": "Sociedade Anônima Fechada"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_juridico !== 'sociedade_anonima' "
+            },
+            {
+              "key": "nat_jud_quatro",
+              "type": "select",
+              "templateOptions": {
+                "label": "Natureza Jurídica",
+                "options": [
+                  {
+                    "label": "Cooperativa",
+                    "value": "Cooperativa"
+                  },
+                  {
+                    "label": "Cooperativas de Consumo",
+                    "value": "Cooperativas de Consumo"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_juridico !== 'cooperativa' "
+            },
+            {
+              "key": "nat_jud_cinco",
+              "type": "select",
+              "templateOptions": {
+                "label": "Natureza Jurídica",
+                "options": [
+                  {
+                    "label": "Consórcio de Sociedades",
+                    "value": "Consórcio de Sociedades"
+                  },
+                  {
+                    "label": "Consórcio Simples",
+                    "value": "Consórcio Simples"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_juridico !== 'consorcio' "
+            },
+            {
+              "key": "nat_jud_seis",
+              "type": "select",
+              "templateOptions": {
+                "label": "Natureza Jurídica",
+                "options": [
+                  {
+                    "label": "Fundação Privada",
+                    "value": "Fundação Privada"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_juridico !== 'fundacao' "
+            },
+            {
+              "key": "nat_jud_sete",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Natureza Jurídica",
+                "options": [
+                  {
+                    "label": "Empresa Domiciliada no Exterior",
+                    "value": "Empresa Domiciliada no Exterior"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.tipo_juridico !== 'empresa_estrangeira' "
+            },
+            {
+              "key": "tipo_unidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Tipo de Unidade",
+                "options": [
+                  {
+                    "label": "Unidade Produtiva",
+                    "value": "un_produtiva"
+                  },
+                  {
+                    "label": "Unidade de abastecimento de combustíveis",
+                    "value": "un_abastecimento"
+                  },
+                  {
+                    "label": "Sede",
+                    "value": "sede"
+                  },
+                  {
+                    "label": "Ponto de exposição",
+                    "value": "ponto_exposicao"
+                  },
+                  {
+                    "label": "Escritório Administrativo",
+                    "value": "esc_adm"
+                  },
+                  {
+                    "label": "Centro de treinamento",
+                    "value": "centro_treinamento"
+                  },
+                  {
+                    "label": "Depósito Fechado",
+                    "value": "deposito_fechado"
+                  },
+                  {
+                    "label": "Centro de Processamento de Dados",
+                    "value": "centro_dados"
+                  },
+                  {
+                    "label": "Almoxarifado",
+                    "value": "almoxarifado"
+                  },
+                  {
+                    "label": "Posto de Serviço",
+                    "value": "posto_servico"
+                  },
+                  {
+                    "label": "Oficina de Reparação",
+                    "value": "oficina"
+                  },
+                  {
+                    "label": "Posto de Coleta",
+                    "value": "posto_coleta"
+                  },
+                  {
+                    "label": "Garagem",
+                    "value": "garagem"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracao_insc !== 'Primeira Inscrição Mobiliária' "
+            },
+            {
+              "key": "forma_atuacao",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Forma de Atuação",
+                "options": [
+                  {
+                    "label": "Estabelecimento Fixo",
+                    "value": "estab_fixo"
+                  },
+                  {
+                    "label": "Porta a Porta, Postos Móveis ou por Ambulantes",
+                    "value": "porta_porta"
+                  },
+                  {
+                    "label": "Internet",
+                    "value": "internet"
+                  },
+                  {
+                    "label": "Televendas",
+                    "value": "televendas"
+                  },
+                  {
+                    "label": "Em Local Fixo Fora de Loja",
+                    "value": "local_fixo"
+                  },
+                  {
+                    "label": "Máquinas Automáticas",
+                    "value": "maq_auto"
+                  },
+                  {
+                    "label": "Correio",
+                    "value": "correio"
+                  },
+                  {
+                    "label": "Atividade Desenvolvida Fora do Estabelecimento",
+                    "value": "ativ_fora"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracao_insc !== 'Primeira Inscrição Mobiliária' "
+            },
+            {
+              "key": "categoria_risco_cnae",
+              "type": "next-input",
+              "templateOptions": {
+                "type": "text"
+              },
+              "expressionProperties": {
+                "model|||categoria_risco_cnae": "model.area ? model.area <= 100 ? 'ate100' : model.area <= 200 ? '100a200' : model.area <= 400 ? '200a400' : model.area > 400 ? 'acima400' : '' : ''"
+              },
+              "hideExpression": true
+            },
+            {
+              "key": "mensagemIntegracaoFalhou",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Inscrição Imobiliária inválida, por favor insira outra",
+                "placeholder": "Erro: Você não pode continuar",
+                "readonly": true,
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.inscricao_imob_integration?.data?.response?.Error"
+            },
+            {
+              "key": "cnaeanterior",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CNAE PRINCIPAL ANTERIOR (Que deixará de existir)",
+                "placeholder": "Ex: 00.00-0-00  CNAE PRINCIPAL (antigo) que será substituído",
+                "focus": "false",
+                "type": "text",
+                "mask": "00.00-0-00",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.convertercnae == 'Sim, desejo converter o CNAE PRINCIPAL antigo, para um CNAE SECUNDÁRIO' || model.removerativfiscal !== 'Código CNAE Principal' || model.alteracaocnaeprincipal !== 'Sim'"
+            },
+            {
+              "key": "afanterior",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "ATIVIDADE FISCAL PRINCIPAL ANTERIOR (Que deixará de existir)",
+                "placeholder": "Deve possuir até 6 números (Atividade Fiscal não é um CNAE)",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.removerativfiscal !== 'Código Atividade Fiscal Principal'  || model.alteracaocnaeprincipal !== 'Sim'"
+            },
+            {
+              "key": "cnae_principal",
+              "type": "next-input-data-autocomplete",
+              "wrappers": [
+                "form-field",
+                "consumeDataset"
+              ],
+              "templateOptions": {
+                "label": "NOVO CNAE PRINCIPAL - Somente números. Em caso de consulta de Viabilidade, insira abaixo o CNAE PRINCIPAL",
+                "datasetReference": "6655fd097d32280006010881",
+                "datasetKey": "codigo",
+                "compact": true,
+                "hideData": true,
+                "keepMask": true,
+                "mask": "00.00-0-00",
+                "placeholder": "Insira o NOVO CNAE PRINCIPAL",
+                "autocomplete": true,
+                "object": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.alteracaocnaeprincipal !== 'Não'"
+              },
+              "hideExpression": "model.alteracaocnaeprincipal == 'Não' || model.removerativfiscal == 'Código Atividade Fiscal Principal'"
+            },
+            {
+              "key": "atividade_resolucao_consema",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "cnae",
+                "placeholder": "Placeholder",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||atividade_resolucao_consema": "model?.cnae_principal?.input_data?.data?.find((e)=>e.key ==='codigo')?.value"
+              }
+            },
+            {
+              "key": "escritorio_resp",
+              "type": "radio",
+              "templateOptions": {
+                "label": "A empresa está estabelecida em Escritório Compartilhado (Definição: A empresa fornece o serviço de endereço fiscal)?:",
+                "focus": "false",
+                "required": true,
+                "options": [
+                  {
+                    "label": "Sim",
+                    "value": "Sim"
+                  },
+                  {
+                    "label": "Não",
+                    "value": "Não"
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "atividade",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Denominação da Atividade",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||atividade": "model?.cnae_principal?.input_data?.data?.find((e)=>e.key ==='denominacao')?.value"
+              },
+              "hideExpression": "model.alteracaocnaeprincipal == 'Não' "
+            },
+            {
+              "key": "categoria_metragem_cnae_principal",
+              "type": "next-input",
+              "templateOptions": {
+                "type": "text"
+              },
+              "expressionProperties": {
+                "model|||categoria_metragem_cnae_principal": "model.area ? model.area <= 100 ? 'usoate100' : model.area <= 200 ? 'uso100a200' : model.area <= 400 ? 'uso200a400' : model.area > 400 ? 'usoacima400' : '' : ''"
+              },
+              "hideExpression": true
+            },
+            {
+              "key": "categoria_risco_cnae_principal",
+              "type": "next-input",
+              "templateOptions": {
+                "type": "text"
+              },
+              "expressionProperties": {
+                "model|||categoria_risco_cnae_principal": "model.area ? model.area <= 100 ? 'ate100' : model.area <= 200 ? '100a200' : model.area <= 400 ? '200a400' : model.area > 400 ? 'acima400' : '' : ''"
+              },
+              "hideExpression": true
+            },
+            {
+              "key": "pergunta_principal",
+              "type": "next-input",
+              "templateOptions": {
+                "focus": "false",
+                "required": true,
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||pergunta_principal": "model.cnae_principal?.input_data?.data?.find((item)=>(item.key == model.categoria_metragem_cnae_principal))?.value || ''"
+              },
+              "hideExpression": true
+            },
+            {
+              "key": "risco_principal",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Risco",
+                "readonly": true,
+                "type": "text"
+              },
+              "expressionProperties": {
+                "model|||risco_principal": "model.cnae_principal?.input_data?.data?.find((item)=>(item.key == model.categoria_risco_cnae_principal))?.value || ''"
+              },
+              "hideExpression": "model.alteracaocnaeprincipal == 'Não' "
+            },
+            {
+              "key": "zoneamento_usos_principal",
+              "type": "next-input-data-autocomplete",
+              "wrappers": [
+                "consumeDataset"
+              ],
+              "templateOptions": {
+                "label": "Zoneamentos Usos",
+                "datasetReference": "601d8075bccf0e000807b1cd",
+                "datasetKey": "ZONEAMENTO",
+                "autocomplete": true,
+                "hideData": true,
+                "readonly": true,
+                "object": true
+              },
+              "expressionProperties": {
+                "model|||zoneamento_usos_principal": "{ 'input': model.inscricao_imob?.input_data?.data.find((item)=> (item.key == 'zoneamento'))?.value || '' }"
+              },
+              "hideExpression": "model.alteracaocnaeprincipal == 'Não' "
+            },
+            {
+              "key": "documentacao",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Documentações necessárias para seguimento da Cessão de Viabilidade",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||documentacao": "model?.cnae_principal?.input_data?.data?.find((e)=>e.key ==='documentacao')?.value"
+              },
+              "hideExpression": "model.alteracaocnaeprincipal == 'Não' "
+            },
+            {
+              "key": "auxiliar_classificacao_principal",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Sua classificação de uso é:",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||auxiliar_classificacao_principal": "model.escritorio_resp == 'Sim' ? 'permitido' : model.zoneamento_usos_principal?.input_data?.data?.find((item)=> (item.key == model.pergunta_principal))?.value"
+              },
+              "hideExpression": "model.alteracaocnaeprincipal == 'Não' "
+            },
+            {
+              "key": "informativo_permissivel",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "Atenção!",
+                "placeholder": "A sua viabilidade foi classificada com “Permissível”. Viabilidades permissíveis necessitam a aprovação do Conselho Municipal de Gestão e Desenvolvimento Territorial (CMGDT).",
+                "type": "text",
+                "focus": "false",
+                "labelBadge": "danger",
+                "readonly": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracaocnaeprincipal == 'Não' || model.auxiliar_classificacao_principal !== 'permissível'"
+            },
+            {
+              "key": "bloqueador_principal",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "Atenção!",
+                "placeholder": "Este é um zoneamento proibido para esta atividade.",
+                "type": "text",
+                "labelBadge": "danger",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.auxiliar_classificacao_principal == 'proibido'",
+                "model|||bloqueador_principal": "model.ativ_alteracao == 'Sim' ? model.alteracao_insc !== 'Primeira Inscrição Mobiliária' ? 'Toda atividade já existente, será tolerada' : '' : ''"
+              },
+              "hideExpression": "model.alteracaocnaeprincipal == 'Não' || model.auxiliar_classificacao_principal !== 'proibido'"
+            },
+            {
+              "key": "secativfiscal",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "ATIVIDADE FISCAL Secundária a ser EXCLUÍDO/RETIRADO",
+                "focus": "false",
+                "required": false,
+                "btnAddText": "ATIVIDADE FISCAL Secundária a ser EXCLUÍDO/RETIRADO"
+              },
+              "expressionProperties": {
+                "templateOptions|||disableAdd": "!model.area "
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "atividadefiscalsec",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "ATIVIDADE FISCAL A SER RETIRADO",
+                      "placeholder": "Código com até 6 números",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "hideExpression": "model.alteracao_insc !== 'Alteração do Cadastro Mobiliário (Em caso de alteração de Endereço, você deve preencher todos os CNAES atuais PRINCIPAL E SECUNDÁRIOS novamente como NOVOS)'"
+            },
+            {
+              "key": "cnae_existente",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "CNAE Secundário a ser EXCLUÍDO/RETIRADO",
+                "focus": "false",
+                "required": false,
+                "btnAddText": "CNAE Secundário a ser EXCLUÍDO/RETIRADO"
+              },
+              "expressionProperties": {
+                "templateOptions|||disableAdd": "!model.area "
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "cnae_existente_repeat",
+                    "type": "next-input",
+                    "wrappers": [
+                      "form-field",
+                      "consumeDataset"
+                    ],
+                    "templateOptions": {
+                      "label": "CNAE SECUNDÁRIO A SER RETIRADO",
+                      "required": true,
+                      "compact": true,
+                      "placeholder": "Ex: 01.19-9-04",
+                      "keepMask": true,
+                      "mask": "00.00-0-00",
+                      "datasetReference": "5fc64daf78b8f700085d17d6",
+                      "datasetKey": "codigo",
+                      "autocomplete": true
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "hideExpression": "model.alteracao_insc !== 'Alteração do Cadastro Mobiliário (Em caso de alteração de Endereço, você deve preencher todos os CNAES atuais PRINCIPAL E SECUNDÁRIOS novamente como NOVOS)'"
+            },
+            {
+              "key": "viabilidade",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "CNAE Secundário a ser INCLUÍDO/PERMANECIDO",
+                "focus": "false",
+                "required": false,
+                "btnAddText": "CNAE Secundário a ser INCLUÍDO/PERMANECIDO"
+              },
+              "expressionProperties": {
+                "templateOptions|||disableAdd": "!model.area ",
+                "templateOptions|||required": "model.convertercnae == 'Sim, desejo converter o CNAE PRINCIPAL antigo, para um CNAE SECUNDÁRIO'"
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "cnae",
+                    "type": "next-input",
+                    "wrappers": [
+                      "form-field",
+                      "consumeDataset"
+                    ],
+                    "templateOptions": {
+                      "label": "CNAE SECUNDÁRIO A SER INCLUÍDO/PERMANECIDO* (Obs: Em caso de alteração de endereço)",
+                      "required": true,
+                      "compact": true,
+                      "hideData": true,
+                      "keepMask": true,
+                      "placeholder": "Ex: 01.19-9-04",
+                      "mask": "00.00-0-00",
+                      "datasetReference": "5fc64daf78b8f700085d17d6",
+                      "datasetKey": "codigo",
+                      "autocomplete": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "categoria_metragem_cnae",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "type": "text"
+                    },
+                    "expressionProperties": {
+                      "model|||categoria_metragem_cnae": "model.area ? model.area <= 100 ? 'usoate100' : model.area <= 200 ? 'uso100a200' : model.area <= 400 ? 'uso200a400' : model.area > 400 ? 'usoacima400' : '' : ''"
+                    },
+                    "hideExpression": true
+                  },
+                  {
+                    "key": "denominacaocnae",
+                    "type": "next-input-data-autocomplete",
+                    "wrappers": [
+                      "consumeDataset"
+                    ],
+                    "templateOptions": {
+                      "label": "Denominação do CNAE",
+                      "datasetReference": "5fc64daf78b8f700085d17d6",
+                      "datasetKey": "divisao",
+                      "autocomplete": true,
+                      "hideData": true,
+                      "readonly": true,
+                      "object": true
+                    },
+                    "expressionProperties": {
+                      "model|||denominacaocnae": "{ 'input': model.cnae?.input_data?.data.find((item)=> (item.key == 'denominacao'))?.value || '' }"
+                    }
+                  },
+                  {
+                    "key": "categoria_risco_cnae",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "type": "text"
+                    },
+                    "expressionProperties": {
+                      "model|||categoria_risco_cnae": "model.area ? model.area <= 100 ? 'ate100' : model.area <= 200 ? '100a200' : model.area <= 400 ? '200a400' : model.area > 400 ? 'acima400' : '' : ''"
+                    },
+                    "hideExpression": true
+                  },
+                  {
+                    "key": "pergunta",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "focus": "false",
+                      "required": true,
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||pergunta": "model.cnae?.input_data?.data?.find((item)=>(item.key == model.categoria_metragem_cnae))?.value || ''"
+                    },
+                    "hideExpression": true
+                  },
+                  {
+                    "key": "risco",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Risco",
+                      "readonly": true,
+                      "type": "text"
+                    },
+                    "expressionProperties": {
+                      "model|||risco": "model.cnae?.input_data?.data?.find((item)=>(item.key == model.categoria_risco_cnae))?.value || ''"
+                    }
+                  },
+                  {
+                    "key": "zoneamento_usos",
+                    "type": "next-input-data-autocomplete",
+                    "wrappers": [
+                      "consumeDataset"
+                    ],
+                    "templateOptions": {
+                      "label": "Zoneamentos Usos",
+                      "datasetReference": "601d8075bccf0e000807b1cd",
+                      "datasetKey": "ZONEAMENTO",
+                      "autocomplete": true,
+                      "readonly": true,
+                      "hideData": true,
+                      "object": true
+                    },
+                    "expressionProperties": {
+                      "model|||zoneamento_usos": "{ 'input': model.inscricao_imob?.input_data?.data.find((item)=> (item.key == 'zoneamento'))?.value || '' }"
+                    }
+                  },
+                  {
+                    "key": "auxiliar_classificacao",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Sua classificação de uso é:",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||auxiliar_classificacao": "model.zoneamento_usos?.input_data?.data?.find((item)=> (item.key == model.pergunta))?.value"
+                    }
+                  },
+                  {
+                    "key": "bloqueador",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "placeholder": "Este é um zoneamento proibido para esta atividade",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.auxiliar_classificacao == 'proibido'",
+                      "model|||bloqueador": "model.ativ_alteracao == 'Sim' ? model.alteracao_insc !== 'Primeira Inscrição Mobiliária' ? 'Toda atividade já existente, será tolerada' : '' : ''"
+                    },
+                    "hideExpression": "model.auxiliar_classificacao !== 'proibido'"
+                  }
+                ]
+              },
+              "hideExpression": "model.alteracao_insc !== 'Alteração do Cadastro Mobiliário (Em caso de alteração de Endereço, você deve preencher todos os CNAES atuais PRINCIPAL E SECUNDÁRIOS novamente como NOVOS)'"
+            },
+            {
+              "key": "cnae_secundario",
+              "type": "next-repeat",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "CNAE Secundário",
+                "focus": "false",
+                "required": false,
+                "btnAddText": "CNAE Secundário"
+              },
+              "expressionProperties": {
+                "templateOptions|||disableAdd": "!model.area "
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "cnae_sec",
+                    "type": "next-input",
+                    "wrappers": [
+                      "form-field",
+                      "mirror",
+                      "consumeDataset"
+                    ],
+                    "templateOptions": {
+                      "label": "CNAE SECUNDÁRIO",
+                      "required": true,
+                      "compact": true,
+                      "hideData": true,
+                      "keepMask": true,
+                      "placeholder": "Ex: 01.19-9-04",
+                      "mask": "00.00-0-00",
+                      "datasetReference": "5fc64daf78b8f700085d17d6",
+                      "datasetKey": "codigo",
+                      "autocomplete": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "cnaesec",
+                    "type": "next-input",
+                    "wrappers": [
+                      "form-field",
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "cnae secundario",
+                      "required": false,
+                      "mask": "00.00-0-00",
+                      "hidden": true
+                    },
+                    "expressionProperties": {
+                      "model|||cnaesec": "model?.cnae_sec?.input_data?.data?.find((e)=>e.key ==='codigo')?.value"
+                    }
+                  },
+                  {
+                    "key": "categoria_metragem_cnae_sec",
+                    "type": "next-input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "type": "text"
+                    },
+                    "expressionProperties": {
+                      "model|||categoria_metragem_cnae_sec": "model.area ? model.area <= 100 ? 'usoate100' : model.area <= 200 ? 'uso100a200' : model.area <= 400 ? 'uso200a400' : model.area > 400 ? 'usoacima400' : '' : ''"
+                    },
+                    "hideExpression": true
+                  },
+                  {
+                    "key": "denominacaocnae_sec",
+                    "type": "next-input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Denominação do CNAE",
+                      "readonly": true,
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "model|||denominacaocnae_sec": "model?.cnae_sec?.input_data?.data?.find((e)=>e.key ==='denominacao')?.value"
+                    }
+                  },
+                  {
+                    "key": "categoria_risco_cnae_sec",
+                    "type": "next-input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "type": "text"
+                    },
+                    "expressionProperties": {
+                      "model|||categoria_risco_cnae_sec": "model.area ? model.area <= 100 ? 'ate100' : model.area <= 200 ? '100a200' : model.area <= 400 ? '200a400' : model.area > 400 ? 'acima400' : '' : ''"
+                    },
+                    "hideExpression": true
+                  },
+                  {
+                    "key": "pergunta_cnae_sec",
+                    "type": "next-input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "focus": "false",
+                      "required": true,
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||pergunta_cnae_sec": "model.cnae_sec?.input_data?.data?.find((item)=>(item.key == model.categoria_metragem_cnae_sec))?.value || ''"
+                    },
+                    "hideExpression": true
+                  },
+                  {
+                    "key": "risco_cnae_sec",
+                    "type": "next-input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Risco",
+                      "readonly": true,
+                      "type": "text"
+                    },
+                    "expressionProperties": {
+                      "model|||risco_cnae_sec": "model.cnae_sec?.input_data?.data?.find((item)=>(item.key == model.categoria_risco_cnae_sec))?.value || ''"
+                    }
+                  },
+                  {
+                    "key": "zoneamento_usos_sec",
+                    "type": "next-input-data-autocomplete",
+                    "wrappers": [
+                      "mirror",
+                      "consumeDataset"
+                    ],
+                    "templateOptions": {
+                      "label": "Zoneamentos Usos",
+                      "datasetReference": "601d8075bccf0e000807b1cd",
+                      "datasetKey": "ZONEAMENTO",
+                      "autocomplete": true,
+                      "readonly": true,
+                      "hideData": true,
+                      "object": true
+                    },
+                    "expressionProperties": {
+                      "model|||zoneamento_usos_sec": "{ 'input': model.inscricao_imob?.input_data?.data.find((item)=> (item.key == 'zoneamento'))?.value || '' }"
+                    }
+                  },
+                  {
+                    "key": "auxiliar_classificacao_sec",
+                    "type": "next-input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Sua classificação de uso é:",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||auxiliar_classificacao_sec": "model.escritorio_resp == 'Sim' ? 'permitido' : model.zoneamento_usos_sec?.input_data?.data?.find((item)=> (item.key == model.pergunta_cnae_sec))?.value"
+                    }
+                  },
+                  {
+                    "key": "bloqueador",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "placeholder": "Este é um zoneamento proibido para esta atividade",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.auxiliar_classificacao_sec == 'proibido'"
+                    },
+                    "hideExpression": "model.auxiliar_classificacao_sec !== 'proibido'"
+                  }
+                ]
+              },
+              "hideExpression": "model.alteracao_insc !== 'Primeira Inscrição Mobiliária'"
+            },
+            {
+              "key": "blockcs2",
+              "type": "next-input",
+              "templateOptions": {
+                "placeholder": "B: Este é um zoneamento proibido para esta atividade",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.resultadocsdois == 'proibido'",
+                "model|||blockcs2": "model.ativ_alteracao == 'Sim' ? model.alteracao_insc !== 'Primeira Inscrição Mobiliária' ? 'Toda atividade já existente, será tolerada' : '' : ''"
+              },
+              "hideExpression": "!model.auxiliarcsdois"
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Consulta de Viabilidade",
+            "subtitle": "Insira as informações abaixo da forma indicada. Você deve inserir todos os CNAES. Consulte o Grau de Risco antes de iniciar o processo.",
+            "textHtml": "<div class=\"p-4 border-l-4 border-blue-500 text-sm text-blue-800 font-medium leading-6 bg-blue-100\">\n<b> Exemplos para preenchimento do formulário</b><br>\nInscrição imobiliária 1ª parte: 201.042.05.0126 <br>\nInscrição imobiliária 2ª parte: 0001.000 <br><br>\n\n<b>CNAEs exemplares:<br> \n82.30-0-02 -  Eventos (risco alto)<br>\n47.31-8-00 - Combustível (risco alto) <br>\n47.13-0-02 - Loja (sem doc exigida) (risco médio) <br>\n41.20-4-00 - Construção (risco baixo) <br>\n16.10-2-03 - Madeira (risco baixo - permissível a partir de área com 150m²) <br></b><br>\nCNAE principal proibido:<br>\n01.11-3-02 - Milho (risco alto) <br> <br>\n<html>\n<body> \n\n<div class=\"badge badge-danger text-wrap  text-white\" > \n  IMPORTANTE\n</div> <br> \n\n<br>\n<b>3. INSCRIÇÃO IMOBILIÁRIA</b><br>\n\nVocê deve encontrar aqui a <a target=' blank' href='https://geoitajai.github.io/geo/plantacadastral.html\n'> Inscrição Imobiliária</a>, e insira conforme a orientação do campo:\n<br><br>Como preencher a Inscrição Imobiliária: 1º PARTE: referente ao LOTE, composta por 10 números: 000.000.00.0000 2º PARTE: referente a UNIDADE, composta por 7 números: 0000.000   <br> <br><br>\n\n<b>4. LISTA DE CNAES</b><br>\nVocê deve acessar aqui a <a target=' blank' href='https://assets-publicos.s3.amazonaws.com/LISTA+CNAES+-+CLASSIFICAC%CC%A7O%CC%83ES+DE+USO+ITAJAI%CC%81+-+dados_categorizados.pdf'> Lista de CNAE</a>, e insira os números da coluna em Amarelo.\n<br><br><br>\n\n<b>05. TIPOS DE ESCRITÓRIO</b><br>\n\n- Referência Fiscal: endereço residencial, o qual será utilizado apenas como ponto de referência para correspondências; não haverá comercialização, distribuição, armazenagem ou fabricação de produtos, nem prestação de serviços, no local.\n<br><br>\n- Escritório Compartilhado: estabelecido em endereço COMERCIAL, em ambiente único compartilhado, cujo cedente do imóvel já possui Atestado de Vistoria para Alvará de Funcionamento do Corpo de Bombeiros Militar de Itajaí, declarando ainda que não haverá comercialização, distribuição, armazenagem ou fabricação de produtos, nem prestação de serviços, no local.\n<br><br>\n- Escritório Convencional: endereço comercial que desempenhará exclusivamente atividades de escritório, sem armazenagem ou estoque de produtos não compatíveis com tal atividade."
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "templateOptions": {
+            "title": "Endereço da Empresa",
+            "subtitle": "Informe o logradouro, o número e o bairro",
+            "textHtml": "<div class=\"p-4 border-l-4 border-blue-500 text-sm text-blue-800 font-medium leading-6 bg-blue-100\">\n<div class=\"\" >\n</div>\n<br>\nConfirme o endereço da empresa conforme Inscrição Imobiliária inserida anteriormente, ou insira o novo endereço da empresa.\n<br><br>\n\nComprovante de Endereço: Conta de Água, Luz, Telefone, Cartão de Crédito, Televisão por Assinatura, Contrato de Locação, Correspondência bancária.\n\n\n<br><br>",
+            "fieldGroup": [
+              {
+                "key": "inscricaol-empresa",
+                "type": "next-input",
+                "wrappers": [
+                  "form-field",
+                  "fake-imovel"
+                ],
+                "templateOptions": {
+                  "label": "Inscrição Imobiliária",
+                  "placeholder": "0000.0000",
+                  "focus": "false",
+                  "type": "text",
+                  "required": true,
+                  "messageSuccess": "Inscrição imobiliária encontrada. Pode seguir em frente.",
+                  "correctValue": [
+                    "24.757.040/0001-40"
+                  ],
+                  "messageErro": "Inscrição imobiliária não encontrada. Favor procurar o cadastro imobiliário da Prefeitura."
+                },
+                "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+              },
+              {
+                "key": "key-novo-field",
+                "type": "next-input",
+                "templateOptions": {
+                  "label": "Label",
+                  "placeholder": "Placeholder",
+                  "focus": "false",
+                  "type": "text",
+                  "required": true
+                }
+              },
+              {
+                "key": "endereco-empresa",
+                "type": "next-input",
+                "templateOptions": {
+                  "label": "Logradouro",
+                  "placeholder": "Rua Carlos Gomes",
+                  "focus": "false",
+                  "type": "text",
+                  "required": true
+                },
+                "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+              },
+              {
+                "key": "numero-empresa",
+                "type": "next-input",
+                "templateOptions": {
+                  "label": "Número",
+                  "placeholder": "0000",
+                  "focus": "false",
+                  "type": "text",
+                  "required": true
+                },
+                "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+              },
+              {
+                "key": "bairro-empresa",
+                "type": "next-input",
+                "templateOptions": {
+                  "label": "Bairro",
+                  "placeholder": "Centro",
+                  "focus": "false",
+                  "type": "text",
+                  "required": true
+                },
+                "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+              }
+            ]
+          },
+          "fieldGroup": [
+            {
+              "className": "col-6",
+              "key": "endereco_cep",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CEP",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "mask": "00000-000",
+                "readonly": true,
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||endereco_cep": "model.endereco_cep || model.inscricao_imob_integration?.data?.response?.endereco?.cep || '88301-360' "
+              }
+            },
+            {
+              "key": "logradouro",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Logradouro",
+                "readonly": true,
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||logradouro": "model.logradouro || model.inscricao_imob_integration?.data?.response?.endereco?.logradouro || 'TIJUCAS' "
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "nr_predial",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número Predial",
+                "placeholder": "",
+                "readonly": true,
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||nr_predial": "model.nr_predial || model.inscricao_imob_integration?.data?.response?.endereco?.numero || '78' "
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "bairro_empresa",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Bairro",
+                "placeholder": "Centro",
+                "focus": "false",
+                "type": "text",
+                "readonly": true,
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||bairro_empresa": "model.bairro_empresa || model.inscricao_imob_integration?.data?.response?.endereco?.bairro || 'CENTRO' "
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "cidade",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cidade",
+                "placeholder": "",
+                "readonly": true,
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cidade": "(model.inscricao_imob_integration?.data?.response?.endereco?.cidade) || 'ITAJAI'"
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "uf",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Estado",
+                "placeholder": "",
+                "readonly": true,
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||uf": "model.uf || model.inscricao_imob_integration?.data?.response?.endereco?.uf || 'SC' "
+              }
+            },
+            {
+              "key": "complemento_sala",
+              "type": "next-repeat",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Complemento",
+                "btnAddText": "Complemento",
+                "required": false
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "className": "col-6",
+                    "key": "complement",
+                    "type": "select",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Tipo de Complemento",
+                      "options": [
+                        {
+                          "label": "Sala",
+                          "value": "Sala"
+                        },
+                        {
+                          "label": "Ala",
+                          "value": "Ala"
+                        },
+                        {
+                          "label": "Galpão",
+                          "value": "Galpão"
+                        },
+                        {
+                          "label": "Box",
+                          "value": "Box"
+                        }
+                      ],
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "comp",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Complemento",
+                      "required": false
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "novo_cep_imovel",
+              "type": "next-input",
+              "wrappers": [
+                "mirror",
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "Insira o novo CEP da empresa",
+                "idIntegration": "60bf6970f5ace0000afcd57f",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "mask": "00000-000",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.opcaoalteracao ?.endereco_empresa"
+            },
+            {
+              "key": "nova_rua_imovel",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Insira o novo logradouro da empresa",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||nova_rua_imovel": "model.novo_cep_imovel ? model.novo_cep_imovel.data ? model.novo_cep_imovel.data.response ? ( model.novo_cep_imovel.data.response.result?.logradouro ) : '' : '' : '' "
+              },
+              "hideExpression": "!model.opcaoalteracao ?.endereco_empresa"
+            },
+            {
+              "className": "col-6",
+              "key": "novo_numero_imovel",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Insira o novo número predial da empresa",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.opcaoalteracao ?.endereco_empresa"
+            },
+            {
+              "className": "col-6",
+              "key": "novo_bairro_imovel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Insira o novo bairro da empresa",
+                "placeholder": "Centro",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||novo_bairro_imovel": "model.novo_cep_imovel ? model.novo_cep_imovel.data ? model.novo_cep_imovel.data.response ? ( model.novo_cep_imovel.data.response.result?.bairro ) : '' : '' : '' "
+              },
+              "hideExpression": "!model.opcaoalteracao ?.endereco_empresa"
+            },
+            {
+              "className": "col-6",
+              "key": "nova_cidade_imovel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Insira a nova cidade da empresa",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||nova_cidade_imovel": "model.novo_cep_imovel ? model.novo_cep_imovel.data ? model.novo_cep_imovel.data.response ? ( model.novo_cep_imovel.data.response.result?.localidade ) : '' : '' : '' "
+              },
+              "hideExpression": "!model.opcaoalteracao ?.endereco_empresa"
+            },
+            {
+              "className": "col-6",
+              "key": "novo_uf_imovel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Insira o novo estado da empresa",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||novo_uf_imovel": "model.novo_cep_imovel ? model.novo_cep_imovel.data ? model.novo_cep_imovel.data.response ? ( model.novo_cep_imovel.data.response.result?.uf ) : '' : '' : '' "
+              },
+              "hideExpression": "!model.opcaoalteracao ?.endereco_empresa"
+            },
+            {
+              "key": "novo_complemento_sala",
+              "type": "next-repeat",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Insira o novo complemento da empresa",
+                "btnAddText": "Complemento",
+                "required": false
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "className": "col-6",
+                    "key": "novo_complemento",
+                    "type": "select",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Tipo de Complemento",
+                      "options": [
+                        {
+                          "label": "Sala",
+                          "value": "Sala"
+                        },
+                        {
+                          "label": "Ala",
+                          "value": "Ala"
+                        },
+                        {
+                          "label": "Galpão",
+                          "value": "Galpão"
+                        },
+                        {
+                          "label": "Box",
+                          "value": "Box"
+                        }
+                      ],
+                      "required": false
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "nova_obs",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Complemento",
+                      "required": false
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.opcaoalteracao ?.endereco_empresa"
+            },
+            {
+              "className": "col-6",
+              "key": "telefone_empresa",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone Empresa",
+                "placeholder": "Ex: (00) 00000-0000",
+                "mask": "(00) 00000-0000",
+                "focus": "false",
+                "type": "text",
+                "required": true,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-6",
+              "key": "email_dte",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "E-mail",
+                "placeholder": "Ex: contato@empresa.com.br",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "certificado-bombeiros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Certificado de Vistoria do Corpo de Bombeiros",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.escritorio_resp !== 'Sim'"
+            },
+            {
+              "key": "certif_bombeiros",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Certificado de Vistoria do Corpo de Bombeiros",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.escritorio_resp !== 'Não'"
+            },
+            {
+              "key": "declaracaoamb",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declaração de Firma Estabelecida em Ambiente Único Compartilhado do Corpo de Bombeiros",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.escritorio_resp !== 'Sim'"
+            },
+            {
+              "key": "comp_ender",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovante de Endereço (Contrato de Locação, Conta de Luz, Água, etc)",
+                "options": [],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.escritorio_resp == 'Não'"
+              }
+            }
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "novo_nome_razao",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Qual informação será alterada?",
+                "options": [
+                  {
+                    "label": "Razão Social",
+                    "value": "razaosocial"
+                  },
+                  {
+                    "label": "Nome Fantasia",
+                    "value": "nomefantasia"
+                  }
+                ],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.opcaoalteracao ?.razaosocial_nomefantasia"
+            },
+            {
+              "key": "nova_razaosocial",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Insira a nova razão social",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.novo_nome_razao ?.razaosocial"
+            },
+            {
+              "key": "novo_nomefantasia",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Insira o novo nome fantasia",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.novo_nome_razao ?.nomefantasia"
+            },
+            {
+              "className": "col-6",
+              "key": "novo_capital_social",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Novo capital Social (em reais)",
+                "floatNumber": true,
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "currency": {
+                  "prefix": "R$",
+                  "thousands": ".",
+                  "decimal": ",",
+                  "precision": 2,
+                  "allowNegative": false
+                },
+                "hidden": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.opcaoalteracao ?.capital_social"
+            },
+            {
+              "key": "nome_empresarial",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Opção de Nome Empresarial",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracao_insc !== 'Primeira Inscrição Mobiliária'"
+            },
+            {
+              "key": "porte_empresa",
+              "type": "select",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Enquadramento Empresarial",
+                "options": [
+                  {
+                    "label": "Microempresa (ME)",
+                    "value": "microempresa"
+                  },
+                  {
+                    "label": "Empresa de Pequeno Porte (EPP)",
+                    "value": "pequeno"
+                  },
+                  {
+                    "label": "Empresa de Médio Porte",
+                    "value": "medio"
+                  },
+                  {
+                    "label": "Empresa de Grande Porte",
+                    "value": "grande"
+                  }
+                ],
+                "focus": "false",
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.alteracao_insc !== 'Primeira Inscrição Mobiliária'"
+            },
+            {
+              "key": "proprietario",
+              "type": "next-repeat",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Sócios",
+                "btnAddText": "Sócio",
+                "required": false
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "nome-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Nome do Sócio",
+                      "required": false
+                    },
+                    "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "cpfcnpj-proprietario",
+                    "type": "next-cpf-cnpj",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "CPF/CNPJ do Sócio",
+                      "omitirCrea": true,
+                      "required": false
+                    },
+                    "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required, Validators.minLength(14)])\\n\\t\\t}",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "cel-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Telefone/Celular do Sócio",
+                      "placeholder": "(00) 00000-0000",
+                      "required": false,
+                      "mask": "(00) 00000-0009"
+                    },
+                    "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "email-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Email do Sócio",
+                      "required": false
+                    },
+                    "validators": {
+                      "validation": [
+                        "email"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "cep-proprietario",
+                    "type": "next-input-data",
+                    "wrappers": [
+                      "form-field",
+                      "mirror",
+                      "integrations"
+                    ],
+                    "templateOptions": {
+                      "label": "CEP do Sócio",
+                      "mask": "99999-999",
+                      "idIntegration": "60bf6970f5ace0000afcd57f",
+                      "saveIntegrationResponse": true,
+                      "required": false,
+                      "hideData": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "rua-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Endereço do Sócio",
+                      "required": false
+                    },
+                    "expressionProperties": {
+                      "model|||rua-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.logradouro ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "numero-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Nº Residencial do Sócio",
+                      "required": false
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "bairro-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Bairro do Sócio",
+                      "required": false
+                    },
+                    "expressionProperties": {
+                      "model|||bairro-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.bairro ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "cidade-proprietario",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Cidade do Sócio",
+                      "required": false
+                    },
+                    "expressionProperties": {
+                      "model|||cidade-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.localidade ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "uf-proprietario",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "UF",
+                      "required": false
+                    },
+                    "expressionProperties": {
+                      "model|||uf-proprietario": "model['cep-proprietario'] ? model['cep-proprietario'].data ? model['cep-proprietario'].data.response ? ( model['cep-proprietario'].data.response.result?.uf ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "key": "documento-proprietario",
+                    "type": "next-upload",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Documentos do Sócio (Comprovante de Residência e Cópia do CPF/ RG/CNH, e Contrato Social quando necessário",
+                      "placeholder": "",
+                      "type": "text",
+                      "required": false
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "contador",
+              "type": "next-repeat",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Contador",
+                "btnAddText": "Contador",
+                "required": false
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "nome-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Nome",
+                      "required": false
+                    },
+                    "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "cpfcnpj-contador",
+                    "type": "next-cpf-cnpj",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "CPF/CNPJ",
+                      "omitirCrea": true,
+                      "required": false
+                    },
+                    "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required, Validators.minLength(14)])\\n\\t\\t}",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "cel-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Telefone/Celular",
+                      "placeholder": "(00) 00000-0000",
+                      "required": false,
+                      "mask": "(00) 00000-0009"
+                    },
+                    "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "email-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Email",
+                      "required": false
+                    },
+                    "validators": {
+                      "validation": [
+                        "email"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "cep-contador",
+                    "type": "next-input-data",
+                    "wrappers": [
+                      "form-field",
+                      "mirror",
+                      "integrations"
+                    ],
+                    "templateOptions": {
+                      "label": "CEP",
+                      "mask": "99999-999",
+                      "idIntegration": "60bf6970f5ace0000afcd57f",
+                      "saveIntegrationResponse": true,
+                      "required": false,
+                      "hideData": true
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "rua-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Endereço",
+                      "required": false
+                    },
+                    "expressionProperties": {
+                      "model|||rua-contador": "model['cep-contador'] ? model['cep-contador'].data ? model['cep-contador'].data.response ? ( model['cep-contador'].data.response.result?.logradouro ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "numero-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Nº Residencial",
+                      "required": false
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "bairro-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Bairro",
+                      "required": false
+                    },
+                    "expressionProperties": {
+                      "model|||bairro-contador": "model['cep-contador'] ? model['cep-contador'].data ? model['cep-contador'].data.response ? ( model['cep-contador'].data.response.result?.bairro ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "cidade-contador",
+                    "type": "input",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Cidade",
+                      "required": false
+                    },
+                    "expressionProperties": {
+                      "model|||cidade-contador": "model['cep-contador'] ? model['cep-contador'].data ? model['cep-contador'].data.response ? ( model['cep-contador'].data.response.result?.localidade ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "uf-contador",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "UF",
+                      "required": false
+                    },
+                    "expressionProperties": {
+                      "model|||uf-contador": "model['cep-contador'] ? model['cep-contador'].data ? model['cep-contador'].data.response ? ( model['cep-contador'].data.response.result?.uf ) : '' : '' : '' "
+                    }
+                  },
+                  {
+                    "key": "documento-contador",
+                    "type": "next-upload",
+                    "wrappers": [
+                      "mirror"
+                    ],
+                    "templateOptions": {
+                      "label": "Documentos do Sócio (Comprovante de Residência e Cópia do CPF/ RG/CNH, e Contrato Social quando necessário",
+                      "placeholder": "",
+                      "type": "text",
+                      "required": false
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "processo_junta",
+              "type": "next-input",
+              "defaultValue": "16548793",
+              "wrappers": [
+                "form-field",
+                "mirror",
+                "consumeDataset"
+              ],
+              "templateOptions": {
+                "label": "Viabilidade Junta",
+                "placeholder": " ",
+                "readonly": true,
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "datasetReference": "665e5cfeb84dda000707eea6",
+                "datasetKey": "processo",
+                "object": true,
+                "autocomplete": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "processo_junta_dataset",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Viabilidade",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||processo_junta_dataset": "model?.processo_junta?.input_data?.data?.find((e)=>e.key ==='processo')?.value"
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "cnpj",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "CNPJ",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "mask": "AA.AAA.AAA/AAAA-00",
+                "required": false,
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||cnpj": "model?.processo_junta?.input_data?.data?.find((e)=>e.key ==='cnpj')?.value"
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "capital_social",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Capital Social (em reais)",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||capital_social": "model?.processo_junta?.input_data?.data?.find((e)=>e.key ==='capital_social')?.value"
+              }
+            },
+            {
+              "key": "razao_social",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Razão Social",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||razao_social": "model?.processo_junta?.input_data?.data?.find((e)=>e.key ==='razao_social')?.value"
+              }
+            },
+            {
+              "key": "nome_fantasia",
+              "type": "next-input",
+              "wrappers": [
+                "mirror"
+              ],
+              "templateOptions": {
+                "label": "Nome Fantasia",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "model|||nome_fantasia": "model?.processo_junta?.input_data?.data?.find((e)=>e.key ==='nome_fantasi')?.value"
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Quadro Sócios/Administradores",
+            "subtitle": "",
+            "textHtml": "<div class=\"p-4 border-l-4 border-blue-500 text-sm text-blue-800 font-medium leading-6 bg-blue-100\">\n<div class=\"\" >\n</div>\nInsira a opção principal de nome empresarial, o enquadramento, o quadro societário e o(s) contador(es)."
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "tramite": [],
+  "step": {}
+}

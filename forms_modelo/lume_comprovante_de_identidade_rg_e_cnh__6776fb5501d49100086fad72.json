@@ -1,0 +1,235 @@
+{
+  "_id": "6776fb5501d49100086fad72",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "templateOptions": {
+            "title": "Proprietário",
+            "subtitle": "",
+            "textHtml": "<figure class=\"image\"><img src=\"https://api.producao.aprova.com.br/blob/url/redirect/blueprint-editor/21738863850092.png\"></figure>",
+            "editMode": false
+          },
+          "fieldGroup": [
+            {
+              "type": "next-upload",
+              "wrappers": [
+                "lume-ai"
+              ],
+              "templateOptions": {
+                "hideNestedField": true,
+                "label": "Documento de identificação do Proprietário ou Responsável do CNPJ (CPF/ RG/CNH)",
+                "required": true,
+                "columns": "12",
+                "extends": [
+                  "PDF",
+                  "PNG",
+                  "JPG",
+                  "JPEG"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": true,
+                "multiple": false,
+                "agentId": "67d56dc2-1456-449a-bf1f-41e193e536e0"
+              },
+              "key": "documento_proprietario",
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "documento_valido_identifidade",
+              "type": "next-html",
+              "resetOnHide": true,
+              "templateOptions": {
+                "focus": "false",
+                "label": "next-html - Documento válido identidade",
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>O documento anexado não foi reconhecido como válido. Verifique o arquivo e tente novamente.</div></div><br/>",
+                "readonly": true,
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model?.documento_proprietario?.lume_data?.isValidDocument ||  !model.documento_proprietario?.lume_data || model.documento_proprietario?.lume_data === null"
+            },
+            {
+              "key": "documento_semCPF",
+              "type": "next-html",
+              "resetOnHide": true,
+              "templateOptions": {
+                "focus": "false",
+                "label": "next-html - Validação se tem CPF",
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'> <div class='flex space-x-2 text-yellow-500 mb-2'> <div> <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor' > <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/> </svg> </div><div class='text-yellow-800'>Aviso</div></div><div>O documento do proprietário deve possuir o número do CPF para conferência.</div></div><br/>",
+                "readonly": true,
+                "required": false
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.documento_proprietario?.lume_data?.extractedData?.cpf ||  !model.documento_proprietario?.lume_data || model.documento_proprietario?.lume_data === null "
+            },
+            {
+              "key": "pergunta_validacaoLume_IDENTIDADE",
+              "type": "radio",
+              "templateOptions": {
+                "label": "<b>Atenção</b>: As informações abaixo foram extraídas automaticamente pela inteligência artificial com base no documento enviado. Caso escolha editá-las, você confirma que a extração não foi precisa e se compromete a inserir os dados corretos. <b>Deseja editar as informações?</b>",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "labelHtml": true,
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.documento_proprietario?.lume_data || model.documento_proprietario?.lume_data === null"
+            },
+            {
+              "key": "nome_rt",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome do Responsável",
+                "required": true,
+                "readonly": false,
+                "columns": "12",
+                "hiddenTemp": false,
+                "sensitiveField": true
+              },
+              "expressionProperties": {
+                "model|||nome_rt": "model.pergunta_validacaoLume_IDENTIDADE == 'Sim' ?  model.nome_rt : model?.documento_proprietario?.lume_data?.extractedData?.nome_completo ",
+                "templateOptions|||readonly": "model.pergunta_validacaoLume_IDENTIDADE == 'Não' || !model.pergunta_validacaoLume_IDENTIDADE"
+              },
+              "className": "col-12"
+            },
+            {
+              "type": "next-input",
+              "key": "cpf_identidade",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "templateOptions": {
+                "label": "CPF do Responsável",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "mask": "000.000.000-00",
+                "readonly": false,
+                "sensitiveField": true,
+                "multiple": false,
+                "useNewSidebarForwarding": true
+              },
+              "expressionProperties": {
+                "model|||cpf_identidade": "model.pergunta_validacaoLume_IDENTIDADE == 'Sim' ?  model.cpf_identidade : model?.documento_proprietario?.lume_data?.extractedData?.cpf?.replace(/[.-]/g, '')",
+                "templateOptions|||readonly": "model.pergunta_validacaoLume_IDENTIDADE == 'Não' || !model.pergunta_validacaoLume_IDENTIDADE"
+              },
+              "className": "col-12"
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "sensitiveField": false,
+                "accessLevel": "FULL",
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "predefined",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "admmodelo_modeload",
+                      "label": "Secretaria de Administração",
+                      "id": "675c980a96ab6200088ea449"
+                    }
+                  ]
+                },
+                "sensitiveField": false,
+                "multiple": true,
+                "useNewSidebarForwarding": true,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "an",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "anexo teste",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "bot": {
+            "title": "Existem alguma regras sobre os participantes",
+            "subtitle": "Saiba mais sobre quem pode ser responsável por um projeto",
+            "textButton": "Ver Artigo",
+            "link": "http://ajuda.aprovadigital.com.br/"
+          },
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "title": "Lume - Comprovante de identidade (RG e CNH)",
+    "descricao": "IA desenvolvida para gerar impactos reais na Gestão Pública.",
+    "devolverAoUltimo": true,
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "LUM",
+    "templates": [],
+    "form_tramites": [],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "experimentalMode": true,
+    "useNewSidebarForwarding": true,
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "admmodelo_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "tramite": [],
+  "__v": 0,
+  "city_id": 38,
+  "step": {}
+}

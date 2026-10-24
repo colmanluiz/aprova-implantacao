@@ -1,0 +1,167 @@
+{
+  "_id": "67b38acce31d420009e4732e",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": false,
+                "sensitiveField": false,
+                "multiple": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "quest_orgao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Órgão para o qual você quer enviar seu pedido de acesso à informação",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "type": "next-input",
+              "key": "assunto",
+              "templateOptions": {
+                "label": "Assunto",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "type": "next-ck",
+              "key": "corpo_do_texto",
+              "templateOptions": {
+                "label": "Corpo do texto",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "type": "next-upload",
+              "key": "anexos",
+              "templateOptions": {
+                "label": "Anexos",
+                "required": false,
+                "columns": "12",
+                "extends": [
+                  "PDF",
+                  "PNG",
+                  "IMG",
+                  "JPG",
+                  "JPEG"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "predefined",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "admmodelo_modeload",
+                      "label": "Secretaria de Administração",
+                      "id": "675c980a96ab6200088ea449"
+                    }
+                  ]
+                },
+                "sensitiveField": false,
+                "destinationAccessLevel": "FULL",
+                "multiple": true,
+                "useNewSidebarForwarding": true,
+                "hidden": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados da solicitação",
+            "subtitle": "",
+            "textHtml": "Digite algo aqui",
+            "editMode": false
+          },
+          "wrappers": [
+            "step",
+            "text-right"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "LAI - Lei de Acesso a Informação",
+    "descricao": "O e-SIC (Sistema Eletrônico do Serviço de Informação ao Cidadão) é um processo que permite a qualquer pessoa, física ou jurídica, solicitar informações públicas aos órgãos e entidades do governo.  Ele foi criado para atender à Lei de Acesso à Informação (Lei nº 12.527/2011), que garante o direito de acesso à informação pública, promovendo a transparência e o controle social da administração pública.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "NEW",
+    "experimentalMode": true,
+    "useNewSidebarForwarding": true,
+    "newSignatureStrategy": true,
+    "templates": [],
+    "form_tramites": [],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "admmodelo_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "city_id": 38,
+  "tramite": [],
+  "__v": 0
+}

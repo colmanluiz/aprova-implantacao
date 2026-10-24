@@ -1,0 +1,1966 @@
+{
+  "_id": "676453879cfce500081231a3",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "adquirente",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Adquirente",
+                "focus": "false",
+                "btnAddText": "Adquirente",
+                "required": true
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "cpfcnpj_adq",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Tipo de Pessoa:",
+                      "options": [
+                        {
+                          "label": "Pessoa Física",
+                          "value": "Pessoa Física"
+                        },
+                        {
+                          "label": "Pessoa Jurídica",
+                          "value": "Pessoa Jurídica"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true,
+                      "hideLabel": false,
+                      "columns": "12",
+                      "hiddenTemp": false,
+                      "readonly": false,
+                      "sensitiveField": false
+                    },
+                    "className": "col-12",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "doc_identidade_pf_adq",
+                    "type": "next-upload",
+                    "wrappers": [
+                      "ai-docs"
+                    ],
+                    "templateOptions": {
+                      "hideNestedField": true,
+                      "label": "Cópia legível do CPF e RG ou CNH do Adquirente",
+                      "required": false,
+                      "columns": "12",
+                      "extends": [
+                        "PDF",
+                        "PNG",
+                        "JPG",
+                        "JPEG"
+                      ],
+                      "hiddenTemp": false,
+                      "readonly": false,
+                      "sensitiveField": false,
+                      "multiple": false,
+                      "hideLabel": false,
+                      "compactView": false,
+                      "docTipo": "identidade-pessoa-fisica",
+                      "docModelo": "aprova-padrao-identidade-pessoa-fisica"
+                    },
+                    "className": "col-12",
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_adq === 'Pessoa Física'"
+                    },
+                    "hideExpression": "model.cpfcnpj_adq !== 'Pessoa Física'"
+                  },
+                  {
+                    "key": "doc_valido_identidade_pf_adq",
+                    "type": "next-html",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "focus": "false",
+                      "label": "next-html - Documento inválido identidade PF",
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-2 text-yellow-500 mb-2'><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/></svg></div><div class='text-yellow-800'>Aviso</div></div><div>O documento anexado não foi reconhecido como válido. Verifique o arquivo e tente novamente.</div></div><br/>",
+                      "readonly": true,
+                      "required": false
+                    },
+                    "expressionProperties": {},
+                    "hideExpression": "model.cpfcnpj_adq !== 'Pessoa Física' || model?.doc_identidade_pf_adq?.ai_docs_data?.isValidDocument || !model.doc_identidade_pf_adq?.ai_docs_data || model.doc_identidade_pf_adq?.ai_docs_data === null"
+                  },
+                  {
+                    "key": "pergunta_edicao_lume_pf_adq",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "<b>Atenção</b>: As informações abaixo foram extraídas automaticamente pela inteligência artificial com base no documento enviado. Caso escolha editá-las, você confirma que a extração não foi precisa e se compromete a inserir os dados corretos. <b>Deseja editar as informações?</b>",
+                      "options": [
+                        {
+                          "value": "Sim"
+                        },
+                        {
+                          "value": "Não"
+                        }
+                      ],
+                      "labelHtml": true,
+                      "required": true
+                    },
+                    "expressionProperties": {},
+                    "hideExpression": "model.cpfcnpj_adq !== 'Pessoa Física' || !model.doc_identidade_pf_adq?.ai_docs_data || model.doc_identidade_pf_adq?.ai_docs_data === null"
+                  },
+                  {
+                    "key": "nome_completo_pf_aqd",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Nome Adquirente",
+                      "placeholder": "Nome completo do adquirente",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_adq === 'Pessoa Física'",
+                      "model|||nome_completo_pf_aqd": "model.pergunta_edicao_lume_pf_adq == 'Sim' ? model.nome_completo_pf_aqd : model?.doc_identidade_pf_adq?.ai_docs_data?.extractedData?.titular?.nome",
+                      "templateOptions|||readonly": "model.pergunta_edicao_lume_pf_adq == 'Não' || (!model.pergunta_edicao_lume_pf_adq && !!model?.doc_identidade_pf_adq?.ai_docs_data)"
+                    },
+                    "className": "col-12",
+                    "hideExpression": "model.cpfcnpj_adq !== 'Pessoa Física'"
+                  },
+                  {
+                    "key": "cpf_adquirente",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "CPF",
+                      "placeholder": "000.000.000-00",
+                      "mask": "000.000.000-00",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_adq === 'Pessoa Física'",
+                      "model|||cpf_adquirente": "model.pergunta_edicao_lume_pf_adq == 'Sim' ? model.cpf_adquirente : model?.doc_identidade_pf_adq?.ai_docs_data?.extractedData?.titular?.cpf?.replace(/[.-]/g, '')",
+                      "templateOptions|||readonly": "model.pergunta_edicao_lume_pf_adq == 'Não' || (!model.pergunta_edicao_lume_pf_adq && !!model?.doc_identidade_pf_adq?.ai_docs_data)"
+                    },
+                    "className": "col-12",
+                    "hideExpression": "model.cpfcnpj_adq !== 'Pessoa Física'"
+                  },
+                  {
+                    "key": "doc_cartao_cnpj_adq",
+                    "type": "next-upload",
+                    "wrappers": [
+                      "ai-docs"
+                    ],
+                    "templateOptions": {
+                      "hideNestedField": true,
+                      "label": "Cartão do Cadastro Nacional de Pessoas Jurídicas - CNPJ",
+                      "required": false,
+                      "columns": "12",
+                      "extends": [
+                        "PDF"
+                      ],
+                      "hiddenTemp": false,
+                      "readonly": false,
+                      "sensitiveField": false,
+                      "multiple": false,
+                      "hideLabel": false,
+                      "compactView": false,
+                      "docTipo": "cartao-cnpj",
+                      "docModelo": "aprova-padrao-cartao-cnpj"
+                    },
+                    "className": "col-12",
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_adq === 'Pessoa Jurídica'"
+                    },
+                    "hideExpression": "model.cpfcnpj_adq !== 'Pessoa Jurídica'"
+                  },
+                  {
+                    "key": "doc_valido_cartao_cnpj_adq",
+                    "type": "next-html",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "focus": "false",
+                      "label": "next-html - Documento inválido Cartão CNPJ",
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-2 text-yellow-500 mb-2'><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/></svg></div><div class='text-yellow-800'>Aviso</div></div><div>O Cartão CNPJ anexado não foi reconhecido como válido. Verifique o arquivo e tente novamente.</div></div><br/>",
+                      "readonly": true,
+                      "required": false
+                    },
+                    "expressionProperties": {},
+                    "hideExpression": "model.cpfcnpj_adq !== 'Pessoa Jurídica' || model.doc_cartao_cnpj_adq?.ai_docs_data?.isValidDocument || !model.doc_cartao_cnpj_adq?.ai_docs_data || model.doc_cartao_cnpj_adq?.ai_docs_data === null"
+                  },
+                  {
+                    "key": "pergunta_edicao_lume_pj_adq",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "<b>Atenção</b>: As informações abaixo foram extraídas automaticamente pela inteligência artificial com base no documento enviado. Caso escolha editá-las, você confirma que a extração não foi precisa e se compromete a inserir os dados corretos. <b>Deseja editar as informações?</b>",
+                      "options": [
+                        {
+                          "value": "Sim"
+                        },
+                        {
+                          "value": "Não"
+                        }
+                      ],
+                      "labelHtml": true,
+                      "required": false
+                    },
+                    "expressionProperties": {},
+                    "hideExpression": "model.cpfcnpj_adq !== 'Pessoa Jurídica' || !model.doc_cartao_cnpj_adq?.ai_docs_data || model.doc_cartao_cnpj_adq?.ai_docs_data === null"
+                  },
+                  {
+                    "key": "razao_social_adq",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Razão Social Adquirente",
+                      "placeholder": "Razão social da empresa",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_adq === 'Pessoa Jurídica'",
+                      "model|||razao_social_adq": "model.pergunta_edicao_lume_pj_adq == 'Sim' ? model.razao_social_adq : model?.doc_cartao_cnpj_adq?.ai_docs_data?.extractedData?.empresa?.nome",
+                      "templateOptions|||readonly": "model.pergunta_edicao_lume_pj_adq == 'Não' || (!model.pergunta_edicao_lume_pj_adq && !!model?.doc_cartao_cnpj_adq?.ai_docs_data)"
+                    },
+                    "className": "col-12",
+                    "hideExpression": "model.cpfcnpj_adq !== 'Pessoa Jurídica'"
+                  },
+                  {
+                    "type": "next-input",
+                    "key": "nome_fantasia_adq",
+                    "templateOptions": {
+                      "label": "Nome Fantasia",
+                      "required": false,
+                      "hideLabel": false,
+                      "placeholder": "Se aplicável",
+                      "columns": "12",
+                      "hiddenTemp": false,
+                      "readonly": false,
+                      "sensitiveField": false
+                    },
+                    "className": "col-12",
+                    "expressionProperties": {},
+                    "hideExpression": "model.cpfcnpj_adq !== 'Pessoa Jurídica'"
+                  },
+                  {
+                    "key": "doc_contrato_social_adq",
+                    "type": "next-upload",
+                    "wrappers": [
+                      "ai-docs"
+                    ],
+                    "templateOptions": {
+                      "hideNestedField": true,
+                      "label": "Contrato Social ou Ato Constitutivo (última alteração)",
+                      "required": true,
+                      "columns": "12",
+                      "extends": [
+                        "PDF",
+                        "PNG",
+                        "JPG",
+                        "JPEG"
+                      ],
+                      "hiddenTemp": false,
+                      "readonly": false,
+                      "sensitiveField": false,
+                      "multiple": false,
+                      "hideLabel": false,
+                      "compactView": false,
+                      "docTipo": "",
+                      "docModelo": ""
+                    },
+                    "className": "col-12",
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_adq === 'Pessoa Jurídica'"
+                    },
+                    "hideExpression": "model.cpfcnpj_adq !== 'Pessoa Jurídica'"
+                  },
+                  {
+                    "key": "cnpj_adquirente",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "CNPJ",
+                      "placeholder": "AA.AAA.AAA/AAAA-00",
+                      "mask": "AA.AAA.AAA/AAAA-00",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_adq === 'Pessoa Jurídica'",
+                      "model|||cnpj_adquirente": "model.pergunta_edicao_lume_pj == 'Sim' ? model.cnpj_adquirente : model?.doc_cartao_cnpj_adq?.ai_docs_data?.extractedData?.empresa?.cnpj?.replace(/\\D/g, '')",
+                      "templateOptions|||readonly": "model.pergunta_edicao_lume_pj == 'Não' || (!model.pergunta_edicao_lume_pj && !!model?.doc_cartao_cnpj_adq?.ai_docs_data)"
+                    },
+                    "className": "col-12",
+                    "hideExpression": "model.cpfcnpj_adq !== 'Pessoa Jurídica'"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "endereco_cep_adq",
+                    "type": "next-input-data",
+                    "wrappers": [
+                      "form-field",
+                      "integrations"
+                    ],
+                    "templateOptions": {
+                      "label": "CEP",
+                      "placeholder": "Ex: 00000-000",
+                      "mask": "00000-000",
+                      "required": true,
+                      "hideData": true,
+                      "idIntegration": "5f916ab6a926a9000875587d",
+                      "saveIntegrationResponse": true,
+                      "triggerOnlyWhenEditing": true
+                    },
+                    "hideExpression": "!model.cpfcnpj_adq",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "status_integracaocep_adq",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                      "focus": "false",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.endereco_cep_adq?.status == 'LOADING' "
+                    },
+                    "hideExpression": " model.endereco_cep_adq?.status !== 'LOADING'  || !model.endereco_cep_adq?.input"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "erro_integracaocep_adq",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                      "focus": "false",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "(model.endereco_cep_adq?.status !== 'SUCCESS') || (model.endereco_cep_adq?.data?.response?.result?.erro === true) || (model.endereco_cep_adq?.input?.length === 8 && model.endereco_cep_adq?.status === 'KNOWN_FAILED') "
+                    },
+                    "hideExpression": "(model.endereco_cep_adq?.status === 'SUCCESS' && model.endereco_cep_adq?.data?.response?.result?.erro !== true) || (model.endereco_cep_adq?.input?.length !== 8 && model.endereco_cep_adq?.status !== 'KNOWN_FAILED') || !model.endereco_cep_adq.input "
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "logradouro_adq",
+                    "resetOnHide": true,
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Logradouro",
+                      "required": true,
+                      "triggerOnlyWhenEditing": true
+                    },
+                    "expressionProperties": {
+                      "model|||logradouro_adq": "model.logradouro_adq && model.logradouro_adq == model.endereco_cep_adq?.data?.response?.result?.logradouro ? model.logradouro_adq : model.endereco_cep_adq?.data?.response?.result?.logradouro"
+                    },
+                    "hideExpression": " model.endereco_cep_adq?.input?.length !== 8 "
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "numero_adq",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Número Predial",
+                      "placeholder": "Ex: S/N",
+                      "required": true
+                    },
+                    "hideExpression": " !model.endereco_cep_adq?.input ",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "bairro_adq",
+                    "resetOnHide": true,
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Bairro",
+                      "required": true,
+                      "triggerOnlyWhenEditing": true,
+                      "placeholder": "",
+                      "focus": false
+                    },
+                    "expressionProperties": {
+                      "model|||bairro_adq": "model.bairro_adq && model.bairro_adq ==  model.endereco_cep_adq?.data?.response?.result?.bairro ? model.bairro_adq :  model.endereco_cep_adq?.data?.response?.result?.bairro"
+                    },
+                    "hideExpression": " model.endereco_cep_adq?.input?.length !== 8 "
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "complemento_adq",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Complemento",
+                      "placeholder": "Ex: Esquina com Rua São Paulo",
+                      "focus": "false",
+                      "type": "text",
+                      "required": false,
+                      "disabled": false
+                    },
+                    "expressionProperties": {},
+                    "hideExpression": " !model.endereco_cep_adq?.input "
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "cidade_adq",
+                    "resetOnHide": true,
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Município",
+                      "required": true,
+                      "triggerOnlyWhenEditing": true,
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||cidade_adq": "model.cidade_adq && model.cidade_adq ==  model.endereco_cep_adq?.data?.response?.result?.localidade ? model.cidade_adq :  model.endereco_cep_adq?.data?.response?.result?.localidade"
+                    },
+                    "hideExpression": " model.endereco_cep_adq?.input?.length !== 8 "
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "uf_adq",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Estado",
+                      "required": true,
+                      "triggerOnlyWhenEditing": true,
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||uf_adq": "model.uf_adq && model.uf_adq ==  model.endereco_cep_adq?.data?.response?.result?.uf ? model.uf_adq :  model.endereco_cep_adq?.data?.response?.result?.uf"
+                    },
+                    "hideExpression": " model.endereco_cep_adq?.input?.length !== 8 "
+                  },
+                  {
+                    "key": "teladq",
+                    "className": "col-6",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Telefone Adquirente",
+                      "placeholder": "(11) 9 9001-1538",
+                      "mask": "(00) 0 0000 0000",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||mask": "model.teladq?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+                    },
+                    "hideExpression": "!model.cpfcnpj_adq"
+                  },
+                  {
+                    "key": "email_adquirente",
+                    "className": "col-6",
+                    "type": "next-input",
+                    "validators": {
+                      "validation": [
+                        "email"
+                      ]
+                    },
+                    "templateOptions": {
+                      "label": "E-mail Adquirente",
+                      "placeholder": "Ex: contato@email.com",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "hideExpression": "!model.cpfcnpj_adq",
+                    "expressionProperties": {}
+                  }
+                ]
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Adquirente",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "transmitente",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Transmitente",
+                "focus": "false",
+                "btnAddText": "Transmitente",
+                "required": true
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "cpfcnpj_tra",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Tipo de Pessoa:",
+                      "options": [
+                        {
+                          "label": "Pessoa Física",
+                          "value": "Pessoa Física"
+                        },
+                        {
+                          "label": "Pessoa Jurídica",
+                          "value": "Pessoa Jurídica"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true,
+                      "hideLabel": false,
+                      "columns": "12",
+                      "hiddenTemp": false,
+                      "readonly": false,
+                      "sensitiveField": false
+                    },
+                    "className": "col-12",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "doc_identidade_pf_tra",
+                    "type": "next-upload",
+                    "wrappers": [
+                      "ai-docs"
+                    ],
+                    "templateOptions": {
+                      "hideNestedField": true,
+                      "label": "Cópia legível do CPF e RG ou CNH do Transmitente",
+                      "required": false,
+                      "columns": "12",
+                      "extends": [
+                        "PDF",
+                        "PNG",
+                        "JPG",
+                        "JPEG"
+                      ],
+                      "hiddenTemp": false,
+                      "readonly": false,
+                      "sensitiveField": false,
+                      "multiple": false,
+                      "hideLabel": false,
+                      "compactView": false,
+                      "docTipo": "identidade-pessoa-fisica",
+                      "docModelo": "aprova-padrao-identidade-pessoa-fisica"
+                    },
+                    "className": "col-12",
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_tra === 'Pessoa Física'"
+                    },
+                    "hideExpression": "model.cpfcnpj_tra !== 'Pessoa Física'"
+                  },
+                  {
+                    "key": "doc_valido_identidade_pf_tra",
+                    "type": "next-html",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "focus": "false",
+                      "label": "next-html - Documento inválido identidade PF",
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-2 text-yellow-500 mb-2'><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/></svg></div><div class='text-yellow-800'>Aviso</div></div><div>O documento anexado não foi reconhecido como válido. Verifique o arquivo e tente novamente.</div></div><br/>",
+                      "readonly": true,
+                      "required": false
+                    },
+                    "expressionProperties": {},
+                    "hideExpression": "model.cpfcnpj_tra !== 'Pessoa Física' || model?.doc_identidade_pf_tra?.ai_docs_data?.isValidDocument || !model.doc_identidade_pf_tra?.ai_docs_data || model.doc_identidade_pf_tra?.ai_docs_data === null"
+                  },
+                  {
+                    "key": "pergunta_edicao_lume_pf_tra",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "<b>Atenção</b>: As informações abaixo foram extraídas automaticamente pela inteligência artificial com base no documento enviado. Caso escolha editá-las, você confirma que a extração não foi precisa e se compromete a inserir os dados corretos. <b>Deseja editar as informações?</b>",
+                      "options": [
+                        {
+                          "value": "Sim"
+                        },
+                        {
+                          "value": "Não"
+                        }
+                      ],
+                      "labelHtml": true,
+                      "required": true
+                    },
+                    "expressionProperties": {},
+                    "hideExpression": "model.cpfcnpj_tra !== 'Pessoa Física' || !model.doc_identidade_pf_tra?.ai_docs_data || model.doc_identidade_pf_tra?.ai_docs_data === null"
+                  },
+                  {
+                    "key": "nome_completo_pf_tra",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Nome Transmitente",
+                      "placeholder": "Nome completo do transmitente",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_tra === 'Pessoa Física'",
+                      "model|||nome_completo_pf_tra": "model.pergunta_edicao_lume_pf_tra == 'Sim' ? model.nome_completo_pf_tra : model?.doc_identidade_pf_tra?.ai_docs_data?.extractedData?.titular?.nome",
+                      "templateOptions|||readonly": "model.pergunta_edicao_lume_pf_tra == 'Não' || (!model.pergunta_edicao_lume_pf_tra && !!model?.doc_identidade_pf_tra?.ai_docs_data)"
+                    },
+                    "className": "col-12",
+                    "hideExpression": "model.cpfcnpj_tra !== 'Pessoa Física'"
+                  },
+                  {
+                    "key": "cpf_transmitente",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "CPF",
+                      "placeholder": "000.000.000-00",
+                      "mask": "000.000.000-00",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_tra === 'Pessoa Física'",
+                      "model|||cpf_transmitente": "model.pergunta_edicao_lume_pf_tra == 'Sim' ? model.cpf_transmitente : model?.doc_identidade_pf_tra?.ai_docs_data?.extractedData?.titular?.cpf?.replace(/[.-]/g, '')",
+                      "templateOptions|||readonly": "model.pergunta_edicao_lume_pf_tra == 'Não' || (!model.pergunta_edicao_lume_pf_tra && !!model?.doc_identidade_pf_tra?.ai_docs_data)"
+                    },
+                    "className": "col-12",
+                    "hideExpression": "model.cpfcnpj_tra !== 'Pessoa Física'"
+                  },
+                  {
+                    "key": "doc_cartao_cnpj_tra",
+                    "type": "next-upload",
+                    "wrappers": [
+                      "ai-docs"
+                    ],
+                    "templateOptions": {
+                      "hideNestedField": true,
+                      "label": "Cartão do Cadastro Nacional de Pessoas Jurídicas - CNPJ",
+                      "required": false,
+                      "columns": "12",
+                      "extends": [
+                        "PDF"
+                      ],
+                      "hiddenTemp": false,
+                      "readonly": false,
+                      "sensitiveField": false,
+                      "multiple": false,
+                      "hideLabel": false,
+                      "compactView": false,
+                      "docTipo": "cartao-cnpj",
+                      "docModelo": "aprova-padrao-cartao-cnpj"
+                    },
+                    "className": "col-12",
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_tra === 'Pessoa Jurídica'"
+                    },
+                    "hideExpression": "model.cpfcnpj_tra !== 'Pessoa Jurídica'"
+                  },
+                  {
+                    "key": "doc_valido_cartao_cnpj_tra",
+                    "type": "next-html",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "focus": "false",
+                      "label": "next-html - Documento inválido Cartão CNPJ",
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-2 text-yellow-500 mb-2'><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd'/></svg></div><div class='text-yellow-800'>Aviso</div></div><div>O Cartão CNPJ anexado não foi reconhecido como válido. Verifique o arquivo e tente novamente.</div></div><br/>",
+                      "readonly": true,
+                      "required": false
+                    },
+                    "expressionProperties": {},
+                    "hideExpression": "model.cpfcnpj_tra !== 'Pessoa Jurídica' || model.doc_cartao_cnpj_tra?.ai_docs_data?.isValidDocument || !model.doc_cartao_cnpj_tra?.ai_docs_data || model.doc_cartao_cnpj_tra?.ai_docs_data === null"
+                  },
+                  {
+                    "key": "pergunta_edicao_lume_pj_tra",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "<b>Atenção</b>: As informações abaixo foram extraídas automaticamente pela inteligência artificial com base no documento enviado. Caso escolha editá-las, você confirma que a extração não foi precisa e se compromete a inserir os dados corretos. <b>Deseja editar as informações?</b>",
+                      "options": [
+                        {
+                          "value": "Sim"
+                        },
+                        {
+                          "value": "Não"
+                        }
+                      ],
+                      "labelHtml": true,
+                      "required": false
+                    },
+                    "expressionProperties": {},
+                    "hideExpression": "model.cpfcnpj_tra !== 'Pessoa Jurídica' || !model.doc_cartao_cnpj_tra?.ai_docs_data || model.doc_cartao_cnpj_tra?.ai_docs_data === null"
+                  },
+                  {
+                    "key": "razao_social_tra",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Razão Social Transmitente",
+                      "placeholder": "Razão social da empresa",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_tra === 'Pessoa Jurídica'",
+                      "model|||razao_social_tra": "model.pergunta_edicao_lume_pj_tra == 'Sim' ? model.razao_social_tra : model?.doc_cartao_cnpj_tra?.ai_docs_data?.extractedData?.empresa?.nome",
+                      "templateOptions|||readonly": "model.pergunta_edicao_lume_pj_tra == 'Não' || (!model.pergunta_edicao_lume_pj_tra && !!model?.doc_cartao_cnpj_tra?.ai_docs_data)"
+                    },
+                    "className": "col-12",
+                    "hideExpression": "model.cpfcnpj_tra !== 'Pessoa Jurídica'"
+                  },
+                  {
+                    "type": "next-input",
+                    "key": "nome_fantasia_tra",
+                    "templateOptions": {
+                      "label": "Nome Fantasia",
+                      "required": false,
+                      "hideLabel": false,
+                      "placeholder": "Se aplicável",
+                      "columns": "12",
+                      "hiddenTemp": false,
+                      "readonly": false,
+                      "sensitiveField": false
+                    },
+                    "className": "col-12",
+                    "expressionProperties": {},
+                    "hideExpression": "model.cpfcnpj_tra !== 'Pessoa Jurídica'"
+                  },
+                  {
+                    "key": "doc_contrato_social_tra",
+                    "type": "next-upload",
+                    "wrappers": [
+                      "ai-docs"
+                    ],
+                    "templateOptions": {
+                      "hideNestedField": true,
+                      "label": "Contrato Social ou Ato Constitutivo (última alteração)",
+                      "required": true,
+                      "columns": "12",
+                      "extends": [
+                        "PDF",
+                        "PNG",
+                        "JPG",
+                        "JPEG"
+                      ],
+                      "hiddenTemp": false,
+                      "readonly": false,
+                      "sensitiveField": false,
+                      "multiple": false,
+                      "hideLabel": false,
+                      "compactView": false,
+                      "docTipo": "",
+                      "docModelo": ""
+                    },
+                    "className": "col-12",
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_tra === 'Pessoa Jurídica'"
+                    },
+                    "hideExpression": "model.cpfcnpj_tra !== 'Pessoa Jurídica'"
+                  },
+                  {
+                    "key": "cnpj_transmitente",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "CNPJ",
+                      "placeholder": "AA.AAA.AAA/AAAA-00",
+                      "mask": "AA.AAA.AAA/AAAA-00",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.cpfcnpj_tra === 'Pessoa Jurídica'",
+                      "model|||cnpj_transmitente": "model.pergunta_edicao_lume_pj == 'Sim' ? model.cnpj_transmitente : model?.doc_cartao_cnpj_tra?.ai_docs_data?.extractedData?.empresa?.cnpj?.replace(/\\D/g, '')",
+                      "templateOptions|||readonly": "model.pergunta_edicao_lume_pj == 'Não' || (!model.pergunta_edicao_lume_pj && !!model?.doc_cartao_cnpj_tra?.ai_docs_data)"
+                    },
+                    "className": "col-12",
+                    "hideExpression": "model.cpfcnpj_tra !== 'Pessoa Jurídica'"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "endereco_cep_tra",
+                    "type": "next-input-data",
+                    "wrappers": [
+                      "form-field",
+                      "integrations"
+                    ],
+                    "templateOptions": {
+                      "label": "CEP",
+                      "placeholder": "Ex: 00000-000",
+                      "mask": "00000-000",
+                      "required": true,
+                      "hideData": true,
+                      "idIntegration": "5f916ab6a926a9000875587d",
+                      "saveIntegrationResponse": true,
+                      "triggerOnlyWhenEditing": true
+                    },
+                    "hideExpression": "!model.cpfcnpj_tra",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "status_integracaocep_tra",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                      "focus": "false",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "model.endereco_cep_tra?.status == 'LOADING' "
+                    },
+                    "hideExpression": " model.endereco_cep_tra?.status !== 'LOADING'  || !model.endereco_cep_tra?.input"
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "erro_integracaocep_tra",
+                    "type": "next-html",
+                    "templateOptions": {
+                      "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                      "focus": "false",
+                      "type": "text",
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||required": "(model.endereco_cep_tra?.status !== 'SUCCESS') || (model.endereco_cep_tra?.data?.response?.result?.erro === true) || (model.endereco_cep_tra?.input?.length === 8 && model.endereco_cep_tra?.status === 'KNOWN_FAILED') "
+                    },
+                    "hideExpression": "(model.endereco_cep_tra?.status === 'SUCCESS' && model.endereco_cep_tra?.data?.response?.result?.erro !== true) || (model.endereco_cep_tra?.input?.length !== 8 && model.endereco_cep_tra?.status !== 'KNOWN_FAILED') || !model.endereco_cep_tra.input "
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "logradouro_tra",
+                    "resetOnHide": true,
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Logradouro",
+                      "required": true,
+                      "triggerOnlyWhenEditing": true
+                    },
+                    "expressionProperties": {
+                      "model|||logradouro_tra": "model.logradouro_tra && model.logradouro_tra == model.endereco_cep_tra?.data?.response?.result?.logradouro ? model.logradouro_tra : model.endereco_cep_tra?.data?.response?.result?.logradouro"
+                    },
+                    "hideExpression": " model.endereco_cep_tra?.input?.length !== 8 "
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "numero_tra",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Número Predial",
+                      "placeholder": "Ex: S/N",
+                      "required": true
+                    },
+                    "hideExpression": " !model.endereco_cep_tra?.input ",
+                    "expressionProperties": {}
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "bairro_tra",
+                    "resetOnHide": true,
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Bairro",
+                      "required": true,
+                      "triggerOnlyWhenEditing": true,
+                      "placeholder": "",
+                      "focus": false
+                    },
+                    "expressionProperties": {
+                      "model|||bairro_tra": "model.bairro_tra && model.bairro_tra ==  model.endereco_cep_tra?.data?.response?.result?.bairro ? model.bairro_tra :  model.endereco_cep_tra?.data?.response?.result?.bairro"
+                    },
+                    "hideExpression": " model.endereco_cep_tra?.input?.length !== 8 "
+                  },
+                  {
+                    "className": "col-12",
+                    "key": "complemento_tra",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Complemento",
+                      "placeholder": "Ex: Esquina com Rua São Paulo",
+                      "focus": "false",
+                      "type": "text",
+                      "required": false,
+                      "disabled": false
+                    },
+                    "expressionProperties": {},
+                    "hideExpression": " !model.endereco_cep_tra?.input "
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "cidade_tra",
+                    "resetOnHide": true,
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Município",
+                      "required": true,
+                      "triggerOnlyWhenEditing": true,
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||cidade_tra": "model.cidade_tra && model.cidade_tra ==  model.endereco_cep_tra?.data?.response?.result?.localidade ? model.cidade_tra :  model.endereco_cep_tra?.data?.response?.result?.localidade"
+                    },
+                    "hideExpression": " model.endereco_cep_tra?.input?.length !== 8 "
+                  },
+                  {
+                    "className": "col-6",
+                    "key": "uf_tra",
+                    "type": "next-input",
+                    "resetOnHide": true,
+                    "templateOptions": {
+                      "label": "Estado",
+                      "required": true,
+                      "triggerOnlyWhenEditing": true,
+                      "readonly": true
+                    },
+                    "expressionProperties": {
+                      "model|||uf_tra": "model.uf_tra && model.uf_tra ==  model.endereco_cep_tra?.data?.response?.result?.uf ? model.uf_tra :  model.endereco_cep_tra?.data?.response?.result?.uf"
+                    },
+                    "hideExpression": " model.endereco_cep_tra?.input?.length !== 8 "
+                  },
+                  {
+                    "key": "teltra",
+                    "className": "col-6",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Telefone Transmitente",
+                      "placeholder": "(11) 9 9001-1538",
+                      "mask": "(00) 0 0000 0000",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "expressionProperties": {
+                      "templateOptions|||mask": "model.teltra?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+                    },
+                    "hideExpression": "!model.cpfcnpj_tra"
+                  },
+                  {
+                    "key": "email_transmitente",
+                    "className": "col-6",
+                    "type": "next-input",
+                    "validators": {
+                      "validation": [
+                        "email"
+                      ]
+                    },
+                    "templateOptions": {
+                      "label": "E-mail Transmitente",
+                      "placeholder": "Ex: contato@email.com",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    },
+                    "hideExpression": "!model.cpfcnpj_tra",
+                    "expressionProperties": {}
+                  }
+                ]
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Transmitente",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroupClassName": "row items-end",
+          "fieldGroup": [
+            {
+              "className": "col-12",
+              "key": "inscricao_imobiliaria",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Inscrição do Imóvel",
+                "mask": "000000-0",
+                "placeholder": "Ex: 000000-0",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "endereco_cep",
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP",
+                "placeholder": "Ex: 00000-000",
+                "mask": "00000-000",
+                "required": true,
+                "hideData": true,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "status_integracaocep_imovel",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.endereco_cep?.status == 'LOADING' "
+              },
+              "hideExpression": " model.endereco_cep?.status !== 'LOADING'  || !model.endereco_cep?.input"
+            },
+            {
+              "className": "col-12",
+              "key": "erro_integracaocep_imovel",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "(model.endereco_cep?.status !== 'SUCCESS') || (model.endereco_cep?.data?.response?.result?.erro === true) || (model.endereco_cep?.input?.length === 8 && model.endereco_cep?.status === 'KNOWN_FAILED') "
+              },
+              "hideExpression": "(model.endereco_cep?.status === 'SUCCESS' && model.endereco_cep?.data?.response?.result?.erro !== true) || (model.endereco_cep?.input?.length !== 8 && model.endereco_cep?.status !== 'KNOWN_FAILED') || !model.endereco_cep.input "
+            },
+            {
+              "className": "col-12",
+              "key": "logradouro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Logradouro",
+                "required": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {
+                "model|||logradouro_imovel": "model.logradouro_imovel && model.logradouro_imovel == model.endereco_cep?.data?.response?.result?.logradouro ? model.logradouro_imovel : model.endereco_cep?.data?.response?.result?.logradouro"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "erro_logradouro",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O 'Logradouro' informado deve possuir no máximo 50 caracteres. Informações adicionais devem ser inseridas em 'Complemento'.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": " model.logradouro_imovel?.length > 50  "
+              },
+              "hideExpression": "model.logradouro_imovel?.length <= 50 || !model.logradouro_imovel  "
+            },
+            {
+              "className": "col-12",
+              "key": "numero_imovel",
+              "type": "input",
+              "templateOptions": {
+                "label": "Número Predial",
+                "placeholder": "Ex: S/N",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": " !model.endereco_cep?.input "
+            },
+            {
+              "className": "col-12",
+              "key": "erro_numero_predial",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>Número Predial da Obra' informado deve possuir no máximo 10 caracteres.</div></div><br>",
+                "label": "",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.numero_imovel?.length > 10  "
+              },
+              "hideExpression": "model.numero_imovel?.length <= 10 || !model.numero_imovel "
+            },
+            {
+              "className": "col-12",
+              "key": "bairro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Bairro",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "placeholder": "",
+                "focus": false
+              },
+              "expressionProperties": {
+                "model|||bairro_imovel": "model.bairro_imovel && model.bairro_imovel ==  model.endereco_cep?.data?.response?.result?.bairro ? model.bairro_imovel :  model.endereco_cep?.data?.response?.result?.bairro"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "complemento_imovel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento",
+                "placeholder": "Ex: Esquina com Rua São Paulo",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-6",
+              "key": "cidade_obra",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Município",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||cidade_obra": "model.cidade_obra && model.cidade_obra ==  model.endereco_cep?.data?.response?.result?.localidade ? model.cidade_obra :  model.endereco_cep?.data?.response?.result?.localidade"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-6",
+              "key": "uf_obra",
+              "type": "next-input",
+              "resetOnHide": true,
+              "templateOptions": {
+                "label": "Estado",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||uf_obra": "model.uf_obra && model.uf_obra ==  model.endereco_cep?.data?.response?.result?.uf ? model.uf_obra :  model.endereco_cep?.data?.response?.result?.uf"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "endereco_complementar",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Logradouro",
+                "focus": "false",
+                "restartKey": "quest_logradouroadicional",
+                "btnAddText": "Logradouro",
+                "hideLabel": false,
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.quest_logradouroadicional === 'Sim'"
+              },
+              "fieldArray": {
+                "fieldGroupClassName": "row items-end",
+                "fieldGroup": [
+                  {
+                    "className": "col-12",
+                    "key": "logradouro_complementar",
+                    "resetOnHide": true,
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Logradouro Secundário da Obra",
+                      "required": true
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "hideExpression": "model.quest_logradouroadicional === 'Não' || !model.quest_logradouroadicional  "
+            },
+            {
+              "key": "doc_registroimovel",
+              "type": "next-upload",
+              "wrappers": [
+                "ai-docs"
+              ],
+              "templateOptions": {
+                "hideNestedField": true,
+                "label": "Certidão de Registro do Imóvel atualizada",
+                "required": true,
+                "columns": "12",
+                "extends": [
+                  "PDF",
+                  "PNG",
+                  "JPG",
+                  "JPEG"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "hideLabel": false,
+                "compactView": false,
+                "docTipo": "",
+                "docModelo": ""
+              },
+              "className": "col-12",
+              "expressionProperties": {},
+              "hideExpression": ""
+            }
+          ],
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "templateOptions": {
+            "title": "Dados do Imóvel",
+            "subtitle": "",
+            "textHtml": "",
+            "fieldGroupClassName": "row items-end"
+          },
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "naturezatransmissao",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Natureza da Transmissão",
+                "options": [
+                  {
+                    "value": "Compra e Venda"
+                  },
+                  {
+                    "value": "Direitos Hereditários"
+                  },
+                  {
+                    "value": "Permuta"
+                  },
+                  {
+                    "value": "Outros"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "onaturezaop",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Outros",
+                "placeholder": "",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.naturezatransmissao !== 'Outros'"
+            },
+            {
+              "key": "registroanterior",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Registro Anterior ",
+                "placeholder": "Ex: Matrícula A-0/00.000",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "valordeclarado",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Valor Declarado",
+                "placeholder": "Ex: R$100.000,00",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "financiamento",
+              "type": "radio",
+              "templateOptions": {
+                "label": "O imóvel foi adquirido com Financiamento?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.naturezatransmissao === 'Compra e Venda'"
+              },
+              "hideExpression": "model.naturezatransmissao !== 'Compra e Venda'"
+            },
+            {
+              "key": "contrato",
+              "type": "next-upload",
+              "wrappers": [
+                "ai-docs"
+              ],
+              "templateOptions": {
+                "hideNestedField": true,
+                "label": "Contrato de financiamento",
+                "required": true,
+                "columns": "12",
+                "extends": [
+                  "PDF",
+                  "PNG",
+                  "JPG",
+                  "JPEG"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "hideLabel": false,
+                "compactView": false,
+                "docTipo": "",
+                "docModelo": "",
+                "placeholder": "",
+                "focus": false,
+                "disabled": false,
+                "hidden": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.naturezatransmissao === 'Compra e Venda' && model.financiamento === 'Sim' "
+              },
+              "hideExpression": "model.naturezatransmissao !== 'Compra e Venda'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados da Transmissão",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Emissão de Guia de ITBI",
+    "descricao": "Imposto sobre a transmissão 'inter vivos', a qualquer título, por ato oneroso, de bens imóveis, por natureza ou acessão física, e de direitos reais sobre imóveis, exceto os de garantia, bem como cessão de direitos a sua aquisição.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "newSignatureStrategy": true,
+    "useNewSidebarForwarding": true,
+    "experimentalMode": true,
+    "sigla": "ITB",
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "ITBI",
+        "template": "ModeloAD/itbi.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all"
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Resultado da Análise (Cadastro Imobiliário)",
+        "text_action": "Adicionou resultado da análise",
+        "key": "resulan",
+        "fieldGroup": [
+          {
+            "key": "resultanalise",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Resultado da Análise",
+              "placeholder": "Informações sobre a análise feita dos documentos",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "resultanalise",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Resultado da Análise",
+              "placeholder": "Informações sobre a análise feita dos documentos",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Cálculo do Imposto (Diretoria de Receita)",
+        "text_action": "Inseriu imposto",
+        "key": "imposto",
+        "fieldGroup": [
+          {
+            "key": "valoravaliado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Valor Avaliado",
+              "placeholder": "Ex: R$100.000,00",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "calculoimp",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Cálculo do Imposto  (Será Impressa no corpo do Documento Final)",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "compraevenda",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Compra e Venda  (Será Impressa no corpo do Documento Final)",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "financiamentosfh",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Financiamento SFH  (Será Impressa no corpo do Documento Final)",
+              "placeholder": "Financiamento SFH",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "infocompimp",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": " Informações Complementares",
+              "placeholder": "Informações complementares da avaliação",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "anexocalculoimposto",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo - Cálculo do Imposto",
+              "options": [],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "valoravaliado",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Valor Avaliado",
+              "placeholder": "Ex: R$100.000,00",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "calculoimp",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Cálculo do Imposto  (Será Impressa no corpo do Documento Final)",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "compraevenda",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Compra e Venda  (Será Impressa no corpo do Documento Final)",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "financiamentosfh",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Financiamento SFH  (Será Impressa no corpo do Documento Final)",
+              "placeholder": "Financiamento SFH",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "infocompimp",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": " Informações Complementares",
+              "placeholder": "Informações complementares da avaliação",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "anexocalculoimposto",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexo - Cálculo do Imposto",
+              "options": [],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "permission": "taxas",
+        "nome": "Taxa de Aprovação - Guia DAM (Diretoria de Receita)",
+        "text_action": "Emitiu Taxas do Processo",
+        "key": "taxasProcesso",
+        "type": "taxa",
+        "fieldGroup": [
+          {
+            "key": "valor-taxa-aprov",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Valor da Taxa",
+              "placeholder": "Ex: R$00,00",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Anexo da Guia de pagamento - com todas as pendências financeiras (Boleto)",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações - Taxas",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "valor-taxa-aprov",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Valor da Taxa",
+              "placeholder": "Ex: R$00,00",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Anexo da Guia de pagamento - com todas as pendências financeiras (Boleto)",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações - Taxas",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          }
+        ]
+      },
+      {
+        "permission": "taxas",
+        "nome": "Anexo de comprovante de pagamento - Guia DAM (Os boletos se encontram na aba Taxa de Aprovação)",
+        "text_action": "Alteradas informações de comprovantes",
+        "type": "resume.bckp",
+        "key": "anexoComprovante",
+        "hidden": "process.tramites.find((tramite) => tramite['taxasProcesso'])",
+        "fieldGroup": [
+          {
+            "key": "notificacaoitbi",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Notificação",
+              "options": [
+                {
+                  "value": "Declaro que estou ciente e notificado do lançamento conforme guia de recolhimento."
+                },
+                {
+                  "value": "Fica o requerente notificado do lançamento conforme guia de recolhimento. Não concordando com o valor lançado, poderá requerer a reavaliação administrativa, no prazo de dez dias, mediante o pagamento da “taxa de reavaliação”. Instruindo o pedido com a documentação que fundamente sua discordância, exercendo o seu direito de contraditório e ampla defesa."
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "anexosdisc",
+            "type": "next-upload",
+            "hideExpression": "model.notificacaoitbi !== 'Fica o requerente notificado do lançamento conforme guia de recolhimento. Não concordando com o valor lançado, poderá requerer a reavaliação administrativa, no prazo de dez dias, mediante o pagamento da “taxa de reavaliação”. Instruindo o pedido com a documentação que fundamente sua discordância, exercendo o seu direito de contraditório e ampla defesa.'",
+            "templateOptions": {
+              "label": "Anexos - Discordância",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          },
+          {
+            "key": "motivodisc",
+            "type": "next-ck",
+            "hideExpression": "model.notificacaoitbi !== 'Fica o requerente notificado do lançamento conforme guia de recolhimento. Não concordando com o valor lançado, poderá requerer a reavaliação administrativa, no prazo de dez dias, mediante o pagamento da “taxa de reavaliação”. Instruindo o pedido com a documentação que fundamente sua discordância, exercendo o seu direito de contraditório e ampla defesa.'",
+            "templateOptions": {
+              "label": "Motivo da discordância (Descreva aqui o motivo da discordância, e após isto, clique em Enviar para Análise, para que seu processo continue)",
+              "placeholder": "Digite aqui o motivo da discordância",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "comprovante",
+            "type": "next-upload",
+            "wrappers": [
+              "form-field"
+            ],
+            "hideExpression": "model.notificacaoitbi === 'Não concordo com o valor lançado, solicito a reavaliação administrativa, no prazo de dez dias, instruindo o pedido com a documentação que fundamente minha discordância, exercendo o meu direto de contraditório e ampla defesa.'",
+            "templateOptions": {
+              "label": "Comprovante - (Anexe aqui o comprovante de pagamento, e após isto, clique em Enviar para Análise, para que seu processo continue)",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "notificacaoitbi",
+            "type": "radio",
+            "templateOptions": {
+              "label": "Notificação",
+              "options": [
+                {
+                  "value": "Declaro que estou ciente e notificado do lançamento conforme guia de recolhimento."
+                },
+                {
+                  "value": "Fica o requerente notificado do lançamento conforme guia de recolhimento. Não concordando com o valor lançado, poderá requerer a reavaliação administrativa, no prazo de dez dias, mediante o pagamento da “taxa de reavaliação”. Instruindo o pedido com a documentação que fundamente sua discordância, exercendo o seu direito de contraditório e ampla defesa."
+                }
+              ],
+              "focus": "false",
+              "required": true
+            }
+          },
+          {
+            "key": "anexosdisc",
+            "type": "next-upload",
+            "hideExpression": "model.notificacaoitbi !== 'Fica o requerente notificado do lançamento conforme guia de recolhimento. Não concordando com o valor lançado, poderá requerer a reavaliação administrativa, no prazo de dez dias, mediante o pagamento da “taxa de reavaliação”. Instruindo o pedido com a documentação que fundamente sua discordância, exercendo o seu direito de contraditório e ampla defesa.'",
+            "templateOptions": {
+              "label": "Anexos - Discordância",
+              "options": [],
+              "focus": "false",
+              "required": false
+            }
+          },
+          {
+            "key": "motivodisc",
+            "type": "next-ck",
+            "hideExpression": "model.notificacaoitbi !== 'Fica o requerente notificado do lançamento conforme guia de recolhimento. Não concordando com o valor lançado, poderá requerer a reavaliação administrativa, no prazo de dez dias, mediante o pagamento da “taxa de reavaliação”. Instruindo o pedido com a documentação que fundamente sua discordância, exercendo o seu direito de contraditório e ampla defesa.'",
+            "templateOptions": {
+              "label": "Motivo da discordância (Descreva aqui o motivo da discordância, e após isto, clique em Enviar para Análise, para que seu processo continue)",
+              "placeholder": "Digite aqui o motivo da discordância",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "comprovante",
+            "type": "next-upload",
+            "wrappers": [
+              "form-field"
+            ],
+            "hideExpression": "model.notificacaoitbi === 'Não concordo com o valor lançado, solicito a reavaliação administrativa, no prazo de dez dias, instruindo o pedido com a documentação que fundamente minha discordância, exercendo o meu direto de contraditório e ampla defesa.'",
+            "templateOptions": {
+              "label": "Comprovante - (Anexe aqui o comprovante de pagamento, e após isto, clique em Enviar para Análise, para que seu processo continue)",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Verificação de Pagamento da Guia DAM",
+        "text_action": "Realizou ação",
+        "key": "new_key",
+        "form": [
+          {
+            "key": "verificacaopagamento",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Verificação do Pagamento",
+              "placeholder": "Verifica o Pagamento e Libera documento",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "verificacaopagamento",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Verificação do Pagamento",
+              "placeholder": "Verifica o Pagamento e Libera documento",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Observação",
+        "text_action": "Inseriu Observação",
+        "key": "observacao",
+        "fieldGroup": [
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observação (Será Impressa no corpo do Documento Final)",
+              "placeholder": "Insira aqui sua observação",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "obs",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observação (Será Impressa no corpo do Documento Final)",
+              "placeholder": "Insira aqui sua observação",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Finanças",
+    "initialReceiverConfig": {
+      "type": "multiple",
+      "possibleReceivers": []
+    },
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "tramite": [
+    {
+      "_id": "67b382afaafabb000828059d",
+      "groupId": "financas_modeload"
+    }
+  ],
+  "__v": 0,
+  "step": {},
+  "city_id": 38
+}

@@ -1,0 +1,1118 @@
+{
+  "_id": "677fd6e6848f0d00084a1e20",
+  "form": [
+    {
+      "wrappers": [
+        "stepper"
+      ],
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "declaracao_veracidade",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "options": [
+                  {
+                    "label": "Declaro",
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Declaração de Veracidade",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declaração de Veracidade</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerente",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Requerente do processo é:",
+                "options": [
+                  {
+                    "label": "Usuário logado no sistema",
+                    "value": "Usuário logado no sistema"
+                  },
+                  {
+                    "label": "Outro",
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.name : model.user",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "cpfcnpj_requerente",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF",
+                "mask": "000.000.000-009",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||cpfcnpj_requerente": "model.requerente == 'Usuário logado no sistema' ? (model.user_dados?.user?.user_metadata.cpf) : model.cpfcnpj_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "templateOptions": {
+                "label": "E-mail para Correspondência",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||email_requerente": "model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.email : model.email_requerente",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "telefone_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone",
+                "placeholder": "(00) 00000-0000",
+                "required": true,
+                "focus": false,
+                "disabled": false,
+                "hidden": false
+              },
+              "expressionProperties": {
+                "model|||telefone_requerente": "model.telefone_requerente ? model.telefone_requerente : model.requerente == 'Usuário logado no sistema' ? model.user_dados?.user?.user_metadata.telefone : model.usuario_telefone",
+                "templateOptions|||mask": "model.telefone_requerente?.length === 11 ? '(00) 00000-0000': '(00) 0000-00009'"
+              },
+              "hideExpression": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()"
+            },
+            {
+              "className": "col-12",
+              "key": "endereco_cep_req",
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP",
+                "placeholder": "Ex: 00000-000",
+                "mask": "00000-000",
+                "required": true,
+                "hideData": true,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "status_integracaocep_req",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.endereco_cep_req?.status == 'LOADING' "
+              },
+              "hideExpression": " model.endereco_cep_req?.status !== 'LOADING'  || !model.endereco_cep_req?.input"
+            },
+            {
+              "className": "col-12",
+              "key": "erro_integracaocep_empreendimento_req",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "(model.endereco_cep_req?.status !== 'SUCCESS') || (model.endereco_cep_req?.data?.response?.result?.erro === true) || (model.endereco_cep_req?.input?.length === 8 && model.endereco_cep_req?.status === 'KNOWN_FAILED') "
+              },
+              "hideExpression": "(model.endereco_cep_req?.status === 'SUCCESS' && model.endereco_cep_req?.data?.response?.result?.erro !== true) || (model.endereco_cep_req?.input?.length !== 8 && model.endereco_cep_req?.status !== 'KNOWN_FAILED') || !model.endereco_cep_req.input "
+            },
+            {
+              "className": "col-12",
+              "key": "logradouro_imovel_req",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Logradouro",
+                "required": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {
+                "model|||logradouro_imovel_req": "model.logradouro_imovel_req && model.logradouro_imovel_req == model.endereco_cep_req?.data?.response?.result?.logradouro ? model.logradouro_imovel_req : model.endereco_cep_req?.data?.response?.result?.logradouro"
+              },
+              "hideExpression": " model.endereco_cep_req?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "numero_imovel_req",
+              "type": "input",
+              "templateOptions": {
+                "label": "Número Residencial",
+                "placeholder": "Ex: S/N",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": " !model.endereco_cep_req?.input "
+            },
+            {
+              "className": "col-12",
+              "key": "bairro_imovel_req",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Bairro",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "placeholder": "",
+                "focus": false
+              },
+              "expressionProperties": {
+                "model|||bairro_imovel_req": "model.bairro_imovel_req && model.bairro_imovel_req ==  model.endereco_cep_req?.data?.response?.result?.bairro ? model.bairro_imovel_req :  model.endereco_cep_req?.data?.response?.result?.bairro"
+              },
+              "hideExpression": " model.endereco_cep_req?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "complemento_imovel_req",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento de endereço",
+                "placeholder": "Ex: Esquina com Rua São Paulo",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-6",
+              "key": "cidade_req",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cidade",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||cidade_req": "model.cidade_req && model.cidade_req ==  model.endereco_cep_req?.data?.response?.result?.localidade ? model.cidade_req :  model.endereco_cep_req?.data?.response?.result?.localidade"
+              },
+              "hideExpression": " model.endereco_cep_req?.input?.length !== 8 "
+            },
+            {
+              "className": "col-6",
+              "key": "uf_req",
+              "type": "next-input",
+              "resetOnHide": true,
+              "templateOptions": {
+                "label": "Estado",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||uf_req": "model.uf_req && model.uf_req ==  model.endereco_cep_req?.data?.response?.result?.uf ? model.uf_req :  model.endereco_cep_req?.data?.response?.result?.uf"
+              },
+              "hideExpression": " model.endereco_cep_req?.input?.length !== 8 "
+            },
+            {
+              "key": "telcelular",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone/Celular do Requerente",
+                "mask": "(00) 0 0000-0000",
+                "placeholder": "Ex: (00) 0 0000-0000",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "vinculo",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Vínculo com a empresa",
+                "options": [
+                  {
+                    "label": "Sócio Administrador",
+                    "value": "Sócio Administrador"
+                  },
+                  {
+                    "label": "Procurador",
+                    "value": "Procurador"
+                  },
+                  {
+                    "label": "Inventariante",
+                    "value": "Inventariante"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "docide",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento de Identificação com Foto",
+                "options": [],
+                "focus": "false",
+                "extends": [
+                  "PDF",
+                  "pdf"
+                ],
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.vinculo"
+            },
+            {
+              "key": "procuracao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Procuração",
+                "options": [],
+                "focus": "false",
+                "extends": [
+                  "PDF",
+                  "pdf"
+                ],
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.vinculo !== 'Procurador' || !model.vinculo"
+            },
+            {
+              "key": "inventariante",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documentos pertinentes ao Inventário",
+                "options": [],
+                "focus": "false",
+                "extends": [
+                  "PDF",
+                  "pdf"
+                ],
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.vinculo !== 'Inventariante' || !model.vinculo"
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ol class=\"pl-4\">\n<li align='justify'>Nome completo do Requrente: titular, sócio, inventariante ou procurador;</li>\n<li align='justify'>Insira o endereço completo;</li>\n<li align='justify'>(RG, CNH, Carteira de Trabalho, Carteira de Identidade de Estrangeiro,Cartão de Cidadão, etc) da pessoa com <u>poderes para representar legalmente</u> a empresa;</li>\n<li align='justify'>Procuração (estabelecendo poderes específicos para efetuar a baixa de inscrição), se tiver selecionado a opção <strong>Procurador</strong>;</li>\n<li align='justify'>Documento estabelecendo poderes para representar o espólio, se tiver selecionado a opção <strong>Inventariante</strong>;</li>\n</ol>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "inscr_municipal",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Inscrição Municipal",
+                "placeholder": " ",
+                "focus": "false",
+                "description": "",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "cnpj",
+              "validators": {
+                "validation": [
+                  "cpfCnpj"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CNPJ",
+                "mask": "AA.AAA.AAA/AAAA-00",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "razaoSocial",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Razão Social",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "nomeFantasia",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome Fantasia",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "endereco_cep",
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP",
+                "placeholder": "Ex: 00000-000",
+                "mask": "00000-000",
+                "required": true,
+                "hideData": true,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-12",
+              "key": "status_integracaocep",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-yellow-100 font-medium text-yellow-800'><div class='flex space-x-1 text-yellow-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'> <path fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /> </svg></div><div class=' text-yellow-800' >Aviso</div></div><div>Aguarde a busca no banco de dados.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.endereco_cep_empreendimento?.status == 'LOADING' "
+              },
+              "hideExpression": " model.endereco_cep?.status !== 'LOADING'  || !model.endereco_cep?.input"
+            },
+            {
+              "className": "col-12",
+              "key": "erro_integracaocep_empreendimento",
+              "type": "next-html",
+              "templateOptions": {
+                "textHtml": "<div class='flex flex-col mt-2 p-4 rounded bg-red-100 font-medium text-red-800'><div class='flex space-x-1 text-red-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z' clip-rule='evenodd'/></svg></div><div class=' text-red-800' >Atenção</div></div><div>O CEP não foi encontrado, insira um CEP válido.</div></div><br>",
+                "focus": "false",
+                "type": "text",
+                "readonly": true
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "(model.endereco_cep?.status !== 'SUCCESS') || (model.endereco_cep?.data?.response?.result?.erro === true) || (model.endereco_cep?.input?.length === 8 && model.endereco_cep?.status === 'KNOWN_FAILED') "
+              },
+              "hideExpression": "(model.endereco_cep?.status === 'SUCCESS' && model.endereco_cep?.data?.response?.result?.erro !== true) || (model.endereco_cep?.input?.length !== 8 && model.endereco_cep?.status !== 'KNOWN_FAILED') || !model.endereco_cep.input "
+            },
+            {
+              "className": "col-12",
+              "key": "logradouro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Logradouro",
+                "required": true,
+                "triggerOnlyWhenEditing": true
+              },
+              "expressionProperties": {
+                "model|||logradouro_imovel": "model.logradouro_imovel && model.logradouro_imovel == model.endereco_cep?.data?.response?.result?.logradouro ? model.logradouro_imovel : model.endereco_cep?.data?.response?.result?.logradouro"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "numero_imovel",
+              "type": "input",
+              "templateOptions": {
+                "label": "Número Residencial",
+                "placeholder": "Ex: S/N",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": " !model.endereco_cep?.input "
+            },
+            {
+              "className": "col-12",
+              "key": "bairro_imovel",
+              "resetOnHide": true,
+              "type": "input",
+              "templateOptions": {
+                "label": "Bairro",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "placeholder": "",
+                "focus": false
+              },
+              "expressionProperties": {
+                "model|||bairro_imovel": "model.bairro_imovel && model.bairro_imovel ==  model.endereco_cep?.data?.response?.result?.bairro ? model.bairro_imovel :  model.endereco_cep?.data?.response?.result?.bairro"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-12",
+              "key": "complemento_imovel",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento de endereço",
+                "placeholder": "Ex: Esquina com Rua São Paulo",
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "disabled": false
+              },
+              "expressionProperties": {}
+            },
+            {
+              "className": "col-6",
+              "key": "cidade",
+              "resetOnHide": true,
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cidade",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||cidade": "model.cidade && model.cidade ==  model.endereco_cep?.data?.response?.result?.localidade ? model.cidade :  model.endereco_cep?.data?.response?.result?.localidade"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "className": "col-6",
+              "key": "uf",
+              "type": "next-input",
+              "resetOnHide": true,
+              "templateOptions": {
+                "label": "Estado",
+                "required": true,
+                "triggerOnlyWhenEditing": true,
+                "readonly": true
+              },
+              "expressionProperties": {
+                "model|||uf": "model.uf && model.uf ==  model.endereco_cep?.data?.response?.result?.uf ? model.uf :  model.endereco_cep?.data?.response?.result?.uf"
+              },
+              "hideExpression": " model.endereco_cep?.input?.length !== 8 "
+            },
+            {
+              "key": "telefonecelular",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Telefone/Celular",
+                "mask": "(00) 0 0000-0000",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "emailempresa",
+              "validators": {
+                "validation": [
+                  "email"
+                ]
+              },
+              "type": "next-input",
+              "templateOptions": {
+                "label": "E-mail",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados da Empresa",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados da Empresa</span>\n\n\n<ol class=\"pl-4\">\n<li align='justify'>Preencha os campos conforme solicitado.</li>\n</ol>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "tipos_tributaveis",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Selecione de acordo com a sua solicitação",
+                "options": [
+                  {
+                    "value": "Empresa Optante pelo Simples"
+                  },
+                  {
+                    "value": "Empresa Optante pelo Lucro Real ou Lucro Presumido"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "baixaretro",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Existem débitos a serem cancelados?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "requerimento_debitos",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Requerimento",
+                "options": [],
+                "focus": "false",
+                "extends": [
+                  "PDF",
+                  "pdf"
+                ],
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.baixaretro !== 'Sim'"
+            },
+            {
+              "key": "extincao",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Data da Extinção (Data da extinção/Alteração registrada na junta)",
+                "placeholder": " ",
+                "mask": "00/00/0000",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "motivobaixa",
+              "type": "select",
+              "templateOptions": {
+                "label": "Motivo da Baixa",
+                "options": [
+                  {
+                    "label": "Encerramento das atividades (Matriz ou Filial) OU Cisão Total OU Incorporação por outra pessoa jurídica OU Fusão",
+                    "value": "Encerramento das atividades (Matriz ou Filial) OU Cisão Total OU Incorporação por outra pessoa jurídica OU Fusão"
+                  },
+                  {
+                    "label": "Encerramento das atividades Empresário Individual/EIRELI",
+                    "value": "Encerramento das atividades Empresário Individual/EIRELI"
+                  },
+                  {
+                    "label": "Alteração de endereço para outro Município (Matriz ou Filial)",
+                    "value": "Alteração de endereço para outro Município (Matriz ou Filial)"
+                  },
+                  {
+                    "label": "Alteração de endereço para outro Município – Empresário Individual / EIRELI",
+                    "value": "Alteração de endereço para outro Município – Empresário Individual / EIRELI"
+                  },
+                  {
+                    "label": "Falecimento do titular - Empresário Individual / EIRELI",
+                    "value": "Falecimento do titular - Empresário Individual / EIRELI"
+                  },
+                  {
+                    "label": "Outros",
+                    "value": "Outros"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "desc_motivo",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Descreva o motivo",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "model.motivobaixa !== 'Outros' "
+            }
+          ],
+          "templateOptions": {
+            "title": "Solicitação",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Solicitação</span>\n\n\n<ol class=\"pl-4\">\n<li align='justify'>Deve constar no Requerimento uma descrição objetiva dos débitos a serem cancelados.</li>\n<li align='justify'><strong>O Requerimento</strong> deve ser conferido e assinado, <strong><u>preferencialmente de forma digital, </u></strong>com assinatura validada no portal do ITI (<a href=\"https://validar.iti.gov.br/\">https://validar.iti.gov.br/</a>), ou de forma física com firma reconhecida.</li>\n</ol>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "requerimento_baixa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Requerimento de Baixa perante a Junta Comercial e Receita Federal",
+                "options": [],
+                "focus": "false",
+                "extends": [
+                  "PDF",
+                  "pdf"
+                ],
+                "required": true
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "quest_nota_fiscal",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Possui Bloco de Notas ou Notas Fiscais impressas ?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": " !model.tipos_tributaveis || model.tipos_tributaveis !== 'Empresa Optante pelo Simples' "
+            },
+            {
+              "key": "nf_simples",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Todas as notas fiscais de serviços autorizadas, não utilizadas e utilizadas nos últimos 5 (cinco anos)",
+                "options": [],
+                "extends": [
+                  "PDF",
+                  "pdf"
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipos_tributaveis || model.tipos_tributaveis !== 'Empresa Optante pelo Simples' || !model.quest_nota_fiscal || model.quest_nota_fiscal == 'Não' "
+            },
+            {
+              "key": "doc_distratosocial",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Distrato Social ou alteração contratual, registrado pelo órgão competente, original ou fotocopia autenticada",
+                "options": [],
+                "extends": [
+                  "PDF",
+                  "pdf"
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipos_tributaveis "
+            },
+            {
+              "key": "doc_dam",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Documento de arrecadação Municipal (DAM) no valor de 0,20 UFM referente a taxa de baixa",
+                "options": [],
+                "extends": [
+                  "PDF",
+                  "pdf"
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipos_tributaveis"
+            },
+            {
+              "key": "doc_iss",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declarações eletrônicas ISS transmitidas até o mês da competência da baixa",
+                "options": [],
+                "extends": [
+                  "PDF",
+                  "pdf"
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipos_tributaveis  "
+            },
+            {
+              "key": "livroscontabeis_lucroreal",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Todos os livros contábeis, devidamente registrados na Junta Comercial (Livro Caixa, Diário, Razão e Balancetes)",
+                "options": [],
+                "extends": [
+                  "PDF",
+                  "pdf"
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipos_tributaveis || model.tipos_tributaveis !== 'Empresa Optante pelo Lucro Real ou Lucro Presumido' "
+            },
+            {
+              "key": "livrosrazao_lucroreal",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Livro razão dos últimos 5 anos, para contribuinte tributado no lucro real ou lucro presumido. Se a razão for consolidada, juntar um relatório de receitas e despesas para cada estabelecimento em Navegantes – SC",
+                "options": [],
+                "extends": [
+                  "PDF",
+                  "pdf"
+                ],
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {},
+              "hideExpression": "!model.tipos_tributaveis || model.tipos_tributaveis !== 'Empresa Optante pelo Lucro Real ou Lucro Presumido' "
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos</span>\n\n<ol class=\"pl-4\">\n<li align='justify'>Insira os documentos solicitados;</li>\n<li align='justify'>Para justificar a perda ou inutilização dos Livros contábeis, o contribuinte deverá apresentar o registro da ocorrência do fato, com a descrição e numeração dos documentos utilizados e não utilizados.</li>\n</ol>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "obs_solic",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Observações sobre a solicitação",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    },
+                    "expressionProperties": {}
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    },
+                    "expressionProperties": {}
+                  }
+                ]
+              },
+              "expressionProperties": {}
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12",
+              "expressionProperties": {}
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ],
+          "expressionProperties": {}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Baixa de Empresa",
+    "descricao": "Processo de encerramento legal de uma empresa, envolvendo a liquidação de seus ativos, o pagamento de dívidas e o cumprimento de todas as obrigações legais.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "sigla": "BEP",
+    "newSignatureStrategy": true,
+    "experimentalMode": true,
+    "useNewSidebarForwarding": true,
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Certidão de Baixa de Empresa",
+        "template": "ModeloAD/certidao_baixa.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Taxas",
+        "text_action": "Emitiu Taxa",
+        "key": "taxasProcesso",
+        "form": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ],
+        "permission": "taxas",
+        "type": "taxa",
+        "fieldGroup": [
+          {
+            "key": "taxas_processo",
+            "type": "next-taxas",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Boleto",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text"
+            }
+          },
+          {
+            "key": "observacoes_taxas",
+            "type": "next-ck",
+            "wrappers": [
+              "form-field"
+            ],
+            "templateOptions": {
+              "label": "Observações Taxas:",
+              "placeholder": "Escreva aqui caso tenha alguma observação"
+            }
+          },
+          {
+            "key": "aviso_taxas",
+            "type": "next-html",
+            "templateOptions": {
+              "focus": "false",
+              "textHtml": "<div class='flex flex-col mt-2  p-4 rounded bg-blue-100 font-medium text-blue-800'><div class='flex space-x-2 text-blue-500 mb-2' ><div><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>  <path fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z' clip-rule='evenodd' /></svg></div><div class=' text-blue-800' >Aviso ao Requerente</div></div><div>Acima está/estará disponível o link para download de sua taxa. Após realizar o pagamento, anexe o comprovante de pagamento no campo indicado ao lado para que o seu processo possa seguir com os devidos trâmites</div></div><br>",
+              "readonly": true,
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "SDER",
+    "initialReceiverConfig": {
+      "type": "single",
+      "possibleReceivers": [
+        "financas_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "allowMultipleForwarding": true
+  },
+  "tramite": [
+    {
+      "_id": "677fd753551ef70008e0b66c",
+      "groupId": "financas_modeload"
+    }
+  ],
+  "__v": 0,
+  "step": {},
+  "city_id": 38
+}

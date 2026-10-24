@@ -1,0 +1,1251 @@
+{
+  "_id": "6761cf1802c3db00088b9257",
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12"
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome completo",
+                "placeholder": "Ex: João da Silva",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "cpf_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CPF",
+                "placeholder": "Ex: 000.000.000-00",
+                "mask": "000.000.000-00",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "raca_cor",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Raça/cor autodeclarada",
+                "options": [
+                  {
+                    "value": "Branca"
+                  },
+                  {
+                    "value": "Negra/Preta"
+                  },
+                  {
+                    "value": "Parda"
+                  },
+                  {
+                    "value": "Indígena"
+                  },
+                  {
+                    "value": "Amarela"
+                  },
+                  {
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "especificar_raca",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Especificar",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "hideExpression": "model.raca_cor !== 'Outro'",
+              "expressionProperties": {
+                "templateOptions|||required": "model.raca_cor === 'Outro'"
+              }
+            },
+            {
+              "key": "quest_nacionalidade",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Você possui nacionalidade estrangeira?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "tipo_visto",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Tipo de visto",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "hideExpression": "model.quest_nacionalidade !== 'Sim'",
+              "expressionProperties": {
+                "templateOptions|||required": "model.quest_nacionalidade === 'Sim'"
+              }
+            },
+            {
+              "key": "nacionalidade",
+              "wrappers": [
+                "form-field",
+                "consumeDataset"
+              ],
+              "type": "input",
+              "templateOptions": {
+                "label": "Selecione seu país de nascimento",
+                "datasetReference": "65e9fe7a74b1c90007f1e54f",
+                "datasetKey": "Pais",
+                "placeholder": "digite algo para buscar",
+                "autocomplete": true,
+                "hideData": true,
+                "focus": "false",
+                "type": "text",
+                "required": false,
+                "disabled": false
+              },
+              "hideExpression": "model.quest_nacionalidade !== 'Sim'",
+              "expressionProperties": {
+                "templateOptions|||required": "model.quest_nacionalidade === 'Sim'"
+              }
+            },
+            {
+              "key": "identidade",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número da Identidade",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "titulo_eleitor",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número do título de eleitor",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.quest_nacionalidade == 'Não'"
+              }
+            },
+            {
+              "key": "cnh",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número CNH (Obrigatório para o cargo de  motorista)",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "email_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "E-mail",
+                "placeholder": "Ex: nome@email.com",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "celular_requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Celular",
+                "placeholder": "Ex: (00) 0 0000-0000",
+                "mask": "(00) 0 0000-0000",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "cargo_admissao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cargo para admissão",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "secretaria_trabalhar",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Secretaria que irá trabalhar",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "cep_requerente",
+              "type": "next-input-data",
+              "wrappers": [
+                "form-field",
+                "integrations"
+              ],
+              "templateOptions": {
+                "label": "CEP (Somente números)",
+                "mask": "99999999",
+                "required": true,
+                "idIntegration": "5f916ab6a926a9000875587d",
+                "saveIntegrationResponse": true
+              }
+            },
+            {
+              "key": "Numero_Residencial_Requerente",
+              "type": "input",
+              "templateOptions": {
+                "label": "Número Residencial",
+                "required": true
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}"
+            },
+            {
+              "key": "Complemento_Requerente",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Complemento Residencial",
+                "placeholder": "Ex: Ap 01",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "tipo_contrato",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Tipo de Contrato:",
+                "options": [
+                  {
+                    "value": "Prazo Indeterminado"
+                  },
+                  {
+                    "value": "Prazo Determinado"
+                  },
+                  {
+                    "value": "Estágio"
+                  },
+                  {
+                    "value": "Jovem Aprendiz"
+                  },
+                  {
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              }
+            },
+            {
+              "key": "especificar_contrato",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Especificar",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "hideExpression": "model.tipo_contrato !== 'Outro'",
+              "expressionProperties": {
+                "templateOptions|||required": "model.tipo_contrato === 'Outro'"
+              }
+            },
+            {
+              "key": "regime_trabalho",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Regime de Trabalho:",
+                "options": [
+                  {
+                    "value": "CLT"
+                  },
+                  {
+                    "value": "Estatutário"
+                  },
+                  {
+                    "value": "Temporário"
+                  },
+                  {
+                    "value": "Outro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "especificar_regime_trabalho",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Especificar",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              },
+              "hideExpression": "model.regime_trabalho !== 'Outro'",
+              "expressionProperties": {
+                "templateOptions|||required": "model.regime_trabalho === 'Outro'"
+              }
+            },
+            {
+              "key": "numero_pispasep",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Número do PIS PASEP",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dados do Requerente</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Siga as dicas e instruções contidas nos textos laterais, para correto preenchimento do seu processo;&nbsp;</li> \n <li align=\"justify\">Caso seja seu primeiro pedido no Aprova Digital e tenha dúvidas sobre o <b>sistema</b>, favor consultar a página de <u><a target='_blank' class=\"font-weight-bold\" style=\"color: #007BFF\" href='https://aprova.movidesk.com/kb/'<strong>Ajuda</strong></a></u>. Você pode também entrar em contato com nosso suporte pelo ícone no canto inferior direto da tela;&nbsp;</li>  \n<li align=\"justify\">Em caso de dúvidas técnicas sobre o processo, entre em contato diretamente com a prefeitura de sua cidade, eles saberão te auxiliar corretamente.</li>\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "Documento_Certidao_NascimentoCasamento",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Certidão de Nascimento / Certidão de Casamento",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Documento_CPF",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CPF",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Documento_Identidade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Carteira de Identidade (RG)",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Documento_CNH",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Carteira Nacional de Habilitação - CNH",
+                "options": [],
+                "focus": "false",
+                "required": false,
+                "placeholder": "",
+                "disabled": false
+              }
+            },
+            {
+              "key": "Documento_Titulo_Eleitor",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Título de Eleitor",
+                "options": [],
+                "focus": "false",
+                "required": true,
+                "placeholder": "",
+                "disabled": false
+              },
+              "expressionProperties": {
+                "templateOptions|||required": "model.quest_nacionalidade == 'Não'"
+              }
+            },
+            {
+              "key": "Documento_Reservista",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Certificado de Reservista",
+                "options": [],
+                "focus": "false",
+                "required": false
+              }
+            },
+            {
+              "key": "Documento_Conselho_Classe",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Registro Conselho de Classe",
+                "options": [],
+                "focus": "false",
+                "required": false
+              }
+            },
+            {
+              "key": "Documento_Comprovante_Endereco",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovante de Endereço",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Documento_Comprovante_Escolaridade",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovante de Escolaridade",
+                "options": [],
+                "focus": "false",
+                "required": false,
+                "placeholder": "",
+                "disabled": false
+              }
+            },
+            {
+              "key": "Documento_Foto3x4",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Foto 3x4",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentações",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentações</span>\n\n<br><br>\n<b>Documentos necessários nessa etapa:</b><br>\n<br>\n▪ Cópia da Certidão de Nascimento para solteiros ou a Certidão de Casamento de cônjuge <b>(com validade de 90 dias)</b>;<br>\n▪ Cópia do CPF <b>(frente e verso)</b>;<br>\n▪ Cópia do Comprovante de Escolaridade <b>(frente e verso)</b>;<br>\n▪ Cópia da Carteira de Identidade (RG) <b>(frente e verso)</b>;<br>\n▪ Cópia da Carteira Nacional de Habilitação - CNH <b>(obrigatória para o cargo de motorista)</b>;<br>\n▪ Cópia do Título de Eleito <b>(frente e verso)</b>;<br>\n▪ Cópia do Certificado de Reservista <b>(obrigatória para homens de até 45 anos)</b>;<br>\n▪ Cópia dp Registro Conselho de Classe <b>(obrigatória para os cargos de nível superior)</b>;<br>\n▪ Cópia do Comprovante de Endereço;<br>\n▪ Foto 3x4 <b>(colorida)</b>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "possui_dependentes",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Possui dependentes?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "dependentes_rep",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Dependentes",
+                "focus": "false",
+                "btnAddText": "Dependentes",
+                "required": true,
+                "placeholder": "",
+                "disabled": false,
+                "hidden": true
+              },
+              "validatorsText": "{\\n\\t\\t\\tvalidation: Validators.compose([Validators.required])\\n\\t\\t}",
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "nome_beneficiario",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Nome do Beneficiário",
+                      "placeholder": "Digite aqui.",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "parentesco_beneficiario",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Parentesco",
+                      "placeholder": "Digite aqui.",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "data_nasc_beneficiario",
+                    "type": "next-date",
+                    "templateOptions": {
+                      "label": "Data de Nascimento",
+                      "focus": "false",
+                      "type": "date",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "cpf_beneficiario",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "CPF",
+                      "placeholder": "Ex: 000.000.000-00",
+                      "mask": "000.000.000-00",
+                      "focus": "false",
+                      "type": "text",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "dependente_salario",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "É dependente para receber o salário família?",
+                      "options": [
+                        {
+                          "value": "Sim"
+                        },
+                        {
+                          "value": "Não"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "dependente_imposto",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "É dependente para o Imposto de Renda?",
+                      "options": [
+                        {
+                          "value": "Sim"
+                        },
+                        {
+                          "value": "Não"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "certidao_dependente",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Certidão de Nascimento do Dependente",
+                      "options": [],
+                      "focus": "false",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "cpf_dependente",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "CPF do Dependente",
+                      "options": [],
+                      "focus": "false",
+                      "required": true
+                    }
+                  }
+                ]
+              },
+              "hideExpression": "model.possui_dependentes != 'Sim'"
+            },
+            {
+              "key": "declaracao_salario_familia",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Pelo presente TERMO DE RESPONSABILIDADE, declaro estar ciente que deverei comunicar a ocorrência de qualquer fato que determine a perda do direito ao SALÁRIO FAMÍLIA, sob pena de devolução das importâncias recebidas indevidamente e ainda sujeitar-me às penalidades previstas em lei.",
+                "options": [
+                  {
+                    "value": "Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dependentes",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Dependentes</span>\n\n\n<ol class=\"pl-4\">\n<li align = \"justify\">Para receber o salário família, o dependente deve possuir os seguintes parâmetros:</li>\n<ul>\n<li align = \"justify\">filho(a) até 14 anos;</li>\n<li align = \"justify\">filho(a) inválido de qualquer idade;</li>\n<li align = \"justify\">o salário família é devido para quem ganha bruto até R$ 1503,25.</li>\n</ul>\n\n<li align = \"justify\">Para o dependente se enquadrar no Imposto de Renda, ele deve seguir os seguintes parâmetros:</li>\n\n<ul>\n<li align = \"justify\">filho(a) ou enteado(a), até 21 anos de idade;</li>\n<li align = \"justify\">filho(a) ou enteado(a) universitário ou cursando escola técnica de segundo grau, até 24 anos, desde que apresente a DECLARAÇÃO ESCOLAR, todo início de ano letivo;</li>\n<li align = \"justify\">filho(a) ou enteado(a), em qualquer idade, quando incapacitado física ou mentalmente para o trabalho.</li>\n</ul>\n\n\n</ol>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "bancoreq",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Banco para Recebimento do Salário",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "agenciareq",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Agência para Recebimento do Salário",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "contareq",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Conta Corrente para Recebimento do Salário",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "doc",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Formulário de abertura de conta bancaria",
+                "options": [],
+                "focus": "false",
+                "required": false
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Conta Salário",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Conta Salário</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\"><b> Consulte com o Departamento de Pessoal sobre a abertura da Conta Salário. </B>&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "Declaracao_RecebimentosdeProventos",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Recebo proventos de aposentadoria decorrentes de cargo(s), emprego(s) e/ou função(ões) pública(s), incluídas as autarquias, empresas públicas, sociedades de economia mista da União, dos Estados, do Distrito Federal e dos Municípios e Fundações mantidas pelo Poder Público, conforme anexa cópia do contracheque.",
+                "options": [
+                  {
+                    "value": "Declaro"
+                  },
+                  {
+                    "value": "Não Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Declaracao_AcumulacaodeCargos",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Acumulo cargo(s), emprego(s) e/ou função(ões) pública(s), incluídas as autarquias, empresas públicas, sociedades de economia mista da União, dos Estados, do Distrito Federal e dos Municípios e Fundações mantidas pelo Poder Público, abaixo discriminado:",
+                "options": [
+                  {
+                    "value": "Declaro"
+                  },
+                  {
+                    "value": "Não Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Orgao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Órgão",
+                "placeholder": "Digite aqui.",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "model.Declaracao_AcumulacaodeCargos!== 'Declaro'"
+            },
+            {
+              "key": "Cargo",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Cargo",
+                "placeholder": "Digite aqui.",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "model.Declaracao_AcumulacaodeCargos!== 'Declaro'"
+            },
+            {
+              "key": "Carga_Horaria_Semanal",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Carga Horária Semanal",
+                "placeholder": "Digite aqui.",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              },
+              "hideExpression": "model.Declaracao_AcumulacaodeCargos!== 'Declaro'"
+            },
+            {
+              "key": "Declaracao_AuxilioAlimentacao",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Auxílio-alimentação, assistência pré-escolar e/ou benefícios de espécie semelhante",
+                "options": [
+                  {
+                    "value": "Não recebo auxílio-alimentação, assistência pré-escolar e/ou benefícios de espécie semelhante no órgão/empresa em que acumulo cargo."
+                  },
+                  {
+                    "value": "Recebo auxílio-alimentação, assistência pré-escolar e/ou benefícios de espécie semelhante no órgão/empresa em que acumulo cargo."
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Declaracao_DemissaodeServicoPublico",
+              "type": "radio",
+              "templateOptions": {
+                "label": "NÃO DEMISSÃO DO SERVIÇO PÚBLICO: DECLARA -Sob as penas da lei e para os devidos fins e efeitos, que não foi demitido(a) a bem do serviço público, de cargo público efetivo, ou destituído de cargo em comissão, ou de função pública, em órgão da União, Estados e Municípios, nos últimos 05 (cinco) anos anteriores à data desta declaração. Para clareza firma a presente declaração para que promova todos os efeitos legais",
+                "options": [
+                  {
+                    "value": "Declaro"
+                  },
+                  {
+                    "value": "Não Declaro"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Cargos_Comissionados",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Cadastro para Cargos Comissionado?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Documento_DeclaracaodeBens",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declaração de Bens",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "hideExpression": "model.Cargos_Comissionados!== 'Sim'"
+            },
+            {
+              "key": "Cadastro_Supervisor_Educacional",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Cadastro de Supervisor Educacional?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Documento_ComprovanteExperiencia",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Comprovante de Experiência Docente",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "hideExpression": "model.Cadastro_Supervisor_Educacional!== 'Sim'"
+            },
+            {
+              "key": "Cadastro_Cotista",
+              "type": "radio",
+              "templateOptions": {
+                "label": "Cadastro para Cotista?",
+                "options": [
+                  {
+                    "value": "Sim"
+                  },
+                  {
+                    "value": "Não"
+                  }
+                ],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Documento_DeclaracaoCotista",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Declaração de Cotista",
+                "options": [],
+                "focus": "false",
+                "required": true
+              },
+              "hideExpression": "model.Cadastro_Cotista!== 'Sim'"
+            }
+          ],
+          "templateOptions": {
+            "title": "Declarações",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Declarações</span>\n\n\n<br>\n<b>Acumulação de cargos e/ou proventos</b>\n<br><br>\nDeclaro, tendo lido o disposto no artigo 37, incisos XVI e XVII e § 10, 40, § 6º, da Constituição Federal, nos arts. 118, 119 e 120 da Lei nº 8.112/90, alterados pela Lei nº 9.527/97, na Súmula do TCU nº 246/2002, publicada no DOU de 5/4/2002, e no ACÓRDÃO do TCU nº 54/2007, publicado no DOU de 8/2/2007, transcritos no verso.\n<br><br>\n<hr>\n<br><br>\n\nAo lado são mostradas algumas declarações que devem ser feitas para o processo de admissão.\n<br><br>\nExistem três declarações ao final da área referentes ao cadastro para Cargos Comissionados, para Supervisor Educacional e para Cotista.\nCaso você encaixe em algum desses critérios, um botão de upload vai ser aberto para a inserção dos documentos necessários para cada caso."
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "Documento_CertidaoCivilNegativa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Certidão Cívil Negativa",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Documento_CertidaoCriminalNegativa",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Certidão Criminal Negativa",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Documento_QuitacaoEleitoral",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Certidão de Quitação com as Obrigações Eleitorais",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Documento_CNIS",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "CNIS",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "Documento_RegularizacaoCPF",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Certidão de Regularização do CPF",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Certidões",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "Documento_AtestadoOcupacional",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Atestado de Saúde Ocupacional",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Exame Admissional",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "obs_solic",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Observações sobre a solicitação",
+                "placeholder": " ",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    }
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Documentos Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Documentos Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Caso seja necessário, clique em 'Adicionar Documentos Complementares' e adicione o anexo desejado a sua respectiva descrição.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "681df41c5882ba0008fa0c77"
+    }
+  ],
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Processo Admissional",
+    "descricao": "Conjunto de etapas para contratação de novos funcionários, incluindo seleção, contratação e integração na empresa.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "useNewSidebarForwarding": true,
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "sigla": "PAD",
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Ficha cadastral",
+        "template": "ModeloAD/ficha_cadastral_admissional.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true
+      },
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Declaração de Dependentes",
+        "template": "ModeloAD/declaracao_dependentes_admissional.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "official": true,
+        "viewed": true
+      }
+    ],
+    "form_tramites": [
+      {
+        "nome": "Análise da solicitação",
+        "text_action": "Analisou solicitação",
+        "key": "analisesolicitacao",
+        "fieldGroup": [
+          {
+            "key": "nummatricula",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Número da Matrícula do Servidor",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "parecerreq",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Total de proventos",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "obsanalise",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "Digite aqui suas observações",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "nummatricula",
+            "type": "next-input",
+            "templateOptions": {
+              "label": "Número da Matrícula do Servidor",
+              "placeholder": " ",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "parecerreq",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Total de proventos",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": true
+            }
+          },
+          {
+            "key": "obsanalise",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "Digite aqui suas observações",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ]
+      },
+      {
+        "nome": "Termo de Posse/Contrato/Decreto de Nomeação",
+        "text_action": "Adicionou Declaração",
+        "key": "declaracaosemvincemp",
+        "fieldGroup": [
+          {
+            "key": "declaracaoanexo",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexe aqui Termo de Posse/Contrato/Decreto de Nomeação para o Requerente",
+              "extends": [
+                "pdf",
+                "PDF"
+              ],
+              "options": [],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ],
+        "form": [
+          {
+            "key": "declaracaoanexo",
+            "type": "next-upload",
+            "templateOptions": {
+              "label": "Anexe aqui Termo de Posse/Contrato/Decreto de Nomeação para o Requerente",
+              "extends": [
+                "pdf",
+                "PDF"
+              ],
+              "options": [],
+              "focus": "false",
+              "required": true
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Administração ou RH",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "admmodelo_modeload"
+      ]
+    },
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "tramite": [
+    {
+      "_id": "6761cfbdc1b13900082df786",
+      "groupId": "admmodelo_modeload"
+    }
+  ],
+  "__v": 0,
+  "step": {},
+  "city_id": 38
+}

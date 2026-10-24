@@ -1,0 +1,228 @@
+{
+  "_id": "67a4f8a9bdad7d0008f164a7",
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "type": "next-upload",
+              "wrappers": [
+                "lume-ai"
+              ],
+              "templateOptions": {
+                "hideNestedField": true,
+                "label": "Atestado Médico",
+                "required": true,
+                "columns": "12",
+                "extends": [
+                  "PDF",
+                  "PNG",
+                  "JPG",
+                  "JPEG"
+                ],
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "agentId": "1babe534-34ac-43ad-a561-4f4e5bab476a"
+              },
+              "key": "atestado_medico_lume",
+              "className": "col-12"
+            },
+            {
+              "className": "col-6",
+              "key": "inicio_afast",
+              "type": "next-date",
+              "templateOptions": {
+                "label": "Data de início do afastamento",
+                "placeholder": "Ex: 15/06/2022",
+                "focus": "false",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||inicio_afast": "((model, field, formState) => {const formatDateToISO=(dateString)=>{if(!dateString)return null;const[day,month,year]=dateString.split('/').map(Number);const fullYear=year<100?2000+year:year;return new Date(Date.UTC(fullYear,month-1,day,3)).toISOString();};return formatDateToISO(model?.atestado_medico_lume?.lume_data?.extractedData?.data_emissao);})(model, field, formState) ",
+                "templateOptions|||label": "model.inicio_afast"
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "hora_afast",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Horário de início do afastamento",
+                "focus": "false",
+                "type": "time",
+                "required": true
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "termino_afast",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Data de término do afastamento",
+                "placeholder": "Ex: 18/06/2022",
+                "focus": "false",
+                "type": "text",
+                "mask": "00/00/0000",
+                "keepMask": true,
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||termino_afast": "((model, field, formState) => {const addDaysToDate=(dateString,daysToAdd)=>{if(!dateString||isNaN(daysToAdd))return null;const date=new Date(dateString);if(isNaN(date))return null;date.setUTCDate(date.getUTCDate()+daysToAdd);return date.toISOString();};return model.inicio_afast&&!isNaN(parseInt(model.periodo_afastamento,10))?addDaysToDate(model.inicio_afast,parseInt(model.periodo_afastamento,10)):null;})(model, field, formState)"
+              }
+            },
+            {
+              "className": "col-6",
+              "key": "hora_afast_termino",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Horário de término do afastamento",
+                "focus": "false",
+                "type": "time",
+                "required": true
+              }
+            },
+            {
+              "key": "periodo_afastamento",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Período de afastamento",
+                "focus": "false",
+                "type": "text"
+              },
+              "expressionProperties": {
+                "model|||periodo_afastamento": "model?.atestado_medico_lume?.lume_data?.extractedData?.tempo_afastamento || ''"
+              }
+            },
+            {
+              "key": "cid",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "CID",
+                "focus": "false",
+                "type": "text"
+              },
+              "expressionProperties": {
+                "model|||cid": "model?.atestado_medico_lume?.lume_data?.extractedData?.codigo || ''"
+              }
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "sectorFromToggle": false,
+                "sensitiveField": false,
+                "accessLevel": "FULL",
+                "hidden": true
+              },
+              "className": "col-12"
+            },
+            {
+              "newField": true,
+              "type": "next-destinatario",
+              "key": "destinatario",
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "readonly": true,
+                "addressee": {
+                  "type": "predefined",
+                  "values": [
+                    {
+                      "type": "sector",
+                      "value": "admmodelo_modeload",
+                      "label": "Secretaria de Administração",
+                      "id": "675c980a96ab6200088ea449"
+                    }
+                  ]
+                },
+                "sensitiveField": false,
+                "multiple": true,
+                "useNewSidebarForwarding": true,
+                "hidden": true
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Solicitação",
+            "subtitle": "",
+            "textHtml": "<p><img src=\"https://api.producao.aprova.com.br/blob/url/redirect/blueprint-editor/21738864996093.png\"></p>",
+            "editMode": false
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "67a51d6d0a76d500085be624"
+    }
+  ],
+  "config": {
+    "title": "Lume - Atestado Médico",
+    "descricao": "IA desenvolvida para gerar impactos reais na Gestão Pública",
+    "devolverAoUltimo": true,
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "LUM",
+    "templates": [
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Alvará",
+        "template": "CascavelPR/alvara_construcao_lume.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all"
+      },
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Prancha",
+        "template": "CascavelPR/prancha_alvara_construcao_wk_lume.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "wk": true
+      },
+      {
+        "icon": "ion-ios-print",
+        "text_button": "Relatório",
+        "template": "Genericos/relatorio_auto_individual.html",
+        "function": "processComplete",
+        "permission": "process:viewAll:all",
+        "viewed": true
+      }
+    ],
+    "form_tramites": [],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "experimentalMode": true,
+    "useNewSidebarForwarding": true,
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "admmodelo_modeload"
+      ]
+    },
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "tramite": [],
+  "__v": 0,
+  "city_id": 38,
+  "step": {}
+}

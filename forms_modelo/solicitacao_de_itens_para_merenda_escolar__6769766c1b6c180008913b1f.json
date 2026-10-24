@@ -1,0 +1,346 @@
+{
+  "_id": "6769766c1b6c180008913b1f",
+  "form": [
+    {
+      "fieldGroup": [
+        {
+          "fieldGroup": [
+            {
+              "key": "setor",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Setor/Departamento (Requerente)",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "key": "user_dados",
+              "type": "next-input",
+              "wrappers": [
+                "search-user"
+              ],
+              "templateOptions": {
+                "searchUser": {
+                  "myself": true,
+                  "show": "name"
+                },
+                "label": "User Dados",
+                "type": "text",
+                "required": true,
+                "hidden": true
+              }
+            },
+            {
+              "key": "user",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              },
+              "expressionProperties": {
+                "model|||user": "model.user_dados?.user?.user_metadata.name",
+                "templateOptions|||readonly": "model.requerente == 'Usuário logado no sistema' ? true : false"
+              }
+            },
+            {
+              "key": "funcao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Função",
+                "placeholder": "",
+                "focus": "false",
+                "type": "text",
+                "required": true
+              }
+            },
+            {
+              "newField": true,
+              "type": "next-from",
+              "key": "from",
+              "templateOptions": {
+                "label": "Remetente",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sectorFromToggle": true,
+                "sensitiveField": false,
+                "multiple": false,
+                "useNewSidebarForwarding": true,
+                "accessLevel": "FULL"
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados do Requerente",
+            "subtitle": "",
+            "textHtml": "",
+            "validateWithAnalyzis": true
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "nome_instituicao",
+              "type": "next-input",
+              "templateOptions": {
+                "label": "Nome da Escola",
+                "required": true
+              }
+            },
+            {
+              "key": "itens",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Itens",
+                "focus": "false",
+                "btnAddText": "item",
+                "required": true
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "descricao",
+                    "className": "col-8",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Nome do Item",
+                      "required": true,
+                      "placeholder": ""
+                    }
+                  },
+                  {
+                    "key": "un_medida",
+                    "type": "radio",
+                    "templateOptions": {
+                      "label": "Unidade de medida",
+                      "options": [
+                        {
+                          "value": "Gramas"
+                        },
+                        {
+                          "value": "Kilogramas"
+                        },
+                        {
+                          "value": "Litros"
+                        }
+                      ],
+                      "focus": "false",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "qtd_item",
+                    "className": "col-8",
+                    "type": "next-input",
+                    "templateOptions": {
+                      "label": "Quantidade",
+                      "required": true,
+                      "placeholder": "",
+                      "type": "number"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Dados da Solicitação",
+            "subtitle": "",
+            "textHtml": ""
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "documentacao",
+              "type": "next-upload",
+              "templateOptions": {
+                "label": "Anexos Obrigatórios",
+                "options": [],
+                "focus": "false",
+                "required": true
+              }
+            },
+            {
+              "key": "destinatario",
+              "type": "next-destinatario",
+              "newField": true,
+              "templateOptions": {
+                "label": "Destinatário",
+                "required": true,
+                "columns": "12",
+                "hiddenTemp": false,
+                "readonly": false,
+                "sensitiveField": false,
+                "addressee": {
+                  "type": "multiple",
+                  "values": []
+                },
+                "multiple": true,
+                "destinationAccessLevel": "FULL",
+                "useNewSidebarForwarding": true
+              },
+              "className": "col-12"
+            }
+          ],
+          "templateOptions": {
+            "title": "Anexos",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Anexos</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\"><b>Anexos Obrigatórios:</b> apresente toda a documentação necessária para a sequência do seu processo aqui.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        },
+        {
+          "fieldGroup": [
+            {
+              "key": "infos_gerais",
+              "type": "next-ck",
+              "templateOptions": {
+                "label": "Informações Complementares",
+                "placeholder": "Escreva sobre a solicitação",
+                "focus": "false",
+                "type": "text",
+                "required": false
+              }
+            },
+            {
+              "key": "docextra",
+              "type": "next-repeat",
+              "templateOptions": {
+                "label": "Documentos Complementares",
+                "focus": "false",
+                "btnAddText": "Documentos Complementares",
+                "required": false
+              },
+              "fieldArray": {
+                "fieldGroup": [
+                  {
+                    "key": "titulodoc",
+                    "type": "input",
+                    "templateOptions": {
+                      "label": "Descrição do Documento",
+                      "required": true,
+                      "placeholder": "Ex: Contrato"
+                    }
+                  },
+                  {
+                    "key": "anexdocextra",
+                    "type": "next-upload",
+                    "templateOptions": {
+                      "label": "Documento Complementar",
+                      "required": true,
+                      "extends": [
+                        "PDF",
+                        "pdf"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "templateOptions": {
+            "title": "Informações Complementares",
+            "subtitle": "",
+            "textHtml": "<span class=\"p-1 rounded\" style=\"background-color: #06929F; color: white;\">Informações Complementares</span>\n\n\n<ul class = \"pt-2\">\n  <li align=\"justify\">Adicione no card ao lado qualquer informação ou anexo complementar à sua solicitação.&nbsp;</li> \n\n</ul>"
+          },
+          "wrappers": [
+            "text-right",
+            "step"
+          ]
+        }
+      ],
+      "wrappers": [
+        "stepper"
+      ],
+      "_id": "67ebf4f6028e1200085a1058"
+    }
+  ],
+  "step": {},
+  "config": {
+    "devolverAoUltimo": true,
+    "title": "Solicitação de Itens para Merenda Escolar",
+    "descricao": "Solicitação para ajuste de quantidade de itens que são comprados para a merenda escolar.",
+    "cidade": "modeload",
+    "approveActionText": "Deferir",
+    "markdown": "Acesse a aba Resumo para verificar o andamento do seu processo",
+    "sigla": "SME",
+    "experimentalMode": true,
+    "newSignatureStrategy": true,
+    "useNewSidebarForwarding": true,
+    "sendToEmailExpression": "Array.from(new Set([...(context.proprietario?.map((RL) => RL.email_proprietario ) || []), ...(context['requerente']?.map((RL) => RL.email_requerente) || []) ]))",
+    "templates": [],
+    "form_tramites": [
+      {
+        "nome": "Observações Gerais",
+        "text_action": "Realizou ação",
+        "key": "obs_gerais",
+        "form": [
+          {
+            "key": "obs_geral",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ],
+        "fieldGroup": [
+          {
+            "key": "obs_geral",
+            "type": "next-ck",
+            "templateOptions": {
+              "label": "Observações",
+              "placeholder": "",
+              "focus": "false",
+              "type": "text",
+              "required": false
+            }
+          }
+        ]
+      }
+    ],
+    "fluxograma": {
+      "fields": []
+    },
+    "tenance": "Geral",
+    "initialReceiverConfig": {
+      "type": "predefined",
+      "possibleReceivers": [
+        "educacao_modeload"
+      ]
+    },
+    "requiresPreCreationSignature": true,
+    "subClassId": "numeracao_padrao",
+    "keepOpenBoxStateOnCreation": true,
+    "autoConcludeParticipation": false,
+    "allowMultipleForwarding": true
+  },
+  "tramite": [
+    {
+      "_id": "67b7735dc404340008abc31f",
+      "groupId": "educacao_modeload"
+    }
+  ],
+  "__v": 0,
+  "city_id": 38
+}
