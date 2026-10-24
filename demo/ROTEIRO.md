@@ -14,7 +14,7 @@
 | 1:00 | **Painel: visão da prefeitura** | — |
 | 1:10 | **Painel: detalhe do Alvará**, conversa ao vivo | conversa com o agente |
 | 2:20 | Painel: detalhe, `diff.md` e etapa "aplicar" | — |
-| 3:00 | Painel: detalhe, cenários e gate | — |
+| 3:00 | Painel: detalhe, cenários, conferir e gate | casos para conferir |
 | 3:25 | **Painel: detalhe de Férias** | menu → Solicitação de Férias |
 | 3:45 | **Painel: visão da prefeitura** (métricas) | — |
 
@@ -27,12 +27,13 @@ Apontar: 11 etapas, 134 campos, 160 regras, e o analisador reduziu a **36 pergun
 E não é só o alvará: "Em 117 processos reais do Estúdio, 75% dos campos já vêm prontos do modelo e sobram em média 14 perguntas por processo. 28 modelos ainda apontam para setores de outra prefeitura." (`docs/forms-modelo-analise.md`)
 
 ## 1:00 — O painel do implantador (10 s)
-**Projetor: visão da prefeitura.** "Isto é o que o implantador vê: 12 secretarias, 96 processos de Vale Verde. Cada linha tem as 6 etapas, de analisar a homologar." Clicar em **Alvará de Construção**.
+**Projetor: visão da prefeitura.** "Isto é o que o implantador vê: 12 secretarias, 96 processos de Vale Verde. Cada linha tem as etapas, de analisar a homologar." Clicar em **Alvará de Construção**.
 
 ## 1:10 — A conversa (70 s)
 **Projetor: detalhe do Alvará** (conversa no centro, etapas à esquerda). Celular na câmera. Quem opera lê as falas de Dona Marlene, protocolo de Obras (`fixtures/insumos/conversa-marlene.txt`).
 Marlene manda `/start`; o bot pergunta "Sobre qual serviço vamos conversar?" e ela escolhe **Alvará de Construção**. Cada mensagem aparece no painel em até 2 s.
 - **Pergunta aberta**: o agente se apresenta e pergunta uma coisa só: "o que acontece, do balcão até o documento sair?". Marlene conta do jeito dela; o agente devolve **uma lista numerada de passos** e pergunta se está certo.
+- **Modelo primeiro**: o agente manda o resumo e o PDF do que já está pronto ("Olha como já está pronto…") e pergunta "o que é diferente aí?". As diferenças voltam como **plano de ação** numerado; Marlene confirma numa mensagem e o código aplica.
 - **Foto do papel**: o agente pede o requerimento de papel. Marlene manda `requerimento-alvara-papel.png`; o agente diz o que leu (tipo de obra, quem pede, documentos) e pergunta só o item apagado.
 - **Foto da tabela da lei**: `tabela-zoneamento.png`, "tá meio apagada". O agente confere um caso concreto: "casa na ZR1 com 3 m de recuo volta, certo?".
 - **"Isso é com o Paulo"**: vira pendência com dono, sem insistir.
@@ -55,6 +56,8 @@ Opcional (10 s, se sobrar tempo): **"Assumir conversa"**. O implantador escreve 
 Template cru: **12/15**, falha recuo, taxa de ocupação e cidade (terminal, se der tempo: `npm run validate -- fixtures/templates/alvara-construcao.modeload.json fixtures/cenarios/alvara.cenarios.json`).
 Formulário de Vale Verde: **15/15** nos cenários base. Na rodada ao vivo (`alvara-demo`) o validador partiu desses 15 e escreveu mais 15: **30/30**, nenhuma expressão indeterminada nova, e o juiz confirmou que os cenários cobrem a ficha.
 Gate de homologação aberto (card laranja no topo): ler a instrução em voz alta ("2 pendências, cenários 30/30, diff em diff.md") e clicar **aprovar**. "Cada cenário é uma frase que o analista entende. O que falhar por regra de negócio vira pergunta no WhatsApp ou decisão do implantador, não ticket."
+
+**Conferir (se o processo chegou lá):** o código escolhe até 3 cenários que passam e os manda à analista em linguagem de balcão; ela confirma no celular antes da homologação. Ainda não visto ao vivo depois das correções: se não aparecer, só contar.
 
 ## 3:25 — Outro processo, mesmo chat (20 s)
 **Celular:** o analista escreve `menu` e digita **Solicitação de Férias** (aceita o nome de qualquer um dos 112 processos ativos, não só os 10 da lista). **Projetor: detalhe de Férias.** O agente abre o processo em uma linha: 10 perguntas em vez de 28 campos, e a primeira é o setor, porque o modelo veio com o setor de outra prefeitura (`csimplantacao_implantacaoad`). "Mesmo analista, outra secretaria, sem reunião nova. E o Alvará continua de onde parou: se ele voltar, o agente diz quantas perguntas faltam."

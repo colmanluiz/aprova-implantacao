@@ -26,7 +26,7 @@ Contra o JSON real do **Alvará de Construção** (template `modeload`):
 | Pipeline sem LLM | analisar → coletar → aplicar → validar → gate de homologação → aprovar → `concluido` |
 | Segundo processo: Solicitação de Férias (RH) | 3 etapas, 28 campos, **10 pontos**; carrega um setor de outra prefeitura (`csimplantacao_implantacaoad`) que o analisador acha e o aplicador troca. Cenários base: 8/8 no template cru |
 | Catálogo real | 117 modelos do Estúdio analisados em lote (seção abaixo) |
-| Testes | **91** (`npm test`), `npm run typecheck` limpo |
+| Testes | **106** (`npm test`), `npm run typecheck` limpo |
 
 ### Rodada ao vivo, de ponta a ponta (`data/vale-verde/alvara-demo`, `MODEL=claude-sonnet-5-5`)
 
@@ -62,12 +62,13 @@ A conversa foi redesenhada depois de uma avaliação de UX (`docs/avaliacao-conv
 Princípios:
 
 - **Começa aberto**: "quando alguém chega querendo o alvará, o que acontece, do balcão até o documento sair?"; o agente devolve o que entendeu como lista numerada de passos.
+- **Modelo primeiro**: em seguida manda o resumo e o PDF do que já está pronto ("Olha como já está pronto…") e pergunta "o que é diferente aí?". As diferenças viram um **plano de ação** estruturado (operações validadas e aplicadas por código, `src/core/plano.ts`, `montar.ts`), confirmado numa mensagem só; depois vêm setor, fotos, taxa, pacote padrão e fechamento.
 - **Foto antes de pergunta**: pede cedo a foto do requerimento de papel e da tabela da lei; lê de lá e pergunta só o que ficou apagado ou diferente.
 - **No máximo 2 perguntas por mensagem, do mesmo assunto**, com progresso por assunto ("já ficou: secretaria, documentos…") e o "pacote padrão" (o que costuma ser igual em toda cidade) confirmado de uma vez no fim.
 - **O que a analista não deveria ver vira pendência do implantador**, não pergunta; "é com o Paulo" vira pendência com dono.
 - **Respeita o balcão**: "tenho balcão" encerra com o que já ficou e o que falta; a sessão seguinte retoma dali e fecha com o próximo passo.
 
-Imposto em código, não só na instrução: `enviar_mensagem` recusa mensagem com mais de 2 "?", mais de 70 palavras com pergunta, mais de 160 sem pergunta, ou palavra de sistema (`src/core/mensagens.ts`); as perguntas de gate ao analista passam pela mesma checagem.
+Imposto em código, não só na instrução: toda saída para o analista (mensagens, PDF, gates, lembretes) passa por uma função só, `src/agents/envio.ts`, que recusa mensagem com mais de 2 "?", mais de 70 palavras com pergunta, mais de 160 sem pergunta, ou palavra de sistema (`src/core/mensagens.ts`); as perguntas de gate ao analista passam pela mesma checagem.
 
 ## Catálogo real (`forms_modelo/`)
 
@@ -89,7 +90,7 @@ Rodar o lote endureceu o analisador: setores de outra prefeitura (`*_umuaramapr`
 
 ```bash
 npm install
-npm test                      # 91 testes, sem API
+npm test                      # 106 testes, sem API
 npm run typecheck
 ```
 
@@ -154,11 +155,12 @@ O processo é um **pipeline validado**: a definição está em [`INSTRUCTIONS/pi
 | # | Etapa | Quem faz | Critérios de saída (em ordem) | Ao esgotar tentativas |
 |---|---|---|---|---|
 | 1 | `analisar` | código (`analisarTemplate`) | ficha tem perguntas bloqueantes; nenhum placeholder sem pergunta | gate do implantador |
-| 2 | `coletar` | agente Coletor, no canal | nenhuma pergunta em aberto (resposta com confiança ≥ 0,8 ou pendência explícita) | pergunta ao analista |
+| 2 | `coletar` | agente Coletor, no canal | analista decidiu sobre o modelo; plano de ação confirmado; nenhuma pergunta em aberto (resposta com confiança ≥ 0,8 ou pendência explícita) | analista / implantador / analista |
 | 3 | `extrair` (dentro de `coletar`, a cada anexo) | agente Extrator + prova em código | todo candidato cita trecho e confiança | pergunta ao analista |
 | 4 | `aplicar` | código (`aplicarFicha`, `gerarDiff`) | sem placeholder `modeload`; nenhum resíduo de outra cidade pendente | gate do implantador |
 | 5 | `validar` | agente Validador escreve cenários; código os executa | todos os cenários passam; nenhuma expressão indeterminada nova; cenários cobrem a ficha (juiz LLM) | analista / implantador / implantador |
-| 6 | `homologar` | gate do implantador | implantador aprovou | processo para |
+| 6 | `conferir` | código escolhe até 3 cenários que passam, em linguagem de balcão; gate do analista | analista conferiu os casos | gate do implantador |
+| 7 | `homologar` | gate do implantador | implantador aprovou | processo para |
 
 Como o motor decide:
 
@@ -171,6 +173,7 @@ Como o motor decide:
 - **Snapshot imutável**: ao abrir o processo, template e `pipeline.json` são copiados para `data/<cidade>/<processo>/snapshot/`. Mudar o pipeline não afeta processo aberto.
 - **Grounding do Extrator** (`src/agents/extrator.ts`): PDF e texto são transcritos na íntegra antes; todo candidato precisa citar um `trecho` literal, e o código procura o trecho no documento — sem achar, o candidato é descartado. Foto nunca sai com confiança acima de 0,7; uma segunda leitura independente confere cada valor (zona por zona): tudo "sim" → 0,9 verificado; qualquer "não"/"ilegível" → 0,4 e o Coletor pergunta só aquelas linhas. Valor que precisa de confirmação fica travado em 0,79 até o analista confirmar por mensagem.
 - **Contrato de formato**: `registrar_resposta` recusa (`schema_invalido`) resposta fora do formato do tipo (`src/core/respostas.ts`); nada fora do formato chega ao aplicador. Setor exige o nome do setor e recusa placeholder (`modeload`, `*_implantacaoad`); o Coletor nunca aceita "como está" para setor ou tabela por zona.
+- **Cobrança de prazo** (`src/pipeline/cobranca.ts`): lembrete depois de 4 h parado, aviso de ritmo e escalonamento, só em horário comercial. Prazo pelo chat (`/prazo 29/10`) ou `npm run gate -- <cidade> <processo> prazo AAAA-MM-DD`. No Telegram o agente também manda o PDF e, para áudio, pede o texto.
 - **Modo humano**: o implantador assume a conversa pelo painel ou `npm run gate -- <cidade> <processo> assumir`. O agente pausa, nada é avaliado, as mensagens do analista ficam no histórico. O que o implantador escreve no painel vai para `outbox.json` e o processo do canal (Telegram ou terminal) entrega. Em `devolver`, o Coletor recebe uma nota com o que foi trocado. Cada assumida conta como intervenção humana.
 - **Nenhum LLM edita o JSON do formulário.** O avaliador de expressões Formly roda em sandbox (`node:vm`).
 
@@ -217,6 +220,8 @@ O que é medido de verdade, por processo, em `run.json.metricas`: perguntas feit
 
 ## Limites conhecidos
 
+- Fluxo unificado (merge com a branch `parametrizacao-wpp`) testado ao vivo uma vez: `fixtures/insumos/transcricao-merge-smoke.md`, 31/36 respondidas, 5 pendências, chegou a `validar` com pergunta ao analista. A etapa `conferir` ainda não foi vista ao vivo depois das correções.
+
 - O avaliador cobre expressões puras sobre `model`. Expressões que dependem de funções globais do app Aprova viram `indeterminado` e não falham; o critério só barra as **novas**.
 - O aplicador gera o JSON no formato do configurador, mas não publica. Importar é o próximo passo.
 - Canal real hoje é Telegram. WhatsApp é trocar o adaptador (Baileys/Evolution/Cloud API) pela mesma interface `Canal = { enviar(texto) }`.
@@ -225,6 +230,10 @@ O que é medido de verdade, por processo, em `run.json.metricas`: perguntas feit
 - A conversa varia de uma rodada para outra: a mesma fala da Marlene já fechou 30/36 e, noutra rodada, 25/36. As transcrições guardadas são a referência.
 - Ponta a ponta com agente: alvará. Férias tem análise e cenários base; os outros 115 modelos só passaram pela análise em lote. Dados de Vale Verde são fictícios.
 - `ferramentas().aplicador` e `ferramentas().orquestrador` em `src/agents/tools.ts` ainda existem, mas o pipeline não os usa.
+
+## Créditos
+
+Da branch do Arthur (`parametrizacao-wpp`): fluxo modelo primeiro, plano de ação, etapa `conferir` e cobrança de prazo. Da `main`: abertura com entrevista aberta, limites de mensagem e classificação de falhas de cenário.
 
 ## Contratos de dados
 
