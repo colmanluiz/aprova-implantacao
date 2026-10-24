@@ -106,3 +106,47 @@ Integração com o configurador da Aprova, autenticação, multiusuário, histó
 ## Entrega
 
 Repositório com `INSTRUCTIONS/`, `README.md`, `demo/ROTEIRO.md`, vídeo de backup. Entrega por QR code até 17h.
+
+---
+
+## Revisão 13:00 (24/10) — de orquestrador imperativo a pipeline validado
+
+### O que mudou
+
+De manhã, a orquestração era uma máquina de estados escrita à mão em `src/agents/orquestrador.ts`: um `switch` por etapa que chamava o agente certo e decidia quando avançar. Funcionava no caminho feliz, mas cada caso de erro (agente que inventa cenário, extrator que lê errado, analista que some) virava mais um `if`, e a regra de transição só existia no código.
+
+Trocamos por um **pipeline declarativo e validado**:
+
+- `INSTRUCTIONS/pipeline.json` declara as etapas (`analisar`, `coletar`, `extrair` dentro de `coletar`, `aplicar`, `validar`, `homologar`), se cada uma é código ou agente, e os critérios de saída de cada uma, com tentativas e rota de falha.
+- `INSTRUCTIONS/PIPELINE.md` é gerado desse JSON (`npm run docs`); um teste falha se os dois divergirem. A banca lê a mesma coisa que o motor executa.
+- `src/pipeline/motor.ts` executa: roda a etapa, avalia os critérios em ordem, e decide avançar, esperar, tentar de novo ou abrir gate. `orquestrador.ts` ficou só como porta de entrada do canal.
+- `npm run gate` é a CLI do implantador (`aprovar`, `ajustar`, `rejeitar`, `assumir`, `devolver`, `status`); o painel chama a mesma CLI.
+- `npm run pipeline:offline` roda tudo sem LLM, com a ficha e os cenários de `fixtures/`, até o gate de homologação.
+
+### Por quê
+
+O modelo veio de um motor Run/Step que o time já conhece em produção. Trouxemos as ideias que resolvem os problemas que apareceram de manhã:
+
+| Ideia | Como ficou aqui | Problema que resolve |
+|---|---|---|
+| Snapshot imutável do run | template e `pipeline.json` copiados para `data/<cidade>/<processo>/snapshot/` ao abrir | mudar o pipeline durante o dia não quebra processo já aberto |
+| Critérios nomeados | `src/pipeline/criterios.ts`, um por nome do JSON; resultado `passou`, `aguardando`, `falhou`, `nao_avaliado` | "pronto" deixa de ser opinião do agente; esperar o analista não é erro |
+| Orçamento de tentativas | `tentativas` por critério; a retentativa volta para a mesma conversa do agente só com o motivo | o agente corrige o que falhou sem loop infinito; código determinístico tem 0 |
+| Rota ao falhar | `ao_falhar`: `analista`, `implantador` ou `parar` | falha vira pergunta em linguagem de cenário ou decisão do implantador, não exceção |
+| Grounding | o extrator só entrega candidato com trecho literal encontrado no documento; foto passa por segunda leitura independente | leitura errada de anexo não entra na ficha como certa |
+| Gates que se descrevem | `{para, tipo, instrucao, resumo, acoes, contexto}` em `run.json` | painel, CLI e WhatsApp mostram o mesmo gate sem código específico |
+| Juiz com falha fechada | critério "cenários cobrem a ficha" avaliado por LLM; saída ilegível reprova | o validador não declara pronto com metade da ficha sem cenário |
+
+### O que veio junto
+
+- **Extrator endurecido**: PDF transcrito antes de interpretar; confiança de foto limitada a 0,7 até a conferência (0,9 se confere tudo, 0,4 se não); candidato a confirmar fica em 0,79 até o analista confirmar por mensagem.
+- **Contrato de formato** (`src/core/respostas.ts`): `registrar_resposta` recusa resposta fora do formato do tipo; a primeira recusa não conta como falha.
+- **Resíduo de outra cidade** (`'Cascavel'`) é trocado pelo nome da cidade já na etapa `analisar`; nunca é perguntado à prefeitura. O analisador deixou de marcar `"Não permitido"` como resíduo: a ficha agora tem 36 pontos, não 37.
+- **Painel do implantador** (`npm run painel`, `src/painel/`, `painel/`), lendo `run.json` e `estado.json`.
+- **Modo humano**: o implantador assume e devolve a conversa; mensagens dele saem por `outbox.json`; o Coletor recebe nota do que foi trocado; cada assumida conta como intervenção.
+- **Conversa roteirizada** (`fixtures/insumos/conversa-demo.txt`) e replay pelo `npm run chat -- --script`, com transcrição gravada.
+- **`MODEL`** por variável de ambiente, para testar com modelo barato.
+
+### O que não mudou
+
+As cinco peças, a tese e o fluxo de dados acima continuam valendo. O aplicador continua código puro; a instrução `04-aplicador.md` agora descreve os critérios dessa etapa em vez de um agente. A contagem de expressões do template, medida pelo código (`resumoTemplate`), é 160, não 151.

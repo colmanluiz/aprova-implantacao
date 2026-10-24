@@ -21,8 +21,8 @@
 "100 processos, 60 dias, 4 prefeituras por implantador. Dez reuniões por dia. A conta não fecha." Mostrar a conta no slide.
 
 ## 0:30 — O que o template já sabe (30 s)
-Terminal: `npm run analyze -- fixtures/templates/alvara-construcao.modeload.json`
-Apontar: 134 campos, 160 regras, e o analisador reduziu a **37 perguntas em 11 grupos**. Destacar o `'Cascavel'` achado dentro do template: "isso hoje só apareceria na homologação, depois de um cidadão de outra cidade reclamar".
+Terminal: `npm run analyze -- fixtures/templates/alvara-construcao.modeload.json > /dev/null` (o resumo sai no stderr; sem o redirecionamento a ficha inteira é despejada na tela)
+Apontar: 11 etapas, 134 campos, 160 regras, e o analisador reduziu a **36 perguntas em 11 grupos**. Destacar o `'Cascavel'` achado dentro do template: "isso hoje só apareceria na homologação, depois de um cidadão de outra cidade reclamar".
 
 ## 1:00 — O painel do implantador (10 s)
 **Projetor: visão da prefeitura.** "Isto é o que o implantador vê: 12 secretarias, 96 processos de Vale Verde. Cada linha tem as 6 etapas, de analisar a homologar." Clicar em **Alvará de Construção**.
@@ -39,7 +39,7 @@ Opcional (10 s, se sobrar tempo): **"Assumir conversa"**. O implantador escreve 
 
 ## 3:00 — A validação sem clique (45 s)
 **Projetor: detalhe, coluna "Cenários" e etapa "validar".**
-Template cru: **12/15**, falha recuo, taxa de ocupação e cidade (terminal, `npm run validate`, se der tempo).
+Template cru: **12/15**, falha recuo, taxa de ocupação e cidade (terminal, se der tempo: `npm run validate -- fixtures/templates/alvara-construcao.modeload.json fixtures/cenarios/alvara.cenarios.json`).
 Formulário de Vale Verde: **15/15** no painel.
 Se houver gate aberto (card laranja no topo): ler a instrução em voz alta e clicar **aprovar**. "Cada cenário é uma frase que o analista entende. O que falhar por regra de negócio vira pergunta no WhatsApp ou decisão do implantador, não ticket."
 
@@ -52,11 +52,19 @@ Se houver gate aberto (card laranja no topo): ler a instrução em voz alta e cl
 Se a API da Anthropic ou o canal cair, o painel continua contando a história com dados determinísticos:
 
 ```bash
-npm run pipeline:offline   # roda analisar → aplicar → validar sem LLM e grava data/vale-verde/alvara/run.json completo
-npm run painel             # http://localhost:4310 → clicar em Alvará de Construção
+npm run pipeline:offline                    # analisar → coletar → aplicar → validar sem LLM; apaga e regrava data/vale-verde/alvara/; para no gate de homologação
+npm run painel                              # http://localhost:4310 → clicar em Alvará de Construção
+npm run gate -- vale-verde alvara aprovar   # ou clicar "aprovar" no card do gate
 ```
 
-A conversa mostrada é a da ficha de exemplo; etapas, critérios, diff e 15/15 cenários são reais.
+Não há conversa nesse modo: o painel mostra os registros da ficha de exemplo (25 respostas, 12 pendências). Etapas, critérios, gate, diff e 15/15 cenários são reais.
+
+### Fallback com API, sem celular
+A conversa gravada com o agente real está em `data/vale-verde/alvara-demo/` (aparece no painel como linha extra na mesma secretaria, com o slug no nome) e em `fixtures/insumos/transcricao-demo.md`. Para reproduzir ao vivo no terminal, num processo novo para não apagar a gravação:
+
+```bash
+npm run chat -- --script fixtures/insumos/conversa-demo.txt --processo alvara-ao-vivo --pausa 3000
+```
 
 ### Fallback sem servidor
 Se nem o Node subir: `painel/data.json` (gerado por `npm run painel:data` no ensaio) é lido pelo modo estático. Servir a pasta com qualquer servidor estático e abrir `index.html?static=1`:

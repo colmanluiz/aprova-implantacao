@@ -1,7 +1,7 @@
 {
   "processo": "Alvará de Construção",
   "template": "alvara-construcao.modeload.json",
-  "criada_em": "2026-10-24T14:29:09.562Z",
+  "criada_em": "2026-10-24T16:02:14.391Z",
   "grupos": [
     {
       "nome": "Quem atende",
@@ -900,21 +900,6 @@
           "resposta": "Vale Verde",
           "confianca": 1,
           "origem": "Implantador (resíduo apontado pelo analisador)"
-        },
-        {
-          "id": "residuo-37",
-          "tipo": "residuo",
-          "grupo": "Atenção do implantador",
-          "texto": "O template contém o literal \"Não permitido\" em regra de validação. Parece resíduo de outra cidade: trocar pelo nome correto.",
-          "assume": "Não permitido",
-          "afeta": [
-            "zona_atividades[].permissao"
-          ],
-          "prioridade": "bloqueia",
-          "aceita_anexo": false,
-          "resposta": null,
-          "confianca": 0,
-          "origem": null
         }
       ]
     }

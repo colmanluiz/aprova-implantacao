@@ -1,0 +1,4 @@
+# Continuação ("dia seguinte"): Marcos fecha o que ficou aberto. Replay com --continuar.
+# npm run chat -- --script fixtures/insumos/conversa-demo-fechamento.txt --continuar
+Oi, voltei. Os tipos de solicitação da edificação ficam como estão: construção nova, ampliação, regularização, reforma e demolição.
+E confirmo: o alvará e as peças gráficas saem no modelo padrão do sistema de vocês mesmo, não temos modelo próprio. Validade 12 meses e numeração nossa.

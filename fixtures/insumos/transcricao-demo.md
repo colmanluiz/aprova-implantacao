@@ -1,262 +1,234 @@
 # Transcrição: alvara-demo de vale-verde
 
-Gerada por `npm run chat -- --script fixtures/insumos/conversa-demo.txt` em 24/10/2026, 12:49:41.
+Gerada por `npm run chat -- --script fixtures/insumos/conversa-demo.txt` em 24/10/2026, 12:58:30.
 
 ## Conversa
 
-**Aprova** (12:45):
+**Aprova** (12:54):
 
-> Olá! Sou o assistente que ajuda a montar o processo de Alvará de Construção da sua prefeitura. Faltam 35 perguntas, mas você pode responder aos poucos ou mandar foto/PDF das leis e tabelas.
+> Olá! Sou o assistente que ajuda a montar o Alvará de Construção de Vale Verde no sistema. Faltam 35 perguntas, mas você pode responder aos poucos ou mandar foto/PDF da lei.
 > 
 > Primeiro lote:
+> 1) Qual setor recebe o processo? Quem analisa e quem assina o alvará final?
+> 2) O sistema prevê as zonas Z1, Z2, Z3 e Z4. Quais são as zonas de vocês?
+> 3) Atividades previstas: Residência Unifamiliar, Residência Multifamiliar, Comércio e Serviços, Condomínios Horizontais, Empreendimentos de Hotelaria e Turísticos. Confere ou muda algo?
+> 4) Se tiver a tabela da lei de zoneamento, pode mandar foto ou PDF. Preciso, por zona, de: pavimentos, recuo frontal, recuos laterais (maior e menor), recuo de fundos, índice de aproveitamento, taxa de ocupação e taxa de permeabilidade.
+
+**Analista** (12:54): Bom dia! Aqui é o Marcos, da SEPLAN, divisão de aprovação de projetos. Pode mandar que vou respondendo entre um atendimento e outro.
+
+**Aprova** (12:55):
+
+> Bom dia, Marcos! Anotei: o processo entra na SEPLAN, Divisão de Aprovação de Projetos.
 > 
-> 1. Qual setor recebe o pedido de Alvará de Construção? Quem analisa e quem assina o alvará?
+> Seguem as perguntas do primeiro lote:
+> 1) Quem analisa e quem assina o alvará final nessa divisão?
+> 2) O sistema prevê as zonas Z1, Z2, Z3 e Z4. Quais são as zonas de vocês?
+> 3) Atividades previstas: Residência Unifamiliar, Residência Multifamiliar, Comércio e Serviços, Condomínios Horizontais, Hotelaria e Turísticos. Confere ou muda algo?
+> 4) Se tiver a tabela da lei de zoneamento, pode mandar foto ou PDF. Preciso, por zona, de: pavimentos, recuo frontal, recuos laterais (maior e menor), recuo de fundos, índice de aproveitamento, taxa de ocupação e taxa de permeabilidade.
+
+**Analista** (12:55): Quem recebe o alvará é a Secretaria de Planejamento Urbano, Divisão de Aprovação de Projetos. Eu analiso e quem assina é o secretário.
+
+**Aprova** (12:55):
+
+> Obrigado, Marcos! Anotei: recebe a Secretaria de Planejamento Urbano, Divisão de Aprovação de Projetos; você analisa e o secretário assina.
 > 
-> 2. O sistema prevê as zonas Z1, Z2, Z3 e Z4. Quais são as zonas de vocês?
+> Agora sobre o imóvel:
+> 1) O sistema prevê as zonas Z1, Z2, Z3 e Z4. Quais são as zonas de vocês?
+> 2) Atividades previstas: Residência Unifamiliar, Residência Multifamiliar, Comércio e Serviços, Condomínios Horizontais, Empreendimentos de Hotelaria e Turísticos. Confere ou muda algo?
+> 3) Tipos de uso previstos: Residencial unifamiliar, Residencial multifamiliar, Comercial salas e lojas, Edifício de garagens, Galpão industrial, Casa popular, Conjunto habitacional popular. Confere ou muda algo?
+> 4) Se tiver a tabela da lei de zoneamento, pode mandar foto ou PDF. Preciso, por zona, de: pavimentos, recuo frontal, recuos laterais (maior e menor), recuo de fundos, índice de aproveitamento, taxa de ocupação e taxa de permeabilidade.
+
+**Analista** (12:55): [anexo] `tabela-zoneamento.png` essa é a tabela do anexo II da lei 1.204, tem as zonas e os recuos de cada uma
+
+**Aprova** (12:55):
+
+> Obrigado, Marcos! Li a tabela do Anexo II: 4 zonas (ZR1, ZR2, ZC1, ZI) e os 8 parâmetros de cada uma. Já está anotado.
 > 
-> 3. Para cada zona, preciso destes valores: pavimentos, recuo frontal, recuo lateral maior, recuo lateral menor, recuo de fundos, índice de aproveitamento, taxa de ocupação e taxa de permeabilidade. Se tiver a tabela da lei de zoneamento, pode mandar foto ou PDF.
+> Agora os dados do imóvel. Para cada item, diga "confere" ou o que muda:
+> 1) Atividades: Residência Unifamiliar, Residência Multifamiliar, Comércio e Serviços, Condomínios Horizontais, Empreendimentos de Hotelaria e Turísticos.
+> 2) Tipos de uso: Residencial unifamiliar, Residencial multifamiliar, Comercial salas e lojas, Edifício de garagens, Galpão industrial, Casa popular, Conjunto habitacional popular.
+> 3) Tipos de uso complementar: Quadra esportiva e poliesportiva, Estacionamento térreo, Piscina, Área complementar de posto de gasolina.
+> 4) Tipo da solicitação para a edificação: Construção nova, Ampliação, Regularização, Reforma, Demolição.
+> 5) Material: Alvenaria, Madeira, Mista.
 
-**Analista** (12:45): Bom dia! Aqui é o Marcos, da SEPLAN, divisão de aprovação de projetos. Pode mandar que vou respondendo entre um atendimento e outro.
+**Analista** (12:55): isso, confere. Na ZR2 é 4 m de frente mesmo
 
-**Aprova** (12:46):
+**Aprova** (12:56):
 
-> Bom dia, Marcos! Sou o assistente que está montando com você o processo de Alvará de Construção. Faltam 35 perguntas. Pode responder aos poucos ou mandar foto/PDF.
+> Valeu, Marcos! Tabela confirmada, ZR2 com 4 m de frente anotado.
 > 
-> Primeiro lote:
+> 1) O "confere" valeu também para a lista anterior (atividades, tipos de uso, uso complementar, tipo de solicitação da edificação e material)? Se sim, deixo como o sistema prevê.
+> 2) Documentos do requerente. Hoje o sistema exige: documento do requerente (RG/CPF ou CNPJ e contrato social), procuração (só se for procurador), documentos pessoais (só PF), contrato social (só PJ), ART/RRT, matrícula atualizada, projeto arquitetônico em PDF e documento complementar. Não exige: projeto em DWG e projetos complementares em PDF. Algum desses muda na sua cidade? Se tudo certo, é só dizer "confere".
+
+**Analista** (12:56): Documentos: ART/RRT, matrícula atualizada e projeto em PDF são sempre exigidos. DWG a gente não pede. Procuração só quando quem pede é procurador. Contrato social só pra empresa, RG e CPF só pra pessoa física.
+
+**Aprova** (12:56):
+
+> Obrigado, Marcos! Anotei os documentos: ART/RRT, matrícula e projeto em PDF sempre; DWG não; procuração só de procurador; contrato social só de PJ; RG e CPF só de PF.
 > 
-> 1. Anotei: SEPLAN, Divisão de Aprovação de Projetos recebe o pedido. Qual é o nome da cidade? Quem analisa e quem assina o alvará?
+> Faltam só 4 documentos:
+> 1) Documento do requerente (RG/CPF ou CNPJ e contrato social): é sempre exigido?
+> 2) Projetos complementares em PDF: a) sempre, b) não exigido?
+> 3) Documento complementar: a) sempre, b) não exigido?
+> 4) Alvará antigo (só quando o alvará anterior foi aprovado em meio físico, no caso de retificação): a) exigido nesse caso, b) não exigido?
 > 
-> 2. O sistema prevê as zonas Z1, Z2, Z3 e Z4. Quais são as zonas de vocês? Se tiver a lei, pode mandar foto.
+> 5) Aquele seu "confere" valeu também para as listas de atividades, tipos de uso, uso complementar, tipo de solicitação da edificação e material? Se sim, deixo como o sistema prevê.
+
+**Analista** (12:56): Alvará antigo só na retificação de alvará que foi aprovado no papel, do jeito que está. Documento complementar e projetos complementares pode deixar como estão.
+
+**Aprova** (12:56):
+
+> Obrigado, Marcos! Anotei: alvará antigo só na retificação de alvará aprovado no papel; documento complementar exigido; projetos complementares não exigidos.
 > 
-> 3. Para cada zona preciso de: pavimentos, recuo frontal, recuo lateral maior, recuo lateral menor, recuo de fundos, índice de aproveitamento, taxa de ocupação e taxa de permeabilidade. A tabela da lei de zoneamento (foto ou PDF) resolve tudo de uma vez.
+> Faltam as listas do imóvel. Pode deixar como o sistema prevê ("confere") ou me dizer o que muda:
+> 1) Documento do requerente (RG e CPF para PF, CNPJ e contrato social para PJ): a) sempre exigido, b) não exigido?
+> 2) Atividades: Residência Unifamiliar, Residência Multifamiliar, Comércio e Serviços, Condomínios Horizontais, Empreendimentos de Hotelaria e Turísticos.
+> 3) Tipos de uso: Residencial unifamiliar, Residencial multifamiliar, Comercial salas e lojas, Edifício de garagens, Galpão industrial, Casa popular, Conjunto habitacional popular.
+> 4) Uso complementar: Quadra esportiva e poliesportiva, Estacionamento térreo, Piscina, Área complementar de posto de gasolina.
+> 5) Tipo de solicitação da edificação: Construção nova, Ampliação, Regularização, Reforma, Demolição.
 
-**Analista** (12:46): Quem recebe o alvará é a Secretaria de Planejamento Urbano, Divisão de Aprovação de Projetos. Eu analiso e quem assina é o secretário.
+**Analista** (12:56): Tipo de logradouro aqui tem Rua, Avenida, Travessa, Estrada e Outros. Material: alvenaria, madeira, mista e estrutura metálica.
 
-**Aprova** (12:46):
+**Aprova** (12:56):
 
-> Obrigado, Marcos! Anotei: recebe a Divisão de Aprovação de Projetos (Secretaria de Planejamento Urbano), você analisa e o secretário assina.
+> Anotado, Marcos! Logradouro: Rua, Avenida, Travessa, Estrada e Outros. Material: alvenaria, madeira, mista e estrutura metálica.
 > 
-> Faltam só 3 coisas desse primeiro assunto:
+> Próximas (responda "confere" ou o que muda):
+> 1) Documento do requerente (RG/CPF para PF, CNPJ e contrato social para PJ): a) sempre exigido, b) não exigido?
+> 2) Atividades, tipos de uso, uso complementar e tipo de solicitação da edificação (as listas que te mandei antes): ficam como o sistema prevê?
+> 3) Tipo da solicitação: Nova solicitação, Retificação. Confere?
+> 4) Tipo do alvará a retificar: Aprovado no modo físico, Aprovado pela Aprova. Confere?
+> 5) Vínculo do requerente: Proprietário do imóvel, Responsável Técnico, Procurador. Confere?
+
+**Analista** (12:56): A taxa eu não sei te dizer, quem calcula é a Fazenda. Vou ver com eles.
+
+**Aprova** (12:57):
+
+> Sem problema, Marcos. Deixei a taxa como pendência para a Fazenda, e você me conta se conseguir com eles.
 > 
-> 1. Qual é o nome da cidade? (para identificar a prefeitura no sistema)
+> Agora a análise interna. O sistema prevê as etapas abaixo. Cada uma existe aí? Se existir, quem preenche?
+> 1) Fiscalização in loco offline
+> 2) Numeração Predial
+> 3) Parecer Edilício
+> 4) Pareceres complementares
+> 5) Observações
 > 
-> 2. O sistema prevê as zonas Z1, Z2, Z3 e Z4. Quais são as zonas de vocês?
+> Se todas existirem do jeito previsto, é só dizer "confere" e quem preenche.
+
+**Analista** (12:57): Fiscalização in loco a gente não faz nessa fase. Numeração predial tem, quem faz é o protocolo. O parecer edilício aqui chama Parecer Técnico de Aprovação. Pareceres complementares e observações tem sim.
+
+**Aprova** (12:57):
+
+> Anotado, Marcos! Fiscalização in loco não existe; Numeração Predial fica com o protocolo; Parecer Técnico de Aprovação, Pareceres complementares e Observações existem.
 > 
-> 3. Se tiver a tabela da lei de zoneamento com recuos, taxas e pavimentos de cada zona, pode mandar foto ou PDF. Resolve tudo de uma vez.
+> Faltam estas, pode responder "confere" ou o que muda:
+> 1) Quem preenche o Parecer Técnico de Aprovação, os Pareceres complementares e as Observações? (você, o secretário, outro setor?)
+> 2) Documento do requerente (RG/CPF para PF, CNPJ e contrato social para PJ): a) sempre exigido, b) não exigido?
+> 3) Atividades, tipos de uso, uso complementar e tipo de solicitação da edificação (as listas que mandei antes): ficam como o sistema prevê?
+> 4) Tipo da solicitação (Nova solicitação, Retificação), tipo do alvará a retificar (Aprovado no modo físico, Aprovado pela Aprova) e vínculo do requerente (Proprietário do imóvel, Responsável Técnico, Procurador): conferem?
+> 5) As 11 etapas do pedido (Declaração de Veracidade, Solicitação, Dados do Requerente, Responsável(is) pelo imóvel, Responsável Técnico, Dados do imóvel, Quadro de áreas, Quadro de áreas totais, Parâmetros Urbanísticos, Projetos, Documentos complementares): alguma não existe aí?
 
-**Analista** (12:46): [anexo] `tabela-zoneamento.png` essa é a tabela do anexo II da lei 1.204, tem as zonas e os recuos de cada uma
+**Analista** (12:57): As etapas do pedido podem ficar todas. Tipo de vínculo do requerente, vínculo do proprietário, responsabilidade do responsável técnico, tipos de solicitação e os tipos de alvará a retificar estão certos como estão.
 
-**Aprova** (12:46):
+**Aprova** (12:57):
 
-> Obrigado, Marcos! Li a tabela do Anexo II da Lei 1.204: 4 zonas (ZR1, ZR2, ZC1, ZI) e os 8 parâmetros de cada uma. Já anotei.
+> Obrigado, Marcos! Etapas, vínculos, responsabilidade e tipos de solicitação/alvará a retificar anotados como estão.
 > 
-> Agora o próximo lote:
+> Faltam poucas. Responda "confere" ou o que muda:
+> 1) Documento do requerente (RG e CPF para PF, CNPJ e contrato social para PJ): a) sempre exigido, b) não exigido?
+> 2) Atividades (Residência Unifamiliar, Residência Multifamiliar, Comércio e Serviços, Condomínios Horizontais, Empreendimentos de Hotelaria e Turísticos): confere?
+> 3) Tipos de uso (Residencial unifamiliar, Residencial multifamiliar, Comercial salas e lojas, Edifício de garagens, Galpão industrial, Casa popular, Conjunto habitacional popular): confere?
+> 4) Uso complementar (Quadra esportiva e poliesportiva, Estacionamento térreo, Piscina, Área complementar de posto de gasolina): confere?
+> 5) Tipo de solicitação da edificação (Construção nova, Ampliação, Regularização, Reforma, Demolição): confere?
+
+**Analista** (12:57): Tipo de uso e uso complementar também pode deixar como está.
+
+**Aprova** (12:57):
+
+> Anotado, Marcos! Tipos de uso e uso complementar ficam como estão.
 > 
-> 1. Qual é o nome da sua cidade? Preciso só para identificar a prefeitura. O setor (Divisão de Aprovação de Projetos, Secretaria de Planejamento Urbano) já está anotado.
-> 
-> Documentos do requerente. O sistema prevê assim; me diga só o que for diferente:
-> 2. ART/RRT: sempre exigido?
-> 3. Matrícula do imóvel atualizada: sempre exigida?
-> 4. Projeto arquitetônico em DWG: hoje é opcional. Na sua cidade é a) exigido sempre, b) opcional, c) não pedem?
-> 5. Projetos complementares em PDF: hoje é opcional. É a) exigido sempre, b) opcional, c) não pedem?
-> 
-> Pode responder só com os números, tipo "1 Cidade X, 2 sim, 3 sim, 4 b, 5 b".
+> Faltam estas:
+> 1) Documento do requerente (RG e CPF para PF, CNPJ e contrato social para PJ): a) sempre exigido, b) não exigido?
+> 2) Atividades (Residência Unifamiliar, Residência Multifamiliar, Comércio e Serviços, Condomínios Horizontais, Empreendimentos de Hotelaria e Turísticos): confere?
+> 3) Tipo de solicitação da edificação (Construção nova, Ampliação, Regularização, Reforma, Demolição): confere?
+> 4) Texto da declaração de veracidade ("Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal..."): mantém o do sistema ou a prefeitura tem texto próprio?
+> 5) Documentos emitidos: Alvará, Peça gráfica e Peça gráfica complementar. É isso mesmo, com validade em todos? A prefeitura tem modelo ou numeração própria?
 
-**Analista** (12:46): isso, confere. Na ZR2 é 4 m de frente mesmo
+**Analista** (12:57): Atividades é uma lista grande, te mando a planilha segunda.
 
-**Aprova** (12:47):
-
-> Obrigado, Marcos! Zonas e parâmetros confirmados (ZR2 com 4 m de frente). O setor também está anotado, e não precisa me dizer o nome da cidade, já tenho. Faltam 31 perguntas.
-> 
-> Agora os documentos do requerente. O sistema prevê o abaixo, e você me diz só o que for diferente:
-> 1. ART/RRT: sempre exigido?
-> 2. Matrícula do imóvel atualizada: sempre exigida?
-> 3. Projeto arquitetônico em DWG: hoje é opcional. Na sua cidade é a) exigido sempre, b) opcional, c) não pedem?
-> 4. Projetos complementares em PDF: hoje é opcional. É a) exigido sempre, b) opcional, c) não pedem?
-> 
-> Pode responder só com os números, tipo "1 sim, 2 sim, 3 b, 4 b".
-
-**Analista** (12:47): Documentos: ART/RRT, matrícula atualizada e projeto em PDF são sempre exigidos. DWG a gente não pede. Procuração só quando quem pede é procurador. Contrato social só pra empresa, RG e CPF só pra pessoa física.
-
-**Aprova** (12:47):
-
-> Obrigado, Marcos! Anotei: ART/RRT e matrícula sempre; DWG não pedem; procuração só para procurador; contrato social só PJ; RG e CPF só PF.
-> 
-> Só preciso confirmar o resto dos documentos:
-> 1. "Projeto em PDF" que você falou é o projeto arquitetônico, certo? 
-> 2. Projetos complementares em PDF: a) sempre exigido, b) opcional, c) não pedem?
-> 3. Documento "Alvará antigo" (só aparece na retificação de alvará aprovado no modo físico): vocês exigem? 
-> 4. "Documento Complementar" (anexo extra que o requerente pode juntar): a) sempre exigido, b) opcional, c) não pedem?
-> 
-> Pode responder só com os números.
-
-**Analista** (12:47): Alvará antigo só na retificação de alvará que foi aprovado no papel, do jeito que está. Documento complementar e projetos complementares pode deixar como estão.
-
-**Aprova** (12:47):
-
-> Obrigado, Marcos! Anotei: Alvará antigo só na retificação de alvará aprovado no papel. Projetos complementares em PDF ficam opcionais. Documento Complementar fica como está no sistema, ou seja, sempre exigido. Confere?
-> 
-> Próximo lote:
-> 1. Antes você falou "projeto em PDF sempre exigido". Esse é o projeto arquitetônico em PDF, certo?
-> 2. O sistema também prevê um documento único: "RG e CPF (PF) ou CNPJ e contrato social (PJ)". Ele já está coberto pelo que você disse sobre RG/CPF e contrato social? Posso dispensar esse documento único? a) sim, b) não, mantém
-> 3. Tipos de solicitação para a edificação. O sistema prevê: Construção nova, Ampliação, Regularização, Reforma, Demolição. Quais são os de vocês?
-> 4. Tipos de vínculo do proprietário. O sistema prevê: Proprietário, Possuidor, Condomínio, Espólio, Massa Falida. Quais são os de vocês?
-> 5. Existe taxa de aprovação do Alvará de Construção? Se existir, como é calculada e quem emite?
-> 
-> Pode responder só com os números.
-
-**Analista** (12:47): Tipo de logradouro aqui tem Rua, Avenida, Travessa, Estrada e Outros. Material: alvenaria, madeira, mista e estrutura metálica.
-
-**Aprova** (12:48):
-
-> Obrigado, Marcos! Anotei:
-> • Logradouro: Rua, Avenida, Travessa, Estrada, Outros
-> • Material: alvenaria, madeira, mista, estrutura metálica
-> 
-> Faltam 22 perguntas. Ficaram em aberto algumas da última mensagem:
-> 1. O "projeto em PDF" sempre exigido é o projeto arquitetônico, certo?
-> 2. "Documento Complementar" (anexo extra do requerente): fica como sempre exigido, ou é a) opcional, b) não pedem?
-> 3. Tipos de solicitação para a edificação: o sistema prevê Construção nova, Ampliação, Regularização, Reforma, Demolição. Quais são os de vocês?
-> 4. Tipos de vínculo do proprietário: o sistema prevê Proprietário, Possuidor, Condomínio, Espólio, Massa Falida. Quais são os de vocês?
-> 5. O documento único "RG e CPF (PF) ou CNPJ e contrato social (PJ)" já está coberto pelo que você disse? Posso dispensá-lo? a) sim, b) não, mantém
-> 
-> Pode responder só com os números.
-
-**Analista** (12:48): A taxa eu não sei te dizer, quem calcula é a Fazenda. Vou ver com eles.
-
-**Aprova** (12:48):
-
-> Sem problema, Marcos. Anotei que a taxa fica com a Fazenda e deixei como pendência.
-> 
-> Próximo assunto: usos do imóvel. Me diga só o que for diferente do sistema:
-> 1. Tipo de uso. O sistema prevê: Residencial unifamiliar, Residencial multifamiliar, Comercial salas e lojas, Edifício de garagens, Galpão industrial, Casa popular, Conjunto habitacional popular. Quais são os de vocês?
-> 2. Uso complementar. O sistema prevê: Quadra esportiva e poliesportiva, Estacionamento térreo, Piscina, Área complementar de posto de gasolina. Quais são os de vocês?
-> 3. Atividades por zona. O sistema prevê: Residência Unifamiliar, Residência Multifamiliar, Comércio e Serviços, Condomínios Horizontais, Empreendimentos de Hotelaria e Turísticos. Quais são os de vocês?
-> 
-> Se tiver a lista na lei, pode mandar foto. Quando puder, ainda ficaram abertas as perguntas sobre tipos de solicitação e de vínculo do proprietário.
-
-**Analista** (12:48): Fiscalização in loco a gente não faz nessa fase. Numeração predial tem, quem faz é o protocolo. O parecer edilício aqui chama Parecer Técnico de Aprovação. Pareceres complementares e observações tem sim.
-
-**Aprova** (12:48):
-
-> Obrigado, Marcos! Anotei:
-> • Fiscalização in loco: não existe
-> • Numeração Predial: existe (protocolo)
-> • Parecer Técnico de Aprovação: existe
-> • Pareceres complementares e Observações: existem
-> 
-> Faltam 16 perguntas. Próximo assunto: tipos de pedido. Me diga só o que for diferente:
-> 1. Tipo da solicitação: o sistema prevê Nova solicitação, Retificação. Confere?
-> 2. Alvará a retificar: o sistema prevê Aprovado no modo físico, Aprovado pela Aprova. Confere?
-> 3. Vínculo do requerente: o sistema prevê Proprietário do imóvel, Responsável Técnico, Procurador. Confere?
-> 4. Responsabilidade do responsável técnico: o sistema prevê Projeto, Execução. Confere?
-> 
-> Pode responder só com os números, tipo "1 sim, 2 sim, 3 tira Procurador, 4 sim".
-> 
-> Quando puder, ainda estão abertos: usos do imóvel (tipo de uso, uso complementar, atividades), tipos de solicitação da edificação e de vínculo do proprietário.
-
-**Analista** (12:48): As etapas do pedido podem ficar todas. Tipo de vínculo, responsabilidade e os tipos de solicitação estão certos como estão.
-
-**Aprova** (12:48):
-
-> Obrigado, Marcos! Anotei: as 11 etapas do pedido ficam; tipo da solicitação (Nova solicitação, Retificação), vínculo do requerente (Proprietário do imóvel, Responsável Técnico, Procurador) e responsabilidade (Projeto, Execução) como estão. Faltam 14 perguntas.
-> 
-> Só pra não confundir, o "como estão" vale também para estes?
-> 1. Tipos de solicitação da edificação: Construção nova, Ampliação, Regularização, Reforma, Demolição.
-> 2. Vínculo do proprietário: Proprietário, Possuidor, Condomínio, Espólio, Massa Falida.
-> 3. Alvará a retificar: Aprovado no modo físico, Aprovado pela Aprova. Confere?
-> 4. O "projeto em PDF" sempre exigido é o projeto arquitetônico, certo?
-> 5. O documento único "RG e CPF (PF) ou CNPJ e contrato social (PJ)" já está coberto pelo que você disse sobre RG/CPF e contrato social. Posso dispensá-lo? a) sim, b) não, mantém
-> 
-> Pode responder só com os números.
-
-**Analista** (12:48): Tipo de uso e uso complementar também pode deixar como está.
-
-**Aprova** (12:49):
-
-> Obrigada, Marcos! Tipo de uso e uso complementar ficam como o sistema prevê. Faltam 12 perguntas.
-> 
-> Próximo lote:
-> 1. Atividades por zona: o sistema prevê Residência Unifamiliar, Residência Multifamiliar, Comércio e Serviços, Condomínios Horizontais, Empreendimentos de Hotelaria e Turísticos. Pode deixar como está?
-> 2. Declaração de veracidade: o texto padrão é "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados...". Mantém ou a prefeitura tem texto próprio?
-> 3. Documentos que o processo emite: Alvará, Peça gráfica e Peça gráfica complementar. A prefeitura tem modelo próprio? Têm prazo de validade e numeração própria?
-> 
-> Quando puder, ainda estão abertas as da mensagem anterior: tipos de solicitação da edificação, vínculo do proprietário, alvará a retificar, "projeto em PDF" ser o arquitetônico, e o documento único de RG/CPF/CNPJ.
-> 
-> Pode responder só com os números.
-
-**Analista** (12:49): Atividades é uma lista grande, te mando a planilha segunda.
-
-**Aprova** (12:49):
+**Aprova** (12:58):
 
 > Combinado, Marcos! Fico aguardando a planilha de atividades na segunda.
 > 
-> Faltam 11 perguntas. Pode responder só com os números:
-> 1. Declaração de veracidade: mantém o texto padrão ("Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal...") ou a prefeitura tem texto próprio?
-> 2. Documentos que o processo emite: Alvará, Peça gráfica e Peça gráfica complementar. A prefeitura tem modelo próprio? Têm prazo de validade e numeração própria?
-> 3. Tipos de solicitação da edificação (Construção nova, Ampliação, Regularização, Reforma, Demolição): pode deixar como está?
-> 4. Vínculo do proprietário (Proprietário, Possuidor, Condomínio, Espólio, Massa Falida): pode deixar como está?
-> 5. Alvará a retificar (Aprovado no modo físico, Aprovado pela Aprova): confere?
+> Faltam 4, pode responder aos poucos:
+> 1) Documento do requerente (RG e CPF para PF, CNPJ e contrato social para PJ): a) sempre exigido, b) não exigido?
+> 2) Tipo de solicitação da edificação (Construção nova, Ampliação, Regularização, Reforma, Demolição): confere?
+> 3) Declaração de veracidade ("Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal..."): mantém esse texto ou a prefeitura tem o próprio?
+> 4) Documentos emitidos: Alvará, Peça gráfica e Peça gráfica complementar, todos com validade. Confere? Tem modelo ou numeração própria?
 
-**Analista** (12:49): A declaração pode ser a do sistema mesmo. O alvará sai no modelo de vocês, com validade de 12 meses.
+**Analista** (12:58): A declaração pode ser a do sistema mesmo. O alvará, a peça gráfica e a complementar saem no modelo de vocês, com validade de 12 meses e numeração própria da prefeitura. O documento de identificação do requerente pode ficar como está também.
 
-**Aprova** (12:49):
+**Aprova** (12:58):
 
-> Obrigada, Marcos! Anotei: declaração igual à do sistema; Alvará no modelo da prefeitura, com validade de 12 meses.
+> Obrigado, Marcos! Anotei: declaração do sistema, documento de identificação sempre exigido, e os 3 documentos emitidos com validade de 12 meses e numeração própria da prefeitura.
 > 
-> Faltam 9 perguntas. Só mais um detalhe do alvará:
-> 1. A Peça gráfica e a Peça gráfica complementar também saem no modelo de vocês? Têm validade de 12 meses?
-> 2. O Alvará tem numeração própria da prefeitura?
+> Só para confirmar: o alvará e as peças gráficas saem no modelo padrão do sistema (sem modelo próprio da prefeitura), certo?
 > 
-> Ainda abertas da mensagem anterior (pode responder só com os números):
-> 3. Tipos de solicitação da edificação (Construção nova, Ampliação, Regularização, Reforma, Demolição): pode deixar como está?
-> 4. Vínculo do proprietário (Proprietário, Possuidor, Condomínio, Espólio, Massa Falida): pode deixar como está?
-> 5. Alvará a retificar (Aprovado no modo físico, Aprovado pela Aprova): confere?
+> Falta 1: tipo de solicitação da edificação (Construção nova, Ampliação, Regularização, Reforma, Demolição). Confere, ou o que muda?
+> 
+> A lista de atividades fica para a planilha de segunda.
 
-**Analista** (12:49): Por hoje é isso, tenho balcão agora. Qualquer coisa me chama.
+**Analista** (12:58): Por hoje é isso, tenho balcão agora. Qualquer coisa me chama.
 
-**Aprova** (12:49):
+**Aprova** (12:58):
 
-> Obrigada, Marcos! Pode ir ao balcão, o resto fica para quando você puder.
-> Definido: documentos exigidos, logradouro e material, pareceres, etapas do pedido, usos, declaração e Alvará (modelo da prefeitura, 12 meses).
-> Pendente com você: tipos de solicitação da edificação, vínculo do proprietário, alvará a retificar, "projeto em PDF" ser o arquitetônico, documento único de RG/CPF/CNPJ, peças gráficas e planilha de atividades (segunda).
-> Pendente com a Fazenda: taxa de aprovação.
+> Obrigado, Marcos! Bom balcão. 
+> Ficou definido: documentos, etapas, vínculos, declaração e listas de uso, uso complementar e material.
+> Pendentes:
+> - Atividades: você manda a planilha na segunda.
+> - Taxa: Fazenda.
+> - Tipo de solicitação da edificação (Construção nova, Ampliação, Regularização, Reforma, Demolição): quando puder, é só dizer "confere".
+> - Documentos emitidos: falta confirmar se saem no modelo padrão do sistema.
 > O implantador vai montar o formulário e voltar com alguns casos para você conferir.
 
 ## Ficha ao final
 
-Ficha: 36 perguntas | respondidas: 23 | a confirmar: 6 | pendências: 2 | sem resposta: 5
+Ficha: 36 perguntas | respondidas: 32 | a confirmar: 1 | pendências: 2 | sem resposta: 1
 
 | Pergunta | Resposta | Confiança | Origem |
 |---|---|---|---|
-| setor-01 | `{"slug":"vale-verde","setor":"Secretaria de Planejamento Urbano - D...` | 1 | WhatsApp, Marcos (SEPLAN); analisa: Marcos, assina: secretário; cidade conforme a ficha |
-| etapas-02 | `["Declaração de Veracidade","Solicitação","Dados do Requerente","Re...` | 1 | WhatsApp, Marcos (SEPLAN): "as etapas do pedido podem ficar todas" |
-| opcoes-13 | `["Projeto","Execução"]` | 1 | WhatsApp, Marcos (SEPLAN): "responsabilidade ... certos como estão" |
-| documento-06 | `{"exigido":true}` | 1 | WhatsApp, Marcos (SEPLAN): só na retificação de alvará aprovado no modo físico, como no modelo |
-| documento-09 | `{"exigido":true}` | 1 | WhatsApp, Marcos (SEPLAN): só quando quem pede é procurador |
+| setor-01 | `{"slug":"vale_verde","setor":"Secretaria de Planejamento Urbano - D...` | 1 | WhatsApp, Marcos (SEPLAN). Marcos analisa; o secretário assina o alvará. |
+| etapas-02 | `["Declaração de Veracidade","Solicitação","Dados do Requerente","Re...` | 1 | WhatsApp, Marcos (SEPLAN) |
+| opcoes-04 | `["Nova solicitação","Retificação"]` | 1 | WhatsApp, Marcos (SEPLAN) |
+| opcoes-05 | `["Aprovado no modo físico","Aprovado pela Aprova"]` | 1 | WhatsApp, Marcos (SEPLAN) |
+| opcoes-08 | `["Proprietário do imóvel","Responsável Técnico","Procurador"]` | 1 | WhatsApp, Marcos (SEPLAN) |
+| opcoes-10 | `["Proprietário","Possuidor","Condomínio","Espólio","Massa Falida"]` | 1 | WhatsApp, Marcos (SEPLAN) |
+| opcoes-13 | `["Projeto","Execução"]` | 1 | WhatsApp, Marcos (SEPLAN) |
+| documento-06 | `{"exigido":true}` | 1 | WhatsApp, Marcos (SEPLAN): só na retificação de alvará aprovado no papel, como no modelo |
+| documento-07 | `{"exigido":true,"sempre":true}` | 1 | WhatsApp, Marcos (SEPLAN) |
+| documento-09 | `{"exigido":true}` | 1 | WhatsApp, Marcos (SEPLAN): só quando o requerente é procurador |
 | documento-11 | `{"exigido":true}` | 1 | WhatsApp, Marcos (SEPLAN): RG e CPF só para pessoa física |
-| documento-12 | `{"exigido":true}` | 1 | WhatsApp, Marcos (SEPLAN): contrato social só para pessoa jurídica |
+| documento-12 | `{"exigido":true}` | 1 | WhatsApp, Marcos (SEPLAN): só para pessoa jurídica |
 | documento-14 | `{"exigido":true,"sempre":true}` | 1 | WhatsApp, Marcos (SEPLAN) |
 | documento-17 | `{"exigido":true,"sempre":true}` | 1 | WhatsApp, Marcos (SEPLAN) |
-| documento-25 | `{"exigido":false}` | 1 | WhatsApp, Marcos (SEPLAN): "DWG a gente não pede" |
+| documento-24 | `{"exigido":true,"sempre":true}` | 1 | WhatsApp, Marcos (SEPLAN) |
+| documento-25 | `{"exigido":false}` | 1 | WhatsApp, Marcos (SEPLAN) |
+| documento-26 | `{"exigido":false}` | 1 | WhatsApp, Marcos (SEPLAN): "pode deixar como estão" |
+| documento-27 | `{"exigido":true,"sempre":true}` | 1 | WhatsApp, Marcos (SEPLAN): "pode deixar como estão" |
 | opcoes-15 | `["Rua","Avenida","Travessa","Estrada","Outros"]` | 1 | WhatsApp, Marcos (SEPLAN) |
-| opcoes-16 | `["ZR1","ZR2","ZC1","ZI"]` | 1 | Anexo: tabela-zoneamento.png (Anexo II da Lei 1.204), confirmado pelo analista Marcos (SEPLAN) |
-| opcoes-18 | `["Residencial unifamiliar","Residencial multifamiliar","Comercial s...` | 1 | WhatsApp, Marcos (SEPLAN): "Tipo de uso ... pode deixar como está" (mantém opções do modelo) |
-| opcoes-19 | `["Quadra esportiva e poliesportiva","Estacionamento térreo","Piscin...` | 1 | WhatsApp, Marcos (SEPLAN): "uso complementar também pode deixar como está" (mantém opções do modelo) |
+| opcoes-16 | `["ZR1","ZR2","ZC1","ZI"]` | 1 | Anexo: tabela-zoneamento.png (Anexo II, Lei 1.204), confirmado pelo analista |
+| opcoes-18 | `["Residencial unifamiliar","Residencial multifamiliar","Comercial s...` | 1 | WhatsApp, Marcos (SEPLAN): "pode deixar como está" |
+| opcoes-19 | `["Quadra esportiva e poliesportiva","Estacionamento térreo","Piscin...` | 1 | WhatsApp, Marcos (SEPLAN): "pode deixar como está" |
 | opcoes-21 | `["Alvenaria","Madeira","Mista","Estrutura metálica"]` | 1 | WhatsApp, Marcos (SEPLAN) |
-| opcoes-22 | `["ZR1","ZR2","ZC1","ZI"]` | 1 | Anexo: tabela-zoneamento.png (Anexo II da Lei 1.204), confirmado pelo analista Marcos (SEPLAN) |
-| dataset-28 | `{"ZR1":{"PAVIMENTOS":2,"RECUO_FRONTAL":4,"RECUO_LATERAL_MAIOR":1.5,...` | 1 | Anexo: tabela-zoneamento.png (Anexo II da Lei 1.204), confirmado pelo analista Marcos (SEPLAN) |
+| opcoes-22 | `["ZR1","ZR2","ZC1","ZI"]` | 1 | Anexo: tabela-zoneamento.png (Anexo II, Lei 1.204), confirmado pelo analista |
+| dataset-28 | `{"ZR1":{"PAVIMENTOS":2,"RECUO_FRONTAL":4,"RECUO_LATERAL_MAIOR":1.5,...` | 1 | Anexo: tabela-zoneamento.png (Anexo II, Lei 1.204), confirmado pelo analista (WhatsApp, Marcos: "confere"; ZR2 recuo frontal 4 m confirmado) |
 | card-29 | `{"existe":false}` | 1 | WhatsApp, Marcos (SEPLAN): "Fiscalização in loco a gente não faz nessa fase" |
-| card-30 | `{"existe":true}` | 1 | WhatsApp, Marcos (SEPLAN): "Numeração predial tem, quem faz é o protocolo" |
-| card-31 | `{"existe":true,"nome":"Parecer Técnico de Aprovação"}` | 1 | WhatsApp, Marcos (SEPLAN): "O parecer edilício aqui chama Parecer Técnico de Aprovação" |
-| card-32 | `{"existe":true}` | 1 | WhatsApp, Marcos (SEPLAN): "Pareceres complementares e observações tem sim" |
-| card-33 | `{"existe":true}` | 1 | WhatsApp, Marcos (SEPLAN): "Pareceres complementares e observações tem sim" |
-| texto-03 | `"Declaro, para fins de direito, sob as penas do Artigo 299 do Códig...` | 1 | WhatsApp, Marcos (SEPLAN): "a declaração pode ser a do sistema mesmo" |
-| opcoes-04 | `["Nova solicitação","Retificação"]` | 0.6 | WhatsApp, Marcos (SEPLAN): "tipos de solicitação estão certos como estão" (interpretado como resposta ao tipo da solicitação do pedido) |
-| opcoes-08 | `["Proprietário do imóvel","Responsável Técnico","Procurador"]` | 0.6 | WhatsApp, Marcos (SEPLAN): "tipo de vínculo ... certos como estão" (interpretado como vínculo do requerente) |
-| documento-24 | `{"exigido":true,"sempre":true}` | 0.6 | WhatsApp, Marcos (SEPLAN): "projeto em PDF sempre exigido" (interpretado como projeto arquitetônico em PDF) |
-| documento-26 | `{"exigido":false}` | 0.6 | WhatsApp, Marcos (SEPLAN): "pode deixar como estão" (interpretado como opcional, como no modelo) |
-| documento-27 | `{"exigido":true,"sempre":true}` | 0.6 | WhatsApp, Marcos (SEPLAN): "pode deixar como está" (interpretado como sempre exigido, como no modelo) |
-| saida-35 | `{"Alvará":{"modelo_proprio":true,"validade_meses":12}}` | 0.6 | WhatsApp, Marcos (SEPLAN): "o alvará sai no modelo de vocês, com validade de 12 meses" |
-| opcoes-23 | _pendência_ | — | Lista de atividades por zona é grande; o Marcos vai enviar a planilha na segunda-feira. |
+| card-30 | `{"existe":true}` | 1 | WhatsApp, Marcos (SEPLAN): numeração predial existe, quem faz é o protocolo |
+| card-31 | `{"existe":true,"nome":"Parecer Técnico de Aprovação"}` | 1 | WhatsApp, Marcos (SEPLAN): na cidade chama Parecer Técnico de Aprovação |
+| card-32 | `{"existe":true}` | 1 | WhatsApp, Marcos (SEPLAN): pareceres complementares existe |
+| card-33 | `{"existe":true}` | 1 | WhatsApp, Marcos (SEPLAN): observações existe |
+| texto-03 | `"Declaro, para fins de direito, sob as penas do Artigo 299 do Códig...` | 1 | WhatsApp, Marcos (SEPLAN) |
+| residuo-36 | `"Vale Verde"` | 1 | analisador: resíduo substituído pelo nome da cidade |
+| saida-35 | `{"modelo_proprio":false,"validade_dias":365,"numeracao_propria":true}` | 0.6 | WhatsApp, Marcos (SEPLAN): Alvará, Peça gráfica e Peça gráfica complementar no modelo do sistema, validade 12 meses (registrada como 365 dias), numeração própria da prefeitura |
+| opcoes-23 | _pendência_ | — | Lista de atividades é extensa; Marcos vai enviar planilha na segunda-feira. Aguardar anexo. |
 | taxa-34 | _pendência_ | — | Perguntar à Secretaria de Fazenda: existe taxa de aprovação do Alvará de Construção, como é calculada e quem emite. Marcos vai consultar a Fazenda. |
