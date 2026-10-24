@@ -8,8 +8,16 @@
       "tipo": "codigo",
       "descricao": "O código lê o modelo de formulário da Aprova e lista só o que muda de uma cidade para outra, em forma de perguntas.",
       "criterios": [
-        { "nome": "ficha tem perguntas bloqueantes", "tentativas": 0, "ao_falhar": "implantador" },
-        { "nome": "nenhum placeholder sem pergunta", "tentativas": 0, "ao_falhar": "implantador" }
+        {
+          "nome": "ficha tem perguntas bloqueantes",
+          "tentativas": 0,
+          "ao_falhar": "implantador"
+        },
+        {
+          "nome": "nenhum placeholder sem pergunta",
+          "tentativas": 0,
+          "ao_falhar": "implantador"
+        }
       ]
     },
     {
@@ -17,9 +25,23 @@
       "nome": "Coletar respostas",
       "tipo": "agente",
       "agente": "coletor",
-      "descricao": "O agente conversa com o analista da prefeitura pelo WhatsApp, no ritmo dele, até cada pergunta ter resposta ou virar pendência.",
+      "descricao": "O agente mostra ao analista o modelo que a Aprova já tem, pergunta se atende e, se a prefeitura quiser mudar, monta com ele um plano de ação; depois pergunta só o que o modelo não tem como saber (setor, tabelas da cidade).",
       "criterios": [
-        { "nome": "nenhuma pergunta em aberto", "tentativas": 1, "ao_falhar": "analista" }
+        {
+          "nome": "analista decidiu sobre o modelo",
+          "tentativas": 0,
+          "ao_falhar": "analista"
+        },
+        {
+          "nome": "plano de ação confirmado",
+          "tentativas": 1,
+          "ao_falhar": "implantador"
+        },
+        {
+          "nome": "nenhuma pergunta em aberto",
+          "tentativas": 1,
+          "ao_falhar": "analista"
+        }
       ]
     },
     {
@@ -30,7 +52,11 @@
       "sub_etapa_de": "coletar",
       "descricao": "Quando o analista manda foto, PDF ou planilha, o agente lê o arquivo e sugere respostas citando de onde tirou cada uma.",
       "criterios": [
-        { "nome": "todo candidato cita trecho e confiança", "tentativas": 1, "ao_falhar": "analista" }
+        {
+          "nome": "todo candidato cita trecho e confiança",
+          "tentativas": 1,
+          "ao_falhar": "analista"
+        }
       ]
     },
     {
@@ -39,8 +65,16 @@
       "tipo": "codigo",
       "descricao": "O código monta o formulário da cidade a partir das respostas, sem IA, e escreve um resumo do que mudou e por quê.",
       "criterios": [
-        { "nome": "formulário sem placeholder de modelo", "tentativas": 0, "ao_falhar": "implantador" },
-        { "nome": "nenhum resíduo de outra cidade pendente", "tentativas": 0, "ao_falhar": "implantador" }
+        {
+          "nome": "formulário sem placeholder de modelo",
+          "tentativas": 0,
+          "ao_falhar": "implantador"
+        },
+        {
+          "nome": "nenhum resíduo de outra cidade pendente",
+          "tentativas": 0,
+          "ao_falhar": "implantador"
+        }
       ]
     },
     {
@@ -50,8 +84,16 @@
       "agente": "validador",
       "descricao": "O agente escreve situações de teste a partir das respostas e o código confere se o formulário se comporta como a prefeitura disse.",
       "criterios": [
-        { "nome": "todos os cenários passam", "tentativas": 1, "ao_falhar": "analista" },
-        { "nome": "nenhuma expressão indeterminada nova", "tentativas": 1, "ao_falhar": "implantador" },
+        {
+          "nome": "todos os cenários passam",
+          "tentativas": 1,
+          "ao_falhar": "analista"
+        },
+        {
+          "nome": "nenhuma expressão indeterminada nova",
+          "tentativas": 1,
+          "ao_falhar": "implantador"
+        },
         {
           "nome": "cenários cobrem a ficha",
           "tipo": "juiz",
@@ -62,13 +104,31 @@
       ]
     },
     {
+      "slug": "conferir",
+      "nome": "Conferir com a prefeitura",
+      "tipo": "codigo",
+      "gate": "analista",
+      "descricao": "O código escolhe alguns casos do formulário pronto, em linguagem de balcão, e o analista confere. Se algo estiver errado, a conversa volta ao plano de ação.",
+      "criterios": [
+        {
+          "nome": "analista conferiu os casos",
+          "tentativas": 0,
+          "ao_falhar": "implantador"
+        }
+      ]
+    },
+    {
       "slug": "homologar",
       "nome": "Homologar",
       "tipo": "codigo",
       "gate": "implantador",
       "descricao": "O implantador revisa o resumo das mudanças, as pendências e os cenários, e aprova antes de qualquer coisa ir para a prefeitura.",
       "criterios": [
-        { "nome": "implantador aprovou", "tentativas": 0, "ao_falhar": "parar" }
+        {
+          "nome": "implantador aprovou",
+          "tentativas": 0,
+          "ao_falhar": "parar"
+        }
       ]
     }
   ]

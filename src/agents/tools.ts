@@ -8,10 +8,13 @@ import { analisarTemplate } from "../core/template-analyzer.js";
 import { aplicarFicha, gerarDiff } from "../core/patcher.js";
 import { rodarCenarios, relatorioTexto } from "../core/scenario-runner.js";
 import { validarResposta } from "../core/respostas.js";
-import { store, perguntasAbertas, resumir, type Contexto } from "./store.js";
+import { store, perguntasAbertas, resumir, gravar, type Contexto } from "./store.js";
 import { extrair, type Anexo, type SaidaExtrator } from "./extrator.js";
 import { registrarRejeicao, limparRejeicao } from "../pipeline/run.js";
 import type { AprovaTemplate, Cenario, Pergunta } from "../core/types.js";
+import { montarFormulario } from "../core/montar.js";
+import { Operacao, validarOperacao, verificarPlano, itensConfirmados, itensPropostos, cenariosDoPlano, camposDoPlano, type ItemPlano } from "../core/plano.js";
+import { resumoModelo, pdfDoModelo, modeloParaAgente } from "../core/resumo-modelo.js";
 
 /** Junta cenários pelo id: novo entra no fim, id repetido substitui no lugar. */
 export function juntarCenarios(base: Cenario[], novos: Cenario[]): Cenario[] {
@@ -64,7 +67,23 @@ export function arquivoCenariosBase(ctx: Contexto): string | undefined {
   return undefined;
 }
 
-export type Canal = { enviar: (texto: string) => Promise<void> };
+export type Canal = {
+  enviar: (texto: string) => Promise<void>;
+  /** opcional: canais que mandam arquivo (Telegram); sem isto, o arquivo fica só em disco */
+  enviarArquivo?: (a: { nome: string; conteudo: Buffer; legenda?: string }) => Promise<void>;
+};
+
+/** Valor "como está no modelo" por tipo de pergunta; setor, dataset e resíduo não têm (o modelo não sabe). */
+export function valorDoModelo(q: Pergunta): unknown | undefined {
+  switch (q.tipo) {
+    case "opcoes": case "etapas": return Array.isArray(q.assume) && q.assume.length ? q.assume : undefined;
+    case "documento": return { exigido: true };
+    case "taxa": case "card": return { existe: true };
+    case "texto": return typeof q.assume === "string" && q.assume.trim() ? q.assume : undefined;
+    case "saida": return { mantido_do_modelo: true };
+    default: return undefined;
+  }
+}
 
 /** Ganchos do pipeline: a sub-etapa extrair embrulha a leitura de anexos com os seus critérios. */
 export type Ganchos = {
@@ -91,7 +110,16 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
     run: async ({ somente_abertas }) => {
       const f = store.ficha(ctx);
       if (!f) return "ficha inexistente; chame analisar_template";
-      return JSON.stringify(somente_abertas ? perguntasAbertas(f) : f);
+      if (somente_abertas) return JSON.stringify(perguntasAbertas(f));
+      // Perguntas cujo campo um item confirmado do plano de ação mudou: o plano prevalece sobre a resposta da ficha.
+      const tocados = camposDoPlano(store.template(ctx), store.plano(ctx).itens);
+      if (!tocados.size) return JSON.stringify(f);
+      const anotada = structuredClone(f);
+      for (const q of anotada.grupos.flatMap((g) => g.perguntas)) {
+        const m = q.afeta.map((a) => tocados.get(a)).find(Boolean);
+        if (m) (q as any).substituida_pelo_plano = m;
+      }
+      return JSON.stringify(anotada);
     },
   });
 
@@ -138,19 +166,20 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
     },
   });
 
+  async function enviarAoAnalista(texto: string) {
+    await canal.enviar(texto);
+    store.atualizarEstado(ctx, (e) => {
+      e.mensagens_enviadas++;
+      e.perguntas_feitas += (texto.match(/\?/g) ?? []).length;
+      e.historico.push({ role: "assistant", content: texto, em: new Date().toISOString() });
+    });
+  }
+
   const enviar_mensagem = betaZodTool({
     name: "enviar_mensagem",
     description: "Envia uma mensagem curta ao analista da prefeitura pelo canal (WhatsApp/Telegram). Máximo 5 perguntas por mensagem.",
     inputSchema: z.object({ texto: z.string() }),
-    run: async ({ texto }) => {
-      await canal.enviar(texto);
-      store.atualizarEstado(ctx, (e) => {
-        e.mensagens_enviadas++;
-        e.perguntas_feitas += (texto.match(/\?/g) ?? []).length;
-        e.historico.push({ role: "assistant", content: texto, em: new Date().toISOString() });
-      });
-      return "enviada";
-    },
+    run: async ({ texto }) => { await enviarAoAnalista(texto); return "enviada"; },
   });
 
   const pedir_extracao = betaZodTool({
@@ -240,12 +269,153 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
 
   const cenarios_base = betaZodTool({
     name: "cenarios_base",
-    description: "Devolve os cenários já comprovados para este template (ponto de partida). Rode-os e acrescente cobertura; não os apague.",
+    description: "Devolve os cenários já comprovados para este template mais os casos automáticos do plano de ação (ids plano-*). Rode-os e acrescente cobertura; não os apague.",
     inputSchema: z.object({}),
     run: async () => {
       const arq = arquivoCenariosBase(ctx);
-      return arq ? fs.readFileSync(arq, "utf8") : "[]";
+      const base: Cenario[] = arq ? JSON.parse(fs.readFileSync(arq, "utf8")) : [];
+      const form = store.form(ctx);
+      const doPlano = form ? cenariosDoPlano(form, store.plano(ctx).itens) : [];
+      return JSON.stringify(juntarCenarios(base, doPlano));
     },
+  });
+
+
+  // ---------------------------------------------------------------- modelo e plano de ação
+
+  const formAtual = () => montarFormulario(store.template(ctx), store.ficha(ctx), store.plano(ctx)).form;
+  const resumoItem = (i: ItemPlano) => ({ id: i.id, descricao: i.descricao, status: i.status, operacao: i.operacao, verificacao: i.verificacao });
+
+  const mostrar_modelo = betaZodTool({
+    name: "mostrar_modelo",
+    description:
+      "Envia ao analista o resumo do modelo atual (mensagem curta) e a prévia completa em PDF, etapa por etapa. " +
+      "Devolve para você o modelo com o path de cada item, para montar o plano de ação. Use uma vez no começo e de novo se ele pedir para ver como ficou.",
+    inputSchema: z.object({}),
+    run: async () => {
+      const form = formAtual();
+      const titulo = String(store.template(ctx).config?.title ?? ctx.processo);
+      const texto = resumoModelo(form, titulo);
+      await enviarAoAnalista(texto);
+      const pdf = pdfDoModelo(form, titulo, ctx.cidade);
+      const nome = `modelo-${ctx.processo}.pdf`;
+      gravar(store.arquivo(ctx, nome), pdf);
+      if (canal.enviarArquivo) await canal.enviarArquivo({ nome, conteudo: pdf, legenda: `Modelo de ${titulo}` });
+      const p = store.plano(ctx);
+      store.salvarPlano(ctx, { ...p, modelo_mostrado_em: new Date().toISOString() });
+      return `Resumo e PDF enviados${canal.enviarArquivo ? "" : " (este canal não manda arquivo: o PDF ficou em " + store.arquivo(ctx, nome) + ")"}.\n\nModelo (para você, não repita ao analista):\n${modeloParaAgente(form)}`;
+    },
+  });
+
+  const ver_modelo = betaZodTool({
+    name: "ver_modelo",
+    description: "Lê o modelo como está agora (ficha e plano confirmados aplicados), com o path de cada item. Não envia nada ao analista.",
+    inputSchema: z.object({ etapa: z.string().optional() }),
+    run: async ({ etapa }) => {
+      const txt = modeloParaAgente(formAtual());
+      if (!etapa) return txt;
+      const bloco = txt.split("\n\n").filter((b) => b.toLowerCase().includes(etapa.toLowerCase()));
+      return bloco.join("\n\n") || txt;
+    },
+  });
+
+  const registrar_decisao = betaZodTool({
+    name: "registrar_decisao",
+    description:
+      "Registra se o modelo atende a prefeitura ('atende') ou se ela quer mudanças ('mudar'). Nos dois casos, o que o modelo já define " +
+      "fica aceito como está e sai da lista de perguntas; sobram só as que o modelo não tem como saber (setor, tabelas da cidade). Devolve essas que sobraram.",
+    inputSchema: z.object({ decisao: z.enum(["atende", "mudar"]), origem: z.string() }),
+    run: async ({ decisao, origem }) => {
+      const f = store.ficha(ctx);
+      const p = store.plano(ctx);
+      store.salvarPlano(ctx, { ...p, decisao, decidido_em: new Date().toISOString() });
+      if (!f) return `decisão ${decisao} registrada; ficha inexistente`;
+      let aceitas = 0;
+      for (const q of perguntasAbertas(f)) {
+        const v = valorDoModelo(q);
+        if (v === undefined) continue;
+        const val = validarResposta(q, v);
+        if (!val.ok) continue;
+        Object.assign(q, { resposta: val.valor, origem: `${origem}: modelo aceito como está`, confianca: 1, pendencia: undefined });
+        aceitas++;
+      }
+      store.salvarFicha(ctx, f);
+      if (aceitas) store.registrar(ctx, { pergunta_id: "modelo", confianca: 1, origem, resumo: `${aceitas} itens do modelo aceitos como estão (${decisao})` });
+      const resto = perguntasAbertas(f);
+      return JSON.stringify({ decisao, aceitas_do_modelo: aceitas, perguntas_que_sobram: resto.map((q) => ({ id: q.id, tipo: q.tipo, texto: q.texto, prioridade: q.prioridade })) });
+    },
+  });
+
+  const propor_plano = betaZodTool({
+    name: "propor_plano",
+    description:
+      "Grava itens do plano de ação a partir do que o analista pediu. Cada item: descricao (como o analista diria) e operacao estruturada. " +
+      "O código confere cada operação contra o formulário: item inválido volta com o motivo e não é gravado. Os gravados ficam 'proposto' até o analista confirmar. " +
+      "Depois, mande ao analista a lista numerada com os ids e peça confirmação.",
+    inputSchema: z.object({
+      itens: z.array(z.object({ descricao: z.string().min(3), operacao: Operacao })).min(1),
+      origem: z.string(),
+    }),
+    run: async ({ itens, origem }) => {
+      const p = store.plano(ctx);
+      const form = formAtual();
+      const gravados: string[] = [];
+      const recusados: { descricao: string; erros: string[] }[] = [];
+      let n = p.itens.length;
+      for (const it of itens) {
+        const erros = validarOperacao(form, it.operacao as Operacao);
+        if (erros.length) { recusados.push({ descricao: it.descricao, erros }); continue; }
+        const id = `m${++n}`;
+        p.itens.push({ id, descricao: it.descricao, operacao: it.operacao as Operacao, status: "proposto", origem, proposto_em: new Date().toISOString() });
+        gravados.push(id);
+      }
+      store.salvarPlano(ctx, p);
+      return JSON.stringify({ gravados: p.itens.filter((i) => gravados.includes(i.id)).map((i) => ({ id: i.id, descricao: i.descricao })), recusados, aguardando_confirmacao: itensPropostos(p).length });
+    },
+  });
+
+  const confirmar_plano = betaZodTool({
+    name: "confirmar_plano",
+    description:
+      "Marca itens do plano como confirmados pelo analista e já aplica no formulário, rodando a verificação automática de cada um. " +
+      "Use só depois de ele confirmar por mensagem. Devolve o resultado por item.",
+    inputSchema: z.object({ ids: z.array(z.string()).min(1), origem: z.string() }),
+    run: async ({ ids, origem }) => {
+      const p = store.plano(ctx);
+      const desconhecidos = ids.filter((id) => !p.itens.some((i) => i.id === id));
+      const agora = new Date().toISOString();
+      for (const i of p.itens) if (ids.includes(i.id) && i.status !== "descartado") Object.assign(i, { status: "confirmado", confirmado_em: agora, origem: `${i.origem}; confirmado: ${origem}` });
+      const base = montarFormulario(store.template(ctx), store.ficha(ctx)).form;
+      const { porItem } = verificarPlano(base, p.itens);
+      for (const i of p.itens) if (porItem[i.id]) i.verificacao = { em: agora, ...porItem[i.id] };
+      store.salvarPlano(ctx, p);
+      for (const id of ids.filter((x) => porItem[x])) store.registrar(ctx, { pergunta_id: id, confianca: 1, origem, resumo: `plano: ${p.itens.find((i) => i.id === id)!.descricao}` });
+      return JSON.stringify({
+        aplicados: ids.filter((x) => porItem[x]).map((x) => ({ id: x, ...porItem[x] })),
+        desconhecidos,
+        ainda_propostos: itensPropostos(p).map((i) => i.id),
+        confirmados_total: itensConfirmados(p).length,
+      });
+    },
+  });
+
+  const descartar_itens = betaZodTool({
+    name: "descartar_itens",
+    description: "Descarta itens do plano que o analista não quer mais (ou que você entendeu errado). Para corrigir um item, descarte e proponha de novo.",
+    inputSchema: z.object({ ids: z.array(z.string()).min(1), motivo: z.string() }),
+    run: async ({ ids, motivo }) => {
+      const p = store.plano(ctx);
+      for (const i of p.itens) if (ids.includes(i.id)) Object.assign(i, { status: "descartado", origem: `${i.origem}; descartado: ${motivo}` });
+      store.salvarPlano(ctx, p);
+      return JSON.stringify({ descartados: ids, ainda_propostos: itensPropostos(p).map((i) => i.id) });
+    },
+  });
+
+  const ler_plano = betaZodTool({
+    name: "ler_plano",
+    description: "Lê o plano de ação: decisão sobre o modelo e itens (proposto, confirmado, descartado) com a verificação de cada um.",
+    inputSchema: z.object({}),
+    run: async () => { const p = store.plano(ctx); return JSON.stringify({ decisao: p.decisao, itens: p.itens.map(resumoItem) }); },
   });
 
   const estado_processo = betaZodTool({
@@ -257,10 +427,10 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
 
   return {
     orquestrador: [estado_processo, analisar_template, ler_ficha],
-    coletor: [ler_ficha, registrar_resposta, enviar_mensagem, pedir_extracao],
+    coletor: [ler_ficha, registrar_resposta, enviar_mensagem, pedir_extracao, mostrar_modelo, ver_modelo, registrar_decisao, propor_plano, confirmar_plano, descartar_itens, ler_plano],
     aplicador: [aplicar_ficha, gerar_diff],
     // O validador não fala com a prefeitura: confirmações viram gate para o analista, abertos pelo pipeline.
-    validador: [listar_campos, cenarios_base, ler_ficha, rodar_cenarios],
+    validador: [listar_campos, cenarios_base, ler_ficha, ler_plano, rodar_cenarios],
     todas: [estado_processo, analisar_template, ler_ficha, registrar_resposta, enviar_mensagem, pedir_extracao, aplicar_ficha, gerar_diff, rodar_cenarios, listar_campos, cenarios_base],
   };
 }

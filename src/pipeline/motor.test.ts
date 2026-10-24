@@ -115,9 +115,10 @@ test("coletar: 2ª rejeição seguida falha, refaz com feedback na mesma convers
   });
   const deps = { runAgent: a.fn, juiz: null };
   await iniciarProcesso(ctx, deps);
+  store.salvarPlano(ctx, { decisao: "atende", itens: [] });
   await tratarMensagem(ctx, canal, { texto: "resposta 1" }, deps);
   let run = lerRun(ctx)!;
-  assert.equal(etapaRun(run, "coletar").criterios[0].resultado, "aguardando", "1ª rejeição não é falha");
+  assert.equal(etapaRun(run, "coletar").criterios.find((k) => k.nome === "nenhuma pergunta em aberto")!.resultado, "aguardando", "1ª rejeição não é falha");
   assert.equal(run.gate, null);
 
   await tratarMensagem(ctx, canal, { texto: "resposta 2" }, deps);
@@ -157,6 +158,7 @@ test("ficha fechada: aplicar → validar com juiz reprovando → retentativas co
   const deps = { runAgent: val.fn, juiz };
   await iniciarProcesso(ctx, deps);
   store.salvarFicha(ctx, fichaFechada(ctx.cidade));
+  store.salvarPlano(ctx, { decisao: "atende", itens: [] });
   let run = await avancar(ctx, deps);
 
   assert.equal(etapaRun(run, "coletar").status, "concluida");
@@ -200,6 +202,7 @@ test("cenário falhando esgota e vira pergunta de confirmação ao analista; 'si
   const deps = { runAgent: val.fn, juiz: juizFixo([{ pass: true, faltam: [] }]), canal };
   await iniciarProcesso(ctx, deps);
   store.salvarFicha(ctx, fichaFechada(ctx.cidade));
+  store.salvarPlano(ctx, { decisao: "atende", itens: [] });
   let run = await avancar(ctx, deps);
   assert.equal(run.gate?.para, "analista");
   assert.equal(run.gate?.criterio, "todos os cenários passam");
@@ -209,7 +212,15 @@ test("cenário falhando esgota e vira pergunta de confirmação ao analista; 'si
   await tratarMensagem(ctx, canal, { texto: "Sim, é assim mesmo" }, deps);
   run = lerRun(ctx)!;
   assert.equal(run.decisoes?.at(-1)?.acao, "aprovar");
+  // Com canal, o formulário pronto passa pela conferência de casos com o analista antes da homologação.
+  assert.equal(run.etapa_atual, "conferir");
+  assert.equal(run.gate?.tipo, "conferencia");
+  assert.match(enviadas.at(-1)!, /Confere estes casos\?/);
+
+  await tratarMensagem(ctx, canal, { texto: "sim" }, deps);
+  run = lerRun(ctx)!;
   assert.equal(run.etapa_atual, "homologar");
+  assert.equal(etapaRun(run, "conferir").criterios[0].resultado, "passou");
   assert.equal(run.metricas.horas_reuniao_evitadas, 0.67);
 });
 
@@ -218,6 +229,7 @@ test("homologar: ajustar com <id>=<valor> corrige a ficha e refaz desde aplicar;
   const deps = { semLLM: true, juiz: null, cenarios: "fixtures/cenarios/alvara.cenarios.json" };
   await iniciarProcesso(ctx, deps);
   store.salvarFicha(ctx, fichaFechada(ctx.cidade));
+  store.salvarPlano(ctx, { decisao: "atende", itens: [] });
   let run = await avancar(ctx, deps);
   assert.equal(run.gate?.tipo, "homologacao");
 
@@ -315,6 +327,7 @@ test("validador com cenários de diagnóstico sem pré-condição: no máximo 2 
   const deps = { runAgent: val.fn, juiz: juizFixo([{ pass: true, faltam: [] }]), canal };
   await iniciarProcesso(ctx, deps);
   store.salvarFicha(ctx, fichaFechada(ctx.cidade));
+  store.salvarPlano(ctx, { decisao: "atende", itens: [] });
   const run = await avancar(ctx, deps);
   assert.equal(val.chamadas.length, 2, "1 execução + 1 retentativa");
   assert.ok(val.chamadas.every((c) => c.maxIteracoes === MAX_RODADAS_VALIDADOR && MAX_RODADAS_VALIDADOR <= 6));
@@ -331,6 +344,7 @@ test("reexecutar validar: reabre validar e homologar, apaga cenários e conversa
   const deps = { semLLM: true, juiz: null, cenarios: "fixtures/cenarios/alvara.cenarios.json" };
   await iniciarProcesso(ctx, deps);
   store.salvarFicha(ctx, fichaFechada(ctx.cidade));
+  store.salvarPlano(ctx, { decisao: "atende", itens: [] });
   await avancar(ctx, deps);
   let run = await resolverGate(ctx, "aprovar", undefined, deps);
   assert.equal(run.status, "concluido");

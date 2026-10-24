@@ -17,7 +17,7 @@ import { tratarMensagem } from "../agents/orquestrador.js";
 import { store, baseDados, perguntasAbertas, type Contexto } from "../agents/store.js";
 import type { Canal } from "../agents/tools.js";
 import type { Anexo } from "../agents/extrator.js";
-import { lerRun } from "../pipeline/run.js";
+import { lerRun, salvarRun } from "../pipeline/run.js";
 
 export type ItemCatalogo = { id: string; titulo: string; slug: string; arquivo: string; template: string };
 
@@ -35,7 +35,8 @@ export type Rota =
   | { acao: "menu"; opcoes: ItemCatalogo[]; total: number; aviso?: string }
   | { acao: "escolher"; item: ItemCatalogo }
   | { acao: "encaminhar"; texto: string }
-  | { acao: "ajuda" };
+  | { acao: "ajuda" }
+  | { acao: "prazo"; data: string };
 
 export const PASTA_FORMS = "forms_modelo";
 /** O Alvará de Construção usa o template de fixture: é dele que saem os cenários base e os dados da demo. */
@@ -163,6 +164,11 @@ export function rotear(estado: EstadoChat, texto: string, cat: ItemCatalogo[] = 
   const menuAberto = estado.ultimo_menu.length > 0;
 
   if (AJUDA.has(q) || bruto === "/help" || bruto === "/ajuda") return { acao: "ajuda" };
+  const pz = bruto.match(/^\/prazo\s+(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?$/i);
+  if (pz) {
+    const ano = pz[3] ? (pz[3].length === 2 ? `20${pz[3]}` : pz[3]) : String(new Date().getFullYear());
+    return { acao: "prazo", data: `${ano}-${pz[2].padStart(2, "0")}-${pz[1].padStart(2, "0")}` };
+  }
   if (MENU.has(q)) return menu(cat, menuCurado(cat));
 
   const cmd = bruto.match(/^\/processo\s+(.+)$/i);
@@ -207,6 +213,7 @@ export const TEXTO_AJUDA = [
   "menu: lista os processos para escolher",
   "trocar: muda de processo (o que já respondeu fica salvo)",
   "/processo <nome>: vai direto a um processo",
+  "/prazo 29/10: combina o prazo do processo atual",
   "Fora isso, é só responder às perguntas.",
 ].join("\n");
 
@@ -291,6 +298,15 @@ export async function atender(a: Atendimento): Promise<Contexto | null> {
 
   if (rota.acao === "ajuda") { await a.canal.enviar(TEXTO_AJUDA); return ctxDoChat(estado); }
 
+  if (rota.acao === "prazo") {
+    const ctx = ctxDoChat(estado);
+    const run = ctx ? lerRun(ctx) : undefined;
+    if (!ctx || !run) { await a.canal.enviar("Escolha um processo antes de combinar o prazo."); return ctx; }
+    salvarRun(ctx, { ...run, prazo: rota.data });
+    await a.canal.enviar(`Prazo do ${run.titulo} combinado: ${rota.data.slice(8, 10)}/${rota.data.slice(5, 7)}.`);
+    return ctx;
+  }
+
   if (rota.acao === "menu") {
     salvarChat(a.tipo, a.chatId, { ...estado, ultimo_menu: rota.opcoes.map((o) => o.slug) });
     await a.canal.enviar(textoMenu(rota));
@@ -309,7 +325,7 @@ export async function atender(a: Atendimento): Promise<Contexto | null> {
     if (r.tipo === "coletor") {
       nota = await tratarMensagem(ctx, a.canal, { texto: PEDIDO_RETOMADA, remetente: a.entrada.remetente });
     } else {
-      await a.canal.enviar(`Combinado: ${item.titulo}. Vou te mandar as perguntas.`);
+      await a.canal.enviar(`Combinado: ${item.titulo}. Vou te mostrar o modelo que a Aprova já tem.`);
       // Turno vazio: é assim que tratarMensagem abre um processo (o Coletor se apresenta e manda o primeiro lote).
       nota = await tratarMensagem(ctx, a.canal, { remetente: a.entrada.remetente });
     }

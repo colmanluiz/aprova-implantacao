@@ -58,7 +58,7 @@ export type AcaoGate = "aprovar" | "ajustar" | "rejeitar";
 
 export type Gate = {
   para: "analista" | "implantador";
-  tipo: "falha_criterio" | "homologacao";
+  tipo: "falha_criterio" | "homologacao" | "conferencia";
   etapa: string;
   criterio?: string;
   instrucao: string;
@@ -110,4 +110,8 @@ export type Run = {
   opcoes?: { sem_llm?: boolean; cenarios?: string };
   /** horário em que a etapa aplicar foi alcançada */
   aplicar_alcancado_em?: string;
+  /** prazo combinado para fechar a parametrização (AAAA-MM-DD), definido pelo implantador */
+  prazo?: string;
+  /** cobranças de prazo enviadas ao analista ou escaladas ao implantador */
+  cobrancas?: { em: string; nivel: "lembrete" | "ritmo" | "escalar"; texto: string }[];
 };
