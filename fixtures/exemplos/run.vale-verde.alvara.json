@@ -1,0 +1,214 @@
+{
+  "processo": "alvara",
+  "cidade": "vale-verde",
+  "titulo": "Alvará de Construção",
+  "iniciado_em": "2026-10-24T09:30:00-03:00",
+  "atualizado_em": "2026-10-24T10:24:00-03:00",
+  "etapa_atual": "validar",
+  "status": "aguardando_implantador",
+  "etapas": [
+    {
+      "slug": "analisar",
+      "nome": "Analisar template",
+      "tipo": "codigo",
+      "status": "concluida",
+      "iniciada_em": "2026-10-24T09:30:00-03:00",
+      "concluida_em": "2026-10-24T09:31:00-03:00",
+      "tentativas": 1,
+      "criterios": [
+        {
+          "nome": "template lido sem erro",
+          "resultado": "passou",
+          "detalhe": "11 etapas, 134 campos, 160 expressões",
+          "avaliado_em": "2026-10-24T09:31:00-03:00"
+        },
+        {
+          "nome": "pontos de parametrização encontrados",
+          "resultado": "passou",
+          "detalhe": "37 perguntas em 11 grupos",
+          "avaliado_em": "2026-10-24T09:31:00-03:00"
+        },
+        {
+          "nome": "resíduos de outra cidade apontados",
+          "resultado": "passou",
+          "detalhe": "'Cascavel' em 2 expressões de validação",
+          "avaliado_em": "2026-10-24T09:31:00-03:00"
+        }
+      ],
+      "entrada_resumo": "fixtures/templates/alvara-construcao.modeload.json",
+      "saida_resumo": "ficha.json com 37 perguntas"
+    },
+    {
+      "slug": "coletar",
+      "nome": "Coletar com a prefeitura",
+      "tipo": "agente",
+      "status": "concluida",
+      "iniciada_em": "2026-10-24T09:38:00-03:00",
+      "concluida_em": "2026-10-24T10:12:00-03:00",
+      "tentativas": 1,
+      "criterios": [
+        {
+          "nome": "nenhuma pergunta bloqueante em aberto",
+          "resultado": "passou",
+          "detalhe": "0 de 14 bloqueantes em aberto",
+          "avaliado_em": "2026-10-24T10:12:00-03:00"
+        },
+        {
+          "nome": "toda resposta com origem e confiança",
+          "resultado": "passou",
+          "detalhe": "25 respostas, todas com origem",
+          "avaliado_em": "2026-10-24T10:12:00-03:00"
+        },
+        {
+          "nome": "pendências explícitas registradas",
+          "resultado": "passou",
+          "detalhe": "12 pendências (ex.: taxa com a Fazenda)",
+          "avaliado_em": "2026-10-24T10:12:00-03:00"
+        }
+      ],
+      "entrada_resumo": "37 perguntas",
+      "saida_resumo": "25 respondidas, 12 pendências"
+    },
+    {
+      "slug": "extrair",
+      "nome": "Extrair anexos",
+      "tipo": "agente",
+      "status": "concluida",
+      "iniciada_em": "2026-10-24T09:57:00-03:00",
+      "concluida_em": "2026-10-24T09:58:00-03:00",
+      "tentativas": 1,
+      "criterios": [
+        {
+          "nome": "confiança mínima 0,8",
+          "resultado": "passou",
+          "detalhe": "foto da Lei 1.204/2019: 0,95",
+          "avaliado_em": "2026-10-24T09:58:00-03:00"
+        },
+        {
+          "nome": "analista confirmou a leitura",
+          "resultado": "passou",
+          "detalhe": "\"isso, ZR2 é 4 m\"",
+          "avaliado_em": "2026-10-24T09:59:00-03:00"
+        }
+      ],
+      "entrada_resumo": "1 foto (tabela de zoneamento)",
+      "saida_resumo": "4 zonas × 8 parâmetros"
+    },
+    {
+      "slug": "aplicar",
+      "nome": "Aplicar no formulário",
+      "tipo": "codigo",
+      "status": "concluida",
+      "iniciada_em": "2026-10-24T10:13:00-03:00",
+      "concluida_em": "2026-10-24T10:13:00-03:00",
+      "tentativas": 1,
+      "criterios": [
+        {
+          "nome": "formulário gerado",
+          "resultado": "passou",
+          "detalhe": "form.json, 21 mudanças",
+          "avaliado_em": "2026-10-24T10:13:00-03:00"
+        },
+        {
+          "nome": "nenhum placeholder modeload restante",
+          "resultado": "passou",
+          "detalhe": "0 ocorrências",
+          "avaliado_em": "2026-10-24T10:13:00-03:00"
+        },
+        {
+          "nome": "diff com origem de cada mudança",
+          "resultado": "passou",
+          "detalhe": "diff.md, 14 linhas com origem",
+          "avaliado_em": "2026-10-24T10:13:00-03:00"
+        }
+      ],
+      "entrada_resumo": "ficha fechada",
+      "saida_resumo": "form.json + diff.md"
+    },
+    {
+      "slug": "validar",
+      "nome": "Validar cenários",
+      "tipo": "agente",
+      "status": "aguardando",
+      "iniciada_em": "2026-10-24T10:14:00-03:00",
+      "concluida_em": null,
+      "tentativas": 2,
+      "criterios": [
+        {
+          "nome": "cenários escritos com campos existentes",
+          "resultado": "passou",
+          "detalhe": "15 cenários, 0 campos inventados",
+          "avaliado_em": "2026-10-24T10:15:00-03:00"
+        },
+        {
+          "nome": "todos os cenários passando",
+          "resultado": "falhou",
+          "detalhe": "13/15: c13 e c14 (taxa de ocupação)",
+          "avaliado_em": "2026-10-24T10:22:00-03:00"
+        },
+        {
+          "nome": "regra de negócio confirmada pelo analista",
+          "resultado": "aguardando",
+          "detalhe": "aguardando o implantador decidir a correção",
+          "avaliado_em": null
+        }
+      ],
+      "entrada_resumo": "form.json + 15 cenários",
+      "saida_resumo": "relatorio.json: 13/15"
+    },
+    {
+      "slug": "homologar",
+      "nome": "Homologar",
+      "tipo": "codigo",
+      "status": "pendente",
+      "iniciada_em": null,
+      "concluida_em": null,
+      "tentativas": 0,
+      "criterios": [
+        {
+          "nome": "implantador aprovou o diff",
+          "resultado": "nao_avaliado",
+          "detalhe": "",
+          "avaliado_em": null
+        },
+        {
+          "nome": "pendências encaminhadas",
+          "resultado": "nao_avaliado",
+          "detalhe": "",
+          "avaliado_em": null
+        }
+      ],
+      "entrada_resumo": "",
+      "saida_resumo": ""
+    }
+  ],
+  "gate": {
+    "para": "implantador",
+    "tipo": "aprovacao",
+    "instrucao": "Dois cenários de taxa de ocupação falharam. O agente propõe usar TO máx. 80% na ZC1 e 60% na ZR2, conforme a foto da Lei 1.204/2019. Aprove para reaplicar e rodar os cenários de novo.",
+    "resumo": "c13 e c14 falharam: o formulário calculou a TO com o limite padrão do template (50%).",
+    "acoes": [
+      "aprovar",
+      "ajustar",
+      "rejeitar"
+    ],
+    "aberto_em": "2026-10-24T10:22:00-03:00",
+    "contexto": {
+      "cenarios": [
+        "c13-taxa-ocupacao",
+        "c14-taxa-ocupacao-estourada"
+      ]
+    }
+  },
+  "metricas": {
+    "mensagens_enviadas": 9,
+    "mensagens_recebidas": 8,
+    "perguntas_feitas": 37,
+    "respondidas_por_mensagem": 20,
+    "respondidas_por_anexo": 5,
+    "pendencias_abertas": 12,
+    "cenarios_rodados": 15,
+    "cenarios_passando": 13,
+    "horas_reuniao_evitadas": 1
+  }
+}

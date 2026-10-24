@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel do implantador</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="marca">
+      <span class="marca-produto">APROVA</span>
+      <span class="marca-sep">/</span>
+      <span>Implantação</span>
+      <span class="marca-sep">/</span>
+      <strong id="cidade">—</strong>
+    </div>
+    <nav class="topo-nav">
+      <a href="#/" id="link-visao" class="ativo">Visão da prefeitura</a>
+    </nav>
+    <div class="vivo" id="vivo" title="Atualiza a cada 2 segundos">
+      <span class="vivo-ponto"></span>
+      <span id="vivo-texto">conectando…</span>
+    </div>
+  </header>
+
+  <main>
+    <section id="tela-visao" class="tela">
+      <div class="metricas" id="metricas"></div>
+      <div class="legenda" id="legenda"></div>
+      <div class="secretarias" id="secretarias"></div>
+    </section>
+
+    <section id="tela-detalhe" class="tela" hidden>
+      <div class="detalhe-topo">
+        <a href="#/" class="voltar">&larr; Prefeitura</a>
+        <div class="detalhe-titulo">
+          <div class="detalhe-sec" id="d-secretaria"></div>
+          <h1 id="d-titulo">—</h1>
+        </div>
+        <div class="detalhe-status" id="d-status"></div>
+      </div>
+
+      <div id="d-gate"></div>
+
+      <div class="detalhe-grade">
+        <section class="painel-bloco" aria-labelledby="h-etapas">
+          <h2 id="h-etapas">Etapas</h2>
+          <ol class="linha-tempo" id="d-etapas"></ol>
+        </section>
+
+        <section class="painel-bloco chat-bloco" aria-labelledby="h-chat">
+          <div class="chat-cabecalho">
+            <h2 id="h-chat">Conversa no WhatsApp</h2>
+            <button type="button" class="btn" id="btn-modo" hidden></button>
+          </div>
+          <div class="faixa-humano" id="faixa-humano" hidden></div>
+          <div class="chat" id="d-chat"></div>
+          <form class="compositor" id="compositor" hidden>
+            <textarea id="compositor-texto" rows="2" placeholder="Mensagem para o analista, como implantador…"></textarea>
+            <button type="submit" class="btn btn-primario" id="compositor-enviar">Enviar</button>
+          </form>
+          <div class="aviso-erro" id="chat-erro" hidden></div>
+        </section>
+
+        <div class="coluna-direita">
+          <section class="painel-bloco" aria-labelledby="h-metricas">
+            <h2 id="h-metricas">Números do processo</h2>
+            <dl class="numeros" id="d-numeros"></dl>
+          </section>
+          <section class="painel-bloco" aria-labelledby="h-ficha">
+            <h2 id="h-ficha">Ficha por grupo</h2>
+            <div id="d-ficha"></div>
+          </section>
+          <section class="painel-bloco" aria-labelledby="h-cenarios">
+            <h2 id="h-cenarios">Cenários</h2>
+            <div id="d-cenarios"></div>
+          </section>
+        </div>
+      </div>
+
+      <div class="detalhe-rodape">
+        <section class="painel-bloco" aria-labelledby="h-diff">
+          <h2 id="h-diff">diff.md</h2>
+          <pre class="pre" id="d-diff"></pre>
+        </section>
+        <section class="painel-bloco" aria-labelledby="h-pend" id="bloco-pendencias">
+          <h2 id="h-pend">pendencias.md</h2>
+          <pre class="pre" id="d-pendencias"></pre>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

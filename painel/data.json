@@ -1,0 +1,5700 @@
+{
+  "cidade": "Vale Verde",
+  "cidade_slug": "vale-verde",
+  "gerado_em": "2026-10-24T15:43:24.323Z",
+  "gate_disponivel": false,
+  "etapas": [
+    {
+      "slug": "analisar",
+      "nome": "Analisar template"
+    },
+    {
+      "slug": "coletar",
+      "nome": "Coletar com a prefeitura"
+    },
+    {
+      "slug": "extrair",
+      "nome": "Extrair anexos"
+    },
+    {
+      "slug": "aplicar",
+      "nome": "Aplicar no formulário"
+    },
+    {
+      "slug": "validar",
+      "nome": "Validar cenários"
+    },
+    {
+      "slug": "homologar",
+      "nome": "Homologar"
+    }
+  ],
+  "metricas": {
+    "processos_total": 96,
+    "processos_prontos": 0,
+    "processos_em_andamento": 1,
+    "gates_abertos": 1,
+    "horas_reuniao_evitadas": 1,
+    "perguntas_feitas": 37,
+    "perguntas_respondidas_sem_reuniao": 25,
+    "respondidas_por_mensagem": 20,
+    "respondidas_por_anexo": 5,
+    "pendencias_abertas": 12,
+    "cenarios_rodados": 15,
+    "cenarios_passando": 13,
+    "mensagens": 17,
+    "intervencoes_humanas": 0,
+    "conversas_assumidas": 0,
+    "por_status": {
+      "nao_iniciado": 95,
+      "executando": 0,
+      "aguardando_prefeitura": 0,
+      "aguardando_implantador": 1,
+      "concluido": 0,
+      "parado": 0
+    }
+  },
+  "secretarias": [
+    {
+      "nome": "Planejamento Urbano",
+      "processos": [
+        {
+          "id": "p001",
+          "processo": "Alvará de Construção",
+          "secretaria": "Planejamento Urbano",
+          "complexidade": "complexo",
+          "slug": "alvara",
+          "tem_dados": true,
+          "status": "aguardando_implantador",
+          "etapa_atual": "validar",
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "concluida"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "concluida"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "concluida"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "concluida"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "aguardando"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": {
+            "para": "implantador",
+            "tipo": "aprovacao"
+          },
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 12,
+          "perguntas_feitas": 37,
+          "respondidas": 25,
+          "mensagens": 17,
+          "cenarios": "13/15",
+          "horas_reuniao_evitadas": 1,
+          "atualizado_em": "2026-10-24T10:24:00-03:00"
+        },
+        {
+          "id": "p002",
+          "processo": "Habite-se",
+          "secretaria": "Planejamento Urbano",
+          "complexidade": "complexo",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p003",
+          "processo": "Alvará de Demolição",
+          "secretaria": "Planejamento Urbano",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p004",
+          "processo": "Certidão de Numeração Predial",
+          "secretaria": "Planejamento Urbano",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p005",
+          "processo": "Aprovação de Projeto Arquitetônico",
+          "secretaria": "Planejamento Urbano",
+          "complexidade": "complexo",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p006",
+          "processo": "Consulta Prévia de Viabilidade",
+          "secretaria": "Planejamento Urbano",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p007",
+          "processo": "Desmembramento e Remembramento",
+          "secretaria": "Planejamento Urbano",
+          "complexidade": "complexo",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p008",
+          "processo": "Alvará de Reforma",
+          "secretaria": "Planejamento Urbano",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        }
+      ]
+    },
+    {
+      "nome": "Meio Ambiente",
+      "processos": [
+        {
+          "id": "p009",
+          "processo": "Licença Ambiental Prévia (LAP)",
+          "secretaria": "Meio Ambiente",
+          "complexidade": "complexo",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p010",
+          "processo": "Licença Ambiental de Instalação (LAI)",
+          "secretaria": "Meio Ambiente",
+          "complexidade": "complexo",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p011",
+          "processo": "Licença Ambiental de Operação (LAO)",
+          "secretaria": "Meio Ambiente",
+          "complexidade": "complexo",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p012",
+          "processo": "Autorização de Corte de Árvore",
+          "secretaria": "Meio Ambiente",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p013",
+          "processo": "Dispensa de Licenciamento",
+          "secretaria": "Meio Ambiente",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p014",
+          "processo": "Cadastro Ambiental de Atividade",
+          "secretaria": "Meio Ambiente",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p015",
+          "processo": "Denúncia Ambiental",
+          "secretaria": "Meio Ambiente",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p016",
+          "processo": "Renovação de Licença Ambiental",
+          "secretaria": "Meio Ambiente",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        }
+      ]
+    },
+    {
+      "nome": "Obras e Fiscalização",
+      "processos": [
+        {
+          "id": "p017",
+          "processo": "Vistoria de Obra",
+          "secretaria": "Obras e Fiscalização",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p018",
+          "processo": "Auto de Infração de Obra",
+          "secretaria": "Obras e Fiscalização",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p019",
+          "processo": "Defesa de Auto de Infração",
+          "secretaria": "Obras e Fiscalização",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p020",
+          "processo": "Regularização de Obra",
+          "secretaria": "Obras e Fiscalização",
+          "complexidade": "complexo",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p021",
+          "processo": "Certidão de Conclusão de Obra",
+          "secretaria": "Obras e Fiscalização",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p022",
+          "processo": "Autorização de Tapume e Andaime",
+          "secretaria": "Obras e Fiscalização",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p023",
+          "processo": "Ocupação de Passeio Público",
+          "secretaria": "Obras e Fiscalização",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p024",
+          "processo": "Alvará de Instalação de Elevador",
+          "secretaria": "Obras e Fiscalização",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        }
+      ]
+    },
+    {
+      "nome": "Fazenda",
+      "processos": [
+        {
+          "id": "p025",
+          "processo": "Certidão Negativa de Débitos",
+          "secretaria": "Fazenda",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p026",
+          "processo": "Parcelamento de Dívida Ativa",
+          "secretaria": "Fazenda",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p027",
+          "processo": "Revisão de IPTU",
+          "secretaria": "Fazenda",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p028",
+          "processo": "Isenção de IPTU",
+          "secretaria": "Fazenda",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p029",
+          "processo": "Simulação e Guia de ITBI",
+          "secretaria": "Fazenda",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p030",
+          "processo": "Baixa de Inscrição Municipal",
+          "secretaria": "Fazenda",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p031",
+          "processo": "Restituição de Tributo",
+          "secretaria": "Fazenda",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p032",
+          "processo": "Certidão de Valor Venal",
+          "secretaria": "Fazenda",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        }
+      ]
+    },
+    {
+      "nome": "Desenvolvimento Econômico",
+      "processos": [
+        {
+          "id": "p033",
+          "processo": "Abertura de Empresa (Alvará de Localização)",
+          "secretaria": "Desenvolvimento Econômico",
+          "complexidade": "complexo",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p034",
+          "processo": "Alvará de Funcionamento",
+          "secretaria": "Desenvolvimento Econômico",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p035",
+          "processo": "Renovação de Alvará de Funcionamento",
+          "secretaria": "Desenvolvimento Econômico",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p036",
+          "processo": "Alvará de Evento",
+          "secretaria": "Desenvolvimento Econômico",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p037",
+          "processo": "Autorização de Comércio Ambulante",
+          "secretaria": "Desenvolvimento Econômico",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p038",
+          "processo": "Alvará de Publicidade",
+          "secretaria": "Desenvolvimento Econômico",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p039",
+          "processo": "Licença de Feira Livre",
+          "secretaria": "Desenvolvimento Econômico",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p040",
+          "processo": "Consulta de Viabilidade de Atividade",
+          "secretaria": "Desenvolvimento Econômico",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        }
+      ]
+    },
+    {
+      "nome": "Vigilância Sanitária",
+      "processos": [
+        {
+          "id": "p041",
+          "processo": "Alvará Sanitário",
+          "secretaria": "Vigilância Sanitária",
+          "complexidade": "complexo",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p042",
+          "processo": "Renovação de Alvará Sanitário",
+          "secretaria": "Vigilância Sanitária",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p043",
+          "processo": "Licença para Transporte de Alimentos",
+          "secretaria": "Vigilância Sanitária",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p044",
+          "processo": "Inspeção Sanitária",
+          "secretaria": "Vigilância Sanitária",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p045",
+          "processo": "Cadastro de Estabelecimento de Saúde",
+          "secretaria": "Vigilância Sanitária",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p046",
+          "processo": "Autorização de Evento com Alimentação",
+          "secretaria": "Vigilância Sanitária",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p047",
+          "processo": "Denúncia Sanitária",
+          "secretaria": "Vigilância Sanitária",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p048",
+          "processo": "Dispensa de Alvará Sanitário",
+          "secretaria": "Vigilância Sanitária",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        }
+      ]
+    },
+    {
+      "nome": "Saúde",
+      "processos": [
+        {
+          "id": "p049",
+          "processo": "Solicitação de Medicamento Especial",
+          "secretaria": "Saúde",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p050",
+          "processo": "Tratamento Fora de Domicílio (TFD)",
+          "secretaria": "Saúde",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p051",
+          "processo": "Agendamento de Consulta Especializada",
+          "secretaria": "Saúde",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p052",
+          "processo": "Cartão SUS Municipal",
+          "secretaria": "Saúde",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p053",
+          "processo": "Solicitação de Transporte Sanitário",
+          "secretaria": "Saúde",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p054",
+          "processo": "Reclamação de Atendimento",
+          "secretaria": "Saúde",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p055",
+          "processo": "Vaga em CAPS",
+          "secretaria": "Saúde",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p056",
+          "processo": "Vacinação Domiciliar",
+          "secretaria": "Saúde",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        }
+      ]
+    },
+    {
+      "nome": "Educação",
+      "processos": [
+        {
+          "id": "p057",
+          "processo": "Matrícula na Rede Municipal",
+          "secretaria": "Educação",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p058",
+          "processo": "Transferência Escolar",
+          "secretaria": "Educação",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p059",
+          "processo": "Transporte Escolar",
+          "secretaria": "Educação",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p060",
+          "processo": "Vaga em Creche",
+          "secretaria": "Educação",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p061",
+          "processo": "Declaração de Escolaridade",
+          "secretaria": "Educação",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p062",
+          "processo": "Uniforme e Material Escolar",
+          "secretaria": "Educação",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p063",
+          "processo": "Recurso de Lista de Espera",
+          "secretaria": "Educação",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p064",
+          "processo": "Autorização de Funcionamento de Escola Privada",
+          "secretaria": "Educação",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        }
+      ]
+    },
+    {
+      "nome": "Assistência Social",
+      "processos": [
+        {
+          "id": "p065",
+          "processo": "Cadastro Único",
+          "secretaria": "Assistência Social",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p066",
+          "processo": "Benefício Eventual (Cesta Básica)",
+          "secretaria": "Assistência Social",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p067",
+          "processo": "Auxílio Funeral",
+          "secretaria": "Assistência Social",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p068",
+          "processo": "Carteira do Idoso",
+          "secretaria": "Assistência Social",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p069",
+          "processo": "Passe Livre PCD",
+          "secretaria": "Assistência Social",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p070",
+          "processo": "Inscrição em Programa Habitacional",
+          "secretaria": "Assistência Social",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p071",
+          "processo": "Atendimento CRAS",
+          "secretaria": "Assistência Social",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p072",
+          "processo": "Benefício de Prestação Continuada (encaminhamento)",
+          "secretaria": "Assistência Social",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        }
+      ]
+    },
+    {
+      "nome": "Administração e RH",
+      "processos": [
+        {
+          "id": "p073",
+          "processo": "Solicitação de Férias",
+          "secretaria": "Administração e RH",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p074",
+          "processo": "Licença-Prêmio",
+          "secretaria": "Administração e RH",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p075",
+          "processo": "Averbação de Tempo de Serviço",
+          "secretaria": "Administração e RH",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p076",
+          "processo": "Declaração de Vínculo",
+          "secretaria": "Administração e RH",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p077",
+          "processo": "Progressão Funcional",
+          "secretaria": "Administração e RH",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p078",
+          "processo": "Licença para Tratamento de Saúde",
+          "secretaria": "Administração e RH",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p079",
+          "processo": "Diária de Viagem",
+          "secretaria": "Administração e RH",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p080",
+          "processo": "Desligamento de Servidor",
+          "secretaria": "Administração e RH",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        }
+      ]
+    },
+    {
+      "nome": "Compras e Licitações",
+      "processos": [
+        {
+          "id": "p081",
+          "processo": "Estudo Técnico Preliminar (ETP)",
+          "secretaria": "Compras e Licitações",
+          "complexidade": "complexo",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p082",
+          "processo": "Termo de Referência",
+          "secretaria": "Compras e Licitações",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p083",
+          "processo": "Dispensa de Licitação",
+          "secretaria": "Compras e Licitações",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p084",
+          "processo": "Inexigibilidade",
+          "secretaria": "Compras e Licitações",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p085",
+          "processo": "Pregão Eletrônico",
+          "secretaria": "Compras e Licitações",
+          "complexidade": "complexo",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p086",
+          "processo": "Renovação de Ata de Registro de Preços",
+          "secretaria": "Compras e Licitações",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p087",
+          "processo": "Aditivo Contratual",
+          "secretaria": "Compras e Licitações",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p088",
+          "processo": "Pagamento de Fornecedor",
+          "secretaria": "Compras e Licitações",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        }
+      ]
+    },
+    {
+      "nome": "Ouvidoria e Protocolo",
+      "processos": [
+        {
+          "id": "p089",
+          "processo": "Manifestação de Ouvidoria",
+          "secretaria": "Ouvidoria e Protocolo",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p090",
+          "processo": "Pedido de Acesso à Informação (LAI)",
+          "secretaria": "Ouvidoria e Protocolo",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p091",
+          "processo": "Protocolo Geral",
+          "secretaria": "Ouvidoria e Protocolo",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p092",
+          "processo": "Comunicação Oficial Interna (Ofício)",
+          "secretaria": "Ouvidoria e Protocolo",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p093",
+          "processo": "Memorando",
+          "secretaria": "Ouvidoria e Protocolo",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p094",
+          "processo": "Certidão de Tramitação",
+          "secretaria": "Ouvidoria e Protocolo",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p095",
+          "processo": "Desarquivamento de Processo",
+          "secretaria": "Ouvidoria e Protocolo",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        },
+        {
+          "id": "p096",
+          "processo": "Denúncia Anônima",
+          "secretaria": "Ouvidoria e Protocolo",
+          "complexidade": "simples",
+          "slug": null,
+          "tem_dados": false,
+          "status": "nao_iniciado",
+          "etapa_atual": null,
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "pendente"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar com a prefeitura",
+              "status": "pendente"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Extrair anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Aplicar no formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 0,
+          "perguntas_feitas": 0,
+          "respondidas": 0,
+          "mensagens": 0,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": null
+        }
+      ]
+    }
+  ],
+  "detalhes": {
+    "vale-verde/alvara": {
+      "cidade": "vale-verde",
+      "slug": "alvara",
+      "gerado_em": "2026-10-24T15:43:24.325Z",
+      "gate_disponivel": false,
+      "processo": {
+        "id": "p001",
+        "processo": "Alvará de Construção",
+        "secretaria": "Planejamento Urbano",
+        "complexidade": "complexo",
+        "slug": "alvara",
+        "tem_dados": true,
+        "status": "aguardando_implantador",
+        "etapa_atual": "validar",
+        "etapas": [
+          {
+            "slug": "analisar",
+            "nome": "Analisar template",
+            "status": "concluida"
+          },
+          {
+            "slug": "coletar",
+            "nome": "Coletar com a prefeitura",
+            "status": "concluida"
+          },
+          {
+            "slug": "extrair",
+            "nome": "Extrair anexos",
+            "status": "concluida"
+          },
+          {
+            "slug": "aplicar",
+            "nome": "Aplicar no formulário",
+            "status": "concluida"
+          },
+          {
+            "slug": "validar",
+            "nome": "Validar cenários",
+            "status": "aguardando"
+          },
+          {
+            "slug": "homologar",
+            "nome": "Homologar",
+            "status": "pendente"
+          }
+        ],
+        "gate": {
+          "para": "implantador",
+          "tipo": "aprovacao"
+        },
+        "modo": "agente",
+        "pronto": false,
+        "pendencias": 12,
+        "perguntas_feitas": 37,
+        "respondidas": 25,
+        "mensagens": 17,
+        "cenarios": "13/15",
+        "horas_reuniao_evitadas": 1,
+        "atualizado_em": "2026-10-24T10:24:00-03:00"
+      },
+      "run": {
+        "processo": "alvara",
+        "cidade": "vale-verde",
+        "titulo": "Alvará de Construção",
+        "iniciado_em": "2026-10-24T09:30:00-03:00",
+        "atualizado_em": "2026-10-24T10:24:00-03:00",
+        "etapa_atual": "validar",
+        "status": "aguardando_implantador",
+        "etapas": [
+          {
+            "slug": "analisar",
+            "nome": "Analisar template",
+            "tipo": "codigo",
+            "status": "concluida",
+            "iniciada_em": "2026-10-24T09:30:00-03:00",
+            "concluida_em": "2026-10-24T09:31:00-03:00",
+            "tentativas": 1,
+            "criterios": [
+              {
+                "nome": "template lido sem erro",
+                "resultado": "passou",
+                "detalhe": "11 etapas, 134 campos, 160 expressões",
+                "avaliado_em": "2026-10-24T09:31:00-03:00"
+              },
+              {
+                "nome": "pontos de parametrização encontrados",
+                "resultado": "passou",
+                "detalhe": "37 perguntas em 11 grupos",
+                "avaliado_em": "2026-10-24T09:31:00-03:00"
+              },
+              {
+                "nome": "resíduos de outra cidade apontados",
+                "resultado": "passou",
+                "detalhe": "'Cascavel' em 2 expressões de validação",
+                "avaliado_em": "2026-10-24T09:31:00-03:00"
+              }
+            ],
+            "entrada_resumo": "fixtures/templates/alvara-construcao.modeload.json",
+            "saida_resumo": "ficha.json com 37 perguntas"
+          },
+          {
+            "slug": "coletar",
+            "nome": "Coletar com a prefeitura",
+            "tipo": "agente",
+            "status": "concluida",
+            "iniciada_em": "2026-10-24T09:38:00-03:00",
+            "concluida_em": "2026-10-24T10:12:00-03:00",
+            "tentativas": 1,
+            "criterios": [
+              {
+                "nome": "nenhuma pergunta bloqueante em aberto",
+                "resultado": "passou",
+                "detalhe": "0 de 14 bloqueantes em aberto",
+                "avaliado_em": "2026-10-24T10:12:00-03:00"
+              },
+              {
+                "nome": "toda resposta com origem e confiança",
+                "resultado": "passou",
+                "detalhe": "25 respostas, todas com origem",
+                "avaliado_em": "2026-10-24T10:12:00-03:00"
+              },
+              {
+                "nome": "pendências explícitas registradas",
+                "resultado": "passou",
+                "detalhe": "12 pendências (ex.: taxa com a Fazenda)",
+                "avaliado_em": "2026-10-24T10:12:00-03:00"
+              }
+            ],
+            "entrada_resumo": "37 perguntas",
+            "saida_resumo": "25 respondidas, 12 pendências"
+          },
+          {
+            "slug": "extrair",
+            "nome": "Extrair anexos",
+            "tipo": "agente",
+            "status": "concluida",
+            "iniciada_em": "2026-10-24T09:57:00-03:00",
+            "concluida_em": "2026-10-24T09:58:00-03:00",
+            "tentativas": 1,
+            "criterios": [
+              {
+                "nome": "confiança mínima 0,8",
+                "resultado": "passou",
+                "detalhe": "foto da Lei 1.204/2019: 0,95",
+                "avaliado_em": "2026-10-24T09:58:00-03:00"
+              },
+              {
+                "nome": "analista confirmou a leitura",
+                "resultado": "passou",
+                "detalhe": "\"isso, ZR2 é 4 m\"",
+                "avaliado_em": "2026-10-24T09:59:00-03:00"
+              }
+            ],
+            "entrada_resumo": "1 foto (tabela de zoneamento)",
+            "saida_resumo": "4 zonas × 8 parâmetros"
+          },
+          {
+            "slug": "aplicar",
+            "nome": "Aplicar no formulário",
+            "tipo": "codigo",
+            "status": "concluida",
+            "iniciada_em": "2026-10-24T10:13:00-03:00",
+            "concluida_em": "2026-10-24T10:13:00-03:00",
+            "tentativas": 1,
+            "criterios": [
+              {
+                "nome": "formulário gerado",
+                "resultado": "passou",
+                "detalhe": "form.json, 21 mudanças",
+                "avaliado_em": "2026-10-24T10:13:00-03:00"
+              },
+              {
+                "nome": "nenhum placeholder modeload restante",
+                "resultado": "passou",
+                "detalhe": "0 ocorrências",
+                "avaliado_em": "2026-10-24T10:13:00-03:00"
+              },
+              {
+                "nome": "diff com origem de cada mudança",
+                "resultado": "passou",
+                "detalhe": "diff.md, 14 linhas com origem",
+                "avaliado_em": "2026-10-24T10:13:00-03:00"
+              }
+            ],
+            "entrada_resumo": "ficha fechada",
+            "saida_resumo": "form.json + diff.md"
+          },
+          {
+            "slug": "validar",
+            "nome": "Validar cenários",
+            "tipo": "agente",
+            "status": "aguardando",
+            "iniciada_em": "2026-10-24T10:14:00-03:00",
+            "concluida_em": null,
+            "tentativas": 2,
+            "criterios": [
+              {
+                "nome": "cenários escritos com campos existentes",
+                "resultado": "passou",
+                "detalhe": "15 cenários, 0 campos inventados",
+                "avaliado_em": "2026-10-24T10:15:00-03:00"
+              },
+              {
+                "nome": "todos os cenários passando",
+                "resultado": "falhou",
+                "detalhe": "13/15: c13 e c14 (taxa de ocupação)",
+                "avaliado_em": "2026-10-24T10:22:00-03:00"
+              },
+              {
+                "nome": "regra de negócio confirmada pelo analista",
+                "resultado": "aguardando",
+                "detalhe": "aguardando o implantador decidir a correção",
+                "avaliado_em": null
+              }
+            ],
+            "entrada_resumo": "form.json + 15 cenários",
+            "saida_resumo": "relatorio.json: 13/15"
+          },
+          {
+            "slug": "homologar",
+            "nome": "Homologar",
+            "tipo": "codigo",
+            "status": "pendente",
+            "iniciada_em": null,
+            "concluida_em": null,
+            "tentativas": 0,
+            "criterios": [
+              {
+                "nome": "implantador aprovou o diff",
+                "resultado": "nao_avaliado",
+                "detalhe": "",
+                "avaliado_em": null
+              },
+              {
+                "nome": "pendências encaminhadas",
+                "resultado": "nao_avaliado",
+                "detalhe": "",
+                "avaliado_em": null
+              }
+            ],
+            "entrada_resumo": "",
+            "saida_resumo": ""
+          }
+        ],
+        "gate": {
+          "para": "implantador",
+          "tipo": "aprovacao",
+          "instrucao": "Dois cenários de taxa de ocupação falharam. O agente propõe usar TO máx. 80% na ZC1 e 60% na ZR2, conforme a foto da Lei 1.204/2019. Aprove para reaplicar e rodar os cenários de novo.",
+          "resumo": "c13 e c14 falharam: o formulário calculou a TO com o limite padrão do template (50%).",
+          "acoes": [
+            "aprovar",
+            "ajustar",
+            "rejeitar"
+          ],
+          "aberto_em": "2026-10-24T10:22:00-03:00",
+          "contexto": {
+            "cenarios": [
+              "c13-taxa-ocupacao",
+              "c14-taxa-ocupacao-estourada"
+            ]
+          }
+        },
+        "metricas": {
+          "mensagens_enviadas": 9,
+          "mensagens_recebidas": 8,
+          "perguntas_feitas": 37,
+          "respondidas_por_mensagem": 20,
+          "respondidas_por_anexo": 5,
+          "pendencias_abertas": 12,
+          "cenarios_rodados": 15,
+          "cenarios_passando": 13,
+          "horas_reuniao_evitadas": 1
+        }
+      },
+      "estado": {
+        "etapa": "validando",
+        "mensagens_enviadas": 9,
+        "perguntas_feitas": 37,
+        "atualizado_em": "2026-10-24T10:22:00-03:00"
+      },
+      "modo": "agente",
+      "assumida_em": null,
+      "intervencoes": [],
+      "outbox_pendente": [],
+      "conversa": [
+        {
+          "role": "user",
+          "content": "oi",
+          "em": "2026-10-24T09:38:00-03:00",
+          "registros": []
+        },
+        {
+          "role": "assistant",
+          "content": "Oi, Marcos! Sou o assistente da Aprova para montar o Alvará de Construção de Vale Verde. Vou perguntar só o que muda na sua cidade.\n1. Qual setor recebe o pedido e quem assina o alvará?\n2. Quais tipos de logradouro vocês usam no cadastro?\n3. Quem pode pedir: só o proprietário, ou também o responsável técnico e procurador?",
+          "em": "2026-10-24T09:38:00-03:00",
+          "registros": []
+        },
+        {
+          "role": "user",
+          "content": "o setor é a SEPLAN, divisão de aprovação de projetos. quem assina é o secretário",
+          "em": "2026-10-24T09:41:00-03:00",
+          "registros": []
+        },
+        {
+          "role": "assistant",
+          "content": "Anotado: SEPLAN, Divisão de Aprovação de Projetos; assina o secretário. E os tipos de logradouro (rua, avenida, travessa...)?",
+          "em": "2026-10-24T09:41:00-03:00",
+          "registros": [
+            {
+              "em": "2026-10-24T09:41:00-03:00",
+              "pergunta_id": "setor-01",
+              "confianca": 1,
+              "origem": "WhatsApp, Marcos (SEPLAN), 24/10 09:41",
+              "resumo": "Setor: SEPLAN, Divisão de Aprovação de Projetos"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "rua, avenida, travessa e estrada. e pode pedir proprietario, RT ou procurador",
+          "em": "2026-10-24T09:50:00-03:00",
+          "registros": []
+        },
+        {
+          "role": "assistant",
+          "content": "Perfeito. Agora o zoneamento: vocês têm a tabela de parâmetros por zona (recuo, taxa de ocupação)? Se tiver, pode mandar foto ou PDF.",
+          "em": "2026-10-24T09:53:00-03:00",
+          "registros": [
+            {
+              "em": "2026-10-24T09:50:00-03:00",
+              "pergunta_id": "opcoes-07",
+              "confianca": 1,
+              "origem": "WhatsApp, Marcos, 24/10 09:50",
+              "resumo": "Logradouro: Rua, Avenida, Travessa, Estrada, Outros"
+            },
+            {
+              "em": "2026-10-24T09:52:00-03:00",
+              "pergunta_id": "opcoes-09",
+              "confianca": 1,
+              "origem": "WhatsApp, Marcos, 24/10 09:52",
+              "resumo": "Requerente: proprietário, RT ou procurador"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "[foto] tabela da lei 1.204",
+          "em": "2026-10-24T09:57:00-03:00",
+          "registros": []
+        },
+        {
+          "role": "assistant",
+          "content": "Li ZR1, ZR2, ZC1 e ZI. Na ZR2 o recuo frontal é 4 m, confere?",
+          "em": "2026-10-24T09:58:00-03:00",
+          "registros": [
+            {
+              "em": "2026-10-24T09:58:00-03:00",
+              "pergunta_id": "dataset-24",
+              "confianca": 0.95,
+              "origem": "Anexo: foto da tabela anexa à Lei 1.204/2019, p. 2",
+              "resumo": "Zoneamento: ZR1, ZR2, ZC1, ZI (8 parâmetros)"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "isso, ZR2 é 4 m",
+          "em": "2026-10-24T09:59:00-03:00",
+          "registros": []
+        },
+        {
+          "role": "assistant",
+          "content": "Obrigado. Sobre documentos: ART e registro do imóvel são sempre obrigatórios? O projeto em DWG continua sendo pedido?",
+          "em": "2026-10-24T10:03:00-03:00",
+          "registros": [
+            {
+              "em": "2026-10-24T10:03:00-03:00",
+              "pergunta_id": "documento-14",
+              "confianca": 1,
+              "origem": "WhatsApp, Marcos, 24/10 10:03",
+              "resumo": "ART sempre obrigatória"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "ART e matrícula sempre. DWG não precisa mais. a taxa eu não sei, isso é com a Fazenda",
+          "em": "2026-10-24T10:06:00-03:00",
+          "registros": []
+        },
+        {
+          "role": "assistant",
+          "content": "Sem problema, deixei a taxa como pendência para a Fazenda. Última: o despacho de fiscalização in loco ainda existe?",
+          "em": "2026-10-24T10:06:00-03:00",
+          "registros": [
+            {
+              "em": "2026-10-24T10:06:00-03:00",
+              "pergunta_id": "documento-16",
+              "confianca": 1,
+              "origem": "WhatsApp, Marcos, 24/10 10:06",
+              "resumo": "DWG removido do pedido"
+            },
+            {
+              "em": "2026-10-24T10:06:00-03:00",
+              "pergunta_id": "taxa-34",
+              "confianca": 0,
+              "origem": "WhatsApp, Marcos, 24/10 10:06",
+              "resumo": "Pendência: taxa com a Secretaria de Fazenda"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "não existe mais. e o parecer agora se chama Parecer Técnico de Aprovação",
+          "em": "2026-10-24T10:10:00-03:00",
+          "registros": []
+        },
+        {
+          "role": "assistant",
+          "content": "Fechado! Resumo: setor SEPLAN, 4 zonas da Lei 1.204, ART e matrícula obrigatórias, DWG removido, taxa pendente com a Fazenda. O implantador vai montar o formulário e eu volto se algum cenário precisar de confirmação.",
+          "em": "2026-10-24T10:12:00-03:00",
+          "registros": [
+            {
+              "em": "2026-10-24T10:10:00-03:00",
+              "pergunta_id": "tramite-28",
+              "confianca": 1,
+              "origem": "WhatsApp, Marcos, 24/10 10:10",
+              "resumo": "Despacho de fiscalização in loco removido"
+            },
+            {
+              "em": "2026-10-24T10:11:00-03:00",
+              "pergunta_id": "tramite-29",
+              "confianca": 1,
+              "origem": "WhatsApp, Marcos, 24/10 10:11",
+              "resumo": "Parecer renomeado: Parecer Técnico de Aprovação"
+            }
+          ]
+        }
+      ],
+      "registros_sem_turno": [],
+      "ficha_progresso": [],
+      "ficha": null,
+      "relatorio": [
+        {
+          "id": "c01-nova-solicitacao",
+          "descricao": "Pedido novo: os campos de retificação não aparecem",
+          "passou": true,
+          "falhas": [],
+          "indeterminados": []
+        },
+        {
+          "id": "c02-retificacao-fisico",
+          "descricao": "Retificação de alvará aprovado no papel: pede número e alvará antigo",
+          "passou": true,
+          "falhas": [],
+          "indeterminados": []
+        },
+        {
+          "id": "c03-retificacao-aprova",
+          "descricao": "Retificação de alvará já emitido pela Aprova: pede o número do processo e ele é obrigatório",
+          "passou": true,
+          "falhas": [],
+          "indeterminados": []
+        },
+        {
+          "id": "c04-procurador",
+          "descricao": "Requerente é procurador: procuração aparece",
+          "passou": true,
+          "falhas": [],
+          "indeterminados": []
+        },
+        {
+          "id": "c05-proprietario-sem-procuracao",
+          "descricao": "Requerente é o próprio proprietário: procuração não aparece",
+          "passou": true,
+          "falhas": [],
+          "indeterminados": []
+        },
+        {
+          "id": "c06-proprietario-pj",
+          "descricao": "Responsável pelo imóvel é empresa: exige contrato social, não exige RG/CPF",
+          "passou": true,
+          "falhas": [],
+          "indeterminados": []
+        },
+        {
+          "id": "c07-proprietario-pf",
+          "descricao": "Responsável pelo imóvel é pessoa física: exige RG/CPF, não exige contrato social",
+          "passou": true,
+          "falhas": [],
+          "indeterminados": []
+        },
+        {
+          "id": "c08-rt-sem-projeto",
+          "descricao": "Só há responsável pela execução: avisa que falta responsável pelo projeto",
+          "passou": true,
+          "falhas": [],
+          "indeterminados": []
+        },
+        {
+          "id": "c09-area-final",
+          "descricao": "Ampliação: área final = existente + construir + regularizar + ampliar − demolir",
+          "passou": true,
+          "falhas": [],
+          "indeterminados": []
+        },
+        {
+          "id": "c10-construcao-nova-e-reforma",
+          "descricao": "Construção nova junto com reforma na mesma edificação: sistema deve avisar que não pode",
+          "passou": true,
+          "falhas": [],
+          "indeterminados": []
+        },
+        {
+          "id": "c11-recuo-abaixo-do-minimo",
+          "descricao": "Zona ZR2 exige recuo frontal de 4 m; projeto com 3 m deve receber aviso",
+          "passou": true,
+          "falhas": [],
+          "indeterminados": []
+        },
+        {
+          "id": "c12-recuo-no-minimo",
+          "descricao": "Zona ZR2, recuo frontal exatamente 4 m: sem aviso",
+          "passou": true,
+          "falhas": [],
+          "indeterminados": []
+        },
+        {
+          "id": "c13-taxa-ocupacao",
+          "descricao": "Projeção de 70 m² em terreno de 100 m² na ZC1 (TO máx. 80%): calcula 70% e não avisa",
+          "passou": false,
+          "falhas": [
+            {
+              "campo": "aviso_taxa_ocupacao",
+              "esperado": {
+                "visivel": false
+              },
+              "obtido": {
+                "visivel": true
+              }
+            }
+          ],
+          "indeterminados": []
+        },
+        {
+          "id": "c14-taxa-ocupacao-estourada",
+          "descricao": "Projeção de 70 m² em terreno de 100 m² na ZR2 (TO máx. 60%): avisa",
+          "passou": false,
+          "falhas": [
+            {
+              "campo": "aviso_taxa_ocupacao",
+              "esperado": {
+                "visivel": true
+              },
+              "obtido": {
+                "visivel": false
+              }
+            }
+          ],
+          "indeterminados": []
+        },
+        {
+          "id": "c15-obra-na-propria-cidade",
+          "descricao": "Obra em Vale Verde/RS: o formulário não pode acusar cidade errada",
+          "passou": true,
+          "falhas": [],
+          "indeterminados": []
+        }
+      ],
+      "metricas": {
+        "mensagens_enviadas": 9,
+        "mensagens_recebidas": 8,
+        "perguntas_feitas": 37,
+        "respondidas_por_mensagem": 20,
+        "respondidas_por_anexo": 5,
+        "pendencias_abertas": 12,
+        "cenarios_rodados": 15,
+        "cenarios_passando": 13,
+        "horas_reuniao_evitadas": 1,
+        "intervencoes_humanas": 0
+      },
+      "diff": "# Diff de parametrização: Alvará de Construção (Vale Verde)\n\n## O que mudou\n\n- **placeholders modeload**: {\"type\":\"predefined\",\"possibleReceivers\":[\"planejamento_modeload\"]} → {\"type\":\"predefined\",\"possibleReceivers\":[\"planejamento_vale_verde\"]}  _(WhatsApp, Marcos (SEPLAN), 24/10 09:41, confiança 1)_\n- **vinculo_requerente.options**: `[\"Proprietário do imóvel\",\"Responsável Técnico\",\"Procurador\"]` → `[\"Proprietário do imóvel\",\"Responsável Técnico\",\"Procurador\"]`  _(WhatsApp, Marcos, 24/10 09:53, confiança 1)_\n- **responsavel_tecnico[].documento_art**: `{\"required\":true}` → sempre obrigatório  _(WhatsApp, Marcos, 24/10 10:03, confiança 1)_\n- **doc_registroimovel**: `{\"required\":true}` → sempre obrigatório  _(WhatsApp, Marcos, 24/10 10:03, confiança 1)_\n- **proj-arq**: `{\"required\":true}` → sempre obrigatório  _(WhatsApp, Marcos, 24/10 10:06, confiança 1)_\n- **proj-dwg**: `{\"required\":false}` → removido do pedido  _(WhatsApp, Marcos, 24/10 10:02, confiança 1)_\n- **tipo_logradouro.options**: `[\"Avenida\",\"Rua\",\"Outros\"]` → `[\"Rua\",\"Avenida\",\"Travessa\",\"Estrada\",\"Outros\"]`  _(WhatsApp, Marcos, 24/10 09:50, confiança 1)_\n- **zoneamento_repeat[].zoneamento.options**: `[\"Z1\",\"Z2\",\"Z3\",\"Z4\"]` → `[\"ZR1\",\"ZR2\",\"ZC1\",\"ZI\"]`  _(Anexo: foto da tabela anexa à Lei 1.204/2019, p. 2, confiança 0.95)_\n- **quadro_areas[].material_construtivo.options**: `[\"Alvenaria\",\"Madeira\",\"Mista\"]` → `[\"Alvenaria\",\"Madeira\",\"Mista\",\"Estrutura metálica\"]`  _(WhatsApp, Marcos, 24/10 09:52, confiança 1)_\n- **zoneamento_dataset.options**: `[\"Z1\",\"Z2\",\"Z3\",\"Z4\"]` → `[\"ZR1\",\"ZR2\",\"ZC1\",\"ZI\"]`  _(Anexo: foto da tabela anexa à Lei 1.204/2019, p. 2, confiança 0.95)_\n- **config.datasets.zoneamento_dataset**: — → 4 zonas  _(Anexo: foto da tabela anexa à Lei 1.204/2019, p. 2 (extrator, 4 zonas × 8 parâmetros), confiança 0.9)_\n- **config.form_tramites[despacho_inicial]**: Fiscalização in loco offline → removido  _(WhatsApp, Marcos, 24/10 10:10, confiança 1)_\n- **config.form_tramites[parecer_card].nome**: Parecer Edilício → Parecer Técnico de Aprovação  _(WhatsApp, Marcos, 24/10 10:11, confiança 1)_\n- **literal 'Cascavel'**: Cascavel → Vale Verde (2 ocorrências)  _(Implantador (resíduo apontado pelo analisador), confiança 1)_\n\n## O que ficou do template\n\n- alvaraAntigo\n- documento_requerente\n- doc_procurador\n- proprietario[].documento_proprietario\n- proprietario[].contratosocial_pessoajuridica\n- proj-comp\n- docextra[].anexdocextra\n\n## Atenção do implantador\n\n- [ ] opcoes-04 (opcoes): Para \"Tipo da solicitação\", o template prevê: Nova solicitação, Retificação. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.\n- [ ] opcoes-05 (opcoes): Para \"Tipo do Alvará a ser retificado\", o template prevê: Aprovado no modo físico, Aprovado pela Aprova. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.\n- [ ] opcoes-20 (opcoes): Para \"Tipo da solicitação para esta edificação\", o template prevê: Construção nova, Ampliação, Regularização, Reforma, Demolição. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.\n- [ ] opcoes-10 (opcoes): Para \"Tipo de vínculo:\", o template prevê: Proprietário, Possuidor, Condomínio, Espólio, Massa Falida. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.\n- [ ] opcoes-13 (opcoes): Para \"Responsabilidade\", o template prevê: Projeto, Execução. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.\n- [ ] opcoes-18 (opcoes): Para \"Tipo de uso\", o template prevê: Residencial unifamiliar, Residencial multifamiliar, Comercial salas e lojas, Edifício de garagens, Galpão industrial, Casa popular, Conjunto habitacional popular. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.\n- [ ] opcoes-19 (opcoes): Para \"Tipo de uso complementar\", o template prevê: Quadra esportiva e poliesportiva, Estacionamento térreo, Piscina, Área complementar de posto de gasolina. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.\n- [ ] opcoes-23 (opcoes): Para \"Atividades\", o template prevê: 1 - Residência Unifamiliar, 2 - Residência Multifamiliar, 3 - Comércio e Serviços, 4 - Condomínios Horizontais, 5 - Empreendimentos de Hotelaria e Turísticos. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar. — aguardando planilha de atividades do uso do solo (prometida para segunda)\n- [ ] taxa-34 (taxa): Existe taxa de aprovação para Alvará de Construção? Como é calculada e quem emite? — Marcos não sabe o valor; perguntar à Secretaria de Fazenda\n- [ ] texto-03 (texto): O template usa este texto de declaração: \"Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anex…\". Mantém ou a prefeitura tem o texto próprio?\n- [ ] saida-35 (saida): O processo emite: Alvará, Peça gráfica, Peça gráfica complementar. A prefeitura tem modelo próprio? Há prazo de validade e numeração própria?\n- [ ] residuo-37 (residuo): O template contém o literal \"Não permitido\" em regra de validação. Parece resíduo de outra cidade: trocar pelo nome correto.",
+      "pendencias": null
+    }
+  }
+}

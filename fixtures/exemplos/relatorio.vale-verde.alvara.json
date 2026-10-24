@@ -1,0 +1,127 @@
+[
+  {
+    "id": "c01-nova-solicitacao",
+    "descricao": "Pedido novo: os campos de retificação não aparecem",
+    "passou": true,
+    "falhas": [],
+    "indeterminados": []
+  },
+  {
+    "id": "c02-retificacao-fisico",
+    "descricao": "Retificação de alvará aprovado no papel: pede número e alvará antigo",
+    "passou": true,
+    "falhas": [],
+    "indeterminados": []
+  },
+  {
+    "id": "c03-retificacao-aprova",
+    "descricao": "Retificação de alvará já emitido pela Aprova: pede o número do processo e ele é obrigatório",
+    "passou": true,
+    "falhas": [],
+    "indeterminados": []
+  },
+  {
+    "id": "c04-procurador",
+    "descricao": "Requerente é procurador: procuração aparece",
+    "passou": true,
+    "falhas": [],
+    "indeterminados": []
+  },
+  {
+    "id": "c05-proprietario-sem-procuracao",
+    "descricao": "Requerente é o próprio proprietário: procuração não aparece",
+    "passou": true,
+    "falhas": [],
+    "indeterminados": []
+  },
+  {
+    "id": "c06-proprietario-pj",
+    "descricao": "Responsável pelo imóvel é empresa: exige contrato social, não exige RG/CPF",
+    "passou": true,
+    "falhas": [],
+    "indeterminados": []
+  },
+  {
+    "id": "c07-proprietario-pf",
+    "descricao": "Responsável pelo imóvel é pessoa física: exige RG/CPF, não exige contrato social",
+    "passou": true,
+    "falhas": [],
+    "indeterminados": []
+  },
+  {
+    "id": "c08-rt-sem-projeto",
+    "descricao": "Só há responsável pela execução: avisa que falta responsável pelo projeto",
+    "passou": true,
+    "falhas": [],
+    "indeterminados": []
+  },
+  {
+    "id": "c09-area-final",
+    "descricao": "Ampliação: área final = existente + construir + regularizar + ampliar − demolir",
+    "passou": true,
+    "falhas": [],
+    "indeterminados": []
+  },
+  {
+    "id": "c10-construcao-nova-e-reforma",
+    "descricao": "Construção nova junto com reforma na mesma edificação: sistema deve avisar que não pode",
+    "passou": true,
+    "falhas": [],
+    "indeterminados": []
+  },
+  {
+    "id": "c11-recuo-abaixo-do-minimo",
+    "descricao": "Zona ZR2 exige recuo frontal de 4 m; projeto com 3 m deve receber aviso",
+    "passou": true,
+    "falhas": [],
+    "indeterminados": []
+  },
+  {
+    "id": "c12-recuo-no-minimo",
+    "descricao": "Zona ZR2, recuo frontal exatamente 4 m: sem aviso",
+    "passou": true,
+    "falhas": [],
+    "indeterminados": []
+  },
+  {
+    "id": "c13-taxa-ocupacao",
+    "descricao": "Projeção de 70 m² em terreno de 100 m² na ZC1 (TO máx. 80%): calcula 70% e não avisa",
+    "passou": false,
+    "falhas": [
+      {
+        "campo": "aviso_taxa_ocupacao",
+        "esperado": {
+          "visivel": false
+        },
+        "obtido": {
+          "visivel": true
+        }
+      }
+    ],
+    "indeterminados": []
+  },
+  {
+    "id": "c14-taxa-ocupacao-estourada",
+    "descricao": "Projeção de 70 m² em terreno de 100 m² na ZR2 (TO máx. 60%): avisa",
+    "passou": false,
+    "falhas": [
+      {
+        "campo": "aviso_taxa_ocupacao",
+        "esperado": {
+          "visivel": true
+        },
+        "obtido": {
+          "visivel": false
+        }
+      }
+    ],
+    "indeterminados": []
+  },
+  {
+    "id": "c15-obra-na-propria-cidade",
+    "descricao": "Obra em Vale Verde/RS: o formulário não pode acusar cidade errada",
+    "passou": true,
+    "falhas": [],
+    "indeterminados": []
+  }
+]

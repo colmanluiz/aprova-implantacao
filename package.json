@@ -11,8 +11,13 @@
     "chat": "node --env-file-if-exists=.env --import tsx src/channel/mock-chat.ts",
     "telegram": "node --env-file-if-exists=.env --import tsx src/channel/telegram.ts",
     "agent": "node --env-file-if-exists=.env --import tsx",
-    "test": "tsx --test src/core/*.test.ts",
-    "typecheck": "tsc --noEmit"
+    "test": "tsx --test \"src/**/*.test.ts\"",
+    "painel": "node --env-file-if-exists=.env --import tsx src/painel/server.ts",
+    "painel:data": "tsx scripts/painel-data.ts",
+    "typecheck": "tsc --noEmit",
+    "docs": "tsx scripts/gerar-pipeline-md.ts",
+    "gate": "node --env-file-if-exists=.env --import tsx scripts/gate.ts",
+    "pipeline:offline": "tsx scripts/rodar-pipeline-offline.ts --sem-llm"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.110.0",

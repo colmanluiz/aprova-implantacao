@@ -1,0 +1,143 @@
+{
+  "etapa": "validando",
+  "mensagens_enviadas": 9,
+  "perguntas_feitas": 37,
+  "atualizado_em": "2026-10-24T10:22:00-03:00",
+  "historico": [
+    {
+      "role": "user",
+      "content": "oi",
+      "em": "2026-10-24T09:38:00-03:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Oi, Marcos! Sou o assistente da Aprova para montar o Alvará de Construção de Vale Verde. Vou perguntar só o que muda na sua cidade.\n1. Qual setor recebe o pedido e quem assina o alvará?\n2. Quais tipos de logradouro vocês usam no cadastro?\n3. Quem pode pedir: só o proprietário, ou também o responsável técnico e procurador?",
+      "em": "2026-10-24T09:38:00-03:00"
+    },
+    {
+      "role": "user",
+      "content": "o setor é a SEPLAN, divisão de aprovação de projetos. quem assina é o secretário",
+      "em": "2026-10-24T09:41:00-03:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Anotado: SEPLAN, Divisão de Aprovação de Projetos; assina o secretário. E os tipos de logradouro (rua, avenida, travessa...)?",
+      "em": "2026-10-24T09:41:00-03:00"
+    },
+    {
+      "role": "user",
+      "content": "rua, avenida, travessa e estrada. e pode pedir proprietario, RT ou procurador",
+      "em": "2026-10-24T09:50:00-03:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Perfeito. Agora o zoneamento: vocês têm a tabela de parâmetros por zona (recuo, taxa de ocupação)? Se tiver, pode mandar foto ou PDF.",
+      "em": "2026-10-24T09:53:00-03:00"
+    },
+    {
+      "role": "user",
+      "content": "[foto] tabela da lei 1.204",
+      "em": "2026-10-24T09:57:00-03:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Li ZR1, ZR2, ZC1 e ZI. Na ZR2 o recuo frontal é 4 m, confere?",
+      "em": "2026-10-24T09:58:00-03:00"
+    },
+    {
+      "role": "user",
+      "content": "isso, ZR2 é 4 m",
+      "em": "2026-10-24T09:59:00-03:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Obrigado. Sobre documentos: ART e registro do imóvel são sempre obrigatórios? O projeto em DWG continua sendo pedido?",
+      "em": "2026-10-24T10:03:00-03:00"
+    },
+    {
+      "role": "user",
+      "content": "ART e matrícula sempre. DWG não precisa mais. a taxa eu não sei, isso é com a Fazenda",
+      "em": "2026-10-24T10:06:00-03:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Sem problema, deixei a taxa como pendência para a Fazenda. Última: o despacho de fiscalização in loco ainda existe?",
+      "em": "2026-10-24T10:06:00-03:00"
+    },
+    {
+      "role": "user",
+      "content": "não existe mais. e o parecer agora se chama Parecer Técnico de Aprovação",
+      "em": "2026-10-24T10:10:00-03:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Fechado! Resumo: setor SEPLAN, 4 zonas da Lei 1.204, ART e matrícula obrigatórias, DWG removido, taxa pendente com a Fazenda. O implantador vai montar o formulário e eu volto se algum cenário precisar de confirmação.",
+      "em": "2026-10-24T10:12:00-03:00"
+    }
+  ],
+  "registros": [
+    {
+      "em": "2026-10-24T09:41:00-03:00",
+      "pergunta_id": "setor-01",
+      "confianca": 1,
+      "origem": "WhatsApp, Marcos (SEPLAN), 24/10 09:41",
+      "resumo": "Setor: SEPLAN, Divisão de Aprovação de Projetos"
+    },
+    {
+      "em": "2026-10-24T09:50:00-03:00",
+      "pergunta_id": "opcoes-07",
+      "confianca": 1,
+      "origem": "WhatsApp, Marcos, 24/10 09:50",
+      "resumo": "Logradouro: Rua, Avenida, Travessa, Estrada, Outros"
+    },
+    {
+      "em": "2026-10-24T09:52:00-03:00",
+      "pergunta_id": "opcoes-09",
+      "confianca": 1,
+      "origem": "WhatsApp, Marcos, 24/10 09:52",
+      "resumo": "Requerente: proprietário, RT ou procurador"
+    },
+    {
+      "em": "2026-10-24T09:58:00-03:00",
+      "pergunta_id": "dataset-24",
+      "confianca": 0.95,
+      "origem": "Anexo: foto da tabela anexa à Lei 1.204/2019, p. 2",
+      "resumo": "Zoneamento: ZR1, ZR2, ZC1, ZI (8 parâmetros)"
+    },
+    {
+      "em": "2026-10-24T10:03:00-03:00",
+      "pergunta_id": "documento-14",
+      "confianca": 1,
+      "origem": "WhatsApp, Marcos, 24/10 10:03",
+      "resumo": "ART sempre obrigatória"
+    },
+    {
+      "em": "2026-10-24T10:06:00-03:00",
+      "pergunta_id": "documento-16",
+      "confianca": 1,
+      "origem": "WhatsApp, Marcos, 24/10 10:06",
+      "resumo": "DWG removido do pedido"
+    },
+    {
+      "em": "2026-10-24T10:06:00-03:00",
+      "pergunta_id": "taxa-34",
+      "confianca": 0,
+      "origem": "WhatsApp, Marcos, 24/10 10:06",
+      "resumo": "Pendência: taxa com a Secretaria de Fazenda"
+    },
+    {
+      "em": "2026-10-24T10:10:00-03:00",
+      "pergunta_id": "tramite-28",
+      "confianca": 1,
+      "origem": "WhatsApp, Marcos, 24/10 10:10",
+      "resumo": "Despacho de fiscalização in loco removido"
+    },
+    {
+      "em": "2026-10-24T10:11:00-03:00",
+      "pergunta_id": "tramite-29",
+      "confianca": 1,
+      "origem": "WhatsApp, Marcos, 24/10 10:11",
+      "resumo": "Parecer renomeado: Parecer Técnico de Aprovação"
+    }
+  ]
+}
