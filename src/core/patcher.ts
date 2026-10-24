@@ -4,7 +4,7 @@
 import type { AprovaTemplate, Ficha, Pergunta, Mudanca, FormlyField } from "./types.js";
 import { walk, label } from "./formly.js";
 
-const LIMIAR = 0.8;
+const LIMIAR = 0.6;
 
 export function aplicarFicha(tplEntrada: AprovaTemplate, ficha: Ficha): { form: AprovaTemplate; mudancas: Mudanca[]; pendencias: Pergunta[] } {
   let tpl = structuredClone(tplEntrada);

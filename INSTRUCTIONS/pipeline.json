@@ -87,7 +87,7 @@
         {
           "nome": "todos os cenários passam",
           "tentativas": 1,
-          "ao_falhar": "analista"
+          "ao_falhar": "implantador"
         },
         {
           "nome": "nenhuma expressão indeterminada nova",

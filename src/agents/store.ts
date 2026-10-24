@@ -108,7 +108,7 @@ export function perguntasDe(f: Ficha) {
 
 /** Pergunta sem resposta confiável (resposta nula ou confiança abaixo de 0,8). */
 export function semResposta(q: { resposta: unknown; confianca: number }) {
-  return q.resposta === null || q.resposta === undefined || q.confianca < 0.8;
+  return q.resposta === null || q.resposta === undefined || q.confianca < 0.6;
 }
 
 /**

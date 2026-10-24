@@ -9,7 +9,9 @@ import { lerRun, salvarRun, agora } from "../pipeline/run.js";
 
 export { assumirConversa, devolverConversa };
 
-const SIM = /^\s*(sim|s|confirmo|confere|correto|isso|exato|pode|ok|certo)\b/i;
+const NEGACAO = /\b(n[aã]o|nao|errad|mas |por[eé]m|falta|tira|muda|troca|diferente|ajust)/i;
+const AFIRMACAO = /^\s*(sim|s|ok|okay|certo|est[aá] certo|t[aá] certo|t[aá] bom|isso|[eé] isso|[eé] assi|[eé] assim|confere|confirmo|pode|pode ser|pode seguir|pode montar|segue|beleza|perfeito|fechado|correto|exato|show|positivo|blz|uhum|aham|yes)\b/i;
+const SIM = { test: (t: string) => AFIRMACAO.test(t) && !NEGACAO.test(t) && t.trim().split(/\s+/).length <= 12 };
 
 export async function tratarMensagem(
   ctx: Contexto,

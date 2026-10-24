@@ -10,7 +10,7 @@ Cada etapa roda e só termina quando todos os seus critérios de saída passam, 
 | 2 | Coletar respostas (`coletar`) | agente | `coletor` | analista decidiu sobre o modelo<br>plano de ação confirmado<br>nenhuma pergunta em aberto | 0<br>1<br>1 | pergunta ao analista<br>gate do implantador<br>pergunta ao analista |
 | 3 | Ler anexos (`extrair`, dentro de `coletar`) | agente | `extrator` | todo candidato cita trecho e confiança | 1 | pergunta ao analista |
 | 4 | Gerar formulário (`aplicar`) | código | — | formulário sem placeholder de modelo<br>nenhum resíduo de outra cidade pendente | 0<br>0 | gate do implantador<br>gate do implantador |
-| 5 | Validar com cenários (`validar`) | agente | `validador` | todos os cenários passam<br>nenhuma expressão indeterminada nova<br>cenários cobrem a ficha _(juiz LLM)_ | 1<br>1<br>2 | pergunta ao analista<br>gate do implantador<br>gate do implantador |
+| 5 | Validar com cenários (`validar`) | agente | `validador` | todos os cenários passam<br>nenhuma expressão indeterminada nova<br>cenários cobrem a ficha _(juiz LLM)_ | 1<br>1<br>2 | gate do implantador<br>gate do implantador<br>gate do implantador |
 | 6 | Conferir com a prefeitura (`conferir`) | código + gate analista | — | analista conferiu os casos | 0 | gate do implantador |
 | 7 | Homologar (`homologar`) | código + gate implantador | — | implantador aprovou | 0 | para o processo |
 
@@ -48,7 +48,7 @@ O código monta o formulário da cidade a partir das respostas, sem IA, e escrev
 
 O agente escreve situações de teste a partir das respostas e o código confere se o formulário se comporta como a prefeitura disse.
 
-- **todos os cenários passam**: 1 tentativa extra; depois, pergunta ao analista.
+- **todos os cenários passam**: 1 tentativa extra; depois, gate do implantador.
 - **nenhuma expressão indeterminada nova**: 1 tentativa extra; depois, gate do implantador.
 - **cenários cobrem a ficha** (juiz LLM, falha fechada): 2 tentativas extra; depois, gate do implantador.
   - Rubrica: Para cada pergunta respondida da ficha existe pelo menos um cenário que exercita a resposta (um model que passa pelo campo afetado e uma expectativa sobre ele). Perguntas sem efeito testável no formulário (setor, cards internos, documento final) contam como cobertas se o formulário as reflete. Responda pass=false e liste em faltam os ids das perguntas sem cenário.

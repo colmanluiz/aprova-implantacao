@@ -195,7 +195,7 @@ test("ficha fechada: aplicar → validar com juiz reprovando → retentativas co
   assert.equal(run.metricas.cenarios_passando, 15);
 });
 
-test("cenário falhando esgota e vira pergunta de confirmação ao analista; 'sim' aprova; horas evitadas cai para 0,67", async () => {
+test("cenário falhando esgota e vai ao implantador (não ao analista); aprovar segue para a conferência e a homologação", async () => {
   const ctx = novoCtx();
   const { canal, enviadas } = canalFalso();
   const quebrado = cenariosVV.map((c) => c.id === "c11-recuo-abaixo-do-minimo" ? { ...c, espera: c.espera.map((e) => ({ ...e, visivel: !e.visivel })) } : c);
@@ -205,26 +205,21 @@ test("cenário falhando esgota e vira pergunta de confirmação ao analista; 'si
   store.salvarFicha(ctx, fichaFechada(ctx.cidade));
   store.salvarPlano(ctx, { decisao: "atende", itens: [] });
   let run = await avancar(ctx, deps);
-  assert.equal(run.gate?.para, "analista");
+  assert.equal(run.gate?.para, "implantador");
   assert.equal(run.gate?.criterio, "todos os cenários passam");
-  assert.match(enviadas.at(-1)!, /Zona ZR2 exige recuo frontal/);
-  assert.match(enviadas.at(-1)!, /É assim aí/);
+  assert.ok(!enviadas.some((t) => /É assim aí/.test(t)), "falha de cenário não vira pergunta ao analista");
 
-  await tratarMensagem(ctx, canal, { texto: "Sim, é assim mesmo" }, deps);
-  run = lerRun(ctx)!;
-  assert.equal(run.decisoes?.at(-1)?.acao, "aprovar");
+  run = await resolverGate(ctx, "aprovar", undefined, deps);
   // Com canal, o formulário pronto passa pela conferência de casos com o analista antes da homologação.
   assert.equal(run.etapa_atual, "conferir");
   assert.equal(run.gate?.tipo, "conferencia");
   assert.match(enviadas.at(-1)!, /^Antes de liberar, confere estes casos pra mim:/);
-  assert.match(enviadas.at(-1)!, /Está certo assim\?/);
   assert.ok(verificarMensagem(enviadas.at(-1)!).ok, "conferência cabe nos limites da conversa (até 70 palavras, uma pergunta)");
 
-  await tratarMensagem(ctx, canal, { texto: "sim" }, deps);
+  await tratarMensagem(ctx, canal, { texto: "tá certo, pode seguir" }, deps);
   run = lerRun(ctx)!;
   assert.equal(run.etapa_atual, "homologar");
   assert.equal(etapaRun(run, "conferir").criterios[0].resultado, "passou");
-  assert.equal(run.metricas.horas_reuniao_evitadas, 0.67);
 });
 
 test("homologar: ajustar com <id>=<valor> corrige a ficha e refaz desde aplicar; valor inválido é recusado; rejeitar para", async () => {
@@ -337,7 +332,6 @@ test("validador com cenários de diagnóstico sem pré-condição: no máximo 2 
   assert.match(val.chamadas[1].mensagens.at(-1).content, /precondicao: falta endereco_cep/);
   assert.equal(store.cenarios(ctx)!.length, 17, "rodar_cenarios junta pelo id em vez de substituir");
   assert.equal(run.gate?.para, "implantador");
-  assert.match(run.gate!.instrucao, /não foi ao analista/);
   assert.deepEqual(enviadas, []);
   assert.equal(run.metricas.horas_reuniao_evitadas, 1);
 });
