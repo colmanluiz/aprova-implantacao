@@ -15,9 +15,20 @@ const API = `https://api.telegram.org/bot${TOKEN}`;
 const FILE = `https://api.telegram.org/file/bot${TOKEN}`;
 const ctxPadrao = { cidade: process.env.CIDADE ?? "vale-verde", processo: process.env.PROCESSO ?? "alvara", template: process.env.TEMPLATE ?? "fixtures/templates/alvara-construcao.modeload.json" };
 
-async function tg(method: string, body: unknown) {
-  const r = await fetch(`${API}/${method}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
-  return r.json() as Promise<any>;
+async function tg(method: string, body: unknown, tentativas = 3) {
+  for (let i = 1; ; i++) {
+    try {
+      const r = await fetch(`${API}/${method}`, {
+        method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body),
+        signal: AbortSignal.timeout(method === "getUpdates" ? 45_000 : 15_000),
+      });
+      return (await r.json()) as any;
+    } catch (e) {
+      if (i >= tentativas) throw e;
+      console.error(`telegram ${method}: ${(e as Error).message}; tentando de novo (${i}/${tentativas})`);
+      await new Promise((r) => setTimeout(r, 1000 * i));
+    }
+  }
 }
 async function baixar(fileId: string): Promise<{ base64: string; path: string }> {
   const info = await tg("getFile", { file_id: fileId });
