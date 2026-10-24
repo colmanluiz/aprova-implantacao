@@ -1,0 +1,116 @@
+[
+  {
+    "id": "c01-nova-solicitacao",
+    "descricao": "Pedido novo: os campos de retificação não aparecem",
+    "model": { "solicitacao": "Nova solicitação" },
+    "espera": [
+      { "campo": "solicitacaoRetificacao", "visivel": false },
+      { "campo": "processo_fisico", "visivel": false },
+      { "campo": "alvaraAntigo", "visivel": false }
+    ]
+  },
+  {
+    "id": "c02-retificacao-fisico",
+    "descricao": "Retificação de alvará aprovado no papel: pede número e alvará antigo",
+    "model": { "solicitacao": "Retificação", "solicitacaoRetificacao": "Aprovado no modo físico" },
+    "espera": [
+      { "campo": "solicitacaoRetificacao", "visivel": true },
+      { "campo": "processo_fisico", "visivel": true },
+      { "campo": "alvaraAntigo", "visivel": true },
+      { "campo": "process_existente_aprova", "visivel": false }
+    ]
+  },
+  {
+    "id": "c03-retificacao-aprova",
+    "descricao": "Retificação de alvará já emitido pela Aprova: pede o número do processo e ele é obrigatório",
+    "model": { "solicitacao": "Retificação", "solicitacaoRetificacao": "Aprovado pela Aprova" },
+    "espera": [
+      { "campo": "process_existente_aprova", "visivel": true, "obrigatorio": true },
+      { "campo": "processo_fisico", "visivel": false }
+    ]
+  },
+  {
+    "id": "c04-procurador",
+    "descricao": "Requerente é procurador: procuração aparece",
+    "model": { "vinculo_requerente": "Procurador" },
+    "espera": [ { "campo": "doc_procurador", "visivel": true } ]
+  },
+  {
+    "id": "c05-proprietario-sem-procuracao",
+    "descricao": "Requerente é o próprio proprietário: procuração não aparece",
+    "model": { "vinculo_requerente": "Proprietário do imóvel" },
+    "espera": [ { "campo": "doc_procurador", "visivel": false } ]
+  },
+  {
+    "id": "c06-proprietario-pj",
+    "descricao": "Responsável pelo imóvel é empresa: exige contrato social, não exige RG/CPF",
+    "model": { "vinculo_requerente": "Responsável Técnico", "proprietario": [ { "cpfcnpj_proprietario": "12345678000199" } ] },
+    "espera": [
+      { "campo": "proprietario[0].contratosocial_pessoajuridica", "visivel": true, "obrigatorio": true },
+      { "campo": "proprietario[0].documento_proprietario", "visivel": false }
+    ]
+  },
+  {
+    "id": "c07-proprietario-pf",
+    "descricao": "Responsável pelo imóvel é pessoa física: exige RG/CPF, não exige contrato social",
+    "model": { "vinculo_requerente": "Responsável Técnico", "proprietario": [ { "cpfcnpj_proprietario": "12345678901" } ] },
+    "espera": [
+      { "campo": "proprietario[0].documento_proprietario", "visivel": true, "obrigatorio": true },
+      { "campo": "proprietario[0].contratosocial_pessoajuridica", "visivel": false }
+    ]
+  },
+  {
+    "id": "c08-rt-sem-projeto",
+    "descricao": "Só há responsável pela execução: avisa que falta responsável pelo projeto",
+    "model": { "responsavel_tecnico": [ { "responsavel_tecnico_vinculo": { "Execução": true } } ] },
+    "espera": [
+      { "campo": "avisoResposavelProjeto", "visivel": true },
+      { "campo": "avisoResposavelExecucao", "visivel": false }
+    ]
+  },
+  {
+    "id": "c09-area-final",
+    "descricao": "Ampliação: área final = existente + construir + regularizar + ampliar − demolir",
+    "model": { "quadro_areas": [ { "tipo_uso": "Residencial unifamiliar", "modalidade_aprovacao": { "Ampliação": true }, "area_existente": 100, "area_construir": 0, "area_ampliar": 50, "area_regularizar": 0, "area_demolir": 20 } ] },
+    "espera": [
+      { "campo": "quadro_areas[0].area_total", "valor": 130 },
+      { "campo": "totalarea_total", "valor": 130 }
+    ]
+  },
+  {
+    "id": "c10-construcao-nova-e-reforma",
+    "descricao": "Construção nova junto com reforma na mesma edificação: sistema deve avisar que não pode",
+    "model": { "quadro_areas": [ { "tipo_uso": "Residencial unifamiliar", "modalidade_aprovacao": { "Construção nova": true, "Reforma": true }, "area_existente": 0 } ] },
+    "espera": [ { "campo": "validConstNova2", "visivel": true } ]
+  },
+  {
+    "id": "c11-recuo-abaixo-do-minimo",
+    "descricao": "Zona ZR2 exige recuo frontal de 4 m; projeto com 3 m deve receber aviso",
+    "model": { "zoneamento_dataset": "ZR2", "recuo_frontal": 3 },
+    "espera": [ { "campo": "aviso_recuo_frontal", "visivel": true } ]
+  },
+  {
+    "id": "c12-recuo-no-minimo",
+    "descricao": "Zona ZR2, recuo frontal exatamente 4 m: sem aviso",
+    "model": { "zoneamento_dataset": "ZR2", "recuo_frontal": 4 },
+    "espera": [ { "campo": "aviso_recuo_frontal", "visivel": false } ]
+  },
+  {
+    "id": "c13-taxa-ocupacao",
+    "descricao": "Projeção de 70 m² em terreno de 100 m² na ZC1 (TO máx. 80%): calcula 70% e não avisa",
+    "model": { "zoneamento_dataset": "ZC1", "area_projecao": 70, "area_terreno_real": 100 },
+    "espera": [ { "campo": "taxa_ocup", "valor": 70 }, { "campo": "aviso_taxa_ocup", "visivel": false } ]
+  },
+  {
+    "id": "c14-taxa-ocupacao-estourada",
+    "descricao": "Projeção de 70 m² em terreno de 100 m² na ZR2 (TO máx. 60%): avisa",
+    "model": { "zoneamento_dataset": "ZR2", "area_projecao": 70, "area_terreno_real": 100 },
+    "espera": [ { "campo": "aviso_taxa_ocup", "visivel": true } ]
+  },
+  {
+    "id": "c15-obra-na-propria-cidade",
+    "descricao": "Obra em Vale Verde/RS: o formulário não pode acusar cidade errada",
+    "model": { "cidade_obra": "Vale Verde", "uf_obra": "RS" },
+    "espera": [ { "campo": "valid_cidade", "visivel": false } ]
+  }
+]

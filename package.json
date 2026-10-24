@@ -1,0 +1,24 @@
+{
+  "name": "aprova-implantacao",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Implantação assistida por IA: coleta e validação de regras de negócio de processos municipais sem reunião",
+  "scripts": {
+    "analyze": "tsx src/cli.ts analyze",
+    "validate": "tsx src/cli.ts validate",
+    "apply": "tsx src/cli.ts apply",
+    "chat": "tsx src/channel/mock-chat.ts",
+    "test": "tsx --test src/core/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.110.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
