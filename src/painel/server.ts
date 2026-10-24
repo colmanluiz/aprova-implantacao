@@ -131,9 +131,11 @@ const principal = process.argv[1] && path.resolve(process.argv[1]) === fileURLTo
 if (principal) {
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
   const porta = Number(process.env.PAINEL_PORT ?? 4310);
-  criarServidor({ root }).listen(porta, () => {
+  // APROVA_DATA troca a pasta de dados (mesma variável do pipeline), útil para ensaiar sem tocar em data/.
+  const dataDir = process.env.APROVA_DATA ? path.resolve(root, process.env.APROVA_DATA) : path.join(root, "data");
+  criarServidor({ root, dataDir }).listen(porta, () => {
     console.log(`Painel do implantador: http://localhost:${porta}`);
-    console.log(`  dados: ${path.join(root, "data")}  (lidos a cada requisição)`);
+    console.log(`  dados: ${dataDir}  (lidos a cada requisição)`);
     console.log(`  gate:  ${gateDisponivel(root) ? "npm run gate disponível" : "npm run gate ainda não existe (botões desabilitados)"}`);
   });
 }

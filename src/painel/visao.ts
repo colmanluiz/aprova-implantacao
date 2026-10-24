@@ -60,13 +60,28 @@ export type ProcessoVisao = {
   slug: string | null; tem_dados: boolean;
   status: StatusProcesso; etapa_atual: string | null;
   etapas: { slug: string; nome: string; status: StatusEtapa }[];
-  gate: { para: string; tipo: string } | null;
+  gate: { para: string; tipo: string; etapa?: string; resumo?: string; aberto_em?: string } | null;
   modo: "agente" | "humano";
   pronto: boolean;
   pendencias: number; perguntas_feitas: number; respondidas: number; mensagens: number;
   cenarios: string | null; horas_reuniao_evitadas: number;
   atualizado_em: string | null;
+  // ---- campos opcionais (painel) ----
+  /** última mensagem da conversa (qualquer voz) */
+  ultima_mensagem_em?: string | null;
+  ultima_voz?: Voz | null;
+  /** horas desde a última mensagem nossa sem resposta do analista; só quando o processo depende da prefeitura */
+  sem_resposta_horas?: number | null;
+  /** por que o implantador precisa agir agora; null quando nada depende dele */
+  atencao?: Atencao | null;
+  /** processo ainda sem pasta: slug que o pipeline vai usar (deixa a linha clicável antes do primeiro "oi") */
+  slug_previsto?: string | null;
 };
+
+export type Voz = "analista" | "agente" | "implantador" | "nota" | "sistema";
+export type Atencao = { tipo: "gate" | "parado" | "falhou" | "humano" | "sem_resposta"; desde: string | null; texto: string };
+/** Acima disto, "sem resposta" vira item da fila do implantador. */
+export const LIMIAR_SEM_RESPOSTA_HORAS = 24;
 
 export type Visao = {
   cidade: string; cidade_slug: string; gerado_em: string; gate_disponivel: boolean;
@@ -78,11 +93,13 @@ export type Visao = {
     cenarios_rodados: number; cenarios_passando: number; mensagens: number;
     intervencoes_humanas: number; conversas_assumidas: number;
     por_status: Record<StatusProcesso, number>;
+    /** opcionais (painel): tamanho das duas primeiras faixas da fila */
+    precisam_implantador?: number; aguardando_prefeitura?: number;
   };
   secretarias: { nome: string; processos: ProcessoVisao[] }[];
 };
 
-export type Opcoes = { seedPath: string; dataDir: string; cidadeSlug?: string; gateDisponivel?: boolean };
+export type Opcoes = { seedPath: string; dataDir: string; cidadeSlug?: string; gateDisponivel?: boolean; /** relógio (testes) */ agora?: () => Date };
 
 // ---------- leitura defensiva ----------
 
@@ -191,7 +208,88 @@ const STATUS_ETAPA_VALIDOS: StatusEtapa[] = ["pendente", "executando", "aguardan
 
 type BaseProcesso = Pick<ProcessoVisao, "id" | "processo" | "secretaria" | "complexidade">;
 
-function processoDePasta(base: BaseProcesso, p: Pasta): ProcessoVisao {
+// ---------- vozes da conversa ----------
+
+const MARCADORES_SISTEMA = /^(O analista enviou um anexo \(|Esta é a primeira interação|\[pipeline\]|Enquanto o agente estava pausado)/;
+
+/**
+ * Separa o que o motor embrulha no histórico do que cada voz disse de fato.
+ * - `user` vem como "Prefeitura: … / Mensagem do analista: (analista) texto / O analista enviou um anexo (x)…" (ou texto puro, formato antigo).
+ * - `assistant` sem autor é mensagem enviada ao analista, salvo a nota de turno do agente ("Enviei 1=…; registrei …"), que não vai ao canal.
+ */
+export function classificarMensagem(m: Mensagem): { voz: Voz; texto: string; anexo: string | null } {
+  const content = String(m.content ?? "");
+  if (m.autor === "implantador") return { voz: "implantador", texto: content, anexo: null };
+  if (m.role === "assistant") {
+    const nota = /^(enviei|não enviei|nada enviado|registrei|não registrei)\b/i.test(content.trim());
+    return { voz: nota ? "nota" : "agente", texto: content, anexo: null };
+  }
+  const linhas = content.split("\n");
+  const anexo = content.match(/O analista enviou um anexo \(([^)]+)\)/)?.[1] ?? null;
+  const embrulhado = /^Prefeitura: .*Perguntas abertas: /.test(linhas[0] ?? "");
+  const i = linhas.findIndex((l) => l.startsWith("Mensagem do analista:"));
+  if (i >= 0) {
+    const corpo: string[] = [linhas[i].replace(/^Mensagem do analista:\s*/, "")];
+    for (const l of linhas.slice(i + 1)) { if (MARCADORES_SISTEMA.test(l)) break; corpo.push(l); }
+    return { voz: "analista", texto: corpo.join("\n").replace(/^\(analista\)\s*/, "").trim(), anexo };
+  }
+  if (!embrulhado) return { voz: "analista", texto: content, anexo };
+  if (anexo) return { voz: "analista", texto: "", anexo };
+  const resto = linhas.slice(1).join("\n").trim();
+  const texto = /primeira interação/.test(resto) ? "Processo aberto. O agente foi chamado para se apresentar e mandar as primeiras perguntas."
+    : resto.startsWith("[pipeline]") ? resto.replace(/^\[pipeline\]\s*/, "Pipeline: ")
+    : resto.startsWith("Enquanto o agente") ? "Agente retomou a conversa com um resumo do que o implantador tratou."
+    : resto || "Agente acionado pelo pipeline.";
+  return { voz: "sistema", texto, anexo: null };
+}
+
+const HORA = 3_600_000;
+const tsOk = (s?: string | null) => { const t = s ? Date.parse(s) : NaN; return Number.isFinite(t) ? t : null; };
+
+/** Última mensagem e, se o processo depende da prefeitura, há quantas horas o analista não responde. */
+function esperaDoAnalista(p: Pasta, status: StatusProcesso, atual: string | null, gatePara: string | null, agora: number) {
+  const hist = (p.estado?.historico ?? []).filter((h) => h && typeof h.content === "string");
+  const ultima = hist.length ? hist[hist.length - 1] : null;
+  const ultima_mensagem_em = ultima?.em ?? null;
+  const ultima_voz: Voz | null = ultima ? classificarMensagem(ultima).voz : null;
+  const dependePrefeitura = status === "aguardando_prefeitura" || gatePara === "analista" || (status === "executando" && atual === "coletar");
+  let sem_resposta_horas: number | null = null;
+  if (dependePrefeitura && ultima_voz && ultima_voz !== "analista") {
+    // conta desde a última fala nossa que ficou sem resposta
+    let desde: number | null = null;
+    for (let i = hist.length - 1; i >= 0; i--) {
+      const v = classificarMensagem(hist[i]).voz;
+      if (v === "analista") break;
+      const t = tsOk(hist[i].em);
+      if (t !== null && (v === "agente" || v === "implantador")) desde = t;
+    }
+    if (desde !== null) sem_resposta_horas = Math.max(0, Math.round(((agora - desde) / HORA) * 10) / 10);
+  }
+  return { ultima_mensagem_em, ultima_voz, sem_resposta_horas };
+}
+
+const horasTexto = (h: number) => (h < 1 ? `${Math.round(h * 60)} min` : h < 48 ? `${Math.floor(h)} h` : `${Math.floor(h / 24)} dias`);
+
+function atencaoDoProcesso(p: Pasta, status: StatusProcesso, etapas: ProcessoVisao["etapas"], gate: ProcessoVisao["gate"], semResposta: number | null): Atencao | null {
+  if (gate && gate.para === "implantador") {
+    const nomeEtapa = etapas.find((e) => e.slug === gate.etapa)?.nome ?? gate.etapa ?? "";
+    const texto = gate.tipo === "homologacao" ? `Decisão sua: homologar o formulário` : `Decisão sua: ${nomeEtapa ? `${nomeEtapa.toLowerCase()} ` : ""}parou num critério`;
+    return { tipo: "gate", desde: gate.aberto_em ?? null, texto };
+  }
+  if (status === "parado") return { tipo: "parado", desde: p.run?.atualizado_em ?? null, texto: "Processo parado" };
+  const falhou = etapas.find((e) => e.status === "falhou");
+  if (falhou) return { tipo: "falhou", desde: p.run?.atualizado_em ?? null, texto: `Etapa "${falhou.nome}" falhou` };
+  if (p.estado?.modo === "humano") {
+    const ult = [...(p.estado.intervencoes ?? [])].reverse().find((i) => i?.tipo === "assumir");
+    return { tipo: "humano", desde: ult?.em ?? null, texto: "Você está na conversa; o agente está pausado" };
+  }
+  if (semResposta !== null && semResposta >= LIMIAR_SEM_RESPOSTA_HORAS) {
+    return { tipo: "sem_resposta", desde: null, texto: `Analista sem responder há ${horasTexto(semResposta)}` };
+  }
+  return null;
+}
+
+function processoDePasta(base: BaseProcesso, p: Pasta, agora: number): ProcessoVisao {
   const run = p.run;
   let etapas: ProcessoVisao["etapas"];
   let status: StatusProcesso;
@@ -212,8 +310,15 @@ function processoDePasta(base: BaseProcesso, p: Pasta): ProcessoVisao {
     atual = run?.etapa_atual ?? d.atual;
   }
   const m = metricasProcesso(p);
-  const gate = run?.gate && typeof run.gate === "object" ? { para: String(run.gate.para ?? "implantador"), tipo: String(run.gate.tipo ?? "aprovacao") } : null;
+  const g = run?.gate && typeof run.gate === "object" ? run.gate as Gate & { etapa?: string } : null;
+  const gate: ProcessoVisao["gate"] = g ? {
+    para: String(g.para ?? "implantador"), tipo: String(g.tipo ?? "aprovacao"),
+    ...(typeof g.etapa === "string" ? { etapa: g.etapa } : {}),
+    ...(typeof g.resumo === "string" ? { resumo: g.resumo } : {}),
+    ...(typeof g.aberto_em === "string" ? { aberto_em: g.aberto_em } : {}),
+  } : null;
   const validar = etapas.find((e) => e.slug === "validar");
+  const espera = esperaDoAnalista(p, status, atual, gate?.para ?? null, agora);
   return {
     ...base,
     slug: p.slug, tem_dados: true, status, etapa_atual: atual, etapas, gate, modo: p.estado?.modo === "humano" ? "humano" : "agente",
@@ -224,6 +329,8 @@ function processoDePasta(base: BaseProcesso, p: Pasta): ProcessoVisao {
     cenarios: m.cenarios_rodados ? `${m.cenarios_passando}/${m.cenarios_rodados}` : null,
     horas_reuniao_evitadas: m.horas_reuniao_evitadas,
     atualizado_em: run?.atualizado_em ?? p.estado?.atualizado_em ?? null,
+    ...espera,
+    atencao: atencaoDoProcesso(p, status, etapas, gate, espera.sem_resposta_horas),
   };
 }
 
@@ -242,9 +349,14 @@ function casar(seed: SeedProcesso[], p: Pasta, usados: Set<string>): SeedProcess
   return k.length >= 4 ? livres.find((x) => chave(x.processo).startsWith(k)) : undefined;
 }
 
+/** Processo que espera a prefeitura (gate ao analista, coleta aberta ou analista sem responder). */
+export const dependePrefeitura = (p: ProcessoVisao) =>
+  p.tem_dados && (p.status === "aguardando_prefeitura" || p.gate?.para === "analista" || (p.sem_resposta_horas ?? null) !== null);
+
 export function montarVisao(o: Opcoes): Visao {
   const seed = lerJson<Seed>(o.seedPath) ?? { cidade: o.cidadeSlug ?? "Cidade", secretarias: [], processos: [] };
   const cidadeSlug = o.cidadeSlug ?? slugCidade(seed.cidade);
+  const agora = (o.agora ?? (() => new Date()))().getTime();
   const pastas = listarPastas(o.dataDir, cidadeSlug);
   const usados = new Set<string>();
   const porId = new Map<string, Pasta>();
@@ -259,11 +371,13 @@ export function montarVisao(o: Opcoes): Visao {
     slug: null, tem_dados: false, status: "nao_iniciado", etapa_atual: null,
     etapas: ETAPAS.map((e) => ({ ...e, status: "pendente" as StatusEtapa })), gate: null, modo: "agente", pronto: false,
     pendencias: 0, perguntas_feitas: 0, respondidas: 0, mensagens: 0, cenarios: null, horas_reuniao_evitadas: 0, atualizado_em: null,
+    ultima_mensagem_em: null, ultima_voz: null, sem_resposta_horas: null, atencao: null,
+    slug_previsto: Object.entries(APELIDOS).find(([, t]) => chave(t) === chave(s.processo))?.[0] ?? slugCidade(s.processo),
   });
 
   const processos: ProcessoVisao[] = seed.processos.map((s) => {
     const p = porId.get(s.id);
-    return p ? processoDePasta({ id: s.id, processo: s.processo, secretaria: s.secretaria, complexidade: s.complexidade ?? null }, p) : vazio(s);
+    return p ? processoDePasta({ id: s.id, processo: s.processo, secretaria: s.secretaria, complexidade: s.complexidade ?? null }, p, agora) : vazio(s);
   });
   // Pastas sem par livre no seed (ex.: alvara-demo ao lado de alvara): entram como linha extra na secretaria
   // do processo com o mesmo título (run.titulo ou ficha.processo), ou em "Outros".
@@ -273,7 +387,7 @@ export function montarVisao(o: Opcoes): Visao {
     processos.push(processoDePasta({
       id: `x-${p.slug}`, processo: titulo ? `${titulo} · ${p.slug}` : p.slug,
       secretaria: irmao?.secretaria ?? "Outros", complexidade: irmao?.complexidade ?? null,
-    }, p));
+    }, p, agora));
   }
 
   const nomesSec = [...seed.secretarias];
@@ -305,6 +419,8 @@ export function montarVisao(o: Opcoes): Visao {
       intervencoes_humanas: somaM((m) => m.intervencoes_humanas),
       conversas_assumidas: processos.filter((p) => p.modo === "humano").length,
       por_status,
+      precisam_implantador: processos.filter((p) => p.atencao).length,
+      aguardando_prefeitura: processos.filter((p) => !p.atencao && dependePrefeitura(p)).length,
     },
     secretarias,
   };
@@ -312,7 +428,7 @@ export function montarVisao(o: Opcoes): Visao {
 
 // ---------- detalhe ----------
 
-export type Turno = Mensagem & { registros: Registro[] };
+export type Turno = Mensagem & { registros: Registro[]; /** opcionais (painel) */ voz?: Voz; texto?: string; anexo?: string | null };
 
 /** Cada turno do agente recebe os registros feitos desde o turno anterior do agente até ele (inclusive). */
 export function conversaComRegistros(historico: Mensagem[] = [], registros: Registro[] = []) {
@@ -321,7 +437,7 @@ export function conversaComRegistros(historico: Mensagem[] = [], registros: Regi
   const usados = new Set<Registro>();
   let inicio = -Infinity;
   const turnos: Turno[] = historico.map((m) => {
-    const t: Turno = { ...m, registros: [] };
+    const t: Turno = { ...m, registros: [], ...classificarMensagem(m) };
     if (m.role === "assistant") {
       const fim = ts(m.em);
       if (Number.isFinite(fim)) {

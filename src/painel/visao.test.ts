@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { montarVisao, montarDetalhe, conversaComRegistros, anexarOutbox, lerOutbox } from "./visao.js";
+import { montarVisao, montarDetalhe, conversaComRegistros, anexarOutbox, lerOutbox, classificarMensagem } from "./visao.js";
 
 const SEED = path.resolve("fixtures/seed/processos.json");
 const EXEMPLO = path.resolve("fixtures/exemplos");
@@ -26,6 +26,8 @@ test("sem data/: 96 processos do seed, 12 secretarias, nada pronto", () => {
   const p = v.secretarias[0].processos[0];
   assert.equal(p.etapas.length, 6);
   assert.ok(p.etapas.every((e) => e.status === "pendente"));
+  assert.equal(p.slug_previsto, "alvara", "Alvará de Construção usa a pasta alvara");
+  assert.equal(v.secretarias[0].processos[1].slug_previsto, "habite-se");
 });
 
 test("run.json da pasta alvara sobrepõe a entrada Alvará de Construção (p001)", () => {
@@ -39,7 +41,9 @@ test("run.json da pasta alvara sobrepõe a entrada Alvará de Construção (p001
   assert.equal(alv.status, "aguardando_implantador");
   assert.equal(alv.etapa_atual, "validar");
   assert.deepEqual(alv.etapas.map((e) => e.status), ["concluida", "concluida", "concluida", "concluida", "aguardando", "pendente"]);
-  assert.deepEqual(alv.gate, { para: "implantador", tipo: "aprovacao" });
+  assert.equal(alv.gate?.para, "implantador");
+  assert.equal(alv.gate?.tipo, "aprovacao");
+  assert.equal(alv.gate?.aberto_em, "2026-10-24T10:22:00-03:00");
   assert.equal(alv.cenarios, "13/15");
   assert.equal(alv.pronto, false);
   assert.equal(todos.find((p) => p.id === "p003")!.tem_dados, false, "demolição não casa com a pasta alvara");
@@ -152,4 +156,51 @@ test("pasta extra só com estado.json + ficha.json entra na secretaria do títul
   assert.equal(d.processo!.slug, "alvara-demo");
   assert.equal(d.conversa.length, 1);
   assert.equal(d.run, null);
+});
+
+test("classificarMensagem separa as vozes do histórico embrulhado pelo motor", () => {
+  const w = (t: string) => `Prefeitura: Vale Verde. Processo: Alvará de Construção. Perguntas abertas: 34.\n${t}`;
+  assert.deepEqual(classificarMensagem({ role: "user", content: w("Mensagem do analista: (analista) Bom dia! Aqui é o Marcos.") }), { voz: "analista", texto: "Bom dia! Aqui é o Marcos.", anexo: null });
+  assert.deepEqual(classificarMensagem({ role: "user", content: w("Mensagem do analista: (analista) essa é a tabela\nO analista enviou um anexo (tabela-zoneamento.png). Chame pedir_extracao antes de responder.") }),
+    { voz: "analista", texto: "essa é a tabela", anexo: "tabela-zoneamento.png" });
+  assert.equal(classificarMensagem({ role: "user", content: w("Esta é a primeira interação: apresente-se e envie o primeiro lote de perguntas prioritárias.") }).voz, "sistema");
+  assert.equal(classificarMensagem({ role: "user", content: w('[pipeline] O critério de saída "x" falhou: y.') }).texto, 'Pipeline: O critério de saída "x" falhou: y.');
+  assert.deepEqual(classificarMensagem({ role: "user", content: "oi" }), { voz: "analista", texto: "oi", anexo: null });
+  assert.equal(classificarMensagem({ role: "assistant", content: "Enviei 1=setor-01, 2=opcoes-16. Registrei setor-01." }).voz, "nota");
+  assert.equal(classificarMensagem({ role: "assistant", content: "Bom dia, Marcos! Anotei: SEPLAN." }).voz, "agente");
+  assert.equal(classificarMensagem({ role: "assistant", autor: "implantador", content: "Aqui é a Ana." }).voz, "implantador");
+});
+
+test("fila do implantador: gate aberto vira atenção; analista sem responder há 30 h entra na fila; validar em andamento não conta espera", () => {
+  const dir = tmp();
+  const agora = () => new Date("2026-10-25T20:00:00Z");
+  fs.cpSync(path.join(EXEMPLO, "run.vale-verde.alvara.json"), path.join(dir, "vale-verde/alvara/run.json"));
+  const hab = path.join(dir, "vale-verde/habite-se");
+  escrever(path.join(hab, "estado.json"), { etapa: "aguardando_prefeitura", historico: [
+    { role: "user", content: "oi", em: "2026-10-24T12:00:00Z" },
+    { role: "assistant", content: "Olá! Qual setor recebe o processo?", em: "2026-10-24T14:00:00Z" },
+    { role: "assistant", content: "Enviei 1=setor-01. Não registrei nada.", em: "2026-10-24T14:00:05Z" },
+  ] });
+  const dem = path.join(dir, "vale-verde/alvara-de-demolicao");
+  escrever(path.join(dem, "run.json"), { processo: "alvara-de-demolicao", cidade: "vale-verde", titulo: "Alvará de Demolição", status: "executando", etapa_atual: "validar",
+    etapas: [{ slug: "analisar", nome: "Analisar", status: "concluida" }, { slug: "coletar", nome: "Coletar", status: "concluida" }, { slug: "validar", nome: "Validar", status: "executando" }] });
+  escrever(path.join(dem, "estado.json"), { etapa: "validando", historico: [{ role: "assistant", content: "Preciso confirmar uma regra", em: "2026-10-24T14:00:00Z" }] });
+  const v = montarVisao({ seedPath: SEED, dataDir: dir, agora });
+  const todos = v.secretarias.flatMap((s) => s.processos);
+  const alv = todos.find((p) => p.slug === "alvara")!;
+  assert.equal(alv.atencao?.tipo, "gate");
+  assert.equal(alv.gate?.etapa, undefined, "fixture antiga sem etapa no gate: campo fica ausente");
+  const h = todos.find((p) => p.slug === "habite-se")!;
+  assert.equal(h.ultima_voz, "nota");
+  assert.equal(h.sem_resposta_horas, 30);
+  assert.equal(h.atencao?.tipo, "sem_resposta");
+  assert.match(h.atencao!.texto, /30 h/);
+  const d = todos.find((p) => p.slug === "alvara-de-demolicao")!;
+  assert.equal(d.sem_resposta_horas, null);
+  assert.equal(d.atencao, null);
+  assert.equal(todos.find((p) => !p.tem_dados)!.atencao, null);
+  assert.equal(v.metricas.precisam_implantador, 2);
+  assert.equal(v.metricas.aguardando_prefeitura, 0);
+  const det = montarDetalhe({ seedPath: SEED, dataDir: dir, agora }, "vale-verde", "habite-se")!;
+  assert.deepEqual(det.conversa.map((t) => t.voz), ["analista", "agente", "nota"]);
 });

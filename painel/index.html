@@ -4,90 +4,122 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Painel do implantador</title>
+  <meta name="color-scheme" content="light">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="topo">
-    <div class="marca">
-      <span class="marca-produto">APROVA</span>
-      <span class="marca-sep">/</span>
-      <span>Implantação</span>
-      <span class="marca-sep">/</span>
-      <strong id="cidade">—</strong>
-    </div>
-    <nav class="topo-nav">
-      <a href="#/" id="link-visao" class="ativo">Visão da prefeitura</a>
+    <a href="#/" class="marca" aria-label="Aprova, painel de implantação">
+      <img src="aprova-wordmark.svg" alt="Aprova" class="marca-logo" width="118" height="16">
+      <span class="marca-sep" aria-hidden="true"></span>
+      <span class="marca-produto">Implantação</span>
+    </a>
+    <nav class="topo-nav" aria-label="Navegação">
+      <a href="#/" id="link-visao" class="ativo"><span id="cidade">Prefeitura</span></a>
+      <span id="trilha" class="trilha" hidden></span>
     </nav>
-    <div class="vivo" id="vivo" title="Atualiza a cada 2 segundos">
-      <span class="vivo-ponto"></span>
+    <div class="vivo" id="vivo" title="O painel relê os dados a cada 2 segundos">
+      <span class="vivo-ponto" aria-hidden="true"></span>
       <span id="vivo-texto">conectando…</span>
     </div>
   </header>
 
+  <div class="aviso-topo" id="aviso-topo" hidden></div>
+
   <main>
-    <section id="tela-visao" class="tela">
+    <!-- Visão da prefeitura -->
+    <section id="tela-visao" class="tela" aria-label="Visão da prefeitura">
       <div class="metricas" id="metricas"></div>
-      <div class="legenda" id="legenda"></div>
+      <section class="fila" id="fila" aria-label="Fila de atenção"></section>
+      <div class="secretarias-cab">
+        <h2 class="secao-titulo">Secretarias e processos</h2>
+        <div class="legenda" id="legenda"></div>
+      </div>
       <div class="secretarias" id="secretarias"></div>
     </section>
 
-    <section id="tela-detalhe" class="tela" hidden>
+    <!-- Detalhe do processo -->
+    <section id="tela-detalhe" class="tela" hidden aria-label="Detalhe do processo">
       <div class="detalhe-topo">
-        <a href="#/" class="voltar">&larr; Prefeitura</a>
         <div class="detalhe-titulo">
           <div class="detalhe-sec" id="d-secretaria"></div>
           <h1 id="d-titulo">—</h1>
         </div>
-        <div class="detalhe-status" id="d-status"></div>
+        <div class="detalhe-estado" id="d-estado"></div>
       </div>
+      <div class="faixa-grande" id="d-faixa"></div>
 
+      <div id="d-vazio" hidden></div>
       <div id="d-gate"></div>
 
-      <div class="detalhe-grade">
-        <section class="painel-bloco" aria-labelledby="h-etapas">
-          <h2 id="h-etapas">Etapas</h2>
+      <div class="detalhe-grade" id="d-grade">
+        <section class="cartao" aria-labelledby="h-etapas">
+          <div class="cartao-cab"><h2 id="h-etapas">Etapas e critérios</h2><span class="cartao-nota" id="d-etapas-nota"></span></div>
           <ol class="linha-tempo" id="d-etapas"></ol>
         </section>
 
-        <section class="painel-bloco chat-bloco" aria-labelledby="h-chat">
-          <div class="chat-cabecalho">
-            <h2 id="h-chat">Conversa no WhatsApp</h2>
-            <button type="button" class="btn" id="btn-modo" hidden></button>
+        <section class="cartao chat-cartao" aria-labelledby="h-chat">
+          <div class="cartao-cab chat-cab">
+            <div>
+              <h2 id="h-chat">Conversa no WhatsApp</h2>
+              <div class="chat-modo" id="chat-modo"></div>
+            </div>
+            <div class="chat-acoes">
+              <button type="button" class="btn btn-fantasma btn-p" id="btn-notas" hidden></button>
+              <button type="button" class="btn" id="btn-modo" hidden></button>
+            </div>
           </div>
-          <div class="faixa-humano" id="faixa-humano" hidden></div>
-          <div class="chat" id="d-chat"></div>
-          <form class="compositor" id="compositor" hidden>
-            <textarea id="compositor-texto" rows="2" placeholder="Mensagem para o analista, como implantador…"></textarea>
-            <button type="submit" class="btn btn-primario" id="compositor-enviar">Enviar</button>
+          <div class="confirma" id="confirma-modo" hidden></div>
+          <div class="chat" id="d-chat" aria-live="polite"></div>
+          <form class="compositor" id="compositor" hidden autocomplete="off">
+            <label class="compositor-rotulo" for="compositor-texto">Você responde como implantador. O analista recebe no WhatsApp.</label>
+            <div class="compositor-linha">
+              <textarea id="compositor-texto" rows="2" placeholder="Escreva para o analista… (Ctrl+Enter envia)"></textarea>
+              <button type="submit" class="btn btn-primario" id="compositor-enviar">Enviar</button>
+            </div>
           </form>
-          <div class="aviso-erro" id="chat-erro" hidden></div>
+          <p class="aviso-erro" id="chat-erro" hidden></p>
         </section>
 
         <div class="coluna-direita">
-          <section class="painel-bloco" aria-labelledby="h-metricas">
-            <h2 id="h-metricas">Números do processo</h2>
-            <dl class="numeros" id="d-numeros"></dl>
-          </section>
-          <section class="painel-bloco" aria-labelledby="h-ficha">
-            <h2 id="h-ficha">Ficha por grupo</h2>
+          <section class="cartao" aria-labelledby="h-ficha">
+            <div class="cartao-cab"><h2 id="h-ficha">Ficha por grupo</h2><span class="cartao-nota" id="d-ficha-nota"></span></div>
             <div id="d-ficha"></div>
           </section>
-          <section class="painel-bloco" aria-labelledby="h-cenarios">
-            <h2 id="h-cenarios">Cenários</h2>
+          <section class="cartao" aria-labelledby="h-cenarios">
+            <div class="cartao-cab"><h2 id="h-cenarios">Cenários de validação</h2><span class="cartao-nota" id="d-cenarios-nota"></span></div>
             <div id="d-cenarios"></div>
           </section>
         </div>
       </div>
 
-      <div class="detalhe-rodape">
-        <section class="painel-bloco" aria-labelledby="h-diff">
-          <h2 id="h-diff">diff.md</h2>
-          <pre class="pre" id="d-diff"></pre>
+      <div class="detalhe-rodape" id="d-rodape">
+        <section class="cartao" aria-labelledby="h-diff">
+          <div class="cartao-cab"><h2 id="h-diff">O que mudou no formulário</h2><span class="cartao-nota" id="d-diff-nota"></span></div>
+          <div id="d-diff"></div>
         </section>
-        <section class="painel-bloco" aria-labelledby="h-pend" id="bloco-pendencias">
-          <h2 id="h-pend">pendencias.md</h2>
-          <pre class="pre" id="d-pendencias"></pre>
-        </section>
+        <div class="coluna-direita">
+          <section class="cartao" aria-labelledby="h-numeros">
+            <div class="cartao-cab"><h2 id="h-numeros">Números do processo</h2></div>
+            <dl class="numeros" id="d-numeros"></dl>
+          </section>
+          <section class="cartao" aria-labelledby="h-pendencias" id="bloco-pendencias" hidden>
+            <div class="cartao-cab"><h2 id="h-pendencias">Pendências do implantador</h2></div>
+            <div id="d-pendencias"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sem dados nenhum (nem API nem cópia estática) -->
+    <section id="tela-falha" class="tela" hidden aria-label="Painel sem conexão">
+      <div class="estado-vazio grande">
+        <h1>O painel não encontrou dados</h1>
+        <p>Nem a API (<code>/api/visao</code>) nem a cópia estática (<code>data.json</code>) responderam. O painel tenta de novo a cada 2 segundos.</p>
+        <p class="muted">Para subir a API: <code>npm run painel</code>. Para gerar a cópia estática: <code>npm run painel:data</code>.</p>
       </div>
     </section>
   </main>
