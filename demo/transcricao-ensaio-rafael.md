@@ -1,14 +1,14 @@
-# Transcrição: solicitacao-de-ferias-ensaio de vale-verde
+# Transcrição: solicitacao-de-ferias de vale-verde
 
-Gerada por `npm run chat -- --script demo/falas-rafael.txt` em 24/10/2026, 16:48:58.
+Gerada por `npm run chat -- --script demo/falas-rafael.txt` em 24/10/2026, 17:14:28.
 
 ## Conversa
 
-**Aprova** (16:48):
+**Aprova** (17:12):
 
-> Olá! Sou o assistente da Aprova, a empresa que vai colocar o pedido de Solicitação de Férias de Vale Verde na internet. Já existe um jeito pronto; quero ajustar ao de vocês.
+> Sou o assistente da Aprova, a empresa que vai colocar o pedido de Solicitação de Férias de Vale Verde na internet. Já existe um jeito pronto; quero ajustar ao de vocês.
 
-**Aprova** (16:48):
+**Aprova** (17:12):
 
 > Olha como já está pronto o Solicitação de Férias na Aprova:
 > - 3 etapas: Dados do interessado, Dados da Solicitação, Documentos Complementares
@@ -17,41 +17,45 @@ Gerada por `npm run chat -- --script demo/falas-rafael.txt` em 24/10/2026, 16:48
 > - ao final emite: Solicitação de Férias
 > Te mando também o PDF com tudo, etapa por etapa.
 
-**Aprova** (16:48): [arquivo modelo-solicitacao-de-ferias-ensaio.pdf]
+**Aprova** (17:12): [arquivo modelo-solicitacao-de-ferias.pdf]
 
-**Aprova** (16:48):
+**Aprova** (17:12):
 
 > Comparando com o jeito que vocês fazem hoje, o que é diferente aí? Se for igual, me diz que é isso.
 
-**Analista** (16:48): vi o pdf, tá igual ao que a gente faz. só muda que aqui quem recebe é a Secretaria de Administração, Departamento de Recursos Humanos. o chefe imediato aprova primeiro e depois o RH
+**Analista** (17:12): vi o pdf, tá igual ao que a gente faz. só muda que aqui quem recebe é a Secretaria de Administração, Departamento de Recursos Humanos. o chefe imediato aprova primeiro e depois o RH
 
-**Aprova** (16:48):
+**Aprova** (17:12):
 
-> Obrigado! Ficou assim: o pedido de Solicitação de Férias fica como está no PDF, e quem recebe é a Secretaria de Administração, Departamento de Recursos Humanos. Anotei que o chefe imediato aprova primeiro e depois o RH; a equipe da Aprova confere esse caminho na montagem. Agora a Aprova monta e eu volto com 3 ou 4 casos pra você conferir. Até lá não precisa fazer nada.
+> Anotado: o pedido vai para a Secretaria de Administração, Departamento de Recursos Humanos. Só um ponto sobre o fluxo: o chefe imediato aprova primeiro e depois o RH. Quem assina o documento final: o RH?
 
-**Analista** (16:48): regime aqui só tem estatutário e comissionado, CLT não tem
+**Analista** (17:13): regime aqui só tem estatutário e comissionado, CLT não tem
 
-**Aprova** (16:48):
+**Aprova** (17:13):
 
-> Obrigado! Já tenho o que preciso por enquanto; o implantador está revisando o formulário e eu volto se surgir dúvida.
+> Então fica assim: no regime de trabalho aparecem só Estatutário e Comissionado, sem CLT e sem "Outro". Pode ser?
 
-**Analista** (16:48): o documento de identificação não precisa, o servidor já entra logado
+**Analista** (17:13): o documento de identificação não precisa, o servidor já entra logado
 
-**Aprova** (16:48):
+**Aprova** (17:13):
 
-> Obrigado! Já tenho o que preciso por enquanto; o implantador está revisando o formulário e eu volto se surgir dúvida.
+> Então fica assim: o regime de trabalho só com Estatutário e Comissionado, e some o anexo do documento de identificação, já que o servidor entra logado. Pode ser?
 
-**Analista** (16:48): pode montar
+**Analista** (17:13): pode montar
 
-**Aprova** (16:48):
+**Aprova** (17:13):
 
-> Obrigado! Já tenho o que preciso por enquanto; o implantador está revisando o formulário e eu volto se surgir dúvida.
+> Pronto. Ficou igual ao que já estava pronto, com duas mudanças: o regime de trabalho só com Estatutário e Comissionado, e sem o anexo do documento de identificação. O pedido vai para a Secretaria de Administração, Departamento de Recursos Humanos. Agora a Aprova monta e eu volto com 3 ou 4 casos pra você conferir. Até lá não precisa fazer nada.
 
-**Analista** (16:48): tá certo
+**Aprova** (17:14):
 
-**Aprova** (16:48):
+> Antes de liberar, confere estes casos pra mim:
+> 1. Servidor comissionado: regime aceito e não pede para especificar outro regime
+> 2. Servidor estatutário: não pede para especificar o regime
+> 3. Primeiras férias do período aquisitivo: não pergunta dias já gozados
+> Está certo assim? Se algo estiver diferente, me diz o número.
 
-> Obrigado! Já tenho o que preciso por enquanto; o implantador está revisando o formulário e eu volto se surgir dúvida.
+**Analista** (17:14): tá certo
 
 ## Ficha ao final
 
@@ -59,7 +63,7 @@ Ficha: 10 perguntas | respondidas: 10 | a confirmar: 0 | pendências: 0 | sem re
 
 | Pergunta | Resposta | Confiança | Origem |
 |---|---|---|---|
-| setor-01 | `{"slug":"vale_verde","setor":"Secretaria de Administração - Departa...` | 1 | WhatsApp, analista: 'quem recebe é a Secretaria de Administração, Departamento de Recursos Humanos' |
+| setor-01 | `{"slug":"vale_verde","setor":"Secretaria de Administração - Departa...` | 1 | WhatsApp, analista: 'quem recebe é a Secretaria de Administração, Departamento de Recursos Humanos'. Chefe imediato aprova antes do RH (conferir no fluxo) |
 | etapas-02 | `["Dados do interessado","Dados da Solicitação","Documentos Compleme...` | 1 | WhatsApp, analista: 'tá igual ao que a gente faz': modelo aceito como está |
 | opcoes-03 | `["Interessado","Secretaria de lotação do interessado"]` | 1 | WhatsApp, analista: 'tá igual ao que a gente faz': modelo aceito como está |
 | documento-05 | `{"exigido":true}` | 1 | WhatsApp, analista: 'tá igual ao que a gente faz': modelo aceito como está |
