@@ -155,12 +155,12 @@ function pintarVivo() {
   aviso.classList.remove("falha");
   if (estado.fonte === "api") {
     el.classList.add("ok");
-    $("vivo-texto").textContent = `ao vivo · ${new Date(estado.ultimoOk).toLocaleTimeString("pt-BR")}`;
+    $("vivo-texto").textContent = `ao vivo, ${new Date(estado.ultimoOk).toLocaleTimeString("pt-BR")}`;
     aviso.hidden = true;
   } else if (estado.fonte === "estatico") {
     el.classList.add("estatico");
     const g = estado.visao?.gerado_em;
-    $("vivo-texto").textContent = `cópia estática${g ? ` · ${quando(g)}` : ""}`;
+    $("vivo-texto").textContent = `cópia estática${g ? ` de ${quando(g)}` : ""}`;
     aviso.hidden = false;
     aviso.textContent = `Você está vendo uma cópia estática gerada ${g ? `às ${quando(g)}` : "antes"} (painel/data.json). As ações ficam desabilitadas até a API voltar.`;
   } else {
@@ -232,13 +232,13 @@ function pintarFila(v) {
     : `<p class="fila-vazia">${comDados.length ? "Nada esperando por você." : "Nenhum processo iniciado. O primeiro “oi” do analista aparece aqui."}</p>`;
   const l2 = pref.length
     ? `<ul class="fila-lista">${pref.map((p) => { const m = motivoPrefeitura(p); return itemFila(v, p, m.texto, m.desde); }).join("")}</ul>`
-    : `<p class="fila-vazia">Ninguém esperando a prefeitura.</p>`;
+    : `<p class="fila-vazia">Nenhum processo esperando a prefeitura.</p>`;
   const html = `
-    <div class="fila-bloco ${minha.length ? "urgente" : ""}">
-      <div class="fila-cab"><h2>Precisa de você</h2><span class="contagem">${minha.length}</span></div>${l1}
+    <div class="fila-grupo ${minha.length ? "urgente" : ""}">
+      <h2>Precisa de você <span class="contagem">${minha.length}</span></h2>${l1}
     </div>
-    <div class="fila-bloco">
-      <div class="fila-cab"><h2>Esperando a prefeitura</h2><span class="contagem">${pref.length}</span></div>${l2}
+    <div class="fila-grupo">
+      <h2>Esperando a prefeitura <span class="contagem">${pref.length}</span></h2>${l2}
     </div>`;
   setHtml($("fila"), html, "fila");
 }
@@ -309,7 +309,7 @@ function pintarCabecalhoDetalhe(d) {
   const html = base.map((e, i) => {
     const r = d.run?.etapas?.find((x) => x.slug === e.slug) ?? {};
     const quandoTxt = e.status === "concluida" && r.concluida_em ? `às ${quando(r.concluida_em)}` : (e.status === "executando" || e.status === "aguardando") && r.iniciada_em ? `desde ${quando(r.iniciada_em)}` : "";
-    return `<div class="passo ${esc(e.status)}"><div class="passo-nome" title="${esc(r.nome || e.nome)}"><span class="passo-n">${i + 1}</span>${esc(ETAPA_NOME_CURTO[e.slug] ?? r.nome ?? e.nome)}</div><div class="passo-estado" title="${esc(quandoTxt)}">${esc(ETAPA_CURTA[e.status] ?? e.status)}</div></div>`;
+    return `<li class="passo ${esc(e.status)}"><div class="passo-nome" title="${esc(r.nome || e.nome)}"><span class="passo-n">${i + 1}</span>${esc(ETAPA_NOME_CURTO[e.slug] ?? r.nome ?? e.nome)}</div><div class="passo-estado" title="${esc(quandoTxt)}">${esc(ETAPA_CURTA[e.status] ?? e.status)}</div></li>`;
   }).join("");
   setHtml($("d-faixa"), html, "d-faixa");
 }
@@ -423,34 +423,38 @@ $("d-gate").addEventListener("click", async (e) => {
 function pintarEtapas(d) {
   const run = d.run;
   const base = d.processo?.etapas ?? [];
-  $("d-etapas-nota").textContent = run ? "" : base.length ? "deduzidas pelos arquivos (sem run.json)" : "";
+  $("d-etapas-nota").textContent = run ? "" : base.length ? "deduzidas pelos arquivos" : "";
   const html = base.map((e) => {
     const r = run?.etapas?.find((x) => x.slug === e.slug) ?? {};
     const nome = r.nome || e.nome;
-    const quandoTxt = e.status === "concluida" && r.concluida_em ? ` às ${quando(r.concluida_em)}` : (e.status === "executando" || e.status === "aguardando") && r.iniciada_em ? ` desde ${quando(r.iniciada_em)}` : "";
-    const tent = r.tentativas > 1 ? ` Levou ${r.tentativas} tentativas.` : "";
-    let frase = `<b>${esc(cap(ETAPA_PALAVRA[e.status] ?? e.status))}</b>${esc(quandoTxt)}.`;
-    if (e.status === "concluida" && r.saida_resumo) frase += ` ${esc(cap(r.saida_resumo))}.`;
-    else if ((e.status === "executando" || e.status === "aguardando") && (r.saida_resumo || r.entrada_resumo)) frase += ` ${esc(cap(r.saida_resumo || r.entrada_resumo))}.`;
-    else if (e.status === "falhou" && r.saida_resumo) frase += ` ${esc(cap(r.saida_resumo))}.`;
-    frase += esc(tent);
-    const quem = "";
-    const crit = (r.criterios ?? []).map((c) => `<li class="criterio ${esc(c.resultado)}">
+    const quandoTxt = e.status === "concluida" && r.concluida_em ? quando(r.concluida_em) : (e.status === "executando" || e.status === "aguardando") && r.iniciada_em ? `desde ${quando(r.iniciada_em)}` : "";
+    let frase = e.status === "pendente" ? "" : `<b>${esc(cap(ETAPA_PALAVRA[e.status] ?? e.status))}</b>`;
+    const resumo = e.status === "concluida" || e.status === "falhou" ? r.saida_resumo : r.saida_resumo || r.entrada_resumo;
+    if (frase && resumo) frase += `. ${esc(cap(resumo))}`;
+    if (r.tentativas > 1) frase += `. ${r.tentativas} tentativas`;
+    const crits = r.criterios ?? [];
+    const todosOk = crits.length && crits.every((c) => c.resultado === "passou" || c.resultado === "nao_avaliado");
+    let critHtml = "";
+    if (crits.length && e.status === "concluida" && todosOk) {
+      const n = crits.filter((c) => c.resultado === "passou").length;
+      critHtml = `<div class="criterios-resumo" title="${esc(crits.map((c) => `${c.nome}: ${c.detalhe || c.resultado}`).join("\n"))}"><span class="criterio-icone criterio passou" style="background:var(--success)">${ICO.check}</span>${n} ${n === 1 ? "critério verificado" : "critérios verificados"}</div>`;
+    } else if (crits.length && e.status !== "pendente") {
+      critHtml = `<ul class="criterios">${crits.map((c) => `<li class="criterio ${esc(c.resultado)}">
         <span class="criterio-icone">${ICONE_CRITERIO[c.resultado] ?? ICO.minus}</span>
-        <span><span class="criterio-nome" title="${esc(c.detalhe ?? "")}">${esc(cap(c.nome))}</span>${c.detalhe && c.resultado !== "passou" ? `<span class="criterio-detalhe">${esc(cap(c.detalhe))}</span>` : ""}</span></li>`).join("");
+        <span><span class="criterio-nome">${esc(cap(c.nome))}</span>${c.detalhe && c.resultado !== "passou" ? `<span class="criterio-detalhe">${esc(cap(c.detalhe))}</span>` : ""}</span></li>`).join("")}</ul>`;
+    }
     return `<li class="etapa ${esc(e.status)}">
       <span class="etapa-marca" aria-hidden="true">${e.status === "concluida" ? ICO.check : e.status === "falhou" ? ICO.x : e.status === "aguardando" ? ICO.clock : ""}</span>
-      <div class="etapa-cab"><span class="etapa-nome">${esc(nome)}</span></div>
-      <div class="etapa-frase">${frase}</div>
-      ${quem ? `<div class="etapa-quem">${esc(quem)}</div>` : ""}
-      ${crit ? `<ul class="criterios">${crit}</ul>` : ""}
+      <div class="etapa-cab"><span class="etapa-nome">${esc(nome)}</span><span class="etapa-quando">${esc(quandoTxt)}</span></div>
+      ${frase ? `<div class="etapa-frase">${frase}</div>` : ""}
+      ${critHtml}
     </li>`;
   }).join("");
-  setHtml($("d-etapas"), html || `<p class="vazio">As etapas aparecem quando o pipeline abrir o processo (run.json).</p>`, "d-etapas");
+  setHtml($("d-etapas"), html || `<p class="vazio">Aparecem quando o pipeline abrir o processo.</p>`, "d-etapas");
 }
 
 // ---------- detalhe: conversa ----------
-const ROTULO_VOZ = { analista: "Analista", agente: "Agente", implantador: "Implantador" };
+const ROTULO_VOZ = { analista: "Analista", agente: "Agente", implantador: "Você (implantador)" };
 function vozDe(m) {
   if (m.voz) return m.voz;
   if (m.role === "user") return "analista";
@@ -541,7 +545,7 @@ function pintarChat(d) {
   let html = itens.map((it) => {
     if (it.tipo === "evento") {
       const txt = it.i.tipo === "assumir" ? "Implantador assumiu a conversa; o agente pausou" : it.i.tipo === "devolver" ? "Conversa devolvida ao agente" : it.i.tipo;
-      return `<div class="evento humano">${esc(txt)}${it.i.por && it.i.por !== "implantador" ? ` (${esc(it.i.por)})` : ""} · ${esc(hora(it.em))}</div>`;
+      return `<div class="evento humano">${esc(txt)}${it.i.por && it.i.por !== "implantador" ? ` (${esc(it.i.por)})` : ""}, ${esc(hora(it.em))}</div>`;
     }
     const t = it.t;
     const voz = vozDe(t);
@@ -551,14 +555,14 @@ function pintarChat(d) {
       if (!estado.mostrarNotas) return "";
       return `<div class="nota"><b>Nota interna do agente (não enviada):</b> ${esc(texto)}</div>`;
     }
-    if (voz === "sistema") return `<div class="evento">${esc(texto)} · ${esc(hora(t.em))}</div>`;
+    if (voz === "sistema") return `<div class="evento">${esc(texto)}, ${esc(hora(t.em))}</div>`;
     const anexo = t.anexo ? `<div><span class="anexo">${ICO.clip}${esc(t.anexo)}</span></div>` : "";
     const corpo = texto || (t.anexo ? "" : "(mensagem vazia)");
     return `<div class="bolha ${voz}"><div class="bolha-autor">${ROTULO_VOZ[voz] ?? voz}</div>${esc(corpo)}${anexo}<span class="bolha-hora">${esc(quando(t.em))}</span></div>`
       + (voz === "agente" || voz === "implantador" ? htmlRegistros(t.registros, perguntas) : "");
   }).join("");
   html += htmlRegistros(d.registros_sem_turno, perguntas, true);
-  html += (d.outbox_pendente ?? []).map((o) => `<div class="bolha implantador enviando"><div class="bolha-autor">Implantador</div>${esc(o.texto)}<span class="bolha-hora">enviando…</span></div>`).join("");
+  html += (d.outbox_pendente ?? []).map((o) => `<div class="bolha implantador enviando"><div class="bolha-autor">Você (implantador)</div>${esc(o.texto)}<span class="bolha-hora">enviando…</span></div>`).join("");
   if (!html) html = `<div class="estado-vazio"><h3>Nenhuma mensagem ainda</h3><p>Quando o analista mandar a primeira mensagem no WhatsApp, ela aparece aqui à direita e a resposta do agente à esquerda. Embaixo de cada resposta do agente fica o que ele registrou na ficha, com origem e confiança.</p></div>`;
 
   const chat = $("d-chat");
@@ -580,7 +584,7 @@ function pintarChat(d) {
   setHtml(modoEl, somenteLeitura()
     ? `Cópia estática: só leitura.`
     : humano
-      ? `<span class="selo selo-brand"><span class="ponto"></span>Você na conversa${d.assumida_em ? ` desde ${esc(hora(d.assumida_em))}` : ""} · agente pausado</span>`
+      ? `<span class="selo selo-brand"><span class="ponto"></span>Você na conversa${d.assumida_em ? ` desde ${esc(hora(d.assumida_em))}` : ""}, agente pausado</span>`
       : `<span class="selo selo-neutro"><span class="ponto"></span>Agente respondendo</span>`, "d-chat-modo");
   const btn = $("btn-modo");
   btn.hidden = !d.processo;
@@ -668,7 +672,7 @@ function pintarFicha(d) {
     return;
   }
   const tot = gs.reduce((a, g) => a + g.total, 0), resp = gs.reduce((a, g) => a + g.respondidas, 0), pend = gs.reduce((a, g) => a + g.pendencias, 0);
-  $("d-ficha-nota").textContent = `${resp} de ${tot} respondidas${pend ? ` · ${pend} pend.` : ""}`;
+  $("d-ficha-nota").textContent = `${resp} de ${tot} respondidas${pend ? `, ${plural(pend, "pendência", "pendências")}` : ""}`;
   const html = gs.map((g, gi) => {
     const t = g.total || 1;
     const msg = ((g.respondidas - g.por_anexo) / t) * 100;
@@ -687,7 +691,7 @@ function pintarFicha(d) {
     const nAbertas = g.abertas - Math.min(g.pendencias, g.abertas);
     return `<details class="ficha-grupo" data-k="ficha-${gi}">
       <summary title="${g.respondidas} respondidas (${g.por_anexo} por anexo), ${nAbertas} em aberto, ${g.pendencias} pendências">
-        <span class="nome">${esc(g.grupo)}</span><span class="n ${g.pendencias ? "aviso" : ""}">${g.respondidas}/${g.total}${g.pendencias ? ` · ${g.pendencias} pend.` : ""}</span>
+        <span class="nome">${esc(g.grupo)}</span><span class="n ${g.pendencias ? "aviso" : ""}">${g.respondidas}/${g.total}${g.pendencias ? `, ${g.pendencias} pend.` : ""}</span>
         <div class="barra"><i class="b-msg" style="width:${msg}%"></i><i class="b-anexo" style="width:${anx}%"></i><i class="b-pend" style="width:${pnd}%"></i></div>
       </summary>
       ${lista ? `<ul class="ficha-perguntas">${lista}</ul>` : `<p class="vazio">Sem o texto das perguntas (ficha.json sem este grupo).</p>`}
@@ -744,7 +748,7 @@ function itemDiff(item) {
   let origem = "";
   const o = resto.lastIndexOf(" _(");
   if (o >= 0 && resto.endsWith(")_")) { origem = resto.slice(o + 3, -2); resto = resto.slice(0, o); }
-  const limpar = (s) => s.replace(/^`|`$/g, "").trim();
+  const limpar = (s) => s.trim().replace(/^`|`$/g, "").trim();
   const seta = resto.split(" → ");
   const mudanca = seta.length === 2
     ? `<span class="de">${esc(limpar(seta[0]))}</span><span class="seta">→</span><span class="para">${esc(limpar(seta[1]))}</span>`
@@ -764,10 +768,10 @@ function pintarTextos(d) {
       $("d-diff-nota").textContent = "";
       setHtml($("d-diff"), `<pre class="pre">${esc(d.diff)}</pre>`, "d-diff");
     } else {
-      $("d-diff-nota").textContent = `${plural(mudou.length, "mudança", "mudanças")} · ${ficou.length} como no template`;
+      $("d-diff-nota").textContent = `${plural(mudou.length, "mudança", "mudanças")}, ${ficou.length} como no template`;
       const html = `${mudou.length ? `<ul class="diff-lista">${mudou.map(itemDiff).join("")}</ul>` : `<p class="vazio">Nenhuma mudança em relação ao template.</p>`}
-        ${ficou.length ? `<div class="diff-sub">Ficou como no template</div><div class="diff-chips">${ficou.map((c) => `<code>${esc(c.replace(/`/g, ""))}</code>`).join("")}</div>` : ""}
-        ${atencao.length ? `<div class="diff-sub">Atenção do implantador</div><ul class="pendencias-lista">${atencao.map((a) => `<li>${esc(a.replace(/^\[[ x]\]\s*/, "").replace(/\*\*/g, ""))}</li>`).join("")}</ul>` : ""}`;
+        ${ficou.length ? `<h3 class="sub">Ficou como no template</h3><div class="diff-chips">${ficou.map((c) => `<code>${esc(c.replace(/`/g, ""))}</code>`).join("")}</div>` : ""}
+        ${atencao.length ? `<h3 class="sub">Atenção do implantador</h3><ul class="pendencias-lista">${atencao.map((a) => `<li>${esc(a.replace(/^\[[ x]\]\s*/, "").replace(/\*\*/g, ""))}</li>`).join("")}</ul>` : ""}`;
       setHtml($("d-diff"), html, "d-diff");
     }
   }
@@ -798,6 +802,7 @@ function pintarDetalhe() {
   $("d-vazio").hidden = !vazio;
   $("d-gate").hidden = vazio;
   $("d-grade").hidden = vazio;
+  $("d-listas").hidden = vazio;
   $("d-rodape").hidden = vazio;
   $("d-faixa").hidden = vazio;
   if (vazio) {

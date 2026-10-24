@@ -15,7 +15,6 @@
   <header class="topo">
     <a href="#/" class="marca" aria-label="Aprova, painel de implantação">
       <img src="aprova-wordmark.svg" alt="Aprova" class="marca-logo" width="118" height="16">
-      <span class="marca-sep" aria-hidden="true"></span>
       <span class="marca-produto">Implantação</span>
     </a>
     <nav class="topo-nav" aria-label="Navegação">
@@ -35,8 +34,8 @@
     <section id="tela-visao" class="tela" aria-label="Visão da prefeitura">
       <div class="metricas" id="metricas"></div>
       <section class="fila" id="fila" aria-label="Fila de atenção"></section>
-      <div class="secretarias-cab">
-        <h2 class="secao-titulo">Secretarias</h2>
+      <div class="lista-cab">
+        <h2>Secretarias</h2>
         <div class="legenda" id="legenda"></div>
       </div>
       <div class="secretarias" id="secretarias"></div>
@@ -51,20 +50,20 @@
         </div>
         <div class="detalhe-estado" id="d-estado"></div>
       </div>
-      <div class="faixa-grande" id="d-faixa"></div>
+      <ol class="faixa-grande" id="d-faixa" aria-label="Etapas do processo"></ol>
 
       <div id="d-vazio" hidden></div>
       <div id="d-gate"></div>
 
-      <div class="detalhe-grade" id="d-grade">
-        <section class="cartao" aria-labelledby="h-etapas">
-          <div class="cartao-cab"><h2 id="h-etapas">Etapas e critérios</h2><span class="cartao-nota" id="d-etapas-nota"></span></div>
+      <div class="corpo" id="d-grade">
+        <section class="secao" aria-labelledby="h-etapas">
+          <div class="secao-cab"><h2 id="h-etapas">Etapas</h2><span class="secao-nota" id="d-etapas-nota"></span></div>
           <ol class="linha-tempo" id="d-etapas"></ol>
         </section>
 
-        <section class="cartao chat-cartao" aria-labelledby="h-chat">
-          <div class="cartao-cab chat-cab">
-            <div>
+        <section class="conversa" aria-labelledby="h-chat">
+          <div class="chat-cab">
+            <div class="chat-cab-titulo">
               <h2 id="h-chat">Conversa no WhatsApp</h2>
               <div class="chat-modo" id="chat-modo"></div>
             </div>
@@ -78,41 +77,34 @@
           <form class="compositor" id="compositor" hidden autocomplete="off">
             <label class="compositor-rotulo" for="compositor-texto">Sua mensagem vai para o analista no WhatsApp</label>
             <div class="compositor-linha">
-              <textarea id="compositor-texto" rows="2" placeholder="Escreva para o analista… (Ctrl+Enter envia)"></textarea>
+              <textarea id="compositor-texto" rows="2" placeholder="Escreva para o analista (Ctrl+Enter envia)"></textarea>
               <button type="submit" class="btn btn-primario" id="compositor-enviar">Enviar</button>
             </div>
           </form>
           <p class="aviso-erro" id="chat-erro" hidden></p>
         </section>
-
-        <div class="coluna-direita">
-          <section class="cartao" aria-labelledby="h-ficha">
-            <div class="cartao-cab"><h2 id="h-ficha">Ficha por grupo</h2><span class="cartao-nota" id="d-ficha-nota"></span></div>
-            <div id="d-ficha"></div>
-          </section>
-          <section class="cartao" aria-labelledby="h-cenarios">
-            <div class="cartao-cab"><h2 id="h-cenarios">Cenários de validação</h2><span class="cartao-nota" id="d-cenarios-nota"></span></div>
-            <div id="d-cenarios"></div>
-          </section>
-        </div>
       </div>
 
-      <div class="detalhe-rodape" id="d-rodape">
-        <section class="cartao" aria-labelledby="h-diff">
-          <div class="cartao-cab"><h2 id="h-diff">O que mudou no formulário</h2><span class="cartao-nota" id="d-diff-nota"></span></div>
-          <div id="d-diff"></div>
+      <div class="duas" id="d-listas">
+        <section class="secao" aria-labelledby="h-ficha">
+          <div class="secao-cab"><h2 id="h-ficha">Ficha</h2><span class="secao-nota" id="d-ficha-nota"></span></div>
+          <div id="d-ficha"></div>
         </section>
-        <div class="coluna-direita">
-          <section class="cartao" aria-labelledby="h-numeros">
-            <div class="cartao-cab"><h2 id="h-numeros">Números do processo</h2></div>
-            <dl class="numeros" id="d-numeros"></dl>
-          </section>
-          <section class="cartao" aria-labelledby="h-pendencias" id="bloco-pendencias" hidden>
-            <div class="cartao-cab"><h2 id="h-pendencias">Pendências do implantador</h2></div>
-            <div id="d-pendencias"></div>
-          </section>
-        </div>
+        <section class="secao" aria-labelledby="h-cenarios">
+          <div class="secao-cab"><h2 id="h-cenarios">Cenários de validação</h2><span class="secao-nota" id="d-cenarios-nota"></span></div>
+          <div id="d-cenarios"></div>
+        </section>
       </div>
+
+      <section class="secao" id="d-rodape" aria-labelledby="h-diff">
+        <div class="secao-cab"><h2 id="h-diff">O que mudou no formulário</h2><span class="secao-nota" id="d-diff-nota"></span></div>
+        <dl class="numeros" id="d-numeros"></dl>
+        <div id="d-diff"></div>
+        <div id="bloco-pendencias" hidden>
+          <h3 class="sub">Pendências do implantador</h3>
+          <div id="d-pendencias"></div>
+        </div>
+      </section>
     </section>
 
     <!-- Sem dados nenhum (nem API nem cópia estática) -->
