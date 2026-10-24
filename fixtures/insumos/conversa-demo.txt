@@ -1,0 +1,18 @@
+# Conversa de demonstração: Marcos, analista da SEPLAN de Vale Verde (dados fictícios).
+# Uma fala por linha. "/anexo <arquivo> [legenda]" manda arquivo. Linhas com # são ignoradas.
+# As falas não dependem da ordem exata das perguntas do agente: cada uma diz do que está falando.
+# Replay: npm run chat -- --script fixtures/insumos/conversa-demo.txt
+Bom dia! Aqui é o Marcos, da SEPLAN, divisão de aprovação de projetos. Pode mandar que vou respondendo entre um atendimento e outro.
+Quem recebe o alvará é a Secretaria de Planejamento Urbano, Divisão de Aprovação de Projetos. Eu analiso e quem assina é o secretário.
+/anexo fixtures/insumos/tabela-zoneamento.png essa é a tabela do anexo II da lei 1.204, tem as zonas e os recuos de cada uma
+isso, confere. Na ZR2 é 4 m de frente mesmo
+Documentos: ART/RRT, matrícula atualizada e projeto em PDF são sempre exigidos. DWG a gente não pede. Procuração só quando quem pede é procurador. Contrato social só pra empresa, RG e CPF só pra pessoa física.
+Alvará antigo só na retificação de alvará que foi aprovado no papel, do jeito que está. Documento complementar e projetos complementares pode deixar como estão.
+Tipo de logradouro aqui tem Rua, Avenida, Travessa, Estrada e Outros. Material: alvenaria, madeira, mista e estrutura metálica.
+A taxa eu não sei te dizer, quem calcula é a Fazenda. Vou ver com eles.
+Fiscalização in loco a gente não faz nessa fase. Numeração predial tem, quem faz é o protocolo. O parecer edilício aqui chama Parecer Técnico de Aprovação. Pareceres complementares e observações tem sim.
+As etapas do pedido podem ficar todas. Tipo de vínculo, responsabilidade e os tipos de solicitação estão certos como estão.
+Tipo de uso e uso complementar também pode deixar como está.
+Atividades é uma lista grande, te mando a planilha segunda.
+A declaração pode ser a do sistema mesmo. O alvará sai no modelo de vocês, com validade de 12 meses.
+Por hoje é isso, tenho balcão agora. Qualquer coisa me chama.
