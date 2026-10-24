@@ -4,13 +4,20 @@ import { betaZodTool } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { analisarTemplate } from "../core/template-analyzer.js";
 import { aplicarFicha, gerarDiff } from "../core/patcher.js";
 import { rodarCenarios, relatorioTexto } from "../core/scenario-runner.js";
-import { store, perguntasAbertas, type Contexto } from "./store.js";
-import { extrair, type Anexo } from "./extrator.js";
-import type { Cenario } from "../core/types.js";
+import { validarResposta } from "../core/respostas.js";
+import { store, perguntasAbertas, resumir, type Contexto } from "./store.js";
+import { extrair, type Anexo, type SaidaExtrator } from "./extrator.js";
+import { registrarRejeicao, limparRejeicao } from "../pipeline/run.js";
+import type { Cenario, Pergunta } from "../core/types.js";
 
 export type Canal = { enviar: (texto: string) => Promise<void> };
 
-export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[] = []) {
+/** Ganchos do pipeline: a sub-etapa extrair embrulha a leitura de anexos com os seus critérios. */
+export type Ganchos = {
+  aoExtrair?: (anexo: Anexo, abertas: Pergunta[], ler: (a: Anexo, q: Pergunta[]) => Promise<SaidaExtrator>) => Promise<SaidaExtrator>;
+};
+
+export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[] = [], ganchos: Ganchos = {}) {
   const analisar_template = betaZodTool({
     name: "analisar_template",
     description: "Extrai mecanicamente os pontos de parametrização do template Formly e cria a ficha de perguntas do processo.",
@@ -36,7 +43,11 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
 
   const registrar_resposta = betaZodTool({
     name: "registrar_resposta",
-    description: "Registra a resposta de uma pergunta da ficha, com origem e confiança (0 a 1). Use pendencia quando o analista não sabe.",
+    description:
+      "Registra a resposta de uma pergunta da ficha, com origem e confiança (0 a 1). Use resposta null + pendencia quando o analista não sabe. " +
+      "Formato por tipo: opcoes → lista de textos; dataset → {zona: {CHAVE: número}} com todas as chaves; documento → {exigido, sempre?}; " +
+      "setor → {slug, setor?}; etapas → lista de títulos; taxa/card → {existe, nome?}; texto/residuo → texto; saida → objeto. " +
+      "Se voltar schema_invalido, corrija o formato ou reformule a pergunta ao analista.",
     inputSchema: z.object({
       pergunta_id: z.string(),
       resposta: z.any().nullable(),
@@ -49,9 +60,27 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
       if (!f) return "ficha inexistente";
       const q = f.grupos.flatMap((g) => g.perguntas).find((q) => q.id === i.pergunta_id);
       if (!q) return `pergunta ${i.pergunta_id} não existe`;
-      Object.assign(q, { resposta: i.resposta, origem: i.origem, confianca: i.confianca, pendencia: i.pendencia });
+      const v = validarResposta(q, i.resposta);
+      if (!v.ok) {
+        registrarRejeicao(ctx, q.id, v.erro);
+        return v.erro;
+      }
+      // Candidato de anexo que precisa de confirmação: fica abaixo do limiar até o analista confirmar por mensagem.
+      let confianca = i.confianca;
+      const pendentes = store.aConfirmar(ctx);
+      let aviso = "";
+      if (pendentes.includes(q.id)) {
+        if (/mensagem/i.test(i.origem)) store.salvarAConfirmar(ctx, pendentes.filter((x) => x !== q.id));
+        else if (confianca > 0.79) { confianca = 0.79; aviso = " (confiança limitada a 0,79: confirme com o analista e registre de novo com origem mensagem)"; }
+      }
+      Object.assign(q, { resposta: v.valor, origem: i.origem, confianca, pendencia: i.pendencia });
       store.salvarFicha(ctx, f);
-      return `ok; abertas restantes: ${perguntasAbertas(f).length}`;
+      limparRejeicao(ctx, q.id);
+      store.registrar(ctx, {
+        pergunta_id: q.id, confianca, origem: i.origem,
+        resumo: v.valor === null ? `pendência: ${i.pendencia ?? "sem resposta"}` : resumir(v.valor),
+      });
+      return `ok${aviso}; abertas restantes: ${perguntasAbertas(f).length}`;
     },
   });
 
@@ -61,10 +90,11 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
     inputSchema: z.object({ texto: z.string() }),
     run: async ({ texto }) => {
       await canal.enviar(texto);
-      const e = store.estado(ctx);
-      e.mensagens_enviadas++;
-      e.perguntas_feitas += (texto.match(/\?/g) ?? []).length;
-      store.salvarEstado(ctx, e);
+      store.atualizarEstado(ctx, (e) => {
+        e.mensagens_enviadas++;
+        e.perguntas_feitas += (texto.match(/\?/g) ?? []).length;
+        e.historico.push({ role: "assistant", content: texto, em: new Date().toISOString() });
+      });
       return "enviada";
     },
   });
@@ -76,8 +106,15 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
     run: async () => {
       const f = store.ficha(ctx);
       const anexo = anexosPendentes.shift();
-      if (!f || !anexo) return JSON.stringify({ candidatos: [], motivo: "sem anexo pendente" });
-      return JSON.stringify(await extrair(anexo, perguntasAbertas(f)));
+      if (!f || !anexo) return JSON.stringify({ candidatos: [], descartados: [], motivo: "sem anexo pendente" });
+      const abertas = perguntasAbertas(f);
+      const ler = (a: Anexo, q: Pergunta[]) => extrair(a, q);
+      const saida = ganchos.aoExtrair ? await ganchos.aoExtrair(anexo, abertas, ler) : await ler(anexo, abertas);
+      const em = new Date().toISOString();
+      store.anexarDescartados(ctx, (saida.descartados ?? []).map((d) => ({ em, anexo: anexo.nome ?? anexo.tipo, ...d })));
+      const confirmar = saida.candidatos.filter((k) => k.precisa_confirmacao).map((k) => k.pergunta_id);
+      if (confirmar.length) store.salvarAConfirmar(ctx, [...store.aConfirmar(ctx), ...confirmar]);
+      return JSON.stringify(saida);
     },
   });
 
@@ -136,18 +173,12 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
     run: async () => JSON.stringify({ ...store.estado(ctx), historico: undefined, abertas: store.ficha(ctx) ? perguntasAbertas(store.ficha(ctx)!).length : null }),
   });
 
-  const avancar_etapa = betaZodTool({
-    name: "avancar_etapa",
-    description: "Muda a etapa do processo.",
-    inputSchema: z.object({ etapa: z.enum(["nao_iniciado", "analisado", "coletando", "aguardando_prefeitura", "ficha_fechada", "aplicado", "validando", "pronto_para_homologacao"]) }),
-    run: async ({ etapa }) => { const e = store.estado(ctx); e.etapa = etapa; store.salvarEstado(ctx, e); return `etapa: ${etapa}`; },
-  });
-
   return {
-    orquestrador: [estado_processo, avancar_etapa, analisar_template, ler_ficha],
+    orquestrador: [estado_processo, analisar_template, ler_ficha],
     coletor: [ler_ficha, registrar_resposta, enviar_mensagem, pedir_extracao],
     aplicador: [aplicar_ficha, gerar_diff],
-    validador: [ler_ficha, rodar_cenarios, enviar_mensagem],
-    todas: [estado_processo, avancar_etapa, analisar_template, ler_ficha, registrar_resposta, enviar_mensagem, pedir_extracao, aplicar_ficha, gerar_diff, rodar_cenarios],
+    // O validador não fala com a prefeitura: confirmações viram gate para o analista, abertos pelo pipeline.
+    validador: [ler_ficha, rodar_cenarios],
+    todas: [estado_processo, analisar_template, ler_ficha, registrar_resposta, enviar_mensagem, pedir_extracao, aplicar_ficha, gerar_diff, rodar_cenarios],
   };
 }

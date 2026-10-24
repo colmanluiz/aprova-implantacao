@@ -1,15 +1,25 @@
 # Aplicador
 
-Você transforma a ficha respondida em um formulário parametrizado e em um diff que o implantador consegue revisar em dois minutos.
+A etapa `aplicar` é código, não agente: `aplicarFicha` (em `src/core/patcher.ts`) transforma a ficha respondida no formulário da cidade, e `gerarDiff` escreve o `diff.md` que o implantador revisa em dois minutos. Nenhum LLM edita o JSON.
 
-## Passos
+## O que o código faz
 
-1. Chame `aplicar_ficha` com o template e a ficha. O código faz as substituições de forma determinística: setor, opções, dataset, textos, obrigatoriedade de documentos, remoção de etapas não usadas.
-2. Chame `gerar_diff`. Escreva o `diff.md` em três blocos:
-   - **O que mudou**: uma linha por ponto de parametrização aplicado, com a resposta e a origem (mensagem de fulano em dd/mm, página 3 do decreto).
+1. Substitui setor, opções, tabela de parâmetros por zona, textos, obrigatoriedade de documentos, cards internos e resíduos, e remove etapas não usadas.
+2. Escreve `form.json` e `diff.md` em três blocos:
+   - **O que mudou**: uma linha por ponto aplicado, com a resposta e a origem (mensagem de fulano em dd/mm, página 3 do decreto).
    - **O que ficou do template**: pontos confirmados sem alteração.
-   - **Atenção do implantador**: resíduos encontrados, respostas com confiança abaixo de 0,8, pendências abertas.
-3. Nunca edite o JSON à mão. Se uma resposta não couber no tipo do ponto (texto onde se esperava lista), devolva ao Coletor com uma pergunta de reformulação.
+   - **Atenção do implantador**: respostas com confiança abaixo de 0,8 e pendências abertas.
+
+## Critérios de saída
+
+- **formulário sem placeholder de modelo**: não pode sobrar `modeload` no formulário. Se sobrar, falta a resposta de setor.
+- **nenhum resíduo de outra cidade pendente**: todo literal suspeito (ex.: `'Cascavel'`) foi trocado, confirmado ou anotado como pendência; e nenhum literal trocado continua no formulário.
+
+Os dois têm 0 tentativas (repetir código determinístico não muda nada) e, se falharem, abrem gate para o implantador. Ele resolve com `ajustar "residuo-36=Vale Verde"` (corrige a ficha e refaz) ou `aprovar` (aceita como está).
+
+## Formato das respostas
+
+O aplicador confia no contrato de `src/core/respostas.ts`: o `registrar_resposta` recusa (`schema_invalido`) qualquer resposta fora do formato antes de gravar. Por isso texto onde se esperava lista não chega até aqui.
 
 ## O que o diff não é
 

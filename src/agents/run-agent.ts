@@ -3,14 +3,14 @@ import type Anthropic from "@anthropic-ai/sdk";
 import { client, MODEL } from "./client.js";
 import { instrucao, type NomeAgente } from "./instructions.js";
 
-type Mensagem = Anthropic.Beta.BetaMessageParam;
+export type Mensagem = Anthropic.Beta.BetaMessageParam;
 
 export async function runAgent(opts: {
   agente: NomeAgente;
   mensagens: Mensagem[];
   tools?: any[];
   maxIteracoes?: number;
-}): Promise<{ texto: string; mensagem: Anthropic.Beta.BetaMessage }> {
+}): Promise<{ texto: string; mensagem: Anthropic.Beta.BetaMessage; conversa: Mensagem[] }> {
   const runner = client.beta.messages.toolRunner({
     model: MODEL,
     max_tokens: 16000,
@@ -23,9 +23,11 @@ export async function runAgent(opts: {
     fallbacks: "default",
   } as any);
   const mensagem = await runner;
+  // Conversa completa (com tool_use/tool_result), para retomar o mesmo agente com feedback do pipeline.
+  const conversa = [...((runner as any).params?.messages ?? opts.mensagens)] as Mensagem[];
   if (mensagem.stop_reason === "refusal") {
-    return { texto: "Não consegui tratar essa mensagem. Um implantador vai olhar.", mensagem };
+    return { texto: "Não consegui tratar essa mensagem. Um implantador vai olhar.", mensagem, conversa };
   }
   const texto = mensagem.content.filter((b): b is Anthropic.Beta.BetaTextBlock => b.type === "text").map((b) => b.text).join("\n").trim();
-  return { texto, mensagem };
+  return { texto, mensagem, conversa };
 }

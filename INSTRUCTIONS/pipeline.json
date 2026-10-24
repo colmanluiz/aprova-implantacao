@@ -1,0 +1,75 @@
+{
+  "versao": 1,
+  "limiar_confianca": 0.8,
+  "etapas": [
+    {
+      "slug": "analisar",
+      "nome": "Analisar template",
+      "tipo": "codigo",
+      "descricao": "O código lê o modelo de formulário da Aprova e lista só o que muda de uma cidade para outra, em forma de perguntas.",
+      "criterios": [
+        { "nome": "ficha tem perguntas bloqueantes", "tentativas": 0, "ao_falhar": "implantador" },
+        { "nome": "nenhum placeholder sem pergunta", "tentativas": 0, "ao_falhar": "implantador" }
+      ]
+    },
+    {
+      "slug": "coletar",
+      "nome": "Coletar respostas",
+      "tipo": "agente",
+      "agente": "coletor",
+      "descricao": "O agente conversa com o analista da prefeitura pelo WhatsApp, no ritmo dele, até cada pergunta ter resposta ou virar pendência.",
+      "criterios": [
+        { "nome": "nenhuma pergunta em aberto", "tentativas": 1, "ao_falhar": "analista" }
+      ]
+    },
+    {
+      "slug": "extrair",
+      "nome": "Ler anexos",
+      "tipo": "agente",
+      "agente": "extrator",
+      "sub_etapa_de": "coletar",
+      "descricao": "Quando o analista manda foto, PDF ou planilha, o agente lê o arquivo e sugere respostas citando de onde tirou cada uma.",
+      "criterios": [
+        { "nome": "todo candidato cita trecho e confiança", "tentativas": 1, "ao_falhar": "analista" }
+      ]
+    },
+    {
+      "slug": "aplicar",
+      "nome": "Gerar formulário",
+      "tipo": "codigo",
+      "descricao": "O código monta o formulário da cidade a partir das respostas, sem IA, e escreve um resumo do que mudou e por quê.",
+      "criterios": [
+        { "nome": "formulário sem placeholder de modelo", "tentativas": 0, "ao_falhar": "implantador" },
+        { "nome": "nenhum resíduo de outra cidade pendente", "tentativas": 0, "ao_falhar": "implantador" }
+      ]
+    },
+    {
+      "slug": "validar",
+      "nome": "Validar com cenários",
+      "tipo": "agente",
+      "agente": "validador",
+      "descricao": "O agente escreve situações de teste a partir das respostas e o código confere se o formulário se comporta como a prefeitura disse.",
+      "criterios": [
+        { "nome": "todos os cenários passam", "tentativas": 1, "ao_falhar": "analista" },
+        { "nome": "nenhuma expressão indeterminada nova", "tentativas": 1, "ao_falhar": "implantador" },
+        {
+          "nome": "cenários cobrem a ficha",
+          "tipo": "juiz",
+          "tentativas": 2,
+          "ao_falhar": "implantador",
+          "rubrica": "Para cada pergunta respondida da ficha existe pelo menos um cenário que exercita a resposta (um model que passa pelo campo afetado e uma expectativa sobre ele). Perguntas sem efeito testável no formulário (setor, cards internos, documento final) contam como cobertas se o formulário as reflete. Responda pass=false e liste em faltam os ids das perguntas sem cenário."
+        }
+      ]
+    },
+    {
+      "slug": "homologar",
+      "nome": "Homologar",
+      "tipo": "codigo",
+      "gate": "implantador",
+      "descricao": "O implantador revisa o resumo das mudanças, as pendências e os cenários, e aprova antes de qualquer coisa ir para a prefeitura.",
+      "criterios": [
+        { "nome": "implantador aprovou", "tentativas": 0, "ao_falhar": "parar" }
+      ]
+    }
+  ]
+}
