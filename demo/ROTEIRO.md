@@ -65,7 +65,7 @@ npm run gate -- vale-verde alvara aprovar   # ou clicar "aprovar" no card do gat
 Não há conversa nesse modo: o painel mostra os registros da ficha de exemplo (25 respostas, 11 pendências). Etapas, critérios, gate, diff e 15/15 cenários são reais.
 
 ### Fallback com API, sem celular
-A rodada ao vivo completa está em `data/vale-verde/alvara-demo/` (linha extra na mesma secretaria do painel, com o slug no nome), parada no gate de homologação: 34 respostas (3 pela foto), 2 pendências com dono, 30/30 cenários. Transcrições: `fixtures/insumos/transcricao-demo.md` e `transcricao-demo-fechamento.md`.
+A rodada ao vivo completa está em `data/vale-verde/alvara-demo/` (linha extra na mesma secretaria do painel, com o slug no nome), parada no gate de homologação: 34 respostas (3 pela foto), 2 pendências com dono, 30/30 cenários. Transcrições: `fixtures/insumos/transcricao-demo-antes.md` e `transcricao-demo-fechamento.md`.
 
 ```bash
 npm run gate -- vale-verde alvara-demo status

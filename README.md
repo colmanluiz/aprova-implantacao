@@ -32,7 +32,7 @@ Contra o JSON real do **Alvará de Construção** (template `modeload`):
 
 | Etapa | O que aconteceu |
 |---|---|
-| Conversa | 16 falas do analista: 14 em `conversa-demo.txt` (com uma foto da tabela de zoneamento) e 2 no "dia seguinte" em `conversa-demo-fechamento.txt`. Transcrições: `fixtures/insumos/transcricao-demo.md` e `transcricao-demo-fechamento.md` |
+| Conversa | 16 falas do analista: 14 em `conversa-demo.txt` (com uma foto da tabela de zoneamento) e 2 no "dia seguinte" em `conversa-demo-fechamento.txt`. Transcrições: `fixtures/insumos/transcricao-demo-antes.md` e `transcricao-demo-fechamento.md` |
 | `analisar` | 36 perguntas; o resíduo `'Cascavel'` já sai trocado por "Vale Verde" |
 | `coletar` + `extrair` | 34 respondidas com confiança 1,0: 31 por mensagem e 3 pela foto (lista de zonas e a tabela 4 zonas × 8 parâmetros, lidas, conferidas contra a imagem e confirmadas pelo analista). 2 pendências com dono: taxa → Fazenda; atividades → planilha na segunda |
 | `aplicar` | passou: nenhum placeholder, nenhum resíduo pendente |

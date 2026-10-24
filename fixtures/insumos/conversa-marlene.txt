@@ -1,0 +1,16 @@
+# Conversa de demonstração ("depois"): Dona Marlene, protocolo da Secretaria de Obras de Vale Verde (dados fictícios).
+# Sessão 1, terça de manhã, entre um atendimento e outro. Sessão 2: conversa-marlene-sessao2.txt (com --continuar).
+# Uma fala por linha. "/anexo <arquivo> [legenda]" manda arquivo. Linhas com # são ignoradas.
+# As falas não dependem da ordem exata das perguntas do agente: cada uma diz do que está falando.
+# Roteiro de referência: docs/roteiro-conversa-proposto.md
+# Replay: npm run chat -- --script fixtures/insumos/conversa-marlene.txt --processo alvara-marlene --pausa 0 --transcricao fixtures/insumos/transcricao-marlene.md
+bom dia. a pessoa traz a papelada aqui no protocolo, eu confiro se ta tudo e mando pro engenheiro Paulo olhar a planta. se ta certo ele assina e o secretario tambem. ai a pessoa paga a taxa e vem retirar o alvara
+o nome da secretaria é Secretaria Municipal de Obras e Serviços Urbanos. sou a Marlene
+/anexo fixtures/insumos/requerimento-alvara-papel.png é esse o papel que a pessoa preenche, a lista dos documentos ta embaixo
+isso, a procuracao é quando quem vem nao é o dono. despachante sempre traz. quem pode dar entrada é o dono, o engenheiro ou quem tem procuracao
+da planta so o pdf mesmo, arquivo de autocad o Paulo nem abre. projeto eletrico e hidraulico a gente nao pede, so a planta, o resto é com a Copel e o SAAE
+a tabela das zonas tem uma xerox colada aqui na parede, pera
+/anexo fixtures/insumos/tabela-zoneamento.png essa é a tabela da lei, ta meio apagada
+no centro (ZC1) o recuo da frente é zero, pode construir colado na calcada. e sim, casa na ZR1 com recuo de frente menor que 4 metros volta pra corrigir
+a lista de atividades que pode em cada zona isso é com o Paulo, ele que sabe
+tenho balcão, depois continuo

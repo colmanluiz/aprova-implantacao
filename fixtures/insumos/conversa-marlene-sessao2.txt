@@ -1,0 +1,14 @@
+# Conversa de demonstração ("depois"), sessão 2: Dona Marlene volta no dia seguinte (dados fictícios).
+# Rodar depois da sessão 1, com --continuar (não apaga o processo).
+# As falas não dependem da ordem exata das perguntas do agente: cada uma diz do que está falando.
+# Replay: npm run chat -- --script fixtures/insumos/conversa-marlene-sessao2.txt --processo alvara-marlene --pausa 0 --continuar --transcricao fixtures/insumos/transcricao-marlene-sessao2.md
+bom dia voltei
+vistoria no terreno so no habite-se, antes do alvara nao tem
+o numero da casa quem da é o cadastro imobiliario, la na fazenda
+a analise do Paulo a gente chama de parecer tecnico
+meio ambiente da parecer quando é perto de rio. e o Paulo escreve observacao sim, o que tem que corrigir na planta
+a taxa quem calcula é a tributacao, pela metragem, e eles geram a guia. o valor eu nao sei
+no final sai o alvara e uma via da planta aprovada carimbada. vale 1 ano. o numero do alvara é nosso, sai do livro
+quando tem que corrigir um alvara que ja saiu a gente faz sim, e tem que trazer o alvara original de papel
+pode deixar assim do jeito que vocês fazem, depois eu confiro
+obrigada

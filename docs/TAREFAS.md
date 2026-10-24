@@ -24,7 +24,7 @@ Checkpoints: **13:30** (5 min, o que travou?), **14:30** integração, **15:30**
 - [x] **A4 · Foto de verdade** — `fixtures/insumos/tabela-zoneamento.png` vira dataset 4 zonas × 8 parâmetros, com conferência da foto e confirmação do analista.
 - [x] **A5 · Telegram (código)** — `npm run telegram` com foto, PDF, texto e entrega do `outbox`. Falta o teste no celular (ver tarde).
 - [x] **A6 · "Não sei"** — `resposta: null` + `pendencia` com dono ("perguntar à Fazenda"); agente não insiste.
-- [x] **A7 · Fechamento** — resumo em até 5 linhas e aviso de que o implantador volta (visto em `fixtures/insumos/transcricao-demo.md`).
+- [x] **A7 · Fechamento** — resumo em até 5 linhas e aviso de que o implantador volta (visto em `fixtures/insumos/transcricao-demo-antes.md`).
 - [ ] **A8 · opcional · WhatsApp real** — mesma interface `Canal`. Só se sobrar alguém depois das 15:00.
 
 ### Trilha B — substituída pelo pipeline validado
