@@ -95,10 +95,16 @@ export const CRITERIOS: Record<string, Criterio> = {
   },
 
   // ---- validar ----
-  "todos os cenários passam": ({ relatorio }) => {
+  "todos os cenários passam": ({ relatorio, form, cenarios }) => {
     if (!relatorio?.length) return falha("nenhum cenário rodado");
     const f = relatorio.filter((r) => !r.passou);
-    return f.length ? falha(`${f.length} de ${relatorio.length} cenários falharam: ${lista(f.map((r) => r.id))}`) : ok(`${relatorio.length}/${relatorio.length} cenários passam`);
+    if (!f.length) return ok(`${relatorio.length}/${relatorio.length} cenários passam`);
+    const cls = form && cenarios ? classificarFalhas(form, cenarios, relatorio) : [];
+    const txt = f.map((r) => {
+      const k = cls.find((x) => x.id === r.id);
+      return k ? `${r.id} [${k.classe}${k.motivo ? `: ${k.motivo}` : ""}]` : r.id;
+    });
+    return falha(`${f.length} de ${relatorio.length} cenários falharam: ${lista(txt, 6)}`);
   },
   "nenhuma expressão indeterminada nova": ({ relatorio, cenarios, template }) => {
     if (!relatorio || !cenarios) return falha("nenhum cenário rodado");
@@ -123,6 +129,59 @@ export const CRITERIOS: Record<string, Criterio> = {
     return d.acao === "aprovar" ? ok(`aprovado em ${d.em}${d.texto ? `: ${d.texto}` : ""}`) : falha(`${d.acao}${d.texto ? `: ${d.texto}` : ""}`);
   },
 };
+
+export type ClasseFalha = "precondicao" | "regra" | "tecnica";
+
+/**
+ * Classifica cada cenário que falhou:
+ * - tecnica: campo inexistente ou expressão indeterminada no campo esperado (vai para o implantador);
+ * - precondicao: esperava visível, o campo ficou oculto e a condição de visibilidade depende de algo
+ *   que o model do cenário nem preencheu (o cenário esqueceu a pré-condição; o validador corrige o model);
+ * - regra: o formulário se comporta diferente do que o cenário diz (vira pergunta ao analista).
+ */
+export function classificarFalhas(form: AprovaTemplate, cenarios: Cenario[], relatorio: ResultadoCenario[]): { id: string; classe: ClasseFalha; motivo?: string }[] {
+  const porKey = new Map<string, { hide?: string }>();
+  for (const { field } of walk(form.form)) {
+    if (field.key) porKey.set(String(field.key), { hide: typeof field.hideExpression === "string" ? field.hideExpression : undefined });
+  }
+  const out: { id: string; classe: ClasseFalha; motivo?: string }[] = [];
+  for (const r of relatorio.filter((x) => !x.passou)) {
+    const cen = cenarios.find((c) => c.id === r.id);
+    let classe: ClasseFalha = "regra";
+    let motivo: string | undefined;
+    for (const f of r.falhas) {
+      if (f.obtido === "campo_inexistente") { classe = "tecnica"; motivo = `campo ${f.campo} não existe`; break; }
+      const key = f.campo.split(".").pop()!.replace(/\[\d*\]/g, "");
+      if (r.indeterminados.some((i) => i.includes(key))) { classe = "tecnica"; motivo = `expressão indeterminada em ${key}`; break; }
+      const hide = porKey.get(key)?.hide;
+      if (f.esperado.visivel === true && (f.obtido as any).visivel === false && hide && cen) {
+        const raizes = [...new Set([...hide.matchAll(/model\??\.([a-zA-Z0-9_]+)/g)].map((m) => m[1]))];
+        const doItem = [...new Set([...hide.matchAll(/(?:^|[^.\w])(?:field\.parent\.model|item|row)\??\.([a-zA-Z0-9_]+)/g)].map((m) => m[1]))];
+        const presentes = new Set(Object.keys(cen.model ?? {}));
+        for (const v of Object.values(cen.model ?? {})) if (Array.isArray(v)) for (const it of v) if (it && typeof it === "object") for (const k of Object.keys(it)) presentes.add(k);
+        const faltam = [...raizes, ...doItem].filter((x) => x !== key && !presentes.has(x));
+        if (faltam.length) { classe = "precondicao"; motivo = `falta ${faltam.join(", ")} no model (condição: ${hide.slice(0, 80)})`; break; }
+      }
+    }
+    out.push({ id: r.id, classe, ...(motivo ? { motivo } : {}) });
+  }
+  return out;
+}
+
+/**
+ * Uma pergunta ao analista precisa ser regra de balcão: sem "Diagnóstico", sem nome de campo
+ * (snake_case, camelCase, model.x), sem chaves/colchetes e com no máximo 240 caracteres.
+ */
+export function legivelParaAnalista(texto: string): { ok: boolean; motivo?: string } {
+  if (!texto.trim()) return { ok: false, motivo: "vazio" };
+  if (texto.length > 240) return { ok: false, motivo: "mais de 240 caracteres" };
+  if (/diagn[oó]stico/i.test(texto)) return { ok: false, motivo: "cenário de diagnóstico" };
+  if (/[{}\[\]]/.test(texto)) return { ok: false, motivo: "chaves ou colchetes" };
+  if (/\b[A-Za-z0-9]+_[A-Za-z0-9_]+\b/.test(texto)) return { ok: false, motivo: "nome de campo (snake_case)" };
+  if (/\b[a-z]+[A-Z][A-Za-z0-9]*\b/.test(texto)) return { ok: false, motivo: "nome de campo (camelCase)" };
+  if (/\b(model|field)\.\w/.test(texto)) return { ok: false, motivo: "expressão do formulário" };
+  return { ok: true };
+}
 
 /** Indeterminado sem o índice de repetição ([0]) para comparar template e formulário. */
 function chaveIndet(s: string) { return s.replace(/\[\d+\]/g, "[]"); }

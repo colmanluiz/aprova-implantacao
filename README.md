@@ -20,7 +20,7 @@ Contra o JSON real do **Alvará de Construção** (template `modeload`):
 |---|---|
 | Template | 11 etapas, 134 campos, 160 expressões JS |
 | Analisador (código) | **36 pontos de parametrização** em 11 grupos (22 bloqueiam), inclusive um `'Cascavel'` esquecido numa regra de validação, que já sai trocado pelo nome da cidade |
-| Coleta (ficha de exemplo de Vale Verde, fictícia) | 25 respostas, 12 pendências explícitas (ex.: "taxa: perguntar à Fazenda") |
+| Coleta (ficha de exemplo de Vale Verde, fictícia) | 25 respostas, 11 pendências explícitas (ex.: "taxa: perguntar à Fazenda") |
 | Aplicador (código) | 21 mudanças rastreáveis, `diff.md` com a origem de cada decisão |
 | Validador | 15 cenários. Template cru: **12/15**. Formulário de Vale Verde: **15/15** |
 | Pipeline sem LLM | analisar → coletar → aplicar → validar → gate de homologação → aprovar → `concluido` |
@@ -145,7 +145,7 @@ Sem LLM (`pipeline:offline`), Coletor e Validador não rodam: a ficha vem de `fi
 | Processos prontos por implantador por dia | 10 (teórico, não cabe) | 20+ (o implantador revisa diffs e gates, não faz reunião) |
 | Projetos simultâneos por implantador | 4 | 8 |
 
-O que é medido de verdade, por processo, em `run.json.metricas`: perguntas feitas, respondidas por mensagem e por anexo, pendências abertas, cenários rodados/passando, horas de reunião evitadas, intervenções humanas. O painel soma isso na visão da prefeitura. No pipeline offline do alvará: 21 por mensagem, 3 por anexo, 12 pendências, 15/15 cenários, 1 h evitada.
+O que é medido de verdade, por processo, em `run.json.metricas`: perguntas feitas, respondidas por mensagem e por anexo, pendências abertas, cenários rodados/passando, horas de reunião evitadas, intervenções humanas. O painel soma isso na visão da prefeitura. No pipeline offline do alvará: 21 por mensagem, 3 por anexo, 11 pendências, 15/15 cenários, 1 h evitada.
 
 ## Limites conhecidos
 

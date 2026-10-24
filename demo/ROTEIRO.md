@@ -57,7 +57,7 @@ npm run painel                              # http://localhost:4310 → clicar e
 npm run gate -- vale-verde alvara aprovar   # ou clicar "aprovar" no card do gate
 ```
 
-Não há conversa nesse modo: o painel mostra os registros da ficha de exemplo (25 respostas, 12 pendências). Etapas, critérios, gate, diff e 15/15 cenários são reais.
+Não há conversa nesse modo: o painel mostra os registros da ficha de exemplo (25 respostas, 11 pendências). Etapas, critérios, gate, diff e 15/15 cenários são reais.
 
 ### Fallback com API, sem celular
 A conversa gravada com o agente real está em `data/vale-verde/alvara-demo/` (aparece no painel como linha extra na mesma secretaria, com o slug no nome) e em `fixtures/insumos/transcricao-demo.md`. Para reproduzir ao vivo no terminal, num processo novo para não apagar a gravação:
@@ -80,6 +80,6 @@ Vídeo de 3 min gravado às 15h30 com o mesmo fluxo (celular + painel lado a lad
 
 ## Perguntas prováveis da banca
 - **"E quando o template não existe?"** O analisador funciona em qualquer Formly JSON; sem template, a ficha vira entrevista aberta guiada pelos tipos de ponto.
-- **"Como garante que o agente não inventa regra?"** Toda resposta tem origem e confiança; abaixo de 0,8 não é aplicada; a ficha de exemplo tem 12 pendências explícitas. No painel, cada registro aparece embaixo da mensagem que o gerou.
+- **"Como garante que o agente não inventa regra?"** Toda resposta tem origem e confiança; abaixo de 0,8 não é aplicada; a ficha de exemplo tem 11 pendências explícitas. No painel, cada registro aparece embaixo da mensagem que o gerou.
 - **"E se o agente se perder na conversa?"** O implantador assume a conversa pelo painel, responde como humano e devolve ao agente. Fica registrado como intervenção.
 - **"Isso entra na operação?"** A saída é o mesmo JSON do configurador. O passo seguinte é um botão "importar ficha" no configurador e trocar o Telegram pelo WhatsApp oficial.

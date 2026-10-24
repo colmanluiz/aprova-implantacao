@@ -31,7 +31,7 @@ test("offline: vale-verde/alvara de ponta a ponta sem LLM, até o gate de homolo
     assert.equal(run.metricas.cenarios_rodados, 15);
     assert.equal(run.metricas.cenarios_passando, 15);
     assert.equal(run.metricas.horas_reuniao_evitadas, 1);
-    assert.equal(run.metricas.pendencias_abertas, 12);
+    assert.equal(run.metricas.pendencias_abertas, 11);
     assert.ok(fs.existsSync(store.arquivo(ctx, "snapshot/template.json")));
     assert.ok((store.estado(ctx).registros?.length ?? 0) >= 25);
 
