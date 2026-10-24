@@ -1,0 +1,691 @@
+{
+  "cidade": "Vale Verde",
+  "secretarias": [
+    "Planejamento Urbano",
+    "Meio Ambiente",
+    "Obras e Fiscalização",
+    "Fazenda",
+    "Desenvolvimento Econômico",
+    "Vigilância Sanitária",
+    "Saúde",
+    "Educação",
+    "Assistência Social",
+    "Administração e RH",
+    "Compras e Licitações",
+    "Ouvidoria e Protocolo"
+  ],
+  "processos": [
+    {
+      "id": "p001",
+      "secretaria": "Planejamento Urbano",
+      "processo": "Alvará de Construção",
+      "complexidade": "complexo",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p002",
+      "secretaria": "Planejamento Urbano",
+      "processo": "Habite-se",
+      "complexidade": "complexo",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p003",
+      "secretaria": "Planejamento Urbano",
+      "processo": "Alvará de Demolição",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p004",
+      "secretaria": "Planejamento Urbano",
+      "processo": "Certidão de Numeração Predial",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p005",
+      "secretaria": "Planejamento Urbano",
+      "processo": "Aprovação de Projeto Arquitetônico",
+      "complexidade": "complexo",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p006",
+      "secretaria": "Planejamento Urbano",
+      "processo": "Consulta Prévia de Viabilidade",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p007",
+      "secretaria": "Planejamento Urbano",
+      "processo": "Desmembramento e Remembramento",
+      "complexidade": "complexo",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p008",
+      "secretaria": "Planejamento Urbano",
+      "processo": "Alvará de Reforma",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p009",
+      "secretaria": "Meio Ambiente",
+      "processo": "Licença Ambiental Prévia (LAP)",
+      "complexidade": "complexo",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p010",
+      "secretaria": "Meio Ambiente",
+      "processo": "Licença Ambiental de Instalação (LAI)",
+      "complexidade": "complexo",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p011",
+      "secretaria": "Meio Ambiente",
+      "processo": "Licença Ambiental de Operação (LAO)",
+      "complexidade": "complexo",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p012",
+      "secretaria": "Meio Ambiente",
+      "processo": "Autorização de Corte de Árvore",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p013",
+      "secretaria": "Meio Ambiente",
+      "processo": "Dispensa de Licenciamento",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p014",
+      "secretaria": "Meio Ambiente",
+      "processo": "Cadastro Ambiental de Atividade",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p015",
+      "secretaria": "Meio Ambiente",
+      "processo": "Denúncia Ambiental",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p016",
+      "secretaria": "Meio Ambiente",
+      "processo": "Renovação de Licença Ambiental",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p017",
+      "secretaria": "Obras e Fiscalização",
+      "processo": "Vistoria de Obra",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p018",
+      "secretaria": "Obras e Fiscalização",
+      "processo": "Auto de Infração de Obra",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p019",
+      "secretaria": "Obras e Fiscalização",
+      "processo": "Defesa de Auto de Infração",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p020",
+      "secretaria": "Obras e Fiscalização",
+      "processo": "Regularização de Obra",
+      "complexidade": "complexo",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p021",
+      "secretaria": "Obras e Fiscalização",
+      "processo": "Certidão de Conclusão de Obra",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p022",
+      "secretaria": "Obras e Fiscalização",
+      "processo": "Autorização de Tapume e Andaime",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p023",
+      "secretaria": "Obras e Fiscalização",
+      "processo": "Ocupação de Passeio Público",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p024",
+      "secretaria": "Obras e Fiscalização",
+      "processo": "Alvará de Instalação de Elevador",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p025",
+      "secretaria": "Fazenda",
+      "processo": "Certidão Negativa de Débitos",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p026",
+      "secretaria": "Fazenda",
+      "processo": "Parcelamento de Dívida Ativa",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p027",
+      "secretaria": "Fazenda",
+      "processo": "Revisão de IPTU",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p028",
+      "secretaria": "Fazenda",
+      "processo": "Isenção de IPTU",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p029",
+      "secretaria": "Fazenda",
+      "processo": "Simulação e Guia de ITBI",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p030",
+      "secretaria": "Fazenda",
+      "processo": "Baixa de Inscrição Municipal",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p031",
+      "secretaria": "Fazenda",
+      "processo": "Restituição de Tributo",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p032",
+      "secretaria": "Fazenda",
+      "processo": "Certidão de Valor Venal",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p033",
+      "secretaria": "Desenvolvimento Econômico",
+      "processo": "Abertura de Empresa (Alvará de Localização)",
+      "complexidade": "complexo",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p034",
+      "secretaria": "Desenvolvimento Econômico",
+      "processo": "Alvará de Funcionamento",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p035",
+      "secretaria": "Desenvolvimento Econômico",
+      "processo": "Renovação de Alvará de Funcionamento",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p036",
+      "secretaria": "Desenvolvimento Econômico",
+      "processo": "Alvará de Evento",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p037",
+      "secretaria": "Desenvolvimento Econômico",
+      "processo": "Autorização de Comércio Ambulante",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p038",
+      "secretaria": "Desenvolvimento Econômico",
+      "processo": "Alvará de Publicidade",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p039",
+      "secretaria": "Desenvolvimento Econômico",
+      "processo": "Licença de Feira Livre",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p040",
+      "secretaria": "Desenvolvimento Econômico",
+      "processo": "Consulta de Viabilidade de Atividade",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p041",
+      "secretaria": "Vigilância Sanitária",
+      "processo": "Alvará Sanitário",
+      "complexidade": "complexo",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p042",
+      "secretaria": "Vigilância Sanitária",
+      "processo": "Renovação de Alvará Sanitário",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p043",
+      "secretaria": "Vigilância Sanitária",
+      "processo": "Licença para Transporte de Alimentos",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p044",
+      "secretaria": "Vigilância Sanitária",
+      "processo": "Inspeção Sanitária",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p045",
+      "secretaria": "Vigilância Sanitária",
+      "processo": "Cadastro de Estabelecimento de Saúde",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p046",
+      "secretaria": "Vigilância Sanitária",
+      "processo": "Autorização de Evento com Alimentação",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p047",
+      "secretaria": "Vigilância Sanitária",
+      "processo": "Denúncia Sanitária",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p048",
+      "secretaria": "Vigilância Sanitária",
+      "processo": "Dispensa de Alvará Sanitário",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p049",
+      "secretaria": "Saúde",
+      "processo": "Solicitação de Medicamento Especial",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p050",
+      "secretaria": "Saúde",
+      "processo": "Tratamento Fora de Domicílio (TFD)",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p051",
+      "secretaria": "Saúde",
+      "processo": "Agendamento de Consulta Especializada",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p052",
+      "secretaria": "Saúde",
+      "processo": "Cartão SUS Municipal",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p053",
+      "secretaria": "Saúde",
+      "processo": "Solicitação de Transporte Sanitário",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p054",
+      "secretaria": "Saúde",
+      "processo": "Reclamação de Atendimento",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p055",
+      "secretaria": "Saúde",
+      "processo": "Vaga em CAPS",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p056",
+      "secretaria": "Saúde",
+      "processo": "Vacinação Domiciliar",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p057",
+      "secretaria": "Educação",
+      "processo": "Matrícula na Rede Municipal",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p058",
+      "secretaria": "Educação",
+      "processo": "Transferência Escolar",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p059",
+      "secretaria": "Educação",
+      "processo": "Transporte Escolar",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p060",
+      "secretaria": "Educação",
+      "processo": "Vaga em Creche",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p061",
+      "secretaria": "Educação",
+      "processo": "Declaração de Escolaridade",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p062",
+      "secretaria": "Educação",
+      "processo": "Uniforme e Material Escolar",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p063",
+      "secretaria": "Educação",
+      "processo": "Recurso de Lista de Espera",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p064",
+      "secretaria": "Educação",
+      "processo": "Autorização de Funcionamento de Escola Privada",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p065",
+      "secretaria": "Assistência Social",
+      "processo": "Cadastro Único",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p066",
+      "secretaria": "Assistência Social",
+      "processo": "Benefício Eventual (Cesta Básica)",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p067",
+      "secretaria": "Assistência Social",
+      "processo": "Auxílio Funeral",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p068",
+      "secretaria": "Assistência Social",
+      "processo": "Carteira do Idoso",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p069",
+      "secretaria": "Assistência Social",
+      "processo": "Passe Livre PCD",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p070",
+      "secretaria": "Assistência Social",
+      "processo": "Inscrição em Programa Habitacional",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p071",
+      "secretaria": "Assistência Social",
+      "processo": "Atendimento CRAS",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p072",
+      "secretaria": "Assistência Social",
+      "processo": "Benefício de Prestação Continuada (encaminhamento)",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p073",
+      "secretaria": "Administração e RH",
+      "processo": "Solicitação de Férias",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p074",
+      "secretaria": "Administração e RH",
+      "processo": "Licença-Prêmio",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p075",
+      "secretaria": "Administração e RH",
+      "processo": "Averbação de Tempo de Serviço",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p076",
+      "secretaria": "Administração e RH",
+      "processo": "Declaração de Vínculo",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p077",
+      "secretaria": "Administração e RH",
+      "processo": "Progressão Funcional",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p078",
+      "secretaria": "Administração e RH",
+      "processo": "Licença para Tratamento de Saúde",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p079",
+      "secretaria": "Administração e RH",
+      "processo": "Diária de Viagem",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p080",
+      "secretaria": "Administração e RH",
+      "processo": "Desligamento de Servidor",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p081",
+      "secretaria": "Compras e Licitações",
+      "processo": "Estudo Técnico Preliminar (ETP)",
+      "complexidade": "complexo",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p082",
+      "secretaria": "Compras e Licitações",
+      "processo": "Termo de Referência",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p083",
+      "secretaria": "Compras e Licitações",
+      "processo": "Dispensa de Licitação",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p084",
+      "secretaria": "Compras e Licitações",
+      "processo": "Inexigibilidade",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p085",
+      "secretaria": "Compras e Licitações",
+      "processo": "Pregão Eletrônico",
+      "complexidade": "complexo",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p086",
+      "secretaria": "Compras e Licitações",
+      "processo": "Renovação de Ata de Registro de Preços",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p087",
+      "secretaria": "Compras e Licitações",
+      "processo": "Aditivo Contratual",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p088",
+      "secretaria": "Compras e Licitações",
+      "processo": "Pagamento de Fornecedor",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p089",
+      "secretaria": "Ouvidoria e Protocolo",
+      "processo": "Manifestação de Ouvidoria",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p090",
+      "secretaria": "Ouvidoria e Protocolo",
+      "processo": "Pedido de Acesso à Informação (LAI)",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p091",
+      "secretaria": "Ouvidoria e Protocolo",
+      "processo": "Protocolo Geral",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p092",
+      "secretaria": "Ouvidoria e Protocolo",
+      "processo": "Comunicação Oficial Interna (Ofício)",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p093",
+      "secretaria": "Ouvidoria e Protocolo",
+      "processo": "Memorando",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p094",
+      "secretaria": "Ouvidoria e Protocolo",
+      "processo": "Certidão de Tramitação",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p095",
+      "secretaria": "Ouvidoria e Protocolo",
+      "processo": "Desarquivamento de Processo",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    },
+    {
+      "id": "p096",
+      "secretaria": "Ouvidoria e Protocolo",
+      "processo": "Denúncia Anônima",
+      "complexidade": "simples",
+      "etapa": "nao_iniciado"
+    }
+  ]
+}
