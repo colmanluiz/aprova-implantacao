@@ -52,7 +52,7 @@ export const MENU_CURADO = [
   "Auxílio Funeral",
   "Baixa de Empresa",
   "Castração de Animais",
-  "Comunicação de Buracos em Vias",
+  "Solicitação de Férias",
   "Solicitação de Cadastro em Programas Sociais",
 ];
 const MAX_MENU = 10;

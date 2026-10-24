@@ -3,8 +3,8 @@
 ## Montagem da mesa (antes de subir)
 
 - **Projetor**: navegador em tela cheia com o painel (`npm run painel` → http://localhost:4310), zoom 125% se a sala for grande. Uma segunda aba com o terminal/slides.
-- **Câmera de mesa**: o celular com o Telegram/WhatsApp do "analista".
-- `data/vale-verde/alvara/` limpo para a conversa ao vivo (o painel mostra o alvará como "não iniciado" até o primeiro "oi").
+- **Câmera de mesa**: o celular com o Telegram do "analista", aberto no bot @hackaton_aprova_bot. No notebook: `env CIDADE=vale-verde npm run telegram` (sem `PROCESSO`, o bot abre o menu).
+- `data/vale-verde/alvara/` e a pasta de Férias em `data/vale-verde/` limpas para a conversa ao vivo (o painel mostra os processos como "não iniciado" até a primeira mensagem).
 - `npm run painel:data` rodado no último ensaio: `painel/data.json` atualizado para o fallback.
 
 | Tempo | Projetor | Celular |
@@ -15,6 +15,7 @@
 | 1:10 | **Painel: detalhe do Alvará**, conversa ao vivo | conversa com o agente |
 | 2:20 | Painel: detalhe, `diff.md` e etapa "aplicar" | — |
 | 3:00 | Painel: detalhe, cenários e gate | — |
+| 3:25 | **Painel: detalhe de Férias** | menu → Solicitação de Férias |
 | 3:45 | **Painel: visão da prefeitura** (métricas) | — |
 
 ## 0:00 — O problema (30 s)
@@ -23,13 +24,14 @@
 ## 0:30 — O que o template já sabe (30 s)
 Terminal: `npm run analyze -- fixtures/templates/alvara-construcao.modeload.json > /dev/null` (o resumo sai no stderr; sem o redirecionamento a ficha inteira é despejada na tela)
 Apontar: 11 etapas, 134 campos, 160 regras, e o analisador reduziu a **36 perguntas em 11 grupos**. Destacar o `'Cascavel'` achado dentro do template: "isso hoje só apareceria na homologação, depois de um cidadão de outra cidade reclamar".
+E não é só o alvará: "Em 117 processos reais do Estúdio, 75% dos campos já vêm prontos do modelo e sobram em média 14 perguntas por processo. 28 modelos ainda apontam para setores de outra prefeitura." (`docs/forms-modelo-analise.md`)
 
 ## 1:00 — O painel do implantador (10 s)
 **Projetor: visão da prefeitura.** "Isto é o que o implantador vê: 12 secretarias, 96 processos de Vale Verde. Cada linha tem as 6 etapas, de analisar a homologar." Clicar em **Alvará de Construção**.
 
 ## 1:10 — A conversa (70 s)
 **Projetor: detalhe do Alvará** (conversa no centro, etapas à esquerda). Celular na câmera.
-Analista manda "oi". A mensagem aparece no painel em até 2 s, à direita; o agente responde à esquerda. Agente se apresenta e faz as primeiras perguntas (setor, zonas, documentos). Analista manda **foto da tabela de zoneamento**. Agente extrai 4 zonas × 8 parâmetros e confirma em uma linha: "Li ZR1, ZR2, ZC1 e ZI. Na ZR2 o recuo frontal é 4 m, confere?".
+Analista manda `/start`; o bot lista os processos e ele escolhe **Alvará de Construção**. A mensagem aparece no painel em até 2 s, à direita; o agente responde à esquerda. Agente se apresenta e faz as primeiras perguntas (setor, zonas, documentos). Analista manda **foto da tabela de zoneamento**. Agente extrai 4 zonas × 8 parâmetros e confirma em uma linha: "Li ZR1, ZR2, ZC1 e ZI. Na ZR2 o recuo frontal é 4 m, confere?".
 Apontar no painel: embaixo de cada resposta do agente, **o que ele registrou na ficha**, com origem e confiança; a etapa "extrair" acende; a barra "Ficha por grupo" enche. Analista: "não sei a taxa". Agente registra pendência sem inventar (aparece com confiança 0, em laranja).
 
 Opcional (10 s, se sobrar tempo): **"Assumir conversa"**. O implantador escreve uma mensagem pelo painel, ela aparece cinza "enviando…" e depois como bolha amarela "Implantador" no celular e no painel. "Devolver ao agente" e a conversa segue.
@@ -37,11 +39,14 @@ Opcional (10 s, se sobrar tempo): **"Assumir conversa"**. O implantador escreve 
 ## 2:20 — O formulário e o diff (40 s)
 **Projetor: detalhe, rolar até `diff.md`.** Etapa "aplicar" concluída com critérios verdes (formulário gerado, nenhum placeholder `modeload`, origem em cada mudança). Cada mudança com a origem ("foto da Lei 1.204, p. 2", "Marcos, 10:03"). "O implantador lê isso em dois minutos em vez de fazer uma reunião de uma hora."
 
-## 3:00 — A validação sem clique (45 s)
+## 3:00 — A validação sem clique (25 s)
 **Projetor: detalhe, coluna "Cenários" e etapa "validar".**
 Template cru: **12/15**, falha recuo, taxa de ocupação e cidade (terminal, se der tempo: `npm run validate -- fixtures/templates/alvara-construcao.modeload.json fixtures/cenarios/alvara.cenarios.json`).
 Formulário de Vale Verde: **15/15** nos cenários base. Na rodada ao vivo (`alvara-demo`) o validador partiu desses 15 e escreveu mais 15: **30/30**, nenhuma expressão indeterminada nova, e o juiz confirmou que os cenários cobrem a ficha.
 Gate de homologação aberto (card laranja no topo): ler a instrução em voz alta ("2 pendências, cenários 30/30, diff em diff.md") e clicar **aprovar**. "Cada cenário é uma frase que o analista entende. O que falhar por regra de negócio vira pergunta no WhatsApp ou decisão do implantador, não ticket."
+
+## 3:25 — Outro processo, mesmo chat (20 s)
+**Celular:** o analista escreve `menu` e digita **Solicitação de Férias** (aceita o nome de qualquer um dos 112 processos ativos, não só os 10 da lista). **Projetor: detalhe de Férias.** O agente abre o processo em uma linha: 10 perguntas em vez de 28 campos, e a primeira é o setor, porque o modelo veio com o setor de outra prefeitura (`csimplantacao_implantacaoad`). "Mesmo analista, outra secretaria, sem reunião nova. E o Alvará continua de onde parou: se ele voltar, o agente diz quantas perguntas faltam."
 
 ## 3:45 — Métricas e fechamento (15 s)
 **Projetor: voltar para a visão da prefeitura.** As 4 métricas do topo mudaram durante a demo: processos prontos, horas de reunião evitadas, perguntas respondidas sem reunião, cenários passando. Horas de reunião → 0 nos simples. Rodadas de homologação → 1. 4 projetos → 8 por implantador.

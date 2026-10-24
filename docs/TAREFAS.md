@@ -47,18 +47,18 @@ B1–B6 deixaram de ser scripts avulsos: viraram etapas, critérios e gates de `
 
 ## Tarde
 
-- [ ] **T1 · Validador ao vivo (até 14:30)** — Rodar o pipeline com LLM até `validar`. A conversa gravada termina com 11 perguntas ainda abertas (6 a confirmar, 5 sem resposta), então `coletar` fica aguardando: acrescentar ao roteiro, numa cópia, as falas que respondem ou pendenciam essas perguntas e rodar num processo novo (`npm run chat -- --script <copia> --processo alvara-t1`), sem tocar em `alvara-demo`. Pronto quando o agente escreve ≥ 10 cenários com campos que existem, o juiz roda (passa, ou reprova com `faltam` e a retentativa corrige) e o gate de homologação aparece no painel. Testar com `MODEL` barato primeiro, rodar uma vez com o padrão.
-- [ ] **T2 · Telegram no celular (até 14:30; precisa de um humano)** — Alguém cria o bot no BotFather e põe `TELEGRAM_BOT_TOKEN` no `.env`. `npm run telegram`. Pronto quando, pelo celular: "oi" → lote de perguntas, foto da tabela → dataset na ficha, "Assumir conversa" no painel → mensagem do implantador chega no celular, "Devolver" → agente segue sem repetir pergunta.
-- [ ] **T3 · Segundo template (se der, até 15:15)** — Template simples (certidão, numeração predial) pedido à Aprova, ou derivado do alvará cortando etapas. `npm run analyze -- <template>`. Pronto quando a ficha sai coerente com poucas perguntas e `pipeline:offline`/`gate` funcionam com `TEMPLATE=...`, provando que nada é feito à mão para o alvará.
+- [x] **T1 · Validador ao vivo** — `alvara-demo` com `MODEL=claude-sonnet-5-5`: conversa (`conversa-demo.txt` + `conversa-demo-fechamento.txt` com `--continuar`) fecha a ficha (34 respondidas, 2 pendências), aplicar passa, validador escreve 15 cenários além dos 15 base, 30/30, juiz aprova, gate de homologação aberto. `npm run gate -- vale-verde alvara-demo reexecutar validar` refaz a validação ao vivo.
+- [x] **T2 · Telegram** — bot @hackaton_aprova_bot criado e rodando (`env CIDADE=vale-verde npm run telegram`; token só no `.env`, fora do git).
+- [x] **T3 · Segundo template** — Solicitação de Férias (RH), do catálogo real `forms_modelo/`: 3 etapas, 28 campos, 10 pontos, setor de outra prefeitura (`csimplantacao_implantacaoad`) detectado; cenários base 8/8. Catálogo inteiro analisado em lote (`npm run analyze:lote`, 117 modelos).
+- [x] **T3b · Menu de processos no chat** — `src/channel/roteador.ts`: `/start`, `menu`, `trocar`, `/processo <nome>`, `/ajuda`; 10 processos na lista e qualquer um dos 112 ativos pelo nome; trocar retoma de onde parou.
 - [ ] **T4 · Vídeo de backup (15:30, 30 min)** — Celular + painel lado a lado, seguindo `demo/ROTEIRO.md`. Pronto quando toca do início ao fim sem depender de API; link no README.
 - [ ] **T5 · Revisão de entrega (16:00, 30 min)** — Congelar código. README e `INSTRUCTIONS/` conferidos contra o código (nomes de ferramentas, quem chama o quê, números); `npm run docs` sem diff; `npm run painel:data` para o fallback estático. Ensaio cronometrado < 4 min.
-- [ ] **T6 · Push final e QR (16:45)** — `npm test` e `npm run typecheck` verdes, nada de `data/` ou `.env` no git, repo abre em aba anônima, QR do link em `demo/qr.png`. Entrega às 17:00.
+- [ ] **T6 · Repo público, push final e QR (16:45)** — `npm test` (86) e `npm run typecheck` verdes, nada de `data/` ou `.env` no git, repo público abrindo em aba anônima, QR do link em `demo/qr.png`. Entrega às 17:00.
 
 ## Ordem
 
 ```
-T1 ──┐
-T2 ──┼── 14:30 integração ── T3 (opcional) ── T4 15:30 ── T5 16:00 ── T6 16:45 ── 17:00
+T1, T2, T3 feitos ── T4 15:30 vídeo ── T5 16:00 revisão ── T6 16:45 push + QR ── 17:00
 ```
 
-Se T1 ou T2 não fecharem até 14:30, a demo usa o replay gravado (`alvara-demo`) e o pipeline offline no painel; a história continua inteira.
+Se o Telegram ou a API caírem na hora, a demo usa a rodada gravada (`alvara-demo`, parada no gate) e o pipeline offline no painel; a história continua inteira.

@@ -24,7 +24,9 @@ Contra o JSON real do **Alvará de Construção** (template `modeload`):
 | Aplicador (código) | 21 mudanças rastreáveis, `diff.md` com a origem de cada decisão |
 | Validador | 15 cenários. Template cru: **12/15**. Formulário de Vale Verde: **15/15** |
 | Pipeline sem LLM | analisar → coletar → aplicar → validar → gate de homologação → aprovar → `concluido` |
-| Testes | **65** (`npm test`), `npm run typecheck` limpo |
+| Segundo processo: Solicitação de Férias (RH) | 3 etapas, 28 campos, **10 pontos**; carrega um setor de outra prefeitura (`csimplantacao_implantacaoad`) que o analisador acha e o aplicador troca. Cenários base: 8/8 no template cru |
+| Catálogo real | 117 modelos do Estúdio analisados em lote (seção abaixo) |
+| Testes | **86** (`npm test`), `npm run typecheck` limpo |
 
 ### Rodada ao vivo, de ponta a ponta (`data/vale-verde/alvara-demo`, `MODEL=claude-sonnet-5-5`)
 
@@ -44,11 +46,27 @@ npm run gate -- vale-verde alvara-demo reexecutar validar   # roda a validação
 npm run gate -- vale-verde alvara-demo aprovar
 ```
 
+## Catálogo real (`forms_modelo/`)
+
+129 modelos JSON raspados do Estúdio da Aprova, com `forms_modelo/_indice.csv` (112 ativos, 12 rascunhos vazios; 117 analisáveis).
+
+> Em 117 processos reais do Estúdio, **75% dos campos já vêm prontos do modelo** e sobram em média **14 perguntas por processo** (mediana 11, 5 bloqueantes). 28 modelos ainda apontam para setores de outra prefeitura; 6 têm literais de outra cidade em regra de validação (Cascavel em 6, João Pessoa em 1).
+
+| Totais | Mediana por modelo | Maior |
+|---|---|---|
+| 553 etapas, 4336 campos, 3830 expressões, 1641 pontos (1003 bloqueiam) | 4 etapas, 27 campos, 18 expressões, 11 pontos | 133 pontos (Compras e Licitação) |
+
+```bash
+npm run analyze:lote          # regrava docs/forms-modelo-analise.md e .json
+```
+
+Rodar o lote endureceu o analisador: setores de outra prefeitura (`*_umuaramapr`, `*_implantacaoad`) agora são detectados e trocados pelo aplicador, referências a dataset são reconhecidas, e os falsos positivos de resíduo caíram de 27 para 7, todos verdadeiros.
+
 ## Como rodar
 
 ```bash
 npm install
-npm test                      # 65 testes, sem API
+npm test                      # 86 testes, sem API
 npm run typecheck
 ```
 
@@ -70,13 +88,15 @@ npm run painel:data           # grava painel/data.json para o modo estático (?s
 **Conversa com os agentes** (precisa de `ANTHROPIC_API_KEY` no `.env` ou `ant auth login`):
 
 ```bash
-npm run chat                                          # você é o analista; /anexo foto.png manda arquivo; /estado; /sair
+npm run chat                                          # você é o analista; abre o menu de processos; /anexo foto.png; /estado; /sair
 npm run chat -- --script fixtures/insumos/conversa-demo.txt --processo alvara-demo --transcricao saida.md
                                                       # replay da conversa da demo; sem --continuar apaga data/vale-verde/alvara-demo
 npm run chat -- --script fixtures/insumos/conversa-demo-fechamento.txt --processo alvara-demo --continuar
                                                       # "dia seguinte": fecha a ficha e o pipeline segue até homologar
-TELEGRAM_BOT_TOKEN=... npm run telegram               # canal real (celular); ou ponha o token no .env
+env CIDADE=vale-verde npm run telegram                # canal real (celular); token em TELEGRAM_BOT_TOKEN no .env; sem PROCESSO abre o menu
 ```
+
+**Menu de processos no chat** (`src/channel/roteador.ts`, terminal e Telegram): `/start`, `/processos`, `menu`, `trocar` ou `outro processo` listam 10 processos escolhidos; o analista também pode digitar o nome de qualquer um dos 112 ativos, ou `/processo <nome>` direto; `/ajuda` explica. Cada processo tem a sua pasta `data/<cidade>/<slug>/`; trocar não apaga nada e voltar retoma de onde parou ("Voltando ao Habite-se: faltam 4 perguntas"). Estado do chat em `data/<cidade>/.canais/<tipo>-<chat_id>.json`.
 
 **Peças determinísticas isoladas**:
 
@@ -85,6 +105,8 @@ npm run analyze  -- fixtures/templates/alvara-construcao.modeload.json -o /tmp/f
 npm run apply    -- fixtures/templates/alvara-construcao.modeload.json fixtures/fichas/alvara.vale-verde.json -o /tmp/form.json --diff /tmp/diff.md
 npm run validate -- fixtures/templates/alvara-construcao.modeload.json fixtures/cenarios/alvara.cenarios.json   # 12/15
 npm run validate -- /tmp/form.json fixtures/cenarios/alvara.cenarios.json                                      # 15/15
+npm run analyze  -- forms_modelo/solicitacao_de_ferias__678172ef8989870008b47fde.json > /dev/null                                                    # Férias: 10 pontos
+npm run validate -- forms_modelo/solicitacao_de_ferias__678172ef8989870008b47fde.json fixtures/cenarios/solicitacao_de_ferias__678172ef8989870008b47fde.cenarios.json   # 8/8
 npm run docs     # regenera INSTRUCTIONS/PIPELINE.md a partir de pipeline.json
 ```
 
@@ -95,7 +117,7 @@ Variáveis de ambiente (`.env` é lido por `chat`, `telegram`, `painel` e `gate`
 | `ANTHROPIC_API_KEY` | agentes, extrator e juiz | perfil do `ant auth login` |
 | `MODEL` | modelo de todos os agentes e do juiz; use um modelo barato para testar | `claude-opus-5-5` |
 | `TELEGRAM_BOT_TOKEN` | `npm run telegram` | — |
-| `CIDADE`, `PROCESSO`, `TEMPLATE` | processo do Telegram (`TEMPLATE` também no `gate`) | `vale-verde`, `alvara`, template do alvará |
+| `CIDADE`, `PROCESSO`, `TEMPLATE` | cidade e processo do Telegram; sem `PROCESSO`, o analista escolhe no menu (`TEMPLATE` também no `gate`) | `vale-verde`, menu, template do alvará |
 | `PAINEL_PORT` | porta do painel | `4310` |
 | `APROVA_DATA` | pasta de dados (útil para rodar sem tocar em `data/`) | `data` |
 
@@ -122,7 +144,7 @@ Como o motor decide:
 - **Gates que se explicam sozinhos**: `{para, tipo, instrucao, resumo, acoes: [aprovar, ajustar, rejeitar], contexto}`. `ajustar "residuo-36=Vale Verde"` corrige a ficha (mesmo contrato de formato do `registrar_resposta`) e refaz desde `aplicar`.
 - **Snapshot imutável**: ao abrir o processo, template e `pipeline.json` são copiados para `data/<cidade>/<processo>/snapshot/`. Mudar o pipeline não afeta processo aberto.
 - **Grounding do Extrator** (`src/agents/extrator.ts`): PDF e texto são transcritos na íntegra antes; todo candidato precisa citar um `trecho` literal, e o código procura o trecho no documento — sem achar, o candidato é descartado. Foto nunca sai com confiança acima de 0,7; uma segunda leitura independente confere cada valor (zona por zona): tudo "sim" → 0,9 verificado; qualquer "não"/"ilegível" → 0,4 e o Coletor pergunta só aquelas linhas. Valor que precisa de confirmação fica travado em 0,79 até o analista confirmar por mensagem.
-- **Contrato de formato**: `registrar_resposta` recusa (`schema_invalido`) resposta fora do formato do tipo (`src/core/respostas.ts`); nada fora do formato chega ao aplicador.
+- **Contrato de formato**: `registrar_resposta` recusa (`schema_invalido`) resposta fora do formato do tipo (`src/core/respostas.ts`); nada fora do formato chega ao aplicador. Setor exige o nome do setor e recusa placeholder (`modeload`, `*_implantacaoad`); o Coletor nunca aceita "como está" para setor ou tabela por zona.
 - **Modo humano**: o implantador assume a conversa pelo painel ou `npm run gate -- <cidade> <processo> assumir`. O agente pausa, nada é avaliado, as mensagens do analista ficam no histórico. O que o implantador escreve no painel vai para `outbox.json` e o processo do canal (Telegram ou terminal) entrega. Em `devolver`, o Coletor recebe uma nota com o que foi trocado. Cada assumida conta como intervenção humana.
 - **Nenhum LLM edita o JSON do formulário.** O avaliador de expressões Formly roda em sandbox (`node:vm`).
 
@@ -132,9 +154,10 @@ Como o motor decide:
 | `src/pipeline/` | `motor` (laço, gates, modo humano), `criterios`, `juiz`, `run` (snapshot, `run.json`, métricas), `definicao`, `docs`, `offline` |
 | `src/agents/` | `run-agent` (tool runner do SDK), `tools`, `extrator`, `orquestrador` (traduz "chegou mensagem" em passos do motor), `store` |
 | `src/core/` | `template-analyzer`, `patcher`, `expression-evaluator`, `scenario-runner`, `respostas` (contrato de formato) |
-| `src/channel/` | `mock-chat` (terminal e replay), `telegram` (long polling), `outbox` (mensagens do implantador) |
+| `src/channel/` | `mock-chat` (terminal e replay), `telegram` (long polling), `roteador` (menu de processos), `outbox` (mensagens do implantador) |
 | `src/painel/`, `painel/` | servidor `node:http` sem dependências e front HTML/JS puro (ver `painel/README.md`) |
-| `scripts/` | `gate`, `rodar-pipeline-offline`, `painel-data`, `gerar-pipeline-md`, `ficha-exemplo`, `canal-tabela-zoneamento` |
+| `scripts/` | `gate`, `rodar-pipeline-offline`, `analisar-lote`, `painel-data`, `gerar-pipeline-md`, `ficha-exemplo`, `canal-tabela-zoneamento` |
+| `forms_modelo/` | 129 modelos reais do Estúdio + `_indice.csv`; análise em lote em `docs/forms-modelo-analise.md` |
 | `fixtures/` | template real, ficha de exemplo, 15 cenários, seed de 96 processos, roteiro e transcrição da conversa da demo, foto da tabela |
 | `docs/`, `demo/` | design, quadro de tarefas, roteiro da apresentação |
 
@@ -173,7 +196,7 @@ O que é medido de verdade, por processo, em `run.json.metricas`: perguntas feit
 - Canal real hoje é Telegram. WhatsApp é trocar o adaptador (Baileys/Evolution/Cloud API) pela mesma interface `Canal = { enviar(texto) }`.
 - Planilha só entra como texto (CSV); `.xlsx` não é lido.
 - O juiz de cobertura depende de LLM; sem ele o critério fica `nao_avaliado` e não bloqueia.
-- Um template testado (alvará). Dados de Vale Verde são fictícios.
+- Ponta a ponta com agente: alvará. Férias tem análise e cenários base; os outros 115 modelos só passaram pela análise em lote. Dados de Vale Verde são fictícios.
 - `ferramentas().aplicador` e `ferramentas().orquestrador` em `src/agents/tools.ts` ainda existem, mas o pipeline não os usa.
 
 ## Contratos de dados
