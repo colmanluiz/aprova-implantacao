@@ -74,7 +74,7 @@ test("texto do menu", () => {
   const r = rotear(vazio, "menu", CAT);
   assert.ok(r.acao === "menu");
   const t = textoMenu({ ...r, total: 129 });
-  assert.match(t, /^Qual processo vamos parametrizar\? Responda com o número ou o nome\.\n1\. Alvará de Construção\n2\. Habite-se/);
+  assert.match(t, /^Sobre qual serviço vamos conversar\? Responda com o número ou o nome\.\n1\. Alvará de Construção\n2\. Habite-se/);
   assert.match(t, /qualquer um dos 129 processos/);
 });
 

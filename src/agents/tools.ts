@@ -8,6 +8,7 @@ import { analisarTemplate } from "../core/template-analyzer.js";
 import { aplicarFicha, gerarDiff } from "../core/patcher.js";
 import { rodarCenarios, relatorioTexto } from "../core/scenario-runner.js";
 import { validarResposta } from "../core/respostas.js";
+import { verificarMensagem } from "../core/mensagens.js";
 import { store, perguntasAbertas, resumir, type Contexto } from "./store.js";
 import { extrair, type Anexo, type SaidaExtrator } from "./extrator.js";
 import { registrarRejeicao, limparRejeicao } from "../pipeline/run.js";
@@ -140,9 +141,16 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
 
   const enviar_mensagem = betaZodTool({
     name: "enviar_mensagem",
-    description: "Envia uma mensagem curta ao analista da prefeitura pelo canal (WhatsApp/Telegram). Máximo 5 perguntas por mensagem.",
+    description:
+      "Envia uma mensagem curta ao analista da prefeitura pelo canal (WhatsApp/Telegram). Até 2 perguntas por mensagem, do mesmo assunto; " +
+      "com pergunta, até 70 palavras; sem pergunta (resumo, fechamento), até 160. Sem palavras de sistema (template, dataset, parametrização, Formly, " +
+      "placeholder, confiança, oculto, offline, \"o sistema prevê\"). Se voltar mensagem_recusada, nada foi enviado: reescreva e envie de novo " +
+      "(isso não é erro do analista).",
     inputSchema: z.object({ texto: z.string() }),
     run: async ({ texto }) => {
+      // Mesmo padrão do schema_invalido: o erro volta ao modelo e nada sai pelo canal. Não conta como rejeição do analista.
+      const v = verificarMensagem(texto);
+      if (!v.ok) return v.motivo;
       await canal.enviar(texto);
       store.atualizarEstado(ctx, (e) => {
         e.mensagens_enviadas++;

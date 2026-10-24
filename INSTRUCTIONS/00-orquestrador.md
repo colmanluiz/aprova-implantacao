@@ -40,6 +40,8 @@ A cada mensagem do analista, o Coletor roda com as suas ferramentas e, em seguid
 
 Resposta fora do formato (`schema_invalido`) só conta como falha na segunda rejeição seguida da mesma pergunta. A primeira é uma chance para o Coletor corrigir sozinho.
 
+Mensagem ao analista fora dos limites da conversa (`mensagem_recusada`: mais de 2 perguntas, mais de 70 palavras com pergunta, mais de 160 sem pergunta, ou palavra de sistema como "template" e "parametrização") não sai pelo canal e volta ao Coletor para reescrever; nunca conta como falha do analista. O mesmo limite vale para a pergunta de um gate ao analista: se não passar, o gate vai ao implantador.
+
 Quando chega anexo, a sub-etapa `extrair` roda dentro de `coletar`, com o seu próprio critério ("todo candidato cita trecho e confiança"). Se não chegar nenhum anexo, `extrair` é fechada junto com `coletar`.
 
 ## Modo humano

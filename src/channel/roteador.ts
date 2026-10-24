@@ -196,7 +196,7 @@ export function ehEscolhaDeMenu(texto: string): boolean {
 export function textoMenu(r: Extract<Rota, { acao: "menu" }>): string {
   const L: string[] = [];
   if (r.aviso) L.push(r.aviso);
-  L.push("Qual processo vamos parametrizar? Responda com o número ou o nome.");
+  L.push("Sobre qual serviço vamos conversar? Responda com o número ou o nome.");
   r.opcoes.forEach((o, i) => L.push(`${i + 1}. ${o.titulo}`));
   if (r.opcoes.length < r.total) L.push(`Ou escreva o nome de qualquer um dos ${r.total} processos.`);
   return L.join("\n");
@@ -207,7 +207,7 @@ export const TEXTO_AJUDA = [
   "menu: lista os processos para escolher",
   "trocar: muda de processo (o que já respondeu fica salvo)",
   "/processo <nome>: vai direto a um processo",
-  "Fora isso, é só responder às perguntas.",
+  "Fora isso, é só conversar por aqui.",
 ].join("\n");
 
 // ---------------------------------------------------------------- estado do chat (disco)
@@ -242,7 +242,7 @@ export function preselecionar(e: EstadoChat, processo: string, template: string,
 
 /**
  * Como retomar um processo escolhido: "novo" (nunca falou com o analista), "aviso" (fora da coleta ou sem
- * pergunta aberta: uma linha basta) ou "coletor" (coleta em andamento: o Coletor diz o que falta e reenvia o lote).
+ * pergunta aberta: uma linha basta) ou "coletor" (coleta em andamento: o Coletor retoma pelo assunto em que a conversa parou).
  */
 export function retomada(ctx: Contexto, titulo: string): { tipo: "novo" } | { tipo: "aviso"; texto: string } | { tipo: "coletor"; abertas: number } {
   const estado = store.estado(ctx);
@@ -254,16 +254,16 @@ export function retomada(ctx: Contexto, titulo: string): { tipo: "novo" } | { ti
       ? `Voltando ao processo ${titulo}: esse já foi homologado pelo implantador.`
       : run.gate?.para === "analista"
         ? `Voltando ao processo ${titulo}: tem uma confirmação esperando você na mensagem anterior.`
-        : `Voltando ao processo ${titulo}: as perguntas já terminaram; o implantador está revisando o formulário.` };
+        : `Voltando ao processo ${titulo}: já conversamos sobre tudo; o implantador está revisando o formulário.` };
   }
   const f = store.ficha(ctx);
   const n = f ? perguntasAbertas(f).length : 0;
-  if (!n) return { tipo: "aviso", texto: `Voltando ao processo ${titulo}: não falta nenhuma pergunta.` };
+  if (!n) return { tipo: "aviso", texto: `Voltando ao processo ${titulo}: já conversamos sobre tudo por aqui.` };
   return { tipo: "coletor", abertas: n };
 }
 
 /** Turno sintético que pede ao Coletor para retomar (vai ao histórico como fala do analista). */
-export const PEDIDO_RETOMADA = "(voltei a este processo pelo menu: me diga quantas perguntas faltam e mande o próximo lote)";
+export const PEDIDO_RETOMADA = "(voltei a este processo pelo menu: retome pelo assunto em que paramos, numa frase como \"Voltando ao Habite-se: estávamos nos documentos.\", e siga com uma pergunta só; não diga quantas perguntas faltam)";
 
 export type Atendimento = {
   tipo: string;
@@ -309,8 +309,8 @@ export async function atender(a: Atendimento): Promise<Contexto | null> {
     if (r.tipo === "coletor") {
       nota = await tratarMensagem(ctx, a.canal, { texto: PEDIDO_RETOMADA, remetente: a.entrada.remetente });
     } else {
-      await a.canal.enviar(`Combinado: ${item.titulo}. Vou te mandar as perguntas.`);
-      // Turno vazio: é assim que tratarMensagem abre um processo (o Coletor se apresenta e manda o primeiro lote).
+      await a.canal.enviar(`Combinado: ${item.titulo}.`);
+      // Turno vazio: é assim que tratarMensagem abre um processo (o Coletor se apresenta e abre com uma pergunta aberta).
       nota = await tratarMensagem(ctx, a.canal, { remetente: a.entrada.remetente });
     }
     a.depois?.(ctx, nota);

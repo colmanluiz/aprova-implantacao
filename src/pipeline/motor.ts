@@ -14,6 +14,7 @@ import type { Canal } from "../agents/tools.js";
 import type { Mensagem } from "../agents/run-agent.js";
 import type { NomeAgente } from "../agents/instructions.js";
 import { etapaDef, etapasPrincipais } from "./definicao.js";
+import { verificarMensagem } from "../core/mensagens.js";
 import { CRITERIOS, criterio as acharCriterio, classificarFalhas, legivelParaAnalista, type Avaliacao, type CtxCriterio } from "./criterios.js";
 import type { ClienteJuiz } from "./juiz.js";
 import type { AcaoGate, CriterioDef, EtapaRun, Gate, PipelineDef, Run } from "./tipos.js";
@@ -148,7 +149,7 @@ export async function avancar(c: Contexto, depsEntrada: Dependencias = {}, entra
       er2.retentativas[criterio.nome] = usadas + 1;
       er2.tentativas++;
       salvarRun(c, run);
-      await executar(c, ed, deps, { feedback: feedbackDe(criterio, avaliacao) });
+      await executar(c, ed, deps, { feedback: feedbackDe(criterio, avaliacao, ed.agente) });
       continue;
     }
     await rotearFalha(c, run, ed, er2, criterio, avaliacao, deps);
@@ -182,9 +183,15 @@ function fecharSubEtapas(run: Run, def: PipelineDef, mae: string) {
   }
 }
 
-function feedbackDe(k: CriterioDef, a: Avaliacao): string {
-  return `[pipeline] O critério de saída "${k.nome}" falhou: ${a.detalhe}. Corrija isso antes de encerrar; não repita o que já está certo.`;
+function feedbackDe(k: CriterioDef, a: Avaliacao, agente?: string): string {
+  return `[pipeline] O critério de saída "${k.nome}" falhou: ${a.detalhe}. Corrija isso antes de encerrar; não repita o que já está certo.` +
+    (agente === "coletor" ? AVISO_RECUSAS : "");
 }
+
+/** Lembrete ao Coletor: as recusas das ferramentas são dele para corrigir, não falha do analista. */
+export const AVISO_RECUSAS =
+  " Se enviar_mensagem voltar mensagem_recusada (mais de 2 perguntas, mensagem longa com pergunta ou palavra de sistema), nada foi enviado: reescreva e envie de novo." +
+  " Se registrar_resposta voltar schema_invalido, corrija o formato ou reformule a pergunta. Nenhuma das duas é erro do analista.";
 
 // ---------------------------------------------------------------- critérios
 
@@ -266,6 +273,11 @@ export async function abrirGate(
     if (p.ok) g = { ...g, instrucao: p.texto };
     else g = { ...g, para: "implantador", detalhe: `${g.detalhe} (não foi ao analista: ${p.motivo})` };
   }
+  // Mesmos limites do enviar_mensagem: até 2 perguntas, curta, sem palavra de sistema.
+  if (g.para === "analista" && g.instrucao) {
+    const v = verificarMensagem(g.instrucao);
+    if (!v.ok) g = { ...g, para: "implantador", instrucao: undefined, detalhe: `${g.detalhe} (não foi ao analista: ${v.motivo})` };
+  }
   const instrucao = g.instrucao ?? (g.para === "analista" ? "" :
     `Na etapa "${nomeEtapa}", o critério "${g.criterio}" falhou${g.tentativas ? ` depois de ${g.tentativas} tentativa(s)` : ""}: ${g.detalhe}. ` +
     `aprovar = aceitar como está e seguir; ajustar "<pergunta_id>=<valor>" (uma por linha) = corrigir a ficha e refazer; ajustar com texto livre = refazer a etapa com essa orientação; rejeitar = parar o processo.`);
@@ -323,7 +335,12 @@ export function perguntaAoAnalista(c: Contexto, run: Run, etapa: string, criteri
   if (criterio === "nenhuma pergunta em aberto") {
     const id = Object.entries(run.rejeicoes_schema ?? {}).find(([, r]) => r.n >= 2)?.[0];
     const q = id ? perguntasDe(store.ficha(c)!).find((x) => x.id === id) : undefined;
-    if (q) return { ok: true, texto: `Não consegui registrar sua resposta para esta pergunta: "${q.texto}" Pode responder de novo, de forma direta? Se não souber, pode dizer "não sei" que eu anoto como pendência.` };
+    if (q) {
+      // O texto da ficha costuma ter jargão ("o template prevê") ou várias perguntas: só é citado se passar nos limites da conversa.
+      const fim = `Pode responder de novo, de forma direta? Se não souber, pode dizer "não sei" que eu anoto como pendência.`;
+      const citado = `Não consegui registrar sua resposta para esta pergunta: "${q.texto}" ${fim}`;
+      return { ok: true, texto: verificarMensagem(citado).ok ? citado : `Não consegui registrar sua resposta à última pergunta. ${fim}` };
+    }
   }
   if (etapa === "extrair") return { ok: true, texto: "Não consegui ler com segurança o arquivo que você mandou. Pode mandar uma foto mais nítida ou escrever os valores aqui mesmo?" };
   const v = legivelParaAnalista(detalhe);
@@ -618,7 +635,7 @@ async function rodarColetor(c: Contexto, deps: Dependencias & { runAgent: RunAge
   }
   if (entrada.mensagem) partes.push(`Mensagem do analista: ${entrada.mensagem}`);
   if (entrada.anexo) partes.push(`O analista enviou um anexo (${entrada.anexo.nome ?? entrada.anexo.tipo}). Chame pedir_extracao antes de responder.`);
-  if (!estado.historico.some((h) => h.role === "assistant")) partes.push("Esta é a primeira interação: apresente-se e envie o primeiro lote de perguntas prioritárias.");
+  if (!estado.historico.some((h) => h.role === "assistant")) partes.push("Esta é a primeira interação: apresente-se em uma frase e abra com a pergunta aberta da sua instrução, uma só; não mande lote de perguntas nem diga quantas são.");
   if (entrada.feedback) partes.push(entrada.feedback);
   store.atualizarEstado(c, (e) => {
     if (limparNota) delete e.nota_pendente_desde;
