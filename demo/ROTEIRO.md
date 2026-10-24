@@ -40,8 +40,8 @@ Opcional (10 s, se sobrar tempo): **"Assumir conversa"**. O implantador escreve 
 ## 3:00 — A validação sem clique (45 s)
 **Projetor: detalhe, coluna "Cenários" e etapa "validar".**
 Template cru: **12/15**, falha recuo, taxa de ocupação e cidade (terminal, se der tempo: `npm run validate -- fixtures/templates/alvara-construcao.modeload.json fixtures/cenarios/alvara.cenarios.json`).
-Formulário de Vale Verde: **15/15** no painel.
-Se houver gate aberto (card laranja no topo): ler a instrução em voz alta e clicar **aprovar**. "Cada cenário é uma frase que o analista entende. O que falhar por regra de negócio vira pergunta no WhatsApp ou decisão do implantador, não ticket."
+Formulário de Vale Verde: **15/15** nos cenários base. Na rodada ao vivo (`alvara-demo`) o validador partiu desses 15 e escreveu mais 15: **30/30**, nenhuma expressão indeterminada nova, e o juiz confirmou que os cenários cobrem a ficha.
+Gate de homologação aberto (card laranja no topo): ler a instrução em voz alta ("2 pendências, cenários 30/30, diff em diff.md") e clicar **aprovar**. "Cada cenário é uma frase que o analista entende. O que falhar por regra de negócio vira pergunta no WhatsApp ou decisão do implantador, não ticket."
 
 ## 3:45 — Métricas e fechamento (15 s)
 **Projetor: voltar para a visão da prefeitura.** As 4 métricas do topo mudaram durante a demo: processos prontos, horas de reunião evitadas, perguntas respondidas sem reunião, cenários passando. Horas de reunião → 0 nos simples. Rodadas de homologação → 1. 4 projetos → 8 por implantador.
@@ -60,10 +60,19 @@ npm run gate -- vale-verde alvara aprovar   # ou clicar "aprovar" no card do gat
 Não há conversa nesse modo: o painel mostra os registros da ficha de exemplo (25 respostas, 11 pendências). Etapas, critérios, gate, diff e 15/15 cenários são reais.
 
 ### Fallback com API, sem celular
-A conversa gravada com o agente real está em `data/vale-verde/alvara-demo/` (aparece no painel como linha extra na mesma secretaria, com o slug no nome) e em `fixtures/insumos/transcricao-demo.md`. Para reproduzir ao vivo no terminal, num processo novo para não apagar a gravação:
+A rodada ao vivo completa está em `data/vale-verde/alvara-demo/` (linha extra na mesma secretaria do painel, com o slug no nome), parada no gate de homologação: 34 respostas (3 pela foto), 2 pendências com dono, 30/30 cenários. Transcrições: `fixtures/insumos/transcricao-demo.md` e `transcricao-demo-fechamento.md`.
+
+```bash
+npm run gate -- vale-verde alvara-demo status
+npm run gate -- vale-verde alvara-demo reexecutar validar   # mostra o validador ao vivo de novo (precisa de API)
+npm run gate -- vale-verde alvara-demo aprovar              # só no fim: depois de aprovar o gate some
+```
+
+Para reproduzir a conversa no terminal, num processo novo para não apagar a gravação:
 
 ```bash
 npm run chat -- --script fixtures/insumos/conversa-demo.txt --processo alvara-ao-vivo --pausa 3000
+npm run chat -- --script fixtures/insumos/conversa-demo-fechamento.txt --processo alvara-ao-vivo --continuar   # "dia seguinte": fecha a ficha e segue até homologar
 ```
 
 ### Fallback sem servidor
@@ -81,5 +90,6 @@ Vídeo de 3 min gravado às 15h30 com o mesmo fluxo (celular + painel lado a lad
 ## Perguntas prováveis da banca
 - **"E quando o template não existe?"** O analisador funciona em qualquer Formly JSON; sem template, a ficha vira entrevista aberta guiada pelos tipos de ponto.
 - **"Como garante que o agente não inventa regra?"** Toda resposta tem origem e confiança; abaixo de 0,8 não é aplicada; a ficha de exemplo tem 11 pendências explícitas. No painel, cada registro aparece embaixo da mensagem que o gerou.
+- **"E se o cenário falhar por erro do próprio agente?"** A falha é classificada: cenário que esqueceu uma pré-condição ou escreveu num campo calculado volta ao validador; campo inexistente ou expressão indeterminada vai ao implantador; só divergência de regra chega ao analista, como frase de balcão de até 240 caracteres sem nome de campo.
 - **"E se o agente se perder na conversa?"** O implantador assume a conversa pelo painel, responde como humano e devolve ao agente. Fica registrado como intervenção.
 - **"Isso entra na operação?"** A saída é o mesmo JSON do configurador. O passo seguinte é um botão "importar ficha" no configurador e trocar o Telegram pelo WhatsApp oficial.

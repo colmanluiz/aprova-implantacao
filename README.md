@@ -24,16 +24,31 @@ Contra o JSON real do **Alvará de Construção** (template `modeload`):
 | Aplicador (código) | 21 mudanças rastreáveis, `diff.md` com a origem de cada decisão |
 | Validador | 15 cenários. Template cru: **12/15**. Formulário de Vale Verde: **15/15** |
 | Pipeline sem LLM | analisar → coletar → aplicar → validar → gate de homologação → aprovar → `concluido` |
-| Conversa roteirizada com o agente real | 14 falas do analista e uma foto da tabela de zoneamento (4 zonas × 8 parâmetros lidos e confirmados). Ao fim: 23 respondidas, 6 a confirmar, 2 pendências com dono, 5 sem resposta; o agente resume e se despede (`fixtures/insumos/transcricao-demo.md`) |
-| Testes | **60** (`npm test`), `npm run typecheck` limpo |
+| Testes | **65** (`npm test`), `npm run typecheck` limpo |
 
-> A ficha de exemplo (`fixtures/fichas/alvara.vale-verde.json`) foi gerada antes de o analisador deixar de marcar `"Não permitido"` como resíduo de cidade; por isso ela tem 37 perguntas e o analisador atual gera 36. Não muda nenhum número acima.
+### Rodada ao vivo, de ponta a ponta (`data/vale-verde/alvara-demo`, `MODEL=claude-sonnet-5-5`)
+
+| Etapa | O que aconteceu |
+|---|---|
+| Conversa | 16 falas do analista: 14 em `conversa-demo.txt` (com uma foto da tabela de zoneamento) e 2 no "dia seguinte" em `conversa-demo-fechamento.txt`. Transcrições: `fixtures/insumos/transcricao-demo.md` e `transcricao-demo-fechamento.md` |
+| `analisar` | 36 perguntas; o resíduo `'Cascavel'` já sai trocado por "Vale Verde" |
+| `coletar` + `extrair` | 34 respondidas com confiança 1,0: 31 por mensagem e 3 pela foto (lista de zonas e a tabela 4 zonas × 8 parâmetros, lidas, conferidas contra a imagem e confirmadas pelo analista). 2 pendências com dono: taxa → Fazenda; atividades → planilha na segunda |
+| `aplicar` | passou: nenhum placeholder, nenhum resíduo pendente |
+| `validar` | o validador partiu dos 15 cenários base, escreveu mais 15: **30/30** passam, nenhuma expressão indeterminada nova, juiz LLM "cenários cobrem a ficha" aprovou |
+| `homologar` | gate aberto para o implantador (`aguardando_implantador`) |
+| Métricas | 19 mensagens enviadas, 16 recebidas, 35 perguntas feitas, 0,67 h de reunião evitada (houve uma pergunta de confirmação ao analista numa tentativa anterior) |
+
+```bash
+npm run gate -- vale-verde alvara-demo status
+npm run gate -- vale-verde alvara-demo reexecutar validar   # roda a validação de novo com o validador ao vivo
+npm run gate -- vale-verde alvara-demo aprovar
+```
 
 ## Como rodar
 
 ```bash
 npm install
-npm test                      # 60 testes, sem API
+npm test                      # 65 testes, sem API
 npm run typecheck
 ```
 
@@ -58,6 +73,8 @@ npm run painel:data           # grava painel/data.json para o modo estático (?s
 npm run chat                                          # você é o analista; /anexo foto.png manda arquivo; /estado; /sair
 npm run chat -- --script fixtures/insumos/conversa-demo.txt --processo alvara-demo --transcricao saida.md
                                                       # replay da conversa da demo; sem --continuar apaga data/vale-verde/alvara-demo
+npm run chat -- --script fixtures/insumos/conversa-demo-fechamento.txt --processo alvara-demo --continuar
+                                                      # "dia seguinte": fecha a ficha e o pipeline segue até homologar
 TELEGRAM_BOT_TOKEN=... npm run telegram               # canal real (celular); ou ponha o token no .env
 ```
 
@@ -100,6 +117,8 @@ Como o motor decide:
 - **Critérios nomeados**, avaliados em ordem (`src/pipeline/criterios.ts`). Cada um devolve `passou`, `aguardando` (etapa fica aberta sem gastar tentativa, ex.: analista ainda não respondeu), `falhou` ou `nao_avaliado` (ex.: juiz sem LLM).
 - **Orçamento de tentativas** por critério. Falhou com tentativa sobrando: o agente da etapa roda de novo **na mesma conversa**, recebendo só `[pipeline] O critério de saída "…" falhou: …`. Etapa de código tem 0 tentativas.
 - **Rota de falha** (`ao_falhar`): `analista` (pergunta em linguagem de cenário pelo canal; "sim" aprova), `implantador` (gate em `run.json` e `pendencias.md`) ou `parar`.
+- **Falhas de cenário classificadas** (`classificarFalhas`): `precondicao` (o cenário esqueceu de preencher a condição) e `calculado` (o cenário escreveu num campo calculado) voltam ao validador na retentativa; `tecnica` (campo inexistente, expressão indeterminada) vai ao implantador; só `regra` chega ao analista, e só se a pergunta for uma regra de balcão de até 240 caracteres sem nome de campo; senão, vai ao implantador.
+- **Reexecutar**: `npm run gate -- <cidade> <processo> reexecutar <etapa>` reabre a etapa e as seguintes e roda de novo com os agentes.
 - **Gates que se explicam sozinhos**: `{para, tipo, instrucao, resumo, acoes: [aprovar, ajustar, rejeitar], contexto}`. `ajustar "residuo-36=Vale Verde"` corrige a ficha (mesmo contrato de formato do `registrar_resposta`) e refaz desde `aplicar`.
 - **Snapshot imutável**: ao abrir o processo, template e `pipeline.json` são copiados para `data/<cidade>/<processo>/snapshot/`. Mudar o pipeline não afeta processo aberto.
 - **Grounding do Extrator** (`src/agents/extrator.ts`): PDF e texto são transcritos na íntegra antes; todo candidato precisa citar um `trecho` literal, e o código procura o trecho no documento — sem achar, o candidato é descartado. Foto nunca sai com confiança acima de 0,7; uma segunda leitura independente confere cada valor (zona por zona): tudo "sim" → 0,9 verificado; qualquer "não"/"ilegível" → 0,4 e o Coletor pergunta só aquelas linhas. Valor que precisa de confirmação fica travado em 0,79 até o analista confirmar por mensagem.
@@ -131,7 +150,7 @@ Como o motor decide:
 | `02-coletor.md` | `rodarColetor` (`motor.ts`) → `runAgent({agente: "coletor"})` | cada mensagem do analista em `coletar`, e retentativa | `ler_ficha`, `registrar_resposta`, `enviar_mensagem`, `pedir_extracao` |
 | `03-extrator.md` | `pedir_extracao` → `lerAnexo` (`motor.ts`, critérios de `extrair`) → `extrair()` → `propor()` | cada anexo | sem ferramentas; saída estruturada Zod. Transcrição de PDF e conferência de foto usam prompts fixos em `extrator.ts` |
 | `04-aplicador.md` | ninguém carrega como prompt: `aplicar` é código (`aplicarFicha`, `gerarDiff`) | coleta fechada | — |
-| `05-validador.md` | executor `validar` (`motor.ts`) → `runAgent({agente: "validador"})`; conversa guardada em `conversas/validar.json` | depois de aplicar, a cada retentativa ou `ajustar` | `ler_ficha`, `rodar_cenarios` |
+| `05-validador.md` | executor `validar` (`motor.ts`) → `runAgent({agente: "validador"})`; conversa guardada em `conversas/validar.json` | depois de aplicar, a cada retentativa, `ajustar` ou `reexecutar validar` | `ler_ficha`, `rodar_cenarios` |
 | rubrica do juiz (`pipeline.json`) | `julgarCobertura` (`src/pipeline/juiz.ts`) | critério "cenários cobrem a ficha" | saída estruturada `{pass, faltam}`; saída inválida reprova |
 
 Sem LLM (`pipeline:offline`), Coletor e Validador não rodam: a ficha vem de `fixtures/fichas/` e os cenários de `fixtures/cenarios/`; o juiz fica `nao_avaliado`.
@@ -145,7 +164,7 @@ Sem LLM (`pipeline:offline`), Coletor e Validador não rodam: a ficha vem de `fi
 | Processos prontos por implantador por dia | 10 (teórico, não cabe) | 20+ (o implantador revisa diffs e gates, não faz reunião) |
 | Projetos simultâneos por implantador | 4 | 8 |
 
-O que é medido de verdade, por processo, em `run.json.metricas`: perguntas feitas, respondidas por mensagem e por anexo, pendências abertas, cenários rodados/passando, horas de reunião evitadas, intervenções humanas. O painel soma isso na visão da prefeitura. No pipeline offline do alvará: 21 por mensagem, 3 por anexo, 11 pendências, 15/15 cenários, 1 h evitada.
+O que é medido de verdade, por processo, em `run.json.metricas`: perguntas feitas, respondidas por mensagem e por anexo, pendências abertas, cenários rodados/passando, horas de reunião evitadas, intervenções humanas. O painel soma isso na visão da prefeitura. Na rodada ao vivo (`alvara-demo`): 31 por mensagem, 3 por foto, 2 pendências, 30/30 cenários, 0,67 h evitada. No pipeline offline: 21 por mensagem, 3 por anexo, 11 pendências, 15/15, 1 h evitada.
 
 ## Limites conhecidos
 
@@ -153,7 +172,6 @@ O que é medido de verdade, por processo, em `run.json.metricas`: perguntas feit
 - O aplicador gera o JSON no formato do configurador, mas não publica. Importar é o próximo passo.
 - Canal real hoje é Telegram. WhatsApp é trocar o adaptador (Baileys/Evolution/Cloud API) pela mesma interface `Canal = { enviar(texto) }`.
 - Planilha só entra como texto (CSV); `.xlsx` não é lido.
-- Na transcrição da demo, o Coletor ainda perguntou o nome da cidade; a instrução `02-coletor.md` foi corrigida depois, sem nova rodada gravada.
 - O juiz de cobertura depende de LLM; sem ele o critério fica `nao_avaliado` e não bloqueia.
 - Um template testado (alvará). Dados de Vale Verde são fictícios.
 - `ferramentas().aplicador` e `ferramentas().orquestrador` em `src/agents/tools.ts` ainda existem, mas o pipeline não os usa.
