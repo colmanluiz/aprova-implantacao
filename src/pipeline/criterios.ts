@@ -124,7 +124,9 @@ export const CRITERIOS: Record<string, Criterio> = {
 
   // ---- homologar ----
   "implantador aprovou": ({ run }) => {
-    const d = [...(run.decisoes ?? [])].reverse().find((x) => x.etapa === "homologar");
+    // Só vale decisão tomada depois que esta rodada de homologação começou (reexecutar/ajustar reabre a etapa).
+    const desde = run.etapas.find((e) => e.slug === "homologar")?.decisoes_desde ?? 0;
+    const d = [...(run.decisoes ?? []).slice(desde)].reverse().find((x) => x.etapa === "homologar");
     if (!d) return { resultado: "aguardando", detalhe: "aguardando revisão do implantador" };
     return d.acao === "aprovar" ? ok(`aprovado em ${d.em}${d.texto ? `: ${d.texto}` : ""}`) : falha(`${d.acao}${d.texto ? `: ${d.texto}` : ""}`);
   },

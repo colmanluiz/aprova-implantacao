@@ -50,6 +50,8 @@ export type EtapaRun = {
   saida_resumo: string;
   /** opcional: retentativas já consumidas por critério */
   retentativas?: Record<string, number>;
+  /** opcional: índice em run.decisoes a partir do qual decisões valem para esta etapa (reaberta) */
+  decisoes_desde?: number;
 };
 
 export type AcaoGate = "aprovar" | "ajustar" | "rejeitar";

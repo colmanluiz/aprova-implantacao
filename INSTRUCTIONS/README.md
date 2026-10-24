@@ -10,7 +10,7 @@ Cada arquivo `.md` numerado é a instrução de um agente. `src/agents/run-agent
 | `coletar` | agente | `02-coletor.md` | A cada mensagem do analista | `ler_ficha`, `registrar_resposta`, `enviar_mensagem`, `pedir_extracao` |
 | `extrair` (dentro de `coletar`) | agente | `03-extrator.md` | Quando chega anexo (via `pedir_extracao`) | nenhuma (saída estruturada) |
 | `aplicar` | código | `04-aplicador.md` | Quando a coleta fecha | — |
-| `validar` | agente + código | `05-validador.md` | Depois de aplicar, e a cada retentativa ou ajuste | `ler_ficha`, `rodar_cenarios` |
+| `validar` | agente + código | `05-validador.md` | Depois de aplicar, e a cada retentativa ou ajuste | `listar_campos`, `cenarios_base`, `ler_ficha`, `rodar_cenarios` |
 | `homologar` | gate do implantador | `00-orquestrador.md` | Depois de validar | `npm run gate` |
 
 `00-orquestrador.md` não é instrução de agente: descreve as transições que o motor aplica (aguardando, falhou, retentativa, gates, modo humano).

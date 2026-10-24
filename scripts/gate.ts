@@ -1,15 +1,16 @@
 // Ações do implantador sobre um processo. Imprime uma linha curta ("ok: ..." ou "erro: ...") para o painel.
 // Uso: npm run gate -- <cidade> <processo> <aprovar|ajustar|rejeitar> [texto]
 //      npm run gate -- <cidade> <processo> <assumir|devolver>        (modo humano da conversa)
+//      npm run gate -- <cidade> <processo> reexecutar <etapa>         (reabre a etapa e as seguintes e roda de novo, com os agentes)
 //      npm run gate -- <cidade> <processo> status                     (resumo detalhado)
-import { resolverGate, assumirConversa, devolverConversa } from "../src/pipeline/motor.js";
+import { resolverGate, reexecutarEtapa, assumirConversa, devolverConversa } from "../src/pipeline/motor.js";
 import { lerRun } from "../src/pipeline/run.js";
 import type { AcaoGate, Run } from "../src/pipeline/tipos.js";
 
 const [cidade, processo, acao, ...resto] = process.argv.slice(2);
 const texto = resto.join(" ").replace(/\\n/g, "\n") || undefined;
 const sair = (msg: string, code = 1): never => { console.log(msg); process.exit(code); };
-if (!cidade || !processo || !acao) sair("erro: uso npm run gate -- <cidade> <processo> <aprovar|ajustar|rejeitar|assumir|devolver|status> [texto]", 2);
+if (!cidade || !processo || !acao) sair("erro: uso npm run gate -- <cidade> <processo> <aprovar|ajustar|rejeitar|reexecutar|assumir|devolver|status> [texto]", 2);
 const ctx = { cidade, processo, template: process.env.TEMPLATE ?? "fixtures/templates/alvara-construcao.modeload.json" };
 // Pergunta para o analista aberta pela CLI não chega ao WhatsApp: vai para stderr e fica em run.json.gate.
 const canal = { enviar: async (t: string) => { console.error(`[para o analista] ${t}`); } };
@@ -31,6 +32,10 @@ try {
   } else if (acao === "devolver") {
     devolverConversa(ctx);
     console.log("ok: conversa devolvida ao agente");
+  } else if (acao === "reexecutar") {
+    if (!texto) sair("erro: informe a etapa, ex.: reexecutar validar", 2);
+    const run = await reexecutarEtapa(ctx, texto!.trim(), { canal });
+    console.log(`ok: etapa ${texto!.trim()} reexecutada; ${depois(run)}`);
   } else if (acao in PART) {
     const etapa = lerRun(ctx)?.gate?.etapa ?? "?";
     const run = await resolverGate(ctx, acao as AcaoGate, texto, { canal });

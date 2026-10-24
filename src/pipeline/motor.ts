@@ -14,12 +14,12 @@ import type { Canal } from "../agents/tools.js";
 import type { Mensagem } from "../agents/run-agent.js";
 import type { NomeAgente } from "../agents/instructions.js";
 import { etapaDef, etapasPrincipais } from "./definicao.js";
-import { CRITERIOS, criterio as acharCriterio, type Avaliacao, type CtxCriterio } from "./criterios.js";
+import { CRITERIOS, criterio as acharCriterio, classificarFalhas, legivelParaAnalista, type Avaliacao, type CtxCriterio } from "./criterios.js";
 import type { ClienteJuiz } from "./juiz.js";
 import type { AcaoGate, CriterioDef, EtapaRun, Gate, PipelineDef, Run } from "./tipos.js";
 import { nomeCidade, agora, anotarPendencia, criarSnapshot, etapaRun, lerRun, novoRun, pipelineDoProcesso, salvarRun } from "./run.js";
 
-export type RunAgentFn = (opts: { agente: NomeAgente; mensagens: Mensagem[]; tools?: any[] }) => Promise<{ texto: string; conversa?: Mensagem[] }>;
+export type RunAgentFn = (opts: { agente: NomeAgente; mensagens: Mensagem[]; tools?: any[]; maxIteracoes?: number }) => Promise<{ texto: string; conversa?: Mensagem[] }>;
 
 export type Dependencias = {
   canal?: Canal;
@@ -38,6 +38,8 @@ export type Dependencias = {
 export type Entrada = { mensagem?: string; feedback?: string; anexo?: Anexo; primeira?: boolean };
 
 const MAX_PASSOS = 40;
+/** Máximo de rodadas de ferramenta numa execução do validador (evita conversas de 14 mensagens). */
+export const MAX_RODADAS_VALIDADOR = 6;
 
 // ---------------------------------------------------------------- início
 
@@ -258,7 +260,13 @@ export async function abrirGate(
 ) {
   const def = pipelineDoProcesso(c);
   const nomeEtapa = etapaDef(def, g.etapa).nome;
-  const instrucao = g.instrucao ?? (g.para === "analista" ? perguntaAoAnalista(c, run, g.etapa, g.criterio, g.detalhe) :
+  // Pergunta ao analista só sai se for regra de balcão legível; senão o gate vai para o implantador.
+  if (g.para === "analista" && !g.instrucao) {
+    const p = perguntaAoAnalista(c, run, g.etapa, g.criterio, g.detalhe);
+    if (p.ok) g = { ...g, instrucao: p.texto };
+    else g = { ...g, para: "implantador", detalhe: `${g.detalhe} (não foi ao analista: ${p.motivo})` };
+  }
+  const instrucao = g.instrucao ?? (g.para === "analista" ? "" :
     `Na etapa "${nomeEtapa}", o critério "${g.criterio}" falhou${g.tentativas ? ` depois de ${g.tentativas} tentativa(s)` : ""}: ${g.detalhe}. ` +
     `aprovar = aceitar como está e seguir; ajustar "<pergunta_id>=<valor>" (uma por linha) = corrigir a ficha e refazer; ajustar com texto livre = refazer a etapa com essa orientação; rejeitar = parar o processo.`);
   const gate: Gate = {
@@ -292,19 +300,34 @@ export async function abrirGate(
   salvarRun(c, run);
 }
 
-/** Pergunta de confirmação em linguagem de servidor, sem jargão. */
-function perguntaAoAnalista(c: Contexto, run: Run, etapa: string, criterio: string | undefined, detalhe: string): string {
+/**
+ * Pergunta de confirmação em linguagem de servidor, sem jargão. Para cenários, a pergunta é a
+ * `descricao` de um cenário que falhou por regra (não por pré-condição esquecida nem falha técnica).
+ */
+export function perguntaAoAnalista(c: Contexto, run: Run, etapa: string, criterio: string | undefined, detalhe: string): { ok: true; texto: string } | { ok: false; motivo: string } {
   if (criterio === "todos os cenários passam") {
-    const f = (store.relatorio(c) ?? []).find((r) => !r.passou);
-    if (f) return `Preciso confirmar uma regra do ${run.titulo}: "${f.descricao}". É assim que deve funcionar na prefeitura? Responda sim ou não e, se não, como deveria ser.`;
+    const rel = store.relatorio(c) ?? [];
+    const form = store.form(c);
+    const cens = store.cenarios(c) ?? [];
+    const cls = form ? classificarFalhas(form, cens, rel) : [];
+    const deRegra = rel.filter((r) => !r.passou && (cls.find((k) => k.id === r.id)?.classe ?? "regra") === "regra");
+    if (!deRegra.length) return { ok: false, motivo: "nenhuma falha é de regra (pré-condição esquecida ou falha técnica)" };
+    let motivo = "";
+    for (const r of deRegra) {
+      const v = legivelParaAnalista(r.descricao);
+      if (v.ok) return { ok: true, texto: `Preciso confirmar uma regra do ${run.titulo}: "${r.descricao}". É assim que deve funcionar na prefeitura? Responda sim ou não e, se não, como deveria ser.` };
+      motivo = `descrição do cenário ${r.id} ilegível para o analista (${v.motivo})`;
+    }
+    return { ok: false, motivo };
   }
   if (criterio === "nenhuma pergunta em aberto") {
     const id = Object.entries(run.rejeicoes_schema ?? {}).find(([, r]) => r.n >= 2)?.[0];
     const q = id ? perguntasDe(store.ficha(c)!).find((x) => x.id === id) : undefined;
-    if (q) return `Não consegui registrar sua resposta para esta pergunta: "${q.texto}" Pode responder de novo, de forma direta? Se não souber, pode dizer "não sei" que eu anoto como pendência.`;
+    if (q) return { ok: true, texto: `Não consegui registrar sua resposta para esta pergunta: "${q.texto}" Pode responder de novo, de forma direta? Se não souber, pode dizer "não sei" que eu anoto como pendência.` };
   }
-  if (etapa === "extrair") return "Não consegui ler com segurança o arquivo que você mandou. Pode mandar uma foto mais nítida ou escrever os valores aqui mesmo?";
-  return `Preciso de uma confirmação sua para seguir: ${detalhe}. Pode me responder?`;
+  if (etapa === "extrair") return { ok: true, texto: "Não consegui ler com segurança o arquivo que você mandou. Pode mandar uma foto mais nítida ou escrever os valores aqui mesmo?" };
+  const v = legivelParaAnalista(detalhe);
+  return v.ok ? { ok: true, texto: `Preciso de uma confirmação sua para seguir: ${detalhe}. Pode me responder?` } : { ok: false, motivo: `detalhe técnico (${v.motivo})` };
 }
 
 /**
@@ -362,7 +385,7 @@ export async function resolverGate(c: Contexto, acao: AcaoGate, texto?: string, 
   const ordem = etapasPrincipais(def).map((e) => e.slug);
   const posAplicar = ordem.indexOf(gate.etapa) > ordem.indexOf("aplicar") && ordem.includes("aplicar");
   if (validos.length && posAplicar) {
-    for (const slug of ordem.slice(ordem.indexOf("aplicar"))) reabrir(etapaRun(run, slug));
+    for (const slug of ordem.slice(ordem.indexOf("aplicar"))) reabrir(run, slug);
     run.etapa_atual = "aplicar";
     run.status = "executando";
     salvarRun(c, run);
@@ -372,7 +395,7 @@ export async function resolverGate(c: Contexto, acao: AcaoGate, texto?: string, 
   // Homologar não tem agente: texto livre volta para o validador como orientação.
   let alvo = gate.etapa === "extrair" ? "coletar" : gate.etapa;
   if (gate.etapa === "homologar" && resto) {
-    reabrir(etapaRun(run, "homologar"));
+    reabrir(run, "homologar");
     alvo = "validar";
     run.etapa_atual = "validar";
   }
@@ -388,7 +411,10 @@ export async function resolverGate(c: Contexto, acao: AcaoGate, texto?: string, 
   return avancar(c, deps, entrada);
 }
 
-function reabrir(er: EtapaRun) {
+function reabrir(run: Run, slug: string) {
+  const er = etapaRun(run, slug);
+  run.criterios_aprovados = (run.criterios_aprovados ?? []).filter((k) => !k.startsWith(`${slug}:`));
+  er.decisoes_desde = run.decisoes?.length ?? 0;
   er.status = "pendente";
   er.iniciada_em = null;
   er.concluida_em = null;
@@ -410,6 +436,31 @@ function lerAjustes(c: Contexto, texto: string): ({ q: Pergunta; valor: unknown 
     out.push(v.ok ? { q, valor: v.valor } : { erro: v.erro });
   }
   return out;
+}
+
+/**
+ * Reabre uma etapa e todas as seguintes (critérios nao_avaliado, tentativas 0), apaga a conversa
+ * do agente daquela etapa (e cenários/relatório quando é validar) e roda o pipeline a partir dela.
+ */
+export async function reexecutarEtapa(c: Contexto, slug: string, deps: Dependencias = {}): Promise<Run> {
+  const run = lerRun(c);
+  if (!run) throw new Error(`processo ${c.cidade}/${c.processo} não iniciado`);
+  const def = pipelineDoProcesso(c);
+  const ordem = etapasPrincipais(def).map((e) => e.slug);
+  const i = ordem.indexOf(slug);
+  if (i < 0) throw new Error(`etapa inválida para reexecutar: ${slug} (use ${ordem.join(", ")})`);
+  if (i < ordem.indexOf("coletar") + 1 && slug !== "coletar") throw new Error("reexecutar analisar recria a ficha; abra o processo de novo");
+  const afetadas = ordem.slice(i);
+  for (const s of afetadas) {
+    reabrir(run, s);
+    fs.rmSync(store.arquivo(c, `conversas/${s}.json`), { force: true });
+  }
+  if (afetadas.includes("validar")) for (const f of ["cenarios.json", "relatorio.json"]) fs.rmSync(store.arquivo(c, f), { force: true });
+  if (run.gate && afetadas.includes(run.gate.etapa)) run.gate = null;
+  run.etapa_atual = slug;
+  run.status = "executando";
+  salvarRun(c, run);
+  return avancar(c, deps);
 }
 
 // ---------------------------------------------------------------- executores
@@ -500,7 +551,8 @@ const EXECUTORES: Record<string, Executor> = {
       const mensagens: Mensagem[] = entrada?.feedback && anterior?.length
         ? [...anterior, { role: "user", content: entrada.feedback }]
         : [{ role: "user", content: "Formulário aplicado. Leia a ficha, escreva de 10 a 30 cenários cobrindo cada pergunta respondida, rode com rodar_cenarios e resuma o relatório em até 5 linhas." }];
-      const { conversa } = await deps.runAgent({ agente: "validador", mensagens, tools: t.validador });
+      // Rodadas de ferramenta limitadas: listar_campos, cenarios_base, ler_ficha, rodar_cenarios e uma correção.
+      const { conversa } = await deps.runAgent({ agente: "validador", mensagens, tools: t.validador, maxIteracoes: MAX_RODADAS_VALIDADOR });
       gravar(arqConversa, conversa ?? mensagens);
       resumos(c, "validar", "cenários escritos pelo agente validador");
     }

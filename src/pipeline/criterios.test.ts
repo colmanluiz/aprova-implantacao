@@ -141,3 +141,38 @@ test("nomeCidade: slug vira nome de exibição", async () => {
   assert.equal(nomeCidade("sao-jose-dos-campos"), "Sao Jose dos Campos");
   assert.equal(nomeCidade(""), "");
 });
+
+test("legível para o analista: descrições dos cenários de fixture passam; diagnóstico, campo, chaves e textão não", async () => {
+  const { legivelParaAnalista } = await import("./criterios.js");
+  for (const c of cenarios) assert.ok(legivelParaAnalista(c.descricao).ok, c.descricao);
+  for (const t of [
+    'Diagnóstico: tipo de logradouro "Rua" (opção que já existia no modelo) também fica oculto?',
+    "Se tipo_logradouro for Rua, aparece?",
+    "Se tipoLogradouro for Rua, aparece?",
+    "O campo {zona} aparece?",
+    "x".repeat(241),
+  ]) assert.equal(legivelParaAnalista(t).ok, false, t);
+});
+
+test("classificarFalhas: pré-condição esquecida, falha técnica e falha de regra", async () => {
+  const { classificarFalhas } = await import("./criterios.js");
+  const { form } = aplicarFicha(tpl, fichaVV());
+  const cs: Cenario[] = [
+    { id: "d1", descricao: "Diagnóstico: tipo de logradouro Rua", model: { tipo_logradouro: "Rua" }, espera: [{ campo: "tipo_logradouro", visivel: true }] },
+    { id: "d2", descricao: "Diagnóstico: piscina", model: { quadro_areas: [{ tipo_uso_complementar: "Piscina" }] }, espera: [{ campo: "quadro_areas[0].tipo_uso_complementar", visivel: true }] },
+    { id: "t1", descricao: "campo que não existe", model: {}, espera: [{ campo: "nao_existe_xyz", visivel: true }] },
+    { ...cenarios.find((c) => c.id === "c11-recuo-abaixo-do-minimo")!, id: "r1", espera: [{ campo: "aviso_recuo_frontal", visivel: false }] },
+    { id: "ok1", descricao: "logradouro com CEP", model: { endereco_cep: { input: "85800000" } }, espera: [{ campo: "tipo_logradouro", visivel: true }] },
+  ];
+  const rel = rodarCenarios(form, cs);
+  assert.ok(rel.find((r) => r.id === "ok1")!.passou, "com a pré-condição o campo aparece");
+  const cls = Object.fromEntries(classificarFalhas(form, cs, rel).map((k) => [k.id, k]));
+  assert.equal(cls.d1.classe, "precondicao");
+  assert.match(cls.d1.motivo!, /endereco_cep/);
+  assert.equal(cls.d2.classe, "precondicao");
+  assert.match(cls.d2.motivo!, /area_complementar/);
+  assert.equal(cls.t1.classe, "tecnica");
+  assert.equal(cls.r1.classe, "regra");
+  const r = await av("todos os cenários passam", { relatorio: rel, cenarios: cs, form });
+  assert.match(r.detalhe, /d1 \[precondicao: falta endereco_cep/);
+});

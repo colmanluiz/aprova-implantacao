@@ -1,5 +1,8 @@
 // Ferramentas que os agentes podem chamar. Cada uma embrulha código de src/core/ ou o store.
+import fs from "node:fs";
+import path from "node:path";
 import { z } from "zod";
+import { walk, label, ehEtapa } from "../core/formly.js";
 import { betaZodTool } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { analisarTemplate } from "../core/template-analyzer.js";
 import { aplicarFicha, gerarDiff } from "../core/patcher.js";
@@ -8,7 +11,55 @@ import { validarResposta } from "../core/respostas.js";
 import { store, perguntasAbertas, resumir, type Contexto } from "./store.js";
 import { extrair, type Anexo, type SaidaExtrator } from "./extrator.js";
 import { registrarRejeicao, limparRejeicao } from "../pipeline/run.js";
-import type { Cenario, Pergunta } from "../core/types.js";
+import type { AprovaTemplate, Cenario, Pergunta } from "../core/types.js";
+
+/** Junta cenários pelo id: novo entra no fim, id repetido substitui no lugar. */
+export function juntarCenarios(base: Cenario[], novos: Cenario[]): Cenario[] {
+  const out = [...base];
+  for (const c of novos) {
+    const i = out.findIndex((x) => x.id === c.id);
+    if (i >= 0) out[i] = c; else out.push(c);
+  }
+  return out;
+}
+
+export type CampoListado = {
+  path: string; key: string; label: string | null; type: string | null; etapa: string | null;
+  opcoes?: string[]; condicao_visivel: string | null; condicao_obrigatorio: string | null;
+};
+
+/** Campos com key do formulário, com a etapa (step) e as condições cruas. */
+export function listarCampos(form: AprovaTemplate): CampoListado[] {
+  const out: CampoListado[] = [];
+  for (const { field, path, parents } of walk(form.form)) {
+    if (!field.key) continue;
+    const step = [...parents].reverse().find(ehEtapa);
+    const to = field.templateOptions ?? {};
+    const expReq = field.expressionProperties?.["templateOptions|||required"] ?? field.expressionProperties?.["templateOptions.required"];
+    out.push({
+      path,
+      key: String(field.key),
+      label: label(field) ?? null,
+      type: field.type ?? null,
+      etapa: step ? label(step) ?? null : null,
+      ...(Array.isArray(to.options) && to.options.length ? { opcoes: to.options.map((o: any) => String(o.label ?? o.value)) } : {}),
+      condicao_visivel: typeof field.hideExpression === "string" ? `oculto quando: ${field.hideExpression}` : field.hideExpression === true ? "sempre oculto" : null,
+      condicao_obrigatorio: typeof expReq === "string" ? expReq : to.required ? "sempre" : null,
+    });
+  }
+  return out;
+}
+
+/** fixtures/cenarios/<slug>.cenarios.json para o template do processo, se existir. */
+export function arquivoCenariosBase(ctx: Contexto): string | undefined {
+  const base = path.basename(ctx.template).replace(/\.json$/, "");
+  const nomes = [base, base.split(".")[0], base.split(/[.-]/)[0], ctx.processo];
+  for (const n of nomes) {
+    const p = path.join("fixtures/cenarios", `${n}.cenarios.json`);
+    if (fs.existsSync(p)) return p;
+  }
+  return undefined;
+}
 
 export type Canal = { enviar: (texto: string) => Promise<void> };
 
@@ -147,8 +198,11 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
 
   const rodar_cenarios = betaZodTool({
     name: "rodar_cenarios",
-    description: "Roda cenários (model + expectativas) contra o formulário parametrizado no avaliador de expressões. Devolve relatório.",
+    description:
+      "Roda cenários (model + expectativas) contra o formulário parametrizado. Junta pelo id ao conjunto já salvo " +
+      "(id novo entra, id repetido substitui) e devolve o relatório do conjunto inteiro. Use substituir: true só para recomeçar do zero.",
     inputSchema: z.object({
+      substituir: z.boolean().optional(),
       cenarios: z.array(z.object({
         id: z.string(),
         descricao: z.string(),
@@ -156,13 +210,38 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
         espera: z.array(z.object({ campo: z.string(), visivel: z.boolean().optional(), obrigatorio: z.boolean().optional(), valor: z.any().optional() })),
       })),
     }),
-    run: async ({ cenarios }) => {
+    run: async ({ cenarios, substituir }) => {
       const form = store.form(ctx);
       if (!form) return "formulário inexistente; chame aplicar_ficha";
-      store.salvarCenarios(ctx, cenarios as Cenario[]);
-      const res = rodarCenarios(form, cenarios as Cenario[]);
+      const todos = juntarCenarios(substituir ? [] : store.cenarios(ctx) ?? [], cenarios as Cenario[]);
+      store.salvarCenarios(ctx, todos);
+      const res = rodarCenarios(form, todos);
       store.salvarRelatorio(ctx, res);
       return relatorioTexto(res);
+    },
+  });
+
+  const listar_campos = betaZodTool({
+    name: "listar_campos",
+    description:
+      "Lista os campos do formulário parametrizado: path, key, label, tipo, etapa, opções e as condições de visibilidade e obrigatoriedade " +
+      "(expressão crua). Use antes de escrever cenários para preencher no model as pré-condições de cada campo esperado visível.",
+    inputSchema: z.object({ etapa: z.string().optional() }),
+    run: async ({ etapa }) => {
+      const form = store.form(ctx);
+      if (!form) return "formulário inexistente";
+      const campos = listarCampos(form).filter((c) => !etapa || c.etapa === etapa);
+      return JSON.stringify(campos);
+    },
+  });
+
+  const cenarios_base = betaZodTool({
+    name: "cenarios_base",
+    description: "Devolve os cenários já comprovados para este template (ponto de partida). Rode-os e acrescente cobertura; não os apague.",
+    inputSchema: z.object({}),
+    run: async () => {
+      const arq = arquivoCenariosBase(ctx);
+      return arq ? fs.readFileSync(arq, "utf8") : "[]";
     },
   });
 
@@ -178,7 +257,7 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
     coletor: [ler_ficha, registrar_resposta, enviar_mensagem, pedir_extracao],
     aplicador: [aplicar_ficha, gerar_diff],
     // O validador não fala com a prefeitura: confirmações viram gate para o analista, abertos pelo pipeline.
-    validador: [ler_ficha, rodar_cenarios],
-    todas: [estado_processo, analisar_template, ler_ficha, registrar_resposta, enviar_mensagem, pedir_extracao, aplicar_ficha, gerar_diff, rodar_cenarios],
+    validador: [listar_campos, cenarios_base, ler_ficha, rodar_cenarios],
+    todas: [estado_processo, analisar_template, ler_ficha, registrar_resposta, enviar_mensagem, pedir_extracao, aplicar_ficha, gerar_diff, rodar_cenarios, listar_campos, cenarios_base],
   };
 }

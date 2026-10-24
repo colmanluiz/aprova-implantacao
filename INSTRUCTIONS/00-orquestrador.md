@@ -18,6 +18,7 @@ Cada etapa tem critérios de saída, avaliados em ordem. A avaliação para no p
 ## Sem tentativas: para onde vai (`ao_falhar`)
 
 - `analista`: abre um gate para o analista. A pergunta sai pelo canal (WhatsApp/Telegram) em linguagem de cenário, por exemplo: "Se o requerente for empresa e não anexar contrato social, o sistema deve barrar o protocolo?" A próxima mensagem do analista resolve o gate: "sim" aprova; qualquer outra resposta vira ajuste e volta para o agente da etapa.
+  Antes de sair, o motor confere a pergunta: ela precisa ser a `descricao` de um cenário que falhou por **regra** (não por pré-condição esquecida nem por falha técnica), escrita como regra de balcão: sem "Diagnóstico", sem nome de campo (`tipo_logradouro`, `tipoLogradouro`, `model.x`), sem chaves ou colchetes e com até 240 caracteres. Se não passar, o gate vai para o implantador.
 - `implantador`: abre um gate para o implantador, gravado em `run.json` (campo `gate`) e anotado em `pendencias.md`.
 - `parar`: o processo fica `parado`.
 
@@ -30,6 +31,8 @@ Todo gate se explica sozinho: `{ para, tipo, instrucao, resumo, acoes: ["aprovar
 - **rejeitar**: o processo para.
 
 Comando: `npm run gate -- <cidade> <processo> <aprovar|ajustar|rejeitar> [texto]`. No código: `resolverGate(ctx, acao, texto?)`.
+
+Para testar de novo uma etapa sem refazer a conversa: `npm run gate -- <cidade> <processo> reexecutar <etapa>` (`reexecutarEtapa` no código). Reabre a etapa e as seguintes (critérios não avaliados, tentativas zeradas, aprovações antigas descartadas), apaga a conversa do agente daquela etapa (e, em `validar`, os cenários e o relatório) e roda o pipeline dali para a frente.
 
 ## Coletar é uma etapa longa
 

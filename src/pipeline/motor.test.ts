@@ -7,7 +7,7 @@ import path from "node:path";
 import type { Cenario, Ficha } from "../core/types.js";
 import { store, perguntasDe, type Contexto } from "../agents/store.js";
 import { tratarMensagem } from "../agents/orquestrador.js";
-import { iniciarProcesso, avancar, resolverGate, assumirConversa, devolverConversa, historicoParaMensagens, type RunAgentFn } from "./motor.js";
+import { iniciarProcesso, avancar, resolverGate, reexecutarEtapa, assumirConversa, devolverConversa, historicoParaMensagens, MAX_RODADAS_VALIDADOR, type RunAgentFn } from "./motor.js";
 import { lerRun, etapaRun } from "./run.js";
 import type { ClienteJuiz } from "./juiz.js";
 
@@ -19,11 +19,11 @@ const novoCtx = (): Contexto => ({ cidade: "teste", processo: `p${++n}`, templat
 const fichaVV = (): Ficha => JSON.parse(fs.readFileSync("fixtures/fichas/alvara.vale-verde.json", "utf8"));
 const cenariosVV: Cenario[] = JSON.parse(fs.readFileSync("fixtures/cenarios/alvara.cenarios.json", "utf8"));
 
-type Chamada = { agente: string; mensagens: any[]; tools: any[] };
+type Chamada = { agente: string; mensagens: any[]; tools: any[]; maxIteracoes?: number };
 function agenteFalso(comportamento: (c: Chamada, i: number) => Promise<string | void> | string | void) {
   const chamadas: Chamada[] = [];
   const fn: RunAgentFn = async (o) => {
-    const c = { agente: o.agente, mensagens: o.mensagens, tools: o.tools ?? [] };
+    const c = { agente: o.agente, mensagens: o.mensagens, tools: o.tools ?? [], maxIteracoes: o.maxIteracoes };
     chamadas.push(c);
     const texto = (await comportamento(c, chamadas.length - 1)) ?? "";
     return { texto, conversa: [...o.mensagens, { role: "assistant", content: texto || "ok" }] };
@@ -294,4 +294,56 @@ test("extrator: candidato com precisa_confirmacao trava confiança em 0,79 até 
   await reg.run({ pergunta_id: "opcoes-16", resposta: ["ZR1"], origem: "mensagem", confianca: 1 });
   assert.equal(perguntasDe(store.ficha(ctx)!).find((q) => q.id === "opcoes-16")!.confianca, 1);
   assert.deepEqual(store.aConfirmar(ctx), []);
+});
+
+test("validador com cenários de diagnóstico sem pré-condição: no máximo 2 execuções, rodadas limitadas, gate vai ao implantador e nada chega ao analista", async () => {
+  const ctx = novoCtx();
+  const { canal, enviadas } = canalFalso();
+  const diag: Cenario[] = [
+    { id: "d1", descricao: 'Diagnóstico: tipo de logradouro "Rua" (opção que já existia no modelo) também fica oculto?', model: { tipo_logradouro: "Rua" }, espera: [{ campo: "tipo_logradouro", visivel: true }] },
+    { id: "d2", descricao: "Diagnóstico: piscina aparece?", model: { quadro_areas: [{ tipo_uso_complementar: "Piscina" }] }, espera: [{ campo: "quadro_areas[0].tipo_uso_complementar", visivel: true }] },
+  ];
+  const val = agenteFalso(async (c) => {
+    if (c.agente !== "validador") return;
+    const base = JSON.parse(await ferramenta(c, "cenarios_base").run({}));
+    assert.equal(base.length, 15);
+    const campos = JSON.parse(await ferramenta(c, "listar_campos").run({}));
+    assert.ok(campos.some((x: any) => x.key === "tipo_logradouro" && /endereco_cep/.test(x.condicao_visivel)));
+    await ferramenta(c, "rodar_cenarios").run({ cenarios: base });
+    await ferramenta(c, "rodar_cenarios").run({ cenarios: diag });
+  });
+  const deps = { runAgent: val.fn, juiz: juizFixo([{ pass: true, faltam: [] }]), canal };
+  await iniciarProcesso(ctx, deps);
+  store.salvarFicha(ctx, fichaFechada(ctx.cidade));
+  const run = await avancar(ctx, deps);
+  assert.equal(val.chamadas.length, 2, "1 execução + 1 retentativa");
+  assert.ok(val.chamadas.every((c) => c.maxIteracoes === MAX_RODADAS_VALIDADOR && MAX_RODADAS_VALIDADOR <= 6));
+  assert.match(val.chamadas[1].mensagens.at(-1).content, /precondicao: falta endereco_cep/);
+  assert.equal(store.cenarios(ctx)!.length, 17, "rodar_cenarios junta pelo id em vez de substituir");
+  assert.equal(run.gate?.para, "implantador");
+  assert.match(run.gate!.instrucao, /não foi ao analista/);
+  assert.deepEqual(enviadas, []);
+  assert.equal(run.metricas.horas_reuniao_evitadas, 1);
+});
+
+test("reexecutar validar: reabre validar e homologar, apaga cenários e conversa, roda de novo e pede nova homologação", async () => {
+  const ctx = novoCtx();
+  const deps = { semLLM: true, juiz: null, cenarios: "fixtures/cenarios/alvara.cenarios.json" };
+  await iniciarProcesso(ctx, deps);
+  store.salvarFicha(ctx, fichaFechada(ctx.cidade));
+  await avancar(ctx, deps);
+  let run = await resolverGate(ctx, "aprovar", undefined, deps);
+  assert.equal(run.status, "concluido");
+  fs.mkdirSync(store.arquivo(ctx, "conversas"), { recursive: true });
+  fs.writeFileSync(store.arquivo(ctx, "conversas/validar.json"), "[]");
+  fs.writeFileSync(store.arquivo(ctx, "cenarios.json"), "[]");
+  run = await reexecutarEtapa(ctx, "validar", deps);
+  assert.ok(!fs.existsSync(store.arquivo(ctx, "conversas/validar.json")));
+  assert.equal(store.cenarios(ctx)!.length, 15);
+  assert.equal(etapaRun(run, "validar").status, "concluida");
+  assert.equal(etapaRun(run, "validar").tentativas, 1);
+  assert.equal(run.etapa_atual, "homologar");
+  assert.equal(run.status, "aguardando_implantador", "aprovação antiga não vale para a nova rodada");
+  assert.equal(run.gate?.tipo, "homologacao");
+  await assert.rejects(reexecutarEtapa(ctx, "xyz", deps), /etapa inválida/);
 });
