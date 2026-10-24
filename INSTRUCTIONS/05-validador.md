@@ -32,6 +32,18 @@ Todo campo que você espera visível precisa ter a sua condição de visibilidad
 
 Exemplo: `{ "quadro_areas": [{ "tipo_uso": "Residencial unifamiliar", "area_complementar": "Sim", "tipo_uso_complementar": "Piscina" }] }`.
 
+### Campo calculado: nunca defina seu valor no model; defina os insumos
+
+Alguns campos são calculados pelo próprio formulário (em `listar_campos`, têm `calculado_de`). O avaliador recalcula esses campos a partir dos insumos, então o valor que você colocar no `model` é ignorado. Para exercitar um aviso que depende deles, preencha os insumos. Neste template:
+
+- `coeficiente_aproveitamentoprojeto` = `area_totalcomputavel / area_terreno_real` (ex.: índice 1,5 → `area_totalcomputavel: 150`, `area_terreno_real: 100`);
+- `taxa_ocup` = `area_projecao / area_terreno_real × 100`;
+- `taxa_permeabilidade_projeto` = `area_permeavel / area_terreno_real × 100`;
+- `area_total` (em cada item de `quadro_areas[]`) = existente + construir + regularizar + ampliar − demolir, e `totalarea_total` soma os itens;
+- campos de endereço (logradouro, tipo de logradouro, bairro, cidade, UF) também são preenchidos a partir do CEP.
+
+O pipeline marca esse erro como `[calculado: … defina os insumos, não o resultado]`.
+
 ### A descrição é para o analista
 
 A `descricao` é o que o analista vai ler se o cenário precisar de confirmação. Escreva como regra de balcão, em até 240 caracteres, sem nome de campo, sem chaves: "Zona ZR2 exige recuo frontal de 4 m; projeto com 3 m deve receber aviso".
@@ -47,10 +59,11 @@ Se um critério falhar, você recebe na mesma conversa: `[pipeline] O critério 
 O pipeline já marca cada falha, ex.: `c20 [precondicao: falta endereco_cep no model]`. Confira e trate assim:
 
 - **precondicao**: o cenário esqueceu uma pré-condição. Corrija o `model` do cenário (mesmo `id`) e rode de novo. Isso é permitido e **não** é "ajustar a expectativa".
+- **calculado**: o cenário definiu um campo calculado em vez dos insumos. Troque pelo cálculo de origem no `model` (mesmo `id`) e rode de novo.
 - **regra**: o formulário faz uma coisa e a ficha diz outra. Não mexa: essa falha vira pergunta de confirmação ao analista, com a sua `descricao`.
 - **tecnica**: campo inexistente ou expressão indeterminada. Não contorne; vai para o implantador.
 
-Só falhas de **regra** chegam ao analista.
+Só falhas de **regra** chegam ao analista; `precondicao` e `calculado` são erro do cenário e você corrige.
 
 ### Outros critérios
 

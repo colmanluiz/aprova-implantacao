@@ -132,20 +132,40 @@ export const CRITERIOS: Record<string, Criterio> = {
   },
 };
 
-export type ClasseFalha = "precondicao" | "regra" | "tecnica";
+export type ClasseFalha = "precondicao" | "calculado" | "regra" | "tecnica";
+
+const refsModel = (expr: string) => [...new Set([...expr.matchAll(/model\??\.([a-zA-Z0-9_]+)/g)].map((m) => m[1]))];
+
+/** Campos calculados: key → expressão crua de expressionProperties["model|||key"]. */
+export function camposCalculados(form: AprovaTemplate): Map<string, string> {
+  const out = new Map<string, string>();
+  for (const { field } of walk(form.form)) {
+    if (!field.key) continue;
+    const e = field.expressionProperties?.[`model|||${field.key}`];
+    if (typeof e === "string") out.set(String(field.key), e);
+  }
+  return out;
+}
 
 /**
  * Classifica cada cenário que falhou:
  * - tecnica: campo inexistente ou expressão indeterminada no campo esperado (vai para o implantador);
  * - precondicao: esperava visível, o campo ficou oculto e a condição de visibilidade depende de algo
  *   que o model do cenário nem preencheu (o cenário esqueceu a pré-condição; o validador corrige o model);
+ * - calculado: a regra do campo esperado depende de um campo calculado K e o cenário definiu K direto
+ *   (o avaliador recalcula K a partir dos insumos) ou não definiu os insumos de K;
  * - regra: o formulário se comporta diferente do que o cenário diz (vira pergunta ao analista).
+ * precondicao e calculado nunca chegam ao analista: o validador corrige o model na retentativa.
  */
 export function classificarFalhas(form: AprovaTemplate, cenarios: Cenario[], relatorio: ResultadoCenario[]): { id: string; classe: ClasseFalha; motivo?: string }[] {
-  const porKey = new Map<string, { hide?: string }>();
+  const porKey = new Map<string, { hide?: string; exprs: string[] }>();
   for (const { field } of walk(form.form)) {
-    if (field.key) porKey.set(String(field.key), { hide: typeof field.hideExpression === "string" ? field.hideExpression : undefined });
+    if (field.key) porKey.set(String(field.key), {
+      hide: typeof field.hideExpression === "string" ? field.hideExpression : undefined,
+      exprs: expressoes(field).filter((e) => !e.prop.startsWith("model|||")).map((e) => e.expr),
+    });
   }
+  const calculados = camposCalculados(form);
   const out: { id: string; classe: ClasseFalha; motivo?: string }[] = [];
   for (const r of relatorio.filter((x) => !x.passou)) {
     const cen = cenarios.find((c) => c.id === r.id);
@@ -155,6 +175,20 @@ export function classificarFalhas(form: AprovaTemplate, cenarios: Cenario[], rel
       if (f.obtido === "campo_inexistente") { classe = "tecnica"; motivo = `campo ${f.campo} não existe`; break; }
       const key = f.campo.split(".").pop()!.replace(/\[\d*\]/g, "");
       if (r.indeterminados.some((i) => i.includes(key))) { classe = "tecnica"; motivo = `expressão indeterminada em ${key}`; break; }
+      const presentesCalc = chavesDoModel(cen?.model ?? {});
+      const refs = new Set([...(porKey.get(key)?.exprs ?? []).flatMap(refsModel), ...(f.esperado.valor !== undefined ? [key] : [])]);
+      const calc = [...refs].find((k) => {
+        const e = calculados.get(k);
+        if (!e || !cen) return false;
+        const insumos = refsModel(e).filter((x) => x !== k);
+        return presentesCalc.has(k) || (insumos.length > 0 && !insumos.some((x) => presentesCalc.has(x)));
+      });
+      if (calc) {
+        const insumos = refsModel(calculados.get(calc)!).filter((x) => x !== calc);
+        classe = "calculado";
+        motivo = `${calc} é calculado a partir de ${insumos.join(", ") || "outros campos"}; defina os insumos, não o resultado`;
+        break;
+      }
       const hide = porKey.get(key)?.hide;
       if (f.esperado.visivel === true && (f.obtido as any).visivel === false && hide && cen) {
         const raizes = [...new Set([...hide.matchAll(/model\??\.([a-zA-Z0-9_]+)/g)].map((m) => m[1]))];
@@ -168,6 +202,13 @@ export function classificarFalhas(form: AprovaTemplate, cenarios: Cenario[], rel
     out.push({ id: r.id, classe, ...(motivo ? { motivo } : {}) });
   }
   return out;
+}
+
+/** Chaves presentes no model, inclusive dentro de itens de listas (quadro_areas[0].x conta como x). */
+function chavesDoModel(model: Record<string, any>): Set<string> {
+  const s = new Set(Object.keys(model));
+  for (const v of Object.values(model)) if (Array.isArray(v)) for (const it of v) if (it && typeof it === "object") for (const k of Object.keys(it)) s.add(k);
+  return s;
 }
 
 /**

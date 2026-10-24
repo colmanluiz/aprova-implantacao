@@ -176,3 +176,26 @@ test("classificarFalhas: pré-condição esquecida, falha técnica e falha de re
   const r = await av("todos os cenários passam", { relatorio: rel, cenarios: cs, form });
   assert.match(r.detalhe, /d1 \[precondicao: falta endereco_cep/);
 });
+
+test("classificarFalhas: cenário que define campo calculado em vez dos insumos é 'calculado' (falhas reais c24 e c26)", async () => {
+  const { classificarFalhas } = await import("./criterios.js");
+  const { form } = aplicarFicha(tpl, fichaVV());
+  const cs: Cenario[] = [
+    { id: "c24", descricao: "ZR1 com índice de aproveitamento 1,5 acima do máximo 1 deve receber aviso", model: { zoneamento_dataset: "ZR1", coeficiente_aproveitamentoprojeto: 1.5 }, espera: [{ campo: "aviso_indice_aproveitamento", visivel: true }] },
+    { id: "c26", descricao: "ZR1 com permeabilidade 25% acima do mínimo 20% não deve receber aviso", model: { zoneamento_dataset: "ZR1", taxa_permeabilidade_projeto: 25 }, espera: [{ campo: "aviso_taxa_permeabilidade", visivel: false }] },
+    { id: "c24-certo", descricao: "ZR1 com índice 1,5 deve receber aviso", model: { zoneamento_dataset: "ZR1", area_totalcomputavel: 150, area_terreno_real: 100 }, espera: [{ campo: "aviso_indice_aproveitamento", visivel: true }] },
+    { id: "c26-certo", descricao: "ZR1 com permeabilidade 25% não recebe aviso", model: { zoneamento_dataset: "ZR1", area_permeavel: 25, area_terreno_real: 100 }, espera: [{ campo: "aviso_taxa_permeabilidade", visivel: false }] },
+  ];
+  const rel = rodarCenarios(form, cs);
+  assert.deepEqual(rel.filter((r) => !r.passou).map((r) => r.id), ["c24", "c26"], "com os insumos, os mesmos cenários passam");
+  const cls = Object.fromEntries(classificarFalhas(form, cs, rel).map((k) => [k.id, k]));
+  assert.equal(cls.c24.classe, "calculado");
+  assert.match(cls.c24.motivo!, /coeficiente_aproveitamentoprojeto é calculado a partir de area_totalcomputavel, area_terreno_real; defina os insumos/);
+  assert.equal(cls.c26.classe, "calculado");
+  assert.match(cls.c26.motivo!, /taxa_permeabilidade_projeto é calculado a partir de area_permeavel, area_terreno_real/);
+  // listar_campos mostra a fórmula
+  const { listarCampos } = await import("../agents/tools.js");
+  const coef = listarCampos(form).find((c) => c.key === "coeficiente_aproveitamentoprojeto")!;
+  assert.match(coef.calculado_de!, /area_totalcomputavel/);
+  assert.equal(listarCampos(form).find((c) => c.key === "aviso_indice_aproveitamento")!.calculado_de, undefined);
+});

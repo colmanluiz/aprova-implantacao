@@ -26,6 +26,8 @@ export function juntarCenarios(base: Cenario[], novos: Cenario[]): Cenario[] {
 export type CampoListado = {
   path: string; key: string; label: string | null; type: string | null; etapa: string | null;
   opcoes?: string[]; condicao_visivel: string | null; condicao_obrigatorio: string | null;
+  /** campo calculado: expressão crua que o formulário usa para preencher o valor (nunca defina no model) */
+  calculado_de?: string;
 };
 
 /** Campos com key do formulário, com a etapa (step) e as condições cruas. */
@@ -45,6 +47,7 @@ export function listarCampos(form: AprovaTemplate): CampoListado[] {
       ...(Array.isArray(to.options) && to.options.length ? { opcoes: to.options.map((o: any) => String(o.label ?? o.value)) } : {}),
       condicao_visivel: typeof field.hideExpression === "string" ? `oculto quando: ${field.hideExpression}` : field.hideExpression === true ? "sempre oculto" : null,
       condicao_obrigatorio: typeof expReq === "string" ? expReq : to.required ? "sempre" : null,
+      ...(typeof field.expressionProperties?.[`model|||${field.key}`] === "string" ? { calculado_de: field.expressionProperties![`model|||${field.key}`].trim().slice(0, 300) } : {}),
     });
   }
   return out;
@@ -224,8 +227,8 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
   const listar_campos = betaZodTool({
     name: "listar_campos",
     description:
-      "Lista os campos do formulário parametrizado: path, key, label, tipo, etapa, opções e as condições de visibilidade e obrigatoriedade " +
-      "(expressão crua). Use antes de escrever cenários para preencher no model as pré-condições de cada campo esperado visível.",
+      "Lista os campos do formulário parametrizado: path, key, label, tipo, etapa, opções, as condições de visibilidade e obrigatoriedade " +
+      "(expressão crua) e, para campos calculados, calculado_de (nunca defina esses no model; defina os insumos). Use antes de escrever cenários para preencher no model as pré-condições de cada campo esperado visível.",
     inputSchema: z.object({ etapa: z.string().optional() }),
     run: async ({ etapa }) => {
       const form = store.form(ctx);

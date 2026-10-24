@@ -311,7 +311,7 @@ export function perguntaAoAnalista(c: Contexto, run: Run, etapa: string, criteri
     const cens = store.cenarios(c) ?? [];
     const cls = form ? classificarFalhas(form, cens, rel) : [];
     const deRegra = rel.filter((r) => !r.passou && (cls.find((k) => k.id === r.id)?.classe ?? "regra") === "regra");
-    if (!deRegra.length) return { ok: false, motivo: "nenhuma falha é de regra (pré-condição esquecida ou falha técnica)" };
+    if (!deRegra.length) return { ok: false, motivo: "nenhuma falha é de regra (pré-condição esquecida, campo calculado definido direto ou falha técnica)" };
     let motivo = "";
     for (const r of deRegra) {
       const v = legivelParaAnalista(r.descricao);
