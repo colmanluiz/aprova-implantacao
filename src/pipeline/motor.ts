@@ -327,7 +327,7 @@ export function perguntaAoAnalista(c: Contexto, run: Run, etapa: string, criteri
     let motivo = "";
     for (const r of deRegra) {
       const v = legivelParaAnalista(r.descricao);
-      if (v.ok) return { ok: true, texto: `Preciso confirmar uma regra do ${run.titulo}: "${r.descricao}". É assim que deve funcionar na prefeitura? Responda sim ou não e, se não, como deveria ser.` };
+      if (v.ok) return { ok: true, texto: `Uma dúvida pra fechar o ${run.titulo}: ${r.descricao}. É assim aí? Se não for, me conta como é.` };
       motivo = `descrição do cenário ${r.id} ilegível para o analista (${v.motivo})`;
     }
     return { ok: false, motivo };
