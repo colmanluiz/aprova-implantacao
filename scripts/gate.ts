@@ -4,7 +4,7 @@
 //      npm run gate -- <cidade> <processo> reexecutar <etapa>         (reabre a etapa e as seguintes e roda de novo, com os agentes)
 //      npm run gate -- <cidade> <processo> status                     (resumo detalhado)
 import { resolverGate, reexecutarEtapa, assumirConversa, devolverConversa } from "../src/pipeline/motor.js";
-import { lerRun } from "../src/pipeline/run.js";
+import { lerRun, salvarRun } from "../src/pipeline/run.js";
 import type { AcaoGate, Run } from "../src/pipeline/tipos.js";
 
 const [cidade, processo, acao, ...resto] = process.argv.slice(2);
@@ -26,6 +26,12 @@ try {
     const run = lerRun(ctx) ?? sair(`erro: processo ${cidade}/${processo} não iniciado`);
     console.log(`ok: ${run.status} | etapa ${run.etapa_atual}${run.gate ? ` | gate para ${run.gate.para}: ${run.gate.resumo}` : ""}`);
     for (const e of run.etapas) console.log(`  ${e.status.padEnd(10)} ${e.slug.padEnd(10)} ${e.criterios.map((k) => `[${k.resultado}] ${k.nome}`).join(" · ")}`);
+  } else if (acao === "prazo") {
+    const run = lerRun(ctx) ?? sair(`erro: processo ${cidade}/${processo} não iniciado`);
+    if (!texto || !/^\d{4}-\d{2}-\d{2}$/.test(texto.trim())) sair("erro: informe a data, ex.: prazo 2026-10-29", 2);
+    run.prazo = texto!.trim();
+    salvarRun(ctx, run);
+    console.log(`ok: prazo de ${run.titulo} = ${run.prazo}`);
   } else if (acao === "assumir") {
     assumirConversa(ctx);
     console.log("ok: conversa com o implantador; o agente fica pausado até devolver");

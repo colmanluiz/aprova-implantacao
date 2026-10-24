@@ -23,6 +23,7 @@ export async function tratarMensagem(
   if (temConteudo) {
     run.metricas.mensagens_recebidas++;
     salvarRun(ctx, run);
+    store.atualizarEstado(ctx, (e) => { e.ultima_mensagem_analista = agora(); });
   }
   const nAntes = store.estado(ctx).historico.length;
   const mensagem = entrada.texto ? `${entrada.remetente ? `(${entrada.remetente}) ` : ""}${entrada.texto}` : undefined;

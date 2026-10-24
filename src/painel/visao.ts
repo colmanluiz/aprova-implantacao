@@ -52,8 +52,16 @@ export const ETAPAS: { slug: string; nome: string }[] = [
   { slug: "extrair", nome: "Extrair anexos" },
   { slug: "aplicar", nome: "Aplicar no formulário" },
   { slug: "validar", nome: "Validar cenários" },
+  { slug: "conferir", nome: "Conferir com a prefeitura" },
   { slug: "homologar", nome: "Homologar" },
 ];
+
+/**
+ * Processos abertos antes da etapa conferir rodam do snapshot congelado (6 etapas): sem conferir no run.json,
+ * ou sem run.json (etapas deduzidas pelos arquivos), a linha mostra só as 6 que o processo tem.
+ */
+export const ETAPAS_LEGADO = ETAPAS.filter((e) => e.slug !== "conferir");
+const etapasDoRun = (run?: Run) => (run?.etapas?.some((x) => x?.slug === "conferir") ? ETAPAS : ETAPAS_LEGADO);
 
 export type ProcessoVisao = {
   id: string; processo: string; secretaria: string; complexidade: string | null;
@@ -156,7 +164,8 @@ export function progressoFicha(ficha?: FichaArq) {
 }
 
 function etapasDerivadas(p: Pasta): { etapas: StatusEtapa[]; status: StatusProcesso; atual: string | null } {
-  const st: StatusEtapa[] = ETAPAS.map(() => "pendente");
+  // Dedução pelos arquivos: processo do fluxo antigo, índices de ETAPAS_LEGADO (homologar = 5).
+  const st: StatusEtapa[] = ETAPAS_LEGADO.map(() => "pendente");
   const ate = (n: number) => { for (let i = 0; i <= n && i < st.length; i++) st[i] = "concluida"; };
   const e = p.estado?.etapa;
   let status: StatusProcesso = "nao_iniciado";
@@ -178,7 +187,7 @@ function etapasDerivadas(p: Pasta): { etapas: StatusEtapa[]; status: StatusProce
     } else status = "concluido";
   }
   const atualIdx = st.findIndex((s) => s !== "concluida");
-  return { etapas: st, status, atual: nivel < 0 ? null : atualIdx < 0 ? ETAPAS[5].slug : ETAPAS[atualIdx].slug };
+  return { etapas: st, status, atual: nivel < 0 ? null : atualIdx < 0 ? ETAPAS_LEGADO[5].slug : ETAPAS_LEGADO[atualIdx].slug };
 }
 
 function metricasProcesso(p: Pasta): MetricasRun {
@@ -295,7 +304,7 @@ function processoDePasta(base: BaseProcesso, p: Pasta, agora: number): ProcessoV
   let status: StatusProcesso;
   let atual: string | null;
   if (run && Array.isArray(run.etapas) && run.etapas.length) {
-    etapas = ETAPAS.map((e) => {
+    etapas = etapasDoRun(run).map((e) => {
       const r = run.etapas!.find((x) => x?.slug === e.slug);
       const s = r && STATUS_ETAPA_VALIDOS.includes(r.status) ? r.status : "pendente";
       return { slug: e.slug, nome: r?.nome || e.nome, status: s };
@@ -305,7 +314,7 @@ function processoDePasta(base: BaseProcesso, p: Pasta, agora: number): ProcessoV
     atual = run.etapa_atual ?? d.atual;
   } else {
     const d = etapasDerivadas(p);
-    etapas = ETAPAS.map((e, i) => ({ ...e, status: d.etapas[i] }));
+    etapas = ETAPAS_LEGADO.map((e, i) => ({ ...e, status: d.etapas[i] }));
     status = run?.status && STATUS_VALIDOS.includes(run.status) ? run.status : d.status;
     atual = run?.etapa_atual ?? d.atual;
   }

@@ -12,6 +12,7 @@ import { store, type Contexto } from "../agents/store.js";
 import type { Anexo } from "../agents/extrator.js";
 import { processosComCanal, salvarCanal, vigiarOutbox } from "./outbox.js";
 import { atender, catalogo, lerChat, preselecionar, salvarChat } from "./roteador.js";
+import { verificarCobrancas } from "../pipeline/cobranca.js";
 
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 if (!TOKEN) { console.error("defina TELEGRAM_BOT_TOKEN"); process.exit(1); }
@@ -41,6 +42,14 @@ async function baixar(fileId: string): Promise<{ base64: string; path: string }>
   const buf = Buffer.from(await (await fetch(`${FILE}/${p}`)).arrayBuffer());
   return { base64: buf.toString("base64"), path: p };
 }
+async function enviarArquivo(chat: number | string, a: { nome: string; conteudo: Buffer; legenda?: string }) {
+  const fd = new FormData();
+  fd.append("chat_id", String(chat));
+  if (a.legenda) fd.append("caption", a.legenda);
+  fd.append("document", new Blob([new Uint8Array(a.conteudo)], { type: "application/pdf" }), a.nome);
+  const r = (await (await fetch(`${API}/sendDocument`, { method: "POST", body: fd, signal: AbortSignal.timeout(60_000) })).json()) as any;
+  if (!r?.ok) throw new Error(`sendDocument falhou: ${r?.description ?? "sem resposta"}`);
+}
 async function enviarTexto(chat: number | string, texto: string) {
   const r = await tg("sendMessage", { chat_id: chat, text: texto });
   if (!r?.ok) throw new Error(`sendMessage falhou: ${r?.description ?? "sem resposta"}`);
@@ -59,6 +68,13 @@ vigiarOutbox({
 
 const IMAGEM = new Set(["image/jpeg", "image/png", "image/webp"]);
 
+// Cobrança de prazo: a cada COBRANCA_INTERVALO_MIN minutos (padrão 60), só para processos esperando o analista.
+const INTERVALO = Number(process.env.COBRANCA_INTERVALO_MIN ?? 60) * 60_000;
+setInterval(() => {
+  const alvos = [...chatDoProcesso].filter(([pasta]) => !ocupados.has(pasta)).map(([pasta, chat]) => ({ pasta, enviar: (t: string) => enviarTexto(chat, t) }));
+  verificarCobrancas(alvos).catch((e) => console.error("cobrança:", e));
+}, INTERVALO);
+
 let offset = 0;
 console.log("Telegram: ouvindo…");
 for (;;) {
@@ -74,7 +90,7 @@ for (;;) {
       const template = process.env.TEMPLATE ?? item?.template ?? "fixtures/templates/alvara-construcao.modeload.json";
       salvarChat("telegram", chat, preselecionar(estadoChat, PROCESSO_PADRAO, template, item?.titulo));
     }
-    const canal = { enviar: (texto: string) => enviarTexto(chat, texto) };
+    const canal = { enviar: (texto: string) => enviarTexto(chat, texto), enviarArquivo: (a: { nome: string; conteudo: Buffer; legenda?: string }) => enviarArquivo(chat, a) };
     let pasta: string | undefined;
     const vincular = (ctx: Contexto) => {
       if (pasta) ocupados.delete(pasta);
@@ -101,8 +117,10 @@ for (;;) {
         const { base64 } = await baixar(m.document.file_id);
         anexo = { tipo: "texto", texto: Buffer.from(base64, "base64").toString("utf8"), nome: m.document.file_name };
       }
+      // Áudio ainda não é transcrito: o agente recebe a nota e pede texto, foto ou PDF.
+      const audio = m.voice || m.audio ? "(o analista mandou um áudio, que ainda não consigo ouvir)" : undefined;
       await tg("sendChatAction", { chat_id: chat, action: "typing" });
-      await atender({ tipo: "telegram", chatId: chat, cidade: CIDADE, canal, entrada: { texto: m.text ?? m.caption, anexo, remetente: m.from?.first_name }, antes: vincular });
+      await atender({ tipo: "telegram", chatId: chat, cidade: CIDADE, canal, entrada: { texto: m.text ?? m.caption ?? audio, anexo, remetente: m.from?.first_name }, antes: vincular });
     } catch (e) {
       console.error(e);
       await canal.enviar("Tive um problema para processar. Um implantador vai olhar.").catch(() => {});
