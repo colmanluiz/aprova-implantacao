@@ -204,7 +204,7 @@ test("cenário falhando esgota e vira pergunta de confirmação ao analista; 'si
   assert.equal(run.gate?.para, "analista");
   assert.equal(run.gate?.criterio, "todos os cenários passam");
   assert.match(enviadas.at(-1)!, /Zona ZR2 exige recuo frontal/);
-  assert.match(enviadas.at(-1)!, /sim ou não/);
+  assert.match(enviadas.at(-1)!, /É assim aí/);
 
   await tratarMensagem(ctx, canal, { texto: "Sim, é assim mesmo" }, deps);
   run = lerRun(ctx)!;
