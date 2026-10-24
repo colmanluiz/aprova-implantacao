@@ -51,14 +51,15 @@ B1–B6 deixaram de ser scripts avulsos: viraram etapas, critérios e gates de `
 - [x] **T2 · Telegram** — bot @hackaton_aprova_bot criado e rodando (`env CIDADE=vale-verde npm run telegram`; token só no `.env`, fora do git).
 - [x] **T3 · Segundo template** — Solicitação de Férias (RH), do catálogo real `forms_modelo/`: 3 etapas, 28 campos, 10 pontos, setor de outra prefeitura (`csimplantacao_implantacaoad`) detectado; cenários base 8/8. Catálogo inteiro analisado em lote (`npm run analyze:lote`, 117 modelos).
 - [x] **T3b · Menu de processos no chat** — `src/channel/roteador.ts`: `/start`, `menu`, `trocar`, `/processo <nome>`, `/ajuda`; 10 processos na lista e qualquer um dos 112 ativos pelo nome; trocar retoma de onde parou.
+- [x] **T3c · Conversa redesenhada** — após avaliação de UX (`docs/avaliacao-conversa.md`): pergunta aberta, lista de passos, foto do requerimento de papel e da tabela, até 2 perguntas por mensagem (imposto em `src/core/mensagens.ts`), pacote padrão no fim. Marlene em duas sessões: 30/36 respondidas + 6 pendências com dono, 0 sem resposta; 49 → 28 perguntas, máx. 6 → 2 por mensagem.
 - [ ] **T4 · Vídeo de backup (15:30, 30 min)** — Celular + painel lado a lado, seguindo `demo/ROTEIRO.md`. Pronto quando toca do início ao fim sem depender de API; link no README.
 - [ ] **T5 · Revisão de entrega (16:00, 30 min)** — Congelar código. README e `INSTRUCTIONS/` conferidos contra o código (nomes de ferramentas, quem chama o quê, números); `npm run docs` sem diff; `npm run painel:data` para o fallback estático. Ensaio cronometrado < 4 min.
-- [ ] **T6 · Repo público, push final e QR (16:45)** — `npm test` (86) e `npm run typecheck` verdes, nada de `data/` ou `.env` no git, repo público abrindo em aba anônima, QR do link em `demo/qr.png`. Entrega às 17:00.
+- [ ] **T6 · Repo público, push final e QR (16:45)** — `npm test` (91) e `npm run typecheck` verdes, nada de `data/` ou `.env` no git, repo público abrindo em aba anônima, QR do link em `demo/qr.png`. Entrega às 17:00.
 
 ## Ordem
 
 ```
-T1, T2, T3 feitos ── T4 15:30 vídeo ── T5 16:00 revisão ── T6 16:45 push + QR ── 17:00
+T1, T2, T3 (menu e conversa nova) feitos ── T4 15:30 vídeo ── T5 16:00 revisão ── T6 16:45 push + QR ── 17:00
 ```
 
 Se o Telegram ou a API caírem na hora, a demo usa a rodada gravada (`alvara-demo`, parada no gate) e o pipeline offline no painel; a história continua inteira.

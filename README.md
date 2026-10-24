@@ -26,7 +26,7 @@ Contra o JSON real do **Alvará de Construção** (template `modeload`):
 | Pipeline sem LLM | analisar → coletar → aplicar → validar → gate de homologação → aprovar → `concluido` |
 | Segundo processo: Solicitação de Férias (RH) | 3 etapas, 28 campos, **10 pontos**; carrega um setor de outra prefeitura (`csimplantacao_implantacaoad`) que o analisador acha e o aplicador troca. Cenários base: 8/8 no template cru |
 | Catálogo real | 117 modelos do Estúdio analisados em lote (seção abaixo) |
-| Testes | **86** (`npm test`), `npm run typecheck` limpo |
+| Testes | **91** (`npm test`), `npm run typecheck` limpo |
 
 ### Rodada ao vivo, de ponta a ponta (`data/vale-verde/alvara-demo`, `MODEL=claude-sonnet-5-5`)
 
@@ -45,6 +45,29 @@ npm run gate -- vale-verde alvara-demo status
 npm run gate -- vale-verde alvara-demo reexecutar validar   # roda a validação de novo com o validador ao vivo
 npm run gate -- vale-verde alvara-demo aprovar
 ```
+
+## Antes e depois da conversa
+
+A conversa foi redesenhada depois de uma avaliação de UX (`docs/avaliacao-conversa.md`, roteiro em `docs/roteiro-conversa-proposto.md`). Contagem só das mensagens da Aprova:
+
+| | Antes (`transcricao-demo-antes.md`) | Depois (`transcricao-marlene.md` + `-sessao2.md`) |
+|---|---|---|
+| Mensagens | 15 | 21 |
+| Perguntas ("?") | 49 (máx. 6, média 3,3) | 28 (máx. 2, média 1,3) |
+| Mensagens com mais de 2 perguntas | 9 | 0 |
+| Palavras por mensagem | 108 em média (máx. 159) | ~45 em média (máx. 74) |
+| Palavras de sistema | 18 | 0 |
+| Ficha ao final | — | 30/36 respondidas + 6 pendências com dono (1 "é com o Paulo", 5 para o implantador), 0 sem resposta |
+
+Princípios:
+
+- **Começa aberto**: "quando alguém chega querendo o alvará, o que acontece, do balcão até o documento sair?"; o agente devolve o que entendeu como lista numerada de passos.
+- **Foto antes de pergunta**: pede cedo a foto do requerimento de papel e da tabela da lei; lê de lá e pergunta só o que ficou apagado ou diferente.
+- **No máximo 2 perguntas por mensagem, do mesmo assunto**, com progresso por assunto ("já ficou: secretaria, documentos…") e o "pacote padrão" (o que costuma ser igual em toda cidade) confirmado de uma vez no fim.
+- **O que a analista não deveria ver vira pendência do implantador**, não pergunta; "é com o Paulo" vira pendência com dono.
+- **Respeita o balcão**: "tenho balcão" encerra com o que já ficou e o que falta; a sessão seguinte retoma dali e fecha com o próximo passo.
+
+Imposto em código, não só na instrução: `enviar_mensagem` recusa mensagem com mais de 2 "?", mais de 70 palavras com pergunta, mais de 160 sem pergunta, ou palavra de sistema (`src/core/mensagens.ts`); as perguntas de gate ao analista passam pela mesma checagem.
 
 ## Catálogo real (`forms_modelo/`)
 
@@ -66,7 +89,7 @@ Rodar o lote endureceu o analisador: setores de outra prefeitura (`*_umuaramapr`
 
 ```bash
 npm install
-npm test                      # 86 testes, sem API
+npm test                      # 91 testes, sem API
 npm run typecheck
 ```
 
@@ -93,10 +116,13 @@ npm run chat -- --script fixtures/insumos/conversa-demo.txt --processo alvara-de
                                                       # replay da conversa da demo; sem --continuar apaga data/vale-verde/alvara-demo
 npm run chat -- --script fixtures/insumos/conversa-demo-fechamento.txt --processo alvara-demo --continuar
                                                       # "dia seguinte": fecha a ficha e o pipeline segue até homologar
+npm run chat -- --script fixtures/insumos/conversa-marlene.txt --processo alvara-marlene
+npm run chat -- --script fixtures/insumos/conversa-marlene-sessao2.txt --processo alvara-marlene --continuar
+                                                      # conversa redesenhada (Dona Marlene, protocolo de Obras), em duas sessões
 env CIDADE=vale-verde npm run telegram                # canal real (celular); token em TELEGRAM_BOT_TOKEN no .env; sem PROCESSO abre o menu
 ```
 
-**Menu de processos no chat** (`src/channel/roteador.ts`, terminal e Telegram): `/start`, `/processos`, `menu`, `trocar` ou `outro processo` listam 10 processos escolhidos; o analista também pode digitar o nome de qualquer um dos 112 ativos, ou `/processo <nome>` direto; `/ajuda` explica. Cada processo tem a sua pasta `data/<cidade>/<slug>/`; trocar não apaga nada e voltar retoma de onde parou ("Voltando ao Habite-se: faltam 4 perguntas"). Estado do chat em `data/<cidade>/.canais/<tipo>-<chat_id>.json`.
+**Menu de processos no chat** (`src/channel/roteador.ts`, terminal e Telegram): `/start`, `/processos`, `menu`, `trocar` ou `outro processo` listam 10 processos escolhidos; o analista também pode digitar o nome de qualquer um dos 112 ativos, ou `/processo <nome>` direto; `/ajuda` explica. O menu abre com "Sobre qual serviço vamos conversar?". Cada processo tem a sua pasta `data/<cidade>/<slug>/`; trocar não apaga nada e voltar retoma de onde parou ("Voltando ao Habite-se: faltam 4 perguntas"). Estado do chat em `data/<cidade>/.canais/<tipo>-<chat_id>.json`.
 
 **Peças determinísticas isoladas**:
 
@@ -196,6 +222,7 @@ O que é medido de verdade, por processo, em `run.json.metricas`: perguntas feit
 - Canal real hoje é Telegram. WhatsApp é trocar o adaptador (Baileys/Evolution/Cloud API) pela mesma interface `Canal = { enviar(texto) }`.
 - Planilha só entra como texto (CSV); `.xlsx` não é lido.
 - O juiz de cobertura depende de LLM; sem ele o critério fica `nao_avaliado` e não bloqueia.
+- A conversa varia de uma rodada para outra: a mesma fala da Marlene já fechou 30/36 e, noutra rodada, 25/36. As transcrições guardadas são a referência.
 - Ponta a ponta com agente: alvará. Férias tem análise e cenários base; os outros 115 modelos só passaram pela análise em lote. Dados de Vale Verde são fictícios.
 - `ferramentas().aplicador` e `ferramentas().orquestrador` em `src/agents/tools.ts` ainda existem, mas o pipeline não os usa.
 

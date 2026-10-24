@@ -30,14 +30,25 @@ E não é só o alvará: "Em 117 processos reais do Estúdio, 75% dos campos já
 **Projetor: visão da prefeitura.** "Isto é o que o implantador vê: 12 secretarias, 96 processos de Vale Verde. Cada linha tem as 6 etapas, de analisar a homologar." Clicar em **Alvará de Construção**.
 
 ## 1:10 — A conversa (70 s)
-**Projetor: detalhe do Alvará** (conversa no centro, etapas à esquerda). Celular na câmera.
-Analista manda `/start`; o bot lista os processos e ele escolhe **Alvará de Construção**. A mensagem aparece no painel em até 2 s, à direita; o agente responde à esquerda. Agente se apresenta e faz as primeiras perguntas (setor, zonas, documentos). Analista manda **foto da tabela de zoneamento**. Agente extrai 4 zonas × 8 parâmetros e confirma em uma linha: "Li ZR1, ZR2, ZC1 e ZI. Na ZR2 o recuo frontal é 4 m, confere?".
-Apontar no painel: embaixo de cada resposta do agente, **o que ele registrou na ficha**, com origem e confiança; a etapa "extrair" acende; a barra "Ficha por grupo" enche. Analista: "não sei a taxa". Agente registra pendência sem inventar (aparece com confiança 0, em laranja).
+**Projetor: detalhe do Alvará** (conversa no centro, etapas à esquerda). Celular na câmera. Quem opera lê as falas de Dona Marlene, protocolo de Obras (`fixtures/insumos/conversa-marlene.txt`).
+Marlene manda `/start`; o bot pergunta "Sobre qual serviço vamos conversar?" e ela escolhe **Alvará de Construção**. Cada mensagem aparece no painel em até 2 s.
+- **Pergunta aberta**: o agente se apresenta e pergunta uma coisa só: "o que acontece, do balcão até o documento sair?". Marlene conta do jeito dela; o agente devolve **uma lista numerada de passos** e pergunta se está certo.
+- **Foto do papel**: o agente pede o requerimento de papel. Marlene manda `requerimento-alvara-papel.png`; o agente diz o que leu (tipo de obra, quem pede, documentos) e pergunta só o item apagado.
+- **Foto da tabela da lei**: `tabela-zoneamento.png`, "tá meio apagada". O agente confere um caso concreto: "casa na ZR1 com 3 m de recuo volta, certo?".
+- **"Isso é com o Paulo"**: vira pendência com dono, sem insistir.
+- **"Tenho balcão, depois continuo"**: o agente encerra com o que já ficou e o que falta, e espera.
+
+Apontar no painel: nenhuma mensagem com mais de 2 perguntas (o código recusa); embaixo de cada resposta, **o que foi registrado na ficha**, com origem; "extrair" acende nas fotos; a barra "Ficha por grupo" enche.
+Frase para a banca: "Antes eram 49 perguntas em 15 mensagens, até 6 por mensagem. Agora são no máximo 2, e ela nunca lê 'template' nem 'campo'."
+
+**Sessão 2 (contar, não rodar ao vivo):** no dia seguinte ela manda "bom dia voltei"; o agente retoma dali, confirma o "pacote padrão" de uma vez e fecha com o próximo passo: "a Aprova monta a tela e eu volto com 3 ou 4 situações pra você conferir". Ficha: 30/36 respondidas, 6 pendências com dono, nenhuma sem resposta (`transcricao-marlene-sessao2.md`).
+
+**Variação entre rodadas:** a mesma conversa já fechou 30/36 e, noutra rodada, 25/36. Ao vivo, o operador lê as falas da Marlene no Telegram; se algo sair do roteiro, mostrar a rodada guardada em `data/vale-verde/alvara-marlene/` (ou as transcrições).
 
 Opcional (10 s, se sobrar tempo): **"Assumir conversa"**. O implantador escreve uma mensagem pelo painel, ela aparece cinza "enviando…" e depois como bolha amarela "Implantador" no celular e no painel. "Devolver ao agente" e a conversa segue.
 
 ## 2:20 — O formulário e o diff (40 s)
-**Projetor: detalhe, rolar até `diff.md`.** Etapa "aplicar" concluída com critérios verdes (formulário gerado, nenhum placeholder `modeload`, origem em cada mudança). Cada mudança com a origem ("foto da Lei 1.204, p. 2", "Marcos, 10:03"). "O implantador lê isso em dois minutos em vez de fazer uma reunião de uma hora."
+**Projetor: detalhe, rolar até `diff.md`.** Etapa "aplicar" concluída com critérios verdes (formulário gerado, nenhum placeholder `modeload`, origem em cada mudança). Cada mudança com a origem (a foto do requerimento, a tabela da lei, a mensagem da Marlene). "O implantador lê isso em dois minutos em vez de fazer uma reunião de uma hora."
 
 ## 3:00 — A validação sem clique (25 s)
 **Projetor: detalhe, coluna "Cenários" e etapa "validar".**
@@ -65,7 +76,14 @@ npm run gate -- vale-verde alvara aprovar   # ou clicar "aprovar" no card do gat
 Não há conversa nesse modo: o painel mostra os registros da ficha de exemplo (25 respostas, 11 pendências). Etapas, critérios, gate, diff e 15/15 cenários são reais.
 
 ### Fallback com API, sem celular
-A rodada ao vivo completa está em `data/vale-verde/alvara-demo/` (linha extra na mesma secretaria do painel, com o slug no nome), parada no gate de homologação: 34 respostas (3 pela foto), 2 pendências com dono, 30/30 cenários. Transcrições: `fixtures/insumos/transcricao-demo-antes.md` e `transcricao-demo-fechamento.md`.
+A conversa redesenhada está guardada em `data/vale-verde/alvara-marlene/` (transcrições `fixtures/insumos/transcricao-marlene.md` e `transcricao-marlene-sessao2.md`). Para reproduzir no terminal, num processo novo:
+
+```bash
+npm run chat -- --script fixtures/insumos/conversa-marlene.txt --processo alvara-marlene-ao-vivo --pausa 3000
+npm run chat -- --script fixtures/insumos/conversa-marlene-sessao2.txt --processo alvara-marlene-ao-vivo --continuar
+```
+
+A rodada anterior (conversa "antes") vai até o fim do pipeline: está em `data/vale-verde/alvara-demo/` (linha extra na mesma secretaria do painel, com o slug no nome), parada no gate de homologação: 34 respostas (3 pela foto), 2 pendências com dono, 30/30 cenários. Transcrições: `fixtures/insumos/transcricao-demo-antes.md` e `transcricao-demo-fechamento.md`.
 
 ```bash
 npm run gate -- vale-verde alvara-demo status
@@ -73,7 +91,7 @@ npm run gate -- vale-verde alvara-demo reexecutar validar   # mostra o validador
 npm run gate -- vale-verde alvara-demo aprovar              # só no fim: depois de aprovar o gate some
 ```
 
-Para reproduzir a conversa no terminal, num processo novo para não apagar a gravação:
+Para reproduzir a conversa antiga no terminal, num processo novo para não apagar a gravação:
 
 ```bash
 npm run chat -- --script fixtures/insumos/conversa-demo.txt --processo alvara-ao-vivo --pausa 3000
