@@ -24,7 +24,8 @@ test("sem data/: 96 processos do seed, 12 secretarias, nada pronto", () => {
   assert.equal(v.metricas.processos_prontos, 0);
   assert.equal(v.metricas.por_status.nao_iniciado, 96);
   const p = v.secretarias[0].processos[0];
-  assert.equal(p.etapas.length, 6);
+  assert.equal(p.etapas.length, 7);
+  assert.equal(p.etapas[5].slug, "conferir");
   assert.ok(p.etapas.every((e) => e.status === "pendente"));
   assert.equal(p.slug_previsto, "alvara", "Alvará de Construção usa a pasta alvara");
   assert.equal(v.secretarias[0].processos[1].slug_previsto, "habite-se");
@@ -40,7 +41,9 @@ test("run.json da pasta alvara sobrepõe a entrada Alvará de Construção (p001
   assert.equal(alv.slug, "alvara");
   assert.equal(alv.status, "aguardando_implantador");
   assert.equal(alv.etapa_atual, "validar");
+  // run antigo (snapshot de 6 etapas): a linha mostra as 6, sem conferir
   assert.deepEqual(alv.etapas.map((e) => e.status), ["concluida", "concluida", "concluida", "concluida", "aguardando", "pendente"]);
+  assert.ok(!alv.etapas.some((e) => e.slug === "conferir"));
   assert.equal(alv.gate?.para, "implantador");
   assert.equal(alv.gate?.tipo, "aprovacao");
   assert.equal(alv.gate?.aberto_em, "2026-10-24T10:22:00-03:00");
@@ -203,4 +206,18 @@ test("fila do implantador: gate aberto vira atenção; analista sem responder h�
   assert.equal(v.metricas.aguardando_prefeitura, 0);
   const det = montarDetalhe({ seedPath: SEED, dataDir: dir, agora }, "vale-verde", "habite-se")!;
   assert.deepEqual(det.conversa.map((t) => t.voz), ["analista", "agente", "nota"]);
+});
+
+test("run com a etapa conferir mostra as 7 etapas, conferir entre validar e homologar", () => {
+  const dir = tmp();
+  const slugs = ["analisar", "coletar", "extrair", "aplicar", "validar", "conferir", "homologar"];
+  escrever(path.join(dir, "vale-verde/alvara/run.json"), { processo: "alvara", cidade: "vale-verde", titulo: "Alvará de Construção", status: "aguardando_prefeitura", etapa_atual: "conferir",
+    gate: { para: "analista", tipo: "conferencia", etapa: "conferir", resumo: "Analista conferindo 3 casos", aberto_em: "2026-10-24T10:00:00-03:00" },
+    etapas: slugs.map((slug, i) => ({ slug, nome: slug, status: i < 5 ? "concluida" : i === 5 ? "aguardando" : "pendente" })) });
+  const v = montarVisao({ seedPath: SEED, dataDir: dir });
+  const alv = v.secretarias.flatMap((s) => s.processos).find((p) => p.id === "p001")!;
+  assert.deepEqual(alv.etapas.map((e) => e.slug), slugs);
+  assert.equal(alv.etapas[5].status, "aguardando");
+  assert.equal(alv.etapa_atual, "conferir");
+  assert.equal(v.etapas.find((e) => e.slug === "conferir")?.nome, "Conferir com a prefeitura");
 });

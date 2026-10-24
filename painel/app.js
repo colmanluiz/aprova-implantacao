@@ -19,7 +19,7 @@ const STATUS_ROTULO = {
 };
 const ETAPA_PALAVRA = { pendente: "ainda não começou", executando: "em andamento", aguardando: "aguardando", concluida: "concluída", falhou: "falhou" };
 const ETAPA_CURTA = { pendente: "não iniciada", executando: "em andamento", aguardando: "aguardando", concluida: "concluída", falhou: "falhou" };
-const ETAPA_NOME_CURTO = { analisar: "Analisar", coletar: "Coletar", extrair: "Ler anexos", aplicar: "Gerar formulário", validar: "Validar", homologar: "Homologar" };
+const ETAPA_NOME_CURTO = { analisar: "Analisar", coletar: "Coletar", extrair: "Ler anexos", aplicar: "Gerar formulário", validar: "Validar", conferir: "Conferir", homologar: "Homologar" };
 const PRIORIDADE_ATENCAO = { gate: 0, parado: 1, falhou: 2, humano: 3, sem_resposta: 4 };
 
 const estado = {
@@ -248,7 +248,7 @@ function pintarFila(v) {
 function pintarLegenda(v) {
   const cores = [["concluida", "concluída"], ["executando", "em andamento"], ["aguardando", "aguardando"], ["falhou", "falhou"]]
     .map(([k, r]) => `<span><i class="seg ${k}"></i>${r}</span>`).join("");
-  const passos = `<span class="ordem" title="As seis etapas de cada processo, na ordem">${v.etapas.map((e) => `<em>${esc(ETAPA_NOME_CURTO[e.slug] ?? e.nome)}</em>`).join(" › ")}</span>`;
+  const passos = `<span class="ordem" title="As etapas de cada processo, na ordem">${v.etapas.map((e) => `<em>${esc(ETAPA_NOME_CURTO[e.slug] ?? e.nome)}</em>`).join(" › ")}</span>`;
   setHtml($("legenda"), cores + passos, "legenda");
 }
 

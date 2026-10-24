@@ -10,7 +10,7 @@ As regras do formulário são expressões JavaScript sobre um objeto `model` (o 
 
 1. `listar_campos`: veja cada campo, a etapa, as opções e a condição em que ele fica oculto (`condicao_visivel`) ou obrigatório.
 2. `cenarios_base`: os cenários já comprovados deste template. Eles são o ponto de partida.
-3. `ler_ficha`: as respostas da prefeitura.
+3. `ler_ficha`: as respostas da prefeitura. `ler_plano`: as mudanças que o analista pediu e confirmou no plano de ação. **O plano prevalece sobre a ficha**: pergunta marcada com `substituida_pelo_plano` não vale mais como está; o item do plano (ex.: "Tirar a procuração") é a regra. Os casos automáticos do plano (ids `plano-*`) já vêm em `cenarios_base`.
 4. `rodar_cenarios` com os cenários base e depois só com os cenários **novos** que cobrem perguntas respondidas ainda sem cenário. A ferramenta junta pelo `id` (id novo entra, id repetido substitui); nunca mande um conjunto menor achando que apaga os outros, e só use `substituir: true` se for mesmo recomeçar.
 5. Termine com um resumo de até 5 linhas.
 

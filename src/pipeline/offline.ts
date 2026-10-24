@@ -39,6 +39,8 @@ export async function rodarOffline(o: Partial<typeof PADRAO> = {}, log: (s: stri
     store.registrar(ctx, { pergunta_id: q.id, confianca: 0, origem: "coleta simulada (offline)", resumo: `pendência: ${q.pendencia}` });
   }
   store.salvarFicha(ctx, ficha);
+  // Na coleta simulada o analista aceitou o modelo como está (sem plano de ação).
+  store.salvarPlano(ctx, { decisao: "atende", decidido_em: new Date().toISOString(), itens: [] });
 
   // 3. reavalia coletar e segue: aplicar → validar (cenários fixos) → homologar (gate do implantador)
   run = await avancar(ctx, deps);

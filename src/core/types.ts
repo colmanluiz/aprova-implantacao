@@ -111,8 +111,9 @@ export type ResultadoCenario = {
 };
 
 export type Mudanca = {
+  /** id da pergunta da ficha ou do item do plano de ação */
   pergunta_id: string;
-  tipo: TipoPonto;
+  tipo: TipoPonto | "plano";
   alvo: string;
   antes: unknown;
   depois: unknown;

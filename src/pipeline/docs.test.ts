@@ -12,7 +12,7 @@ test("docs: INSTRUCTIONS/PIPELINE.md está em dia com pipeline.json (rode npm ru
 
 test("pipeline.json: seis etapas na ordem e todo critério tem implementação", () => {
   const def = carregarPipeline();
-  assert.deepEqual(def.etapas.map((e) => e.slug), ["analisar", "coletar", "extrair", "aplicar", "validar", "homologar"]);
+  assert.deepEqual(def.etapas.map((e) => e.slug), ["analisar", "coletar", "extrair", "aplicar", "validar", "conferir", "homologar"]);
   assert.deepEqual(criteriosSemImplementacao(def), []);
   assert.equal(def.etapas.flatMap((e) => e.criterios).filter((k) => k.tipo === "juiz").length, 1);
 });

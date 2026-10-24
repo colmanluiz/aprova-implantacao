@@ -1,9 +1,10 @@
 // Catálogo de critérios: nome (como aparece em pipeline.json) → predicado sobre o estado do processo.
 // "aguardando" = ainda não terminou (não é erro, não consome tentativa); "falhou" consome uma tentativa.
 import type { AprovaTemplate, Cenario, Ficha, ResultadoCenario } from "../core/types.js";
+import { itensConfirmados, itensPropostos, type Plano } from "../core/plano.js";
 import { walk, expressoes } from "../core/formly.js";
 import { rodarCenarios } from "../core/scenario-runner.js";
-import { perguntasAbertas, perguntasDe, semResposta, type Contexto } from "../agents/store.js";
+import { store, perguntasAbertas, perguntasDe, semResposta, type Contexto } from "../agents/store.js";
 import type { SaidaExtrator } from "../agents/extrator.js";
 import type { CriterioDef, Resultado, Run } from "./tipos.js";
 import { julgarCobertura, type ClienteJuiz } from "./juiz.js";
@@ -17,6 +18,8 @@ export type CtxCriterio = {
   form?: AprovaTemplate;
   cenarios?: Cenario[];
   relatorio?: ResultadoCenario[];
+  /** decisão sobre o modelo e plano de ação */
+  plano?: Plano;
   /** última leitura do extrator (só na sub-etapa extrair) */
   extracao?: SaidaExtrator;
   /** cliente do juiz; null = rodando sem LLM */
@@ -47,7 +50,19 @@ export const CRITERIOS: Record<string, Criterio> = {
   },
 
   // ---- coletar ----
-  "nenhuma pergunta em aberto": ({ ficha, run }) => {
+  "analista decidiu sobre o modelo": ({ plano }) => {
+    if (plano?.decisao) return ok(plano.decisao === "atende" ? "o modelo atende como está" : "a prefeitura pediu mudanças");
+    return { resultado: "aguardando", detalhe: plano?.modelo_mostrado_em ? "modelo enviado; aguardando o analista dizer se atende" : "modelo ainda não foi mostrado ao analista" };
+  },
+  "plano de ação confirmado": ({ plano }) => {
+    const propostos = itensPropostos(plano);
+    if (propostos.length) return { resultado: "aguardando", detalhe: `${propostos.length} mudança(s) aguardando confirmação do analista: ${lista(propostos.map((i) => i.id))}` };
+    const conf = itensConfirmados(plano);
+    const naoAplicados = conf.filter((i) => i.verificacao && !i.verificacao.ok && i.verificacao.detalhe.startsWith("não aplicado"));
+    if (naoAplicados.length) return falha(`${naoAplicados.length} mudança(s) confirmada(s) que não puderam ser aplicadas: ${naoAplicados.map((i) => `${i.id} (${i.verificacao!.detalhe})`).join("; ")}`);
+    return ok(conf.length ? `${conf.length} mudança(s) confirmada(s) e aplicada(s)` : "nenhuma mudança no modelo");
+  },
+  "nenhuma pergunta em aberto": ({ ctx, ficha, run }) => {
     if (!ficha) return falha("ficha inexistente");
     const rej = Object.entries(run.rejeicoes_schema ?? {}).filter(([, r]) => r.n >= 2);
     if (rej.length) {
@@ -56,6 +71,14 @@ export const CRITERIOS: Record<string, Criterio> = {
     }
     const abertas = perguntasAbertas(ficha);
     if (abertas.length) return { resultado: "aguardando", detalhe: `${abertas.length} perguntas abertas: ${lista(abertas.map((q) => q.id))}` };
+    // Com a ficha toda tratada (registrar_decisao aceita do modelo muita coisa de uma vez), a conversa ainda não fechou
+    // se a última mensagem ao analista é uma pergunta sem resposta: o Coletor fecha com uma mensagem sem "?".
+    const hist = store.estado(ctx).historico;
+    let iUlt = hist.length - 1;
+    while (iUlt >= 0 && !(hist[iUlt].role === "assistant" && hist[iUlt].autor !== "cobranca" && hist[iUlt].autor !== "nota")) iUlt--;
+    if (iUlt >= 0 && hist[iUlt].content.includes("?") && !hist.slice(iUlt + 1).some((h) => h.role === "user")) {
+      return { resultado: "aguardando", detalhe: "a última mensagem ao analista é uma pergunta ainda sem resposta" };
+    }
     const pend = perguntasDe(ficha).filter((q) => semResposta(q)).length;
     return ok(pend ? `todas tratadas; ${pend} viraram pendência para o implantador` : "todas respondidas");
   },
@@ -123,6 +146,16 @@ export const CRITERIOS: Record<string, Criterio> = {
   },
 
   // ---- homologar ----
+  // ---- conferir ----
+  "analista conferiu os casos": ({ run }) => {
+    const er = run.etapas.find((e) => e.slug === "conferir");
+    if (run.opcoes?.sem_llm) return ok("sem LLM: conferência com a prefeitura pulada");
+    if (er?.saida_resumo.startsWith("pulada")) return ok(er.saida_resumo);
+    const desde = er?.decisoes_desde ?? 0;
+    const d = (run.decisoes ?? []).slice(desde).find((x) => x.etapa === "conferir" && x.acao === "aprovar");
+    return d ? ok(`analista confirmou os casos${d.texto ? `: "${d.texto}"` : ""}`) : { resultado: "aguardando", detalhe: "aguardando o analista conferir os casos" };
+  },
+
   "implantador aprovou": ({ run }) => {
     // Só vale decisão tomada depois que esta rodada de homologação começou (reexecutar/ajustar reabre a etapa).
     const desde = run.etapas.find((e) => e.slug === "homologar")?.decisoes_desde ?? 0;
@@ -223,6 +256,7 @@ export function legivelParaAnalista(texto: string): { ok: boolean; motivo?: stri
   if (/\b[A-Za-z0-9]+_[A-Za-z0-9_]+\b/.test(texto)) return { ok: false, motivo: "nome de campo (snake_case)" };
   if (/\b[a-z]+[A-Z][A-Za-z0-9]*\b/.test(texto)) return { ok: false, motivo: "nome de campo (camelCase)" };
   if (/\b(model|field)\.\w/.test(texto)) return { ok: false, motivo: "expressão do formulário" };
+  if (/\b(ficha|plano (de ação )?confirmado|plano de ação|cenário|validador)\b/i.test(texto)) return { ok: false, motivo: "termo interno do pipeline" };
   return { ok: true };
 }
 

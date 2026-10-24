@@ -3,7 +3,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import { analisarTemplate } from "../core/template-analyzer.js";
-import { aplicarFicha, gerarDiff } from "../core/patcher.js";
+import { gerarDiff } from "../core/patcher.js";
+import { montarFormulario } from "../core/montar.js";
+import { cenariosDoPlano, itensConfirmados, itensPropostos } from "../core/plano.js";
 import { rodarCenarios } from "../core/scenario-runner.js";
 import { validarResposta } from "../core/respostas.js";
 import { resumoTemplate } from "../core/template-analyzer.js";
@@ -14,7 +16,8 @@ import type { Canal } from "../agents/tools.js";
 import type { Mensagem } from "../agents/run-agent.js";
 import type { NomeAgente } from "../agents/instructions.js";
 import { etapaDef, etapasPrincipais } from "./definicao.js";
-import { verificarMensagem } from "../core/mensagens.js";
+import { verificarMensagem, contarPalavras } from "../core/mensagens.js";
+import { enviarAoAnalista } from "../agents/envio.js";
 import { CRITERIOS, criterio as acharCriterio, classificarFalhas, legivelParaAnalista, type Avaliacao, type CtxCriterio } from "./criterios.js";
 import type { ClienteJuiz } from "./juiz.js";
 import type { AcaoGate, CriterioDef, EtapaRun, Gate, PipelineDef, Run } from "./tipos.js";
@@ -200,6 +203,7 @@ function ctxCriterio(c: Contexto, run: Run, k: CriterioDef, deps: Dependencias, 
     ctx: c, run, criterio: k,
     template: store.template(c),
     ficha: store.ficha(c),
+    plano: store.plano(c),
     form: store.form(c),
     cenarios: store.cenarios(c),
     relatorio: store.relatorio(c),
@@ -273,7 +277,7 @@ export async function abrirGate(
     if (p.ok) g = { ...g, instrucao: p.texto };
     else g = { ...g, para: "implantador", detalhe: `${g.detalhe} (não foi ao analista: ${p.motivo})` };
   }
-  // Mesmos limites do enviar_mensagem: até 2 perguntas, curta, sem palavra de sistema.
+  // Mesmos limites do enviar_mensagem: até 2 perguntas, curta, sem palavra de sistema (conferido de novo na entrega).
   if (g.para === "analista" && g.instrucao) {
     const v = verificarMensagem(g.instrucao);
     if (!v.ok) g = { ...g, para: "implantador", instrucao: undefined, detalhe: `${g.detalhe} (não foi ao analista: ${v.motivo})` };
@@ -298,13 +302,9 @@ export async function abrirGate(
   if (g.para === "implantador") anotarPendencia(c, gate);
   if (g.para === "analista") {
     if (deps.canal) {
-      await deps.canal.enviar(instrucao);
-      store.atualizarEstado(c, (e) => {
-        e.mensagens_enviadas++;
-        e.perguntas_feitas++;
-        e.historico.push({ role: "assistant", content: instrucao, em: agora() });
-      });
-      gate.contexto.entregue = true;
+      // Porta única de saída: já conferida acima, então só falha se a regra mudar entre as duas chamadas.
+      const v = await enviarAoAnalista(c, deps.canal.enviar, instrucao);
+      gate.contexto.entregue = v.ok;
     } else {
       gate.contexto.entregue = false;
     }
@@ -381,6 +381,16 @@ export async function resolverGate(c: Contexto, acao: AcaoGate, texto?: string, 
     run.status = "executando";
     salvarRun(c, run);
     return avancar(c, deps);
+  }
+
+  // Conferência: o analista apontou algo errado nos casos. Volta à conversa para virar item do plano.
+  if (gate.etapa === "conferir") {
+    const ordem = etapasPrincipais(pipelineDoProcesso(c)).map((e) => e.slug);
+    for (const slug of ordem.slice(ordem.indexOf("coletar"))) reabrir(run, slug);
+    run.etapa_atual = "coletar";
+    run.status = "executando";
+    salvarRun(c, run);
+    return avancar(c, deps, { mensagem: `(resposta à conferência dos casos) ${texto}`, feedback: "[pipeline] O analista apontou um problema nos casos do formulário pronto. Entenda o que ele quer, proponha o ajuste como item do plano de ação e peça confirmação." });
   }
 
   // ajustar
@@ -507,6 +517,30 @@ function resumoColeta(c: Contexto) {
   resumos(c, "coletar", undefined, `${resp} respondidas, ${pend} pendências, ${perguntasAbertas(f).length} abertas`);
 }
 
+/** Palavras por caso na conferência: a mensagem inteira precisa caber em 70 palavras com uma pergunta. */
+export const MAX_PALAVRAS_CASO = 12;
+
+/**
+ * Até 3 casos que passaram, em linguagem de balcão e curtos (até 12 palavras):
+ * primeiro os do plano de ação, depois os demais.
+ */
+export function casosParaConferir(c: Contexto, max = 3): string[] {
+  const rel = (store.relatorio(c) ?? []).filter((r) => r.passou);
+  const ordenados = [...rel.filter((r) => r.id.startsWith("plano-")), ...rel.filter((r) => !r.id.startsWith("plano-"))];
+  const out: string[] = [];
+  for (const r of ordenados) {
+    if (out.length >= max) break;
+    const d = r.descricao.trim().replace(/[.;]+$/, "");
+    if (contarPalavras(d) <= MAX_PALAVRAS_CASO && legivelParaAnalista(d).ok && verificarMensagem(d).ok && !out.includes(d)) out.push(d);
+  }
+  return out;
+}
+
+/** Texto do gate de conferência (até 70 palavras, uma pergunta). Se ainda assim não passar, abrirGate manda ao implantador. */
+export function textoConferencia(casos: string[]): string {
+  return ["Antes de liberar, confere estes casos pra mim:", ...casos.map((d, i) => `${i + 1}. ${d}`), "Está certo assim? Se algo estiver diferente, me diz o número."].join("\n");
+}
+
 const EXECUTORES: Record<string, Executor> = {
   async analisar(c) {
     const tpl = store.template(c);
@@ -545,18 +579,23 @@ const EXECUTORES: Record<string, Executor> = {
   async aplicar(c) {
     const ficha = store.ficha(c);
     if (!ficha) return;
-    const { form, mudancas, pendencias } = aplicarFicha(store.template(c), ficha);
+    const plano = store.plano(c);
+    const { form, mudancas, pendencias, falhasPlano } = montarFormulario(store.template(c), ficha, plano);
     store.salvarForm(c, form);
-    store.salvarDiff(c, gerarDiff(ficha, mudancas, pendencias));
+    let diff = gerarDiff(ficha, mudancas, pendencias);
+    if (falhasPlano.length) diff += `\n\n## Plano de ação: mudanças que não puderam ser aplicadas\n\n${falhasPlano.map((f) => `- [ ] ${f.id}: ${f.erro}`).join("\n")}`;
+    store.salvarDiff(c, diff);
     const resp = perguntasDe(ficha).filter((q) => !semResposta(q)).length;
-    resumos(c, "aplicar", `ficha com ${resp} respostas`, `${mudancas.length} mudanças, ${pendencias.length} pendências (diff.md)`);
+    const nPlano = itensConfirmados(plano).length;
+    resumos(c, "aplicar", `ficha com ${resp} respostas${nPlano ? `, plano com ${nPlano} mudança(s)` : ""}`, `${mudancas.length} mudanças, ${pendencias.length} pendências (diff.md)`);
   },
 
   async validar(c, deps, entrada) {
     if (!store.form(c)) return;
     if (deps.semLLM) {
       if (!deps.cenarios) throw new Error("sem LLM é preciso informar o arquivo de cenários fixos");
-      const cenarios: Cenario[] = JSON.parse(fs.readFileSync(deps.cenarios, "utf8"));
+      const fixos: Cenario[] = JSON.parse(fs.readFileSync(deps.cenarios, "utf8"));
+      const cenarios = [...fixos, ...cenariosDoPlano(store.form(c)!, store.plano(c).itens)];
       store.salvarCenarios(c, cenarios);
       store.salvarRelatorio(c, rodarCenarios(store.form(c)!, cenarios));
       resumos(c, "validar", `cenários fixos: ${path.basename(deps.cenarios)} (sem LLM)`);
@@ -575,6 +614,17 @@ const EXECUTORES: Record<string, Executor> = {
     }
     const rel = store.relatorio(c);
     if (rel) resumos(c, "validar", undefined, `${rel.length} cenários, ${rel.filter((r) => r.passou).length} passando`);
+  },
+
+  async conferir(c, deps) {
+    const run = lerRun(c)!;
+    if (run.gate) return;
+    if (deps.semLLM || !deps.canal) { resumos(c, "conferir", undefined, `pulada: ${deps.semLLM ? "sem LLM" : "sem canal com a prefeitura"}`); return; }
+    const casos = casosParaConferir(c);
+    if (!casos.length) { resumos(c, "conferir", undefined, "pulada: nenhum caso legível para o analista"); return; }
+    const texto = textoConferencia(casos);
+    resumos(c, "conferir", `${casos.length} casos enviados ao analista`);
+    await abrirGate(c, run, { para: "analista", tipo: "conferencia", etapa: "conferir", detalhe: `${casos.length} casos para conferir`, instrucao: texto, resumo: `Analista conferindo ${casos.length} casos do formulário` }, deps);
   },
 
   async homologar(c, deps) {
@@ -626,7 +676,10 @@ async function rodarColetor(c: Contexto, deps: Dependencias & { runAgent: RunAge
   const partes: string[] = [];
   const f = store.ficha(c);
   const run = lerRun(c);
-  partes.push(`Prefeitura: ${nomeCidade(c.cidade) || c.cidade}. Processo: ${run?.titulo ?? c.processo}. Perguntas abertas: ${f ? perguntasAbertas(f).length : "?"}.`);
+  const plano = store.plano(c);
+  partes.push(`Prefeitura: ${nomeCidade(c.cidade) || c.cidade}. Processo: ${run?.titulo ?? c.processo}. Perguntas abertas: ${f ? perguntasAbertas(f).length : "?"}.` +
+    ` Modelo: ${plano.decisao ? `decisão "${plano.decisao}"` : plano.modelo_mostrado_em ? "já mostrado, aguardando decisão" : "ainda não mostrado"}; plano: ${itensPropostos(plano).length} proposto(s), ${itensConfirmados(plano).length} confirmado(s).` +
+    (run?.prazo ? ` Prazo combinado: ${run.prazo}.` : ""));
   if (estado.nota_pendente_desde) {
     const desde = estado.nota_pendente_desde;
     const trocas = estado.historico.filter((h) => h.autor === "implantador" && h.em >= desde);
@@ -635,7 +688,7 @@ async function rodarColetor(c: Contexto, deps: Dependencias & { runAgent: RunAge
   }
   if (entrada.mensagem) partes.push(`Mensagem do analista: ${entrada.mensagem}`);
   if (entrada.anexo) partes.push(`O analista enviou um anexo (${entrada.anexo.nome ?? entrada.anexo.tipo}). Chame pedir_extracao antes de responder.`);
-  if (!estado.historico.some((h) => h.role === "assistant")) partes.push("Esta é a primeira interação: apresente-se em uma frase e abra com a pergunta aberta da sua instrução, uma só; não mande lote de perguntas nem diga quantas são.");
+  if (!estado.historico.some((h) => h.role === "assistant")) partes.push("Esta é a primeira interação: apresente-se em uma frase e abra com a pergunta aberta da sua instrução, uma só; não mande lote de perguntas nem diga quantas são. O modelo (mostrar_modelo) vem depois que você refletir os passos que ele contar.");
   if (entrada.feedback) partes.push(entrada.feedback);
   store.atualizarEstado(c, (e) => {
     if (limparNota) delete e.nota_pendente_desde;
@@ -652,7 +705,8 @@ async function rodarColetor(c: Contexto, deps: Dependencias & { runAgent: RunAge
   const mensagens = historicoParaMensagens(store.estado(c).historico.slice(-30));
   const { texto } = await deps.runAgent({ agente: "coletor", mensagens, tools: t.coletor });
   // Append atômico: as ferramentas e o canal mexeram no estado durante a execução.
-  if (texto) store.anexarHistorico(c, { role: "assistant", content: texto });
+  // autor "nota": texto final do turno, que não foi ao analista (o critério de coletar e o painel distinguem pelo autor).
+  if (texto) store.anexarHistorico(c, { role: "assistant", content: texto, autor: "nota" });
 }
 
 /** Sub-etapa extrair: lê o anexo, avalia os critérios do extrator, tenta de novo ou abre gate. */

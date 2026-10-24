@@ -1,5 +1,6 @@
 // Entrada do canal. A orquestração é o pipeline declarativo (INSTRUCTIONS/pipeline.json),
 // executado por src/pipeline/motor.ts. Este arquivo só traduz "chegou mensagem" em passos do motor.
+import { enviarAoAnalista } from "./envio.js";
 import { store, type Contexto } from "./store.js";
 import type { Canal } from "./tools.js";
 import type { Anexo } from "./extrator.js";
@@ -23,6 +24,7 @@ export async function tratarMensagem(
   if (temConteudo) {
     run.metricas.mensagens_recebidas++;
     salvarRun(ctx, run);
+    store.atualizarEstado(ctx, (e) => { e.ultima_mensagem_analista = agora(); });
   }
   const nAntes = store.estado(ctx).historico.length;
   const mensagem = entrada.texto ? `${entrada.remetente ? `(${entrada.remetente}) ` : ""}${entrada.texto}` : undefined;
@@ -60,14 +62,13 @@ export async function tratarMensagem(
     const aviso = run.status === "concluido"
       ? "Obrigado! O formulário já foi homologado pelo implantador."
       : "Obrigado! Já tenho o que preciso por enquanto; o implantador está revisando o formulário e eu volto se surgir dúvida.";
-    await canal.enviar(aviso);
-    store.atualizarEstado(ctx, (e) => { e.mensagens_enviadas++; e.historico.push({ role: "assistant", content: aviso, em: agora() }); });
+    await enviarAoAnalista(ctx, canal.enviar, aviso);
     return aviso;
   }
   return "";
 }
 
 function ultimaResposta(ctx: Contexto, nAntes: number): string {
-  const novas = store.estado(ctx).historico.slice(nAntes).filter((h) => h.role === "assistant" && !h.autor);
+  const novas = store.estado(ctx).historico.slice(nAntes).filter((h) => h.role === "assistant" && (!h.autor || h.autor === "nota"));
   return novas.at(-1)?.content ?? "";
 }

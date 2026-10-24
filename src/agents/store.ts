@@ -3,6 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { Ficha, EtapaProcesso, Cenario, ResultadoCenario, AprovaTemplate } from "../core/types.js";
+import { planoVazio, type Plano } from "../core/plano.js";
 
 export type Contexto = { cidade: string; processo: string; template: string };
 
@@ -29,6 +30,8 @@ export type Estado = {
   intervencoes?: { em: string; tipo: "assumir" | "devolver"; acao: "assumir" | "devolver"; por: "implantador" }[];
   /** quando devolvida ao agente, a próxima mensagem leva uma nota do que o implantador conversou */
   nota_pendente_desde?: string;
+  /** última mensagem real do analista (base da cobrança de prazo) */
+  ultima_mensagem_analista?: string;
 };
 
 export const baseDados = () => process.env.APROVA_DATA ?? "data";
@@ -54,6 +57,9 @@ export const store = {
     return JSON.parse(fs.readFileSync(fs.existsSync(snap) ? snap : c.template, "utf8"));
   },
   ficha(c: Contexto): Ficha | undefined { return lerJson<Ficha>(arq(c, "ficha.json")); },
+  /** Plano de ação: decisão sobre o modelo e mudanças pedidas pela prefeitura. */
+  plano(c: Contexto): Plano { return lerJson<Plano>(arq(c, "plano.json")) ?? planoVazio(); },
+  salvarPlano(c: Contexto, p: Plano) { gravar(arq(c, "plano.json"), p); },
   salvarFicha(c: Contexto, f: Ficha) { gravar(arq(c, "ficha.json"), f); },
   salvarForm(c: Contexto, form: AprovaTemplate) { gravar(arq(c, "form.json"), form); },
   form(c: Contexto): AprovaTemplate | undefined { return lerJson<AprovaTemplate>(arq(c, "form.json")); },

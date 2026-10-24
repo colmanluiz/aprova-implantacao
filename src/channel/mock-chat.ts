@@ -16,6 +16,7 @@
 import readline from "node:readline";
 import fs from "node:fs";
 import path from "node:path";
+import os from "node:os";
 import { store } from "../agents/store.js";
 import type { Anexo } from "../agents/extrator.js";
 import type { Contexto } from "../agents/store.js";
@@ -53,6 +54,12 @@ const canal = {
   enviar: async (texto: string) => {
     console.log(`\n${COR.verde}[Aprova]${COR.fim} ${texto}\n`);
     transcricao.push(`**Aprova** (${hora()}):\n\n${citar(texto)}\n`);
+  },
+  enviarArquivo: async ({ nome, conteudo, legenda }: { nome: string; conteudo: Buffer; legenda?: string }) => {
+    const p = path.join(os.tmpdir(), nome);
+    fs.writeFileSync(p, conteudo);
+    console.log(`\n${COR.verde}[Aprova]${COR.fim} [arquivo] ${legenda ?? nome}: ${p}\n`);
+    transcricao.push(`**Aprova** (${hora()}): [arquivo ${nome}]\n`);
   },
 };
 const citar = (t: string) => t.split("\n").map((l) => `> ${l}`).join("\n");

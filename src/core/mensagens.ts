@@ -6,7 +6,11 @@ export const MAX_PALAVRAS_COM_PERGUNTA = 70;
 export const MAX_PALAVRAS_SEM_PERGUNTA = 160;
 
 /** Palavras de sistema que o analista de balcão não usa (busca sem caixa; prefixos valem: "parametriz" pega "parametrização"). */
-export const PALAVRAS_DE_SISTEMA = ["template", "dataset", "parametriz", "formly", "placeholder", "confiança", "oculto", "offline", "o sistema prevê"];
+export const PALAVRAS_DE_SISTEMA = [
+  "template", "dataset", "parametriz", "formly", "placeholder", "confiança", "oculto", "offline", "o sistema prevê",
+  // termos internos do pipeline (os mesmos que legivelParaAnalista barra nas descrições de cenário)
+  "ficha", "plano de ação", "cenário", "validador",
+];
 
 export type VerificacaoMensagem = { ok: true } | { ok: false; motivo: string };
 
