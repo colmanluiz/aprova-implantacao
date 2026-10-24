@@ -4,9 +4,9 @@
 # As falas não dependem da ordem exata das perguntas do agente: cada uma diz do que está falando.
 # Roteiro de referência: docs/roteiro-conversa-proposto.md
 # Replay: npm run chat -- --script fixtures/insumos/conversa-marlene.txt --processo alvara-marlene --pausa 0 --transcricao fixtures/insumos/transcricao-marlene.md
-bom dia. a pessoa traz a papelada aqui no protocolo, eu confiro se ta tudo e mando pro engenheiro Paulo olhar a planta. se ta certo ele assina e o secretario tambem. ai a pessoa paga a taxa e vem retirar o alvara
+bom dia, olhei aqui. da planta so o pdf mesmo, arquivo de autocad o Paulo nem abre. projeto eletrico e hidraulico a gente nao pede, so a planta, o resto é com a Copel e o SAAE
 # Resposta a "o que é diferente aí?", depois que o agente mostra o que já está pronto (resumo + PDF).
-olhei aqui. da planta so o pdf mesmo, arquivo de autocad o Paulo nem abre. projeto eletrico e hidraulico a gente nao pede, so a planta, o resto é com a Copel e o SAAE
+bom dia. a pessoa traz a papelada aqui no protocolo, eu confiro se ta tudo e mando pro engenheiro Paulo olhar a planta. se ta certo ele assina e o secretario tambem. ai a pessoa paga a taxa e vem retirar o alvara
 isso, pode tirar
 o nome da secretaria é Secretaria Municipal de Obras e Serviços Urbanos. sou a Marlene
 /anexo fixtures/insumos/requerimento-alvara-papel.png é esse o papel que a pessoa preenche, a lista dos documentos ta embaixo

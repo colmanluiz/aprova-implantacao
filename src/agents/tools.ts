@@ -293,7 +293,7 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
     name: "mostrar_modelo",
     description:
       "Mostra ao analista o que já está pronto: manda um resumo curto (sem pergunta), a prévia completa em PDF e, numa terceira mensagem, " +
-      "a pergunta \"Comparando com o que você me contou, o que é diferente aí?\" (ou, com depois_de_mudar, \"Ficou como vocês fazem?\"). " +
+      "a pergunta \"Comparando com o jeito que vocês fazem hoje, o que é diferente aí? Se for igual, me diz que é isso.\" (ou, com depois_de_mudar, \"Ficou como vocês fazem?\"). " +
       "Não repita o resumo nem a pergunta: espere a resposta. Devolve para você o modelo com o path de cada item, para montar o plano de ação. " +
       "Use depois de refletir os passos que o analista contou, e de novo se ele pedir para ver como ficou.",
     inputSchema: z.object({ depois_de_mudar: z.boolean().optional() }),
@@ -308,7 +308,7 @@ export function ferramentas(ctx: Contexto, canal: Canal, anexosPendentes: Anexo[
       const nome = `modelo-${ctx.processo}.pdf`;
       gravar(store.arquivo(ctx, nome), pdf);
       if (canal.enviarArquivo) await canal.enviarArquivo({ nome, conteudo: pdf, legenda: `${titulo}: como já está pronto` });
-      const pergunta = depois_de_mudar ? "Ficou como vocês fazem?" : "Comparando com o que você me contou, o que é diferente aí?";
+      const pergunta = depois_de_mudar ? "Ficou como vocês fazem?" : "Comparando com o jeito que vocês fazem hoje, o que é diferente aí? Se for igual, me diz que é isso.";
       await enviarAoAnalista(pergunta);
       const p = store.plano(ctx);
       store.salvarPlano(ctx, { ...p, modelo_mostrado_em: new Date().toISOString() });

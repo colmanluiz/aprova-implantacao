@@ -43,7 +43,7 @@ test("mostrar_modelo: resumo sem pergunta, PDF e uma pergunta aberta, tudo dentr
   assert.equal(textos.length, 2, out);
   assert.match(textos[0], /^Olha como já está pronto/);
   assert.ok(!textos[0].includes("?"));
-  assert.equal(textos[1], "Comparando com o que você me contou, o que é diferente aí?");
+  assert.equal(textos[1], "Comparando com o jeito que vocês fazem hoje, o que é diferente aí? Se for igual, me diz que é isso.");
   assert.ok(textos.every((x) => verificarMensagem(x).ok));
   assert.deepEqual(arquivos, [`modelo-${ctx.processo}.pdf`]);
   assert.ok(store.plano(ctx).modelo_mostrado_em);

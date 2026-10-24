@@ -688,7 +688,7 @@ async function rodarColetor(c: Contexto, deps: Dependencias & { runAgent: RunAge
   }
   if (entrada.mensagem) partes.push(`Mensagem do analista: ${entrada.mensagem}`);
   if (entrada.anexo) partes.push(`O analista enviou um anexo (${entrada.anexo.nome ?? entrada.anexo.tipo}). Chame pedir_extracao antes de responder.`);
-  if (!estado.historico.some((h) => h.role === "assistant")) partes.push("Esta é a primeira interação: apresente-se em uma frase e abra com a pergunta aberta da sua instrução, uma só; não mande lote de perguntas nem diga quantas são. O modelo (mostrar_modelo) vem depois que você refletir os passos que ele contar.");
+  if (!estado.historico.some((h) => h.role === "assistant")) partes.push("Esta é a primeira interação: apresente-se em uma frase e, no mesmo turno, chame mostrar_modelo para mostrar o que já está pronto (resumo, PDF e a pergunta do que é diferente). Não mande lote de perguntas nem diga quantas são. A pergunta aberta sobre como funciona hoje só entra se a resposta dela mostrar que o jeito deles é muito diferente ou se ela não conseguir comparar.");
   if (entrada.feedback) partes.push(entrada.feedback);
   store.atualizarEstado(c, (e) => {
     if (limparNota) delete e.nota_pendente_desde;
