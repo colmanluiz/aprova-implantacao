@@ -1,0 +1,14 @@
+# Dona Marlene, 58, Secretaria de Obras de Vale Verde. Processo: Alvará de Construção.
+# No Telegram: /start → responder 1. Depois, responda a cada mensagem do agente com a fala correspondente.
+# Ele manda: apresentação, resumo, PDF e "o que é diferente aí?".
+bom dia. olhei o pdf aqui, é parecido com o nosso. so que da planta a gente so pede o pdf mesmo, arquivo de autocad o Paulo nem abre. e projeto eletrico e hidraulico a gente nao pede, so a planta, o resto é com a Copel e o SAAE
+# Ele confirma a mudança ("Pode ser?").
+isso, pode tirar
+# Ele pergunta a secretaria, quem analisa e quem assina.
+o nome da secretaria é Secretaria Municipal de Obras e Serviços Urbanos. sou a Marlene, eu confiro a papelada e mando pro engenheiro Paulo olhar a planta. quem assina é o Paulo e o secretario
+# Ele pede a foto da tabela da lei de zoneamento.
+/anexo fixtures/insumos/tabela-zoneamento.png essa é a tabela da lei, ta meio apagada mas da pra ler
+# Se ele perguntar da taxa ou da lista de atividades:
+a taxa quem calcula é a Tributação, eu nao sei o valor. a lista de atividades por zona é com o Paulo
+# Ele fecha ("agora a Aprova monta") e logo manda "confere estes casos pra mim".
+tá certo, pode liberar
