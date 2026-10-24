@@ -364,3 +364,18 @@ test("reexecutar validar: reabre validar e homologar, apaga cenários e conversa
   assert.equal(run.gate?.tipo, "homologacao");
   await assert.rejects(reexecutarEtapa(ctx, "xyz", deps), /etapa inválida/);
 });
+
+test("coletar não fecha com a ficha tratada se a última mensagem ao analista é pergunta sem resposta", async () => {
+  const ctx = novoCtx();
+  const deps = { semLLM: true, juiz: null, cenarios: "fixtures/cenarios/alvara.cenarios.json" };
+  await iniciarProcesso(ctx, deps);
+  store.salvarFicha(ctx, fichaFechada(ctx.cidade));
+  store.salvarPlano(ctx, { decisao: "atende", itens: [] });
+  store.anexarHistorico(ctx, { role: "assistant", content: "Casa na ZR1 com 3 m de recuo volta. Certo?" });
+  let run = await avancar(ctx, deps);
+  assert.equal(run.etapa_atual, "coletar");
+  assert.match(etapaRun(run, "coletar").criterios.find((k) => k.nome === "nenhuma pergunta em aberto")!.detalhe, /pergunta ainda sem resposta/);
+  store.anexarHistorico(ctx, { role: "user", content: "Mensagem do analista: certo" });
+  run = await avancar(ctx, deps);
+  assert.equal(run.gate?.tipo, "homologacao");
+});

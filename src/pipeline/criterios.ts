@@ -4,7 +4,7 @@ import type { AprovaTemplate, Cenario, Ficha, ResultadoCenario } from "../core/t
 import { itensConfirmados, itensPropostos, type Plano } from "../core/plano.js";
 import { walk, expressoes } from "../core/formly.js";
 import { rodarCenarios } from "../core/scenario-runner.js";
-import { perguntasAbertas, perguntasDe, semResposta, type Contexto } from "../agents/store.js";
+import { store, perguntasAbertas, perguntasDe, semResposta, type Contexto } from "../agents/store.js";
 import type { SaidaExtrator } from "../agents/extrator.js";
 import type { CriterioDef, Resultado, Run } from "./tipos.js";
 import { julgarCobertura, type ClienteJuiz } from "./juiz.js";
@@ -62,7 +62,7 @@ export const CRITERIOS: Record<string, Criterio> = {
     if (naoAplicados.length) return falha(`${naoAplicados.length} mudança(s) confirmada(s) que não puderam ser aplicadas: ${naoAplicados.map((i) => `${i.id} (${i.verificacao!.detalhe})`).join("; ")}`);
     return ok(conf.length ? `${conf.length} mudança(s) confirmada(s) e aplicada(s)` : "nenhuma mudança no modelo");
   },
-  "nenhuma pergunta em aberto": ({ ficha, run }) => {
+  "nenhuma pergunta em aberto": ({ ctx, ficha, run }) => {
     if (!ficha) return falha("ficha inexistente");
     const rej = Object.entries(run.rejeicoes_schema ?? {}).filter(([, r]) => r.n >= 2);
     if (rej.length) {
@@ -71,6 +71,14 @@ export const CRITERIOS: Record<string, Criterio> = {
     }
     const abertas = perguntasAbertas(ficha);
     if (abertas.length) return { resultado: "aguardando", detalhe: `${abertas.length} perguntas abertas: ${lista(abertas.map((q) => q.id))}` };
+    // Com a ficha toda tratada (registrar_decisao aceita do modelo muita coisa de uma vez), a conversa ainda não fechou
+    // se a última mensagem ao analista é uma pergunta sem resposta: o Coletor fecha com uma mensagem sem "?".
+    const hist = store.estado(ctx).historico;
+    let iUlt = hist.length - 1;
+    while (iUlt >= 0 && !(hist[iUlt].role === "assistant" && hist[iUlt].autor !== "cobranca")) iUlt--;
+    if (iUlt >= 0 && hist[iUlt].content.includes("?") && !hist.slice(iUlt + 1).some((h) => h.role === "user")) {
+      return { resultado: "aguardando", detalhe: "a última mensagem ao analista é uma pergunta ainda sem resposta" };
+    }
     const pend = perguntasDe(ficha).filter((q) => semResposta(q)).length;
     return ok(pend ? `todas tratadas; ${pend} viraram pendência para o implantador` : "todas respondidas");
   },
