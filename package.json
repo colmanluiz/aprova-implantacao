@@ -6,6 +6,7 @@
   "description": "Implantação assistida por IA: coleta e validação de regras de negócio de processos municipais sem reunião",
   "scripts": {
     "analyze": "tsx src/cli.ts analyze",
+    "analyze:lote": "tsx scripts/analisar-lote.ts",
     "validate": "tsx src/cli.ts validate",
     "apply": "tsx src/cli.ts apply",
     "chat": "node --dns-result-order=ipv4first --env-file-if-exists=.env --import tsx src/channel/mock-chat.ts",

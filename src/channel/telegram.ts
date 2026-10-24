@@ -4,16 +4,21 @@
 //
 // Mensagens do implantador (painel → data/<cidade>/<processo>/outbox.json) são entregues a cada 2 s no chat do processo.
 // O vínculo chat ↔ processo fica em memória e em data/<cidade>/<processo>/canal.json, para sobreviver a reinício.
-import { tratarMensagem } from "../agents/orquestrador.js";
-import { store } from "../agents/store.js";
+//
+// Cada chat escolhe o processo pelo menu (src/channel/roteador.ts): "menu", "trocar", "/processo <nome>", número ou nome.
+// O processo atual de cada chat fica em data/<cidade>/.canais/telegram-<chat_id>.json.
+// PROCESSO (e TEMPLATE) no ambiente, se definidos, pré-escolhem o processo para chats que ainda não escolheram nenhum.
+import { store, type Contexto } from "../agents/store.js";
 import type { Anexo } from "../agents/extrator.js";
 import { processosComCanal, salvarCanal, vigiarOutbox } from "./outbox.js";
+import { atender, catalogo, lerChat, preselecionar, salvarChat } from "./roteador.js";
 
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 if (!TOKEN) { console.error("defina TELEGRAM_BOT_TOKEN"); process.exit(1); }
 const API = `https://api.telegram.org/bot${TOKEN}`;
 const FILE = `https://api.telegram.org/file/bot${TOKEN}`;
-const ctxPadrao = { cidade: process.env.CIDADE ?? "vale-verde", processo: process.env.PROCESSO ?? "alvara", template: process.env.TEMPLATE ?? "fixtures/templates/alvara-construcao.modeload.json" };
+const CIDADE = process.env.CIDADE ?? "vale-verde";
+const PROCESSO_PADRAO = process.env.PROCESSO;
 
 async function tg(method: string, body: unknown, tentativas = 3) {
   for (let i = 1; ; i++) {
@@ -63,14 +68,23 @@ for (;;) {
     const m = u.message;
     if (!m) continue;
     const chat = m.chat.id;
-    const ctx = ctxPadrao;
-    const pasta = store.pasta(ctx);
-    if (chatDoProcesso.get(pasta) !== chat) {
-      chatDoProcesso.set(pasta, chat);
-      salvarCanal(pasta, { tipo: "telegram", chat_id: chat });
+    const estadoChat = lerChat(CIDADE, "telegram", chat);
+    if (PROCESSO_PADRAO && !estadoChat.processo_atual && !estadoChat.escolhido_em) {
+      const item = catalogo().find((c) => c.slug === PROCESSO_PADRAO);
+      const template = process.env.TEMPLATE ?? item?.template ?? "fixtures/templates/alvara-construcao.modeload.json";
+      salvarChat("telegram", chat, preselecionar(estadoChat, PROCESSO_PADRAO, template, item?.titulo));
     }
     const canal = { enviar: (texto: string) => enviarTexto(chat, texto) };
-    ocupados.add(pasta);
+    let pasta: string | undefined;
+    const vincular = (ctx: Contexto) => {
+      if (pasta) ocupados.delete(pasta);
+      pasta = store.pasta(ctx);
+      if (chatDoProcesso.get(pasta) !== chat) {
+        chatDoProcesso.set(pasta, chat);
+        salvarCanal(pasta, { tipo: "telegram", chat_id: chat });
+      }
+      ocupados.add(pasta);
+    };
     try {
       let anexo: Anexo | undefined;
       if (m.photo?.length) {
@@ -88,12 +102,12 @@ for (;;) {
         anexo = { tipo: "texto", texto: Buffer.from(base64, "base64").toString("utf8"), nome: m.document.file_name };
       }
       await tg("sendChatAction", { chat_id: chat, action: "typing" });
-      await tratarMensagem(ctx, canal, { texto: m.text ?? m.caption, anexo, remetente: m.from?.first_name });
+      await atender({ tipo: "telegram", chatId: chat, cidade: CIDADE, canal, entrada: { texto: m.text ?? m.caption, anexo, remetente: m.from?.first_name }, antes: vincular });
     } catch (e) {
       console.error(e);
       await canal.enviar("Tive um problema para processar. Um implantador vai olhar.").catch(() => {});
     } finally {
-      ocupados.delete(pasta);
+      if (pasta) ocupados.delete(pasta);
     }
   }
 }

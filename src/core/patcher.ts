@@ -23,7 +23,12 @@ export function aplicarFicha(tplEntrada: AprovaTemplate, ficha: Ficha): { form: 
         const slug = slugify(r.slug ?? r.setor ?? "");
         if (!slug) { pendencias.push(q); break; }
         const antes = JSON.stringify(tpl.config.initialReceiverConfig);
-        const texto = JSON.stringify(tpl).replace(/modeload/g, slug);
+        let texto = JSON.stringify(tpl).replace(/modeload/g, slug);
+        // Grupos herdados de outra prefeitura/ambiente (ex.: `ouvidoria_umuaramapr`): troca o sufixo pelo mesmo slug.
+        for (const g of Array.isArray(q.assume) ? q.assume : []) {
+          const m = typeof g === "string" && !/modeload|^config\./.test(g) ? g.match(/^([a-z0-9]+)_[a-z0-9]+$/i) : null;
+          if (m) texto = texto.split(JSON.stringify(g)).join(JSON.stringify(`${m[1]}_${slug}`));
+        }
         tpl = JSON.parse(texto);
         reg("placeholders modeload", antes, JSON.stringify(tpl.config.initialReceiverConfig));
         break;

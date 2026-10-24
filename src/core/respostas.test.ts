@@ -9,7 +9,9 @@ const q = (tipo: Pergunta["tipo"], assume: unknown = null) => ({ id: `${tipo}-01
 test("respostas: formatos válidos por tipo", () => {
   assert.ok(validarResposta(q("opcoes"), ["ZR1", "ZR2"]).ok);
   assert.ok(validarResposta(q("documento"), { exigido: true, sempre: false }).ok);
-  assert.ok(validarResposta(q("setor"), { slug: "planejamento" }).ok);
+  assert.ok(validarResposta(q("setor"), { slug: "planejamento", setor: "Secretaria de Planejamento" }).ok);
+  assert.ok(!validarResposta(q("setor"), { slug: "planejamento_modeload", setor: "Planejamento" }).ok, "placeholder de outra prefeitura deve ser rejeitado");
+  assert.ok(!validarResposta(q("setor"), { slug: "planejamento" }).ok, "setor sem nome deve ser rejeitado");
   assert.ok(validarResposta(q("etapas"), ["Solicitação"]).ok);
   assert.ok(validarResposta(q("taxa"), { existe: false }).ok);
   assert.ok(validarResposta(q("card"), { existe: true, nome: "Parecer" }).ok);

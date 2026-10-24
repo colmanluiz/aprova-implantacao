@@ -1,0 +1,74 @@
+[
+  {
+    "id": "c01-servidor-pede-as-proprias-ferias",
+    "descricao": "Servidor entra com o próprio login e pede as férias dele: não pede nome de outra pessoa e o e-mail vem do cadastro",
+    "model": {
+      "vinculo_requerente": "Interessado",
+      "user_dados": { "user": { "email": "maria.servidora@prefeitura.gov.br", "user_metadata": { "name": "Maria Souza" } } }
+    },
+    "espera": [
+      { "campo": "nome_interessado", "visivel": false },
+      { "campo": "email_requerente", "valor": "maria.servidora@prefeitura.gov.br" }
+    ]
+  },
+  {
+    "id": "c02-secretaria-pede-pelo-servidor",
+    "descricao": "A secretaria onde o servidor está lotado abre o pedido por ele: tem que informar o nome do servidor",
+    "model": { "vinculo_requerente": "Secretaria de lotação do interessado" },
+    "espera": [
+      { "campo": "nome_interessado", "visivel": true, "obrigatorio": true }
+    ]
+  },
+  {
+    "id": "c03-ainda-nao-escolheu-quem-pede",
+    "descricao": "Pedido recém-aberto, ninguém marcou quem está pedindo: o campo de nome do servidor ainda não aparece",
+    "model": {},
+    "espera": [
+      { "campo": "nome_interessado", "visivel": false },
+      { "campo": "especificar_regime_trabalho", "visivel": false },
+      { "campo": "qtd_dias_ferias", "visivel": false }
+    ]
+  },
+  {
+    "id": "c04-regime-outro",
+    "descricao": "Servidor marca regime \"Outro\" (ex.: estagiário, contrato temporário): tem que escrever qual é",
+    "model": { "regime_trabalho": "Outro" },
+    "espera": [
+      { "campo": "especificar_regime_trabalho", "visivel": true, "obrigatorio": true }
+    ]
+  },
+  {
+    "id": "c05-estatutario",
+    "descricao": "Servidor estatutário: não pede para especificar o regime",
+    "model": { "regime_trabalho": "Estatutário" },
+    "espera": [
+      { "campo": "especificar_regime_trabalho", "visivel": false, "obrigatorio": false }
+    ]
+  },
+  {
+    "id": "c06-ja-tirou-parte-das-ferias",
+    "descricao": "Servidor já tirou uma parte das férias desse período: tem que dizer quantos dias já gozou",
+    "model": { "valid_ferias": "Sim" },
+    "espera": [
+      { "campo": "qtd_dias_ferias", "visivel": true, "obrigatorio": true }
+    ]
+  },
+  {
+    "id": "c07-primeira-vez-no-periodo",
+    "descricao": "Primeiras férias do período aquisitivo: não pergunta dias já gozados",
+    "model": { "valid_ferias": "Não", "perg_abono": "Sim" },
+    "espera": [
+      { "campo": "qtd_dias_ferias", "visivel": false, "obrigatorio": false },
+      { "campo": "perg_abono", "visivel": true, "obrigatorio": true }
+    ]
+  },
+  {
+    "id": "c08-ferias-de-30-dias-com-antecedencia",
+    "descricao": "Férias de 1º a 30 de julho pedidas com antecedência: o total dá 30 dias e não aparece o aviso de prazo curto",
+    "model": { "inicio_ferias": "2030-07-01", "fim_ferias": "2030-07-30" },
+    "espera": [
+      { "campo": "total_dias", "valor": 30 },
+      { "campo": "aviso_data", "visivel": false }
+    ]
+  }
+]

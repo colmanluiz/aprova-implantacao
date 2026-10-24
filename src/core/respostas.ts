@@ -10,7 +10,12 @@ const existe = z.object({ existe: z.boolean(), nome: z.string().min(1).optional(
 const ESQUEMAS: Record<Exclude<TipoPonto, "dataset">, z.ZodType> = {
   opcoes: z.array(z.string().min(1)).min(1),
   documento: z.object({ exigido: z.boolean(), sempre: z.boolean().optional() }),
-  setor: z.object({ slug: z.string().min(1), setor: z.string().optional() }),
+  setor: z.object({
+    slug: z.string().min(1).refine((v) => !/modeload|implantacaoad|_implantacao|template|modelo/i.test(v), {
+      message: "o modelo não tem setor definido (placeholder); pergunte o setor real da prefeitura",
+    }),
+    setor: z.string().min(3, "informe o nome do setor que recebe o processo"),
+  }),
   etapas: z.array(z.string().min(1)).min(1),
   taxa: existe,
   card: existe,
@@ -24,7 +29,7 @@ export const FORMATO: Record<TipoPonto, string> = {
   opcoes: 'lista de textos não vazia, ex.: ["ZR1","ZR2"]',
   dataset: 'objeto zona → { chave: número ou texto } com todas as chaves pedidas, ex.: {"ZR1":{"RECUO_FRONTAL":4}}',
   documento: '{"exigido": true|false, "sempre"?: true|false}',
-  setor: '{"slug": "planejamento", "setor"?: "Secretaria de Planejamento"}',
+  setor: '{"slug": "planejamento", "setor": "Secretaria de Planejamento - Divisão de Aprovação de Projetos"}',
   etapas: 'lista com os títulos das etapas que ficam, ex.: ["Solicitação","Dados do Requerente"]',
   taxa: '{"existe": true|false, "nome"?: "Taxa de Aprovação"}',
   card: '{"existe": true|false, "nome"?: "Parecer Técnico"}',
