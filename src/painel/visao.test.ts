@@ -76,7 +76,7 @@ test("arquivos corrompidos ou pela metade não derrubam a visão; pasta desconhe
   const v = montarVisao({ seedPath: SEED, dataDir: dir });
   const fora = v.secretarias.find((s) => s.nome === "Outros");
   assert.ok(fora);
-  assert.equal(fora!.processos[0].processo, "Processo Novo");
+  assert.equal(fora!.processos[0].processo, "Processo Novo · coisa-nova");
   assert.equal(fora!.processos[0].etapas[0].status, "executando");
   assert.equal(v.metricas.processos_total, 97);
 });
