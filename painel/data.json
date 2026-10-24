@@ -1,7 +1,7 @@
 {
   "cidade": "Vale Verde",
   "cidade_slug": "vale-verde",
-  "gerado_em": "2026-10-24T16:55:31.882Z",
+  "gerado_em": "2026-10-24T17:14:37.119Z",
   "gate_disponivel": false,
   "etapas": [
     {
@@ -30,31 +30,31 @@
     }
   ],
   "metricas": {
-    "processos_total": 97,
+    "processos_total": 98,
     "processos_prontos": 2,
-    "processos_em_andamento": 0,
+    "processos_em_andamento": 1,
     "gates_abertos": 2,
     "horas_reuniao_evitadas": 1.7,
     "perguntas_feitas": 68,
-    "perguntas_respondidas_sem_reuniao": 58,
-    "respondidas_por_mensagem": 52,
+    "perguntas_respondidas_sem_reuniao": 59,
+    "respondidas_por_mensagem": 53,
     "respondidas_por_anexo": 6,
-    "pendencias_abertas": 13,
+    "pendencias_abertas": 48,
     "cenarios_rodados": 45,
     "cenarios_passando": 45,
-    "mensagens": 35,
+    "mensagens": 37,
     "intervencoes_humanas": 0,
     "conversas_assumidas": 0,
     "por_status": {
       "nao_iniciado": 95,
       "executando": 0,
-      "aguardando_prefeitura": 0,
+      "aguardando_prefeitura": 1,
       "aguardando_implantador": 2,
       "concluido": 0,
       "parado": 0
     },
     "precisam_implantador": 2,
-    "aguardando_prefeitura": 0
+    "aguardando_prefeitura": 1
   },
   "secretarias": [
     {
@@ -590,6 +590,62 @@
             "desde": "2026-10-24T16:12:24.701Z",
             "texto": "Decisão sua: homologar o formulário"
           }
+        },
+        {
+          "id": "x-alvara-telegram",
+          "processo": "Alvará de Construção · alvara-telegram",
+          "secretaria": "Planejamento Urbano",
+          "complexidade": "complexo",
+          "slug": "alvara-telegram",
+          "tem_dados": true,
+          "status": "aguardando_prefeitura",
+          "etapa_atual": "coletar",
+          "etapas": [
+            {
+              "slug": "analisar",
+              "nome": "Analisar template",
+              "status": "concluida"
+            },
+            {
+              "slug": "coletar",
+              "nome": "Coletar respostas",
+              "status": "aguardando"
+            },
+            {
+              "slug": "extrair",
+              "nome": "Ler anexos",
+              "status": "pendente"
+            },
+            {
+              "slug": "aplicar",
+              "nome": "Gerar formulário",
+              "status": "pendente"
+            },
+            {
+              "slug": "validar",
+              "nome": "Validar com cenários",
+              "status": "pendente"
+            },
+            {
+              "slug": "homologar",
+              "nome": "Homologar",
+              "status": "pendente"
+            }
+          ],
+          "gate": null,
+          "modo": "agente",
+          "pronto": false,
+          "pendencias": 35,
+          "perguntas_feitas": 0,
+          "respondidas": 1,
+          "mensagens": 2,
+          "cenarios": null,
+          "horas_reuniao_evitadas": 0,
+          "atualizado_em": "2026-10-24T17:11:30.038Z",
+          "ultima_mensagem_em": "2026-10-24T17:11:30.033Z",
+          "ultima_voz": "nota",
+          "sem_resposta_horas": 0.1,
+          "atencao": null
         }
       ]
     },
@@ -5669,7 +5725,7 @@
     "vale-verde/alvara": {
       "cidade": "vale-verde",
       "slug": "alvara",
-      "gerado_em": "2026-10-24T16:55:31.885Z",
+      "gerado_em": "2026-10-24T17:14:37.121Z",
       "gate_disponivel": false,
       "processo": {
         "id": "p001",
@@ -7379,7 +7435,7 @@
     "vale-verde/alvara-demo": {
       "cidade": "vale-verde",
       "slug": "alvara-demo",
-      "gerado_em": "2026-10-24T16:55:31.886Z",
+      "gerado_em": "2026-10-24T17:14:37.124Z",
       "gate_disponivel": false,
       "processo": {
         "id": "x-alvara-demo",
@@ -9724,6 +9780,1176 @@
       },
       "diff": "# Diff de parametrização: Alvará de Construção (vale-verde)\n\n## O que mudou\n\n- **placeholders modeload**: {\"type\":\"predefined\",\"possibleReceivers\":[\"planejamento_modeload\"]} → {\"type\":\"predefined\",\"possibleReceivers\":[\"planejamento_vale_verde\"]}  _(WhatsApp, Marcos (SEPLAN). Marcos analisa; o secretário assina o alvará., confiança 1)_\n- **documento_requerente**: `{\"required\":true}` → sempre obrigatório  _(WhatsApp, Marcos (SEPLAN), confiança 1)_\n- **responsavel_tecnico[].documento_art**: `{\"required\":true}` → sempre obrigatório  _(WhatsApp, Marcos (SEPLAN), confiança 1)_\n- **doc_registroimovel**: `{\"required\":true}` → sempre obrigatório  _(WhatsApp, Marcos (SEPLAN), confiança 1)_\n- **proj-arq**: `{\"required\":true}` → sempre obrigatório  _(WhatsApp, Marcos (SEPLAN), confiança 1)_\n- **proj-dwg**: `{\"required\":false}` → removido do pedido  _(WhatsApp, Marcos (SEPLAN), confiança 1)_\n- **proj-comp**: `{\"required\":false}` → removido do pedido  _(WhatsApp, Marcos (SEPLAN): \"pode deixar como estão\", confiança 1)_\n- **docextra[].anexdocextra**: `{\"required\":true}` → sempre obrigatório  _(WhatsApp, Marcos (SEPLAN): \"pode deixar como estão\", confiança 1)_\n- **tipo_logradouro.options**: `[\"Avenida\",\"Rua\",\"Outros\"]` → `[\"Rua\",\"Avenida\",\"Travessa\",\"Estrada\",\"Outros\"]`  _(WhatsApp, Marcos (SEPLAN), confiança 1)_\n- **zoneamento_repeat[].zoneamento.options**: `[\"Z1\",\"Z2\",\"Z3\",\"Z4\"]` → `[\"ZR1\",\"ZR2\",\"ZC1\",\"ZI\"]`  _(Anexo: tabela-zoneamento.png (Anexo II, Lei 1.204), confirmado pelo analista, confiança 1)_\n- **quadro_areas[].material_construtivo.options**: `[\"Alvenaria\",\"Madeira\",\"Mista\"]` → `[\"Alvenaria\",\"Madeira\",\"Mista\",\"Estrutura metálica\"]`  _(WhatsApp, Marcos (SEPLAN), confiança 1)_\n- **zoneamento_dataset.options**: `[\"Z1\",\"Z2\",\"Z3\",\"Z4\"]` → `[\"ZR1\",\"ZR2\",\"ZC1\",\"ZI\"]`  _(Anexo: tabela-zoneamento.png (Anexo II, Lei 1.204), confirmado pelo analista, confiança 1)_\n- **config.datasets.zoneamento_dataset**: — → 4 zonas  _(Anexo: tabela-zoneamento.png (Anexo II, Lei 1.204), confirmado pelo analista (WhatsApp, Marcos: \"confere\"; ZR2 recuo frontal 4 m confirmado), confiança 1)_\n- **config.form_tramites[despacho_inicial]**: Fiscalização in loco offline → removido  _(WhatsApp, Marcos (SEPLAN): \"Fiscalização in loco a gente não faz nessa fase\", confiança 1)_\n- **config.form_tramites[parecer_card].nome**: Parecer Edilício → Parecer Técnico de Aprovação  _(WhatsApp, Marcos (SEPLAN): na cidade chama Parecer Técnico de Aprovação, confiança 1)_\n- **declaracao_veracidade.label**: \"Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Bra…\" → \"Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Bra…\"  _(WhatsApp, Marcos (SEPLAN), confiança 1)_\n- **config.templates**: `[\"Alvará\",\"Peça gráfica\",\"Peça gráfica complementar\"]` → `{\"modelo_proprio\":false,\"validade_dias\":365,\"numeracao_propria\":true}`  _(WhatsApp, Marcos (SEPLAN): modelo padrão do sistema, sem modelo próprio; validade 12 meses (365 dias); numeração própria da prefeitura. Confirmado pelo analista, confiança 1)_\n- **literal 'Cascavel'**: Cascavel → Vale Verde (2 ocorrências)  _(analisador: resíduo substituído pelo nome da cidade, confiança 1)_\n\n## O que ficou do template\n\n- solicitacao.options\n- solicitacaoRetificacao.options\n- quadro_areas[].modalidade_aprovacao.options\n- vinculo_requerente.options\n- proprietario[].tipo_vinculo_proprietario.options\n- responsavel_tecnico[].responsavel_tecnico_vinculo.options\n- alvaraAntigo\n- doc_procurador\n- proprietario[].documento_proprietario\n- proprietario[].contratosocial_pessoajuridica\n- quadro_areas[].tipo_uso.options\n- quadro_areas[].tipo_uso_complementar.options\n\n## Atenção do implantador\n\n- [ ] opcoes-23 (opcoes): Para \"Atividades\", o template prevê: 1 - Residência Unifamiliar, 2 - Residência Multifamiliar, 3 - Comércio e Serviços, 4 - Condomínios Horizontais, 5 - Empreendimentos de Hotelaria e Turísticos. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar. — Lista de atividades é extensa; Marcos vai enviar planilha na segunda-feira. Aguardar anexo.\n- [ ] taxa-34 (taxa): Existe taxa de aprovação para Alvará de Construção? Como é calculada e quem emite? — Perguntar à Secretaria de Fazenda: existe taxa de aprovação do Alvará de Construção, como é calculada e quem emite. Marcos vai consultar a Fazenda.",
       "pendencias": "# Pendências do implantador: alvara-demo (vale-verde)\n\n- [ ] 2026-10-24T16:12:24.701Z · etapa **homologar**: Formulário de Alvará de Construção (vale-verde) pronto para revisão: 2 pendências, cenários 30/30, diff em diff.md\n  - Revise diff.md, pendencias.md e o relatório de cenários. aprovar = liberar para homologação com a prefeitura; ajustar \"<pergunta_id>=<valor>\" = corrigir respostas e refazer formulário e cenários; ajustar com texto livre = pedir mais cenários ao validador; rejeitar = parar o processo.\n  - resolver: `npm run gate -- vale-verde alvara-demo <aprovar|ajustar|rejeitar> [texto]`\n"
+    },
+    "vale-verde/alvara-telegram": {
+      "cidade": "vale-verde",
+      "slug": "alvara-telegram",
+      "gerado_em": "2026-10-24T17:14:37.126Z",
+      "gate_disponivel": false,
+      "processo": {
+        "id": "x-alvara-telegram",
+        "processo": "Alvará de Construção · alvara-telegram",
+        "secretaria": "Planejamento Urbano",
+        "complexidade": "complexo",
+        "slug": "alvara-telegram",
+        "tem_dados": true,
+        "status": "aguardando_prefeitura",
+        "etapa_atual": "coletar",
+        "etapas": [
+          {
+            "slug": "analisar",
+            "nome": "Analisar template",
+            "status": "concluida"
+          },
+          {
+            "slug": "coletar",
+            "nome": "Coletar respostas",
+            "status": "aguardando"
+          },
+          {
+            "slug": "extrair",
+            "nome": "Ler anexos",
+            "status": "pendente"
+          },
+          {
+            "slug": "aplicar",
+            "nome": "Gerar formulário",
+            "status": "pendente"
+          },
+          {
+            "slug": "validar",
+            "nome": "Validar com cenários",
+            "status": "pendente"
+          },
+          {
+            "slug": "homologar",
+            "nome": "Homologar",
+            "status": "pendente"
+          }
+        ],
+        "gate": null,
+        "modo": "agente",
+        "pronto": false,
+        "pendencias": 35,
+        "perguntas_feitas": 0,
+        "respondidas": 1,
+        "mensagens": 2,
+        "cenarios": null,
+        "horas_reuniao_evitadas": 0,
+        "atualizado_em": "2026-10-24T17:11:30.038Z",
+        "ultima_mensagem_em": "2026-10-24T17:11:30.033Z",
+        "ultima_voz": "nota",
+        "sem_resposta_horas": 0.1,
+        "atencao": null
+      },
+      "run": {
+        "processo": "alvara-telegram",
+        "cidade": "vale-verde",
+        "titulo": "Alvará de Construção",
+        "iniciado_em": "2026-10-24T17:11:20.194Z",
+        "atualizado_em": "2026-10-24T17:11:30.038Z",
+        "etapa_atual": "coletar",
+        "status": "aguardando_prefeitura",
+        "etapas": [
+          {
+            "slug": "analisar",
+            "nome": "Analisar template",
+            "tipo": "codigo",
+            "status": "concluida",
+            "iniciada_em": "2026-10-24T17:11:20.245Z",
+            "concluida_em": "2026-10-24T17:11:20.250Z",
+            "tentativas": 1,
+            "criterios": [
+              {
+                "nome": "ficha tem perguntas bloqueantes",
+                "resultado": "passou",
+                "detalhe": "36 perguntas, 22 bloqueiam",
+                "avaliado_em": "2026-10-24T17:11:20.249Z"
+              },
+              {
+                "nome": "nenhum placeholder sem pergunta",
+                "resultado": "passou",
+                "detalhe": "4 ocorrências de modeload cobertas pela pergunta setor-01",
+                "avaliado_em": "2026-10-24T17:11:20.250Z"
+              }
+            ],
+            "entrada_resumo": "alvara-construcao.modeload.json: 11 etapas, 134 campos, 160 expressões",
+            "saida_resumo": "36 perguntas em 11 grupos (22 bloqueiam); 1 resíduo(s) trocado(s) por \"Vale Verde\": 'Cascavel'"
+          },
+          {
+            "slug": "coletar",
+            "nome": "Coletar respostas",
+            "tipo": "agente",
+            "status": "aguardando",
+            "iniciada_em": "2026-10-24T17:11:20.250Z",
+            "concluida_em": null,
+            "tentativas": 1,
+            "criterios": [
+              {
+                "nome": "nenhuma pergunta em aberto",
+                "resultado": "aguardando",
+                "detalhe": "35 perguntas abertas: setor-01, etapas-02, opcoes-04, opcoes-05, opcoes-20 e mais 30",
+                "avaliado_em": "2026-10-24T17:11:30.037Z"
+              }
+            ],
+            "entrada_resumo": "36 perguntas para o analista",
+            "saida_resumo": "1 respondidas, 0 pendências, 35 abertas"
+          },
+          {
+            "slug": "extrair",
+            "nome": "Ler anexos",
+            "tipo": "agente",
+            "status": "pendente",
+            "iniciada_em": null,
+            "concluida_em": null,
+            "tentativas": 0,
+            "criterios": [
+              {
+                "nome": "todo candidato cita trecho e confiança",
+                "resultado": "nao_avaliado",
+                "detalhe": "",
+                "avaliado_em": null
+              }
+            ],
+            "entrada_resumo": "",
+            "saida_resumo": ""
+          },
+          {
+            "slug": "aplicar",
+            "nome": "Gerar formulário",
+            "tipo": "codigo",
+            "status": "pendente",
+            "iniciada_em": null,
+            "concluida_em": null,
+            "tentativas": 0,
+            "criterios": [
+              {
+                "nome": "formulário sem placeholder de modelo",
+                "resultado": "nao_avaliado",
+                "detalhe": "",
+                "avaliado_em": null
+              },
+              {
+                "nome": "nenhum resíduo de outra cidade pendente",
+                "resultado": "nao_avaliado",
+                "detalhe": "",
+                "avaliado_em": null
+              }
+            ],
+            "entrada_resumo": "",
+            "saida_resumo": ""
+          },
+          {
+            "slug": "validar",
+            "nome": "Validar com cenários",
+            "tipo": "agente",
+            "status": "pendente",
+            "iniciada_em": null,
+            "concluida_em": null,
+            "tentativas": 0,
+            "criterios": [
+              {
+                "nome": "todos os cenários passam",
+                "resultado": "nao_avaliado",
+                "detalhe": "",
+                "avaliado_em": null
+              },
+              {
+                "nome": "nenhuma expressão indeterminada nova",
+                "resultado": "nao_avaliado",
+                "detalhe": "",
+                "avaliado_em": null
+              },
+              {
+                "nome": "cenários cobrem a ficha",
+                "resultado": "nao_avaliado",
+                "detalhe": "",
+                "avaliado_em": null
+              }
+            ],
+            "entrada_resumo": "",
+            "saida_resumo": ""
+          },
+          {
+            "slug": "homologar",
+            "nome": "Homologar",
+            "tipo": "codigo",
+            "status": "pendente",
+            "iniciada_em": null,
+            "concluida_em": null,
+            "tentativas": 0,
+            "criterios": [
+              {
+                "nome": "implantador aprovou",
+                "resultado": "nao_avaliado",
+                "detalhe": "",
+                "avaliado_em": null
+              }
+            ],
+            "entrada_resumo": "",
+            "saida_resumo": ""
+          }
+        ],
+        "gate": null,
+        "metricas": {
+          "mensagens_enviadas": 1,
+          "mensagens_recebidas": 1,
+          "perguntas_feitas": 0,
+          "respondidas_por_mensagem": 1,
+          "respondidas_por_anexo": 0,
+          "pendencias_abertas": 35,
+          "cenarios_rodados": 0,
+          "cenarios_passando": 0,
+          "horas_reuniao_evitadas": 0
+        },
+        "decisoes": [],
+        "gates_abertos": [],
+        "criterios_aprovados": [],
+        "rejeicoes_schema": {},
+        "seed_id": "p001"
+      },
+      "estado": {
+        "etapa": "aguardando_prefeitura",
+        "mensagens_enviadas": 1,
+        "perguntas_feitas": 7,
+        "atualizado_em": "2026-10-24T17:11:30.038Z"
+      },
+      "modo": "agente",
+      "assumida_em": null,
+      "intervencoes": [],
+      "outbox_pendente": [],
+      "conversa": [
+        {
+          "role": "user",
+          "content": "Prefeitura: Vale Verde. Processo: Alvará de Construção. Perguntas abertas: 35.\nMensagem do analista: (Arthur) oi\nEsta é a primeira interação: apresente-se e envie o primeiro lote de perguntas prioritárias.",
+          "em": "2026-10-24T17:11:20.253Z",
+          "registros": [],
+          "voz": "analista",
+          "texto": "(Arthur) oi",
+          "anexo": null
+        },
+        {
+          "role": "assistant",
+          "content": "Oi, Arthur! Sou o assistente que está montando, com você, a parametrização do Alvará de Construção de Vale Verde. Faltam 35 perguntas. Pode responder aos poucos, e foto ou PDF de lei ou tabela também vale.\n\nComeçando pelas mais importantes:\n\n1) Qual setor recebe o processo de Alvará de Construção? Quem analisa e quem assina o alvará?\n\n2) O sistema prevê as zonas Z1, Z2, Z3 e Z4. Quais são as zonas de vocês? Se tiver a tabela da lei de zoneamento com recuos e taxas, pode mandar foto ou PDF.\n\n3) Tipos de solicitação para a edificação: Construção nova, Ampliação, Regularização, Reforma, Demolição. Confere ou muda alguma?\n\n4) Tipos de vínculo do proprietário: Proprietário, Possuidor, Condomínio, Espólio, Massa Falida. Confere ou muda alguma?\n\n5) Existe taxa de aprovação do alvará? Se sim, como é calculada e quem emite?",
+          "em": "2026-10-24T17:11:28.194Z",
+          "registros": [
+            {
+              "em": "2026-10-24T17:11:20.247Z",
+              "pergunta_id": "residuo-36",
+              "confianca": 1,
+              "origem": "analisador: resíduo substituído pelo nome da cidade",
+              "resumo": "'Cascavel' → 'Vale Verde'"
+            }
+          ],
+          "voz": "agente",
+          "texto": "Oi, Arthur! Sou o assistente que está montando, com você, a parametrização do Alvará de Construção de Vale Verde. Faltam 35 perguntas. Pode responder aos poucos, e foto ou PDF de lei ou tabela também vale.\n\nComeçando pelas mais importantes:\n\n1) Qual setor recebe o processo de Alvará de Construção? Quem analisa e quem assina o alvará?\n\n2) O sistema prevê as zonas Z1, Z2, Z3 e Z4. Quais são as zonas de vocês? Se tiver a tabela da lei de zoneamento com recuos e taxas, pode mandar foto ou PDF.\n\n3) Tipos de solicitação para a edificação: Construção nova, Ampliação, Regularização, Reforma, Demolição. Confere ou muda alguma?\n\n4) Tipos de vínculo do proprietário: Proprietário, Possuidor, Condomínio, Espólio, Massa Falida. Confere ou muda alguma?\n\n5) Existe taxa de aprovação do alvará? Se sim, como é calculada e quem emite?",
+          "anexo": null
+        },
+        {
+          "role": "assistant",
+          "content": "Enviei 1=setor-01, 2=opcoes-16 e opcoes-22 (zonas; também serve para o dataset-28), 3=opcoes-20, 4=opcoes-10, 5=taxa-34. Não registrei nada ainda.",
+          "em": "2026-10-24T17:11:30.033Z",
+          "registros": [],
+          "voz": "nota",
+          "texto": "Enviei 1=setor-01, 2=opcoes-16 e opcoes-22 (zonas; também serve para o dataset-28), 3=opcoes-20, 4=opcoes-10, 5=taxa-34. Não registrei nada ainda.",
+          "anexo": null
+        }
+      ],
+      "registros_sem_turno": [],
+      "ficha_progresso": [
+        {
+          "grupo": "Quem atende",
+          "total": 1,
+          "respondidas": 0,
+          "por_anexo": 0,
+          "abertas": 1,
+          "pendencias": 0
+        },
+        {
+          "grupo": "Estrutura do pedido",
+          "total": 4,
+          "respondidas": 0,
+          "por_anexo": 0,
+          "abertas": 4,
+          "pendencias": 0
+        },
+        {
+          "grupo": "Quem pode pedir",
+          "total": 3,
+          "respondidas": 0,
+          "por_anexo": 0,
+          "abertas": 3,
+          "pendencias": 0
+        },
+        {
+          "grupo": "Documentos exigidos",
+          "total": 11,
+          "respondidas": 0,
+          "por_anexo": 0,
+          "abertas": 11,
+          "pendencias": 0
+        },
+        {
+          "grupo": "Dados do imóvel",
+          "total": 7,
+          "respondidas": 0,
+          "por_anexo": 0,
+          "abertas": 7,
+          "pendencias": 0
+        },
+        {
+          "grupo": "Parâmetros urbanísticos",
+          "total": 1,
+          "respondidas": 0,
+          "por_anexo": 0,
+          "abertas": 1,
+          "pendencias": 0
+        },
+        {
+          "grupo": "Taxas",
+          "total": 1,
+          "respondidas": 0,
+          "por_anexo": 0,
+          "abertas": 1,
+          "pendencias": 0
+        },
+        {
+          "grupo": "Tramitação interna",
+          "total": 5,
+          "respondidas": 0,
+          "por_anexo": 0,
+          "abertas": 5,
+          "pendencias": 0
+        },
+        {
+          "grupo": "Textos legais",
+          "total": 1,
+          "respondidas": 0,
+          "por_anexo": 0,
+          "abertas": 1,
+          "pendencias": 0
+        },
+        {
+          "grupo": "Documento final",
+          "total": 1,
+          "respondidas": 0,
+          "por_anexo": 0,
+          "abertas": 1,
+          "pendencias": 0
+        },
+        {
+          "grupo": "Atenção do implantador",
+          "total": 1,
+          "respondidas": 1,
+          "por_anexo": 0,
+          "abertas": 0,
+          "pendencias": 0
+        }
+      ],
+      "ficha": {
+        "processo": "Alvará de Construção",
+        "template": "alvara-construcao.modeload.json",
+        "criada_em": "2026-10-24T17:11:20.247Z",
+        "grupos": [
+          {
+            "nome": "Quem atende",
+            "perguntas": [
+              {
+                "id": "setor-01",
+                "tipo": "setor",
+                "grupo": "Quem atende",
+                "texto": "Qual setor da prefeitura recebe o processo de Alvará de Construção? Quem analisa e quem assina o documento final?",
+                "assume": [
+                  "planejamento_modeload",
+                  "config.cidade=modeload"
+                ],
+                "afeta": [
+                  "config.initialReceiverConfig.possibleReceivers",
+                  "tramite[].groupId",
+                  "config.cidade"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              }
+            ]
+          },
+          {
+            "nome": "Estrutura do pedido",
+            "perguntas": [
+              {
+                "id": "etapas-02",
+                "tipo": "etapas",
+                "grupo": "Estrutura do pedido",
+                "texto": "O pedido de Alvará de Construção tem 11 etapas. Alguma delas não existe na sua cidade?",
+                "assume": [
+                  "Declaração de Veracidade",
+                  "Solicitação",
+                  "Dados do Requerente",
+                  "Responsável(is) pelo imóvel",
+                  "Responsável Técnico",
+                  "Dados do imóvel",
+                  "Quadro de áreas",
+                  "Quadro de áreas totais",
+                  "Parâmetros Urbanísticos",
+                  "Projetos",
+                  "Documentos complementares"
+                ],
+                "afeta": [
+                  "form[].wrappers=step"
+                ],
+                "prioridade": "ajusta",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "opcoes-04",
+                "tipo": "opcoes",
+                "grupo": "Estrutura do pedido",
+                "texto": "Para \"Tipo da solicitação\", o template prevê: Nova solicitação, Retificação. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.",
+                "assume": [
+                  "Nova solicitação",
+                  "Retificação"
+                ],
+                "afeta": [
+                  "solicitacao"
+                ],
+                "prioridade": "ajusta",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "opcoes-05",
+                "tipo": "opcoes",
+                "grupo": "Estrutura do pedido",
+                "texto": "Para \"Tipo do Alvará a ser retificado\", o template prevê: Aprovado no modo físico, Aprovado pela Aprova. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.",
+                "assume": [
+                  "Aprovado no modo físico",
+                  "Aprovado pela Aprova"
+                ],
+                "afeta": [
+                  "solicitacaoRetificacao"
+                ],
+                "prioridade": "ajusta",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "opcoes-20",
+                "tipo": "opcoes",
+                "grupo": "Estrutura do pedido",
+                "texto": "Para \"Tipo da solicitação para esta edificação\", o template prevê: Construção nova, Ampliação, Regularização, Reforma, Demolição. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.",
+                "assume": [
+                  "Construção nova",
+                  "Ampliação",
+                  "Regularização",
+                  "Reforma",
+                  "Demolição"
+                ],
+                "afeta": [
+                  "quadro_areas[].modalidade_aprovacao"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              }
+            ]
+          },
+          {
+            "nome": "Quem pode pedir",
+            "perguntas": [
+              {
+                "id": "opcoes-08",
+                "tipo": "opcoes",
+                "grupo": "Quem pode pedir",
+                "texto": "Para \"Tipo de vínculo do requerente:\", o template prevê: Proprietário do imóvel, Responsável Técnico, Procurador. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.",
+                "assume": [
+                  "Proprietário do imóvel",
+                  "Responsável Técnico",
+                  "Procurador"
+                ],
+                "afeta": [
+                  "vinculo_requerente"
+                ],
+                "prioridade": "ajusta",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "opcoes-10",
+                "tipo": "opcoes",
+                "grupo": "Quem pode pedir",
+                "texto": "Para \"Tipo de vínculo:\", o template prevê: Proprietário, Possuidor, Condomínio, Espólio, Massa Falida. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.",
+                "assume": [
+                  "Proprietário",
+                  "Possuidor",
+                  "Condomínio",
+                  "Espólio",
+                  "Massa Falida"
+                ],
+                "afeta": [
+                  "proprietario[].tipo_vinculo_proprietario"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "opcoes-13",
+                "tipo": "opcoes",
+                "grupo": "Quem pode pedir",
+                "texto": "Para \"Responsabilidade\", o template prevê: Projeto, Execução. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.",
+                "assume": [
+                  "Projeto",
+                  "Execução"
+                ],
+                "afeta": [
+                  "responsavel_tecnico[].responsavel_tecnico_vinculo"
+                ],
+                "prioridade": "ajusta",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              }
+            ]
+          },
+          {
+            "nome": "Documentos exigidos",
+            "perguntas": [
+              {
+                "id": "documento-06",
+                "tipo": "documento",
+                "grupo": "Documentos exigidos",
+                "texto": "O documento \"Alvará antigo\" é exigido na sua cidade? No template, só aparece quando o requerente é \"Aprovado no modo físico\".",
+                "assume": {
+                  "obrigatorio": true,
+                  "condicao": null,
+                  "oculto_quando": "model.solicitacaoRetificacao !== 'Aprovado no modo físico'",
+                  "repetivel": false
+                },
+                "afeta": [
+                  "alvaraAntigo"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "documento-07",
+                "tipo": "documento",
+                "grupo": "Documentos exigidos",
+                "texto": "O documento \"Documentos (Carteira de Identidade e CPF, se pessoa física, OU CNPJ e contrato social, se pessoa jurídica)\" é exigido na sua cidade? No template, é sempre obrigatório.",
+                "assume": {
+                  "obrigatorio": true,
+                  "condicao": null,
+                  "oculto_quando": null,
+                  "repetivel": false
+                },
+                "afeta": [
+                  "documento_requerente"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "documento-09",
+                "tipo": "documento",
+                "grupo": "Documentos exigidos",
+                "texto": "O documento \"Procuração\" é exigido na sua cidade? No template, só aparece quando o requerente é \"Procurador\".",
+                "assume": {
+                  "obrigatorio": true,
+                  "condicao": null,
+                  "oculto_quando": "!model.vinculo_requerente || model.vinculo_requerente !== 'Procurador' ",
+                  "repetivel": false
+                },
+                "afeta": [
+                  "doc_procurador"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "documento-11",
+                "tipo": "documento",
+                "grupo": "Documentos exigidos",
+                "texto": "O documento \"Documentos pessoais (Carteira de Identidade e CPF)\" é exigido na sua cidade? No template, é exigido só de pessoa física.",
+                "assume": {
+                  "obrigatorio": true,
+                  "condicao": "model.cpfcnpj_proprietario?.length == 11",
+                  "oculto_quando": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                  "repetivel": true
+                },
+                "afeta": [
+                  "proprietario[].documento_proprietario"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "documento-12",
+                "tipo": "documento",
+                "grupo": "Documentos exigidos",
+                "texto": "O documento \"Contrato Social da Pessoa Jurídica\" é exigido na sua cidade? No template, é exigido só de pessoa jurídica.",
+                "assume": {
+                  "obrigatorio": true,
+                  "condicao": "model.cpfcnpj_proprietario?.length > 11 ",
+                  "oculto_quando": "(()=>{try{return!field.templateOptions?.required}catch(err){return(err)}})()",
+                  "repetivel": true
+                },
+                "afeta": [
+                  "proprietario[].contratosocial_pessoajuridica"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "documento-14",
+                "tipo": "documento",
+                "grupo": "Documentos exigidos",
+                "texto": "O documento \"ART/RRT\" é exigido na sua cidade? No template, é sempre obrigatório.",
+                "assume": {
+                  "obrigatorio": true,
+                  "condicao": null,
+                  "oculto_quando": null,
+                  "repetivel": true
+                },
+                "afeta": [
+                  "responsavel_tecnico[].documento_art"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "documento-17",
+                "tipo": "documento",
+                "grupo": "Documentos exigidos",
+                "texto": "O documento \"Matrícula do imóvel atualizada\" é exigido na sua cidade? No template, é sempre obrigatório.",
+                "assume": {
+                  "obrigatorio": true,
+                  "condicao": null,
+                  "oculto_quando": null,
+                  "repetivel": false
+                },
+                "afeta": [
+                  "doc_registroimovel"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "documento-24",
+                "tipo": "documento",
+                "grupo": "Documentos exigidos",
+                "texto": "O documento \"Projeto arquitetônico em pdf\" é exigido na sua cidade? No template, é sempre obrigatório.",
+                "assume": {
+                  "obrigatorio": true,
+                  "condicao": null,
+                  "oculto_quando": null,
+                  "repetivel": false
+                },
+                "afeta": [
+                  "proj-arq"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "documento-25",
+                "tipo": "documento",
+                "grupo": "Documentos exigidos",
+                "texto": "O documento \"Projeto arquitetônico em dwg\" é exigido na sua cidade? No template, é opcional.",
+                "assume": {
+                  "obrigatorio": false,
+                  "condicao": null,
+                  "oculto_quando": null,
+                  "repetivel": false
+                },
+                "afeta": [
+                  "proj-dwg"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "documento-26",
+                "tipo": "documento",
+                "grupo": "Documentos exigidos",
+                "texto": "O documento \"Projetos complementares em pdf\" é exigido na sua cidade? No template, é opcional.",
+                "assume": {
+                  "obrigatorio": false,
+                  "condicao": null,
+                  "oculto_quando": null,
+                  "repetivel": false
+                },
+                "afeta": [
+                  "proj-comp"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "documento-27",
+                "tipo": "documento",
+                "grupo": "Documentos exigidos",
+                "texto": "O documento \"Documento Complementar\" é exigido na sua cidade? No template, é sempre obrigatório.",
+                "assume": {
+                  "obrigatorio": true,
+                  "condicao": null,
+                  "oculto_quando": null,
+                  "repetivel": true
+                },
+                "afeta": [
+                  "docextra[].anexdocextra"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              }
+            ]
+          },
+          {
+            "nome": "Dados do imóvel",
+            "perguntas": [
+              {
+                "id": "opcoes-15",
+                "tipo": "opcoes",
+                "grupo": "Dados do imóvel",
+                "texto": "Para \"Tipo de logradouro\", o template prevê: Avenida, Rua, Outros. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.",
+                "assume": [
+                  "Avenida",
+                  "Rua",
+                  "Outros"
+                ],
+                "afeta": [
+                  "tipo_logradouro"
+                ],
+                "prioridade": "ajusta",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "opcoes-16",
+                "tipo": "opcoes",
+                "grupo": "Dados do imóvel",
+                "texto": "Para \"Zoneamento\", o template prevê: Z1, Z2, Z3, Z4. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.",
+                "assume": [
+                  "Z1",
+                  "Z2",
+                  "Z3",
+                  "Z4"
+                ],
+                "afeta": [
+                  "zoneamento_repeat[].zoneamento"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "opcoes-18",
+                "tipo": "opcoes",
+                "grupo": "Dados do imóvel",
+                "texto": "Para \"Tipo de uso\", o template prevê: Residencial unifamiliar, Residencial multifamiliar, Comercial salas e lojas, Edifício de garagens, Galpão industrial, Casa popular, Conjunto habitacional popular. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.",
+                "assume": [
+                  "Residencial unifamiliar",
+                  "Residencial multifamiliar",
+                  "Comercial salas e lojas",
+                  "Edifício de garagens",
+                  "Galpão industrial",
+                  "Casa popular",
+                  "Conjunto habitacional popular"
+                ],
+                "afeta": [
+                  "quadro_areas[].tipo_uso"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "opcoes-19",
+                "tipo": "opcoes",
+                "grupo": "Dados do imóvel",
+                "texto": "Para \"Tipo de uso complementar\", o template prevê: Quadra esportiva e poliesportiva, Estacionamento térreo, Piscina, Área complementar de posto de gasolina. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.",
+                "assume": [
+                  "Quadra esportiva e poliesportiva",
+                  "Estacionamento térreo",
+                  "Piscina",
+                  "Área complementar de posto de gasolina"
+                ],
+                "afeta": [
+                  "quadro_areas[].tipo_uso_complementar"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "opcoes-21",
+                "tipo": "opcoes",
+                "grupo": "Dados do imóvel",
+                "texto": "Para \"Material\", o template prevê: Alvenaria, Madeira, Mista. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.",
+                "assume": [
+                  "Alvenaria",
+                  "Madeira",
+                  "Mista"
+                ],
+                "afeta": [
+                  "quadro_areas[].material_construtivo"
+                ],
+                "prioridade": "ajusta",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "opcoes-22",
+                "tipo": "opcoes",
+                "grupo": "Dados do imóvel",
+                "texto": "Para \"Zoneamento\", o template prevê: Z1, Z2, Z3, Z4. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.",
+                "assume": [
+                  "Z1",
+                  "Z2",
+                  "Z3",
+                  "Z4"
+                ],
+                "afeta": [
+                  "zoneamento_dataset"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "opcoes-23",
+                "tipo": "opcoes",
+                "grupo": "Dados do imóvel",
+                "texto": "Para \"Atividades\", o template prevê: 1 - Residência Unifamiliar, 2 - Residência Multifamiliar, 3 - Comércio e Serviços, 4 - Condomínios Horizontais, 5 - Empreendimentos de Hotelaria e Turísticos. Essas são as opções da sua cidade? Se tiver a lista oficial (lei, decreto ou planilha), pode mandar.",
+                "assume": [
+                  "1 - Residência Unifamiliar",
+                  "2 - Residência Multifamiliar",
+                  "3 - Comércio e Serviços",
+                  "4 - Condomínios Horizontais",
+                  "5 - Empreendimentos de Hotelaria e Turísticos"
+                ],
+                "afeta": [
+                  "zona_atividades[].atividade"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              }
+            ]
+          },
+          {
+            "nome": "Parâmetros urbanísticos",
+            "perguntas": [
+              {
+                "id": "dataset-28",
+                "tipo": "dataset",
+                "grupo": "Parâmetros urbanísticos",
+                "texto": "Para cada zona, preciso dos valores de: PAVIMENTOS, RECUO_FRONTAL, RECUO_LATERAL_MAIOR, RECUO_LATERAL_MENOR, RECUO_FUNDOS, INDICE_APROVEITAMENTO, TAXA_OCUPACAO, TAXA_PERMEABILIDADE. Pode mandar a tabela da lei de zoneamento (foto, PDF ou planilha).",
+                "assume": {
+                  "fonte": "zoneamento_dataset",
+                  "chaves": [
+                    "PAVIMENTOS",
+                    "RECUO_FRONTAL",
+                    "RECUO_LATERAL_MAIOR",
+                    "RECUO_LATERAL_MENOR",
+                    "RECUO_FUNDOS",
+                    "INDICE_APROVEITAMENTO",
+                    "TAXA_OCUPACAO",
+                    "TAXA_PERMEABILIDADE"
+                  ]
+                },
+                "afeta": [
+                  "config.datasets.zoneamento_dataset"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              }
+            ]
+          },
+          {
+            "nome": "Taxas",
+            "perguntas": [
+              {
+                "id": "taxa-34",
+                "tipo": "taxa",
+                "grupo": "Taxas",
+                "texto": "Existe taxa de aprovação para Alvará de Construção? Como é calculada e quem emite?",
+                "assume": {
+                  "nome": "Taxa de Aprovação",
+                  "key": "taxasProcesso",
+                  "permission": "taxas"
+                },
+                "afeta": [
+                  "config.form_tramites[key=taxasProcesso]"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              }
+            ]
+          },
+          {
+            "nome": "Tramitação interna",
+            "perguntas": [
+              {
+                "id": "card-29",
+                "tipo": "card",
+                "grupo": "Tramitação interna",
+                "texto": "Na análise interna, o template prevê a etapa \"Fiscalização in loco offline\". Existe na sua cidade? Quem preenche?",
+                "assume": {
+                  "nome": "Fiscalização in loco offline",
+                  "key": "despacho_inicial",
+                  "permission": null
+                },
+                "afeta": [
+                  "config.form_tramites[key=despacho_inicial]"
+                ],
+                "prioridade": "ajusta",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "card-30",
+                "tipo": "card",
+                "grupo": "Tramitação interna",
+                "texto": "Na análise interna, o template prevê a etapa \"Numeração Predial\". Existe na sua cidade? Quem preenche?",
+                "assume": {
+                  "nome": "Numeração Predial",
+                  "key": "numero_card",
+                  "permission": "protocolo"
+                },
+                "afeta": [
+                  "config.form_tramites[key=numero_card]"
+                ],
+                "prioridade": "ajusta",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "card-31",
+                "tipo": "card",
+                "grupo": "Tramitação interna",
+                "texto": "Na análise interna, o template prevê a etapa \"Parecer Edilício\". Existe na sua cidade? Quem preenche?",
+                "assume": {
+                  "nome": "Parecer Edilício",
+                  "key": "parecer_card",
+                  "permission": null
+                },
+                "afeta": [
+                  "config.form_tramites[key=parecer_card]"
+                ],
+                "prioridade": "ajusta",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "card-32",
+                "tipo": "card",
+                "grupo": "Tramitação interna",
+                "texto": "Na análise interna, o template prevê a etapa \"Pareceres complementares\". Existe na sua cidade? Quem preenche?",
+                "assume": {
+                  "nome": "Pareceres complementares",
+                  "key": "parecer_complementar",
+                  "permission": null
+                },
+                "afeta": [
+                  "config.form_tramites[key=parecer_complementar]"
+                ],
+                "prioridade": "ajusta",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              },
+              {
+                "id": "card-33",
+                "tipo": "card",
+                "grupo": "Tramitação interna",
+                "texto": "Na análise interna, o template prevê a etapa \"Observações\". Existe na sua cidade? Quem preenche?",
+                "assume": {
+                  "nome": "Observações",
+                  "key": "observacao_card",
+                  "permission": null
+                },
+                "afeta": [
+                  "config.form_tramites[key=observacao_card]"
+                ],
+                "prioridade": "ajusta",
+                "aceita_anexo": false,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              }
+            ]
+          },
+          {
+            "nome": "Textos legais",
+            "perguntas": [
+              {
+                "id": "texto-03",
+                "tipo": "texto",
+                "grupo": "Textos legais",
+                "texto": "O template usa este texto de declaração: \"Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anex…\". Mantém ou a prefeitura tem o texto próprio?",
+                "assume": "Declaro, para fins de direito, sob as penas do Artigo 299 do Código Penal Brasileiro, a veracidade das informações prestadas e autenticidade dos documentos anexados, ficando sujeito às sanções cabíveis em caso de prestação de informações inverídicas.",
+                "afeta": [
+                  "declaracao_veracidade"
+                ],
+                "prioridade": "cosmetica",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              }
+            ]
+          },
+          {
+            "nome": "Documento final",
+            "perguntas": [
+              {
+                "id": "saida-35",
+                "tipo": "saida",
+                "grupo": "Documento final",
+                "texto": "O processo emite: Alvará, Peça gráfica, Peça gráfica complementar. A prefeitura tem modelo próprio? Há prazo de validade e numeração própria?",
+                "assume": [
+                  {
+                    "nome": "Alvará",
+                    "template": "ModeloAD/alvara_construcao.html",
+                    "validade": true
+                  },
+                  {
+                    "nome": "Peça gráfica",
+                    "template": "ModeloAD/prancha_alvara_construcao_wk.html",
+                    "validade": true
+                  },
+                  {
+                    "nome": "Peça gráfica complementar",
+                    "template": "ModeloAD/prancha_complementar_alvara_construcao_wk.html",
+                    "validade": true
+                  }
+                ],
+                "afeta": [
+                  "config.templates"
+                ],
+                "prioridade": "ajusta",
+                "aceita_anexo": true,
+                "resposta": null,
+                "confianca": 0,
+                "origem": null
+              }
+            ]
+          },
+          {
+            "nome": "Atenção do implantador",
+            "perguntas": [
+              {
+                "id": "residuo-36",
+                "tipo": "residuo",
+                "grupo": "Atenção do implantador",
+                "texto": "O template contém o literal \"Cascavel\" em regra de validação. Parece resíduo de outra cidade: trocar pelo nome correto.",
+                "assume": "Cascavel",
+                "afeta": [
+                  "valid_cidade"
+                ],
+                "prioridade": "bloqueia",
+                "aceita_anexo": false,
+                "resposta": "Vale Verde",
+                "confianca": 1,
+                "origem": "analisador: resíduo substituído pelo nome da cidade"
+              }
+            ]
+          }
+        ],
+        "cidade": "vale-verde"
+      },
+      "relatorio": null,
+      "metricas": {
+        "mensagens_enviadas": 1,
+        "mensagens_recebidas": 1,
+        "perguntas_feitas": 0,
+        "respondidas_por_mensagem": 1,
+        "respondidas_por_anexo": 0,
+        "pendencias_abertas": 35,
+        "cenarios_rodados": 0,
+        "cenarios_passando": 0,
+        "horas_reuniao_evitadas": 0,
+        "intervencoes_humanas": 0
+      },
+      "diff": null,
+      "pendencias": null
     }
   }
 }

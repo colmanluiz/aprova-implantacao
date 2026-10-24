@@ -184,23 +184,22 @@ function seloStatus(status, classeExtra = "") {
 const dependePrefeitura = (p) => p.tem_dados && (p.status === "aguardando_prefeitura" || p.gate?.para === "analista" || (p.sem_resposta_horas ?? null) !== null);
 function textoEspera(p) {
   const h = p.sem_resposta_horas;
-  if (h === null || h === undefined) return "";
-  const cls = h >= LIMIAR_FILA_H ? "erro" : h >= LIMIAR_AVISO_H ? "aviso" : "";
+  if (h === null || h === undefined || h < LIMIAR_AVISO_H) return "";
+  const cls = h >= LIMIAR_FILA_H ? "erro" : "aviso";
   return `<span class="${cls}">sem resposta há ${esc(horasTexto(h))}</span>`;
 }
 
 // ---------- visão da prefeitura: métricas ----------
 function pintarMetricas(v) {
   const m = v.metricas;
-  const precisam = m.precisam_implantador ?? 0;
   const falhando = Math.max(0, (m.cenarios_rodados ?? 0) - (m.cenarios_passando ?? 0));
   const tiles = [
-    { r: "Processos prontos", v: fmtNum(m.processos_prontos, 0), s: `/ ${fmtNum(m.processos_total, 0)}`, n: `${plural(m.processos_em_andamento, "em andamento", "em andamento")} · ${plural(precisam, "espera você", "esperam você")}` },
-    { r: "Horas de reunião evitadas", v: fmtNum(m.horas_reuniao_evitadas), u: "h", n: `${plural(m.mensagens, "mensagem de WhatsApp", "mensagens de WhatsApp")} no lugar de reuniões` },
-    { r: "Perguntas respondidas sem reunião", v: fmtNum(m.perguntas_respondidas_sem_reuniao, 0), s: `/ ${fmtNum(m.perguntas_feitas, 0)} feitas`, n: `${fmtNum(m.respondidas_por_mensagem, 0)} por mensagem · ${fmtNum(m.respondidas_por_anexo, 0)} por foto ou PDF · ${plural(m.pendencias_abertas, "pendência", "pendências")}` },
-    { r: "Cenários de validação passando", v: fmtNum(m.cenarios_passando, 0), s: `/ ${fmtNum(m.cenarios_rodados, 0)} rodados`, n: falhando ? `${plural(falhando, "cenário falhando", "cenários falhando")}: regra de negócio para decidir` : "executados em código antes de ir à prefeitura" },
+    { r: "Processos prontos", v: fmtNum(m.processos_prontos, 0), s: `de ${fmtNum(m.processos_total, 0)}` },
+    { r: "Horas de reunião evitadas", v: fmtNum(m.horas_reuniao_evitadas), u: "h" },
+    { r: "Respostas sem reunião", v: fmtNum(m.perguntas_respondidas_sem_reuniao, 0), s: `de ${fmtNum(m.perguntas_feitas, 0)} perguntas` },
+    { r: "Cenários passando", v: fmtNum(m.cenarios_passando, 0), s: `de ${fmtNum(m.cenarios_rodados, 0)}`, n: falhando ? `${plural(falhando, "falha", "falhas")}` : "" },
   ];
-  const html = tiles.map((t) => `<div class="metrica"><div class="metrica-rotulo">${esc(t.r)}</div><div class="metrica-valor">${esc(t.v)}${t.u ? `<span class="metrica-unidade">${esc(t.u)}</span>` : ""}${t.s ? `<small>${esc(t.s)}</small>` : ""}</div><div class="metrica-nota">${esc(t.n)}</div></div>`).join("");
+  const html = tiles.map((t) => `<div class="metrica"><div class="metrica-rotulo">${esc(t.r)}</div><div class="metrica-valor">${esc(t.v)}${t.u ? `<span class="metrica-unidade">${esc(t.u)}</span>` : ""}${t.s ? `<small>${esc(t.s)}</small>` : ""}</div>${t.n ? `<div class="metrica-nota">${esc(t.n)}</div>` : ""}</div>`).join("");
   const el = $("metricas");
   const antes = [...el.querySelectorAll(".metrica-valor")].map((x) => x.textContent);
   if (setHtml(el, html, "metricas")) {
@@ -212,32 +211,28 @@ function pintarMetricas(v) {
 
 // ---------- visão da prefeitura: fila ----------
 function motivoPrefeitura(p) {
-  if (p.gate?.para === "analista") return { texto: `Pergunta enviada ao analista pelo WhatsApp`, desde: p.gate.aberto_em ?? null };
-  if ((p.sem_resposta_horas ?? null) !== null) return { texto: `Analista ${textoEspera(p)}`, desde: null };
-  return { texto: p.status === "aguardando_prefeitura" ? "Esperando resposta da prefeitura" : "Coleta em andamento", desde: p.ultima_mensagem_em ?? null };
+  if (p.gate?.para === "analista") return { texto: "Pergunta com o analista", desde: p.gate.aberto_em ?? null };
+  const e = textoEspera(p);
+  if (e) return { texto: `Analista ${e}`, desde: null };
+  return { texto: "Em conversa com o analista", desde: p.ultima_mensagem_em ?? null };
 }
 function itemFila(v, p, motivo, desde) {
   return `<li><a class="fila-item" href="#/p/${esc(v.cidade_slug)}/${esc(p.slug)}">
-      <div><div class="fila-nome">${esc(p.processo)}</div><div class="fila-sec">${esc(p.secretaria)}</div></div>
-      <div class="fila-motivo">${motivo}${desde ? `<div class="fila-quando">${rel(desde, "há ")}</div>` : ""}</div>
-      <span class="fila-ir">Abrir →</span></a></li>`;
+      <span class="fila-nome">${esc(p.processo)}</span>
+      <span class="fila-motivo">${motivo}</span>
+      <span class="fila-quando">${desde ? rel(desde, "há ") : ""}</span></a></li>`;
 }
 function pintarFila(v) {
   const todos = v.secretarias.flatMap((s) => s.processos);
   const comDados = todos.filter((p) => p.tem_dados);
   const minha = todos.filter((p) => p.atencao).sort((a, b) => (PRIORIDADE_ATENCAO[a.atencao.tipo] ?? 9) - (PRIORIDADE_ATENCAO[b.atencao.tipo] ?? 9));
   const pref = todos.filter((p) => !p.atencao && dependePrefeitura(p));
-  const andamento = comDados.filter((p) => !p.pronto && p.status !== "parado").length;
-
   const l1 = minha.length
     ? `<ul class="fila-lista">${minha.map((p) => itemFila(v, p, `<b>${esc(p.atencao.texto)}</b>`, p.atencao.desde)).join("")}</ul>`
-    : `<p class="fila-vazia">${comDados.length
-        ? `<b>Nada esperando por você.</b> ${plural(andamento, "processo segue", "processos seguem")} com a prefeitura e o agente.`
-        : `<b>Nenhum processo iniciado ainda.</b> Quando o analista mandar a primeira mensagem, o processo aparece aqui e nas secretarias.`}</p>`;
+    : `<p class="fila-vazia">${comDados.length ? "Nada esperando por você." : "Nenhum processo iniciado. O primeiro “oi” do analista aparece aqui."}</p>`;
   const l2 = pref.length
     ? `<ul class="fila-lista">${pref.map((p) => { const m = motivoPrefeitura(p); return itemFila(v, p, m.texto, m.desde); }).join("")}</ul>`
-    : `<p class="fila-vazia">Nenhum processo esperando a prefeitura agora.</p>`;
-
+    : `<p class="fila-vazia">Ninguém esperando a prefeitura.</p>`;
   const html = `
     <div class="fila-bloco ${minha.length ? "urgente" : ""}">
       <div class="fila-cab"><h2>Precisa de você</h2><span class="contagem">${minha.length}</span></div>${l1}
@@ -250,42 +245,37 @@ function pintarFila(v) {
 
 // ---------- visão da prefeitura: legenda e secretarias ----------
 function pintarLegenda(v) {
-  const html = [
-    ["concluida", "concluída"], ["executando", "em andamento"], ["aguardando", "aguardando"], ["falhou", "falhou"], ["pendente", "não iniciada"],
-  ].map(([k, r]) => `<span><i class="seg ${k}"></i>${r}</span>`).join("")
-    + `<span class="ordem">ordem: ${v.etapas.map((e) => `<em>${esc(ETAPA_NOME_CURTO[e.slug] ?? e.nome)}</em>`).join(" › ")}</span>`;
-  setHtml($("legenda"), html, "legenda");
+  const cores = [["concluida", "concluída"], ["executando", "em andamento"], ["aguardando", "aguardando"], ["falhou", "falhou"]]
+    .map(([k, r]) => `<span><i class="seg ${k}"></i>${r}</span>`).join("");
+  const passos = `<span class="ordem" title="As seis etapas de cada processo, na ordem">${v.etapas.map((e) => `<em>${esc(ETAPA_NOME_CURTO[e.slug] ?? e.nome)}</em>`).join(" › ")}</span>`;
+  setHtml($("legenda"), cores + passos, "legenda");
 }
 
 function subLinha(p) {
-  const partes = [];
-  if (p.atencao) partes.push(`<span class="${p.atencao.tipo === "gate" ? "aviso" : p.atencao.tipo === "humano" ? "brand" : "erro"}">${esc(p.atencao.texto)}</span>`);
-  else if (p.modo === "humano") partes.push(`<span class="brand">você na conversa</span>`);
-  if (p.perguntas_feitas || p.respondidas) partes.push(`${fmtNum(p.respondidas, 0)} de ${fmtNum(p.perguntas_feitas, 0)} respondidas`);
-  if (p.pendencias) partes.push(plural(p.pendencias, "pendência", "pendências"));
-  if (p.cenarios) partes.push(`${esc(p.cenarios)} cenários`);
-  if (!p.atencao || p.atencao.tipo !== "sem_resposta") { const e = textoEspera(p); if (e) partes.push(e); }
-  if (p.gate?.para === "analista") partes.push(`pergunta com o analista ${rel(p.gate.aberto_em)}`);
-  return partes.join(`<span class="sep">·</span>`);
+  if (p.atencao) return `<span class="${p.atencao.tipo === "gate" ? "aviso" : p.atencao.tipo === "humano" ? "brand" : "erro"}">${esc(p.atencao.texto)}</span>`;
+  if (p.modo === "humano") return `<span class="brand">você na conversa</span>`;
+  if (p.gate?.para === "analista") return `pergunta com o analista ${rel(p.gate.aberto_em)}`;
+  const e = textoEspera(p);
+  if (e) return e;
+  if (p.pendencias) return plural(p.pendencias, "pendência", "pendências");
+  return "";
 }
 function pintarSecretarias(v) {
   const peso = (p) => (p.atencao ? 0 : dependePrefeitura(p) ? 1 : p.tem_dados ? 2 : 3);
   const html = v.secretarias.map((s) => {
-    const prontos = s.processos.filter((p) => p.pronto).length;
     const ativos = s.processos.filter((p) => p.tem_dados).length;
     const ordenados = [...s.processos].sort((a, b) => peso(a) - peso(b));
     const linhas = ordenados.map((p) => {
-      const nome = `<div class="linha-nome"><span class="texto" title="${esc(p.processo)}">${esc(p.processo)}</span>${p.complexidade === "complexo" ? `<span class="complexo">complexo</span>` : ""}</div>`;
-      const estadoHtml = `<span class="linha-estado ${esc(p.status)}"><span class="ponto"></span>${esc(STATUS_ROTULO[p.status] ?? p.status)}</span>`;
+      const nome = `<div class="linha-nome"><span class="texto" title="${esc(p.processo)}">${esc(p.processo)}</span></div>`;
       if (!(p.tem_dados && p.slug)) {
-        const alvo = p.slug_previsto ? `href="#/p/${esc(v.cidade_slug)}/${esc(p.slug_previsto)}" title="Ainda sem dados; abre a tela que vai receber a conversa"` : "";
-        return `<li>${alvo ? `<a class="linha sem-dados" ${alvo}>` : `<div class="linha sem-dados">`}${nome}${faixa(p.etapas)}${estadoHtml}${alvo ? "</a>" : "</div>"}</li>`;
+        const alvo = p.slug_previsto ? `href="#/p/${esc(v.cidade_slug)}/${esc(p.slug_previsto)}"` : "";
+        return `<li>${alvo ? `<a class="linha sem-dados" ${alvo}>` : `<div class="linha sem-dados">`}${nome}${faixa(p.etapas)}<span class="linha-estado nao_iniciado"></span>${alvo ? "</a>" : "</div>"}</li>`;
       }
       const sub = subLinha(p);
+      const estadoHtml = `<span class="linha-estado ${esc(p.status)}"><span class="ponto"></span>${esc(STATUS_ROTULO[p.status] ?? p.status)}</span>`;
       return `<li><a class="linha ${p.atencao ? `atencao-${esc(p.atencao.tipo)}` : ""}" href="#/p/${esc(v.cidade_slug)}/${esc(p.slug)}">${nome}${faixa(p.etapas)}${estadoHtml}${sub ? `<div class="linha-sub">${sub}</div>` : ""}</a></li>`;
     }).join("");
-    const contagem = ativos ? `${prontos} ${prontos === 1 ? "pronto" : "prontos"} · ${ativos} com dados · ${s.processos.length} no total` : `${s.processos.length} processos · nenhum iniciado`;
-    return `<section class="secretaria"><div class="secretaria-cab"><h3>${esc(s.nome)}</h3><span class="contagem">${esc(contagem)}</span></div><ul class="linhas">${linhas}</ul></section>`;
+    return `<section class="secretaria"><div class="secretaria-cab"><h3>${esc(s.nome)}</h3><span class="contagem">${ativos ? `${ativos} de ${s.processos.length}` : `${s.processos.length}`}</span></div><ul class="linhas">${linhas}</ul></section>`;
   }).join("");
   setHtml($("secretarias"), html || `<div class="estado-vazio"><h3>Nenhuma secretaria carregada</h3><p>O seed em <code>fixtures/seed/processos.json</code> está vazio ou ilegível.</p></div>`, "secretarias");
 }
@@ -306,14 +296,12 @@ function pintarCabecalhoDetalhe(d) {
   const p = d.processo;
   const titulo = p?.processo ?? d.run?.titulo ?? d.slug;
   $("d-titulo").textContent = titulo;
-  $("d-secretaria").textContent = p ? `${p.secretaria} · ${estado.visao?.cidade ?? d.cidade}` : (estado.visao?.cidade ?? d.cidade);
+  $("d-secretaria").textContent = p ? p.secretaria : "";
   $("trilha").hidden = false;
   $("trilha").textContent = p ? `${p.secretaria} / ${titulo}` : titulo;
   const selos = p ? [
     seloStatus(p.status),
     d.modo === "humano" ? `<span class="selo selo-brand"><span class="ponto"></span>você na conversa</span>` : "",
-    p.atencao && p.atencao.tipo !== "gate" ? `<span class="selo selo-erro">${esc(p.atencao.texto)}</span>` : "",
-    p.atualizado_em ? `<span class="selo selo-contorno">atualizado ${rel(p.atualizado_em)}</span>` : "",
   ].join("") : "";
   setHtml($("d-estado"), selos, "d-estado");
 
@@ -321,7 +309,7 @@ function pintarCabecalhoDetalhe(d) {
   const html = base.map((e, i) => {
     const r = d.run?.etapas?.find((x) => x.slug === e.slug) ?? {};
     const quandoTxt = e.status === "concluida" && r.concluida_em ? `às ${quando(r.concluida_em)}` : (e.status === "executando" || e.status === "aguardando") && r.iniciada_em ? `desde ${quando(r.iniciada_em)}` : "";
-    return `<div class="passo ${esc(e.status)}"><div class="passo-n">ETAPA ${i + 1}</div><div class="passo-nome" title="${esc(r.nome || e.nome)}">${esc(ETAPA_NOME_CURTO[e.slug] ?? r.nome ?? e.nome)}</div><div class="passo-estado">${esc(ETAPA_CURTA[e.status] ?? e.status)}${quandoTxt ? ` ${esc(quandoTxt)}` : ""}</div></div>`;
+    return `<div class="passo ${esc(e.status)}"><div class="passo-nome" title="${esc(r.nome || e.nome)}"><span class="passo-n">${i + 1}</span>${esc(ETAPA_NOME_CURTO[e.slug] ?? r.nome ?? e.nome)}</div><div class="passo-estado" title="${esc(quandoTxt)}">${esc(ETAPA_CURTA[e.status] ?? e.status)}</div></div>`;
   }).join("");
   setHtml($("d-faixa"), html, "d-faixa");
 }
@@ -352,13 +340,13 @@ function pintarGate(d) {
   if (!paraImplantador) {
     const naoEntregue = ctx.entregue === false;
     const html = `<section class="gate analista" aria-live="polite">
-      <div class="gate-cab"><h2>Esperando o analista responder no WhatsApp</h2><span class="selo selo-brand">pergunta ao analista</span><span class="quando">${rel(g.aberto_em, "enviada há ")}</span></div>
+      <div class="gate-cab"><h2>Esperando o analista responder</h2><span class="quando">${rel(g.aberto_em, "há ")}</span></div>
       <div>
         <p class="gate-pergunta">${esc(g.instrucao ?? g.resumo ?? "")}</p>
         <p class="gate-saida" style="margin-top:.5rem">${naoEntregue ? "A pergunta ficou registrada mas não saiu pelo canal (gate aberto fora do WhatsApp)." : "Se ele responder “sim”, o pipeline segue sozinho; se responder diferente, a resposta vira ajuste na ficha."}</p>
         ${g.resumo && g.instrucao ? `<details><summary>Por que o pipeline perguntou</summary><p>${esc(g.resumo)}</p></details>` : ""}
       </div>
-      <div class="gate-acoes"><span class="rotulo">Se quiser intervir</span><p class="gate-saida">Assuma a conversa ao lado e responda você mesmo ao analista.</p></div>
+      <div class="gate-acoes"><p class="gate-saida">Para intervir, assuma a conversa abaixo.</p></div>
     </section>`;
     setHtml(el, html, "d-gate");
     return;
@@ -368,18 +356,19 @@ function pintarGate(d) {
   const cenIds = Array.isArray(ctx.cenarios) ? ctx.cenarios : [];
   const chips = [
     typeof ctx.cenarios === "string" ? `<span class="selo ${ctx.cenarios.split("/")[0] === ctx.cenarios.split("/")[1] ? "selo-ok" : "selo-erro"}">cenários ${esc(ctx.cenarios)}</span>` : (d.processo?.cenarios ? `<span class="selo selo-neutro">cenários ${esc(d.processo.cenarios)}</span>` : ""),
-    pend.length ? `<span class="selo selo-aviso">${plural(pend.length, "pendência para você", "pendências para você")}</span>` : "",
+    pend.length ? `<span class="selo selo-aviso">${plural(pend.length, "pendência", "pendências")}</span>` : "",
     cenIds.length ? `<span class="selo selo-erro">${plural(cenIds.length, "cenário falhou", "cenários falharam")}</span>` : "",
-    d.diff ? `<a class="selo selo-neutro" href="#h-diff">ver o que mudou no formulário</a>` : "",
+    d.diff ? `<a class="selo selo-neutro" href="#h-diff">ver mudanças</a>` : "",
   ].join("");
-  const pendHtml = pend.length ? `<ul class="gate-pendencias">${pend.slice(0, 12).map((q) => `<li><b>${esc(perguntaCurta(q.texto))}</b>${q.pendencia ? ` — ${esc(q.pendencia)}` : ""} <code>${esc(q.id)}</code></li>`).join("")}${pend.length > 12 ? `<li>… e mais ${pend.length - 12}</li>` : ""}</ul>` : "";
+  const pendHtml = pend.length ? `<details data-k="gate-pend"><summary>Ver ${plural(pend.length, "pendência", "pendências")}</summary><ul class="gate-pendencias">${pend.slice(0, 12).map((q) => `<li><b>${esc(perguntaCurta(q.texto))}</b>${q.pendencia ? ` — ${esc(q.pendencia)}` : ""} <code>${esc(q.id)}</code></li>`).join("")}${pend.length > 12 ? `<li>… e mais ${pend.length - 12}</li>` : ""}</ul></details>` : "";
   const cenHtml = cenIds.length ? `<ul class="gate-pendencias">${cenIds.map((id) => { const r = (d.relatorio ?? []).find((x) => x.id === id); return `<li><b>${esc(r?.descricao ?? id)}</b>${r && !r.passou ? ` — ${esc(explicarFalhas(r))}` : ""}</li>`; }).join("")}</ul>` : "";
 
   const acoes = g.acoes?.length ? g.acoes : ["aprovar", "ajustar", "rejeitar"];
   const botao = (a) => {
     const rot = { aprovar: "Aprovar", ajustar: "Ajustar…", rejeitar: "Rejeitar" }[a] ?? a;
     const cls = { aprovar: "btn-ok", ajustar: "", rejeitar: "btn-perigo" }[a] ?? "";
-    return `<button type="button" class="btn ${cls}" data-acao="${esc(a)}" ${desab ? `disabled title="${esc(dica)}"` : ""}>${esc(rot)}</button>`;
+    const ajuda = { aprovar: "Libera para a prefeitura homologar", ajustar: "Corrige respostas ou pede mais cenários", rejeitar: "Para o processo" }[a] ?? "";
+    return `<button type="button" class="btn ${cls}" data-acao="${esc(a)}" title="${esc(desab ? dica : ajuda)}" ${desab ? "disabled" : ""}>${esc(rot)}</button>`;
   };
   let sub = "";
   if (estado.gateUI === "ajustar") {
@@ -394,17 +383,15 @@ function pintarGate(d) {
   }
   const saida = estado.gateSaida && estado.gateSaida.rota === rotaK ? `<p class="gate-saida ${estado.gateSaida.ok ? "ok" : "erro"}">${esc(estado.gateSaida.texto)}</p>` : "";
   const html = `<section class="gate" aria-live="polite">
-    <div class="gate-cab"><h2>${esc(tituloGate(g, d))}</h2><span class="selo selo-aviso">decisão do implantador</span><span class="quando">${rel(g.aberto_em, "aberta há ")}</span></div>
+    <div class="gate-cab"><h2>${esc(tituloGate(g, d))}</h2><span class="quando">${rel(g.aberto_em, "há ")}</span></div>
     <div>
-      <p class="gate-resumo">${esc(g.resumo ?? "")}</p>
+      ${g.tipo === "homologacao" ? "" : `<p class="gate-resumo">${esc(g.resumo ?? "")}</p>`}
       <div class="gate-contexto">${chips}</div>
       ${pendHtml}${cenHtml}
       ${g.instrucao ? `<details><summary>Instrução completa do pipeline</summary><p>${esc(g.instrucao)}</p></details>` : ""}
     </div>
     <div class="gate-acoes">
-      <span class="rotulo">O que você decide</span>
       <div class="gate-botoes">${acoes.map(botao).join("")}</div>
-      <p class="gate-saida">Aprovar libera para a prefeitura homologar. Ajustar corrige respostas ou pede mais cenários. Rejeitar para o processo.</p>
       ${sub}${saida}
     </div>
   </section>`;
@@ -447,10 +434,10 @@ function pintarEtapas(d) {
     else if ((e.status === "executando" || e.status === "aguardando") && (r.saida_resumo || r.entrada_resumo)) frase += ` ${esc(cap(r.saida_resumo || r.entrada_resumo))}.`;
     else if (e.status === "falhou" && r.saida_resumo) frase += ` ${esc(cap(r.saida_resumo))}.`;
     frase += esc(tent);
-    const quem = r.tipo === "codigo" ? "feito por código" : r.tipo === "agente" ? "feito pelo agente; critérios verificados em código" : "";
+    const quem = "";
     const crit = (r.criterios ?? []).map((c) => `<li class="criterio ${esc(c.resultado)}">
         <span class="criterio-icone">${ICONE_CRITERIO[c.resultado] ?? ICO.minus}</span>
-        <span><span class="criterio-nome">${esc(cap(c.nome))}</span>${c.detalhe ? `<span class="criterio-detalhe">${esc(cap(c.detalhe))}</span>` : c.resultado === "nao_avaliado" ? `<span class="criterio-detalhe">ainda não avaliado</span>` : ""}</span></li>`).join("");
+        <span><span class="criterio-nome" title="${esc(c.detalhe ?? "")}">${esc(cap(c.nome))}</span>${c.detalhe && c.resultado !== "passou" ? `<span class="criterio-detalhe">${esc(cap(c.detalhe))}</span>` : ""}</span></li>`).join("");
     return `<li class="etapa ${esc(e.status)}">
       <span class="etapa-marca" aria-hidden="true">${e.status === "concluida" ? ICO.check : e.status === "falhou" ? ICO.x : e.status === "aguardando" ? ICO.clock : ""}</span>
       <div class="etapa-cab"><span class="etapa-nome">${esc(nome)}</span></div>
@@ -469,12 +456,15 @@ function vozDe(m) {
   if (m.role === "user") return "analista";
   return m.autor === "implantador" ? "implantador" : "agente";
 }
-function perguntaCurta(texto) {
+function perguntaCurta(texto, max = 110) {
   if (!texto) return "";
   let t = String(texto).replace(/\s+/g, " ").trim();
+  // "Para "Tipo de uso", o template prevê: …" → Tipo de uso
+  const m = t.match(/^(?:Para|O documento|Na análise interna, o template prevê a etapa)\s+"([^"]+)"/);
+  if (m) return m[1];
   const q = t.indexOf("?");
-  if (q > 15 && q < 110) t = t.slice(0, q + 1);
-  if (t.length > 110) t = t.slice(0, 107).trimEnd() + "…";
+  if (q > 15 && q < max) t = t.slice(0, q + 1);
+  if (t.length > max) t = t.slice(0, max - 1).trimEnd() + "…";
   return t;
 }
 function mapaPerguntas(d) {
@@ -511,26 +501,27 @@ function chipConfianca(conf, pendencia) {
   if (pendencia) return `<span class="conf pendente">pendência</span>`;
   if (typeof conf !== "number") return "";
   const txt = conf.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 2 });
-  if (conf >= 0.8) return `<span class="conf" title="confiança ${txt}: aplicada no formulário">confiança ${txt}</span>`;
-  if (conf >= 0.5) return `<span class="conf media" title="abaixo de 0,8: não é aplicada até o analista confirmar">a confirmar · ${txt}</span>`;
-  return `<span class="conf baixa" title="abaixo de 0,5: descartada ou pendência">baixa · ${txt}</span>`;
+  if (conf >= 0.8) return `<span class="conf" title="confiança ${txt}: aplicada no formulário">${txt}</span>`;
+  if (conf >= 0.5) return `<span class="conf media" title="abaixo de 0,8: não é aplicada até o analista confirmar">a confirmar ${txt}</span>`;
+  return `<span class="conf baixa" title="abaixo de 0,5: descartada ou pendência">baixa ${txt}</span>`;
 }
 function htmlRegistros(regs, perguntas, pendentes) {
   if (!regs?.length) return "";
   const itens = regs.map((r) => {
     const q = perguntas.get(r.pergunta_id);
-    const rotulo = q?.texto ? perguntaCurta(q.texto) : r.pergunta_id ?? "?";
+    const rotulo = q?.texto ? perguntaCurta(q.texto, 60) : r.pergunta_id ?? "?";
     const pendencia = q && q.pendencia && (q.resposta === null || q.resposta === undefined) ? q.pendencia : null;
     const valor = pendencia ? `pendência: ${pendencia}` : valorLegivel(r.resumo);
-    const baixa = typeof r.confianca === "number" && r.confianca < 0.8;
-    return `<li class="registro ${baixa || pendencia ? "baixa" : ""}">
+    const fonte = ehFoto(r.origem) ? "foto/PDF" : /implantador/i.test(r.origem ?? "") ? "implantador" : /analisador/i.test(r.origem ?? "") ? "código" : "WhatsApp";
+    return `<li class="registro" title="${esc([r.origem ? `origem: ${r.origem}` : "", r.pergunta_id].filter(Boolean).join("\n"))}">
       <span class="registro-rotulo">${esc(rotulo)}</span>
       <span class="registro-valor">${esc(valor)}</span>
-      <span class="registro-meta">${chipConfianca(r.confianca, pendencia)}${r.origem ? `<span>origem: ${esc(r.origem)}</span>` : ""}<code>${esc(r.pergunta_id ?? "")}</code></span>
+      <span class="registro-meta">${chipConfianca(r.confianca, pendencia)}<span class="fonte">${esc(fonte)}</span></span>
     </li>`;
   }).join("");
-  return `<ul class="registros ${pendentes ? "pendentes" : ""}"><li class="registros-cab">${pendentes ? "Registrado na ficha depois da última mensagem" : "Registrou na ficha"}</li>${itens}</ul>`;
+  return `<ul class="registros ${pendentes ? "pendentes" : ""}"><li class="registros-cab">${pendentes ? "Registrado depois da última mensagem" : "Registrou na ficha"}</li>${itens}</ul>`;
 }
+const ehFoto = (origem) => /anexo|foto|pdf|planilha|imagem|extrator/i.test(origem ?? "");
 
 function pintarChat(d) {
   const turnos = d.conversa ?? [];
@@ -579,7 +570,7 @@ function pintarChat(d) {
 
   const bn = $("btn-notas");
   bn.hidden = !notas;
-  bn.textContent = estado.mostrarNotas ? "Ocultar notas internas" : `Notas internas do agente (${notas})`;
+  bn.textContent = estado.mostrarNotas ? "Ocultar notas" : `Notas do agente (${notas})`;
   bn.title = "Notas de turno que o agente escreve para si mesmo; não vão ao analista.";
 
   // Modo da conversa: agente ou humano.
@@ -589,8 +580,8 @@ function pintarChat(d) {
   setHtml(modoEl, somenteLeitura()
     ? `Cópia estática: só leitura.`
     : humano
-      ? `<span class="selo selo-brand"><span class="ponto"></span>Você está na conversa${d.assumida_em ? ` desde ${esc(hora(d.assumida_em))}` : ""}</span><span>O agente está pausado até você devolver.</span>`
-      : `<span class="selo selo-neutro"><span class="ponto"></span>Agente respondendo</span><span>Você pode assumir a qualquer momento.</span>`, "d-chat-modo");
+      ? `<span class="selo selo-brand"><span class="ponto"></span>Você na conversa${d.assumida_em ? ` desde ${esc(hora(d.assumida_em))}` : ""} · agente pausado</span>`
+      : `<span class="selo selo-neutro"><span class="ponto"></span>Agente respondendo</span>`, "d-chat-modo");
   const btn = $("btn-modo");
   btn.hidden = !d.processo;
   btn.textContent = humano ? "Devolver ao agente" : "Assumir conversa";
@@ -661,11 +652,9 @@ function pintarNumeros(d) {
     ["Perguntas feitas", fmtNum(m.perguntas_feitas, 0)],
     ["Respondidas por mensagem", fmtNum(m.respondidas_por_mensagem, 0)],
     ["Respondidas por foto ou PDF", fmtNum(m.respondidas_por_anexo, 0)],
-    ["Pendências abertas", fmtNum(m.pendencias_abertas, 0)],
-    ["Mensagens trocadas", `${fmtNum((m.mensagens_enviadas ?? 0) + (m.mensagens_recebidas ?? 0), 0)} <small>${fmtNum(m.mensagens_recebidas, 0)} do analista</small>`],
-    ["Horas de reunião evitadas", `${fmtNum(m.horas_reuniao_evitadas)} <small>h</small>`],
-    ["Cenários passando", m.cenarios_rodados ? `${fmtNum(m.cenarios_passando, 0)} <small>/ ${fmtNum(m.cenarios_rodados, 0)}</small>` : "—"],
-    ["Vezes que você assumiu", fmtNum(m.intervencoes_humanas, 0)],
+    ["Pendências", fmtNum(m.pendencias_abertas, 0)],
+    ["Mensagens", fmtNum((m.mensagens_enviadas ?? 0) + (m.mensagens_recebidas ?? 0), 0)],
+    ["Horas de reunião evitadas", `${fmtNum(m.horas_reuniao_evitadas)}<small> h</small>`],
   ];
   setHtml($("d-numeros"), itens.map(([r, v]) => `<div><dt>${esc(r)}</dt><dd>${v}</dd></div>`).join(""), "d-numeros");
 }
@@ -675,7 +664,7 @@ function pintarFicha(d) {
   const perguntas = d.ficha?.grupos ?? [];
   if (!gs.length) {
     $("d-ficha-nota").textContent = "";
-    setHtml($("d-ficha"), `<p class="vazio">A ficha (as perguntas que variam por cidade) aparece assim que o analisador ler o template.</p>`, "d-ficha");
+    setHtml($("d-ficha"), `<p class="vazio">Aparece quando o template for analisado.</p>`, "d-ficha");
     return;
   }
   const tot = gs.reduce((a, g) => a + g.total, 0), resp = gs.reduce((a, g) => a + g.respondidas, 0), pend = gs.reduce((a, g) => a + g.pendencias, 0);
@@ -724,13 +713,13 @@ function pintarCenarios(d) {
   const rel_ = d.relatorio;
   if (!rel_?.length) {
     $("d-cenarios-nota").textContent = "";
-    setHtml($("d-cenarios"), `<p class="vazio">Os cenários são frases de balcão (“pedido novo: campos de retificação não aparecem”) executadas em código contra o formulário gerado. Aparecem na etapa Validar.</p>`, "d-cenarios");
+    setHtml($("d-cenarios"), `<p class="vazio">Aparecem na etapa Validar.</p>`, "d-cenarios");
     return;
   }
   const ok = rel_.filter((r) => r.passou).length;
   $("d-cenarios-nota").textContent = "";
   const ordenados = [...rel_].sort((a, b) => Number(a.passou) - Number(b.passou));
-  const html = `<div class="cenarios-total ${ok === rel_.length ? "tudo-ok" : "com-falha"}"><b>${ok}/${rel_.length}</b><span>${ok === rel_.length ? "todos os cenários passam" : `${plural(rel_.length - ok, "cenário falha", "cenários falham")}: regra de negócio, não bug`}</span></div>
+  const html = `<div class="cenarios-total ${ok === rel_.length ? "tudo-ok" : "com-falha"}"><b>${ok}/${rel_.length}</b><span>${ok === rel_.length ? "todos passam" : plural(rel_.length - ok, "falha", "falhas")}</span></div>
     <ul class="cenarios">${ordenados.map((r) => `<li class="cenario ${r.passou ? "passou" : "falhou"}"><span class="criterio-icone ${r.passou ? "" : ""}" style="background:${r.passou ? "var(--success)" : "var(--danger)"}">${r.passou ? ICO.check : ICO.x}</span>
       <span><span class="desc">${esc(r.descricao ?? r.id)}</span>${!r.passou ? `<span class="porque">${esc(cap(explicarFalhas(r)))}</span>` : ""}${r.indeterminados?.length ? `<span class="indet">${plural(r.indeterminados.length, "expressão indeterminada", "expressões indeterminadas")} (dependem do app)</span>` : ""}</span></li>`).join("")}</ul>`;
   setHtml($("d-cenarios"), html, "d-cenarios");
@@ -765,7 +754,7 @@ function itemDiff(item) {
 function pintarTextos(d) {
   if (!d.diff) {
     $("d-diff-nota").textContent = "";
-    setHtml($("d-diff"), `<p class="vazio">Quando a coleta fechar, o aplicador gera o formulário e lista aqui cada mudança com a origem da decisão (quem disse, em que foto ou mensagem).</p>`, "d-diff");
+    setHtml($("d-diff"), `<p class="vazio">Aparece quando o formulário for gerado.</p>`, "d-diff");
   } else {
     const s = parseDiff(d.diff);
     const mudou = s["O que mudou"] ?? [];
